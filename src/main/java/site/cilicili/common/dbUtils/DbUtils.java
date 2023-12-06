@@ -12,6 +12,7 @@ import site.cilicili.common.db.domain.dto.DatabaseConnectionDto;
 import site.cilicili.common.db.domain.pojo.DatabaseConnection;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class DbUtils {
         if (checkDb(key) == null) {
             statement.executeUpdate(String.format(CREATEDB, dbSchema));
             statement.executeUpdate(String.format("use `%1$s`;", dbSchema));
-            runSqlByReadFileContent(connection, Resources.getResourceAsReader(filePath));
+            runSqlByReadFileContent(connection, Resources.getResourceAsStream(filePath));
             databaseConnectionDto.setDriver(driver);
             databaseConnectionDto.setUrl(format);
             databaseConnectionDto.setScheme(dbSchema);
@@ -182,7 +183,7 @@ public class DbUtils {
     /**
      * 以行为单位读取文件，并将文件的每一行格式化到ArrayList中，常用于读面向行的格式化文件
      */
-    private static ArrayList<String> readFileByLines(Reader readerFile) throws Exception {
+    private static ArrayList<String> readFileByLines(Reader readerFile) {
         ArrayList<String> listStr = new ArrayList<>();
         StringBuffer sb = new StringBuffer();
         BufferedReader reader = null;
@@ -226,9 +227,9 @@ public class DbUtils {
         return listStr;
     }
 
-    public static void runSqlByReadFileContent(Connection connection, Reader reader) {
+    public static void runSqlByReadFileContent(Connection connection, InputStream reader) {
         try {
-            ArrayList<String> sqlStr = readFileByLines(reader);
+            ArrayList<String> sqlStr = readFileByLines(new InputStreamReader(reader, StandardCharsets.UTF_8));
             if (sqlStr.size() > 0) {
                 int num = batchDate(connection, sqlStr);
                 if (num > 0) {
