@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.cilicili.backend.mapper.SysRoleButtonMapper">
+    
+    <resultMap type="site.cilicili.backend.domain.pojo.SysRoleButton" id="SysRoleButtonMap">
+        <result property="sysRoleRoleCode" column="sys_role_role_code" jdbcType="VARCHAR"/>
+        <result property="sysButtonButtonCode" column="sys_button_button_code" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysRoleButtonMap">
+        select sys_role_role_code,
+               sys_button_button_code
+        from sys_role_button
+        where sys_role_role_code = #{sysRoleRoleCode}
+    </select>
+    
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="SysRoleButtonMap">
+        select
+        sys_role_role_code, sys_button_button_code
+        from sys_role_button
+        <where>
+            <if test="sysRoleRoleCode != null and sysRoleRoleCode != ''">
+                and sys_role_role_code = #{sysRoleRoleCode}
+            </if>
+            <if test="sysButtonButtonCode != null and sysButtonButtonCode != ''">
+                and sys_button_button_code = #{sysButtonButtonCode}
+            </if>
+        </where>
+    </select>
+    
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from sys_role_button
+        <where>
+            <if test="sysRoleRoleCode != null and sysRoleRoleCode != ''">
+                and sys_role_role_code = #{sysRoleRoleCode}
+            </if>
+            <if test="sysButtonButtonCode != null and sysButtonButtonCode != ''">
+                and sys_button_button_code = #{sysButtonButtonCode}
+            </if>
+        </where>
+    </select>
+    
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
+        insert into sys_role_button()
+        values ()
+    </insert>
+    
+    <insert id="insertBatch" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
+        insert into sys_role_button()
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            ()
+        </foreach>
+    </insert>
+    
+    <insert id="insertOrUpdateBatch" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
+        insert into sys_role_button()
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            ()
+        </foreach>
+        on duplicate key update
+    
+    </insert>
+    
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_role_button
+        <set>
+        </set>
+        where sys_role_role_code = #{sysRoleRoleCode}
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from sys_role_button
+        where sys_role_role_code = #{sysRoleRoleCode}
+    </delete>
+
+
+</mapper>
+
+

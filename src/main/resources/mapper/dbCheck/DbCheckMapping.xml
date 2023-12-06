@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.cilicili.backend.mapper.DbCheckMapper">
+    
+    <select id="dbExists" resultType="java.lang.Integer" parameterType="string">
+        SELECT COUNT(*)
+        FROM INFORMATION_SCHEMA.SCHEMATA
+        WHERE SCHEMA_NAME = #{dbName};
+    </select>
+    <select id="dBExists2" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM INFORMATION_SCHEMA.SCHEMATA
+        WHERE SCHEMA_NAME = #{dbName};
+    </select>
+</mapper>
+
+

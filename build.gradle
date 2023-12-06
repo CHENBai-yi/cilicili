@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.6'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'site.cilicili'
+version = '0.0.1'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+bootJar {
+    duplicatesStrategy = 'exclude'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.3.1'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'cn.licoy:encrypt-body-spring-boot-starter:1.2.3'
+    implementation 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.3.0'
+    // https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.20'
+    // https://mvnrepository.com/artifact/com.esotericsoftware.yamlbeans/yamlbeans
+    // https://mvnrepository.com/artifact/cn.hutool/hutool-all
+    implementation 'cn.hutool:hutool-all:5.8.23'
+    // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+    implementation 'org.yaml:snakeyaml:2.2'
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+    implementation 'org.aspectj:aspectjweaver:1.9.20.1'
+    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+
+}
+

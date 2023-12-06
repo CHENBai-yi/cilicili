@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.cilicili.backend.mapper.SysLogOperationMapper">
+    
+    <resultMap type="site.cilicili.backend.domain.pojo.SysLogOperation" id="SysLogOperationMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="operationUsername" column="operation_username" jdbcType="VARCHAR"/>
+        <result property="operationIp" column="operation_ip" jdbcType="VARCHAR"/>
+        <result property="operationMethod" column="operation_method" jdbcType="VARCHAR"/>
+        <result property="operationApi" column="operation_api" jdbcType="VARCHAR"/>
+        <result property="operationStatus" column="operation_status" jdbcType="INTEGER"/>
+        <result property="operationBody" column="operation_body" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysLogOperationMap">
+        select id,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at,
+               sort,
+               stable,
+               status,
+               memo,
+               operation_username,
+               operation_ip,
+               operation_method,
+               operation_api,
+               operation_status,
+               operation_body
+        from sys_log_operation
+        where id = #{id}
+    </select>
+    
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="SysLogOperationMap">
+        select
+        id, created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo, operation_username,
+        operation_ip, operation_method, operation_api, operation_status, operation_body
+        from sys_log_operation
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="stable != null and stable != ''">
+                and stable = #{stable}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="memo != null and memo != ''">
+                and memo = #{memo}
+            </if>
+            <if test="operationUsername != null and operationUsername != ''">
+                and operation_username = #{operationUsername}
+            </if>
+            <if test="operationIp != null and operationIp != ''">
+                and operation_ip = #{operationIp}
+            </if>
+            <if test="operationMethod != null and operationMethod != ''">
+                and operation_method = #{operationMethod}
+            </if>
+            <if test="operationApi != null and operationApi != ''">
+                and operation_api = #{operationApi}
+            </if>
+            <if test="operationStatus != null">
+                and operation_status = #{operationStatus}
+            </if>
+            <if test="operationBody != null and operationBody != ''">
+                and operation_body = #{operationBody}
+            </if>
+        </where>
+    </select>
+    
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from sys_log_operation
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="stable != null and stable != ''">
+                and stable = #{stable}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="memo != null and memo != ''">
+                and memo = #{memo}
+            </if>
+            <if test="operationUsername != null and operationUsername != ''">
+                and operation_username = #{operationUsername}
+            </if>
+            <if test="operationIp != null and operationIp != ''">
+                and operation_ip = #{operationIp}
+            </if>
+            <if test="operationMethod != null and operationMethod != ''">
+                and operation_method = #{operationMethod}
+            </if>
+            <if test="operationApi != null and operationApi != ''">
+                and operation_api = #{operationApi}
+            </if>
+            <if test="operationStatus != null">
+                and operation_status = #{operationStatus}
+            </if>
+            <if test="operationBody != null and operationBody != ''">
+                and operation_body = #{operationBody}
+            </if>
+        </where>
+    </select>
+    
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        values (#{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt}, #{sort}, #{stable}, #{status},
+                #{memo}, #{operationUsername}, #{operationIp}, #{operationMethod}, #{operationApi}, #{operationStatus},
+                #{operationBody})
+    </insert>
+    
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+        memo, operation_username, operation_ip, operation_method, operation_api, operation_status, operation_body)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt},
+            #{entity.sort}, #{entity.stable}, #{entity.status}, #{entity.memo}, #{entity.operationUsername},
+            #{entity.operationIp}, #{entity.operationMethod}, #{entity.operationApi}, #{entity.operationStatus},
+            #{entity.operationBody})
+        </foreach>
+    </insert>
+    
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+        memo, operation_username, operation_ip, operation_method, operation_api, operation_status, operation_body)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt},
+            #{entity.sort}, #{entity.stable}, #{entity.status}, #{entity.memo}, #{entity.operationUsername},
+            #{entity.operationIp}, #{entity.operationMethod}, #{entity.operationApi}, #{entity.operationStatus},
+            #{entity.operationBody})
+        </foreach>
+        on duplicate key update
+        created_at = values(created_at),
+        created_by = values(created_by),
+        updated_at = values(updated_at),
+        updated_by = values(updated_by),
+        deleted_at = values(deleted_at),
+        sort = values(sort),
+        stable = values(stable),
+        status = values(status),
+        memo = values(memo),
+        operation_username = values(operation_username),
+        operation_ip = values(operation_ip),
+        operation_method = values(operation_method),
+        operation_api = values(operation_api),
+        operation_status = values(operation_status),
+        operation_body = values(operation_body)
+    </insert>
+    
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_log_operation
+        <set>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="stable != null and stable != ''">
+                stable = #{stable},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="memo != null and memo != ''">
+                memo = #{memo},
+            </if>
+            <if test="operationUsername != null and operationUsername != ''">
+                operation_username = #{operationUsername},
+            </if>
+            <if test="operationIp != null and operationIp != ''">
+                operation_ip = #{operationIp},
+            </if>
+            <if test="operationMethod != null and operationMethod != ''">
+                operation_method = #{operationMethod},
+            </if>
+            <if test="operationApi != null and operationApi != ''">
+                operation_api = #{operationApi},
+            </if>
+            <if test="operationStatus != null">
+                operation_status = #{operationStatus},
+            </if>
+            <if test="operationBody != null and operationBody != ''">
+                operation_body = #{operationBody},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from sys_log_operation
+        where id = #{id}
+    </delete>
+
+
+</mapper>
+
+
