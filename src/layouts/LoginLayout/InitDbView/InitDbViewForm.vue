@@ -3,7 +3,7 @@
     <div class="col row column justify-center items-center">
       <q-card flat style="background: rgba(0, 0, 0, 0);">
         <q-toolbar>
-          <q-avatar class="gin-quasar-admin-logo">
+          <q-avatar class="gin-quasar-admin-logo" font-size="52px" size="100px">
             <img src="logo.png"/>
           </q-avatar>
           <q-toolbar-title class="row items-center">
@@ -13,7 +13,6 @@
                         </span>
           </q-toolbar-title>
         </q-toolbar>
-
         <q-card-section>
           <q-form class="text-center gqa-form" @submit="onInitDb">
             <div class="q-gutter-y-md column">

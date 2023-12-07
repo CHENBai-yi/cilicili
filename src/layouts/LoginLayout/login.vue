@@ -45,8 +45,8 @@
           </q-card>
           <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
         </div>
-        <div class="col-2 ">
-          <GqaLanguage style="width: 100px"/>
+        <div class="col-2">
+          <GqaLanguage style="width: 110px"/>
         </div>
       </q-page>
     </q-page-container>
@@ -66,7 +66,7 @@ import {postAction} from "src/api/manage";
 const $q = useQuasar()
 
 
-const dbNeedInit = ref(false)
+const dbNeedInit = ref(true)
 const storageStore = useStorageStore()
 const username = ref('Pratik')
 const password = ref('12345')
@@ -127,15 +127,4 @@ const checkDb = async () => {
   background-image: linear-gradient(135deg, #7028e4 0%, #e5b2ca 100%);
 }
 
-.language-show {
-  //position: fixed;
-  bottom: 2px;
-  left: 5px;
-}
-
-.dark-theme-show {
-  //position: fixed;
-  top: 2px;
-  right: 5px;
-}
 </style>

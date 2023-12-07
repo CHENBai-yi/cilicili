@@ -154,6 +154,16 @@ export default {
     "en-US": "Close left",
     "ru": "Закрыть слева"
   },
+  Maximize: {
+    "zh-CN": "最大化",
+    "en-US": "Maximize",
+    "ru": "Максимизация."
+  },
+  Minimize: {
+    "zh-CN": "最小化",
+    "en-US": "Minimize",
+    "ru": "Минимизировать."
+  },
   CloseAll: {
     "zh-CN": "关闭所有",
     "en-US": "Close all",

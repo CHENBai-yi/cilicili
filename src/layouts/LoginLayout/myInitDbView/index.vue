@@ -12,13 +12,13 @@
           <q-space/>
 
           <q-btn :disable="!maximizedToggle" dense flat icon="minimize" @click="maximizedToggle = false">
-            <q-tooltip v-if="maximizedToggle" class="bg-white text-primary">Minimize</q-tooltip>
+            <q-tooltip v-if="maximizedToggle" class="bg-white text-primary">{{ $t('Minimize') }}</q-tooltip>
           </q-btn>
           <q-btn :disable="maximizedToggle" dense flat icon="crop_square" @click="maximizedToggle = true">
-            <q-tooltip v-if="!maximizedToggle" class="bg-white text-primary">Maximize</q-tooltip>
+            <q-tooltip v-if="!maximizedToggle" class="bg-white text-primary">{{ $t('Maximize') }}</q-tooltip>
           </q-btn>
           <q-btn v-close-popup dense flat icon="close">
-            <q-tooltip class="bg-white text-primary">Close</q-tooltip>
+            <q-tooltip class="bg-white text-primary">{{ $t('Close') }}</q-tooltip>
           </q-btn>
         </q-bar>
 
@@ -56,8 +56,8 @@ import useTheme from 'src/composables/useTheme';
 const {darkTheme} = useTheme()
 
 
-const maximizedToggle = ref(true)
-const dialog = ref(false)
+let maximizedToggle = ref(true)
+const dialog = ref(true)
 const router = useRouter()
 
 onMounted(() => {
