@@ -1,12 +1,12 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="bg-image column q-pa-xs">
-        <!--        flex flex-center-->
-        <div class="col-2">
-          <DarkTheme class=" float-right"/>
+      <q-page class="bg-image row q-pa-sm">
+        <div class="col-12">
+          <DarkTheme class="float-right"/>
         </div>
-        <div class="col flex flex-center">
+
+        <div class="col-12 flex flex-center">
           <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
             <q-card-section>
               <q-avatar class="absolute-center shadow-10" size="103px">
@@ -45,8 +45,8 @@
           </q-card>
           <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
         </div>
-        <div class="col-2">
-          <GqaLanguage style="width: 110px"/>
+        <div class="col-12 self-end">
+          <GqaLanguage class="float-left" style="width: 110px"/>
         </div>
       </q-page>
     </q-page-container>
