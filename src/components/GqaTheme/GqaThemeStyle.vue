@@ -22,7 +22,7 @@ import {Cookies, setCssVar} from 'quasar';
 import {ThemeStyleAnt, ThemeStyleElement, ThemeStyleQuasar} from "src/config/default"
 
 const themeStyleList = {
-  'Gin-Quasar-Admin': 'icons/gqa128.png',
+  'Cilicili-Quasar-Admin': 'icons/favicon-128x128.png',
   'Quasar': 'icon/quasar.svg',
   'Element': 'icon/element-plus.svg',
   'Ant Design': 'icon/ant-design-vue.svg',
@@ -32,7 +32,7 @@ const settingStore = useSettingStore()
 const themeStyle = computed(() => settingStore.GetThemeStyle())
 const setThemeStyle = (style) => {
   switch (style) {
-    case 'Gin-Quasar-Admin':
+    case 'Cilicili-Quasar-Admin':
       for (let q in ThemeStyleQuasar) {
         setBrand(q, ThemeStyleQuasar[q])
       }

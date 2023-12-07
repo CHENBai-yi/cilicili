@@ -1,8 +1,8 @@
 export const GqaDefaultUsername = 'GQA'
-export const GqaDefaultAvatar = "gqa128.png"
+export const GqaDefaultAvatar = "favicon-128x128.png"
 export const GqaFrontendDefault = {
-  mainTitle: "Gin-Quasar-Admin",
-  subTitle: "Gin-Quasar-Admin",
+  mainTitle: "Cilicili后台管理系统",
+  subTitle: "Cilicili后台管理系统",
   webDescribe: "Be the change you want to see in the world.",
   showGit: "yesNo_yes"
 }

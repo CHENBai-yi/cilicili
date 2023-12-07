@@ -10,7 +10,7 @@ export const timeWelcome = () => {
 
 export const randomWelcome = () => {
   const w = [
-    i18n.global.t('WelcomeTo') + ' Gin-Quasar-Admin!',
+    i18n.global.t('WelcomeTo') + ' Cilicili后台管理系统!',
     i18n.global.t('GoOutForAWalk'),
     i18n.global.t('WantSomeFeatures'),
     i18n.global.t('NeedSomeCoffee'),

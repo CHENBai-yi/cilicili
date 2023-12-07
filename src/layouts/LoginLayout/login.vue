@@ -1,49 +1,52 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="flex bg-image flex-center">
-        <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
-          <q-card-section>
-            <q-avatar class="absolute-center shadow-10" size="103px">
-              <img src="public/profile.svg">
-            </q-avatar>
-          </q-card-section>
-          <q-card-section>
-            <div class="text-center q-pt-lg">
-              <div class="col text-h6 ellipsis">
-                {{ randomWelcome() }}
-              </div>
-            </div>
-          </q-card-section>
-          <q-card-section>
-            <q-form
-              class="q-gutter-md"
-            >
-              <q-input
-                v-model="username"
-                :label="$t('Username')"
-                filled
-                lazy-rules
-              />
-              <q-input
-                v-model="password"
-                :label="$t('Password')"
-                filled
-                lazy-rules
-                type="password"
-              />
-              <div>
-                <q-btn :label="$t('Login')" color="primary" to="/" type="button"/>
-              </div>
-            </q-form>
-          </q-card-section>
-        </q-card>
-        <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
-        <div class="language-show">
-          <GqaLanguage style="width: 100%;"/>
+      <q-page class="bg-image column q-pa-xs">
+        <!--        flex flex-center-->
+        <div class="col-2">
+          <DarkTheme class=" float-right"/>
         </div>
-        <div class="dark-theme-show">
-          <DarkTheme/>
+        <div class="col flex flex-center">
+          <q-card v-bind:style="$q.screen.lt.sm?{'width': '80%'}:{'width':'30%'}">
+            <q-card-section>
+              <q-avatar class="absolute-center shadow-10" size="103px">
+                <img src="profile.svg">
+              </q-avatar>
+            </q-card-section>
+            <q-card-section>
+              <div class="text-center q-pt-lg">
+                <div class="col text-h6 ellipsis">
+                  {{ randomWelcome() }}
+                </div>
+              </div>
+            </q-card-section>
+            <q-card-section>
+              <q-form
+                class="q-gutter-md"
+              >
+                <q-input
+                  v-model="username"
+                  :label="$t('Username')"
+                  filled
+                  lazy-rules
+                />
+                <q-input
+                  v-model="password"
+                  :label="$t('Password')"
+                  filled
+                  lazy-rules
+                  type="password"
+                />
+                <div>
+                  <q-btn :label="$t('Login')" color="primary" to="/" type="button"/>
+                </div>
+              </q-form>
+            </q-card-section>
+          </q-card>
+          <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
+        </div>
+        <div class="col-2 ">
+          <GqaLanguage style="width: 100px"/>
         </div>
       </q-page>
     </q-page-container>
@@ -125,13 +128,13 @@ const checkDb = async () => {
 }
 
 .language-show {
-  position: fixed;
+  //position: fixed;
   bottom: 2px;
   left: 5px;
 }
 
 .dark-theme-show {
-  position: fixed;
+  //position: fixed;
   top: 2px;
   right: 5px;
 }
