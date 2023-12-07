@@ -66,9 +66,9 @@ import {postAction} from "src/api/manage";
 const $q = useQuasar()
 
 
-const dbNeedInit = ref(true)
+const dbNeedInit = ref(false)
 const storageStore = useStorageStore()
-const username = ref('Pratik')
+const username = ref('Mr Chen')
 const password = ref('12345')
 const changeContainerImg = computed(() => {
   if (bannerImage.value === '') {

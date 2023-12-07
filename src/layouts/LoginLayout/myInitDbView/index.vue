@@ -57,7 +57,7 @@ const {darkTheme} = useTheme()
 
 
 let maximizedToggle = ref(true)
-const dialog = ref(true)
+const dialog = ref(false)
 const router = useRouter()
 
 onMounted(() => {
