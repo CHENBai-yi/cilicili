@@ -1,28 +1,21 @@
-package site.cilicili.backend.domain.pojo;
+package site.cilicili.authentication.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import site.cilicili.common.entity.BaseEntity;
 
-import java.io.Serializable;
-
 /**
- * (SysUser)实体类
- *
- * @author ChenBaiYi
- * @since 2023-12-04 21:48:47
+ * @author BaiYiChen
  */
-@Slf4j
-@Data
-@Builder
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@Schema(description = "SysUser实体类")
-public class SysUser extends BaseEntity implements Serializable {
+@Getter
+@Setter
+@NoArgsConstructor
+@TableName("users")
+public class UserEntity extends BaseEntity {
     private static final long serialVersionUID = 372343052193092864L;
 
     @Schema(description = "排序")
@@ -49,6 +42,20 @@ public class SysUser extends BaseEntity implements Serializable {
     private String mobile;
     @Schema(description = "邮箱")
     private String email;
+
+    @Builder
+    public UserEntity(final Long sort, final String stable, final String status, final String memo, final String username, final String nickname, final String realName, final String password, final String avatar, final String gender, final String mobile, final String email) {
+        this.sort = sort;
+        this.stable = stable;
+        this.status = status;
+        this.memo = memo;
+        this.username = username;
+        this.nickname = nickname;
+        this.realName = realName;
+        this.password = password;
+        this.avatar = avatar;
+        this.gender = gender;
+        this.mobile = mobile;
+        this.email = email;
+    }
 }
-
-

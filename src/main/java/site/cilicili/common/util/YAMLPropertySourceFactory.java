@@ -1,4 +1,4 @@
-package site.cilicili.common.dbUtils;
+package site.cilicili.common.util;
 
 import org.springframework.boot.env.YamlPropertySourceLoader;
 import org.springframework.core.env.PropertySource;

@@ -12,12 +12,15 @@ import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.db.domain.dto.DatabaseConnectionDto;
 import site.cilicili.common.db.domain.pojo.DatabaseConnection;
 import site.cilicili.common.db.service.DatabaseConnectionService;
-import site.cilicili.common.dbUtils.DbUtils;
+import site.cilicili.common.util.DbUtils;
 import site.cilicili.common.util.R;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * @author BaiYiChen
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -59,6 +62,5 @@ public class DbCheckerController {
         }
         return R.no(mess).setData("need_init", true);
     }
-
 
 }

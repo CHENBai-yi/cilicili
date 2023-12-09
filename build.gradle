@@ -55,6 +55,9 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    compileOnly 'io.jsonwebtoken:jjwt-api:0.11.4'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.4'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.4'
 
 
 }

@@ -1,4 +1,4 @@
-package site.cilicili.common.dbUtils;
+package site.cilicili.common.util;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
@@ -144,24 +144,13 @@ public class DbUtils {
                 LOGGER.error(e.getMessage());
             }
         } else {
-            Writer writer = null;
-            try {
-                writer = new FileWriter(classPathResource.getPath());
+            try (Writer writer = new FileWriter(classPathResource.getPath())) {
                 final HashMap<String, Object> map = new HashMap<>();
                 map.put(key, BeanUtil.beanToMap(databaseConnectionDto, false, true));
                 yaml.dump(map, writer);
                 return true;
             } catch (Exception e) {
                 LOGGER.error(e.getMessage());
-            } finally {
-                try {
-                    if (writer != null) {
-                        writer.flush();
-                        writer.close();
-                    }
-                } catch (IOException e) {
-                    LOGGER.error(e.getMessage());
-                }
             }
         }
         return false;
@@ -185,20 +174,18 @@ public class DbUtils {
      */
     private static ArrayList<String> readFileByLines(Reader readerFile) {
         ArrayList<String> listStr = new ArrayList<>();
-        StringBuffer sb = new StringBuffer();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(readerFile);
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(readerFile);) {
             String tempString = null;
             int flag = 0;
             // 一次读入一行，直到读入null为文件结束
             while ((tempString = reader.readLine()) != null) {
                 // 显示行号
                 // System.out.println("line " + line + ": " + tempString);
-                if (tempString.trim().equals("")) {
+                if ("".equals(tempString.trim()) || tempString.startsWith("--")) {
                     continue;
                 }
-                if (tempString.substring(tempString.length() - 1).equals(";")) {
+                if (";".equals(tempString.substring(tempString.length() - 1))) {
                     if (flag == 1) {
                         sb.append(tempString);
                         listStr.add(sb.toString());
@@ -212,24 +199,25 @@ public class DbUtils {
                     sb.append(tempString);
                 }
             }
-            reader.close();
+
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         } finally {
-            if (reader != null) {
+            if (readerFile != null) {
                 try {
-                    reader.close();
-                } catch (IOException e1) {
+                    readerFile.close();
+                } catch (IOException e) {
+                    LOGGER.error(e.getMessage());
                 }
             }
         }
-
+        sb.setLength(0);
         return listStr;
     }
 
     public static void runSqlByReadFileContent(Connection connection, InputStream reader) {
-        try {
-            ArrayList<String> sqlStr = readFileByLines(new InputStreamReader(reader, StandardCharsets.UTF_8));
+        try (InputStreamReader inputStream = new InputStreamReader(reader, StandardCharsets.UTF_8)) {
+            ArrayList<String> sqlStr = readFileByLines(inputStream);
             if (sqlStr.size() > 0) {
                 int num = batchDate(connection, sqlStr);
                 if (num > 0) {
@@ -242,6 +230,14 @@ public class DbUtils {
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            }
         }
     }
 
@@ -264,6 +260,7 @@ public class DbUtils {
             return 0;
         } finally {
             try {
+                sql.clear();
                 connection.commit();
                 if (st != null) {
                     st.close();

@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 06/12/2023 17:47:44
+ Date: 09/12/2023 23:38:28
 */
 
 SET NAMES utf8mb4;
@@ -31,11 +31,14 @@ CREATE TABLE `database_connection`
     `scheme`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 4
+  AUTO_INCREMENT = 5
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = DYNAMIC;
 
+-- ----------------------------
+-- Records of database_connection
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for plugin_achievement_category
@@ -2285,8 +2288,8 @@ VALUES (3, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 2, '
 DROP TABLE IF EXISTS `sys_dept_user`;
 CREATE TABLE `sys_dept_user`
 (
-    `sys_dept_dept_code` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门编码',
-    `sys_user_username`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
+    `sys_dept_dept_code` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '\'部门编码\'',
+    `sys_user_username`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '\'用户名\'',
     PRIMARY KEY (`sys_dept_dept_code`, `sys_user_username`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -3301,8 +3304,8 @@ CREATE TABLE `sys_user`
 -- ----------------------------
 INSERT INTO `sys_user`
 VALUES (1, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_yes', 'onOff_on',
-        'Be the change you want to see in the world.', 'admin', 'Mr.J', 'SuperAdmin',
-        '$2a$10$DvGBM2WYBEMtAtRkpIQO9O2N1ublj92r4ehySrbJEGUOFCyQfJm1u', '', 'gender_unknown', '1234567890',
+        'Be the change you want to see in the world.', 'admin', 'Mr.C', 'SuperAdmin',
+        '$2a$10$CNKI5n6pyA2KoBuDg4k5recg2a5v22eqZigksjLY1.CQ8wxQOEL/S', '', 'gender_unknown', '1234567890',
         '11111111111');
 
 -- ----------------------------
@@ -3333,8 +3336,8 @@ VALUES ('admin',
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`
 (
-    `sys_role_role_code` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色编码',
-    `sys_user_username`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
+    `sys_role_role_code` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '\'角色编码\'',
+    `sys_user_username`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '\'用户名\'',
     PRIMARY KEY (`sys_role_role_code`, `sys_user_username`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4

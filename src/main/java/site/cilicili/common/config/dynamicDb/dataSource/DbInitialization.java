@@ -56,9 +56,9 @@ public class DbInitialization implements CommandLineRunner {
                 druidDataSource.setAsyncInit(true);
                 druidDataSource.setKillWhenSocketReadTimeout(true);
                 druidDataSource.setValidationQuery("select 1;");
-                druidDataSource.setKillWhenSocketReadTimeout(true);
                 druidDataSource.setConnectionErrorRetryAttempts(10);
                 druidDataSource.setNotFullTimeoutRetryCount(10);
+                druidDataSource.setPoolPreparedStatements(true);
                 return druidDataSource;
             }, (value1, value2) -> value1));
             final Map<Object, DataSource> resolvedDataSources = dataSourceList.getResolvedDataSources();

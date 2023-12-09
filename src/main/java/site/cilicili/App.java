@@ -14,13 +14,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import site.cilicili.common.config.dynamicDb.MyDataSourceList;
 import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
-import site.cilicili.common.dbUtils.DbUtils;
+import site.cilicili.common.util.DbUtils;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -36,7 +35,7 @@ import java.util.Optional;
  */
 @Slf4j
 @RequiredArgsConstructor
-@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, SecurityAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
+@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
 public class App {
     private final DbChangeConfig dbChangeConf;
 

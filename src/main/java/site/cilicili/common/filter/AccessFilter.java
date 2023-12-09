@@ -1,4 +1,4 @@
-package site.cilicili.backend.config;
+package site.cilicili.common.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

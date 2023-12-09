@@ -1,4 +1,4 @@
-package site.cilicili.backend.config;
+package site.cilicili.common.swagger;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;

@@ -32,7 +32,7 @@ public class DynamicAspect {
     public void pointCut() {
     }
 
-    @Pointcut("execution( * site.cilicili.backend.controller..*(..))")
+    @Pointcut("execution( * site.cilicili.backend.controller..*(..))||execution( * site.cilicili.authentication.user.controller..*(..))")
     public void pointCutBackend() {
     }
 
