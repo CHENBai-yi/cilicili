@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia';
 import {Cookies, SessionStorage} from 'quasar';
 import {usePermissionStore} from './permission';
-import res from '/public/data/_public_HandleLogin.json'
+import {postAction} from "src/api/manage";
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -15,7 +15,8 @@ export const useUserStore = defineStore('user', {
   getters: {},
   actions: {
     async HandleLogin(loginForm) {
-      // const res = await postAction('public/login', loginForm)
+      console.log(loginForm)
+      const res = await postAction('public/login', loginForm)
       console.log(res)
       if (res.code === 1) {
         const token = res.data.token

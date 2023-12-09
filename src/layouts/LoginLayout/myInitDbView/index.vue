@@ -65,8 +65,6 @@ onMounted(() => {
 })
 const checkDb = async () => {
   const res = await postAction('public/check-db')
-  console.log(res, "check-db")
-  console.log(res.code, "ada")
   if (res.code === 1) {
     if (res.data.need_init === false) {
       await router.push({path: '/'})
