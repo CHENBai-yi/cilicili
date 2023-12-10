@@ -3,6 +3,7 @@ package site.cilicili.backend.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.backend.domain.pojo.SysDept;
 import site.cilicili.backend.mapper.SysDeptMapper;
 import site.cilicili.backend.service.SysDeptService;
@@ -35,6 +36,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      * @param sysDept 筛选条件
      * @return 查询结果
      */
+    @Transactional(readOnly = true)
     @Override
     public R queryAll(SysDept sysDept) {
         return R.ok().setData(baseMapper.queryAll(sysDept));

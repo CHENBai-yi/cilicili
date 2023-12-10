@@ -49,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                 .nickname(userEntity.getNickname())
                 .avatar(userEntity.getAvatar())
                 .realName(userEntity.getNickname())
-                .token(jwtUtils.encode(userEntity.getEmail()))
+                .token(jwtUtils.encode(userEntity.getUsername()))
                 .build();
     }
 

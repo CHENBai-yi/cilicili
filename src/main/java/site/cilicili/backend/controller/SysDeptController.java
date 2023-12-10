@@ -19,7 +19,7 @@ import site.cilicili.common.util.R;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("sysDept")
+@RequestMapping("dept")
 @Tag(name = "(SysDept)表控制层")
 public class SysDeptController {
     /**
@@ -37,7 +37,7 @@ public class SysDeptController {
     @Operation(summary = "全查询", parameters = {
             @Parameter(description = "sysDept 筛选条件")
     })
-    @GetMapping
+    @PostMapping("get-dept-list")
     public R queryAll(final SysDept sysDept) {
         return this.sysDeptService.queryAll(sysDept);
     }

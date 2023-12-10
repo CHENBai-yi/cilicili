@@ -4,12 +4,16 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import site.cilicili.common.filter.JWTAuthFilter;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
 
+/**
+ * @author BaiYiChen
+ */
 public class JwtUtils {
     private final Long validSeconds;
     private final Key key;
@@ -24,7 +28,7 @@ public class JwtUtils {
             return null;
         }
         Instant exp = Instant.now();
-        return Jwts.builder().setSubject(sub).setIssuedAt(new Date(exp.toEpochMilli())).setExpiration(new Date(exp.toEpochMilli() + validSeconds * 1000)).signWith(key).compact();
+        return JWTAuthFilter.TOKEN_PREFIX + Jwts.builder().setSubject(sub).setIssuedAt(new Date(exp.toEpochMilli())).setExpiration(new Date(exp.toEpochMilli() + validSeconds * 1000)).signWith(key).compact();
     }
 
     public boolean validateToken(String jwt) {
