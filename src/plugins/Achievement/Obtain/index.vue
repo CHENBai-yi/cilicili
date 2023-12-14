@@ -22,6 +22,7 @@
 import useTableData from 'src/composables/useTableData'
 import {computed, onMounted} from 'vue'
 import GqaShowName from 'src/components/GqaShowName/index.vue'
+import RecordDetail from 'src/pages/System/Menu/modules/recordDetail.vue'
 
 const url = {
   list: 'plugin-achievement/get-obtain-list',
@@ -34,6 +35,7 @@ const columns = computed(() => {
     {name: 'created_at', align: 'center', label: '获得时间', field: 'created_at'},
   ]
 })
+console.log(recordDetailDialog)
 const {
   showDateTime,
   pagination,

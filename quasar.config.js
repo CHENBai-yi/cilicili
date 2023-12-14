@@ -56,7 +56,6 @@ module.exports = configure(function (ctx) {
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
       'bootstrap-icons',
       'roboto-font', // optional, you are not bound to it
-
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
@@ -78,9 +77,9 @@ module.exports = configure(function (ctx) {
       env: {
         API: ctx.dev
           // 测试代理地址
-          ? "http://127.0.0.1:8080/"
+          ? "http://127.0.0.1:8889/"
           // 正式代理地址
-          : "http://81.68.159.232:8888/"
+          : "http://8.217.182.161/api/"
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

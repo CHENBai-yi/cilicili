@@ -95,7 +95,7 @@ export default function useTableData(url) {
           message: res.message,
         })
       }
-      getTableData()
+      await getTableData()
     })
   }
   const {showDateTime, showDate, gqaFrontend, gqaBackend, GqaDictShow, GqaShowName,} = useCommon()

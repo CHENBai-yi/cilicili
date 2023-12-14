@@ -1,5 +1,5 @@
 export const GqaDefaultUsername = 'GQA'
-export const GqaDefaultAvatar = "favicon-128x128.png"
+export const GqaDefaultAvatar = "icons/favicon-128x128.png"
 export const GqaFrontendDefault = {
   mainTitle: "Cilicili后台管理系统",
   subTitle: "Cilicili后台管理系统",

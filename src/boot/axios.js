@@ -25,7 +25,7 @@ export default boot(({app, router}) => {
     const token = userStore.GetToken()
     request.headers = {
       'Content-Type': 'application/json;charset=utf-8',
-      'Gqa-Token': token,
+      'Authorization': token,
       'Gqa-Lang': Cookies.get("gqa-language") || "zh-CN"
     }
     if (DemoMode && ForbiddenUrl.some(item => item === request.url)) {

@@ -74,6 +74,7 @@ import useTableData from 'src/composables/useTableData'
 import {computed, onMounted, ref} from 'vue'
 import RolePermissionDialog from './modules/RolePermissionDialog.vue'
 import RoleUserDialog from './modules/RoleUserDialog.vue'
+import RecordDetail from 'src/pages/System/Role/modules/recordDetail.vue'
 
 const url = {
   list: 'role/get-role-list',
