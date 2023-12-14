@@ -1,5 +1,6 @@
 package site.cilicili.common.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Slf4j
 @Data
 @Schema(description = "统一返回对象R")
+@JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
 public class R implements Serializable {
     private static final long serialVersionUID = 659942594217762465L;
     @Schema(description = "响应编码")

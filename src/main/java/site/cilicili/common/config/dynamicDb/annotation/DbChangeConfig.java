@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+import site.cilicili.common.util.YAMLPropertySourceFactory;
 
 /**
  * @author BaiYiChen
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @Primary
-@PropertySource(value = "classpath:dbConfig.yaml", ignoreResourceNotFound = true, encoding = "utf8")
+@PropertySource(value = "classpath:dbConfig.yaml", factory = YAMLPropertySourceFactory.class, ignoreResourceNotFound = true, encoding = "utf8")
 public class DbChangeConfig {
     @Value("${backend.scheme:backend}")
     private String backend;

@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80027
  Source Host           : localhost:3306
- Source Schema         : gin-quasar-admin
+ Source Schema         : quasar-admin
 
  Target Server Type    : MySQL
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 09/12/2023 23:38:28
+ Date: 14/12/2023 08:51:34
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `database_connection`
     `scheme`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 5
+  AUTO_INCREMENT = 6
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = DYNAMIC;
@@ -39,6 +39,8 @@ CREATE TABLE `database_connection`
 -- ----------------------------
 -- Records of database_connection
 -- ----------------------------
+INSERT INTO `database_connection`
+VALUES (5, 'jdbc:mysql://127.0.0.1:3306', 'root', '74521CBy', 'com.mysql.cj.jdbc.Driver', 'quasar-admin');
 
 -- ----------------------------
 -- Table structure for plugin_achievement_category
@@ -2809,6 +2811,7 @@ CREATE TABLE `sys_role`
     `dept_data_permission_type`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'deptDataPermissionType_user' COMMENT '部门数据权限分类',
     `dept_data_permission_custom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '自定义部门数据权限',
     `default_page`                varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT 'dashboard' COMMENT '默认首页',
+    `logical_delete`              bit(1)                                                        NULL     DEFAULT b'0',
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE INDEX `idx_sys_role_role_code` (`role_code` ASC) USING BTREE,
     INDEX `idx_sys_role_role_name` (`role_name` ASC) USING BTREE,
@@ -2826,7 +2829,7 @@ CREATE TABLE `sys_role`
 INSERT INTO `sys_role`
 VALUES (1, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_yes', 'onOff_on',
         '这是超级管理员组，拥有所有权限，请不要编辑！', 'super-admin', '超级管理员组', 'deptDataPermissionType_all', '',
-        'dashboard');
+        'dashboard', b'0');
 
 -- ----------------------------
 -- Table structure for sys_role_api

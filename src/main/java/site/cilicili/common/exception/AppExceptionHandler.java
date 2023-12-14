@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.support.MethodArgumentNo
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import site.cilicili.common.util.R;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +17,10 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class AppExceptionHandler {
     @ExceptionHandler(AppException.class)
-    public ResponseEntity<ErrorMessages> handleAppException(AppException exception) {
-        return responseErrorMessages(List.of(exception.getMessage()), exception.getError().getStatus());
+    public ResponseEntity<Object> handleAppException(AppException exception) {
+        final R exp = R.exp();
+        exp.setMessage(exception.getMessage());
+        return ResponseEntity.status(exception.getError().getStatus()).body(exp);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

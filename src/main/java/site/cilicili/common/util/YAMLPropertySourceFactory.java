@@ -1,5 +1,7 @@
 package site.cilicili.common.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.env.YamlPropertySourceLoader;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.ClassPathResource;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class YAMLPropertySourceFactory implements PropertySourceFactory {
     private static final String YML = ".yml";
     private static final String YAML = ".yaml";
+    private final Logger logger = LoggerFactory.getLogger(YAMLPropertySourceFactory.class);
 
     /**
      * @param name：@PropertySource 注解 name 的值
@@ -34,11 +37,15 @@ public class YAMLPropertySourceFactory implements PropertySourceFactory {
         String filename = resource.getResource().getFilename();
         // 属性源的名称
         String resourceName = Optional.ofNullable(name).orElse(filename);
-        if (filename != null) {
-            if (filename.endsWith(YML) || filename.endsWith(YAML)) {
-                List<PropertySource<?>> yamlSources = new YamlPropertySourceLoader().load(resourceName, new FileUrlResource(((ClassPathResource) resource.getResource()).getPath()));
-                return yamlSources.get(0);
+        try {
+            if (filename != null) {
+                if (filename.endsWith(YML) || filename.endsWith(YAML)) {
+                    List<PropertySource<?>> yamlSources = new YamlPropertySourceLoader().load(resourceName, new FileUrlResource(((ClassPathResource) resource.getResource()).getPath()));
+                    return yamlSources.get(0);
+                }
             }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
         return new DefaultPropertySourceFactory().createPropertySource(name, resource);
     }

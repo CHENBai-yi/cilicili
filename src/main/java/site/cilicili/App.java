@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Primary;
 import site.cilicili.common.config.dynamicDb.MyDataSourceList;
 import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
@@ -35,6 +36,7 @@ import java.util.Optional;
  */
 @Slf4j
 @RequiredArgsConstructor
+@EnableAspectJAutoProxy
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
 public class App {
     private final DbChangeConfig dbChangeConf;
@@ -57,6 +59,7 @@ public class App {
         final HashMap<Object, Object> dataSourceMap = new HashMap<>();
         DataSource defaultDataSource = null;
         Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).ifPresent(databaseConnectionDto1 -> {
+            dbChangeConf.setBackend(databaseConnectionDto1.getScheme());
             druidDataSource.setPassword(databaseConnectionDto1.getDbPassword());
             druidDataSource.setUsername(databaseConnectionDto1.getDbUser());
             druidDataSource.setUrl(String.join("/", databaseConnectionDto1.getUrl(), databaseConnectionDto1.getScheme()));

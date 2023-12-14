@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class DynamicAspect {
     public void pointCut() {
     }
 
-    @Pointcut("execution( * site.cilicili.backend.controller..*(..))||execution( * site.cilicili.authentication.user.controller..*(..))")
+    @Pointcut("execution( * site.cilicili.backend..service..*(..))||execution( * site.cilicili.authentication.user.service..*(..))")
     public void pointCutBackend() {
     }
 
@@ -62,21 +63,13 @@ public class DynamicAspect {
         return pjp.getTarget();
     }
 
-    @Around("pointCutBackend()||common()")
-    public Object aroundAdviceBackend(final ProceedingJoinPoint pjp) {
-        try {
-            if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
-                DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackend());
-            } else if (StrUtil.isNotBlank(dbChangeConf.getBackendInner())) {
-                DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackendInner());
-            }
-            return pjp.proceed(pjp.getArgs());
-        } catch (Throwable e) {
-            log.error(e.getMessage());
-        } finally {
-            DbThreadLocalContextHolder.poll();
+    @Before("pointCutBackend()||common()")
+    public void aroundAdviceBackend() {
+        if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
+            DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackend());
+        } else if (StrUtil.isNotBlank(dbChangeConf.getBackendInner())) {
+            DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackendInner());
         }
-        return pjp.getTarget();
     }
 
     // @Around("pointCutFrontend()")

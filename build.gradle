@@ -10,7 +10,9 @@ version = '0.0.1'
 java {
     sourceCompatibility = '17'
 }
-
+jar {
+    enabled(false)
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -20,6 +22,10 @@ configurations {
 repositories {
     mavenCentral()
 }
+//jar {
+//    enabled = false
+//}
+
 bootJar {
     duplicatesStrategy = 'exclude'
 }

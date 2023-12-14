@@ -12,8 +12,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class BaseEntity {
+    @TableLogic
     @TableField(fill = FieldFill.INSERT)
-    protected Integer delete;
+    protected Integer logical_delete;
+
     @TableId(type = IdType.AUTO)
     private Long id;
     @TableField(fill = FieldFill.INSERT)
@@ -24,8 +26,6 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedBy;
-
-    @TableLogic
     @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime deletedAt;
 }
