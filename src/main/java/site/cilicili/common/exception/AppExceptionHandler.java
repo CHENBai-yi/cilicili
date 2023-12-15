@@ -18,9 +18,7 @@ import java.util.stream.Collectors;
 public class AppExceptionHandler {
     @ExceptionHandler(AppException.class)
     public ResponseEntity<Object> handleAppException(AppException exception) {
-        final R exp = R.exp();
-        exp.setMessage(exception.getMessage());
-        return ResponseEntity.status(exception.getError().getStatus()).body(exp);
+        return ResponseEntity.ok(R.no(exception.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

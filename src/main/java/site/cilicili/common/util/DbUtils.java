@@ -2,6 +2,7 @@ package site.cilicili.common.util;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.util.ObjectUtil;
 import org.apache.ibatis.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +38,6 @@ public class DbUtils {
     private static final String filePath = "gin-quasar-admin.sql";
     private static final Logger LOGGER = LoggerFactory.getLogger(DbUtils.class);
     private static final Map<String, String> DRIVER_CLASS_MAP = new HashMap<>();
-    private static Connection connection;
-    private static Statement statement;
 
     static {
         // Initialize the map with supported database types and their corresponding driver classes
@@ -67,15 +66,15 @@ public class DbUtils {
         final String dbPassword = databaseConnectionDto.getDbPassword();
         final String dbUser = databaseConnectionDto.getDbUser();
         // Establish a connection
-        connection = DriverManager.getConnection(format, dbUser, dbPassword);
+        Connection connection = DriverManager.getConnection(format, dbUser, dbPassword);
         connection.setAutoCommit(false);
-        statement = connection.createStatement();
+        Statement statement = connection.createStatement();
         final String dbSchema = databaseConnectionDto.getDbSchema();
         // Execute the SQL script
         final String driver = getDriverClass(databaseConnectionDto.getDbType().toLowerCase(Locale.ROOT));
         final String format1 = String.format(INSERTONE, dbSchema, format, dbUser, dbPassword, driver, dbSchema);
         final String format2 = String.format(UPDATELIST, dbSchema, format, dbUser, dbPassword, driver);
-        if (checkDb(key) == null) {
+        if (ObjectUtil.isNull(checkDb(key))) {
             statement.executeUpdate(String.format(CREATEDB, dbSchema));
             statement.executeUpdate(String.format("use `%1$s`;", dbSchema));
             runSqlByReadFileContent(connection, Resources.getResourceAsStream(filePath));
@@ -115,11 +114,13 @@ public class DbUtils {
         try (Reader reader = new FileReader(filePath)) {
             final Yaml yaml = new Yaml();
             final Map<String, Object> load = yaml.load(reader);
-            final DatabaseConnectionDto d = BeanUtil.toBean(load.get(key), DatabaseConnectionDto.class, CopyOptions.create().setIgnoreNullValue(true));
-            try (Connection connection = DriverManager.getConnection(d.getUrl(), d.getDbUser(), d.getDbPassword())) {
-                final String scheme = d.getScheme();
-                if (databaseExists(connection, scheme) && databaseConnection(connection, scheme) != null) {
-                    return d;
+            if (ObjectUtil.isNotNull(load) && ObjectUtil.isNotNull(load.get(key))) {
+                final DatabaseConnectionDto d = BeanUtil.toBean(load.get(key), DatabaseConnectionDto.class, CopyOptions.create().setIgnoreNullValue(true));
+                try (Connection connection = DriverManager.getConnection(d.getUrl(), d.getDbUser(), d.getDbPassword())) {
+                    final String scheme = d.getScheme();
+                    if (ObjectUtil.isNotNull(databaseConnection(connection, scheme)) && databaseExists(connection, scheme)) {
+                        return d;
+                    }
                 }
             }
         } catch (Exception e) {

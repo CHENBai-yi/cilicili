@@ -18,4 +18,5 @@ public class RoleListQueryParam {
     private String roleName;
     private Integer page;
     private Integer pageSize;
+    private Long id;
 }

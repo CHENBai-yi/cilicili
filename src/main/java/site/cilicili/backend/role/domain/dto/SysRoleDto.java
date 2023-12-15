@@ -11,9 +11,9 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
+import site.cilicili.backend.user.domain.dto.SysUserDto;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * (SysRole)实体类
@@ -28,7 +28,7 @@ import java.util.List;
 @Schema(description = "SysRole数据传输类")
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
 public class SysRoleDto implements Serializable {
-    private List<Records> records;
+    private Object records;
     private Integer total;
     @Positive(message = "页码值不能为负.")
     private Integer page;
@@ -42,6 +42,8 @@ public class SysRoleDto implements Serializable {
         private String user;
         private String menu;
         private String button;
+        private User createdByUser;
+        private User updatedByUser;
         private DefaultPageMenu defaultPageMenu;
     }
 
@@ -53,4 +55,15 @@ public class SysRoleDto implements Serializable {
         private String children;
         private String button;
     }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class User extends SysUserDto {
+        private User createdByUser;
+        private User updatedByUser;
+        private String role;
+        private String dept;
+    }
+
 }

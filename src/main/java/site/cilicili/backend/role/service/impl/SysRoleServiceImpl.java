@@ -92,10 +92,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
 
     @Override
     public R queryRoleListByParam(final RoleListQueryParam queryParam) {
-        final SysRoleDto.SysRoleDtoBuilder page = SysRoleDto.builder().page(queryParam.getPage()).pageSize(queryParam.getPageSize());
-        queryParam.setPage((queryParam.getPage() * queryParam.getPageSize()) - queryParam.getPageSize());
-        return Optional.ofNullable(baseMapper.queryRoleListByParam(queryParam)).map(records -> R.yes("Success").setData(page.total(records.size()).records(records).build())).orElse(R.yes("Success").setData(page.build()));
+        return Optional.ofNullable(queryParam).map(queryParam1 -> Optional.ofNullable(queryParam1.getId()).map(id -> Optional.ofNullable(baseMapper.queryRoleListById(id)).map(records -> R.yes("查找成功.").setData(SysRoleDto.builder().records(records).build())).orElse(R.yes("查找成功.").setData(SysRoleDto.builder().build()))).orElse(Optional.ofNullable(baseMapper.queryRoleListByParam(queryParam)).map(records -> R.yes("Success.").setData(SysRoleDto.builder().page(queryParam.getPage()).pageSize(queryParam.getPageSize()).total(records.size()).records(records).build())).orElse(R.yes("Success").setData(SysRoleDto.builder().build())))).orElseGet(() -> Optional.ofNullable(baseMapper.queryRoleListByParam(queryParam)).map(records -> R.yes("Success.").setData(SysRoleDto.builder().total(records.size()).records(records).build())).orElse(R.yes("Success").setData(SysRoleDto.builder().build())));
     }
+
 
 }
 

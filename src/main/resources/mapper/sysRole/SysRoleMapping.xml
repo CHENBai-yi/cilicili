@@ -42,6 +42,27 @@
         <result property="keepAlive" column="keep_alive" jdbcType="VARCHAR"/>
         <result property="isLink" column="is_link" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap type="site.cilicili.backend.role.domain.dto.SysRoleDto$User" id="user">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <association property="createdByUser" column="createdBy=created_by" select="findCreatedByUser"/>
+        <association property="updatedByUser" column="updatedBy=updated_by" select="findUpdatedByUser"/>
+    </resultMap>
     
     <resultMap type="site.cilicili.backend.role.domain.dto.SysRoleDto$Records" id="RoleList">
         <result property="id" column="id" jdbcType="INTEGER"/>
@@ -64,12 +85,37 @@
         <result property="button" column="button" jdbcType="VARCHAR"/>
         <association property="defaultPageMenu" column="default_page=default_page" select="findDefaultPage"/>
     </resultMap>
-    
+    <resultMap type="site.cilicili.backend.role.domain.dto.SysRoleDto$Records" id="RoleListById">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="deptDataPermissionType" column="dept_data_permission_type" jdbcType="VARCHAR"/>
+        <result property="deptDataPermissionCustom" column="dept_data_permission_custom" jdbcType="VARCHAR"/>
+        <result property="defaultPage" column="default_page" jdbcType="VARCHAR"/>
+        <result property="user" column="user" jdbcType="VARCHAR"/>
+        <result property="menu" column="menu" jdbcType="VARCHAR"/>
+        <result property="button" column="button" jdbcType="VARCHAR"/>
+        <association property="defaultPageMenu" column="default_page=default_page" select="findDefaultPage"/>
+        <association property="createdByUser" column="createdBy=created_by" select="findCreatedByUser"/>
+        <association property="updatedByUser" column="updatedBy=updated_by" select="findUpdatedByUser"/>
+    </resultMap>
     <!--查询SysRoleDto-->
     <select id="queryRoleListByParam" resultMap="RoleList"
             parameterType="site.cilicili.backend.role.domain.dto.RoleListQueryParam">
         select * from sys_role
         <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
             <if test="roleCode!=null">
                 role_code=#{roleCode}
             </if>
@@ -81,13 +127,26 @@
             order by #{sortBy} desc
         </if>
         <if test="page>0 and pageSize>0">
-            limit #{page},#{pageSize}
-        </if>;
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
     </select>
     <select id="findDefaultPage" resultMap="defaultPageMenu">
         select *
         from sys_menu
         where name = #{default_page};
+    </select>
+    
+    <select id="findCreatedByUser" resultMap="user">
+        select *
+        from sys_user
+        where username = #{createdBy};
+    </select>
+    <select id="findUpdatedByUser" resultMap="user">
+        select *
+        from sys_user
+        where username = #{updatedBy};
     </select>
     
     <!--查询单个-->
@@ -217,6 +276,11 @@
                 and default_page = #{defaultPage}
             </if>
         </where>
+    </select>
+    <select id="queryRoleListById" resultMap="RoleListById">
+        select *
+        from sys_role
+        where id = #{id};
     </select>
     
     

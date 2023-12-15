@@ -67,8 +67,22 @@ public class SysRoleController {
             @Parameter(description = "sysRole 筛选条件")
     })
     @PostMapping("get-role-list")
-    public R queryByQueryParam(@RequestBody final RoleListQueryParam queryParam) {
+    public R queryRoleList(@RequestBody(required = false) final RoleListQueryParam queryParam) {
         return this.sysRoleService.queryRoleListByParam(queryParam);
+    }
+
+    /**
+     * 根据体ID查询
+     *
+     * @param sysRole 筛选条件
+     * @return 查询结果
+     */
+    @Operation(summary = "根据体ID查询", parameters = {
+            @Parameter(description = "Long 筛选条件")
+    })
+    @PostMapping("query-role-by-id")
+    public R queryRoleById(@RequestBody final RoleListQueryParam sysRole) {
+        return queryRoleList(sysRole);
     }
 
     /**

@@ -77,7 +77,7 @@ public class R implements Serializable {
 
     public static R no(String message) {
         R r = new R();
-        r.code = -1;
+        r.code = 0;
         r.message = message;
         return r;
     }
