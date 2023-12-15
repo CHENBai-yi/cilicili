@@ -1,4 +1,14 @@
 export default {
+  LoginExpiration: {
+    "zh-CN": "登录失效",
+    "en-US": "Login expiration",
+    "ru": "Регистрация просрочена"
+  },
+  Unauthorized: {
+    "zh-CN": "未授权",
+    "en-US": "unauthorized",
+    "ru": "Неавторизованный"
+  },
   Register: {
     "zh-CN": "注册",
     "en-US": "Register",

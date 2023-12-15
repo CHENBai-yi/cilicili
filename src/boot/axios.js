@@ -49,8 +49,8 @@ export default boot(({app, router}) => {
     // but the RefreshAt has not expired,
     // the background will insert a Gqa Refresh Token in the headers,
     // which will be saved here to form a token replacement logic
-    if (response.headers['gqa-refresh-token'] && response.data.data.refresh) {
-      userStore.SetToken(response.headers['gqa-refresh-token'])
+    if (response.headers['refresh-token'] && response.data.data.refresh) {
+      userStore.SetToken(response.headers['refresh-token'])
       // store.dispatch('user/SetToken', response.headers['gqa-refresh-token'])
       Notify.create({
         type: 'positive',
@@ -105,6 +105,13 @@ export default boot(({app, router}) => {
       }).onOk(() => {
         userStore.HandleLogout()
         router.push({name: 'login'})
+      })
+    }
+    //Unauthorized
+    if (error + '' === 'Error: Request failed with status code 401') {
+      Notify.create({
+        type: 'negative',
+        message: error.config.url + i18n.global.t('Unauthorized'),
       })
     }
     // timeout
