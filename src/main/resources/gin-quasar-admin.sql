@@ -3306,7 +3306,7 @@ CREATE TABLE `sys_user`
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user`
-VALUES (1, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_yes', 'onOff_on',
+VALUES (1, '2023-12-04 13:02:17', 'SuperAdmin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_yes', 'onOff_on',
         'Be the change you want to see in the world.', 'admin', 'Mr.C', 'SuperAdmin',
         '$2a$10$CNKI5n6pyA2KoBuDg4k5recg2a5v22eqZigksjLY1.CQ8wxQOEL/S', '', 'gender_unknown', '1234567890',
         '11111111111');
