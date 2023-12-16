@@ -17,7 +17,6 @@ export const useStorageStore = defineStore('storage', {
   actions: {
     async SetGqaDict() {
       const res = await postAction('public/get-dict-all')
-      // jw(res,"/public/SetGqaDict.json")
       if (res.code === 1) {
         const dictDetail = res.data.records
         for (let i of dictDetail) {
@@ -34,9 +33,9 @@ export const useStorageStore = defineStore('storage', {
       }
     },
 
+
     async SetGqaBackend() {
       const res = await postAction('public/get-config-backend-all')
-      // jw(res,"/public/SetGqaBackend.json")
       if (res.code === 1) {
         const backend = {}
         res.data.records.forEach(item => {
@@ -49,7 +48,6 @@ export const useStorageStore = defineStore('storage', {
 
     async SetGqaFrontend() {
       const res = await postAction('public/get-config-frontend-all')
-      // jw(res,"/public/SetGqaFrontend.json")
       if (res.code === 1) {
         const frontend = {}
         res.data.records.forEach(item => {

@@ -43,7 +43,6 @@ const props = defineProps({
   },
 })
 const {dictCode, withExt1, ext1} = toRefs(props)
-
 const dictList = ref([])
 
 onBeforeMount(async () => {

@@ -1,5 +1,5 @@
 // 演示模式开关
-export const DemoMode = true
+export const DemoMode = false
 // 演示模式禁止的API
 export const ForbiddenUrl = [
   'user/edit-user',
