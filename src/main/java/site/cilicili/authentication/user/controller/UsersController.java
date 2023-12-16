@@ -20,7 +20,7 @@ public class UsersController {
 
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("reg")
     public UserDto registration(@RequestBody @Valid UserDto.Registration registration) {
         return userService.registration(registration);
     }

@@ -60,8 +60,8 @@
         <result property="gender" column="gender" jdbcType="VARCHAR"/>
         <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
-        <association property="createdByUser" column="createdBy=created_by" select="findCreatedByUser"/>
-        <association property="updatedByUser" column="updatedBy=updated_by" select="findUpdatedByUser"/>
+        <association property="createdByUser" column="created_by=created_by" select="findCreatedByUser"/>
+        <association property="updatedByUser" column="updated_by=updated_by" select="findUpdatedByUser"/>
     </resultMap>
     
     <resultMap type="site.cilicili.backend.role.domain.dto.SysRoleDto$Records" id="RoleList">
@@ -105,8 +105,8 @@
         <result property="menu" column="menu" jdbcType="VARCHAR"/>
         <result property="button" column="button" jdbcType="VARCHAR"/>
         <association property="defaultPageMenu" column="default_page=default_page" select="findDefaultPage"/>
-        <association property="createdByUser" column="createdBy=created_by" select="findCreatedByUser"/>
-        <association property="updatedByUser" column="updatedBy=updated_by" select="findUpdatedByUser"/>
+        <association property="createdByUser" column="created_by=created_by" select="findCreatedByUser"/>
+        <association property="updatedByUser" column="updated_by=updated_by" select="findUpdatedByUser"/>
     </resultMap>
     <!--查询SysRoleDto-->
     <select id="queryRoleListByParam" resultMap="RoleList"
@@ -141,12 +141,12 @@
     <select id="findCreatedByUser" resultMap="user">
         select *
         from sys_user
-        where username = #{createdBy};
+        where username = #{created_by};
     </select>
     <select id="findUpdatedByUser" resultMap="user">
         select *
         from sys_user
-        where username = #{updatedBy};
+        where username = #{updated_by};
     </select>
     
     <!--查询单个-->

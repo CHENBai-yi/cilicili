@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 14/12/2023 08:51:34
+ Date: 15/12/2023 23:58:34
 */
 
 SET NAMES utf8mb4;
@@ -2818,7 +2818,7 @@ CREATE TABLE `sys_role`
     INDEX `idx_sys_role_created_by` (`created_by` ASC) USING BTREE,
     INDEX `idx_sys_role_deleted_at` (`deleted_at` ASC) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 6
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = DYNAMIC;
@@ -2830,6 +2830,9 @@ INSERT INTO `sys_role`
 VALUES (1, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_yes', 'onOff_on',
         '这是超级管理员组，拥有所有权限，请不要编辑！', 'super-admin', '超级管理员组', 'deptDataPermissionType_all', '',
         'dashboard', b'0');
+INSERT INTO `sys_role`
+VALUES (5, '2023-12-14 09:55:04', 'admin', '2023-12-14 09:55:04', 'admin', NULL, 2, 'yesNo_no', 'onOff_on', 'aaa',
+        'admin2', 'admin2', 'deptDataPermissionType_user', NULL, 'dashboard', b'0');
 
 -- ----------------------------
 -- Table structure for sys_role_api
