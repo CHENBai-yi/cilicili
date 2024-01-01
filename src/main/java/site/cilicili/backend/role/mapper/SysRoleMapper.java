@@ -3,6 +3,7 @@ package site.cilicili.backend.role.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.backend.role.domain.dto.QueryUserByRoleRequest;
 import site.cilicili.backend.role.domain.dto.RoleListQueryParam;
 import site.cilicili.backend.role.domain.dto.SysRoleDto;
 import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
@@ -86,6 +87,6 @@ public interface SysRoleMapper extends BaseMapper<SysRoleEntity> {
     List<SysRoleDto.Records> queryRoleListByParam(RoleListQueryParam queryParam);
 
     SysRoleDto.Records queryRoleListById(Long id);
+
+    List<SysRoleDto.User> queryUserByRole(QueryUserByRoleRequest queryUserByRoleRequest);
 }
-
-

@@ -41,14 +41,22 @@ public class JwtUtils {
         Instant exp = Instant.now();
         final Date exp1 = new Date(exp.toEpochMilli() + validSeconds * 1000);
         System.out.println(exp1.getTime());
-        return JWTAuthFilter.TOKEN_PREFIX + Jwts.builder().setSubject(sub)
+        return JWTAuthFilter.TOKEN_PREFIX
+                + Jwts.builder()
+                .setSubject(sub)
                 .claim("RefreshAt", new Date(exp.toEpochMilli() + (validSeconds - refreshAt) * 1000))
                 .setIssuedAt(new Date(exp.toEpochMilli()))
-                .setExpiration(exp1).signWith(key).compact();
+                .setExpiration(exp1)
+                .signWith(key)
+                .compact();
     }
 
     public boolean validateToken(String jwt) {
-        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(jwt)
+                .getBody();
         Instant now = Instant.now();
         Date exp = claims.getExpiration();
         return exp.after(Date.from(now));
@@ -56,7 +64,11 @@ public class JwtUtils {
 
     public String refreshToken(String jwt) {
         try {
-            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(jwt)
+                    .getBody();
             return Optional.ofNullable(claims.get("RefreshAt"))
                     .map(obj -> {
                         final Date date = new Date(Long.parseLong(obj + ""));
@@ -66,7 +78,8 @@ public class JwtUtils {
                             return encode(getSub(jwt));
                         }
                         return null;
-                    }).orElse(null);
+                    })
+                    .orElse(null);
         } catch (JwtException e) {
             return null;
         }
@@ -74,7 +87,11 @@ public class JwtUtils {
 
     public String getSub(String jwt) {
         try {
-            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(jwt)
+                    .getBody();
             return claims.getSubject();
         } catch (JwtException e) {
             return null;

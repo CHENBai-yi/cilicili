@@ -3,6 +3,8 @@ package site.cilicili.backend.user.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.backend.user.domain.dto.GetUserListRequest;
+import site.cilicili.backend.user.domain.dto.UserListDto;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 
 import java.util.List;
@@ -79,6 +81,10 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
      * @return 影响行数
      */
     int deleteById(Long id);
+
+    List<UserListDto.Records> getUserList(GetUserListRequest getUserListRequest);
+
+    SysUserEntity selectOneSysUser(String username);
+
+    UserListDto.Records getUserById(Long id);
 }
-
-

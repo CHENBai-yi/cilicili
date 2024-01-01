@@ -21,10 +21,13 @@ import java.util.Map;
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
 public class R implements Serializable {
     private static final long serialVersionUID = 659942594217762465L;
+
     @Schema(description = "响应编码")
     private int code;
+
     @Schema(description = "响应信息")
     private String message;
+
     @Schema(description = "响应数据")
     private Object data;
 
@@ -93,6 +96,13 @@ public class R implements Serializable {
         return this;
     }
 
+    public R setRecords(Object val) {
+        final HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("records", val);
+        data = map;
+        return this;
+    }
+
     public R setData(String key, Object val) {
         if (data == null) {
             data = new HashMap<String, Object>();
@@ -104,5 +114,3 @@ public class R implements Serializable {
         return this;
     }
 }
-
-

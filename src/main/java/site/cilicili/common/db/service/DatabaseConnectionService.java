@@ -52,5 +52,3 @@ public interface DatabaseConnectionService extends IService<DatabaseConnection> 
      */
     R deleteById(final Integer id);
 }
-       
-

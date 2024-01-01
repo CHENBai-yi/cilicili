@@ -1,6 +1,7 @@
 package site.cilicili.backend.menu.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.backend.menu.domain.dto.GetMenuListRequest;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.common.util.R;
 
@@ -51,6 +52,6 @@ public interface SysMenuService extends IService<SysMenuEntity> {
      * @return 是否成功
      */
     R deleteById(final Long id);
-}
-       
 
+    R getRoleMenuList(GetMenuListRequest sysMenuListRequest);
+}

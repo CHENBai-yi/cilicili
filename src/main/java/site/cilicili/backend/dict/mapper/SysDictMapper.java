@@ -83,5 +83,3 @@ public interface SysDictMapper extends BaseMapper<SysDictEntity> {
 
     List<SysDictDto.Records> queryDictAll();
 }
-
-

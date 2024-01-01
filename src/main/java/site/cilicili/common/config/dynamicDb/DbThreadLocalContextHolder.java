@@ -21,5 +21,4 @@ public class DbThreadLocalContextHolder {
     public static void poll() {
         THREAD_LOCAL_DB.remove();
     }
-
 }

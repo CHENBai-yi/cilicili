@@ -23,5 +23,4 @@ public class MyDataSourceList extends AbstractRoutingDataSource {
     protected Object determineCurrentLookupKey() {
         return DbThreadLocalContextHolder.getDbUse();
     }
-
 }

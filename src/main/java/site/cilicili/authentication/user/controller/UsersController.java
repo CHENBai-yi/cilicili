@@ -29,5 +29,4 @@ public class UsersController {
     public R login(@RequestBody @Valid UserDto.Login login) {
         return R.yes("登录成功.").setData(userService.login(login));
     }
-
 }

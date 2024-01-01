@@ -17,12 +17,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
-                .map(userEntity ->
-                        AuthUserDetails.builder()
-                                .id(userEntity.getId())
-                                .username(userEntity.getUsername())
-                                .build())
+        return userRepository
+                .findByUsername(username)
+                .map(userEntity -> AuthUserDetails.builder()
+                        .id(userEntity.getId())
+                        .username(userEntity.getUsername())
+                        .build())
                 .orElse(null);
     }
 }

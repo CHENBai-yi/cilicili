@@ -2,13 +2,14 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.6'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'jacoco'
+    id("com.diffplug.spotless") version "6.18.0"
 }
 
 group = 'site.cilicili'
 version = '0.0.1'
-
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 jar {
     enabled(false)
@@ -37,6 +38,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation "com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0"
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -64,6 +70,48 @@ dependencies {
     compileOnly 'io.jsonwebtoken:jjwt-api:0.11.4'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.4'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.4'
+    implementation 'org.hibernate:hibernate-core:5.5.7.Final' // 替换为您使用的 Hibernate 版本
 
+}
+
+tasks.withType(Test.class) {
+    useJUnitPlatform()
+    finalizedBy("jacocoTestReport")
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        html.required.set(true)
+        html.outputLocation.set(file("$buildDir/jacoco/html"))
+    }
+}
+
+tasks.compileJava {
+    dependsOn(tasks.clean)
+}
+
+spotless {
+    java {
+        palantirJavaFormat()
+        indentWithSpaces()
+        formatAnnotations()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        importOrder("site.cilicili", "java", "javax", "jakarta", "org", "com", "lombok")
+    }
+
+    kotlin {
+        ktlint()
+        gradle
+        indentWithSpaces()
+        trimTrailingWhitespace()
+    }
+
+    kotlinGradle {
+        ktlint()
+        indentWithSpaces()
+        trimTrailingWhitespace()
+    }
 }
 

@@ -3,6 +3,8 @@ package site.cilicili;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -25,6 +27,10 @@ import site.cilicili.common.util.DbUtils;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * PROJECT:cilicili
@@ -37,7 +43,8 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @EnableAspectJAutoProxy
-@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
+@SpringBootApplication(
+        exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
 public class App {
     private final DbChangeConfig dbChangeConf;
 
@@ -55,28 +62,14 @@ public class App {
 
     @Bean
     @Primary
-    public MyDataSourceList myDataSourceList(@Qualifier("backend") DruidDataSource druidDataSource) {
+    public MyDataSourceList myDataSourceList(@Qualifier("backend") DataSource druidDataSource) {
         final HashMap<Object, Object> dataSourceMap = new HashMap<>();
         DataSource defaultDataSource = null;
-        Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).ifPresent(databaseConnectionDto1 -> {
-            dbChangeConf.setBackend(databaseConnectionDto1.getScheme());
-            druidDataSource.setPassword(databaseConnectionDto1.getDbPassword());
-            druidDataSource.setUsername(databaseConnectionDto1.getDbUser());
-            druidDataSource.setUrl(String.join("/", databaseConnectionDto1.getUrl(), databaseConnectionDto1.getScheme()));
-            druidDataSource.setDriverClassName(databaseConnectionDto1.getDriver());
-            druidDataSource.setDefaultAutoCommit(true);
-            druidDataSource.setAsyncInit(true);
-            druidDataSource.setKillWhenSocketReadTimeout(true);
-            druidDataSource.setValidationQuery("select 1;");
-            druidDataSource.setKillWhenSocketReadTimeout(true);
-            druidDataSource.setConnectionErrorRetryAttempts(10);
-            druidDataSource.setNotFullTimeoutRetryCount(10);
-            if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
-                dataSourceMap.put(dbChangeConf.getBackend(), druidDataSource);
-            } else if (StrUtil.isNotBlank(dbChangeConf.getBackendInner())) {
-                dataSourceMap.put(dbChangeConf.getBackendInner(), druidDataSource);
-            }
-        });
+        if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
+            dataSourceMap.put(dbChangeConf.getBackend(), druidDataSource);
+        } else if (StrUtil.isNotBlank(dbChangeConf.getBackendInner())) {
+            dataSourceMap.put(dbChangeConf.getBackendInner(), druidDataSource);
+        }
         if (!dataSourceMap.isEmpty()) {
             defaultDataSource = (DataSource) CollUtil.getLast(dataSourceMap.values());
         }
@@ -86,8 +79,45 @@ public class App {
     @Bean("backend")
     @ConfigurationProperties(prefix = "spring.datasource.master")
     public DruidDataSource mySql() {
-        return new DruidDataSource();
+        DruidDataSource druidDataSource = new DruidDataSource();
+        Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).ifPresent(databaseConnectionDto1 -> {
+            dbChangeConf.setBackend(databaseConnectionDto1.getScheme());
+            druidDataSource.setPassword(databaseConnectionDto1.getDbPassword());
+            druidDataSource.setUsername(databaseConnectionDto1.getDbUser());
+            druidDataSource.setUrl(
+                    String.join("/", databaseConnectionDto1.getUrl(), databaseConnectionDto1.getScheme()));
+            druidDataSource.setDriverClassName(databaseConnectionDto1.getDriver());
+            druidDataSource.setDefaultAutoCommit(true);
+            druidDataSource.setAsyncInit(true);
+            druidDataSource.setKillWhenSocketReadTimeout(true);
+            druidDataSource.setValidationQuery("select 1;");
+            druidDataSource.setKillWhenSocketReadTimeout(true);
+            druidDataSource.setConnectionErrorRetryAttempts(10);
+            druidDataSource.setNotFullTimeoutRetryCount(10);
+        });
+        return druidDataSource;
     }
 
+    @Bean
+    public ThreadPoolExecutor threadPoolTaskExecutor() {
+        return new ThreadPoolExecutor(
+                5, 10, 1, TimeUnit.MINUTES, new ArrayBlockingQueue<>(10, true), Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardPolicy());
+    }
 
+    @Bean
+    public WallFilter wallFilter() {
+        WallFilter wallFilter = new WallFilter();
+        wallFilter.setConfig(wallConfig());
+        return wallFilter;
+    }
+
+    @Bean
+    public WallConfig wallConfig() {
+        WallConfig wallConfig = new WallConfig();
+        wallConfig.setMultiStatementAllow(true);
+        // 允许一次执行多条语句
+        wallConfig.setNoneBaseStatementAllow(true);
+        // 允许一次执行多条语句
+        return wallConfig;
+    }
 }

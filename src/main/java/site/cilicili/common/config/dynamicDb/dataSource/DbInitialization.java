@@ -49,25 +49,31 @@ public class DbInitialization implements CommandLineRunner {
         } catch (Exception ignored) {
         }
         Optional.ofNullable(connections).ifPresent(databaseConnections -> {
-            final Map<Object, Object> dataSourceMap = databaseConnections.stream().collect(Collectors.toMap(DatabaseConnection::getScheme, connection -> {
-                final DruidDataSource druidDataSource = DbSourceToDruidDataSource.DB_SOURCE_TO_DRUID_DATA_SOURCE.toDruidDataSource(connection);
-                druidDataSource.setDriverClassName(connection.getDriver());
-                druidDataSource.setDefaultAutoCommit(true);
-                druidDataSource.setAsyncInit(true);
-                druidDataSource.setKillWhenSocketReadTimeout(true);
-                druidDataSource.setValidationQuery("select 1;");
-                druidDataSource.setConnectionErrorRetryAttempts(10);
-                druidDataSource.setNotFullTimeoutRetryCount(10);
-                druidDataSource.setPoolPreparedStatements(true);
-                return druidDataSource;
-            }, (value1, value2) -> value1));
+            final Map<Object, Object> dataSourceMap = databaseConnections.stream()
+                    .collect(Collectors.toMap(
+                            DatabaseConnection::getScheme,
+                            connection -> {
+                                final DruidDataSource druidDataSource =
+                                        DbSourceToDruidDataSource.DB_SOURCE_TO_DRUID_DATA_SOURCE.toDruidDataSource(
+                                                connection);
+                                druidDataSource.setDriverClassName(connection.getDriver());
+                                druidDataSource.setDefaultAutoCommit(true);
+                                druidDataSource.setAsyncInit(true);
+                                druidDataSource.setKillWhenSocketReadTimeout(true);
+                                druidDataSource.setValidationQuery("select 1;");
+                                druidDataSource.setConnectionErrorRetryAttempts(10);
+                                druidDataSource.setNotFullTimeoutRetryCount(10);
+                                druidDataSource.setPoolPreparedStatements(true);
+                                return druidDataSource;
+                            },
+                            (value1, value2) -> value1));
             final Map<Object, DataSource> resolvedDataSources = dataSourceList.getResolvedDataSources();
             if (dataSourceList.getResolvedDefaultDataSource() == null) {
                 dataSourceList.setDefaultTargetDataSource(CollUtil.getLast(resolvedDataSources.values()));
             }
             dataSourceMap.putAll(resolvedDataSources);
             dataSourceList.setTargetDataSources(dataSourceMap);
-            dataSourceList.afterPropertiesSet();// 重新解析数据源数量
+            dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
             connections.clear();
         });
     }

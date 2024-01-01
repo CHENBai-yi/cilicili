@@ -54,5 +54,3 @@ public interface SysDictService extends IService<SysDictEntity> {
 
     R queryDictAll();
 }
-       
-

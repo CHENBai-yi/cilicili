@@ -23,6 +23,7 @@ public class DbCheckServiceImpl implements DbCheckService {
     public R dbExists() {
         return null;
         // return Optional.ofNullable(CheckDB.getDbName("master"))
-        //         .map(name -> R.yes(null).setData("need_init", dbCheckMapper.dbExists(String.valueOf(name)) == 0)).orElse(R.yes("数据库未准备好").setData("need_init", true));
+        //         .map(name -> R.yes(null).setData("need_init", dbCheckMapper.dbExists(String.valueOf(name)) ==
+        // 0)).orElse(R.yes("数据库未准备好").setData("need_init", true));
     }
 }

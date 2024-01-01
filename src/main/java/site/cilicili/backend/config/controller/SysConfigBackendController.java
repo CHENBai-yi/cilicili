@@ -26,7 +26,6 @@ public class SysConfigBackendController {
     /**
      * 服务对象
      */
-
     private final SysConfigBackendService sysConfigBackendService;
 
     /**
@@ -34,14 +33,11 @@ public class SysConfigBackendController {
      *
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "sysConfigFrontend 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "sysConfigFrontend 筛选条件")})
     @PostMapping({"get-config-backend-all", "get-config-backend-list"})
     public R getConfigBackendAll() {
         return this.sysConfigBackendService.queryConfigBackendAll();
     }
 }
-
-
-

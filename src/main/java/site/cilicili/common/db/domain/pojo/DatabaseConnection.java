@@ -26,5 +26,3 @@ public class DatabaseConnection implements Serializable {
     private String driver;
     private String scheme;
 }
-
-

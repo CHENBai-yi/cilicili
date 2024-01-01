@@ -19,7 +19,8 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Service("sysConfigFrontendService")
-public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendMapper, SysConfigFrontendEntity> implements SysConfigFrontendService {
+public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendMapper, SysConfigFrontendEntity>
+        implements SysConfigFrontendService {
 
     /**
      * 通过ID查询单条数据
@@ -81,9 +82,9 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
 
     @Override
     public R queryConfigFrontAll() {
-        return Optional.ofNullable(baseMapper.queryConfigFrontAll()).map(records -> R.yes("Success.").setData(SysConfigFrontendDto.builder().records(records).build())).orElse(R.no("没有更多了."));
+        return Optional.ofNullable(baseMapper.queryConfigFrontAll())
+                .map(records -> R.yes("Success.")
+                        .setData(SysConfigFrontendDto.builder().records(records).build()))
+                .orElse(R.no("没有更多了."));
     }
-
 }
-
-

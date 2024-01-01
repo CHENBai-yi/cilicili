@@ -80,5 +80,3 @@ public interface DatabaseConnectionMapper extends BaseMapper<DatabaseConnection>
      */
     int deleteById(Integer id);
 }
-
-

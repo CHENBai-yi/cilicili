@@ -30,6 +30,8 @@ knife4j:
     username: abc
     password: 123
 spring:
+  main:
+    allow-circular-references: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -39,9 +41,6 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     master:
-      username: root
-      password: password
-      url: jdbc:mysql:///yourDb
       # 下面为连接池的补充设置，应用到上面所有数据源中
       # 初始化大小，最小，最大
       initial-size: 15
@@ -58,7 +57,10 @@ spring:
       max-pool-prepared-statement-per-connection-size: 60
       validation-query: SELECT 1 FROM DUAL
       async-init: true
-
+      password: 74521CBy
+      username: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/quasar-admin?allowMultiQueries=true
     slave:
       # 下面为连接池的补充设置，应用到上面所有数据源中
       # 初始化大小，最小，最大
@@ -98,8 +100,21 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-      logic-delete-value: 1
-      logic-not-delete-value: 0
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      logic-delete-field: "logical_delete"
+decorator:
+  datasource:
+    p6spy:
+      custom-appender-class: com.p6spy.engine.spy.appender.Slf4JLogger
+      logging: slf4j
+    ignore-routing-data-sources: true
+    datasource-proxy:
+      json-format: true
+      logging: slf4j
+
+
+
 
 
 

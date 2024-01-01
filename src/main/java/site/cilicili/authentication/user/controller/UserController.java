@@ -12,7 +12,7 @@ import site.cilicili.authentication.user.service.UserService;
  * @author BaiYiChen
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -24,9 +24,7 @@ public class UserController {
 
     @PutMapping
     public UserDto update(
-            @Valid @RequestBody UserDto.Update update,
-            @AuthenticationPrincipal AuthUserDetails authUserDetails
-    ) {
+            @Valid @RequestBody UserDto.Update update, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return userService.update(update, authUserDetails);
     }
 }

@@ -33,11 +33,13 @@ public class DynamicAspect {
     public void pointCut() {
     }
 
-    @Pointcut("execution( * site.cilicili.backend..service..*(..))||execution( * site.cilicili.authentication.user.service..*(..))")
+    @Pointcut(
+            "execution( * site.cilicili.backend..service..*(..))||execution( * site.cilicili.authentication.user.service..*(..))")
     public void pointCutBackend() {
     }
 
-    @Pointcut("execution( * site.cilicili.common.db.service..*(..)) || execution( * site.cilicili.common.config.dynamicDb.dataSource..*(..))")
+    @Pointcut(
+            "execution( * site.cilicili.common.db.service..*(..)) || execution( * site.cilicili.common.config.dynamicDb.dataSource..*(..))")
     public void common() {
     }
 

@@ -28,10 +28,17 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
     @Override
     public UserDto registration(final UserDto.Registration registration) {
-        userRepository.findByUsernameOrEmail(registration.getUsername(), registration.getEmail()).stream().findAny().ifPresent(entity -> {
-            throw new AppException(Error.DUPLICATED_USER);
-        });
-        UserEntity userEntity = UserEntity.builder().username(registration.getUsername()).email(registration.getEmail()).password(passwordEncoder.encode(registration.getPassword())).avatar("").build();
+        userRepository.findByUsernameOrEmail(registration.getUsername(), registration.getEmail()).stream()
+                .findAny()
+                .ifPresent(entity -> {
+                    throw new AppException(Error.DUPLICATED_USER);
+                });
+        UserEntity userEntity = UserEntity.builder()
+                .username(registration.getUsername())
+                .email(registration.getEmail())
+                .password(passwordEncoder.encode(registration.getPassword()))
+                .avatar("")
+                .build();
         userRepository.insert(userEntity);
         return convertEntityToDto(userEntity);
     }
@@ -39,7 +46,10 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Transactional(readOnly = true)
     @Override
     public UserDto login(UserDto.Login login) {
-        UserEntity userEntity = userRepository.findByUsername(login.getUsername()).filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword())).orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
+        UserEntity userEntity = userRepository
+                .findByUsername(login.getUsername())
+                .filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword()))
+                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
         return convertEntityToDto(userEntity);
     }
 
@@ -56,25 +66,33 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Transactional(readOnly = true)
     @Override
     public UserDto currentUser(AuthUserDetails authUserDetails) {
-        UserEntity userEntity = Optional.ofNullable(userRepository.selectById(authUserDetails.getId())).orElseThrow(() -> new AppException(Error.USER_NOT_FOUND));
+        UserEntity userEntity = Optional.ofNullable(userRepository.selectById(authUserDetails.getId()))
+                .orElseThrow(() -> new AppException(Error.USER_NOT_FOUND));
         return convertEntityToDto(userEntity);
     }
 
     @Override
     public UserDto update(UserDto.Update update, AuthUserDetails authUserDetails) {
-        UserEntity userEntity = Optional.ofNullable(userRepository.selectById(authUserDetails.getId())).orElseThrow(() -> new AppException(Error.USER_NOT_FOUND));
+        UserEntity userEntity = Optional.ofNullable(userRepository.selectById(authUserDetails.getId()))
+                .orElseThrow(() -> new AppException(Error.USER_NOT_FOUND));
 
         if (update.getUsername() != null) {
-            userRepository.findByUsername(update.getUsername()).filter(found -> !found.getId().equals(userEntity.getId())).ifPresent(found -> {
-                throw new AppException(Error.DUPLICATED_USER);
-            });
+            userRepository
+                    .findByUsername(update.getUsername())
+                    .filter(found -> !found.getId().equals(userEntity.getId()))
+                    .ifPresent(found -> {
+                        throw new AppException(Error.DUPLICATED_USER);
+                    });
             userEntity.setUsername(update.getUsername());
         }
 
         if (update.getEmail() != null) {
-            userRepository.findByEmail(update.getEmail()).filter(found -> !found.getId().equals(userEntity.getId())).ifPresent(found -> {
-                throw new AppException(Error.DUPLICATED_USER);
-            });
+            userRepository
+                    .findByEmail(update.getEmail())
+                    .filter(found -> !found.getId().equals(userEntity.getId()))
+                    .ifPresent(found -> {
+                        throw new AppException(Error.DUPLICATED_USER);
+                    });
             userEntity.setEmail(update.getEmail());
         }
 

@@ -81,9 +81,9 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
 
     @Override
     public R queryDictAll() {
-        return Optional.ofNullable(baseMapper.queryDictAll()).map(records -> R.yes("Success.").setData(SysDictDto.builder().records(records).build())).orElse(R.no("没有更多了."));
+        return Optional.ofNullable(baseMapper.queryDictAll())
+                .map(records -> R.yes("Success.")
+                        .setData(SysDictDto.builder().records(records).build()))
+                .orElse(R.no("没有更多了."));
     }
-
 }
-
-

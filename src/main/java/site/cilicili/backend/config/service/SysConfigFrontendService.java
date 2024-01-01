@@ -54,5 +54,3 @@ public interface SysConfigFrontendService extends IService<SysConfigFrontendEnti
 
     R queryConfigFrontAll();
 }
-       
-

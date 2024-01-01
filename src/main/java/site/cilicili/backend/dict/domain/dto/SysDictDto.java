@@ -35,5 +35,4 @@ public class SysDictDto implements Serializable {
         private SysRoleDto.User updatedByUser;
         private List<Records> children;
     }
-
 }

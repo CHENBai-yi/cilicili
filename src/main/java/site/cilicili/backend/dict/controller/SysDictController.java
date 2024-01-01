@@ -18,21 +18,16 @@ import site.cilicili.common.util.R;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("public")
+@RequestMapping({"public", "dict"})
 @Tag(name = "(SysDict) 表控制层")
 public class SysDictController {
     /**
      * 服务对象
      */
-
     private final SysDictService sysDictService;
 
-    @PostMapping("get-dict-all")
+    @PostMapping({"get-dict-all", "get-dict-list"})
     public R getDictAll() {
         return this.sysDictService.queryDictAll();
     }
-
 }
-
-
-

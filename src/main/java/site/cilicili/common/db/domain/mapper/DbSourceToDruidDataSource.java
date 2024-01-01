@@ -23,7 +23,9 @@ public interface DbSourceToDruidDataSource {
     DbSourceToDruidDataSource DB_SOURCE_TO_DRUID_DATA_SOURCE = Mappers.getMapper(DbSourceToDruidDataSource.class);
 
     @Mappings({
-            @Mapping(target = "url", expression = "java(String.join(\"/\", databaseConnection.getUrl(), databaseConnection.getScheme()))"),
+            @Mapping(
+                    target = "url",
+                    expression = "java(String.join(\"/\", databaseConnection.getUrl(), databaseConnection.getScheme()))"),
             @Mapping(target = "driver", ignore = true)
     })
     DruidDataSource toDruidDataSource(DatabaseConnection databaseConnection);

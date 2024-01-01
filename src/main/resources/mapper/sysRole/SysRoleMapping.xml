@@ -9,6 +9,7 @@
         <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
         <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
         <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="logicalDelete" column="logical_delete" jdbcType="BOOLEAN"/>
         <result property="sort" column="sort" jdbcType="INTEGER"/>
         <result property="stable" column="stable" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
@@ -62,8 +63,22 @@
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <association property="createdByUser" column="created_by=created_by" select="findCreatedByUser"/>
         <association property="updatedByUser" column="updated_by=updated_by" select="findUpdatedByUser"/>
+        <association property="dept" column="username=username" select="findSysDeptEntity"/>
+        <association property="role" column="username=username" select="findSysRoleEntity"/>
     </resultMap>
-    
+    <select id="findSysDeptEntity" resultMap="site.cilicili.backend.dept.mapper.SysDeptMapper.SysDeptDto">
+        select sys_dept.*
+        from sys_dept,
+             (select sys_dept_dept_code from sys_dept_user where sys_user_username = #{username}) as b
+        where dept_code = b.sys_dept_dept_code;
+    </select>
+    <select id="findSysRoleEntity" resultMap="RoleList">
+        select sys_role.*
+        from sys_role,
+             (select sys_role_role_code from sys_user_role where sys_user_username = #{username}) as b
+        where sys_role.logical_delete > 0
+          and sys_role.role_code = b.sys_role_role_code;
+    </select>
     <resultMap type="site.cilicili.backend.role.domain.dto.SysRoleDto$Records" id="RoleList">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
@@ -113,15 +128,20 @@
             parameterType="site.cilicili.backend.role.domain.dto.RoleListQueryParam">
         select * from sys_role
         <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="roleCode!=null and roleCode!=''">
+                    <bind name="rcl" value="'%'+roleCode+'%'"/>
+                    role_code like #{rcl}
+                </if>
+                <if test="roleName!=null and roleName!=''">
+                    <bind name="rl" value="'%'+roleName+'%'"/>
+                    or role_name like #{rl}
+                </if>
+            </trim>
             <if test="id!=null">
                 and id=#{id}
             </if>
-            <if test="roleCode!=null">
-                role_code=#{roleCode}
-            </if>
-            <if test="roleName!=null">
-                and role_name=#{roleName}
-            </if>
+            and logical_delete>0
         </where>
         <if test="desc">
             order by #{sortBy} desc
@@ -167,7 +187,8 @@
                dept_data_permission_custom,
                default_page
         from sys_role
-        where id = #{id}
+        where sys_role.logical_delete > 0
+          and id = #{id}
     </select>
     
     <!--查询指定行数据-->
@@ -177,6 +198,7 @@
         role_name, dept_data_permission_type, dept_data_permission_custom, default_page
         from sys_role
         <where>
+            sys_role.logical_delete>0
             <if test="id != null">
                 and id = #{id}
             </if>
@@ -230,6 +252,7 @@
         select count(*)
         from sys_role
         <where>
+            sys_role.logical_delete>0
             <if test="id != null">
                 and id = #{id}
             </if>
@@ -280,9 +303,21 @@
     <select id="queryRoleListById" resultMap="RoleListById">
         select *
         from sys_role
-        where id = #{id};
+        where sys_role.logical_delete > 0
+          and id = #{id};
     </select>
-    
+    <select id="queryUserByRole" resultMap="user">
+        select sys_user.* from sys_user,(select sys_user_username from sys_user_role where
+        sys_role_role_code=#{roleCode}) as b where username=b.sys_user_username
+        <if test="desc">
+            order by #{sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
@@ -376,15 +411,19 @@
             <if test="defaultPage != null and defaultPage != ''">
                 default_page = #{defaultPage},
             </if>
+            <if test="logicalDelete ==0 or logicalDelete==1">
+                logical_delete = #{logicalDelete},
+            </if>
         </set>
-        where id = #{id}
+        where logical_delete > 0 and id = #{id}
     </update>
     
     <!--通过主键删除-->
     <delete id="deleteById">
         delete
         from sys_role
-        where id = #{id}
+        where logical_delete > 0
+          and id = #{id};
     </delete>
 
 

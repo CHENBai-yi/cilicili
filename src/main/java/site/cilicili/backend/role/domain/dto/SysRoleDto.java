@@ -9,11 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import site.cilicili.backend.dept.domain.dto.SysDeptDto;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.user.domain.dto.SysUserDto;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (SysRole)实体类
@@ -30,8 +32,10 @@ import java.io.Serializable;
 public class SysRoleDto implements Serializable {
     private Object records;
     private Integer total;
+
     @Positive(message = "页码值不能为负.")
     private Integer page;
+
     @Positive(message = "页大小不能为负数.")
     private Integer pageSize;
 
@@ -62,8 +66,8 @@ public class SysRoleDto implements Serializable {
     public static class User extends SysUserDto {
         private User createdByUser;
         private User updatedByUser;
-        private String role;
-        private String dept;
+        private List<Records> role;
+        private List<SysDeptDto.Records> dept;
     }
 
 }

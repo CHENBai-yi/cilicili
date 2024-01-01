@@ -36,21 +36,22 @@ public class DbCheckerController {
     @PostMapping("check-db")
     public R checkDb() {
         try {
-            if (DbUtils.checkDb(dbChangeConf.getBackendInner()) != null && !databaseConnectionService.list().isEmpty()) {
+            if (DbUtils.checkDb(dbChangeConf.getBackendInner()) != null
+                    || !databaseConnectionService.list().isEmpty()) {
                 return R.yes("数据库初始化成功！").setData("need_init", false);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
         }
         return R.yes("数据库未准备好！").setData("need_init", true);
-
     }
 
     @PostMapping("init-db")
     public R initDb(@RequestBody final DatabaseConnectionDto databaseConnectionDto) {
         String mess = "数据库初始化失败！";
         try {
-            final DatabaseConnection databaseConnections = DbUtils.executeScript(databaseConnectionDto, dbChangeConf.getBackendInner());
+            final DatabaseConnection databaseConnections =
+                    DbUtils.executeScript(databaseConnectionDto, dbChangeConf.getBackendInner());
             if (databaseConnections != null) {
                 dbChangeConf.setBackend(databaseConnections.getScheme());
                 if (dbInitialization.setConnections(databaseConnections)) {
@@ -62,5 +63,4 @@ public class DbCheckerController {
         }
         return R.no(mess).setData("need_init", true);
     }
-
 }

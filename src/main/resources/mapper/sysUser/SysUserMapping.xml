@@ -21,7 +21,68 @@
         <result property="gender" column="gender" jdbcType="VARCHAR"/>
         <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="logicalDelete" column="logical_delete" jdbcType="BIT"/>
     </resultMap>
+    
+    <resultMap type="site.cilicili.backend.user.domain.dto.UserListDto$Records" id="UserListDto">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="logicalDelete" column="logical_delete" jdbcType="BIT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <association property="createdByUser" column="created_by=created_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findCreatedByUser"/>
+        <association property="updatedByUser" column="updated_by=updated_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findUpdatedByUser"/>
+        <association property="dept" column="username=username"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findSysDeptEntity"/>
+        <association property="role" column="username=username"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findSysRoleEntity"/>
+    </resultMap>
+    
+    <select id="getUserList" resultMap="UserListDto">
+        select *from sys_user
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="realName!=null and realName!=''">
+                    <bind name="rl" value="'%'+realName+'%'"/>
+                    real_name like #{rl}
+                </if>
+                <if test="username!=null  and username!=''">
+                    <bind name="ul" value="'%'+username+'%'"/>
+                    or username like #{ul}
+                </if>
+            </trim>
+            <if test="!withAdmin">
+                and real_name!='SuperAdmin'
+            </if>
+            <if test="deptCode!=null">
+                and username in (select sys_user_username from sys_dept_user where sys_dept_dept_code=#{deptCode})
+            </if>
+            and logical_delete>0
+        </where>
+        <if test="desc">
+            order by #{sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
+    </select>
     
     <!--查询单个-->
     <select id="queryById" resultMap="SysUserMap">
@@ -173,6 +234,21 @@
         </where>
     </select>
     
+    <select id="selectOneSysUser" resultType="site.cilicili.backend.user.domain.pojo.SysUserEntity">
+        select *
+        from sys_user
+        <where>
+            username=#{username}
+        </where>
+        ;
+    </select>
+    <select id="getUserById" resultMap="UserListDto">
+        select *
+        from sys_user
+        where id = #{id}
+    </select>
+    
+    
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into sys_user(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo,
@@ -278,8 +354,11 @@
             <if test="email != null and email != ''">
                 email = #{email},
             </if>
+            <if test="logicalDelete != null">
+                logical_delete = #{logicalDelete},
+            </if>
         </set>
-        where id = #{id}
+        where id = #{id} and logical_delete>0
     </update>
     
     <!--通过主键删除-->

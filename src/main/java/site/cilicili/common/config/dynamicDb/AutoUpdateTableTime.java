@@ -24,26 +24,20 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
 
     @Override
     public void insertFill(final MetaObject metaObject) {
-        Optional.ofNullable(getAuthUserDetails())
-                .ifPresent(authUserDetails -> {
-                    this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject);
-                    this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
-                    this.setFieldValByName("logical_delete", 0, metaObject);
-                    this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
-                    this.setFieldValByName("createdBy", authUserDetails.getUsername(), metaObject);
-                });
-
+        Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
+            this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject);
+            this.setFieldValByName("logicalDelete", 0, metaObject);
+            this.setFieldValByName("createdBy", authUserDetails.getUsername(), metaObject);
+        });
     }
 
     @Override
     public void updateFill(final MetaObject metaObject) {
-        Optional.ofNullable(getAuthUserDetails())
-                .ifPresent(authUserDetails -> {
-                    this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
-                    this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
-                    this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
-                });
-
+        Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
+            this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
+            this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
+            this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
+        });
     }
 
     public AuthUserDetails getAuthUserDetails() {

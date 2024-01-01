@@ -36,5 +36,4 @@ public class SysConfigBackendDto implements Serializable {
         private SysRoleDto.User updatedByUser;
         private List<Records> children;
     }
-
 }

@@ -3,6 +3,7 @@ package site.cilicili.backend.config.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.backend.config.domain.dto.SysConfigBackendDto;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 import site.cilicili.backend.config.mapper.SysConfigBackendMapper;
@@ -18,8 +19,10 @@ import java.util.Optional;
  * @since 2023-12-16 14:52:43
  */
 @RequiredArgsConstructor
+@Transactional(rollbackFor = Throwable.class)
 @Service("sysConfigBackendService")
-public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMapper, SysConfigBackendEntity> implements SysConfigBackendService {
+public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMapper, SysConfigBackendEntity>
+        implements SysConfigBackendService {
 
     /**
      * 通过ID查询单条数据
@@ -81,10 +84,9 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
 
     @Override
     public R queryConfigBackendAll() {
-        return Optional.ofNullable(baseMapper.queryConfigBackendAll()).map(records -> R.yes("Success.").setData(SysConfigBackendDto.builder().records(records).build())).orElse(R.no("没有更多了."));
-
+        return Optional.ofNullable(baseMapper.queryConfigBackendAll())
+                .map(records -> R.yes("Success.")
+                        .setData(SysConfigBackendDto.builder().records(records).build()))
+                .orElse(R.no("没有更多了."));
     }
-
 }
-
-

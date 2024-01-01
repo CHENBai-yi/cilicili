@@ -40,7 +40,10 @@ public class YAMLPropertySourceFactory implements PropertySourceFactory {
         try {
             if (filename != null) {
                 if (filename.endsWith(YML) || filename.endsWith(YAML)) {
-                    List<PropertySource<?>> yamlSources = new YamlPropertySourceLoader().load(resourceName, new FileUrlResource(((ClassPathResource) resource.getResource()).getPath()));
+                    List<PropertySource<?>> yamlSources = new YamlPropertySourceLoader()
+                            .load(
+                                    resourceName,
+                                    new FileUrlResource(((ClassPathResource) resource.getResource()).getPath()));
                     return yamlSources.get(0);
                 }
             }
@@ -49,6 +52,4 @@ public class YAMLPropertySourceFactory implements PropertySourceFactory {
         }
         return new DefaultPropertySourceFactory().createPropertySource(name, resource);
     }
-
 }
-

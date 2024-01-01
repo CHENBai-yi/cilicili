@@ -9,7 +9,6 @@ import java.lang.annotation.*;
  *
  * @author BaiYiChen
  */
-
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.PARAMETER, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

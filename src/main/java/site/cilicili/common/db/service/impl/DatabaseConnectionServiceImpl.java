@@ -16,7 +16,8 @@ import site.cilicili.common.util.R;
  */
 @RequiredArgsConstructor
 @Service("databaseConnectionService")
-public class DatabaseConnectionServiceImpl extends ServiceImpl<DatabaseConnectionMapper, DatabaseConnection> implements DatabaseConnectionService {
+public class DatabaseConnectionServiceImpl extends ServiceImpl<DatabaseConnectionMapper, DatabaseConnection>
+        implements DatabaseConnectionService {
 
     /**
      * 通过ID查询单条数据
@@ -75,7 +76,4 @@ public class DatabaseConnectionServiceImpl extends ServiceImpl<DatabaseConnectio
         boolean del = baseMapper.deleteById(id) > 0;
         return R.ok().setData(del);
     }
-
 }
-
-

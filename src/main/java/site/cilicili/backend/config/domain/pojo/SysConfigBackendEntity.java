@@ -22,20 +22,25 @@ import java.io.Serializable;
 @TableName("sys_config_backend")
 public class SysConfigBackendEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -55210611552054688L;
+
     @Schema(description = "排序")
     private Long sort;
+
     @Schema(description = "系统内置")
     private String stable;
+
     @Schema(description = "状态")
     private String status;
+
     @Schema(description = "备注描述")
     private String memo;
+
     @Schema(description = "配置项")
     private String configItem;
+
     @Schema(description = "默认值")
     private String itemDefault;
+
     @Schema(description = "自定义值")
     private String itemCustom;
 }
-
-

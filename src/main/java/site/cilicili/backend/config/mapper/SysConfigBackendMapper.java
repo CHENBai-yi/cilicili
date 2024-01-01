@@ -83,5 +83,3 @@ public interface SysConfigBackendMapper extends BaseMapper<SysConfigBackendEntit
 
     List<SysConfigFrontendDto.Records> queryConfigBackendAll();
 }
-
-

@@ -54,5 +54,3 @@ public interface SysConfigBackendService extends IService<SysConfigBackendEntity
 
     R queryConfigBackendAll();
 }
-       
-

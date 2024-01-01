@@ -30,12 +30,16 @@ import java.util.Map;
  */
 public class DbUtils {
     private static final String PREFIX = "jdbc:mysql://%1$s:%2$s";
-    private static final String CREATEDB = "CREATE DATABASE IF NOT EXISTS `%1$s` CHARACTER SET utf8 COLLATE utf8_general_ci;";
-    private static final String QUERYLIST = "SELECT id,url,username,password,driver,scheme FROM database_connection where scheme = '%1$s';";
-    private static final String UPDATELIST = "UPDATE database_connection set url = '%2$s',username='%3$s',password='%4$s',driver='%5$s'  where scheme = '%1$s';";
-    private static final String INSERTONE = "INSERT INTO `%1$s`.database_connection VALUES(DEFAULT,'%2$s','%3$s','%4$s','%5$s','%6$s')";
+    private static final String CREATEDB =
+            "CREATE DATABASE IF NOT EXISTS `%1$s` CHARACTER SET utf8 COLLATE utf8_general_ci;";
+    private static final String QUERYLIST =
+            "SELECT id,url,username,password,driver,scheme FROM database_connection where scheme = '%1$s';";
+    private static final String UPDATELIST =
+            "UPDATE database_connection set url = '%2$s',username='%3$s',password='%4$s',driver='%5$s'  where scheme = '%1$s';";
+    private static final String INSERTONE =
+            "INSERT INTO `%1$s`.database_connection VALUES(DEFAULT,'%2$s','%3$s','%4$s','%5$s','%6$s')";
     private static final String DBCONFIG = "dbConfig.yaml";
-    private static final String filePath = "gin-quasar-admin.sql";
+    private static final String FILE_PATH = "gin-quasar-admin.sql";
     private static final Logger LOGGER = LoggerFactory.getLogger(DbUtils.class);
     private static final Map<String, String> DRIVER_CLASS_MAP = new HashMap<>();
 
@@ -57,12 +61,14 @@ public class DbUtils {
         }
     }
 
-    public static DatabaseConnection executeScript(DatabaseConnectionDto databaseConnectionDto, String key) throws SQLException, IOException {
+    public static DatabaseConnection executeScript(DatabaseConnectionDto databaseConnectionDto, String key)
+            throws SQLException, IOException {
         if (databaseConnectionDto == null) {
             return null;
         }
         // Read the SQL script from the file
-        final String format = String.format(PREFIX, databaseConnectionDto.getDbHost(), databaseConnectionDto.getDbPort());
+        final String format =
+                String.format(PREFIX, databaseConnectionDto.getDbHost(), databaseConnectionDto.getDbPort());
         final String dbPassword = databaseConnectionDto.getDbPassword();
         final String dbUser = databaseConnectionDto.getDbUser();
         // Establish a connection
@@ -77,7 +83,7 @@ public class DbUtils {
         if (ObjectUtil.isNull(checkDb(key))) {
             statement.executeUpdate(String.format(CREATEDB, dbSchema));
             statement.executeUpdate(String.format("use `%1$s`;", dbSchema));
-            runSqlByReadFileContent(connection, Resources.getResourceAsStream(filePath));
+            runSqlByReadFileContent(connection, Resources.getResourceAsStream(FILE_PATH));
             databaseConnectionDto.setDriver(driver);
             databaseConnectionDto.setUrl(format);
             databaseConnectionDto.setScheme(dbSchema);
@@ -115,10 +121,15 @@ public class DbUtils {
             final Yaml yaml = new Yaml();
             final Map<String, Object> load = yaml.load(reader);
             if (ObjectUtil.isNotNull(load) && ObjectUtil.isNotNull(load.get(key))) {
-                final DatabaseConnectionDto d = BeanUtil.toBean(load.get(key), DatabaseConnectionDto.class, CopyOptions.create().setIgnoreNullValue(true));
-                try (Connection connection = DriverManager.getConnection(d.getUrl(), d.getDbUser(), d.getDbPassword())) {
+                final DatabaseConnectionDto d = BeanUtil.toBean(
+                        load.get(key),
+                        DatabaseConnectionDto.class,
+                        CopyOptions.create().setIgnoreNullValue(true));
+                try (Connection connection =
+                             DriverManager.getConnection(d.getUrl(), d.getDbUser(), d.getDbPassword())) {
                     final String scheme = d.getScheme();
-                    if (ObjectUtil.isNotNull(databaseConnection(connection, scheme)) && databaseExists(connection, scheme)) {
+                    if (ObjectUtil.isNotNull(databaseConnection(connection, scheme))
+                            && databaseExists(connection, scheme)) {
                         return d;
                     }
                 }
@@ -136,7 +147,8 @@ public class DbUtils {
         options.setPrettyFlow(true);
         Yaml yaml = new Yaml(options);
         if (classPathResource.exists()) {
-            try (Reader reader = new FileReader(classPathResource.getFile()); Writer writer = new FileWriter(classPathResource.getFile())) {
+            try (Reader reader = new FileReader(classPathResource.getFile());
+                 Writer writer = new FileWriter(classPathResource.getFile())) {
                 final Map<String, Object> load = yaml.load(reader);
                 load.put(key, BeanUtil.beanToMap(databaseConnectionDto, false, true));
                 yaml.dump(load, writer);
@@ -163,7 +175,13 @@ public class DbUtils {
         ResultSet resultSet = statement.executeQuery(String.format(QUERYLIST, scheme));
         while (resultSet.next()) {
             // 封装查询结果为 DatabaseConnectionVO 对象
-            return new DatabaseConnection(resultSet.getInt("id"), resultSet.getString("url"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("driver"), resultSet.getString("scheme"));
+            return new DatabaseConnection(
+                    resultSet.getInt("id"),
+                    resultSet.getString("url"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("driver"),
+                    resultSet.getString("scheme"));
         }
         resultSet.close();
         statement.close();

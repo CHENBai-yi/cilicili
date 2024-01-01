@@ -13,14 +13,21 @@ import site.cilicili.common.util.YAMLPropertySourceFactory;
 @Component
 @Data
 @Primary
-@PropertySource(value = "classpath:dbConfig.yaml", factory = YAMLPropertySourceFactory.class, ignoreResourceNotFound = true, encoding = "utf8")
+@PropertySource(
+        value = "classpath:dbConfig.yaml",
+        factory = YAMLPropertySourceFactory.class,
+        ignoreResourceNotFound = true,
+        encoding = "utf8")
 public class DbChangeConfig {
     @Value("${backend.scheme:backend}")
     private String backend;
+
     @Value("${spring.datasource.master.scheme:backend}")
     private String backendInner;
+
     @Value("${frontend.scheme:frontend}")
     private String frontend;
+
     @Value("${spring.datasource.slave.scheme:frontend}")
     private String frontendInner;
 }

@@ -24,18 +24,25 @@ public class DatabaseConnectionDto implements Serializable {
     List<Long> ids;
     private Integer id;
     private String url;
+
     @JsonAlias({"db_user"})
     private String dbUser;
+
     @JsonAlias({"db_password"})
     private String dbPassword;
+
     private String driver;
     private String scheme;
+
     @JsonAlias({"db_schema"})
     private String dbSchema;
+
     @JsonAlias({"db_port"})
     private String dbPort;
+
     @JsonAlias({"db_host"})
     private String dbHost;
+
     @JsonAlias({"db_type"})
     private String dbType;
     /**

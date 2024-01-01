@@ -26,7 +26,6 @@ public class SysConfigFrontendController {
     /**
      * 服务对象
      */
-
     private final SysConfigFrontendService sysConfigFrontendService;
 
     /**
@@ -34,14 +33,11 @@ public class SysConfigFrontendController {
      *
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "sysConfigFrontend 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "sysConfigFrontend 筛选条件")})
     @PostMapping({"get-config-frontend-all", "get-config-frontend-list"})
     public R getConfigBackendAll() {
         return this.sysConfigFrontendService.queryConfigFrontAll();
     }
 }
-
-
-

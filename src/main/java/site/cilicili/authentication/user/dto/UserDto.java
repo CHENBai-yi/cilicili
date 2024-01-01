@@ -22,8 +22,10 @@ public class UserDto {
     private String email;
     private String token;
     private String username;
+
     @JsonProperty("real_name")
     private String realName;
+
     private String nickname;
     private String avatar;
 

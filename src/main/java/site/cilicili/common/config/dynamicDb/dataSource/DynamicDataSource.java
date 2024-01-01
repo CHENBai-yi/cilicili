@@ -11,5 +11,4 @@ import com.alibaba.druid.pool.DruidDataSource;
  * @author BaiYiChen
  */
 public class DynamicDataSource extends DruidDataSource {
-
 }

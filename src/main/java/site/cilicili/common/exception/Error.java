@@ -3,6 +3,10 @@ package site.cilicili.common.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * @author BaiYiChen
+ */
+
 @Getter
 public enum Error {
     DUPLICATED_USER("there is duplicated user information", HttpStatus.UNPROCESSABLE_ENTITY),
@@ -15,7 +19,8 @@ public enum Error {
     ARTICLE_NOT_FOUND("article not found", HttpStatus.NOT_FOUND),
     FAVORITE_NOT_FOUND("favorite not found", HttpStatus.NOT_FOUND),
     COMMENT_NOT_FOUND("comment not found", HttpStatus.NOT_FOUND),
-    ;
+    COMMON_EXCEPTION("服务器有点呆。。。", HttpStatus.NOT_FOUND),
+    TOKEN_INVALIED("token已失效，登录过期", HttpStatus.NOT_FOUND);
 
     private final String message;
     private final HttpStatus status;

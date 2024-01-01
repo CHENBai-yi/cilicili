@@ -3,10 +3,15 @@ package site.cilicili.backend.menu.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.backend.menu.domain.dto.GetMenuListRequest;
+import site.cilicili.backend.menu.domain.dto.SysMenuDto;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.backend.menu.mapper.SysMenuMapper;
 import site.cilicili.backend.menu.service.SysMenuService;
 import site.cilicili.common.util.R;
+
+import java.util.Optional;
 
 /**
  * (SysMenu) 表服务实现类
@@ -76,6 +81,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity
         return R.ok().setData(del);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public R getRoleMenuList(final GetMenuListRequest sysMenuListRequest) {
+        return Optional.ofNullable(baseMapper.getRoleMenuList(sysMenuListRequest)).map(records -> R.yes("Success").setData(SysMenuDto.builder().build().setRecords(records).setTotal(records.size()).setPageNum(sysMenuListRequest.page()).setPageSize(sysMenuListRequest.pageSize()))).orElse(R.no("Fail"));
+    }
 }
-
-

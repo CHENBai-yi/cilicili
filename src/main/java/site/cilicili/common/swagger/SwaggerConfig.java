@@ -21,10 +21,11 @@ import org.springframework.context.annotation.Configuration;
  * @author ChenBaiYi
  * @since 2023-12-04 21:48:48
  */
-
 @Configuration
 @EnableKnife4j
-@ConditionalOnProperty(value = {"knife4j.enable"}, matchIfMissing = true)
+@ConditionalOnProperty(
+        value = {"knife4j.enable"},
+        matchIfMissing = true)
 @ConfigurationProperties(prefix = "knife4j.config")
 @Data
 public class SwaggerConfig {
@@ -47,7 +48,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springSwaggerOpenApi() {
         return new OpenAPI()
-                .info(new Info().title(title)
+                .info(new Info()
+                        .title(title)
                         .description(description)
                         .version(version)
                         .termsOfService(termsOfServiceUrl)
@@ -60,9 +62,5 @@ public class SwaggerConfig {
 
     @SecurityScheme(type = SecuritySchemeType.HTTP, name = "JWT", scheme = "bearer", in = SecuritySchemeIn.HEADER)
     public class Swagger3Config {
-
     }
 }
-
-
-

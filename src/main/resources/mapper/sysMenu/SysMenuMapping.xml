@@ -25,6 +25,59 @@
         <result property="isLink" column="is_link" jdbcType="VARCHAR"/>
     </resultMap>
     
+    <resultMap type="site.cilicili.backend.menu.domain.dto.SysMenuDto$Records" id="SysMenuDto">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="parentCode" column="parent_code" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="redirect" column="redirect" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="hidden" column="hidden" jdbcType="VARCHAR"/>
+        <result property="keepAlive" column="keep_alive" jdbcType="VARCHAR"/>
+        <result property="isLink" column="is_link" jdbcType="VARCHAR"/>
+        <association property="createdByUser" column="created_by=created_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findCreatedByUser"/>
+        <association property="updatedByUser" column="updated_by=updated_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findUpdatedByUser"/>
+        <collection property="children" column="name=name" select="findChildrenMenu"/>
+        <collection property="button" column="name=name" select="findMenuButton"/>
+    </resultMap>
+    
+    
+    <select id="findChildrenMenu" resultMap="SysMenuDto">
+        select *
+        from sys_menu
+        where parent_code = #{name};
+    </select>
+    <select id="findMenuButton" resultMap="site.cilicili.backend.button.mapper.SysButtonMapper.SysButtonMap">
+        select *
+        from sys_button
+        where menu_name = #{name};
+    </select>
+    
+    <select id="getRoleMenuList" resultMap="SysMenuDto">
+        select *from sys_menu
+        <if test="sortBy!=null">
+            order by #{sortBy}
+            <if test="desc">desc</if>
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+    </select>
+    
     <!--查询单个-->
     <select id="queryById" resultMap="SysMenuMap">
         select id,
@@ -188,6 +241,7 @@
             </if>
         </where>
     </select>
+    
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

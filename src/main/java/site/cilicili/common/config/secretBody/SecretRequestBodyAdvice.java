@@ -24,7 +24,10 @@ public class SecretRequestBodyAdvice extends RequestBodyAdviceAdapter {
      * @return
      */
     @Override
-    public boolean supports(final MethodParameter methodParameter, final Type targetType, final Class<? extends HttpMessageConverter<?>> converterType) {
+    public boolean supports(
+            final MethodParameter methodParameter,
+            final Type targetType,
+            final Class<? extends HttpMessageConverter<?>> converterType) {
         return false;
     }
 }
