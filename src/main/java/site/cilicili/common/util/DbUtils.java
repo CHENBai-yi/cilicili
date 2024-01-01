@@ -39,7 +39,7 @@ public class DbUtils {
     private static final String INSERTONE =
             "INSERT INTO `%1$s`.database_connection VALUES(DEFAULT,'%2$s','%3$s','%4$s','%5$s','%6$s')";
     private static final String DBCONFIG = "dbConfig.yaml";
-    private static final String FILE_PATH = "gin-quasar-admin.sql";
+    private static final String FILE_PATH = "gin-quasar-admin_bak.sql";
     private static final Logger LOGGER = LoggerFactory.getLogger(DbUtils.class);
     private static final Map<String, String> DRIVER_CLASS_MAP = new HashMap<>();
 
