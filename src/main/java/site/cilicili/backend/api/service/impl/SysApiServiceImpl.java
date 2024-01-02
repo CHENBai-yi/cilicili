@@ -85,9 +85,14 @@ public class SysApiServiceImpl extends ServiceImpl<SysApiMapper, SysApiEntity> i
     @Override
     @Transactional(readOnly = true)
     public R getApiList(final GetApiListRequest apiListRequest) {
-        return Optional.ofNullable(baseMapper.getApiList(apiListRequest)).map(records -> R.yes("Success").setData(SysApiDto.builder().build().setRecords(records).setTotal(records.size()).setPageNum(apiListRequest.page()).setPageSize(apiListRequest.pageSize()))).orElse(R.no("Fail"));
+        return Optional.ofNullable(baseMapper.getApiList(apiListRequest))
+                .map(records -> R.yes("Success")
+                        .setData(SysApiDto.builder()
+                                .build()
+                                .setRecords(records)
+                                .setTotal(records.size())
+                                .setPageNum(apiListRequest.page())
+                                .setPageSize(apiListRequest.pageSize())))
+                .orElse(R.no("Fail"));
     }
-
 }
-
-

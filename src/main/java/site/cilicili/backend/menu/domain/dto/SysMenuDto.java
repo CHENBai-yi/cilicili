@@ -73,6 +73,5 @@ public class SysMenuDto implements Serializable {
         private SysRoleDto.User updatedByUser;
         private List<Records> children;
         private List<SysButtonEntity> button;
-
     }
 }

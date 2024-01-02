@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PROJECT: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -30,9 +31,9 @@ import java.io.Serializable;
 @TableName("sys_role_menu")
 public class SysRoleMenuEntity implements Serializable {
     private static final long serialVersionUID = 315378636665802761L;
+
     @TableId
     private String sysRoleRoleCode;
+
     private String sysMenuName;
 }
-
-

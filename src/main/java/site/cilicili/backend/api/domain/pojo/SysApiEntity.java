@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.cilicili.common.entity.BaseEntity;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -32,18 +33,22 @@ public class SysApiEntity extends BaseEntity implements Serializable {
 
     @Schema(description = "排序")
     private Long sort;
+
     @Schema(description = "系统内置")
     private String stable;
+
     @Schema(description = "状态")
     private String status;
+
     @Schema(description = "备注描述")
     private String memo;
+
     @Schema(description = "Api分组")
     private String apiGroup;
+
     @Schema(description = "请求方法")
     private String apiMethod;
+
     @Schema(description = "Api地址")
     private String apiPath;
 }
-
-

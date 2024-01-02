@@ -29,7 +29,6 @@ public class SysRoleMenuController {
     /**
      * 服务对象
      */
-
     private final SysRoleMenuService sysRoleMenuService;
 
     /**
@@ -46,6 +45,3 @@ public class SysRoleMenuController {
         return sysRoleMenuService.getRoleMenuList(roleCode);
     }
 }
-
-
-

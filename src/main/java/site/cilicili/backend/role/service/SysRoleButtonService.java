@@ -47,5 +47,3 @@ public interface SysRoleButtonService extends IService<SysRoleButtonEntity> {
 
     R getRoleButtonList(RoleButtonMenuRequest roleCode);
 }
-       
-

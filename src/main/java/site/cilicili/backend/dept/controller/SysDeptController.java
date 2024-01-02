@@ -27,7 +27,6 @@ public class SysDeptController {
     /**
      * 服务对象
      */
-
     private final SysDeptService sysDeptService;
 
     /**
@@ -36,9 +35,9 @@ public class SysDeptController {
      * @param sysDept 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "sysDept 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "sysDept 筛选条件")})
     @GetMapping
     public R queryAll(final SysDeptEntity sysDept) {
         return this.sysDeptService.queryAll(sysDept);
@@ -50,9 +49,9 @@ public class SysDeptController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") Long id) {
         return this.sysDeptService.queryById(id);
@@ -64,10 +63,9 @@ public class SysDeptController {
      * @param sysDept 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "sysDept 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "sysDept 实体")})
     @PostMapping
     public R add(final @RequestBody SysDeptEntity sysDept) {
         return this.sysDeptService.insert(sysDept);
@@ -79,9 +77,9 @@ public class SysDeptController {
      * @param sysDept 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "sysDeptEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "sysDeptEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody SysDeptEntity sysDept) {
         return this.sysDeptService.update(sysDept);
@@ -93,9 +91,9 @@ public class SysDeptController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final Long id) {
         return this.sysDeptService.deleteById(id);
@@ -115,6 +113,3 @@ public class SysDeptController {
         return sysDeptService.getDeptList(deptListRequest);
     }
 }
-
-
-

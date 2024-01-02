@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -32,8 +33,10 @@ import java.util.List;
 public class SysUserRoleDto implements Serializable {
     private static final long serialVersionUID = 708154901443402975L;
     List<Long> ids;
+
     @Schema(description = "'角色编码'")
     private String sysRoleRoleCode;
+
     @Schema(description = "'用户名'")
     private String sysUserUsername;
     /**

@@ -54,7 +54,4 @@ public interface SysRoleMenuService extends IService<SysRoleMenuEntity> {
     R deleteById(final String sysRoleRoleCode);
 
     R getRoleMenuList(RoleButtonMenuRequest roleCode);
-
 }
-       
-

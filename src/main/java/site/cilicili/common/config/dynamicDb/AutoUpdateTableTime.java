@@ -26,7 +26,7 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
     public void insertFill(final MetaObject metaObject) {
         Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
             this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject);
-            this.setFieldValByName("logicalDelete", 0, metaObject);
+            this.setFieldValByName("logicalDelete", 1, metaObject);
             this.setFieldValByName("createdBy", authUserDetails.getUsername(), metaObject);
         });
     }
@@ -36,11 +36,12 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
         Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
             this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
             this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
-            this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
         });
     }
 
     public AuthUserDetails getAuthUserDetails() {
-        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication()).map(authentication -> (AuthUserDetails) authentication.getPrincipal()).orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
+        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+                .map(authentication -> (AuthUserDetails) authentication.getPrincipal())
+                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }
 }

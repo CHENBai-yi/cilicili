@@ -87,12 +87,15 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDeptEntity
     @Override
     @Transactional(readOnly = true)
     public R getDeptList(final GetDeptListRequest deptListRequest) {
-        return Optional.ofNullable(baseMapper.getDeptList(deptListRequest)).map(deptListDtos -> R.yes("Success").setData(
-                SysDeptDto.builder().page(deptListRequest.page()).pageSize(deptListRequest.pageSize())
-                        .total(deptListDtos.size() + deptListDtos.get(0).getChildren().size()).records(deptListDtos).build())
-        ).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.getDeptList(deptListRequest))
+                .map(deptListDtos -> R.yes("Success")
+                        .setData(SysDeptDto.builder()
+                                .page(deptListRequest.page())
+                                .pageSize(deptListRequest.pageSize())
+                                .total(deptListDtos.size()
+                                        + deptListDtos.get(0).getChildren().size())
+                                .records(deptListDtos)
+                                .build()))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
-
 }
-
-

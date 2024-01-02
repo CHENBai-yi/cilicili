@@ -41,5 +41,4 @@ public class AddUserRequest {
         private Object staff;
         private List<AddUserRequestDto> children;
     }
-
 }

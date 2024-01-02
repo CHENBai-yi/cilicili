@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -28,14 +29,16 @@ import java.io.Serializable;
 @TableName("sys_role_api")
 public class SysRoleApiEntity implements Serializable {
     private static final long serialVersionUID = -86523138557907913L;
+
     @Schema(description = "角色编码")
     private String roleCode;
+
     @Schema(description = "Api分组")
     private String apiGroup;
+
     @Schema(description = "请求方法")
     private String apiMethod;
+
     @Schema(description = "Api地址")
     private String apiPath;
 }
-
-

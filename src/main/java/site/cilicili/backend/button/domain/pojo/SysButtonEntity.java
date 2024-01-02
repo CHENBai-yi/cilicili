@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PROJECT: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -29,12 +30,13 @@ import java.io.Serializable;
 @TableName("sys_button")
 public class SysButtonEntity implements Serializable {
     private static final long serialVersionUID = 685912279623161346L;
+
     @Schema(description = "菜单Name")
     private String menuName;
+
     @Schema(description = "按钮名称")
     private String buttonName;
+
     @Schema(description = "按钮编码")
     private String buttonCode;
 }
-
-

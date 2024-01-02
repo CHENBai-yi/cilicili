@@ -15,5 +15,3 @@ public interface SysRoleApiService extends IService<SysRoleApiEntity> {
 
     R getRoleApiList(GetRoleApiListRequest apiListRequest);
 }
-       
-

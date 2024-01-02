@@ -58,5 +58,3 @@ public interface SysDeptUserService extends IService<SysDeptUserEntity> {
 
     boolean updateDeptUserList(List<SysDeptUserEntity> toList);
 }
-       
-

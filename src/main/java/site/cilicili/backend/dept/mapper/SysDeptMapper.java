@@ -8,6 +8,7 @@ import site.cilicili.backend.dept.domain.dto.SysDeptDto;
 import site.cilicili.backend.dept.domain.pojo.SysDeptEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -91,5 +92,3 @@ public interface SysDeptMapper extends BaseMapper<SysDeptEntity> {
 
     List<SysDeptDto.DeptListDto> getDeptList(GetDeptListRequest deptListRequest);
 }
-
-

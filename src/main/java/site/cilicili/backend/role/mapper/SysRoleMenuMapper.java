@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.role.domain.pojo.SysRoleMenuEntity;
 
 import java.util.List;
+
 /**
  * PROJECT: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -79,7 +80,4 @@ public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenuEntity> {
      * @return 影响行数
      */
     int deleteById(String sysRoleRoleCode);
-
 }
-
-

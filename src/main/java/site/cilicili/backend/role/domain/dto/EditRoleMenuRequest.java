@@ -14,6 +14,9 @@ import java.util.List;
  *
  * @author BaiYiChen
  */
-public record EditRoleMenuRequest(String defaultPage, @NotNull String roleCode, List<SysRoleButtonEntity> roleButton,
-                                  List<SysRoleMenuEntity> roleMenu) {
+public record EditRoleMenuRequest(
+        String defaultPage,
+        @NotNull String roleCode,
+        List<SysRoleButtonEntity> roleButton,
+        List<SysRoleMenuEntity> roleMenu) {
 }

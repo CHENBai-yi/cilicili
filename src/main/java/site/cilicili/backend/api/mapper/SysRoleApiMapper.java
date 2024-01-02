@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.api.domain.pojo.SysRoleApiEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -87,5 +88,3 @@ public interface SysRoleApiMapper extends BaseMapper<SysRoleApiEntity> {
      */
     int deleteById();
 }
-
-

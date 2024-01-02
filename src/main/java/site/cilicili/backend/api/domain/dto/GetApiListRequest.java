@@ -8,6 +8,5 @@ package site.cilicili.backend.api.domain.dto;
  *
  * @author BaiYiChen
  */
-
 public record GetApiListRequest(Boolean desc, Integer page, Integer pageSize, String sortBy) {
 }

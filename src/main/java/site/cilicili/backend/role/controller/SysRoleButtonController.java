@@ -29,7 +29,6 @@ public class SysRoleButtonController {
     /**
      * 服务对象
      */
-
     private final SysRoleButtonService sysRoleButtonService;
 
     /**
@@ -46,6 +45,3 @@ public class SysRoleButtonController {
         return sysRoleButtonService.getRoleButtonList(roleCode);
     }
 }
-
-
-

@@ -10,6 +10,6 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author BaiYiChen
  */
-public record EditRoleDeptDataPermissionRequest(@NotNull String roleCode, String deptDataPermissionType,
-                                                String deptDataPermissionCustom) {
+public record EditRoleDeptDataPermissionRequest(
+        @NotNull String roleCode, String deptDataPermissionType, String deptDataPermissionCustom) {
 }

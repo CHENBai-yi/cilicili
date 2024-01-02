@@ -27,7 +27,6 @@ public class SysUserRoleController {
     /**
      * 服务对象
      */
-
     private final SysUserRoleService sysUserRoleService;
 
     /**
@@ -36,9 +35,9 @@ public class SysUserRoleController {
      * @param sysUserRole 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "sysUserRole 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "sysUserRole 筛选条件")})
     @GetMapping
     public R queryAll(final SysUserRoleEntity sysUserRole) {
         return this.sysUserRoleService.queryAll(sysUserRole);
@@ -50,9 +49,9 @@ public class SysUserRoleController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") String id) {
         return this.sysUserRoleService.queryById(id);
@@ -64,10 +63,9 @@ public class SysUserRoleController {
      * @param sysUserRole 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "sysUserRole 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "sysUserRole 实体")})
     @PostMapping
     public R add(final @RequestBody SysUserRoleEntity sysUserRole) {
         return this.sysUserRoleService.insert(sysUserRole);
@@ -79,9 +77,9 @@ public class SysUserRoleController {
      * @param sysUserRole 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "sysUserRoleEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "sysUserRoleEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody SysUserRoleEntity sysUserRole) {
         return this.sysUserRoleService.update(sysUserRole);
@@ -93,9 +91,9 @@ public class SysUserRoleController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final String id) {
         return this.sysUserRoleService.deleteById(id);
@@ -115,6 +113,3 @@ public class SysUserRoleController {
         return sysUserRoleService.removeRoleUser(removeRoleUserRequest);
     }
 }
-
-
-

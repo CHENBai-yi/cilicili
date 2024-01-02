@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -32,10 +33,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SysUserRoleEntity implements Serializable {
     private static final long serialVersionUID = 464445815074406289L;
+
     @Schema(description = "'角色编码'")
     private String sysRoleRoleCode;
+
     @Schema(description = "'用户名'")
     private String sysUserUsername;
 }
-
-

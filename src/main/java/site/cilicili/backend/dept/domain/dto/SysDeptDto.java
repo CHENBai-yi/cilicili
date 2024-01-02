@@ -12,6 +12,7 @@ import site.cilicili.backend.dept.domain.pojo.SysDeptEntity;
 import site.cilicili.backend.role.domain.dto.SysRoleDto;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -26,7 +27,6 @@ import java.util.List;
  * @author ChenBaiYi
  * @since 2023-12-30 16:36:33
  */
-
 @Slf4j
 @Data
 @Builder(toBuilder = true)
@@ -35,6 +35,7 @@ import java.util.List;
 public class SysDeptDto {
     private List<DeptListDto> records;
     private Integer total;
+
     @Positive(message = "页码值不能为负.")
     private Integer page;
 

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.cilicili.common.entity.BaseEntity;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -29,22 +30,28 @@ import java.io.Serializable;
 @TableName("sys_dept")
 public class SysDeptEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -83111392698342481L;
+
     @Schema(description = "排序")
     private Long sort;
+
     @Schema(description = "系统内置")
     private String stable;
+
     @Schema(description = "状态")
     private String status;
+
     @Schema(description = "备注描述")
     private String memo;
+
     @Schema(description = "父部门DeptCode")
     private String parentCode;
+
     @Schema(description = "部门编码")
     private String deptCode;
+
     @Schema(description = "部门名称")
     private String deptName;
+
     @Schema(description = "部门负责人username")
     private String leader;
 }
-
-

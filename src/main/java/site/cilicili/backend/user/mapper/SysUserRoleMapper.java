@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.user.domain.pojo.SysUserRoleEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -89,5 +90,3 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
 
     int insertSysUserRoleList(List<SysUserRoleEntity> toList);
 }
-
-

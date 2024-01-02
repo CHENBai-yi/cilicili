@@ -28,7 +28,6 @@ public class SysApiController {
     /**
      * 服务对象
      */
-
     private final SysApiService sysApiService;
 
     /**
@@ -37,14 +36,11 @@ public class SysApiController {
      * @param apiListRequest 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "sysButton 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "sysButton 筛选条件")})
     @PostMapping("get-api-list")
     public R getApiList(@RequestBody final GetApiListRequest apiListRequest) {
         return sysApiService.getApiList(apiListRequest);
     }
 }
-
-
-

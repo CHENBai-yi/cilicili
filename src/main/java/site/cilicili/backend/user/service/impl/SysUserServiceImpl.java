@@ -98,64 +98,101 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     @Override
     @Transactional(readOnly = true)
     public R getUserList(final GetUserListRequest getUserListRequest) {
-        return Optional.ofNullable(baseMapper.getUserList(getUserListRequest)).map(userList -> R.yes("Success").setData(UserListDto.builder().total(userList.size()).page(getUserListRequest.page()).pageSize(getUserListRequest.pageSize()).records(userList).build())).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.getUserList(getUserListRequest))
+                .map(userList -> R.yes("Success")
+                        .setData(UserListDto.builder()
+                                .total(userList.size())
+                                .page(getUserListRequest.page())
+                                .pageSize(getUserListRequest.pageSize())
+                                .records(userList)
+                                .build()))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R addUser(final AddUserRequest.Records addUserRequest) {
-        return Optional.ofNullable(baseMapper.selectOneSysUser(addUserRequest.getUsername())).map(item -> R.no(String.format("%1$s用户已经存在", item.getUsername()))).orElseGet(() -> {
-            if (!addUserRequest.getDept().isEmpty() && (sysDeptUserService.insertDeptUserList(addUserRequest.getDept().stream().map(item -> new SysDeptUserEntity(item.getDeptCode(), addUserRequest.getUsername())).toList()))) {
-                return Optional.ofNullable(sysConfigBackendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigBackendEntity>().eq("config_item", "defaultPassword"))).map(item -> {
-                    addUserRequest.setPassword(passwordEncoder.encode(item.getItemDefault()));
-                    baseMapper.insert(addUserRequest);
-                    return R.yes("Success");
-                }).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
-            } else {
-                throw new AppException(Error.COMMON_EXCEPTION);
-            }
-        });
-
+        return Optional.ofNullable(baseMapper.selectOneSysUser(addUserRequest.getUsername()))
+                .map(item -> R.no(String.format("%1$s用户已经存在", item.getUsername())))
+                .orElseGet(() -> {
+                    if (!addUserRequest.getDept().isEmpty()
+                            && (sysDeptUserService.insertDeptUserList(addUserRequest.getDept().stream()
+                            .map(item ->
+                                    new SysDeptUserEntity(item.getDeptCode(), addUserRequest.getUsername()))
+                            .toList()))) {
+                        return Optional.ofNullable(sysConfigBackendService
+                                        .getBaseMapper()
+                                        .selectOne(new QueryWrapper<SysConfigBackendEntity>()
+                                                .eq("config_item", "defaultPassword")))
+                                .map(item -> {
+                                    addUserRequest.setPassword(passwordEncoder.encode(item.getItemDefault()));
+                                    baseMapper.insert(addUserRequest);
+                                    return R.yes("Success");
+                                })
+                                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                    } else {
+                        throw new AppException(Error.COMMON_EXCEPTION);
+                    }
+                });
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R resetPassword(final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
-        return Optional.ofNullable(baseMapper.selectById(resetPasswordAndDeleteUserRequest.id())).map(sysUserEntity ->
-                Optional.ofNullable(sysConfigBackendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigBackendEntity>().eq("config_item", "defaultPassword"))).map(item -> {
-                    sysUserEntity.setPassword(passwordEncoder.encode(item.getItemDefault()));
-                    if (saveOrUpdate(sysUserEntity)) {
-                        return R.yes("重置密码成功.");
-                    }
-                    return R.no("密码重置失败.");
-                }).orElse(R.no("未在系统中找到默认配置密码."))).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.selectById(resetPasswordAndDeleteUserRequest.id()))
+                .map(sysUserEntity -> Optional.ofNullable(sysConfigBackendService
+                                .getBaseMapper()
+                                .selectOne(new QueryWrapper<SysConfigBackendEntity>()
+                                        .eq("config_item", "defaultPassword")))
+                        .map(item -> {
+                            sysUserEntity.setPassword(passwordEncoder.encode(item.getItemDefault()));
+                            if (saveOrUpdate(sysUserEntity)) {
+                                return R.yes("重置密码成功.");
+                            }
+                            return R.no("密码重置失败.");
+                        })
+                        .orElse(R.no("未在系统中找到默认配置密码.")))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R deleteUserById(final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
-        return Optional.ofNullable(baseMapper.selectById(resetPasswordAndDeleteUserRequest.id())).map(sysUserEntity -> {
-            sysUserEntity.setLogicalDelete(0);
-            if (baseMapper.update(sysUserEntity) > 0) {
-                return R.yes(String.format("%1$s删除成功.", sysUserEntity.getUsername()));
-            }
-            return R.no(String.format("%1$s删除失败.", sysUserEntity.getUsername()));
-        }).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.selectById(resetPasswordAndDeleteUserRequest.id()))
+                .map(sysUserEntity -> {
+                    sysUserEntity.setLogicalDelete(0);
+                    if (!"SuperAdmin".equals(sysUserEntity.getRealName()) && baseMapper.update(sysUserEntity) > 0) {
+                        return R.yes(String.format("%1$s删除成功.", sysUserEntity.getUsername()));
+                    }
+                    return R.no(String.format("%1$s删除失败.", sysUserEntity.getUsername()));
+                })
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R editUser(final AddUserRequest.Records editUserRequest) {
-        return Optional.ofNullable(baseMapper.selectOneSysUser(editUserRequest.getUsername())).map(sysUserEntity -> {
-            if (!editUserRequest.getDept().isEmpty() && (sysDeptUserService.remove(new QueryWrapper<SysDeptUserEntity>().eq("sys_user_username", sysUserEntity.getUsername())) | (sysDeptUserService.updateDeptUserList(editUserRequest.getDept().stream().map(item -> new SysDeptUserEntity(item.getDeptCode(), editUserRequest.getUsername())).toList()) && updateById(editUserRequest)))) {
-                return R.yes(String.format("%1$s编辑成功.", sysUserEntity.getUsername()));
-            }
-            return R.no(String.format("%1$s编辑失败.", sysUserEntity.getUsername()));
-        }).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.selectOneSysUser(editUserRequest.getUsername()))
+                .map(sysUserEntity -> {
+                    if (!editUserRequest.getDept().isEmpty()
+                            && (sysDeptUserService.remove(new QueryWrapper<SysDeptUserEntity>()
+                            .eq("sys_user_username", sysUserEntity.getUsername()))
+                            | (sysDeptUserService.updateDeptUserList(editUserRequest.getDept().stream()
+                            .map(item -> new SysDeptUserEntity(
+                                    item.getDeptCode(), editUserRequest.getUsername()))
+                            .toList())
+                            && updateById(editUserRequest)))) {
+                        return R.yes(String.format("%1$s编辑成功.", sysUserEntity.getUsername()));
+                    }
+                    return R.no(String.format("%1$s编辑失败.", sysUserEntity.getUsername()));
+                })
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     public R queryUserById(final ResetPasswordAndDeleteUserRequest id) {
-        return Optional.ofNullable(baseMapper.getUserById(id.id())).map(sysUserEntity -> R.yes("查找成功.").setRecords(sysUserEntity)).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.getUserById(id.id()))
+                .map(sysUserEntity -> R.yes("查找成功.").setRecords(sysUserEntity))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

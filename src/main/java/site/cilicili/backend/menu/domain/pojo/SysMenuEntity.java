@@ -24,6 +24,7 @@ import java.io.Serializable;
 public class SysMenuEntity extends BaseEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = -47068264463880790L;
+
     @Schema(description = "排序")
     private Long sort;
 

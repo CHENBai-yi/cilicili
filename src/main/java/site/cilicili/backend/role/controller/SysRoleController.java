@@ -123,7 +123,8 @@ public class SysRoleController {
             summary = "根据体ID删除",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("edit-role-dept-data-permission")
-    public R editRoleDeptDataPermission(@RequestBody @Validated final EditRoleDeptDataPermissionRequest editRoleDeptDataPermissionRequest) {
+    public R editRoleDeptDataPermission(
+            @RequestBody @Validated final EditRoleDeptDataPermissionRequest editRoleDeptDataPermissionRequest) {
         return sysRoleService.editRoleDeptDataPermission(editRoleDeptDataPermissionRequest);
     }
 
@@ -176,11 +177,10 @@ public class SysRoleController {
      * @return 查询结果
      */
     @Operation(
-            summary = "查询用户角色",
+            summary = "角色添加用户列表",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("add-role-user")
     public R addRoleUser(@RequestBody @Validated final AddRoleUserRequest addRoleUserRequest) {
         return sysRoleService.addRoleUser(addRoleUserRequest);
     }
-
 }

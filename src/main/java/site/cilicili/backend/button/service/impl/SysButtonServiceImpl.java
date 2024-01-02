@@ -77,7 +77,4 @@ public class SysButtonServiceImpl extends ServiceImpl<SysButtonMapper, SysButton
         boolean del = baseMapper.deleteById(menuName) > 0;
         return R.ok().setData(del);
     }
-
 }
-
-

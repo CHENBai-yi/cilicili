@@ -20,7 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysDeptUserService")
-public class SysDeptUserServiceImpl extends ServiceImpl<SysDeptUserMapper, SysDeptUserEntity> implements SysDeptUserService {
+public class SysDeptUserServiceImpl extends ServiceImpl<SysDeptUserMapper, SysDeptUserEntity>
+        implements SysDeptUserService {
 
     /**
      * 通过ID查询单条数据
@@ -89,7 +90,4 @@ public class SysDeptUserServiceImpl extends ServiceImpl<SysDeptUserMapper, SysDe
     public boolean updateDeptUserList(final List<SysDeptUserEntity> toList) {
         return baseMapper.updateDeptUserList(toList) > 0;
     }
-
 }
-
-

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.role.domain.pojo.SysRoleButtonEntity;
 
 import java.util.List;
+
 /**
  * PROJECT: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -80,5 +81,3 @@ public interface SysRoleButtonMapper extends BaseMapper<SysRoleButtonEntity> {
      */
     int deleteById(String sysRoleRoleCode);
 }
-
-

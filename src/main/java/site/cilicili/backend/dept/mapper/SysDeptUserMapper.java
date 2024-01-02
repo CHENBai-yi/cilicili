@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.dept.domain.pojo.SysDeptUserEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -91,5 +92,3 @@ public interface SysDeptUserMapper extends BaseMapper<SysDeptUserEntity> {
 
     int updateDeptUserList(List<SysDeptUserEntity> toList);
 }
-
-

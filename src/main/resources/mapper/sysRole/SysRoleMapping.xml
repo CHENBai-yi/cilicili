@@ -19,6 +19,7 @@
         <result property="deptDataPermissionType" column="dept_data_permission_type" jdbcType="VARCHAR"/>
         <result property="deptDataPermissionCustom" column="dept_data_permission_custom" jdbcType="VARCHAR"/>
         <result property="defaultPage" column="default_page" jdbcType="VARCHAR"/>
+        <result property="logicalDelete" column="logical_delete" jdbcType="VARCHAR"/>
     </resultMap>
     
     <resultMap type="site.cilicili.backend.role.domain.dto.SysRoleDto$DefaultPageMenu" id="defaultPageMenu">
@@ -341,12 +342,13 @@
     
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
         insert into sys_role(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo,
-        role_code, role_name, dept_data_permission_type, dept_data_permission_custom, default_page)
+        role_code, role_name, dept_data_permission_type, dept_data_permission_custom, default_page,logical_delete)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt},
             #{entity.sort}, #{entity.stable}, #{entity.status}, #{entity.memo}, #{entity.roleCode}, #{entity.roleName},
-            #{entity.deptDataPermissionType}, #{entity.deptDataPermissionCustom}, #{entity.defaultPage})
+            #{entity.deptDataPermissionType}, #{entity.deptDataPermissionCustom},
+            #{entity.defaultPage},#{entity.logicalDelete})
         </foreach>
         on duplicate key update
         created_at = values(created_at),
@@ -362,8 +364,62 @@
         role_name = values(role_name),
         dept_data_permission_type = values(dept_data_permission_type),
         dept_data_permission_custom = values(dept_data_permission_custom),
-        default_page = values(default_page)
+        default_page = values(default_page),
+        logical_delete = values(logical_delete)
     </insert>
+    <select id="saveOrUpdateRole">
+        insert into sys_role(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo,
+        role_code, role_name, dept_data_permission_type, dept_data_permission_custom, default_page,logical_delete)
+        values (#{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt}, #{sort}, #{stable}, #{status},
+        #{memo}, #{roleCode}, #{roleName}, #{deptDataPermissionType}, #{deptDataPermissionCustom},
+        #{defaultPage},#{logicalDelete})
+        ON DUPLICATE KEY UPDATE
+        <if test="createdAt != null">
+            created_at = #{createdAt},
+        </if>
+        <if test="createdBy != null and createdBy != ''">
+            created_by = #{createdBy},
+        </if>
+        <if test="updatedAt != null">
+            updated_at = #{updatedAt},
+        </if>
+        <if test="updatedBy != null and updatedBy != ''">
+            updated_by = #{updatedBy},
+        </if>
+        <if test="deletedAt != null">
+            deleted_at = #{deletedAt},
+        </if>
+        <if test="sort != null">
+            sort = #{sort},
+        </if>
+        <if test="stable != null and stable != ''">
+            stable = #{stable},
+        </if>
+        <if test="status != null and status != ''">
+            `status` = #{status},
+        </if>
+        <if test="memo != null and memo != ''">
+            memo = #{memo},
+        </if>
+        <if test="roleCode != null and roleCode != ''">
+            role_code = #{roleCode},
+        </if>
+        <if test="roleName != null and roleName != ''">
+            role_name = #{roleName},
+        </if>
+        <if test="deptDataPermissionType != null and deptDataPermissionType != ''">
+            dept_data_permission_type = #{deptDataPermissionType},
+        </if>
+        <if test="deptDataPermissionCustom != null and deptDataPermissionCustom != ''">
+            dept_data_permission_custom = #{deptDataPermissionCustom},
+        </if>
+        <if test="defaultPage != null and defaultPage != ''">
+            default_page = #{defaultPage},
+        </if>
+        <if test="logicalDelete ==0 or logicalDelete==1">
+            logical_delete = #{logicalDelete},
+        </if>;
+    </select>
     
     <!--通过主键修改数据-->
     <update id="update">

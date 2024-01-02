@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -31,11 +32,11 @@ import java.io.Serializable;
 @ToString
 public class SysDeptUserEntity implements Serializable {
     private static final long serialVersionUID = 405586698921658966L;
+
     @Schema(description = "'部门编码'")
     @TableId
     private String sysDeptDeptCode;
+
     @Schema(description = "'用户名'")
     private String sysUserUsername;
 }
-
-

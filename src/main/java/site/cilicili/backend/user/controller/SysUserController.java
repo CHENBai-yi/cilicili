@@ -137,10 +137,11 @@ public class SysUserController {
      * @return 用户列表
      */
     @Operation(
-            summary = "添加用户",
+            summary = "删除用户",
             parameters = {@Parameter(description = "sysUser 实体")})
     @PostMapping("delete-user-by-id")
-    public R deleteUserById(@RequestBody @Validated final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
+    public R deleteUserById(
+            @RequestBody @Validated final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
         return sysUserService.deleteUserById(resetPasswordAndDeleteUserRequest);
     }
 
@@ -151,10 +152,11 @@ public class SysUserController {
      * @return 用户列表
      */
     @Operation(
-            summary = "添加用户",
+            summary = "根据ID获取用户",
             parameters = {@Parameter(description = "sysUser 实体")})
     @PostMapping("query-user-by-id")
-    public R queryUserById(@RequestBody @NotNull final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
+    public R queryUserById(
+            @RequestBody @NotNull final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
         return sysUserService.queryUserById(resetPasswordAndDeleteUserRequest);
     }
 
@@ -182,8 +184,8 @@ public class SysUserController {
             summary = "重置用户密码",
             parameters = {@Parameter(description = "sysUser 实体")})
     @PostMapping("reset-password")
-    public R resetPassword(@RequestBody @Validated final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
+    public R resetPassword(
+            @RequestBody @Validated final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
         return sysUserService.resetPassword(resetPasswordAndDeleteUserRequest);
     }
-
 }

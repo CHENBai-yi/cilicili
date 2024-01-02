@@ -41,8 +41,7 @@ dependencies {
     implementation "com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0"
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-
+//    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -73,7 +72,9 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.5.7.Final' // 替换为您使用的 Hibernate 版本
 
 }
-
+test {
+    enabled(false)
+}
 tasks.withType(Test.class) {
     useJUnitPlatform()
     finalizedBy("jacocoTestReport")

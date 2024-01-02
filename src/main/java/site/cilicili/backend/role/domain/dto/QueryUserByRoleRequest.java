@@ -10,6 +10,6 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author BaiYiChen
  */
-public record QueryUserByRoleRequest(Boolean desc, Integer page, Integer pageSize, @NotNull String roleCode,
-                                     String sortBy) {
+public record QueryUserByRoleRequest(
+        Boolean desc, Integer page, Integer pageSize, @NotNull String roleCode, String sortBy) {
 }

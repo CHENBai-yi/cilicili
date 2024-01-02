@@ -55,5 +55,3 @@ public interface SysDeptService extends IService<SysDeptEntity> {
 
     R getDeptList(GetDeptListRequest deptListRequest);
 }
-       
-

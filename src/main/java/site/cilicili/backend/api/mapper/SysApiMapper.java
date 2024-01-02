@@ -8,6 +8,7 @@ import site.cilicili.backend.api.domain.dto.SysApiDto;
 import site.cilicili.backend.api.domain.pojo.SysApiEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -91,5 +92,3 @@ public interface SysApiMapper extends BaseMapper<SysApiEntity> {
 
     List<SysApiDto.Records> getApiList(GetApiListRequest apiListRequest);
 }
-
-

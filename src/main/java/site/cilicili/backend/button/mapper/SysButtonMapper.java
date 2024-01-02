@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.button.domain.pojo.SysButtonEntity;
 
 import java.util.List;
+
 /**
  * PROJECT: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -88,5 +89,3 @@ public interface SysButtonMapper extends BaseMapper<SysButtonEntity> {
      */
     int deleteById(String menuName);
 }
-
-

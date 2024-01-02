@@ -8,7 +8,13 @@ package site.cilicili.backend.user.domain.dto;
  *
  * @author BaiYiChen
  */
-
-public record GetUserListRequest(String deptCode, Boolean desc, Integer page, Integer pageSize, String sortBy,
-                                 Boolean withAdmin, String realName, String username) {
+public record GetUserListRequest(
+        String deptCode,
+        Boolean desc,
+        Integer page,
+        Integer pageSize,
+        String sortBy,
+        Boolean withAdmin,
+        String realName,
+        String username) {
 }

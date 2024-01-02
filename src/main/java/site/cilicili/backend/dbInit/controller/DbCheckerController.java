@@ -36,9 +36,10 @@ public class DbCheckerController {
     @PostMapping("check-db")
     public R checkDb() {
         try {
-            if (DbUtils.checkDb(dbChangeConf.getBackendInner()) != null
-                    || !databaseConnectionService.list().isEmpty()) {
-                return R.yes("数据库初始化成功！").setData("need_init", false);
+            if (DbUtils.checkDb(dbChangeConf.getBackendInner()) != null) {
+                if (!databaseConnectionService.list().isEmpty()) {
+                    return R.yes("数据库初始化成功！").setData("need_init", false);
+                }
             }
         } catch (Exception e) {
             log.error(e.getMessage());

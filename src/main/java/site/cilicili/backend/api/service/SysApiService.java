@@ -55,5 +55,3 @@ public interface SysApiService extends IService<SysApiEntity> {
 
     R getApiList(GetApiListRequest apiListRequest);
 }
-       
-

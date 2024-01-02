@@ -85,7 +85,7 @@ public class App {
             druidDataSource.setPassword(databaseConnectionDto1.getDbPassword());
             druidDataSource.setUsername(databaseConnectionDto1.getDbUser());
             druidDataSource.setUrl(
-                    String.join("/", databaseConnectionDto1.getUrl(), databaseConnectionDto1.getScheme()));
+                    String.join("/", databaseConnectionDto1.getUrl(), databaseConnectionDto1.getScheme() + "?allowMultiQueries=true"));
             druidDataSource.setDriverClassName(databaseConnectionDto1.getDriver());
             druidDataSource.setDefaultAutoCommit(true);
             druidDataSource.setAsyncInit(true);
@@ -94,6 +94,7 @@ public class App {
             druidDataSource.setKillWhenSocketReadTimeout(true);
             druidDataSource.setConnectionErrorRetryAttempts(10);
             druidDataSource.setNotFullTimeoutRetryCount(10);
+            druidDataSource.setFailFast(true);
         });
         return druidDataSource;
     }
@@ -101,7 +102,13 @@ public class App {
     @Bean
     public ThreadPoolExecutor threadPoolTaskExecutor() {
         return new ThreadPoolExecutor(
-                5, 10, 1, TimeUnit.MINUTES, new ArrayBlockingQueue<>(10, true), Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardPolicy());
+                5,
+                10,
+                1,
+                TimeUnit.MINUTES,
+                new ArrayBlockingQueue<>(10, true),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.DiscardPolicy());
     }
 
     @Bean

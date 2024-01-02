@@ -1,5 +1,9 @@
 package site.cilicili.backend.user.domain.dto;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -24,7 +28,10 @@ import java.io.Serializable;
 @Schema(description = "SysUser数据传输类")
 public class SysUserDto extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 703587381246600568L;
-
+    @TableLogic
+    @TableField(fill = FieldFill.INSERT)
+    @JsonIgnore
+    protected Integer logicalDelete;
     @Schema(description = "排序")
     private Long sort;
 

@@ -59,5 +59,3 @@ public interface SysUserRoleService extends IService<SysUserRoleEntity> {
 
     R removeRoleUser(RemoveRoleUserRequest removeRoleUserRequest);
 }
-       
-

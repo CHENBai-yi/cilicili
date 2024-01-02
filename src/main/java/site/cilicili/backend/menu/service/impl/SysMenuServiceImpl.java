@@ -84,6 +84,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity
     @Override
     @Transactional(readOnly = true)
     public R getRoleMenuList(final GetMenuListRequest sysMenuListRequest) {
-        return Optional.ofNullable(baseMapper.getRoleMenuList(sysMenuListRequest)).map(records -> R.yes("Success").setData(SysMenuDto.builder().build().setRecords(records).setTotal(records.size()).setPageNum(sysMenuListRequest.page()).setPageSize(sysMenuListRequest.pageSize()))).orElse(R.no("Fail"));
+        return Optional.ofNullable(baseMapper.getRoleMenuList(sysMenuListRequest))
+                .map(records -> R.yes("Success")
+                        .setData(SysMenuDto.builder()
+                                .build()
+                                .setRecords(records)
+                                .setTotal(records.size())
+                                .setPageNum(sysMenuListRequest.page())
+                                .setPageSize(sysMenuListRequest.pageSize())))
+                .orElse(R.no("Fail"));
     }
 }

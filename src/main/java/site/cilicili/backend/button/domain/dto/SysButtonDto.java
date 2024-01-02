@@ -25,10 +25,13 @@ import java.util.List;
 public class SysButtonDto implements Serializable {
     private static final long serialVersionUID = 145919854401060807L;
     List<Long> ids;
+
     @Schema(description = "菜单Name")
     private String menuName;
+
     @Schema(description = "按钮名称")
     private String buttonName;
+
     @Schema(description = "按钮编码")
     private String buttonCode;
     /**

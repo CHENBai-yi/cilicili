@@ -1,7 +1,11 @@
 package site.cilicili.common.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,11 +16,8 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BaseEntity {
-    @TableLogic
-    @TableField(fill = FieldFill.INSERT)
-    @JsonIgnore
-    protected Integer logicalDelete;
 
     @TableId(type = IdType.AUTO)
     private Long id;

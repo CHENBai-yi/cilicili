@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 /**
  * @author BaiYiChen
  */
-
 @Getter
 public enum Error {
     DUPLICATED_USER("there is duplicated user information", HttpStatus.UNPROCESSABLE_ENTITY),

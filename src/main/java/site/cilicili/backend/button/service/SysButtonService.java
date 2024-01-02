@@ -52,5 +52,3 @@ public interface SysButtonService extends IService<SysButtonEntity> {
      */
     R deleteById(final String menuName);
 }
-       
-

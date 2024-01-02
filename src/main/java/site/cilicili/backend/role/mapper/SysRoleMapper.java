@@ -89,4 +89,6 @@ public interface SysRoleMapper extends BaseMapper<SysRoleEntity> {
     SysRoleDto.Records queryRoleListById(Long id);
 
     List<SysRoleDto.User> queryUserByRole(QueryUserByRoleRequest queryUserByRoleRequest);
+
+    int saveOrUpdateRole(SysRoleEntity sysRole);
 }

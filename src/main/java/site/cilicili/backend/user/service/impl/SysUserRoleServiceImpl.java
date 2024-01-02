@@ -25,7 +25,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysUserRoleService")
-public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserRoleEntity> implements SysUserRoleService {
+public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserRoleEntity>
+        implements SysUserRoleService {
 
     /**
      * 通过ID查询单条数据
@@ -93,13 +94,12 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R removeRoleUser(final RemoveRoleUserRequest removeRoleUserRequest) {
-        final QueryWrapper<SysUserRoleEntity> queryWrapper = new QueryWrapper<SysUserRoleEntity>().eq("sys_role_role_code", removeRoleUserRequest.roleCode()).eq("sys_user_username", removeRoleUserRequest.username());
+        final QueryWrapper<SysUserRoleEntity> queryWrapper = new QueryWrapper<SysUserRoleEntity>()
+                .eq("sys_role_role_code", removeRoleUserRequest.roleCode())
+                .eq("sys_user_username", removeRoleUserRequest.username());
         return Optional.ofNullable(baseMapper.selectOne(queryWrapper))
                 .filter(item -> remove(queryWrapper.ne("sys_role_role_code", "super-admin")))
                 .map(item -> R.yes("Success"))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
-
 }
-
-

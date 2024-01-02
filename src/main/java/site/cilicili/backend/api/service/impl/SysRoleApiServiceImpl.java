@@ -22,16 +22,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysRoleApiService")
-public class SysRoleApiServiceImpl extends ServiceImpl<SysRoleApiMapper, SysRoleApiEntity> implements SysRoleApiService {
+public class SysRoleApiServiceImpl extends ServiceImpl<SysRoleApiMapper, SysRoleApiEntity>
+        implements SysRoleApiService {
 
     @Override
     @Transactional(readOnly = true)
     public R getRoleApiList(final GetRoleApiListRequest roleCode) {
-        return Optional.ofNullable(baseMapper.selectList(new QueryWrapper<SysRoleApiEntity>().eq("role_code", roleCode.roleCode())))
+        return Optional.ofNullable(baseMapper.selectList(
+                        new QueryWrapper<SysRoleApiEntity>().eq("role_code", roleCode.roleCode())))
                 .map(sysRoleApiEntities -> R.yes("Success").setData("records", sysRoleApiEntities))
                 .orElse(R.no("Fail"));
     }
-
 }
-
-

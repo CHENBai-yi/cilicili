@@ -22,7 +22,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysRoleMenuService")
-public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenuEntity> implements SysRoleMenuService {
+public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenuEntity>
+        implements SysRoleMenuService {
 
     /**
      * 通过ID查询单条数据
@@ -85,12 +86,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
     @Override
     @Transactional(readOnly = true)
     public R getRoleMenuList(final RoleButtonMenuRequest roleCode) {
-        return Optional.ofNullable(baseMapper.selectList(new QueryWrapper<SysRoleMenuEntity>().eq("sys_role_role_code", roleCode.roleCode())))
+        return Optional.ofNullable(baseMapper.selectList(
+                        new QueryWrapper<SysRoleMenuEntity>().eq("sys_role_role_code", roleCode.roleCode())))
                 .map(sysRoleMenuEntities -> R.yes("Success").setData("records", sysRoleMenuEntities))
                 .orElse(R.no("Fail"));
     }
-
-
 }
-
-
