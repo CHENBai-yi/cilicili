@@ -1,10 +1,16 @@
 package site.cilicili.backend.user.domain.dto;
 
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import site.cilicili.backend.dept.domain.pojo.SysDeptEntity;
+import site.cilicili.backend.role.domain.dto.SysRoleDto;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 
 import java.util.List;
@@ -26,9 +32,53 @@ import java.util.List;
 public class AddUserRequest {
     @Getter
     @Setter
-    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Records extends SysUserEntity {
-        private List<AddUserRequestDto> dept;
+        private List<DeptDto> dept;
+
+        @JsonProperty(value = "dept")
+        public void setDept(final JSONArray dept) {
+            this.dept = JSONUtil.toList(dept, DeptDto.class);
+        }
+    }
+
+    @Getter
+    @Setter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class DeptDto extends DeptDtoBase {
+        private UserDto createdByUser;
+        private List<DeptDtoBase> children;
+
+        @JsonProperty(value = "children")
+        public void setChildren(final JSONArray children) {
+            this.children = JSONUtil.toList(children, DeptDtoBase.class);
+            ;
+        }
+
+        @JsonProperty(value = "createdByUser")
+        public void setCreatedByUser(final JSONObject children) {
+            this.createdByUser = JSONUtil.toBean(children, UserDto.class);
+        }
+    }
+
+    @Getter
+    @Setter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class DeptDtoBase extends SysDeptEntity {
+        private Integer leaderUser;
+    }
+
+    @Getter
+    @Setter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class UserDto extends SysUserEntity {
+        private Integer createdByUser;
+        private List<SysDeptEntity> dept;
+        private List<SysRoleDto.Records> role;
     }
 
     @Getter

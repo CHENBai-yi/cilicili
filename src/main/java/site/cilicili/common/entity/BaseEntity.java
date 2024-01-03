@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @Setter
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BaseEntity {
-
     @TableId(type = IdType.AUTO)
     private Long id;
 
