@@ -15,7 +15,6 @@ export const useUserStore = defineStore('user', {
   getters: {},
   actions: {
     async HandleLogin(loginForm) {
-      console.log(loginForm)
       const res = await postAction('public/login', loginForm)
       console.log(res)
       if (res.code === 1) {

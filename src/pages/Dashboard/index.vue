@@ -93,10 +93,10 @@ const license = ref('MIT')
 onMounted(() => {
   loading.value = true
   runSequentialPromises([
-    () => githubGet.get("https://api.github.com/repos/junvary/gin-quasar-admin/license"),
+    () => githubGet.get("https://gitee.com/api/v5/repos/cby-cby/cilicili/license?access_token=0f029ed1afcf1d532d37f5d5800a6994"),
     // 更多接口
   ]).then(resultAggregator => {
-    license.value = resultAggregator[0].value.data.license.name
+    license.value = resultAggregator[0].value.data.license
   }).finally(() => {
     loading.value = false
   })

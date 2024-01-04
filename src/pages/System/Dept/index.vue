@@ -60,6 +60,7 @@ import useTableData from 'src/composables/useTableData'
 import {computed, onMounted, ref} from 'vue'
 import {ChangeNullChildren2Array} from 'src/utils/arrayAndTree'
 import DeptUser from './modules/DeptUser.vue'
+import RecordDetail from './modules/recordDetail.vue'
 
 const url = {
   list: 'dept/get-dept-list',

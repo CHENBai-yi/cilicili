@@ -140,6 +140,13 @@ const permissionStore = usePermissionStore()
 onBeforeMount(() => {
   checkDb()
 })
+const captchaImage = ref('')
+const getCaptcha = () => {
+  postAction('public/get-captcha').then((res) => {
+    captchaImage.value = res.data.captcha_image
+    form.value.captcha_id = res.data.captcha_id
+  })
+}
 const checkDb = async () => {
   const res = await postAction('public/check-db')
 

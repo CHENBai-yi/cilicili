@@ -1,7 +1,8 @@
 import {defineStore} from 'pinia';
 import {HandleRouter} from 'src/utils/router';
 import {ArrayToTree} from 'src/utils/arrayAndTree';
-import res from '/public/data/_public_GetUserMenu.json'
+import {postAction} from "src/api/manage";
+// import res from '/public/data/_public_GetUserMenu.json'
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
@@ -15,8 +16,8 @@ export const usePermissionStore = defineStore('permission', {
   actions: {
     async GetUserMenu() {
       try {
-        // const res = await postAction('user/get-user-menu')
-        console.log(res)
+        const res = await postAction('user/get-user-menu')
+        console.log(res, "aaa")
         if (res.code === 1) {
           const data = res.data.records
           // role default page

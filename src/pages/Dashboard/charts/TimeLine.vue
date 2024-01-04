@@ -40,7 +40,7 @@ const columns = [
 const dataList = ref([])
 onMounted(() => {
   loading.value = true
-  githubGet.get('https://api.github.com/repos/junvary/gin-quasar-admin/commits?page=0&per_page=5').then(res => {
+  githubGet.get('https://gitee.com/api/v5/repos/cby-cby/cilicili/commits?access_token=b83162d055c78bc145b5a588de341d16&page=1&per_page=20').then(res => {
     dataList.value = res.data
   }).finally(() => {
     loading.value = false
