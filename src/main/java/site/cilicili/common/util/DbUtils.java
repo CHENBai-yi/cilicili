@@ -271,8 +271,8 @@ public class DbUtils {
             st = connection.createStatement();
             for (String subsql : sql) {
                 st.addBatch(subsql);
-                LOGGER.info("加入准备执行->{}", subsql);
             }
+            LOGGER.info("加入准备执行数据库初始化：");
             st.executeBatch();
             return 1;
         } catch (Exception e) {

@@ -26,10 +26,12 @@ import java.io.Serializable;
 @TableName("sys_user")
 public class SysUserEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -18979173431235042L;
+
     @TableLogic
     @TableField(fill = FieldFill.INSERT)
     @JsonIgnore
     protected Integer logicalDelete;
+
     @Schema(description = "排序")
     private Long sort;
 

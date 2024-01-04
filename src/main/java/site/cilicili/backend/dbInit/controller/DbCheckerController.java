@@ -11,12 +11,12 @@ import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.db.domain.dto.DatabaseConnectionDto;
 import site.cilicili.common.db.domain.pojo.DatabaseConnection;
-import site.cilicili.common.db.service.DatabaseConnectionService;
 import site.cilicili.common.util.DbUtils;
 import site.cilicili.common.util.R;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 /**
  * @author BaiYiChen
@@ -27,24 +27,14 @@ import java.sql.SQLException;
 @RequestMapping("public")
 @Tag(name = "数据库初始化表控制层")
 public class DbCheckerController {
-
-    private final DatabaseConnectionService databaseConnectionService;
     private final DbInitialization dbInitialization;
 
     private final DbChangeConfig dbChangeConf;
 
     @PostMapping("check-db")
     public R checkDb() {
-        try {
-            if (DbUtils.checkDb(dbChangeConf.getBackendInner()) != null) {
-                if (!databaseConnectionService.list().isEmpty()) {
-                    return R.yes("数据库初始化成功！").setData("need_init", false);
-                }
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return R.yes("数据库未准备好！").setData("need_init", true);
+        return Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
+                .map(item -> R.yes("数据库初始化成功！").setData("need_init", false)).orElse(R.yes("数据库未准备好！").setData("need_init", true));
     }
 
     @PostMapping("init-db")

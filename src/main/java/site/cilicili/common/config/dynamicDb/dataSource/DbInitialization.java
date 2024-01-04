@@ -13,7 +13,7 @@ import site.cilicili.common.db.domain.pojo.DatabaseConnection;
 import site.cilicili.common.db.service.DatabaseConnectionService;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 public class DbInitialization implements CommandLineRunner {
     private final DatabaseConnectionService databaseConnectionService;
     private final MyDataSourceList dataSourceList;
-    private final List<DatabaseConnection> connections = new ArrayList<>();
 
     /**
      * @param args incoming main method arguments
@@ -41,52 +40,52 @@ public class DbInitialization implements CommandLineRunner {
      */
     @Override
     public void run(final String... args) {
-
         try {
             List<DatabaseConnection> connections1 = databaseConnectionService.list();
-            connections.addAll(connections1);
-
-        } catch (Exception ignored) {
-        }
-        Optional.ofNullable(connections).ifPresent(databaseConnections -> {
-            final Map<Object, Object> dataSourceMap = databaseConnections.stream()
-                    .collect(Collectors.toMap(
-                            DatabaseConnection::getScheme,
-                            connection -> {
-                                final DruidDataSource druidDataSource =
-                                        DbSourceToDruidDataSource.DB_SOURCE_TO_DRUID_DATA_SOURCE.toDruidDataSource(
-                                                connection);
-                                druidDataSource.setDriverClassName(connection.getDriver());
-                                druidDataSource.setDefaultAutoCommit(true);
-                                druidDataSource.setAsyncInit(true);
-                                druidDataSource.setKillWhenSocketReadTimeout(true);
-                                druidDataSource.setValidationQuery("select 1;");
-                                druidDataSource.setConnectionErrorRetryAttempts(10);
-                                druidDataSource.setNotFullTimeoutRetryCount(10);
-                                druidDataSource.setPoolPreparedStatements(true);
-                                return druidDataSource;
-                            },
-                            (value1, value2) -> value1));
-            final Map<Object, DataSource> resolvedDataSources = dataSourceList.getResolvedDataSources();
-            if (dataSourceList.getResolvedDefaultDataSource() == null) {
-                dataSourceList.setDefaultTargetDataSource(CollUtil.getLast(resolvedDataSources.values()));
-            }
-            dataSourceMap.putAll(resolvedDataSources);
-            dataSourceList.setTargetDataSources(dataSourceMap);
-            dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
-            connections.clear();
-        });
-    }
-
-    public boolean setConnections(final DatabaseConnection connections) {
-        boolean flag = false;
-        try {
-            this.connections.add(connections);
-            run();
-            flag = ObjectUtil.isNotNull(dataSourceList.getConnection());
+            resolveSource(connections1);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        return flag;
+    }
+
+    public boolean setConnections(final DatabaseConnection connections) {
+        return resolveSource(Collections.singletonList(connections));
+    }
+
+    public boolean resolveSource(final List<DatabaseConnection> connections) {
+        return Optional.ofNullable(connections).map(databaseConnections -> {
+            boolean flag = false;
+            try {
+                final Map<Object, Object> dataSourceMap = databaseConnections.stream()
+                        .collect(Collectors.toMap(
+                                DatabaseConnection::getScheme,
+                                connection -> {
+                                    final DruidDataSource druidDataSource =
+                                            DbSourceToDruidDataSource.DB_SOURCE_TO_DRUID_DATA_SOURCE.toDruidDataSource(
+                                                    connection);
+                                    druidDataSource.setDriverClassName(connection.getDriver());
+                                    druidDataSource.setDefaultAutoCommit(true);
+                                    druidDataSource.setAsyncInit(true);
+                                    druidDataSource.setKillWhenSocketReadTimeout(true);
+                                    druidDataSource.setValidationQuery("select 1;");
+                                    druidDataSource.setConnectionErrorRetryAttempts(10);
+                                    druidDataSource.setNotFullTimeoutRetryCount(10);
+                                    druidDataSource.setFailFast(true);
+                                    return druidDataSource;
+                                },
+                                (value1, value2) -> value1));
+                if (!dataSourceMap.isEmpty()) {
+                    final Map<Object, DataSource> resolvedDataSources = dataSourceList.getResolvedDataSources();
+                    dataSourceMap.putAll(resolvedDataSources);
+                    dataSourceList.setTargetDataSources(dataSourceMap);
+                    dataSourceList.setDefaultTargetDataSource(CollUtil.getFirst(dataSourceMap.values()));
+                    dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
+                    flag = ObjectUtil.isNotNull(dataSourceList.getConnection());
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+            return flag;
+        }).orElse(false);
     }
 }

@@ -30,6 +30,11 @@ knife4j:
     username: abc
     password: 123
 spring:
+  cache:
+    type: redis
+    redis:
+      time-to-live: 86400000
+      key-prefix: CILI
   main:
     allow-circular-references: true
   jackson:
@@ -57,10 +62,6 @@ spring:
       max-pool-prepared-statement-per-connection-size: 60
       validation-query: SELECT 1 FROM DUAL
       async-init: true
-      password: 74521CBy
-      username: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/quasar-admin?allowMultiQueries=true
     slave:
       # 下面为连接池的补充设置，应用到上面所有数据源中
       # 初始化大小，最小，最大
@@ -87,7 +88,13 @@ spring:
       enabled: true
   thymeleaf:
     cache: false
-
+  data:
+    redis:
+      client-type: lettuce
+      lettuce:
+        pool:
+          enabled: true
+      host: 8.217.182.161
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true

@@ -2,10 +2,7 @@ package site.cilicili.backend.config.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
@@ -25,6 +22,8 @@ import java.util.List;
 @Builder
 @Accessors(chain = true)
 @Schema(description = "SysConfigBackend数据传输类")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysConfigBackendDto implements Serializable {
     private Object records;
 

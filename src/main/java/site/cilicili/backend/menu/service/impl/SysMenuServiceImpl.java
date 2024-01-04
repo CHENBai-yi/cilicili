@@ -2,13 +2,18 @@ package site.cilicili.backend.menu.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.menu.domain.dto.GetMenuListRequest;
 import site.cilicili.backend.menu.domain.dto.SysMenuDto;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.backend.menu.mapper.SysMenuMapper;
 import site.cilicili.backend.menu.service.SysMenuService;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 
 import java.util.Optional;
@@ -21,6 +26,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Service("sysMenuService")
+@CacheConfig(cacheNames = {"SysUser"})
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity> implements SysMenuService {
 
     /**
@@ -93,5 +99,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity
                                 .setPageNum(sysMenuListRequest.page())
                                 .setPageSize(sysMenuListRequest.pageSize())))
                 .orElse(R.no("Fail"));
+    }
+
+    @Cacheable(key = "#root.methodName")
+    @Transactional(readOnly = true)
+    @Override
+    public R getUserMenu(final AuthUserDetails authUserDetails) {
+        return Optional.ofNullable(baseMapper.getUserMenu(authUserDetails.getusername())).map(item -> R.yes("获取用户菜单成功.").setData(item)).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

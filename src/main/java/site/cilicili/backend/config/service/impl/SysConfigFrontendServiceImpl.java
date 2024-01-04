@@ -2,7 +2,10 @@ package site.cilicili.backend.config.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.backend.config.domain.dto.SysConfigFrontendDto;
 import site.cilicili.backend.config.domain.pojo.SysConfigFrontendEntity;
 import site.cilicili.backend.config.mapper.SysConfigFrontendMapper;
@@ -19,6 +22,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Service("sysConfigFrontendService")
+@CacheConfig(cacheNames = {"SysConfigFrontend"})
 public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendMapper, SysConfigFrontendEntity>
         implements SysConfigFrontendService {
 
@@ -80,6 +84,8 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
         return R.ok().setData(del);
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "SysConfigFrontend", key = "#root.methodName")
     @Override
     public R queryConfigFrontAll() {
         return Optional.ofNullable(baseMapper.queryConfigFrontAll())

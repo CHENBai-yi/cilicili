@@ -84,8 +84,10 @@ public class App {
             dbChangeConf.setBackend(databaseConnectionDto1.getScheme());
             druidDataSource.setPassword(databaseConnectionDto1.getDbPassword());
             druidDataSource.setUsername(databaseConnectionDto1.getDbUser());
-            druidDataSource.setUrl(
-                    String.join("/", databaseConnectionDto1.getUrl(), databaseConnectionDto1.getScheme() + "?allowMultiQueries=true"));
+            druidDataSource.setUrl(String.join(
+                    "/",
+                    databaseConnectionDto1.getUrl(),
+                    databaseConnectionDto1.getScheme() + "?allowMultiQueries=true"));
             druidDataSource.setDriverClassName(databaseConnectionDto1.getDriver());
             druidDataSource.setDefaultAutoCommit(true);
             druidDataSource.setAsyncInit(true);
@@ -127,4 +129,5 @@ public class App {
         // 允许一次执行多条语句
         return wallConfig;
     }
+
 }

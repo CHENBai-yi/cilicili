@@ -6,8 +6,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.menu.service.SysMenuService;
 import site.cilicili.backend.user.domain.dto.AddUserRequest;
 import site.cilicili.backend.user.domain.dto.GetUserListRequest;
 import site.cilicili.backend.user.domain.dto.ResetPasswordAndDeleteUserRequest;
@@ -187,5 +190,21 @@ public class SysUserController {
     public R resetPassword(
             @RequestBody @Validated final ResetPasswordAndDeleteUserRequest resetPasswordAndDeleteUserRequest) {
         return sysUserService.resetPassword(resetPasswordAndDeleteUserRequest);
+    }
+
+    /**
+     * 获取用户菜单
+     *
+     * @param resetPasswordAndDeleteUserRequest 请求参数
+     * @return 用户列表
+     */
+    private final SysMenuService sysMenuService;
+
+    @Operation(
+            summary = "获取用户菜单",
+            parameters = {@Parameter(description = "sysUser 实体")})
+    @PostMapping("get-user-menu")
+    public R getUserMenu(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return sysMenuService.getUserMenu(authUserDetails);
     }
 }

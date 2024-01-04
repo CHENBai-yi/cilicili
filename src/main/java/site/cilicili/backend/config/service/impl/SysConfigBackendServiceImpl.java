@@ -2,6 +2,8 @@ package site.cilicili.backend.config.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.backend.config.domain.dto.SysConfigBackendDto;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysConfigBackendService")
+@CacheConfig(cacheNames = {"SysConfigBackend"})
 public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMapper, SysConfigBackendEntity>
         implements SysConfigBackendService {
 
@@ -82,6 +85,8 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
         return R.ok().setData(del);
     }
 
+    @Cacheable(key = "#root.methodName")
+    @Transactional(readOnly = true)
     @Override
     public R queryConfigBackendAll() {
         return Optional.ofNullable(baseMapper.queryConfigBackendAll())

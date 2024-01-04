@@ -21,10 +21,13 @@ import site.cilicili.common.util.YAMLPropertySourceFactory;
 public class DbChangeConfig {
     @Value("${backend.scheme:backend}")
     private String backend;
+
     @Value("${spring.datasource.master.scheme:backend}")
     private String backendInner;
+
     @Value("${frontend.scheme:frontend}")
     private String frontend;
+
     @Value("${spring.datasource.slave.scheme:frontend}")
     private String frontendInner;
 }

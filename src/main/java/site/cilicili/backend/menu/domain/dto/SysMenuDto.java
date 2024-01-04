@@ -1,7 +1,6 @@
 package site.cilicili.backend.menu.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -66,7 +65,6 @@ public class SysMenuDto implements Serializable {
 
     @Getter
     @Setter
-    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
     public static class Records extends SysMenuEntity {
         private SysRoleDto role;
         private SysRoleDto.User createdByUser;

@@ -37,7 +37,7 @@ public class SysConfigFrontendController {
             summary = "全查询",
             parameters = {@Parameter(description = "sysConfigFrontend 筛选条件")})
     @PostMapping({"get-config-frontend-all", "get-config-frontend-list"})
-    public R getConfigBackendAll() {
+    public R getConfigFrontendAll() {
         return this.sysConfigFrontendService.queryConfigFrontAll();
     }
 }

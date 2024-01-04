@@ -54,6 +54,41 @@
         <collection property="button" column="name=name" select="findMenuButton"/>
     </resultMap>
     
+    <resultMap type="site.cilicili.backend.menu.domain.dto.GetUserMenuResponse" id="GetUserMenuResponse">
+        <collection property="buttons" column="roleCode=sys_role_role_code" select="findButtons"/>
+        <collection property="defaultPageList" column="roleCode=sys_role_role_code" select="findDefaultPageList"/>
+        <collection property="records" column="roleCode=sys_role_role_code" select="findMenuList"/>
+    </resultMap>
+    
+    <select id="getUserMenu" resultMap="GetUserMenuResponse">
+        select *from sys_user_role
+        <where>
+            sys_user_username=#{username}
+        </where>
+    </select>
+    
+    <select id="findButtons" resultType="string">
+        select button_code
+        from sys_button
+        where exists(select *
+                     from sys_role_button
+                     where sys_role_role_code = #{roleCode}
+                       and sys_button.button_code = sys_role_button.sys_button_button_code)
+    </select>
+    <select id="findMenuList" resultMap="SysMenuDto">
+        
+        select *
+        from sys_menu
+        where exists(select *
+                     from sys_role_menu
+                     where sys_role_role_code = #{roleCode}
+                       and sys_role_menu.sys_menu_name = sys_menu.name)
+    </select>
+    <select id="findDefaultPageList" resultType="string">
+        select default_page
+        from sys_role
+        where role_code = #{roleCode}
+    </select>
     
     <select id="findChildrenMenu" resultMap="SysMenuDto">
         select *
@@ -241,7 +276,6 @@
             </if>
         </where>
     </select>
-    
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
