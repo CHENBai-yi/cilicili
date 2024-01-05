@@ -40,9 +40,11 @@ public class RedisCacheConfig {
      * @return {@link RedisCacheManager}
      */
     @Bean
-    public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration redisCacheConfiguration) {
+    public RedisCacheManager redisCacheManager(
+            RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration redisCacheConfiguration) {
         return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
-                .cacheDefaults(redisCacheConfiguration).transactionAware()
+                .cacheDefaults(redisCacheConfiguration)
+                .transactionAware()
                 .build();
     }
 
@@ -68,8 +70,10 @@ public class RedisCacheConfig {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
-        config = config.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.string()));
-        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(objectMapper, R.class)));
+        config = config.serializeKeysWith(
+                RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.string()));
+        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
+                new Jackson2JsonRedisSerializer<>(objectMapper, R.class)));
 
         CacheProperties.Redis redisProperties = cacheProperties.getRedis();
 
@@ -86,6 +90,4 @@ public class RedisCacheConfig {
         config = config.computePrefixWith(name -> name + ":");
         return config;
     }
-
 }
-

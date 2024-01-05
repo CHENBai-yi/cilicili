@@ -14,6 +14,12 @@
         from sys_user_role
         where sys_role_role_code = #{sysRoleRoleCode}
     </select>
+    <select id="queryByUsername" resultMap="SysUserRoleMap">
+        select sys_role_role_code,
+               sys_user_username
+        from sys_user_role
+        where sys_user_username = #{sysUserUsername}
+    </select>
     
     <!--查询指定行数据-->
     <select id="queryAll" resultMap="SysUserRoleMap">

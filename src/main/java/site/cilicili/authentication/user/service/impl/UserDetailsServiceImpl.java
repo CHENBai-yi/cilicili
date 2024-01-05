@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.authentication.user.repository.UserRepository;
 
+/**
+ * @author BaiYiChen
+ */
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -22,6 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .map(userEntity -> AuthUserDetails.builder()
                         .id(userEntity.getId())
                         .username(userEntity.getUsername())
+                        .roleCode(userEntity.getRoleCode())
                         .build())
                 .orElse(null);
     }

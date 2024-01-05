@@ -31,6 +31,8 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
      */
     SysUserRoleEntity queryById(String sysRoleRoleCode);
 
+    SysUserRoleEntity queryByUsername(String sysUserUsername);
+
     /**
      * 查询指定行数据
      *

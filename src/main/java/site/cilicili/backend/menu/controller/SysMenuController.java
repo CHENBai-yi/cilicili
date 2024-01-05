@@ -41,6 +41,6 @@ public class SysMenuController {
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("get-menu-list")
     public R getRoleMenuList(@RequestBody final GetMenuListRequest sysMenuListRequest) {
-        return sysMenuService.getRoleMenuList(sysMenuListRequest);
+        return sysMenuService.getMenuList(sysMenuListRequest);
     }
 }

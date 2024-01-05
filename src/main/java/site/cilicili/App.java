@@ -129,5 +129,4 @@ public class App {
         // 允许一次执行多条语句
         return wallConfig;
     }
-
 }

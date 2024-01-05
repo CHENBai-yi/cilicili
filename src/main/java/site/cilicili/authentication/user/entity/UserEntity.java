@@ -32,6 +32,8 @@ public class UserEntity extends BaseEntity {
 
     @Schema(description = "用户名")
     private String username;
+    @Schema(description = "用户名")
+    private String roleCode;
 
     @Schema(description = "用户昵称")
     private String nickname;

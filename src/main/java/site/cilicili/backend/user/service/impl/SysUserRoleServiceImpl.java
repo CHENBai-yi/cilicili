@@ -39,6 +39,11 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         return R.ok().setData(baseMapper.queryById(sysRoleRoleCode));
     }
 
+    @Override
+    public SysUserRoleEntity queryByUsername(final String sysUserUsername) {
+        return baseMapper.queryByUsername(sysUserUsername);
+    }
+
     /**
      * 全查询
      *

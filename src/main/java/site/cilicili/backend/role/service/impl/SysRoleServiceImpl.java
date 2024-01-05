@@ -3,6 +3,8 @@ package site.cilicili.backend.role.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @RequiredArgsConstructor
 @Service("sysRoleService")
+@CacheConfig(cacheNames = {"SysMenu", "SysRole"})
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity> implements SysRoleService {
     public final SysUserRoleService sysUserRoleService;
     private final SysRoleButtonService sysRoleButtonService;
@@ -208,18 +211,19 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(key = "#root.args[0].roleCode")
     public R editRoleMenu(final EditRoleMenuRequest editRoleMenuRequest) {
         return Optional.ofNullable(baseMapper.selectOne(
                         new QueryWrapper<SysRoleEntity>().eq("role_code", editRoleMenuRequest.roleCode())))
                 .map(sysRole -> {
                     if ((!editRoleMenuRequest.roleMenu().isEmpty()
-                            && (sysRoleMenuService.remove(new QueryWrapper<SysRoleMenuEntity>().eq("sys_role_role_code", sysRole.getRoleCode()))
+                            && (sysRoleMenuService.remove(new QueryWrapper<SysRoleMenuEntity>()
+                            .eq("sys_role_role_code", sysRole.getRoleCode()))
                             | sysRoleMenuService.saveBatch(editRoleMenuRequest.roleMenu())))
-                            |
-                            (!editRoleMenuRequest.roleButton().isEmpty()
-                                    && (sysRoleButtonService.remove(new QueryWrapper<SysRoleButtonEntity>()
-                                    .eq("sys_role_role_code", sysRole.getRoleCode()))
-                                    | sysRoleButtonService.saveBatch(editRoleMenuRequest.roleButton())))) {
+                            | (!editRoleMenuRequest.roleButton().isEmpty()
+                            && (sysRoleButtonService.remove(new QueryWrapper<SysRoleButtonEntity>()
+                            .eq("sys_role_role_code", sysRole.getRoleCode()))
+                            | sysRoleButtonService.saveBatch(editRoleMenuRequest.roleButton())))) {
                         sysRole.setDefaultPage(editRoleMenuRequest.defaultPage());
                         baseMapper.update(sysRole);
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleMenuRequest.roleCode()));

@@ -20,5 +20,4 @@ public class GetUserMenuResponse implements Serializable {
     private List<SysMenuDto.Records> records;
     private List<String> buttons;
     private List<String> defaultPageList;
-
 }

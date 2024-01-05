@@ -76,7 +76,6 @@
                        and sys_button.button_code = sys_role_button.sys_button_button_code)
     </select>
     <select id="findMenuList" resultMap="SysMenuDto">
-        
         select *
         from sys_menu
         where exists(select *

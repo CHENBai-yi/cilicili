@@ -23,6 +23,8 @@ public interface SysUserRoleService extends IService<SysUserRoleEntity> {
      */
     R queryById(final String sysRoleRoleCode);
 
+    SysUserRoleEntity queryByUsername(String sysUserUsername);
+
     /**
      * 全查询
      *

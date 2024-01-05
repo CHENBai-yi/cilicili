@@ -34,7 +34,8 @@ public class DbCheckerController {
     @PostMapping("check-db")
     public R checkDb() {
         return Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
-                .map(item -> R.yes("数据库初始化成功！").setData("need_init", false)).orElse(R.yes("数据库未准备好！").setData("need_init", true));
+                .map(item -> R.yes("数据库初始化成功！").setData("need_init", false))
+                .orElse(R.yes("数据库未准备好！").setData("need_init", true));
     }
 
     @PostMapping("init-db")

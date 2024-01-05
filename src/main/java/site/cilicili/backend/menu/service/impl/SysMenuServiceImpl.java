@@ -26,7 +26,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Service("sysMenuService")
-@CacheConfig(cacheNames = {"SysUser"})
+@CacheConfig(cacheNames = {"SysMenu"})
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity> implements SysMenuService {
 
     /**
@@ -89,7 +89,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity
 
     @Override
     @Transactional(readOnly = true)
-    public R getRoleMenuList(final GetMenuListRequest sysMenuListRequest) {
+    @Cacheable(key = "#root.methodName")
+    public R getMenuList(final GetMenuListRequest sysMenuListRequest) {
         return Optional.ofNullable(baseMapper.getRoleMenuList(sysMenuListRequest))
                 .map(records -> R.yes("Success")
                         .setData(SysMenuDto.builder()
@@ -101,10 +102,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity
                 .orElse(R.no("Fail"));
     }
 
-    @Cacheable(key = "#root.methodName")
+    @Cacheable(key = "#root.args[0].roleCode")
     @Transactional(readOnly = true)
     @Override
     public R getUserMenu(final AuthUserDetails authUserDetails) {
-        return Optional.ofNullable(baseMapper.getUserMenu(authUserDetails.getusername())).map(item -> R.yes("获取用户菜单成功.").setData(item)).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(baseMapper.getUserMenu(authUserDetails.getusername()))
+                .map(item -> R.yes("获取用户菜单成功.").setData(item))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

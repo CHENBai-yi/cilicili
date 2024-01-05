@@ -54,7 +54,7 @@ public interface SysMenuService extends IService<SysMenuEntity> {
      */
     R deleteById(final Long id);
 
-    R getRoleMenuList(GetMenuListRequest sysMenuListRequest);
+    R getMenuList(GetMenuListRequest sysMenuListRequest);
 
     R getUserMenu(AuthUserDetails authUserDetails);
 }

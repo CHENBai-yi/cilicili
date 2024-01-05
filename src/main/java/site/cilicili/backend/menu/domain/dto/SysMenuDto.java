@@ -1,6 +1,7 @@
 package site.cilicili.backend.menu.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -28,6 +29,7 @@ import java.util.List;
 @Builder
 @Accessors(chain = true)
 @Schema(description = "SysMenu数据传输类")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SysMenuDto implements Serializable {
     private static final long serialVersionUID = -96896152350797501L;
     private List<Records> records;

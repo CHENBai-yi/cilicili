@@ -12,11 +12,17 @@ import java.util.Collection;
 public class AuthUserDetails implements UserDetails {
     private final Long id;
     private final String username;
+    private final String roleCode;
 
     @Builder
-    public AuthUserDetails(Long id, String username) {
+    public AuthUserDetails(Long id, String username, String roleCode) {
         this.id = id;
         this.username = username;
+        this.roleCode = roleCode;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
     }
 
     public Long getId() {
