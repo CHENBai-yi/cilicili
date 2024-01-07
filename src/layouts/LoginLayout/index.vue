@@ -24,7 +24,7 @@
         <div class="power-show">
           {{ gqaFrontend.subTitle }}
           is powered by&nbsp;
-          <a :style="{ color: $q.dark.isActive ? '#fff' : '#000' }" href="https://github.com/Junvary/gin-quasar-admin"
+          <a :style="{ color: $q.dark.isActive ? '#fff' : '#000' }" href="https://gitee.com/cby-cby/cilicili"
              style="text-decoration: none"
              target="_blank">
             Gin-Quasar-Admin
@@ -36,8 +36,8 @@
             {{ $t('Version') }}{{ $t('Info') }}
             <gqa-version-menu/>
           </q-btn>
-          <q-btn flat label="Github" @click="openLink('https://github.com/Junvary/gin-quasar-admin')"/>
-          <q-btn flat label="Gitee" @click="openLink('https://gitee.com/junvary/gin-quasar-admin')"/>
+          <q-btn flat label="Github" @click="openLink('https://gitee.com/cby-cby/cilicili')"/>
+          <q-btn flat label="Gitee" @click="openLink('https://gitee.com/cby-cby/cilicili')"/>
         </div>
         <div class="language-show">
           <GqaLanguage style="width: 100%;"/>

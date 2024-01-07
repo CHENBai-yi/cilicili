@@ -4,6 +4,7 @@
   "description": "A full-featured management system based on Quasar2, Vue3, SpringBoot, cilicili, CILICILI",
   "productName": "Cilicili后台管理系统",
   "author": "chenbaiyi.work@gmail.com",
+  "giteeToken": "1bff6cced60b6ccfd1a1b839c1e5f27f",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",

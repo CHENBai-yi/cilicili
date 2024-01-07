@@ -42,6 +42,6 @@ export const AllowList = [
 // 控制台打印内容
 export const GqaConsoleLogo = () => {
   console.info('Welcome to Gin-Quasar-Admin!')
-  console.info('Github: https://github.com/Junvary/gin-quasar-admin ')
+  console.info('Github: https://gitee.com/cby-cby/cilicili ')
   console.info('Expecting Your Star!')
 }

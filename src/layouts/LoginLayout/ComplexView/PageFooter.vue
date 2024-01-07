@@ -4,7 +4,7 @@
       <div class="row items-center justify-center" style="width: 100%; height: 100%">
         {{ gqaFrontend.subTitle }}
         is powered by&nbsp;
-        <a href="https://github.com/Junvary/gin-quasar-admin" style="color: white; text-decoration: none;"
+        <a href="https://gitee.com/cby-cby/cilicili" style="color: white; text-decoration: none;"
            target="_blank">
           Gin-Quasar-Admin
           {{ gqaVersion }}

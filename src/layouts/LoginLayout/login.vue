@@ -61,17 +61,7 @@
         </div>
         <div class="col-12 self-end ">
           <GqaLanguage class="power-show " style="width: 90px"/>
-          <div class="power-show">
-            {{ gqaFrontend.subTitle }}
-            is powered by&nbsp;
-            <a :style="{ color: $q.dark.isActive ? '#fff' : '#000' }"
-               href="https://github.com/Junvary/gin-quasar-admin"
-               style="text-decoration: none"
-               target="_blank">
-              Gin-Quasar-Admin
-              {{ gqaVersion }}
-            </a>
-          </div>
+          <PageFooter/>
         </div>
       </q-page>
 
@@ -86,6 +76,7 @@ import {computed, onBeforeMount, ref} from 'vue'
 import DarkTheme from 'src/components/GqaTheme/DarkTheme.vue';
 import {randomWelcome} from 'src/utils/welcome'
 import DbInit from './myInitDbView/index.vue'
+import PageFooter from 'src/layouts/MainLayout/PageFooter.vue'
 import {useStorageStore} from 'src/stores/storage'
 import {useQuasar} from 'quasar'
 import {postAction} from "src/api/manage";

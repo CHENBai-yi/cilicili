@@ -25,6 +25,7 @@
 import {onMounted, ref} from 'vue';
 import axios from 'axios'
 import useCommon from 'src/composables/useCommon'
+import packageJson from '/package.json'
 
 const {showDateTime} = useCommon()
 
@@ -40,7 +41,7 @@ const columns = [
 const dataList = ref([])
 onMounted(() => {
   loading.value = true
-  githubGet.get('https://gitee.com/api/v5/repos/cby-cby/cilicili/commits?access_token=b83162d055c78bc145b5a588de341d16&page=1&per_page=20').then(res => {
+  githubGet.get(`https://gitee.com/api/v5/repos/cby-cby/cilicili/commits?access_token=${packageJson.giteeToken}&page=1&per_page=20`).then(res => {
     dataList.value = res.data
   }).finally(() => {
     loading.value = false

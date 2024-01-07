@@ -86,6 +86,7 @@ import TimeLine from './charts/TimeLine.vue'
 import axios from 'axios'
 import {onMounted, ref} from 'vue';
 import {runSequentialPromises} from 'quasar'
+import packageJson from '/package.json'
 
 const githubGet = axios.create()
 const loading = ref(false)
@@ -93,7 +94,7 @@ const license = ref('MIT')
 onMounted(() => {
   loading.value = true
   runSequentialPromises([
-    () => githubGet.get("https://gitee.com/api/v5/repos/cby-cby/cilicili/license?access_token=0f029ed1afcf1d532d37f5d5800a6994"),
+    () => githubGet.get(`https://gitee.com/api/v5/repos/cby-cby/cilicili/license?access_token=${packageJson.giteeToken}`),
     // 更多接口
   ]).then(resultAggregator => {
     license.value = resultAggregator[0].value.data.license

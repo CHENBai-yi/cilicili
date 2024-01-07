@@ -17,7 +17,6 @@ const {presetUno} = require('unocss')
 module.exports = configure(function (ctx) {
   return {
 
-
     // https://v2.quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
 
@@ -79,7 +78,7 @@ module.exports = configure(function (ctx) {
           // 测试代理地址
           ? "http://127.0.0.1:8889/"
           // 正式代理地址
-          : "http://8.217.182.161/api/"
+          : "http://cilicili.site/api/"
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

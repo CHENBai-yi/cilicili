@@ -106,28 +106,37 @@ export default boot(({app, router}) => {
         userStore.HandleLogout()
         router.push({name: 'login'})
       })
-    }
-    //Unauthorized
+    } else
+      //Unauthorized
     if (error + '' === 'Error: Request failed with status code 401') {
       Notify.create({
         type: 'negative',
         message: error.config.url + i18n.global.t('Unauthorized'),
       })
-    }
-    // timeout
+    } else
+      // timeout
     if (error + '' === 'Error: timeout of 40000ms exceeded') {
       Notify.create({
         type: 'negative',
         message: i18n.global.t('Operation') + i18n.global.t('Timeout')
       })
-    }
-    // network error
+    } else
+      // network error
     if (error + '' === 'Error: Network Error') {
+      Notify.create({
+        type: 'negative',
+        message: error.message
+      })
       router.push({name: 'notFound'})
     } else if (error.response && error.response.status === 404) {
       Notify.create({
         type: 'negative',
         message: i18n.global.t('Request') + i18n.global.t('Address') + i18n.global.t('NotFound') + ' ' + error.response.request.responseURL,
+      })
+    } else {
+      Notify.create({
+        type: 'negative',
+        message: error.response.request.responseURL + ' ' + error.message
       })
     }
     return Promise.reject(error)

@@ -23,7 +23,7 @@
             </p>
             <div class="buttons">
               <q-btn v-if="gqaFrontend.showGit === 'yesNo_yes'" color="primary" push
-                     @click="openLink('https://gitee.com/junvary/gin-quasar-admin')">
+                     @click="openLink('https://gitee.com/cby-cby/cilicili')">
                 Gitee
               </q-btn>
 
@@ -32,7 +32,7 @@
               </q-btn>
 
               <q-btn v-if="gqaFrontend.showGit === 'yesNo_yes'" color="primary" push
-                     @click="openLink('https://github.com/Junvary/gin-quasar-admin')">
+                     @click="openLink('https://gitee.com/cby-cby/cilicili')">
                 Github
               </q-btn>
             </div>
