@@ -1,5 +1,7 @@
 package site.cilicili.common.security.jwt;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +21,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
+import site.cilicili.backend.config.service.SysConfigBackendService;
+import site.cilicili.common.constant.ConfigBackend.BackendConfigItem;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.filter.JWTAuthFilter;
+
+import java.util.Optional;
 
 /**
  * @author BaiYiChen
@@ -39,7 +48,9 @@ public class WebSecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, SysConfigBackendService sysConfigBackendService) throws Exception {
+        final String location = Optional.ofNullable(sysConfigBackendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigBackendEntity>().eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(), BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
+                .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom()).filter(StrUtil::isNotBlank).orElse(sysConfigBackendEntity.getItemDefault())).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
         http.cors(cors -> {
                     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -58,7 +69,7 @@ public class WebSecurityConfiguration {
                 .formLogin(FormLoginConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequests -> {
                     authorizeHttpRequests
-                            .requestMatchers(AntPathRequestMatcher.antMatcher("/public/**"))
+                            .requestMatchers(AntPathRequestMatcher.antMatcher(String.format("/%1$s/**", location)), AntPathRequestMatcher.antMatcher("/public/**"))
                             .permitAll()
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**"))
                             .permitAll()

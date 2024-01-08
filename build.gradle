@@ -76,6 +76,28 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.5.7.Final' // 替换为您使用的 Hibernate 版本
 
 }
+// 配置bootJar进行打包
+// 清除现有的lib目录
+task clearJar(type: Delete) {
+    delete "$buildDir\\libs\\lib"
+}
+
+// 将依赖包复制到lib目录
+task copyJar(type: Copy, dependsOn: 'clearJar') {
+    from configurations.runtimeClasspath
+    into "$buildDir\\libs\\lib"
+}
+//bootJar {
+//    // 例外所有的jar
+//    excludes = ["*.jar"]
+//    // lib目录的清除和复制任务
+//    dependsOn clearJar
+//    dependsOn copyJar
+//    // 指定依赖包的路径
+//    manifest {
+//        attributes 'Class-Path': configurations.runtimeClasspath.files.collect { "lib/$it.name" }.join(' ')
+//    }
+//}
 sourceSets {
     main {
         resources {

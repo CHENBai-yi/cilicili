@@ -66,4 +66,5 @@ public interface SysUserService extends IService<SysUserEntity> {
     R editUser(AddUserRequest.Records editUserRequest);
 
     R queryUserById(final ResetPasswordAndDeleteUserRequest id);
+
 }

@@ -82,6 +82,7 @@
                      from sys_role_menu
                      where sys_role_role_code = #{roleCode}
                        and sys_role_menu.sys_menu_name = sys_menu.name)
+        order by id
     </select>
     <select id="findDefaultPageList" resultType="string">
         select default_page

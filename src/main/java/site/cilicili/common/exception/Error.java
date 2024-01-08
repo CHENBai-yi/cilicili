@@ -19,6 +19,7 @@ public enum Error {
     FAVORITE_NOT_FOUND("favorite not found", HttpStatus.NOT_FOUND),
     COMMENT_NOT_FOUND("comment not found", HttpStatus.NOT_FOUND),
     COMMON_EXCEPTION("服务器有点呆。。。", HttpStatus.NOT_FOUND),
+    EXCEED_UPLOAD_MAXSIZE("上传的文件太大.", HttpStatus.NOT_FOUND),
     TOKEN_INVALIED("token已失效，登录过期", HttpStatus.NOT_FOUND);
 
     private final String message;

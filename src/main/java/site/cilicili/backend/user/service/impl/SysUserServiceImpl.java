@@ -195,4 +195,5 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
                 .map(sysUserEntity -> R.yes("查找成功.").setRecords(sysUserEntity))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
+
 }
