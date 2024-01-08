@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -36,9 +37,11 @@ public class SysUserEntity extends BaseEntity implements Serializable {
     private Long sort;
 
     @Schema(description = "系统内置")
+    @JacksonInject("stable")
     private String stable;
 
     @Schema(description = "状态")
+    @JacksonInject("status")
     private String status;
 
     @Schema(description = "备注描述")

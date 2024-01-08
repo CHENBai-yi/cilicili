@@ -24,7 +24,9 @@ public class FileUploadController {
     private final UploadService uploadService;
 
     @PostMapping("upload/upload-avatar")
-    public R uploadUserAvatar(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestPart(name = "file") MultipartFile[] multipartFile) {
+    public R uploadUserAvatar(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestPart(name = "file") MultipartFile[] multipartFile) {
         return uploadService.uploadUserAvatar(authUserDetails, multipartFile);
     }
 }

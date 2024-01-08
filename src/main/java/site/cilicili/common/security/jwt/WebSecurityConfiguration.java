@@ -48,9 +48,18 @@ public class WebSecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, SysConfigBackendService sysConfigBackendService) throws Exception {
-        final String location = Optional.ofNullable(sysConfigBackendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigBackendEntity>().eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(), BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
-                .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom()).filter(StrUtil::isNotBlank).orElse(sysConfigBackendEntity.getItemDefault())).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, SysConfigBackendService sysConfigBackendService)
+            throws Exception {
+        final String location = Optional.ofNullable(sysConfigBackendService
+                        .getBaseMapper()
+                        .selectOne(new QueryWrapper<SysConfigBackendEntity>()
+                                .eq(
+                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
+                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
+                .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
+                        .filter(StrUtil::isNotBlank)
+                        .orElse(sysConfigBackendEntity.getItemDefault()))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
         http.cors(cors -> {
                     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -69,7 +78,9 @@ public class WebSecurityConfiguration {
                 .formLogin(FormLoginConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequests -> {
                     authorizeHttpRequests
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(String.format("/%1$s/**", location)), AntPathRequestMatcher.antMatcher("/public/**"))
+                            .requestMatchers(
+                                    AntPathRequestMatcher.antMatcher(String.format("/%1$s/**", location)),
+                                    AntPathRequestMatcher.antMatcher("/public/**"))
                             .permitAll()
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**"))
                             .permitAll()

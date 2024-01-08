@@ -29,7 +29,5 @@ public enum BackendConfigItem {
         this.des = des;
         this.item = item;
         this.key = key;
-
     }
-
 }

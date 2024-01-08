@@ -1,14 +1,15 @@
 package site.cilicili.backend.role.controller;
 
-import com.fasterxml.jackson.databind.InjectableValues;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import site.cilicili.backend.role.domain.dto.*;
 import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.role.service.SysRoleService;
@@ -31,7 +32,6 @@ public class SysRoleController {
      */
     private final SysRoleService sysRoleService;
 
-    private final ObjectMapper objectMapper;
 
     /**
      * 新增数据
@@ -47,15 +47,6 @@ public class SysRoleController {
         return this.sysRoleService.insert(sysRole);
     }
 
-    @ModelAttribute
-    public void addRoleDefaultValue() {
-        final InjectableValues.Std std = new InjectableValues.Std();
-        std.addValue("status", "onOff_on");
-        std.addValue("stable", "yesNo_no");
-        std.addValue("deptDataPermissionType", "deptDataPermissionType_user");
-        std.addValue("defaultPage", "dashboard");
-        objectMapper.setInjectableValues(std);
-    }
 
     /**
      * 根据体条件查询

@@ -118,7 +118,6 @@ public class SysUserController {
     public R getUserList(@RequestBody final GetUserListRequest getUserListRequest) {
         return sysUserService.getUserList(getUserListRequest);
     }
-
     /**
      * 添加用户
      *
