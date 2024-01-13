@@ -91,4 +91,6 @@ public interface SysDeptMapper extends BaseMapper<SysDeptEntity> {
     int deleteById(Long id);
 
     List<SysDeptDto.DeptListDto> getDeptList(GetDeptListRequest deptListRequest);
+
+    SysDeptDto.DeptListDto getDeptById(Long id);
 }

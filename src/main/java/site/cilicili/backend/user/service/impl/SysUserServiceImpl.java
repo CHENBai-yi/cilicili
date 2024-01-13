@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 import site.cilicili.backend.config.service.SysConfigBackendService;
 import site.cilicili.backend.dept.domain.pojo.SysDeptUserEntity;
 import site.cilicili.backend.dept.service.SysDeptUserService;
-import site.cilicili.backend.user.domain.dto.AddUserRequest;
-import site.cilicili.backend.user.domain.dto.GetUserListRequest;
-import site.cilicili.backend.user.domain.dto.ResetPasswordAndDeleteUserRequest;
-import site.cilicili.backend.user.domain.dto.UserListDto;
+import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.mapper.SysUserMapper;
 import site.cilicili.backend.user.service.SysUserService;
@@ -193,6 +191,31 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     public R queryUserById(final ResetPasswordAndDeleteUserRequest id) {
         return Optional.ofNullable(baseMapper.getUserById(id.id()))
                 .map(sysUserEntity -> R.yes("查找成功.").setRecords(sysUserEntity))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public R changeNickname(final AuthUserDetails authUserDetails, final ChangeNicknameRequest changeNicknameRequest) {
+        return Optional.ofNullable(baseMapper.selectById(authUserDetails.getId()))
+                .filter(sysUserEntity -> {
+                    sysUserEntity.setNickname(changeNicknameRequest.nickname());
+                    return updateById(sysUserEntity);
+                }).map(sysUserEntity -> R.yes(String.format("%1$s修改昵称成功.", authUserDetails.getusername())))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public R changePassword(final AuthUserDetails authUserDetails, final ChangePasswordRequest changePasswordRequest) {
+        return Optional.ofNullable(baseMapper.selectById(authUserDetails.getId()))
+                .filter(sysUserEntity -> changePasswordRequest.new_password_1().equals(changePasswordRequest.new_password_2()))
+                .filter(sysUserEntity -> passwordEncoder.matches(changePasswordRequest.old_password(), sysUserEntity.getPassword()))
+                .filter(sysUserEntity -> {
+                    sysUserEntity.setPassword(passwordEncoder.encode(changePasswordRequest.new_password_1()));
+                    return updateById(sysUserEntity);
+                })
+                .map(sysUserEntity -> R.yes(String.format("%1$s修改密码成功.", authUserDetails.getusername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

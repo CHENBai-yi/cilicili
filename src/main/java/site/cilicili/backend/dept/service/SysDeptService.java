@@ -1,7 +1,8 @@
 package site.cilicili.backend.dept.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import site.cilicili.backend.dept.domain.dto.GetDeptListRequest;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.dept.domain.dto.*;
 import site.cilicili.backend.dept.domain.pojo.SysDeptEntity;
 import site.cilicili.common.util.R;
 
@@ -54,4 +55,14 @@ public interface SysDeptService extends IService<SysDeptEntity> {
     R deleteById(final Long id);
 
     R getDeptList(GetDeptListRequest deptListRequest);
+
+    R addDept(AddDeptRequest addDeptRequest);
+
+    R deleteDeptById(AuthUserDetails authUserDetails, QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest);
+
+    R queryDeptById(AuthUserDetails authUserDetails, QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest);
+
+    R addDeptUser(AddDeptUserRequest addDeptUserRequest);
+
+    R removeDeptUser(RemoveDeptUserRequest removeDeptUserRequest);
 }

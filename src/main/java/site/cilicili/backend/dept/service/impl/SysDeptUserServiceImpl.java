@@ -90,4 +90,24 @@ public class SysDeptUserServiceImpl extends ServiceImpl<SysDeptUserMapper, SysDe
     public boolean updateDeptUserList(final List<SysDeptUserEntity> toList) {
         return baseMapper.updateDeptUserList(toList) > 0;
     }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public boolean insertSysDeptUserList(final List<SysDeptUserEntity> toList) {
+        return baseMapper.insertSysDeptUserList(toList) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public boolean removeByDeptCode(final String deptCode) {
+        return baseMapper.deleteById(deptCode) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public boolean removeDeptUser(final SysDeptUserEntity r) {
+        return baseMapper.removeDeptUser(r) > 0;
+    }
+
+
 }

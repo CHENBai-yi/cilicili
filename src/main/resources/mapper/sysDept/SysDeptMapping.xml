@@ -203,6 +203,12 @@
             parent_code=#{deptCode}
         </where>
     </select>
+    <select id="getDeptById" resultMap="DeptListDto">
+        select * from sys_dept
+        <where>
+            id=#{id}
+        </where>
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

@@ -1,6 +1,5 @@
 package site.cilicili.backend.menu.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +14,6 @@ import java.util.List;
  * @author BaiYiChen
  */
 @Data
-@JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
 public class GetUserMenuResponse implements Serializable {
     private List<SysMenuDto.Records> records;
     private List<String> buttons;

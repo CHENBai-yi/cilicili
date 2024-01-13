@@ -8,15 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import site.cilicili.common.config.dynamicDb.MyDataSourceList;
+import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.db.domain.mapper.DbSourceToDruidDataSource;
 import site.cilicili.common.db.domain.pojo.DatabaseConnection;
 import site.cilicili.common.db.service.DatabaseConnectionService;
+import site.cilicili.common.util.DbUtils;
 
 import javax.sql.DataSource;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,6 +32,7 @@ import java.util.stream.Collectors;
 public class DbInitialization implements CommandLineRunner {
     private final DatabaseConnectionService databaseConnectionService;
     private final MyDataSourceList dataSourceList;
+    private final DbChangeConfig dbChangeConf;
 
     /**
      * @param args incoming main method arguments
@@ -69,8 +69,7 @@ public class DbInitialization implements CommandLineRunner {
                                             druidDataSource.setAsyncInit(true);
                                             druidDataSource.setKillWhenSocketReadTimeout(true);
                                             druidDataSource.setValidationQuery("select 1;");
-                                            druidDataSource.setConnectionErrorRetryAttempts(10);
-                                            druidDataSource.setNotFullTimeoutRetryCount(10);
+                                            druidDataSource.setConnectionErrorRetryAttempts(3);
                                             druidDataSource.setFailFast(true);
                                             return druidDataSource;
                                         },
@@ -81,7 +80,7 @@ public class DbInitialization implements CommandLineRunner {
                             dataSourceList.setTargetDataSources(dataSourceMap);
                             dataSourceList.setDefaultTargetDataSource(CollUtil.getFirst(dataSourceMap.values()));
                             dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
-                            flag = ObjectUtil.isNotNull(dataSourceList.getConnection());
+                            flag = Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner())) || ObjectUtil.isNotNull(dataSourceList.getConnection());
                         }
                     } catch (Exception e) {
                         log.error(e.getMessage());

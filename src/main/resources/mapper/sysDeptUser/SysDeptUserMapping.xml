@@ -65,13 +65,23 @@
             ()
         </foreach>
         on duplicate key update
-    
+
     </insert>
     <insert id="insertDeptUserList">
         <foreach collection="toList" item="item" separator=";">
             insert into sys_dept_user values (#{item.sysDeptDeptCode},#{item.sysUserUsername}) on duplicate key update
             sys_user_username=#{item.sysUserUsername}
         </foreach>
+    </insert>
+    
+    <insert id="insertSysDeptUserList">
+        insert into sys_dept_user(sys_dept_dept_code,sys_user_username) values
+        <foreach collection="toList" item="e" separator=",">
+            (#{e.sysDeptDeptCode},#{e.sysUserUsername})
+        </foreach>
+        on duplicate key update
+        sys_dept_dept_code=values(sys_dept_dept_code),
+        sys_user_username=values(sys_user_username)
     </insert>
     
     <!--通过主键修改数据-->
@@ -93,6 +103,18 @@
         delete
         from sys_dept_user
         where sys_dept_dept_code = #{sysDeptDeptCode}
+    </delete>
+    <delete id="removeDeptUser">
+        delete
+        from sys_dept_user
+        <where>
+            <if test="sysDeptDeptCode!=null and sysDeptDeptCode!=''">
+                sys_dept_dept_code = #{sysDeptDeptCode}
+            </if>
+            <if test="sysUserUsername!=null and sysUserUsername!=''">
+                and sys_user_username=#{sysUserUsername}
+            </if>
+        </where>
     </delete>
 
 

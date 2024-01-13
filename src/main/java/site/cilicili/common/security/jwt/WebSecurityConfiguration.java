@@ -23,10 +23,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 import site.cilicili.backend.config.service.SysConfigBackendService;
+import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.constant.ConfigBackend.BackendConfigItem;
-import site.cilicili.common.exception.AppException;
-import site.cilicili.common.exception.Error;
 import site.cilicili.common.filter.JWTAuthFilter;
+import site.cilicili.common.util.DbUtils;
 
 import java.util.Optional;
 
@@ -48,18 +48,7 @@ public class WebSecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, SysConfigBackendService sysConfigBackendService)
-            throws Exception {
-        final String location = Optional.ofNullable(sysConfigBackendService
-                        .getBaseMapper()
-                        .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                .eq(
-                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
-                .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
-                        .filter(StrUtil::isNotBlank)
-                        .orElse(sysConfigBackendEntity.getItemDefault()))
-                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, SysConfigBackendService sysConfigBackendService, DbChangeConfig dbChangeConf) throws Exception {
         http.cors(cors -> {
                     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -73,26 +62,15 @@ public class WebSecurityConfiguration {
                     // 配置允许跨域访问的url
                     source.registerCorsConfiguration("/**", corsConfiguration);
                     cors.configurationSource(source);
-                })
-                .csrf(CsrfConfigurer::disable)
-                .formLogin(FormLoginConfigurer::disable)
-                .authorizeHttpRequests(authorizeHttpRequests -> {
-                    authorizeHttpRequests
-                            .requestMatchers(
-                                    AntPathRequestMatcher.antMatcher(String.format("/%1$s/**", location)),
-                                    AntPathRequestMatcher.antMatcher("/public/**"))
-                            .permitAll()
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**"))
-                            .permitAll()
-                            .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
-                            .permitAll()
-                            .anyRequest()
-                            .authenticated();
-                })
-                .exceptionHandling(exceptionHandling -> {
+                }).csrf(CsrfConfigurer::disable).formLogin(FormLoginConfigurer::disable).authorizeHttpRequests(authorizeHttpRequests -> {
+                    Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).ifPresent(it -> {
+                        final String location = Optional.ofNullable(sysConfigBackendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigBackendEntity>().eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(), BackendConfigItem.UPLOADAVATARSAVEPATH.getItem()))).map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom()).filter(StrUtil::isNotBlank).orElse(sysConfigBackendEntity.getItemDefault())).orElse("avatar");
+                        authorizeHttpRequests.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", location))).permitAll();
+                    });
+                    authorizeHttpRequests.requestMatchers(AntPathRequestMatcher.antMatcher("/public/**")).permitAll().requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**")).permitAll().requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll().anyRequest().authenticated();
+                }).exceptionHandling(exceptionHandling -> {
                     exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-                })
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                }).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 // 在这里禁用X-Frame-Options,以便在网页上访问H2数据库
                 .headers(headers -> {
                     headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);

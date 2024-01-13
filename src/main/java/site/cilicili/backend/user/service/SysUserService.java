@@ -1,9 +1,8 @@
 package site.cilicili.backend.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import site.cilicili.backend.user.domain.dto.AddUserRequest;
-import site.cilicili.backend.user.domain.dto.GetUserListRequest;
-import site.cilicili.backend.user.domain.dto.ResetPasswordAndDeleteUserRequest;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.common.util.R;
 
@@ -66,4 +65,8 @@ public interface SysUserService extends IService<SysUserEntity> {
     R editUser(AddUserRequest.Records editUserRequest);
 
     R queryUserById(final ResetPasswordAndDeleteUserRequest id);
+
+    R changeNickname(AuthUserDetails authUserDetails, ChangeNicknameRequest changeNicknameRequest);
+
+    R changePassword(AuthUserDetails authUserDetails, ChangePasswordRequest changePasswordRequest);
 }

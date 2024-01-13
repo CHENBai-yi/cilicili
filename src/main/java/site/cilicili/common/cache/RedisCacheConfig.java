@@ -1,11 +1,15 @@
 package site.cilicili.common.cache;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.redisson.api.RBloomFilter;
+import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
@@ -22,8 +26,9 @@ import site.cilicili.common.util.R;
  * @since 2023/12/4
  */
 @EnableConfigurationProperties(CacheProperties.class)
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableCaching
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class RedisCacheConfig {
 
     /**
@@ -39,7 +44,6 @@ public class RedisCacheConfig {
             RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration redisCacheConfiguration) {
         return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration)
-                .transactionAware()
                 .build();
     }
 
@@ -71,5 +75,12 @@ public class RedisCacheConfig {
         // 覆盖默认key双冒号  CacheKeyPrefix#prefixed
         config = config.computePrefixWith(name -> name + ":");
         return config;
+    }
+
+    @Bean
+    public RBloomFilter<R> rrBloomFilter(RedissonClient redissonClient) {
+        RBloomFilter<R> rBloomFilter = redissonClient.getBloomFilter("CILICILIBloom");
+        rBloomFilter.tryInit(100000, 0.05);
+        return rBloomFilter;
     }
 }

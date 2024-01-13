@@ -13,11 +13,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.exception.AppExceptionHandler;
 import site.cilicili.common.security.jwt.AuthenticationProvider;
+import site.cilicili.common.util.DbUtils;
 import site.cilicili.common.util.JwtUtils;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -31,6 +34,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     private final AuthenticationProvider authenticationProvider;
     private final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
     private final AppExceptionHandler appExceptionHandler;
+    private final DbChangeConfig dbChangeConf;
 
     @Override
     protected void doFilterInternal(
@@ -38,7 +42,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException, ExpiredJwtException {
         try {
             Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
-                    .filter(authHeader -> authHeader.startsWith(TOKEN_PREFIX))
+                    .filter(authHeader -> Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner())) && authHeader.startsWith(TOKEN_PREFIX))
                     .map(authHeader -> jwtUtils.refreshJwt(authHeader.substring(TOKEN_PREFIX.length()), response))
                     .filter(jwtUtils::validateToken)
                     .map(jwtUtils::getSub)

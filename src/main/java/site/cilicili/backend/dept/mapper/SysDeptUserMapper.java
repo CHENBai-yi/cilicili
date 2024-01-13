@@ -91,4 +91,8 @@ public interface SysDeptUserMapper extends BaseMapper<SysDeptUserEntity> {
     int insertDeptUserList(List<SysDeptUserEntity> toList);
 
     int updateDeptUserList(List<SysDeptUserEntity> toList);
+
+    int insertSysDeptUserList(List<SysDeptUserEntity> toList);
+
+    int removeDeptUser(SysDeptUserEntity r);
 }

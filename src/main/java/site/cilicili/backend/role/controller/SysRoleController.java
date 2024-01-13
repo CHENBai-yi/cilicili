@@ -32,7 +32,6 @@ public class SysRoleController {
      */
     private final SysRoleService sysRoleService;
 
-
     /**
      * 新增数据
      *
@@ -46,7 +45,6 @@ public class SysRoleController {
     public R addRole(final @RequestBody SysRoleEntity sysRole) {
         return this.sysRoleService.insert(sysRole);
     }
-
 
     /**
      * 根据体条件查询

@@ -57,4 +57,10 @@ public interface SysDeptUserService extends IService<SysDeptUserEntity> {
     boolean insertDeptUserList(List<SysDeptUserEntity> toList);
 
     boolean updateDeptUserList(List<SysDeptUserEntity> toList);
+
+    boolean insertSysDeptUserList(List<SysDeptUserEntity> toList);
+
+    boolean removeByDeptCode(String deptCode);
+
+    boolean removeDeptUser(SysDeptUserEntity r);
 }

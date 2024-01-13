@@ -11,9 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.menu.service.SysMenuService;
-import site.cilicili.backend.user.domain.dto.AddUserRequest;
-import site.cilicili.backend.user.domain.dto.GetUserListRequest;
-import site.cilicili.backend.user.domain.dto.ResetPasswordAndDeleteUserRequest;
+import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.service.SysUserService;
 import site.cilicili.common.util.R;
@@ -34,6 +32,13 @@ public class SysUserController {
      * 服务对象
      */
     private final SysUserService sysUserService;
+    /**
+     * 获取用户菜单
+     *
+     * @param resetPasswordAndDeleteUserRequest 请求参数
+     * @return 用户列表
+     */
+    private final SysMenuService sysMenuService;
 
     /**
      * 全查询
@@ -118,6 +123,7 @@ public class SysUserController {
     public R getUserList(@RequestBody final GetUserListRequest getUserListRequest) {
         return sysUserService.getUserList(getUserListRequest);
     }
+
     /**
      * 添加用户
      *
@@ -191,19 +197,40 @@ public class SysUserController {
         return sysUserService.resetPassword(resetPasswordAndDeleteUserRequest);
     }
 
-    /**
-     * 获取用户菜单
-     *
-     * @param resetPasswordAndDeleteUserRequest 请求参数
-     * @return 用户列表
-     */
-    private final SysMenuService sysMenuService;
-
     @Operation(
             summary = "获取用户菜单",
             parameters = {@Parameter(description = "sysUser 实体")})
     @PostMapping("get-user-menu")
     public R getUserMenu(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return sysMenuService.getUserMenu(authUserDetails);
+    }
+
+    /**
+     * 修改用户名
+     *
+     * @param changeNicknameRequest 请求参数
+     * @return R
+     */
+    @Operation(
+            summary = "修改用户名",
+            parameters = {@Parameter(description = "sysUser 实体")})
+    @PostMapping("change-nickname")
+    public R changeNickname(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated ChangeNicknameRequest changeNicknameRequest) {
+        return sysUserService.changeNickname(authUserDetails, changeNicknameRequest);
+    }
+
+    /**
+     * 修改用户密码
+     *
+     * @param changePasswordRequest 请求参数
+     * @return R
+     */
+    @Operation(
+            summary = "修改用户密码",
+            parameters = {@Parameter(description = "sysUser 实体")})
+    @PostMapping("change-password")
+    public R changePassword(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
+        // return sysUserService.changePassword(authUserDetails,changePasswordRequest);
+        return R.no("aaa");
     }
 }

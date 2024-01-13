@@ -1,6 +1,7 @@
 package site.cilicili.backend.dept.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JacksonInject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,9 +35,10 @@ public class SysDeptEntity extends BaseEntity implements Serializable {
     @Schema(description = "排序")
     private Long sort;
 
+    @JacksonInject("stable")
     @Schema(description = "系统内置")
     private String stable;
-
+    @JacksonInject("status")
     @Schema(description = "状态")
     private String status;
 

@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
@@ -44,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @EnableAspectJAutoProxy
 @SpringBootApplication(
-        exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
+        exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, RabbitAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
 public class App {
     private final DbChangeConfig dbChangeConf;
 

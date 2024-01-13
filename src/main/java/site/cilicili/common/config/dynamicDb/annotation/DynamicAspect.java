@@ -55,6 +55,12 @@ public class DynamicAspect {
                 final String value = method.getDeclaredAnnotation(DBUSE.class).value();
                 DbThreadLocalContextHolder.setDbUse(value);
                 // log.info(method.getName() + "方法：切换到{}数据库", value);
+            } else {
+                if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
+                    DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackend());
+                } else if (StrUtil.isNotBlank(dbChangeConf.getBackendInner())) {
+                    DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackendInner());
+                }
             }
             return pjp.proceed(pjp.getArgs());
         } catch (Throwable e) {
