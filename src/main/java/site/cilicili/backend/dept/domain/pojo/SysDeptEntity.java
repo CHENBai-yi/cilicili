@@ -38,6 +38,7 @@ public class SysDeptEntity extends BaseEntity implements Serializable {
     @JacksonInject("stable")
     @Schema(description = "系统内置")
     private String stable;
+
     @JacksonInject("status")
     @Schema(description = "状态")
     private String status;

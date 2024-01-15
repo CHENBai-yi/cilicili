@@ -108,6 +108,4 @@ public class SysDeptUserServiceImpl extends ServiceImpl<SysDeptUserMapper, SysDe
     public boolean removeDeptUser(final SysDeptUserEntity r) {
         return baseMapper.removeDeptUser(r) > 0;
     }
-
-
 }

@@ -75,6 +75,17 @@
         on duplicate key update
         button_name = values(button_name)
     </insert>
+    <insert id="insertOrUpdate">
+        insert into sys_button(menu_name,button_name,button_code)
+        values
+        <foreach collection="buttons" item="entity" separator=",">
+            (#{entity.menuName},#{entity.buttonName},#{entity.buttonCode})
+        </foreach>
+        on duplicate key update
+        menu_name = values(menu_name),
+        button_name = values(button_name),
+        button_code = values(button_code)
+    </insert>
     
     <!--通过主键修改数据-->
     <update id="update">

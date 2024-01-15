@@ -115,16 +115,20 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDeptEntity
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public R deleteDeptById(final AuthUserDetails authUserDetails, final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
+    public R deleteDeptById(
+            final AuthUserDetails authUserDetails, final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
         return Optional.ofNullable(authUserDetails)
                 .map(r -> getById(queryAndDeleteDeptByIdRequest.id()))
-                .filter(r -> removeById(queryAndDeleteDeptByIdRequest.id()) && sysDeptUserService.removeByDeptCode(r.getDeptCode()))
-                .map(r -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername()))).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                .filter(r -> removeById(queryAndDeleteDeptByIdRequest.id())
+                        && sysDeptUserService.removeByDeptCode(r.getDeptCode()))
+                .map(r -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername())))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public R queryDeptById(final AuthUserDetails authUserDetails, final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
+    public R queryDeptById(
+            final AuthUserDetails authUserDetails, final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
         return Optional.ofNullable(authUserDetails)
                 .map(r -> baseMapper.getDeptById(queryAndDeleteDeptByIdRequest.id()))
                 .map(sysDeptEntity -> R.yes("查找成功.").setRecords(sysDeptEntity))
@@ -152,13 +156,11 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDeptEntity
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R removeDeptUser(final RemoveDeptUserRequest removeDeptUserRequest) {
-        return Optional.ofNullable(sysDeptUserService
-                        .getOne(new QueryWrapper<SysDeptUserEntity>()
-                                .eq("sys_dept_dept_code", removeDeptUserRequest.deptCode())
-                                .eq("sys_user_username", removeDeptUserRequest.username())))
+        return Optional.ofNullable(sysDeptUserService.getOne(new QueryWrapper<SysDeptUserEntity>()
+                        .eq("sys_dept_dept_code", removeDeptUserRequest.deptCode())
+                        .eq("sys_user_username", removeDeptUserRequest.username())))
                 .filter(sysDeptUserService::removeDeptUser)
                 .map(sysDeptUserEntity -> R.yes(String.format("%1$s移除成功.", sysDeptUserEntity.getSysUserUsername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
-
 }

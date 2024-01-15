@@ -156,6 +156,14 @@
     
     <select id="getApiList" resultMap="SysApiDto">
         select *from sys_api
+        <where>
+            <if test="apiGroup!=null and apiGroup!=''">
+                api_group=#{apiGroup}
+            </if>
+            <if test="apiMethod!=null and apiMethod!=''">
+                and api_method=#{apiMethod}
+            </if>
+        </where>
         <if test="sortBy!=null">
             order by #{sortBy}
             <if test="desc">desc</if>

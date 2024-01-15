@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.backend.button.domain.pojo.SysButtonEntity;
 import site.cilicili.common.util.R;
 
+import java.util.List;
+
 /**
  * (SysButton)表服务接口
  *
@@ -51,4 +53,6 @@ public interface SysButtonService extends IService<SysButtonEntity> {
      * @return 是否成功
      */
     R deleteById(final String menuName);
+
+    boolean insertOrUpdate(List<SysButtonEntity> button);
 }

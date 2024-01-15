@@ -1,6 +1,7 @@
 package site.cilicili.backend.menu.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JacksonInject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +30,11 @@ public class SysMenuEntity extends BaseEntity implements Serializable {
     private Long sort;
 
     @Schema(description = "系统内置")
+    @JacksonInject("stable")
     private String stable;
 
     @Schema(description = "状态")
+    @JacksonInject("status")
     private String status;
 
     @Schema(description = "备注描述")

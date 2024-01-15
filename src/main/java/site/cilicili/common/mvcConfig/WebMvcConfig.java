@@ -66,44 +66,45 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
-                .ifPresent(it -> {
-                    final String location = Optional.ofNullable(sysConfigBackendService
-                                    .getBaseMapper()
-                                    .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                            .eq(
-                                                    BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-                                                    BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
-                            .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
-                                    .filter(StrUtil::isNotBlank)
-                                    .orElse(sysConfigBackendEntity.getItemDefault()))
-                            .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
-                    registry.addResourceHandler(String.format("/%1$s/**", location))
-                            .addResourceLocations(String.format("file:%1$s/", location));
-                });
+        Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).ifPresent(it -> {
+            final String location = Optional.ofNullable(sysConfigBackendService
+                            .getBaseMapper()
+                            .selectOne(new QueryWrapper<SysConfigBackendEntity>()
+                                    .eq(
+                                            BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
+                                            BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
+                    .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
+                            .filter(StrUtil::isNotBlank)
+                            .orElse(sysConfigBackendEntity.getItemDefault()))
+                    .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+            registry.addResourceHandler(String.format("/%1$s/**", location))
+                    .addResourceLocations(String.format("file:%1$s/", location));
+        });
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 
     @Bean
     public MultipartConfigElement multipartConfigElement(MultipartProperties multipartProperties) {
-        Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).flatMap(it -> Optional.ofNullable(sysConfigBackendService
-                .getBaseMapper()
-                .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                        .eq(
-                                BackendConfigItem.AVATARMAXSIZE.getKey(),
-                                BackendConfigItem.AVATARMAXSIZE.getItem())))).ifPresent(avatarMaxsize -> {
-            if (StrUtil.isNotBlank(avatarMaxsize.getItemCustom())) {
-                multipartProperties.setMaxFileSize(
-                        DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemCustom()) * 1024 * 1024));
-                multipartProperties.setMaxRequestSize(
-                        DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemCustom()) * 1024 * 1024));
-            } else {
-                multipartProperties.setMaxFileSize(
-                        DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemDefault()) * 1024 * 1024));
-                multipartProperties.setMaxRequestSize(
-                        DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemDefault()) * 1024 * 1024));
-            }
-        });
+        Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
+                .flatMap(it -> Optional.ofNullable(sysConfigBackendService
+                        .getBaseMapper()
+                        .selectOne(new QueryWrapper<SysConfigBackendEntity>()
+                                .eq(
+                                        BackendConfigItem.AVATARMAXSIZE.getKey(),
+                                        BackendConfigItem.AVATARMAXSIZE.getItem()))))
+                .ifPresent(avatarMaxsize -> {
+                    if (StrUtil.isNotBlank(avatarMaxsize.getItemCustom())) {
+                        multipartProperties.setMaxFileSize(
+                                DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemCustom()) * 1024 * 1024));
+                        multipartProperties.setMaxRequestSize(
+                                DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemCustom()) * 1024 * 1024));
+                    } else {
+                        multipartProperties.setMaxFileSize(
+                                DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemDefault()) * 1024 * 1024));
+                        multipartProperties.setMaxRequestSize(
+                                DataSize.ofBytes(Long.parseLong(avatarMaxsize.getItemDefault()) * 1024 * 1024));
+                    }
+                });
 
         return multipartProperties.createMultipartConfig();
     }

@@ -207,6 +207,13 @@
             </if>
         </where>
     </select>
+    <select id="queryDictById" resultMap="DictList">
+        select *
+        from sys_dict
+        <where>
+            id=#{id}
+        </where>
+    </select>
     
     
     <!--新增所有列-->

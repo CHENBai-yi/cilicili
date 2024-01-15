@@ -1,5 +1,6 @@
 package site.cilicili.backend.menu.domain.dto;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,12 +12,16 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import site.cilicili.backend.button.domain.pojo.SysButtonEntity;
+import site.cilicili.backend.dept.domain.pojo.SysDeptEntity;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.backend.role.domain.dto.SysRoleDto;
+import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
+import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (SysMenu)实体类
@@ -73,5 +78,76 @@ public class SysMenuDto implements Serializable {
         private SysRoleDto.User updatedByUser;
         private List<Records> children;
         private List<SysButtonEntity> button;
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class EditMenuRequest extends SysMenuEntity {
+        private CreatedByUser createdByUser;
+        private UpdatedByUser updatedByUser;
+        private List<SysButtonEntity> button;
+        private List<EditMenuRequest> children;
+
+        @JsonProperty(value = "created_by_user")
+        public void setCreatedUser(final Map<String, Object> objectMap) {
+            this.createdByUser = BeanUtil.toBeanIgnoreCase(objectMap, CreatedByUser.class, true);
+        }
+
+        @JsonProperty(value = "updated_by_user")
+        public void setUpdatedUser(final Map<String, Object> objectMap) {
+            this.updatedByUser = BeanUtil.toBeanIgnoreCase(objectMap, UpdatedByUser.class, true);
+        }
+    }
+
+    @Getter
+    @Setter
+    public static class CreatedByUser extends SysUserEntity {
+        private Long createdByUser;
+        private List<Integer> dept;
+        private List<Integer> role;
+        private User updatedByUser;
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class UpdatedByUser extends SysUserEntity {
+        private Long updatedByUser;
+        private List<Integer> dept;
+        private List<Integer> role;
+        private User createdByUser;
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class User extends SysUserEntity {
+        private Long updatedByUser;
+        private Long createdByUser;
+        private List<Dept> dept;
+        private List<Role> role;
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class Role extends SysRoleEntity {
+        private DefaultPageMenu defaultPageMenu;
+
+        @Getter
+        @Setter
+        @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+        public static class DefaultPageMenu extends SysMenuEntity {
+            private String role;
+            private String children;
+            private String button;
+        }
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class Dept extends SysDeptEntity {
     }
 }

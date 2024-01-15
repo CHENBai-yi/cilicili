@@ -277,6 +277,42 @@
         </where>
     </select>
     
+    <resultMap type="site.cilicili.backend.menu.domain.dto.AddOrEditResponse" id="AddOrEditResponse">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="parentCode" column="parent_code" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="redirect" column="redirect" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="hidden" column="hidden" jdbcType="VARCHAR"/>
+        <result property="keepAlive" column="keep_alive" jdbcType="VARCHAR"/>
+        <result property="isLink" column="is_link" jdbcType="VARCHAR"/>
+        <association property="createdByUser" column="created_by=created_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findCreatedByUser"/>
+        <association property="updatedByUser" column="updated_by=updated_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findUpdatedByUser"/>
+        <collection property="children" column="name=name" select="findChildrenMenu"/>
+        <collection property="button" column="name=name" select="findMenuButton"/>
+    </resultMap>
+    
+    <select id="queryMenuById" resultMap="AddOrEditResponse">
+        select *from sys_menu
+        <where>
+            id=#{id}
+        </where>
+    </select>
+    
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into sys_menu(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo,

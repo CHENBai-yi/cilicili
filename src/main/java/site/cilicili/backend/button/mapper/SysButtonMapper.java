@@ -88,4 +88,6 @@ public interface SysButtonMapper extends BaseMapper<SysButtonEntity> {
      * @return 影响行数
      */
     int deleteById(String menuName);
+
+    int insertOrUpdate(List<SysButtonEntity> buttons);
 }

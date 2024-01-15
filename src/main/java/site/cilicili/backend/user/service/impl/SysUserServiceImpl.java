@@ -201,7 +201,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
                 .filter(sysUserEntity -> {
                     sysUserEntity.setNickname(changeNicknameRequest.nickname());
                     return updateById(sysUserEntity);
-                }).map(sysUserEntity -> R.yes(String.format("%1$s修改昵称成功.", authUserDetails.getusername())))
+                })
+                .map(sysUserEntity -> R.yes(String.format("%1$s修改昵称成功.", authUserDetails.getusername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
@@ -209,8 +210,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     @Transactional(rollbackFor = Throwable.class)
     public R changePassword(final AuthUserDetails authUserDetails, final ChangePasswordRequest changePasswordRequest) {
         return Optional.ofNullable(baseMapper.selectById(authUserDetails.getId()))
-                .filter(sysUserEntity -> changePasswordRequest.new_password_1().equals(changePasswordRequest.new_password_2()))
-                .filter(sysUserEntity -> passwordEncoder.matches(changePasswordRequest.old_password(), sysUserEntity.getPassword()))
+                .filter(sysUserEntity ->
+                        changePasswordRequest.new_password_1().equals(changePasswordRequest.new_password_2()))
+                .filter(sysUserEntity ->
+                        passwordEncoder.matches(changePasswordRequest.old_password(), sysUserEntity.getPassword()))
                 .filter(sysUserEntity -> {
                     sysUserEntity.setPassword(passwordEncoder.encode(changePasswordRequest.new_password_1()));
                     return updateById(sysUserEntity);

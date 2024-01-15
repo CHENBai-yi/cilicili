@@ -36,6 +36,7 @@ public class SysDeptController {
      * 服务对象
      */
     private final SysDeptService sysDeptService;
+
     private final SysUserService sysUserService;
 
     /**
@@ -132,7 +133,9 @@ public class SysDeptController {
             summary = "添加部门或者修改部门",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping(path = {"add-dept", "edit-dept"})
-    public R addDept(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody final AddDeptRequest addDeptRequest) {
+    public R addDept(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody final AddDeptRequest addDeptRequest) {
         return sysDeptService.addDept(addDeptRequest);
     }
 
@@ -146,7 +149,9 @@ public class SysDeptController {
             summary = "根据Id删除部门",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("delete-dept-by-id")
-    public R deleteDeptById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
+    public R deleteDeptById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
         return sysDeptService.deleteDeptById(authUserDetails, queryAndDeleteDeptByIdRequest);
     }
 
@@ -160,7 +165,9 @@ public class SysDeptController {
             summary = "根据Id查询部门",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("query-dept-by-id")
-    public R queryDeptById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
+    public R queryDeptById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final QueryAndDeleteDeptByIdRequest queryAndDeleteDeptByIdRequest) {
         return sysDeptService.queryDeptById(authUserDetails, queryAndDeleteDeptByIdRequest);
     }
 
@@ -174,8 +181,12 @@ public class SysDeptController {
             summary = "获取部门用户",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("query-user-by-dept")
-    public R queryUserByDept(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody final GetUserListRequest getUserListRequest) {
-        return Optional.ofNullable(authUserDetails).map(r -> sysUserService.getUserList(getUserListRequest)).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    public R queryUserByDept(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody final GetUserListRequest getUserListRequest) {
+        return Optional.ofNullable(authUserDetails)
+                .map(r -> sysUserService.getUserList(getUserListRequest))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     /**
@@ -205,5 +216,4 @@ public class SysDeptController {
     public R removeDeptUser(@RequestBody @Validated final RemoveDeptUserRequest removeDeptUserRequest) {
         return sysDeptService.removeDeptUser(removeDeptUserRequest);
     }
-
 }

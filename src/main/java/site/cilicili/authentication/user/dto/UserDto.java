@@ -51,11 +51,13 @@ public class UserDto {
     @Getter
     @AllArgsConstructor
     @Builder
+    @NoArgsConstructor
     @JsonTypeName("user")
     @JsonTypeInfo(use = JsonTypeInfo.Id.NONE, include = JsonTypeInfo.As.WRAPPER_OBJECT)
     public static class Login {
         @NotNull
         private String username;
+
         @NotBlank
         @Size(min = 8, max = 32)
         private String password;

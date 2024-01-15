@@ -68,6 +68,5 @@ public class SysRoleDto implements Serializable {
         private User updatedByUser;
         private List<Records> role;
         private List<SysDeptDto.Records> dept;
-
     }
 }

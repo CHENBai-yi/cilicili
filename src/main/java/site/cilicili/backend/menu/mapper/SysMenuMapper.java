@@ -3,6 +3,7 @@ package site.cilicili.backend.menu.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.backend.menu.domain.dto.AddOrEditResponse;
 import site.cilicili.backend.menu.domain.dto.GetMenuListRequest;
 import site.cilicili.backend.menu.domain.dto.GetUserMenuResponse;
 import site.cilicili.backend.menu.domain.dto.SysMenuDto;
@@ -48,6 +49,7 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity> {
      * @param sysMenu 实例对象
      * @return 影响行数
      */
+    @Override
     int insert(SysMenuEntity sysMenu);
 
     /**
@@ -86,4 +88,6 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity> {
     List<SysMenuDto.Records> getRoleMenuList(GetMenuListRequest sysMenuListRequest);
 
     GetUserMenuResponse getUserMenu(String username);
+
+    AddOrEditResponse queryMenuById(Long id);
 }

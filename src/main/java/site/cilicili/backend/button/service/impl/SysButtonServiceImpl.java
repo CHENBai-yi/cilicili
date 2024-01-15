@@ -9,6 +9,8 @@ import site.cilicili.backend.button.mapper.SysButtonMapper;
 import site.cilicili.backend.button.service.SysButtonService;
 import site.cilicili.common.util.R;
 
+import java.util.List;
+
 /**
  * (SysButton) 表服务实现类
  *
@@ -76,5 +78,11 @@ public class SysButtonServiceImpl extends ServiceImpl<SysButtonMapper, SysButton
     public R deleteById(String menuName) {
         boolean del = baseMapper.deleteById(menuName) > 0;
         return R.ok().setData(del);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean insertOrUpdate(final List<SysButtonEntity> button) {
+        return baseMapper.insertOrUpdate(button) > 0;
     }
 }

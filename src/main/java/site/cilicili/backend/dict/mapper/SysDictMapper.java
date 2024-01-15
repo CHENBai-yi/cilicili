@@ -82,4 +82,6 @@ public interface SysDictMapper extends BaseMapper<SysDictEntity> {
     int deleteById(Long id);
 
     List<SysDictDto.Records> queryDictAll();
+
+    SysDictDto.Records queryDictById(Long id);
 }

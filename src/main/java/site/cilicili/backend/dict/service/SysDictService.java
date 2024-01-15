@@ -1,6 +1,10 @@
 package site.cilicili.backend.dict.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.dict.domain.dto.AddDictRequest;
+import site.cilicili.backend.dict.domain.dto.QueryAndDeleteRequest;
+import site.cilicili.backend.dict.domain.dto.SysDictDto;
 import site.cilicili.backend.dict.domain.pojo.SysDictEntity;
 import site.cilicili.common.util.R;
 
@@ -53,4 +57,12 @@ public interface SysDictService extends IService<SysDictEntity> {
     R deleteById(final Long id);
 
     R queryDictAll();
+
+    R addDict(AddDictRequest addDictRequest);
+
+    R queryDictById(QueryAndDeleteRequest queryAndDeleteRequest);
+
+    R editDict(final AuthUserDetails authUserDetails, SysDictDto.AddOrEditResponse editRequest);
+
+    R deleteDictById(AuthUserDetails authUserDetails, QueryAndDeleteRequest queryAndDeleteRequest);
 }

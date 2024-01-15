@@ -10,6 +10,6 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author BaiYiChen
  */
-public record ChangePasswordRequest(@NotNull String new_password_1, @NotNull String new_password_2,
-                                    @NotNull String old_password) {
+public record ChangePasswordRequest(
+        @NotNull String new_password_1, @NotNull String new_password_2, @NotNull String old_password) {
 }

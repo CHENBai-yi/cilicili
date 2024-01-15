@@ -215,7 +215,9 @@ public class SysUserController {
             summary = "修改用户名",
             parameters = {@Parameter(description = "sysUser 实体")})
     @PostMapping("change-nickname")
-    public R changeNickname(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated ChangeNicknameRequest changeNicknameRequest) {
+    public R changeNickname(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated ChangeNicknameRequest changeNicknameRequest) {
         return sysUserService.changeNickname(authUserDetails, changeNicknameRequest);
     }
 
@@ -229,7 +231,9 @@ public class SysUserController {
             summary = "修改用户密码",
             parameters = {@Parameter(description = "sysUser 实体")})
     @PostMapping("change-password")
-    public R changePassword(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
+    public R changePassword(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
         // return sysUserService.changePassword(authUserDetails,changePasswordRequest);
         return R.no("aaa");
     }

@@ -2,7 +2,10 @@ package site.cilicili.backend.menu.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.menu.domain.dto.AddMenuRequest;
+import site.cilicili.backend.menu.domain.dto.FindOrDeleteRequest;
 import site.cilicili.backend.menu.domain.dto.GetMenuListRequest;
+import site.cilicili.backend.menu.domain.dto.SysMenuDto;
 import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
 import site.cilicili.common.util.R;
 
@@ -57,4 +60,12 @@ public interface SysMenuService extends IService<SysMenuEntity> {
     R getMenuList(GetMenuListRequest sysMenuListRequest);
 
     R getUserMenu(AuthUserDetails authUserDetails);
+
+    R queryMenuById(FindOrDeleteRequest findOrDeleteRequest);
+
+    R addMenu(final AuthUserDetails authUserDetails, AddMenuRequest addMenuRequest);
+
+    R editMenu(AuthUserDetails authUserDetails, SysMenuDto.EditMenuRequest addMenuRequest);
+
+    R deleteMenuById(final AuthUserDetails authUserDetails, FindOrDeleteRequest findOrDeleteRequest);
 }

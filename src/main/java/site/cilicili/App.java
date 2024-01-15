@@ -45,7 +45,12 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @EnableAspectJAutoProxy
 @SpringBootApplication(
-        exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, RabbitAutoConfiguration.class, H2ConsoleAutoConfiguration.class})
+        exclude = {
+                MongoAutoConfiguration.class,
+                MongoDataAutoConfiguration.class,
+                RabbitAutoConfiguration.class,
+                H2ConsoleAutoConfiguration.class
+        })
 public class App {
     private final DbChangeConfig dbChangeConf;
 

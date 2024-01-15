@@ -1,7 +1,11 @@
 package site.cilicili.backend.api.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.api.domain.dto.AddApiRequest;
+import site.cilicili.backend.api.domain.dto.DeleteOrQueryApiRequest;
 import site.cilicili.backend.api.domain.dto.GetApiListRequest;
+import site.cilicili.backend.api.domain.dto.SysApiDto;
 import site.cilicili.backend.api.domain.pojo.SysApiEntity;
 import site.cilicili.common.util.R;
 
@@ -54,4 +58,12 @@ public interface SysApiService extends IService<SysApiEntity> {
     R deleteById(final Long id);
 
     R getApiList(GetApiListRequest apiListRequest);
+
+    R addApi(AddApiRequest addApiRequest);
+
+    R deleteApiById(final AuthUserDetails authUserDetails, DeleteOrQueryApiRequest deleteOrQueryApiRequest);
+
+    R editApi(SysApiDto.Records editRequest, final AuthUserDetails authUserDetails);
+
+    R queryApiById(AuthUserDetails authUserDetails, DeleteOrQueryApiRequest deleteOrQueryApiRequest);
 }

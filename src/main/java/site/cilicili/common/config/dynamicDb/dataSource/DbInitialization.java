@@ -80,7 +80,8 @@ public class DbInitialization implements CommandLineRunner {
                             dataSourceList.setTargetDataSources(dataSourceMap);
                             dataSourceList.setDefaultTargetDataSource(CollUtil.getFirst(dataSourceMap.values()));
                             dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
-                            flag = Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner())) || ObjectUtil.isNotNull(dataSourceList.getConnection());
+                            flag = Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner()))
+                                    || ObjectUtil.isNotNull(dataSourceList.getConnection());
                         }
                     } catch (Exception e) {
                         log.error(e.getMessage());
