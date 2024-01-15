@@ -10,7 +10,7 @@
       <q-card-section class="q-pt-none">
         <q-form ref="passwordFormRef" class="q-gutter-md">
           <q-input v-model.trim="passwordForm.old_password" :label="$t('Old') + ' ' + $t('Password')"
-                   :rules="[val => val && val.length > 0 || $t('NeedInput')]"
+                   :rules="[val => val && val.length > 0 || $t('NeedInput'),val=>val.length>=8 ||$t('NeedInput8')]"
                    :type="isPwd ? 'password' : 'text'" autocomplete="off"
                    filled>
             <template v-slot:append>
@@ -20,7 +20,7 @@
           </q-input>
 
           <q-input v-model.trim="passwordForm.new_password_1" :label="$t('New') + ' ' + $t('Password')"
-                   :rules="[val => val && val.length > 0 || $t('NeedInput')]"
+                   :rules="[val => val && val.length > 0 || $t('NeedInput'),val=>val.length>=8 ||$t('NeedInput8')]"
                    :type="isPwd ? 'password' : 'text'" autocomplete="off"
                    filled>
             <template v-slot:append>
@@ -30,7 +30,7 @@
           </q-input>
 
           <q-input v-model.trim="passwordForm.new_password_2" :label="$t('New') + ' ' + $t('Password')"
-                   :rules="[val => val && val.length > 0 || $t('NeedInput')]"
+                   :rules="[val => val && val.length > 0 || $t('NeedInput'),val=>val.length>=8 ||$t('NeedInput8')]"
                    :type="isPwd ? 'password' : 'text'" autocomplete="off"
                    filled>
             <template v-slot:append>

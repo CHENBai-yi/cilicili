@@ -16,7 +16,6 @@ export const useUserStore = defineStore('user', {
   actions: {
     async HandleLogin(loginForm) {
       const res = await postAction('public/login', loginForm)
-      console.log(res)
       if (res.code === 1) {
         const token = res.data.token
         const username = res.data.username

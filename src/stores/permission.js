@@ -17,7 +17,6 @@ export const usePermissionStore = defineStore('permission', {
     async GetUserMenu() {
       try {
         const res = await postAction('user/get-user-menu')
-        console.log(res, "aaa")
         if (res.code === 1) {
           const data = res.data.records
           // role default page

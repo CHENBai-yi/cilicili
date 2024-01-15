@@ -18,7 +18,7 @@
                       <q-input v-model="iconData.filter" class="q-ma-md" clearable dense label="Filter"
                                outlined/>
                       <q-icon-picker v-model="recordDetail.value.icon" v-model:model-pagination="iconData.pagination"
-                                     :filter="iconData.filter" icon-set="material-icons"
+                                     :filter="iconData.filter" :icons="icons"
                                      style="height: 300px; width: 300px; background-color: white;" tooltips/>
                     </q-popup-proxy>
                   </q-icon>
@@ -120,9 +120,16 @@
 
 
 <script setup>
+import bootstrapIcons from '@quasar/quasar-ui-qiconpicker/src/components/icon-set/bootstrap-icons'
+import materialIcons from '@quasar/quasar-ui-qiconpicker/src/components/icon-set/material-icons'
+import ioniconsV4 from '@quasar/quasar-ui-qiconpicker/src/components/icon-set/ionicons-v4'
+import themify from '@quasar/quasar-ui-qiconpicker/src/components/icon-set/themify'
+import evaIcons from '@quasar/quasar-ui-qiconpicker/src/components/icon-set/eva-icons'
+import fontawesomeV5 from '@quasar/quasar-ui-qiconpicker/src/components/icon-set/fontawesome-v5'
 import useRecordDetail from 'src/composables/useRecordDetail'
 import {ref, toRefs, watch} from 'vue'
 
+const icons = ref(materialIcons.icons.concat(bootstrapIcons.icons).concat(ioniconsV4.icons).concat(themify.icons).concat(evaIcons.icons).concat(fontawesomeV5.icons))
 const emit = defineEmits(['handleFinish'])
 const url = {
   list: 'menu/get-menu-list',

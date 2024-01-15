@@ -185,7 +185,7 @@ const onSubmit = async () => {
       loading.value = false
       $q.notify({
         type: 'negative',
-        message: userMenu,
+        message: userMenu.message,
       })
     }
   } else {

@@ -55,6 +55,7 @@
 <script setup>
 
 import useTableData from 'src/composables/useTableData'
+import RecordDetail from './modules/recordDetail.vue'
 import {computed, onMounted} from 'vue'
 import {ChangeNullChildren2Array} from 'src/utils/arrayAndTree'
 

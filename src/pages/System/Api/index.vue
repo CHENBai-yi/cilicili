@@ -49,6 +49,7 @@
 
 <script setup>
 import useTableData from 'src/composables/useTableData'
+import RecordDetail from './modules/recordDetail.vue'
 import {computed, onMounted} from 'vue'
 
 const url = {

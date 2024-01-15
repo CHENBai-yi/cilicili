@@ -24,6 +24,11 @@ export default {
     "en-US": "Please type something",
     "ru": "Пожалуйста, введите что-нибудь"
   },
+  NeedInput8: {
+    "zh-CN": "密码长度不能低于8位",
+    "en-US": "The password contains a maximum of 8 characters",
+    "ru": "Длина пароля не может быть меньше 8 бит"
+  },
   FixForm: {
     "zh-CN": "请完善表格信息",
     "en-US": "Please fix the form",
