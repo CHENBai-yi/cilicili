@@ -40,10 +40,13 @@ const logout = () => {
     message: t('Confirm') + t('Logout') + '?',
     cancel: true,
     persistent: true,
-  }).onOk(() => {
-    userStore.HandleLogout()
+  }).onOk(async () => {
+    const res = await userStore.HandleUserLogout()
+    $q.notify({
+      type: 'positive',
+      message: res,
+    })
     router.push({path: '/login'})
-
   })
 }
 

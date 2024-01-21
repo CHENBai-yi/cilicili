@@ -15,6 +15,15 @@
             <q-btn :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" class="q-ml-md" dense flat
                    round @click="props.toggleFullscreen"/>
           </template>
+          <template v-slot:body-cell-operation_status="props">
+            <q-td :props="props">
+              <q-badge
+                  :color="props.row.operation_status <=300 ? 'positive':(props.row.operation_status <=400?'warning':'negative')  "
+                  align="middle">
+                {{ props.row.operation_status }}
+              </q-badge>
+            </q-td>
+          </template>
           <template v-slot:body-cell-created_at="props">
             <q-td :props="props">
               {{ showDateTime(props.row.created_at) }}
