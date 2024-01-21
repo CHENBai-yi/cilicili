@@ -22,8 +22,17 @@ public class CiliMultipartConfigElement extends MultipartConfigElement {
     private static final Long UNIT = 1024 * 1024L;
     private final SysConfigBackendService sysConfigBackendService;
 
-    public CiliMultipartConfigElement(final String location, final DataSize maxFileSize, final DataSize maxRequestSize, final DataSize fileSizeThreshold, final SysConfigBackendService sysConfigBackendService) {
-        super(location, maxFileSize.toBytes(), maxRequestSize.toBytes(), Integer.parseInt("" + fileSizeThreshold.toBytes()));
+    public CiliMultipartConfigElement(
+            final String location,
+            final DataSize maxFileSize,
+            final DataSize maxRequestSize,
+            final DataSize fileSizeThreshold,
+            final SysConfigBackendService sysConfigBackendService) {
+        super(
+                location,
+                maxFileSize.toBytes(),
+                maxRequestSize.toBytes(),
+                Integer.parseInt("" + fileSizeThreshold.toBytes()));
         this.sysConfigBackendService = sysConfigBackendService;
     }
 

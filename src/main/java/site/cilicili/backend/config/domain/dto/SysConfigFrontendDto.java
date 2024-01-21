@@ -27,6 +27,9 @@ import java.util.List;
 @Schema(description = "SysConfigFrontend数据传输类")
 public class SysConfigFrontendDto implements Serializable {
     private Object records;
+    private Integer page;
+    private Integer pageSize;
+    private Integer total;
 
     @Getter
     @Setter

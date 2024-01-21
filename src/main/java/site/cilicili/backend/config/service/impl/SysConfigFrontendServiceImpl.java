@@ -107,7 +107,12 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
     public R getConfigFrontendList(final QueryConfigRequest queryFrontendRequest) {
         return Optional.ofNullable(baseMapper.queryConfigFrontendList(queryFrontendRequest))
                 .map(records -> R.yes("Success.")
-                        .setData(SysConfigFrontendDto.builder().records(records).build()))
+                        .setData(SysConfigFrontendDto.builder()
+                                .records(records)
+                                .page(queryFrontendRequest.page())
+                                .pageSize(queryFrontendRequest.pageSize())
+                                .total(records.size())
+                                .build()))
                 .orElse(R.no("没有更多了."));
     }
 

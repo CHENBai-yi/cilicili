@@ -63,7 +63,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                         .findByUsername(login.getUsername())
                         .filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword()))
                         .map(this::convertEntityToDto)
-                        .filter(userDto -> sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
+                        .filter(userDto ->
+                                sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
                         .map(userDto -> R.yes("登录成功.").setData(userDto))
                         .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage())));
     }

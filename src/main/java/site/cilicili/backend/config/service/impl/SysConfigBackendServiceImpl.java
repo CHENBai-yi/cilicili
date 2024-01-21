@@ -9,7 +9,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
-import site.cilicili.backend.config.domain.dto.*;
+import site.cilicili.backend.config.domain.dto.AddConfigRequest;
+import site.cilicili.backend.config.domain.dto.EditedBackendConfigRequest;
+import site.cilicili.backend.config.domain.dto.QueryConfigRequest;
+import site.cilicili.backend.config.domain.dto.SysConfigBackendDto;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 import site.cilicili.backend.config.mapper.SysConfigBackendMapper;
 import site.cilicili.backend.config.service.SysConfigBackendService;
@@ -96,7 +99,8 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
     public R queryConfigBackendAll() {
         return Optional.ofNullable(baseMapper.queryConfigBackendAll())
                 .map(records -> R.yes("Success.")
-                        .setData(SysConfigBackendDto.builder().records(records).build()))
+                        .setData(SysConfigBackendDto.builder()
+                                .records(records).build()))
                 .orElse(R.no("没有更多了."));
     }
 
@@ -105,7 +109,12 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
     public R getConfigBackendList(final QueryConfigRequest queryBackRequest) {
         return Optional.ofNullable(baseMapper.getConfigBackendList(queryBackRequest))
                 .map(records -> R.yes("Success.")
-                        .setData(SysConfigFrontendDto.builder().records(records).build()))
+                        .setData(SysConfigBackendDto.builder()
+                                .records(records)
+                                .page(queryBackRequest.page())
+                                .pageSize(queryBackRequest.pageSize())
+                                .total(records.size())
+                                .build()))
                 .orElse(R.no("没有更多了."));
     }
 

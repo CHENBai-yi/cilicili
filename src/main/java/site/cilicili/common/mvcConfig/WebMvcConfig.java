@@ -53,8 +53,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private final ObjectMapper objectMapper;
     private final DbChangeConfig dbChangeConf;
     private final DbInitialization dbInitialization;
+
     @Value("${requestPath.avatar:avatar}")
     private String avatarRequestPath;
+
     @Value("${requestPath.avatarPrefix:gqa-upload:}")
     private String avatarPrefix;
 
@@ -106,7 +108,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .map(f -> sysConfigBackendService
                         .getBaseMapper()
                         .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                .eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
+                                .eq(
+                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
                                         BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
                 .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                         .filter(StrUtil::isNotBlank)
@@ -121,13 +124,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .resourceChain(true)
                 .addResolver(new AbstractResourceResolver() {
                     @Override
-                    protected Resource resolveResourceInternal(final HttpServletRequest request, final String requestPath, final List<? extends Resource> locations, final ResourceResolverChain chain) {
+                    protected Resource resolveResourceInternal(
+                            final HttpServletRequest request,
+                            final String requestPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
                         try {
                             final String s = resolveUrlPathInternal(requestPath, locations, chain);
                             // 检查资源是否存在，避免抛出异常
                             return Optional.of(new UrlResource(s))
                                     .filter(resource -> resource.exists() && resource.isReadable())
-                                    .orElse(null);// 返回null表示资源不存在，可以让PathResourceResolver使用默认的处理方式
+                                    .orElse(null); // 返回null表示资源不存在，可以让PathResourceResolver使用默认的处理方式
                         } catch (Exception e) {
                             if (logger.isDebugEnabled()) {
                                 logger.error(e.getMessage());
@@ -137,7 +144,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                     }
 
                     @Override
-                    protected String resolveUrlPathInternal(final String resourceUrlPath, final List<? extends Resource> locations, final ResourceResolverChain chain) {
+                    protected String resolveUrlPathInternal(
+                            final String resourceUrlPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
                         String avatarSavePath = getAvatarSavePathFromDatabase();
                         Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
                         return requestedPath.toUri().toString();
@@ -151,12 +161,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return Optional.ofNullable(dbInitialization.isValid())
                 .filter(f -> !f)
                 .map(f -> multipartProperties.createMultipartConfig())
-                .orElseGet(() -> new CiliMultipartConfigElement(multipartProperties.getLocation(),
+                .orElseGet(() -> new CiliMultipartConfigElement(
+                        multipartProperties.getLocation(),
                         multipartProperties.getMaxFileSize(),
                         multipartProperties.getMaxRequestSize(),
-                        multipartProperties.getFileSizeThreshold()
-                        , sysConfigBackendService));
-
+                        multipartProperties.getFileSizeThreshold(),
+                        sysConfigBackendService));
     }
 
     /*@Bean

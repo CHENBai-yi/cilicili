@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.config.domain.dto.QueryConfigRequest;
-import site.cilicili.backend.config.domain.dto.SysConfigFrontendDto;
+import site.cilicili.backend.config.domain.dto.SysConfigBackendDto;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 
 import java.util.List;
@@ -82,7 +82,7 @@ public interface SysConfigBackendMapper extends BaseMapper<SysConfigBackendEntit
      */
     int deleteById(Long id);
 
-    List<SysConfigFrontendDto.Records> queryConfigBackendAll();
+    List<SysConfigBackendDto.Records> queryConfigBackendAll();
 
-    List<SysConfigFrontendDto.Records> getConfigBackendList(QueryConfigRequest queryBackRequest);
+    List<SysConfigBackendDto.Records> getConfigBackendList(QueryConfigRequest queryBackRequest);
 }

@@ -26,6 +26,9 @@ import java.util.List;
 @NoArgsConstructor
 public class SysConfigBackendDto implements Serializable {
     private Object records;
+    private Integer page;
+    private Integer pageSize;
+    private Integer total;
 
     @Getter
     @Setter

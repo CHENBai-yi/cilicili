@@ -40,9 +40,7 @@ public class WebSecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http, WebMvcConfig webMvcConfig)
-            throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, WebMvcConfig webMvcConfig) throws Exception {
         http.cors(cors -> {
                     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -63,7 +61,10 @@ public class WebSecurityConfiguration {
                     authorizeHttpRequests
                             .requestMatchers(AntPathRequestMatcher.antMatcher("/public/**"))
                             .permitAll()
-                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", webMvcConfig.getAvatarRequestPath()).trim()))
+                            .requestMatchers(AntPathRequestMatcher.antMatcher(
+                                    HttpMethod.GET,
+                                    String.format("/%1$s/**", webMvcConfig.getAvatarRequestPath())
+                                            .trim()))
                             .permitAll()
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**"))
                             .permitAll()
