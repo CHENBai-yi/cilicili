@@ -1,7 +1,5 @@
 package site.cilicili.common.security.jwt;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
-import site.cilicili.backend.config.service.SysConfigBackendService;
-import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
-import site.cilicili.common.constant.ConfigBackend.BackendConfigItem;
 import site.cilicili.common.filter.JWTAuthFilter;
-import site.cilicili.common.util.DbUtils;
-
-import java.util.Optional;
+import site.cilicili.common.mvcConfig.WebMvcConfig;
 
 /**
  * @author BaiYiChen
@@ -49,7 +41,7 @@ public class WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http, SysConfigBackendService sysConfigBackendService, DbChangeConfig dbChangeConf)
+            HttpSecurity http, WebMvcConfig webMvcConfig)
             throws Exception {
         http.cors(cors -> {
                     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -68,26 +60,10 @@ public class WebSecurityConfiguration {
                 .csrf(CsrfConfigurer::disable)
                 .formLogin(FormLoginConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequests -> {
-                    Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
-                            .ifPresent(it -> {
-                                final String location = Optional.ofNullable(sysConfigBackendService
-                                                .getBaseMapper()
-                                                .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                                        .eq(
-                                                                BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-                                                                BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
-                                        .map(sysConfigBackendEntity -> Optional.ofNullable(
-                                                        sysConfigBackendEntity.getItemCustom())
-                                                .filter(StrUtil::isNotBlank)
-                                                .orElse(sysConfigBackendEntity.getItemDefault()))
-                                        .orElse("avatar");
-                                authorizeHttpRequests
-                                        .requestMatchers(AntPathRequestMatcher.antMatcher(
-                                                HttpMethod.GET, String.format("/%1$s/**", location)))
-                                        .permitAll();
-                            });
                     authorizeHttpRequests
                             .requestMatchers(AntPathRequestMatcher.antMatcher("/public/**"))
+                            .permitAll()
+                            .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", webMvcConfig.getAvatarRequestPath()).trim()))
                             .permitAll()
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**"))
                             .permitAll()

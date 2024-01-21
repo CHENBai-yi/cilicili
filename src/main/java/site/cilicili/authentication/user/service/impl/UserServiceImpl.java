@@ -63,23 +63,19 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                         .findByUsername(login.getUsername())
                         .filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword()))
                         .map(this::convertEntityToDto)
+                        .filter(userDto -> sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
                         .map(userDto -> R.yes("登录成功.").setData(userDto))
                         .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage())));
     }
 
     private UserDto convertEntityToDto(UserEntity userEntity) {
-        final String username = userEntity.getUsername();
-        final String encode = jwtUtils.encode(username);
-        return Optional.of(sysUserOnlineService.insertOrUpdate(username, encode))
-                .filter(f -> f)
-                .map(f -> UserDto.builder()
-                        .username(username)
-                        .nickname(userEntity.getNickname())
-                        .avatar(userEntity.getAvatar())
-                        .realName(userEntity.getNickname())
-                        .token(encode)
-                        .build())
-                .orElse(null);
+        return UserDto.builder()
+                .username(userEntity.getUsername())
+                .nickname(userEntity.getNickname())
+                .avatar(userEntity.getAvatar())
+                .realName(userEntity.getNickname())
+                .token(jwtUtils.encode(userEntity.getUsername()))
+                .build();
     }
 
     @Transactional(readOnly = true)

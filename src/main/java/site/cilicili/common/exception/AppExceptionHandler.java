@@ -46,9 +46,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AppException.class)
     public ResponseEntity<Object> handleAppException(AppException exception) {
-        if (logger.isDebugEnabled()) {
-            logger.error(exception.getMessage());
-        }
+        logger.error(exception.getMessage());
         final R r = R.no(exception.getMessage());
         final ResponseEntity<Object> ok = ResponseEntity.ok(r);
         logOperationAspect.writeOperationLog(ok.getStatusCode().value(), request, exception.getLocalizedMessage(), r);
@@ -94,18 +92,14 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
             writer.write(objectMapper.writeValueAsString(r));
             writer.flush();
         } catch (IOException e) {
-            if (logger.isDebugEnabled()) {
-                logger.error("{} {}", exception.getMessage(), e.getMessage());
-            }
+            logger.error("{} {}", exception.getMessage(), e.getMessage());
             throw new AppException(Error.COMMON_EXCEPTION);
         }
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessages> handleValidationError(MethodArgumentNotValidException exception) {
-        if (logger.isDebugEnabled()) {
-            logger.error(exception.getMessage());
-        }
+        logger.error(exception.getMessage());
         List<String> messages = Collections.emptyList();
         if (exception.getBindingResult() != null) {
             messages = exception.getBindingResult().getFieldErrors().stream()
@@ -124,9 +118,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessages> handleException(Exception exception) {
         // return responseErrorMessages(List.of("internal server error"), HttpStatus.UNPROCESSABLE_ENTITY);
-        if (logger.isDebugEnabled()) {
-            logger.error(exception.getMessage());
-        }
+        logger.error(exception.getMessage());
         final ResponseEntity<ErrorMessages> responseErrorMessages =
                 responseErrorMessages(List.of(exception.getMessage()));
         logOperationAspect.writeOperationLog(

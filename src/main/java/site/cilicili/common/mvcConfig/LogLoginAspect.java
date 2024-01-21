@@ -99,9 +99,7 @@ public class LogLoginAspect {
                         builder.loginSuccess("yesNo_no");
                         sysLogLoginService.insert(BeanUtil.toBean(builder.build(), SysLogLoginEntity.class));
                     }
-                    if (logger.isDebugEnabled()) {
-                        logger.info("{} IP:{}-->{}", user.getUsername(), IpUtil.getRemoteIp(request), res);
-                    }
+                    logger.info("{} IP:{}-->{}", user.getUsername(), IpUtil.getRemoteIp(request), res);
                 });
     }
 
@@ -141,11 +139,9 @@ public class LogLoginAspect {
                 })
                 .filter(sysLogLoginEntity -> stringRedisTemplate.delete(sysLogLoginEntity.getUsername()))
                 .ifPresent(sysLogLoginEntity -> {
-                    if (logger.isDebugEnabled()) {
-                        logger.info("{} IP:{} 登出成功！", sysLogLoginEntity.getUsername(), sysLogLoginEntity.getLoginIp());
-                    }
                     sysLogLoginEntity.setUpdatedAt(LocalDateTime.now());
                     sysLogLoginService.insert(sysLogLoginEntity);
+                    logger.info("{} IP:{} 登出成功！", sysLogLoginEntity.getUsername(), sysLogLoginEntity.getLoginIp());
                 });
     }
 }

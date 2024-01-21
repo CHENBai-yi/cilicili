@@ -22,6 +22,7 @@ public enum Error {
     EXCEED_UPLOAD_MAXSIZE("上传的文件太大.", HttpStatus.NOT_FOUND),
     TOKEN_INVALIED("token已失效，登录过期", HttpStatus.NOT_FOUND),
     ALREADY_LOGIN("该账号已在别处登录！", HttpStatus.NOT_FOUND),
+    AVATAREXT_DISALLOW("不支持的文件后缀.", HttpStatus.NOT_FOUND),
     KICKED_USER("您已被强制下线！", HttpStatus.NOT_FOUND);
 
     private final String message;
