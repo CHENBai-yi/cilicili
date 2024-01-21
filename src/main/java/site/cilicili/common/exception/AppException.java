@@ -13,4 +13,13 @@ public class AppException extends RuntimeException {
         super(error.getMessage());
         this.error = error;
     }
+
+    @Getter
+    public static class RefreshTokenException extends RuntimeException {
+        private String newToken;
+
+        public RefreshTokenException(final String message) {
+            newToken = message;
+        }
+    }
 }

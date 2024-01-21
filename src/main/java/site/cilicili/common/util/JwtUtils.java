@@ -1,18 +1,15 @@
 package site.cilicili.common.util;
 
-import cn.hutool.json.JSONUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.AppExceptionHandler;
 import site.cilicili.common.filter.JWTAuthFilter;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Instant;
@@ -22,11 +19,20 @@ import java.util.Optional;
 /**
  * @author BaiYiChen
  */
+
 public class JwtUtils {
     private final Long validSeconds;
     private final Key key;
     private final Long refreshAt;
     private final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    private AppExceptionHandler appExceptionHandler;
+
+    public JwtUtils(String signKey, Long validSeconds, Long refreshAt, final AppExceptionHandler appExceptionHandler) {
+        this.validSeconds = validSeconds;
+        this.refreshAt = refreshAt;
+        key = Keys.hmacShaKeyFor(signKey.getBytes(StandardCharsets.UTF_8));
+        this.appExceptionHandler = appExceptionHandler;
+    }
 
     public JwtUtils(String signKey, Long validSeconds, Long refreshAt) {
         this.validSeconds = validSeconds;
@@ -102,19 +108,10 @@ public class JwtUtils {
         }
     }
 
-    public String refreshJwt(String jwt, HttpServletResponse response) {
+    public String refreshJwt(String jwt) {
         return Optional.ofNullable(refreshToken(jwt))
                 .map(newToken -> {
-                    response.addHeader("Access-Control-Expose-Headers", "refresh-token");
-                    response.addHeader("refresh-token", newToken);
-                    response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-                    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                    try (final PrintWriter writer = response.getWriter()) {
-                        writer.write(JSONUtil.toJsonStr(R.yes("token已刷新").setData("refresh", true)));
-                        writer.flush();
-                    } catch (IOException ignored) {
-                        logger.error("token刷新失败--->{}", this.getClass().toString());
-                    }
+                    appExceptionHandler.handleAppException(new AppException.RefreshTokenException(newToken));
                     return newToken;
                 })
                 .orElse(jwt);

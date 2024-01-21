@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import site.cilicili.backend.user.service.SysUserOnlineService;
+import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.mvcConfig.LogOperationAspect;
 import site.cilicili.common.util.R;
 
@@ -41,6 +42,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     private final HttpServletResponse response;
     private final HttpServletRequest request;
     private final LogOperationAspect logOperationAspect;
+    private final DbInitialization dbInitialization;
 
     @ExceptionHandler(AppException.class)
     public ResponseEntity<Object> handleAppException(AppException exception) {
@@ -53,7 +55,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return ok;
     }
 
-    @ExceptionHandler({JwtException.class, UsernameNotFoundException.class, ServletException.class})
+    @ExceptionHandler({JwtException.class, UsernameNotFoundException.class, ServletException.class, AppException.RefreshTokenException.class})
     public void handleAppException(Exception exception) {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
@@ -61,7 +63,9 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         try (final PrintWriter writer = response.getWriter()) {
             if (exception instanceof JwtException e) {
                 response.setStatus(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED.value());
-                r = Optional.ofNullable(sysUserOnlineService.queryById(null, e.getMessage()))
+                r = Optional.of(dbInitialization.isValid())
+                        .filter(f -> f)
+                        .map(f -> sysUserOnlineService.queryById(null, e.getMessage()))
                         .filter(sysUserOnline -> sysUserOnlineService.removeByNameOrToken(
                                 sysUserOnline.getUsername(), sysUserOnline.getToken()))
                         .map(sysUserOnline ->
@@ -76,6 +80,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
                 r = R.no(e.getMessage()).setData("reload", true);
                 logOperationAspect.writeOperationLog(response.getStatus(), request, exception.getLocalizedMessage(), r);
+            } else if (exception instanceof AppException.RefreshTokenException e) {
+                response.setStatus(HttpStatus.OK.value());
+                response.addHeader("Access-Control-Expose-Headers", "refresh-token");
+                response.addHeader("refresh-token", e.getNewToken());
+                r = R.yes("token已刷新").setData("refresh", true);
             }
             writer.write(objectMapper.writeValueAsString(r));
             writer.flush();

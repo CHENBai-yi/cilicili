@@ -39,9 +39,9 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             throws ExpiredJwtException {
         try {
             Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
-                    .filter(authHeader -> Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner()))
-                            && authHeader.startsWith(TOKEN_PREFIX))
-                    .map(authHeader -> jwtUtils.refreshJwt(authHeader.substring(TOKEN_PREFIX.length()), response))
+                    .filter(authHeader -> authHeader.startsWith(TOKEN_PREFIX) && Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner())))
+                    .map(authHeader -> authHeader.substring(TOKEN_PREFIX.length()))
+                    .map(jwtUtils::refreshJwt)
                     .filter(jwtUtils::validateToken)
                     .map(jwtUtils::getSub)
                     .map(authenticationProvider::getAuthentication)

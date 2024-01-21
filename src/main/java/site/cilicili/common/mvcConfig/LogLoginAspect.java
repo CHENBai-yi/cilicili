@@ -26,6 +26,7 @@ import site.cilicili.backend.log.service.SysLogLoginService;
 import site.cilicili.backend.user.domain.dto.KickOnlineUserRequest;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.service.SysUserService;
+import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.util.IpUtil;
 import site.cilicili.common.util.R;
 
@@ -56,6 +57,7 @@ public class LogLoginAspect {
     private final StringRedisTemplate stringRedisTemplate;
     private final SysUserService sysUserService;
     private final HttpServletRequest request;
+    private final DbInitialization dbInitialization;
 
     @Pointcut("execution(* site.cilicili.authentication.user.controller.UsersController.login(..)) throws AppException")
     public void logLoginPointCut() {
@@ -69,6 +71,7 @@ public class LogLoginAspect {
     @AfterReturning(value = "logLoginPointCut()", returning = "res")
     public void logLogin(JoinPoint joinPoint, R res) {
         Optional.ofNullable(res)
+                .filter(r -> dbInitialization.isValid())
                 .flatMap(r -> Optional.ofNullable(joinPoint.getArgs()))
                 .ifPresent(objects -> {
                     final UserDto.Login user = (UserDto.Login) objects[0];
@@ -105,6 +108,7 @@ public class LogLoginAspect {
     @After("logLogoutPointCut()")
     public void logLogout(JoinPoint joinPoint) {
         Optional.ofNullable(joinPoint.getArgs())
+                .filter(objects -> dbInitialization.isValid())
                 .map(objects -> objects[0])
                 .map(o -> {
                     if (o instanceof AuthUserDetails authUserDetails) {

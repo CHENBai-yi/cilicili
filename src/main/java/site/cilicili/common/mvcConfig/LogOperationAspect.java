@@ -17,6 +17,7 @@ import site.cilicili.backend.log.domain.dto.SysLogOperationDto;
 import site.cilicili.backend.log.domain.pojo.SysLogOperationEntity;
 import site.cilicili.backend.log.service.SysLogOperationService;
 import site.cilicili.common.config.dynamicDb.AutoUpdateTableTime;
+import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.util.IpUtil;
 import site.cilicili.common.util.R;
 
@@ -40,6 +41,7 @@ public class LogOperationAspect {
     private final SysLogOperationService sysLogOperationService;
     private final AutoUpdateTableTime autoUpdateTableTime;
     private final ObjectMapper objectMapper;
+    private final DbInitialization dbInitialization;
 
     @Pointcut("execution(* site.cilicili..controller.*.*(..))")
     public void logOperationPointCut() {
@@ -53,6 +55,7 @@ public class LogOperationAspect {
 
     public void writeOperationLog(Integer status, HttpServletRequest request, String memo, Object r) {
         Optional.ofNullable(r)
+                .filter(res -> dbInitialization.isValid())
                 .map(res -> {
                     try {
                         if (res instanceof R r1) {
