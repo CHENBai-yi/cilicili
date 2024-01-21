@@ -65,7 +65,9 @@ public class SysConfigBackendController {
     public R getConfigBackendList(@RequestBody @Validated QueryConfigRequest queryBackRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(sysConfigBackendService.getConfigBackendList(queryBackRequest));
     }
 
@@ -81,7 +83,9 @@ public class SysConfigBackendController {
     public R configBackendAdd(@RequestBody @Validated AddConfigRequest addConfigRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysConfigBackendService.configBackendAdd(addConfigRequest));
     }
 
@@ -94,10 +98,15 @@ public class SysConfigBackendController {
             summary = "修改前台配置",
             parameters = {@Parameter(description = "sysConfigFrontend 筛选条件")})
     @PostMapping({"edit-config-backend"})
-    public R editConfigBackend(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated EditedBackendConfigRequest editedBackendConfigRequest, Errors errors) {
+    public R editConfigBackend(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated EditedBackendConfigRequest editedBackendConfigRequest,
+            Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysConfigBackendService.editConfigBackend(authUserDetails, editedBackendConfigRequest));
     }
 }

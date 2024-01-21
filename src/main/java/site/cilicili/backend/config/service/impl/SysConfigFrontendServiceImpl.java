@@ -30,7 +30,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service("sysConfigFrontendService")
 @CacheConfig(cacheNames = {"SysConfigFrontend"})
-public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendMapper, SysConfigFrontendEntity> implements SysConfigFrontendService {
+public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendMapper, SysConfigFrontendEntity>
+        implements SysConfigFrontendService {
 
     /**
      * 通过ID查询单条数据
@@ -94,24 +95,34 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
     @Cacheable(cacheNames = "SysConfigFrontend", key = "#root.methodName")
     @Override
     public R queryConfigFrontAll() {
-        return Optional.ofNullable(baseMapper.queryConfigFrontAll()).map(records -> R.yes("Success.").setData(SysConfigFrontendDto.builder().records(records).build())).orElse(R.no("没有更多了."));
+        return Optional.ofNullable(baseMapper.queryConfigFrontAll())
+                .map(records -> R.yes("Success.")
+                        .setData(SysConfigFrontendDto.builder().records(records).build()))
+                .orElse(R.no("没有更多了."));
     }
 
     @Transactional(readOnly = true)
     @Override
     public R getConfigFrontendList(final QueryConfigRequest queryFrontendRequest) {
-        return Optional.ofNullable(baseMapper.queryConfigFrontendList(queryFrontendRequest)).map(records -> R.yes("Success.").setData(SysConfigFrontendDto.builder().records(records).build())).orElse(R.no("没有更多了."));
+        return Optional.ofNullable(baseMapper.queryConfigFrontendList(queryFrontendRequest))
+                .map(records -> R.yes("Success.")
+                        .setData(SysConfigFrontendDto.builder().records(records).build()))
+                .orElse(R.no("没有更多了."));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R configFrontendAdd(final AddConfigRequest addConfigRequest) {
-        return Optional.of(save(BeanUtil.toBean(addConfigRequest, SysConfigFrontendEntity.class))).filter(f -> f).map(f -> R.yes("添加成功.")).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.of(save(BeanUtil.toBean(addConfigRequest, SysConfigFrontendEntity.class)))
+                .filter(f -> f)
+                .map(f -> R.yes("添加成功."))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public R editConfigFrontend(final AuthUserDetails authUserDetails, final EditedFrontendConfigRequest editedFrontendConfigRequest) {
+    public R editConfigFrontend(
+            final AuthUserDetails authUserDetails, final EditedFrontendConfigRequest editedFrontendConfigRequest) {
         return Optional.ofNullable(authUserDetails)
                 .map(auth -> (baseMapper.selectById(editedFrontendConfigRequest.getId())))
                 .filter(sysConfigFrontendEntity -> updateById(editedFrontendConfigRequest))

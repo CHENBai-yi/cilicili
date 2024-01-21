@@ -55,5 +55,3 @@ public interface SysLogOperationService extends IService<SysLogOperationEntity> 
 
     R getLogOperationList(QueryLogRequest queryLogRequest);
 }
-       
-

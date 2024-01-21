@@ -36,15 +36,22 @@ public class UsersController {
     public R login(@RequestBody @Valid UserDto.Login login, @RequestHeader HttpHeaders headers, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(userService.login(login, headers));
     }
 
     @PostMapping("logout")
-    public R logout(@AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody @Validated KickOnlineUserRequest kickOnlineUserRequest, Errors errors) {
+    public R logout(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            final @RequestBody @Validated KickOnlineUserRequest kickOnlineUserRequest,
+            Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.userService.logout(authUserDetails, kickOnlineUserRequest));
     }
 

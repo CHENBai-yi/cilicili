@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -28,10 +29,10 @@ import java.io.Serializable;
 @TableName("sys_user_online")
 public class SysUserOnlineEntity implements Serializable {
     private static final long serialVersionUID = -58085958790198870L;
+
     @Schema(description = "用户名")
     private String username;
+
     @Schema(description = "token")
     private String token;
 }
-
-

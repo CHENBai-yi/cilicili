@@ -43,5 +43,4 @@ public class QueryLogResponse {
         private SysRoleDto.User createdByUser;
         private SysRoleDto.User updatedByUser;
     }
-
 }

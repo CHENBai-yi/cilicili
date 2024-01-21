@@ -37,9 +37,11 @@ public class UserEntity extends BaseEntity {
     @TableField(exist = false)
     @Schema(description = "角色编码")
     private String roleCode;
+
     @TableField(exist = false)
     @Schema(description = "登录token")
     private String token;
+
     @Schema(description = "用户昵称")
     private String nickname;
 

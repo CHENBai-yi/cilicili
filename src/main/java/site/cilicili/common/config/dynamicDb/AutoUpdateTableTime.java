@@ -5,8 +5,6 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import site.cilicili.authentication.Details.AuthUserDetails;
-import site.cilicili.common.exception.AppException;
-import site.cilicili.common.exception.Error;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -25,19 +23,19 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
 
     @Override
     public void insertFill(final MetaObject metaObject) {
+        Optional.of(Objects.isNull(this.getFieldValByName("createdAt", metaObject)))
+                .filter(f -> f)
+                .ifPresent(s -> this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject));
+        this.setFieldValByName("logicalDelete", 1, metaObject);
         Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
-            Optional.of(Objects.isNull(this.getFieldValByName("createdAt", metaObject)))
-                    .filter(f -> f)
-                    .ifPresent(s -> this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject));
-            this.setFieldValByName("logicalDelete", 1, metaObject);
             this.setFieldValByName("createdBy", authUserDetails.getUsername(), metaObject);
         });
     }
 
     @Override
     public void updateFill(final MetaObject metaObject) {
+        this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
         Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
-            this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
             this.setFieldValByName("updatedBy", authUserDetails.getUsername(), metaObject);
         });
     }
@@ -51,6 +49,6 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
                     final String s = "" + authentication.getPrincipal();
                     return AuthUserDetails.builder().username(s).realName(s).build();
                 })
-                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
+                .orElse(null);
     }
 }

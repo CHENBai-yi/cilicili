@@ -62,5 +62,6 @@ public interface SysConfigFrontendService extends IService<SysConfigFrontendEnti
 
     R configFrontendAdd(AddConfigRequest addConfigRequest);
 
-    R editConfigFrontend(final AuthUserDetails authUserDetails, EditedFrontendConfigRequest editedFrontendConfigRequest);
+    R editConfigFrontend(
+            final AuthUserDetails authUserDetails, EditedFrontendConfigRequest editedFrontendConfigRequest);
 }

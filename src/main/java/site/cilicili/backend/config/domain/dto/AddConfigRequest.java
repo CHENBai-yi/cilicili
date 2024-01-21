@@ -18,15 +18,17 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AddConfigRequest {
 
-    @NotNull(message = "配置项不能为空")
-    String configItem;
-    @NotNull(message = "默认配置项不能为空")
-    String itemDefault;
+    @NotNull(message = "配置项不能为空") String configItem;
+
+    @NotNull(message = "默认配置项不能为空") String itemDefault;
+
     String memo;
+
     @JacksonInject("status")
     String status;
+
     @JacksonInject("table")
     String table;
-    @NotNull(message = "排序不能为空") @Positive(message = "排序不能为负数")
-    Integer sort;
+
+    @NotNull(message = "排序不能为空") @Positive(message = "排序不能为负数") Integer sort;
 }

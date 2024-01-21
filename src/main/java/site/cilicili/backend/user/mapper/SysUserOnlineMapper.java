@@ -8,6 +8,7 @@ import site.cilicili.backend.user.domain.dto.QueryUserOnlineListResponse;
 import site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -91,11 +92,10 @@ public interface SysUserOnlineMapper extends BaseMapper<SysUserOnlineEntity> {
      */
     int deleteById(@Param("username") String id, @Param("tokens") String token);
 
-    List<QueryUserOnlineListResponse.OnlineList> queryUserOnlineList(QueryUserOnlineListRequest queryUserOnlineListRequest);
+    List<QueryUserOnlineListResponse.OnlineList> queryUserOnlineList(
+            QueryUserOnlineListRequest queryUserOnlineListRequest);
 
     int insertOrUpdate(@Param("username") String username, @Param("token") String token);
 
     int dropOnline();
 }
-
-

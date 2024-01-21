@@ -18,6 +18,5 @@ public record QueryLogRequest(
         String sortBy,
         Boolean desc,
         @NotNull(message = "页码不能为空") @Positive(message = "页码不能为负数") Integer page,
-        @NotNull(message = "页面大小不能为空") @Positive(message = "页面大小不能为负数") Integer pageSize
-) {
+        @NotNull(message = "页面大小不能为空") @Positive(message = "页面大小不能为负数") Integer pageSize) {
 }

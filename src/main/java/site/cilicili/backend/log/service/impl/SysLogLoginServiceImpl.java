@@ -26,7 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysLogLoginService")
-public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLogLoginEntity> implements SysLogLoginService {
+public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLogLoginEntity>
+        implements SysLogLoginService {
 
     /**
      * 通过ID查询单条数据
@@ -110,7 +111,4 @@ public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLo
                 .map(sysDictEntity -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
-
 }
-
-

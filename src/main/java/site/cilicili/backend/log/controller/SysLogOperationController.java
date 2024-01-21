@@ -34,7 +34,6 @@ public class SysLogOperationController {
     /**
      * 服务对象
      */
-
     private final SysLogOperationService sysLogOperationService;
 
     /**
@@ -43,17 +42,16 @@ public class SysLogOperationController {
      * @param queryLogRequest 查询条件
      * @return 响应结果
      */
-    @Operation(summary = "查询操作日志列表", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "查询操作日志列表",
+            parameters = {@Parameter(description = "id 主键")})
     @PostMapping("get-log-operation-list")
     public R getLogOperationList(@RequestBody @Validated QueryLogRequest queryLogRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysLogOperationService.getLogOperationList(queryLogRequest));
     }
 }
-
-
-

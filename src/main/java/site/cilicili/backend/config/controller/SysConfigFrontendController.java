@@ -65,7 +65,9 @@ public class SysConfigFrontendController {
     public R getConfigFrontendList(@RequestBody @Validated QueryConfigRequest queryFrontendRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysConfigFrontendService.getConfigFrontendList(queryFrontendRequest));
     }
 
@@ -81,7 +83,9 @@ public class SysConfigFrontendController {
     public R configFrontendAdd(@RequestBody @Validated AddConfigRequest addConfigRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysConfigFrontendService.configFrontendAdd(addConfigRequest));
     }
 
@@ -94,10 +98,15 @@ public class SysConfigFrontendController {
             summary = "修改前台配置",
             parameters = {@Parameter(description = "sysConfigFrontend 筛选条件")})
     @PostMapping({"edit-config-frontend"})
-    public R editConfigFrontend(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated EditedFrontendConfigRequest editedFrontendConfigRequest, Errors errors) {
+    public R editConfigFrontend(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated EditedFrontendConfigRequest editedFrontendConfigRequest,
+            Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysConfigFrontendService.editConfigFrontend(authUserDetails, editedFrontendConfigRequest));
     }
 }

@@ -15,7 +15,6 @@ import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
  *
  * @author BaiYiChen
  */
-
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

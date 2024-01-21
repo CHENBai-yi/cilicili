@@ -37,7 +37,6 @@ public class SysLogLoginController {
     /**
      * 服务对象
      */
-
     private final SysLogLoginService sysLogLoginService;
 
     /**
@@ -46,14 +45,16 @@ public class SysLogLoginController {
      * @param queryLogRequest 查询条件
      * @return 响应结果
      */
-    @Operation(summary = "根据条件查询登录日志", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "根据条件查询登录日志",
+            parameters = {@Parameter(description = "id 主键")})
     @PostMapping("get-log-login-list")
     public R getLogLoginList(@RequestBody @Validated QueryLogRequest queryLogRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysLogLoginService.getLogLoginList(queryLogRequest));
     }
 
@@ -63,17 +64,19 @@ public class SysLogLoginController {
      * @param deleteLogRequest 查询条件
      * @return 删除是否成功
      */
-    @Operation(summary = "根据id删除登录日志", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "根据id删除登录日志",
+            parameters = {@Parameter(description = "id 主键")})
     @PostMapping("delete-log-login-by-id")
-    public R deleteLogLoginById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated DeleteLogRequest deleteLogRequest, Errors errors) {
+    public R deleteLogLoginById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated DeleteLogRequest deleteLogRequest,
+            Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysLogLoginService.deleteLogLoginById(authUserDetails, deleteLogRequest));
     }
 }
-
-
-

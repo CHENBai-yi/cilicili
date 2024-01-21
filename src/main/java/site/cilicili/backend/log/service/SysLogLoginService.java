@@ -59,5 +59,3 @@ public interface SysLogLoginService extends IService<SysLogLoginEntity> {
 
     R deleteLogLoginById(final AuthUserDetails authUserDetails, DeleteLogRequest deleteLogRequest);
 }
-       
-

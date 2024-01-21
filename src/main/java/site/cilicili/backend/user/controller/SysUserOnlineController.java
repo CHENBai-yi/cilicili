@@ -33,7 +33,6 @@ public class SysUserOnlineController {
     /**
      * 服务对象
      */
-
     private final SysUserOnlineService sysUserOnlineService;
 
     /**
@@ -42,9 +41,9 @@ public class SysUserOnlineController {
      * @param sysUserOnline 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "sysUserOnline 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "sysUserOnline 筛选条件")})
     @GetMapping
     public R queryAll(final SysUserOnlineEntity sysUserOnline) {
         return this.sysUserOnlineService.queryAll(sysUserOnline);
@@ -56,10 +55,9 @@ public class SysUserOnlineController {
      * @param sysUserOnline 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "sysUserOnline 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "sysUserOnline 实体")})
     @PostMapping
     public R add(final @RequestBody SysUserOnlineEntity sysUserOnline) {
         return this.sysUserOnlineService.insert(sysUserOnline);
@@ -71,15 +69,16 @@ public class SysUserOnlineController {
      * @param kickOnlineUserRequest 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "根据用户名下线用户", parameters = {
-            @Parameter(description = "KickOnlineUserRequest 实体")
-    })
+    @Operation(
+            summary = "根据用户名下线用户",
+            parameters = {@Parameter(description = "KickOnlineUserRequest 实体")})
     @PostMapping("kick-online-user")
     public R kickOnlineUser(final @RequestBody @Validated KickOnlineUserRequest kickOnlineUserRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysUserOnlineService.kickOnlineUser(kickOnlineUserRequest));
     }
 
@@ -89,20 +88,17 @@ public class SysUserOnlineController {
      * @param queryUserOnlineListRequest 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "查询所有在线用户", parameters = {
-            @Parameter(description = "sysUserOnline 实体")
-    })
+    @Operation(
+            summary = "查询所有在线用户",
+            parameters = {@Parameter(description = "sysUserOnline 实体")})
     @PostMapping("get-user-online-list")
-    public R getUserOnlineList(final @RequestBody @Validated QueryUserOnlineListRequest queryUserOnlineListRequest, Errors errors) {
+    public R getUserOnlineList(
+            final @RequestBody @Validated QueryUserOnlineListRequest queryUserOnlineListRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
-                .map(e -> R.no(e.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining())))
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
                 .orElse(this.sysUserOnlineService.getUserOnlineList(queryUserOnlineListRequest));
     }
-
-
 }
-
-
-

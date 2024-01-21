@@ -26,7 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysUserOnlineService")
-public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, SysUserOnlineEntity> implements SysUserOnlineService {
+public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, SysUserOnlineEntity>
+        implements SysUserOnlineService {
 
     /**
      * 全查询
@@ -60,13 +61,17 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
     @Override
     public R update(SysUserOnlineEntity sysUserOnline) {
         baseMapper.update(sysUserOnline);
-        return R.ok().setData(this.getOne(new QueryWrapper<SysUserOnlineEntity>().eq("username", sysUserOnline.getUsername())));
+        return R.ok().setData(this.getOne(
+                new QueryWrapper<SysUserOnlineEntity>().eq("username", sysUserOnline.getUsername())));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R kickOnlineUser(final KickOnlineUserRequest kickOnlineUserRequest) {
-        final QueryWrapper<SysUserOnlineEntity> queryWrapper = new QueryWrapper<SysUserOnlineEntity>().eq("username", kickOnlineUserRequest.username()).or().eq("token", kickOnlineUserRequest.token());
+        final QueryWrapper<SysUserOnlineEntity> queryWrapper = new QueryWrapper<SysUserOnlineEntity>()
+                .eq("username", kickOnlineUserRequest.username())
+                .or()
+                .eq("token", kickOnlineUserRequest.token());
         return Optional.ofNullable(this.getOne(queryWrapper))
                 .filter(sysUserOnlineEntity -> this.remove(queryWrapper))
                 .map(sysUserOnlineEntity -> R.yes(String.format("%1$s 下线成功.", sysUserOnlineEntity.getUsername())))
@@ -109,7 +114,4 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
     public boolean removeByNameOrToken(final String username, final String token) {
         return baseMapper.deleteById(username, token) > 0;
     }
-
 }
-
-

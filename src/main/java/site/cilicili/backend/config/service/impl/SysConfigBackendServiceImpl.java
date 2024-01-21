@@ -102,19 +102,25 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
     @Override
     @Transactional(readOnly = true)
     public R getConfigBackendList(final QueryConfigRequest queryBackRequest) {
-        return Optional.ofNullable(baseMapper.getConfigBackendList(queryBackRequest)).map(records -> R.yes("Success.")
-                .setData(SysConfigFrontendDto.builder().records(records).build())).orElse(R.no("没有更多了."));
+        return Optional.ofNullable(baseMapper.getConfigBackendList(queryBackRequest))
+                .map(records -> R.yes("Success.")
+                        .setData(SysConfigFrontendDto.builder().records(records).build()))
+                .orElse(R.no("没有更多了."));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R configBackendAdd(final AddConfigRequest addConfigRequest) {
-        return Optional.of(save(BeanUtil.toBean(addConfigRequest, SysConfigBackendEntity.class))).filter(f -> f).map(f -> R.yes("添加成功.")).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.of(save(BeanUtil.toBean(addConfigRequest, SysConfigBackendEntity.class)))
+                .filter(f -> f)
+                .map(f -> R.yes("添加成功."))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public R editConfigBackend(final AuthUserDetails authUserDetails, final EditedBackendConfigRequest editedBackendConfigRequest) {
+    public R editConfigBackend(
+            final AuthUserDetails authUserDetails, final EditedBackendConfigRequest editedBackendConfigRequest) {
         return Optional.ofNullable(authUserDetails)
                 .map(auth -> (baseMapper.selectById(editedBackendConfigRequest.getId())))
                 .filter(sysConfigFrontendEntity -> updateById(editedBackendConfigRequest))

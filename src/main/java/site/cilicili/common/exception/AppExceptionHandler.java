@@ -62,8 +62,10 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
             if (exception instanceof JwtException e) {
                 response.setStatus(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED.value());
                 r = Optional.ofNullable(sysUserOnlineService.queryById(null, e.getMessage()))
-                        .filter(sysUserOnline -> sysUserOnlineService.removeByNameOrToken(sysUserOnline.getUsername(), sysUserOnline.getToken()))
-                        .map(sysUserOnline -> R.no(Error.TOKEN_INVALIED.getMessage()).setData("reload", true))
+                        .filter(sysUserOnline -> sysUserOnlineService.removeByNameOrToken(
+                                sysUserOnline.getUsername(), sysUserOnline.getToken()))
+                        .map(sysUserOnline ->
+                                R.no(Error.TOKEN_INVALIED.getMessage()).setData("reload", true))
                         .orElse(R.no(Error.TOKEN_INVALIED.getMessage()));
                 logOperationAspect.writeOperationLog(response.getStatus(), request, exception.getLocalizedMessage(), r);
             } else if (exception instanceof UsernameNotFoundException e) {
@@ -97,7 +99,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                     .collect(Collectors.toList());
         }
         final ResponseEntity<ErrorMessages> responseErrorMessages = responseErrorMessages(messages);
-        logOperationAspect.writeOperationLog(responseErrorMessages.getStatusCode().value(), request, exception.getLocalizedMessage(), responseErrorMessages);
+        logOperationAspect.writeOperationLog(
+                responseErrorMessages.getStatusCode().value(),
+                request,
+                exception.getLocalizedMessage(),
+                responseErrorMessages);
         return responseErrorMessages;
     }
 
@@ -107,8 +113,13 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         if (logger.isDebugEnabled()) {
             logger.error(exception.getMessage());
         }
-        final ResponseEntity<ErrorMessages> responseErrorMessages = responseErrorMessages(List.of(exception.getMessage()));
-        logOperationAspect.writeOperationLog(responseErrorMessages.getStatusCode().value(), request, exception.getLocalizedMessage(), responseErrorMessages);
+        final ResponseEntity<ErrorMessages> responseErrorMessages =
+                responseErrorMessages(List.of(exception.getMessage()));
+        logOperationAspect.writeOperationLog(
+                responseErrorMessages.getStatusCode().value(),
+                request,
+                exception.getLocalizedMessage(),
+                responseErrorMessages);
         return responseErrorMessages;
     }
 

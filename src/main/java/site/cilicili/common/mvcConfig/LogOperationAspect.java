@@ -17,6 +17,7 @@ import site.cilicili.backend.log.domain.dto.SysLogOperationDto;
 import site.cilicili.backend.log.domain.pojo.SysLogOperationEntity;
 import site.cilicili.backend.log.service.SysLogOperationService;
 import site.cilicili.common.config.dynamicDb.AutoUpdateTableTime;
+import site.cilicili.common.util.IpUtil;
 import site.cilicili.common.util.R;
 
 import java.util.Optional;
@@ -54,20 +55,20 @@ public class LogOperationAspect {
         Optional.ofNullable(r)
                 .map(res -> {
                     try {
-                        final SysLogOperationDto.SysLogOperationDtoBuilder logOperationDtoBuilder = SysLogOperationDto.builder()
-                                .operationIp(request.getRemoteHost())
+                        if (res instanceof R r1) {
+                            res = BeanUtil.toBean(r1, R.class).setData(null);
+                        }
+                        return SysLogOperationDto.builder()
+                                .operationBody(objectMapper.writeValueAsString(res))
+                                .operationIp(IpUtil.getRemoteIp(request))
                                 .operationApi(request.getRequestURI())
                                 .operationMethod(request.getMethod())
                                 .memo(memo)
                                 .operationStatus(Integer.toUnsignedLong(status))
-                                .operationUsername(Optional.ofNullable(autoUpdateTableTime.getAuthUserDetails()).map(AuthUserDetails::getRealName).orElse(null));
-                        if (res instanceof R r1) {
-                            r1.setData(null);
-                            logOperationDtoBuilder.operationBody(objectMapper.writeValueAsString(r1));
-                        } else {
-                            logOperationDtoBuilder.operationBody(objectMapper.writeValueAsString(res));
-                        }
-                        return logOperationDtoBuilder.build();
+                                .operationUsername(Optional.ofNullable(autoUpdateTableTime.getAuthUserDetails())
+                                        .map(AuthUserDetails::getRealName)
+                                        .orElse(null));
+
                     } catch (JsonProcessingException e) {
                         logger.error(e.getMessage());
                     }

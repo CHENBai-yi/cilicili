@@ -50,5 +50,3 @@ public interface SysUserOnlineService extends IService<SysUserOnlineEntity> {
 
     boolean removeByNameOrToken(String username, String token);
 }
-       
-

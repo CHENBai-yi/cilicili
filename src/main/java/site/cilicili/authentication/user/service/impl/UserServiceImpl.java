@@ -65,7 +65,6 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                         .map(this::convertEntityToDto)
                         .map(userDto -> R.yes("登录成功.").setData(userDto))
                         .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage())));
-
     }
 
     private UserDto convertEntityToDto(UserEntity userEntity) {
@@ -135,6 +134,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R logout(final AuthUserDetails authUserDetails, final KickOnlineUserRequest kickOnlineUserRequest) {
-        return Optional.ofNullable(authUserDetails).map(auth -> this.sysUserOnlineService.kickOnlineUser(kickOnlineUserRequest)).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(authUserDetails)
+                .map(auth -> this.sysUserOnlineService.kickOnlineUser(kickOnlineUserRequest))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

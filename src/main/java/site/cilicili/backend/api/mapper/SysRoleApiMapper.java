@@ -24,5 +24,4 @@ import java.util.List;
 @Mapper
 public interface SysRoleApiMapper extends BaseMapper<SysRoleApiEntity> {
     int insertOrUpdateBatch(@Param("entities") List<SysRoleApiEntity> entities);
-
 }

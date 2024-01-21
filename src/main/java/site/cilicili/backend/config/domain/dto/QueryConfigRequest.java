@@ -16,6 +16,5 @@ public record QueryConfigRequest(
         String sortBy,
         Boolean desc,
         @NotNull(message = "页面大小不能为空") Integer pageSize,
-        @NotNull(message = "页码不能为空") Integer page
-) {
+        @NotNull(message = "页码不能为空") Integer page) {
 }

@@ -24,7 +24,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysLogOperationService")
-public class SysLogOperationServiceImpl extends ServiceImpl<SysLogOperationMapper, SysLogOperationEntity> implements SysLogOperationService {
+public class SysLogOperationServiceImpl extends ServiceImpl<SysLogOperationMapper, SysLogOperationEntity>
+        implements SysLogOperationService {
 
     /**
      * 通过ID查询单条数据
@@ -97,7 +98,4 @@ public class SysLogOperationServiceImpl extends ServiceImpl<SysLogOperationMappe
                                 .build()))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
-
 }
-
-

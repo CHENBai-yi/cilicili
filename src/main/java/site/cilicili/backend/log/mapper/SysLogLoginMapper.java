@@ -8,6 +8,7 @@ import site.cilicili.backend.log.domain.dto.QueryLogResponse;
 import site.cilicili.backend.log.domain.pojo.SysLogLoginEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -94,5 +95,3 @@ public interface SysLogLoginMapper extends BaseMapper<SysLogLoginEntity> {
 
     int insertLogLogin(SysLogLoginEntity sysLogLogin);
 }
-
-
