@@ -1,6 +1,10 @@
 package site.cilicili.backend.config.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.config.domain.dto.AddConfigRequest;
+import site.cilicili.backend.config.domain.dto.EditedFrontendConfigRequest;
+import site.cilicili.backend.config.domain.dto.QueryConfigRequest;
 import site.cilicili.backend.config.domain.pojo.SysConfigFrontendEntity;
 import site.cilicili.common.util.R;
 
@@ -53,4 +57,10 @@ public interface SysConfigFrontendService extends IService<SysConfigFrontendEnti
     R deleteById(final Long id);
 
     R queryConfigFrontAll();
+
+    R getConfigFrontendList(QueryConfigRequest queryFrontendRequest);
+
+    R configFrontendAdd(AddConfigRequest addConfigRequest);
+
+    R editConfigFrontend(final AuthUserDetails authUserDetails, EditedFrontendConfigRequest editedFrontendConfigRequest);
 }

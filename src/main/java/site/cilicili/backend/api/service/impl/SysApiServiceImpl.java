@@ -91,31 +91,51 @@ public class SysApiServiceImpl extends ServiceImpl<SysApiMapper, SysApiEntity> i
     @Override
     @Transactional(readOnly = true)
     public R getApiList(final GetApiListRequest apiListRequest) {
-        return Optional.ofNullable(baseMapper.getApiList(apiListRequest)).map(records -> R.yes("Success").setData(SysApiDto.builder().build().setRecords(records).setTotal(records.size()).setPageNum(apiListRequest.page()).setPageSize(apiListRequest.pageSize()))).orElse(R.no("Fail"));
+        return Optional.ofNullable(baseMapper.getApiList(apiListRequest))
+                .map(records -> R.yes("Success")
+                        .setData(SysApiDto.builder()
+                                .build()
+                                .setRecords(records)
+                                .setTotal(records.size())
+                                .setPageNum(apiListRequest.page())
+                                .setPageSize(apiListRequest.pageSize())))
+                .orElse(R.no("Fail"));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R addApi(final AddApiRequest addApiRequest) {
-        return Optional.of(save(BeanUtil.toBean(addApiRequest, SysApiEntity.class))).filter(r -> r).map(r -> R.yes("添加成功.")).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.of(save(BeanUtil.toBean(addApiRequest, SysApiEntity.class)))
+                .filter(r -> r)
+                .map(r -> R.yes("添加成功."))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public R deleteApiById(final AuthUserDetails authUserDetails, final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
-        return Optional.ofNullable(authUserDetails).map(auth -> baseMapper.selectById(deleteOrQueryApiRequest.id())).filter(this::removeById).map(r -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername()))).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
-
+    public R deleteApiById(
+            final AuthUserDetails authUserDetails, final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
+        return Optional.ofNullable(authUserDetails)
+                .map(auth -> baseMapper.selectById(deleteOrQueryApiRequest.id()))
+                .filter(this::removeById)
+                .map(r -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername())))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R editApi(final SysApiDto.Records editRequest, final AuthUserDetails authUserDetails) {
-        return Optional.ofNullable(authUserDetails).map(r -> baseMapper.selectById(editRequest.getId())).filter(sysApiEntity -> updateById(editRequest)).map(r -> R.yes(String.format("%1$s编辑成功.", authUserDetails.getusername()))).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+        return Optional.ofNullable(authUserDetails)
+                .map(r -> baseMapper.selectById(editRequest.getId()))
+                .filter(sysApiEntity -> updateById(editRequest))
+                .map(r -> R.yes(String.format("%1$s编辑成功.", authUserDetails.getusername())))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public R queryApiById(final AuthUserDetails authUserDetails, final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
+    public R queryApiById(
+            final AuthUserDetails authUserDetails, final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
         return Optional.ofNullable(authUserDetails)
                 .map(auth -> baseMapper.selectById(deleteOrQueryApiRequest.id()))
                 .map(sysApiEntity -> R.yes("查询成功.").setRecords(sysApiEntity))

@@ -93,7 +93,7 @@ public class App {
             druidDataSource.setUrl(String.join(
                     "/",
                     databaseConnectionDto1.getUrl(),
-                    databaseConnectionDto1.getScheme() + "?allowMultiQueries=true"));
+                    databaseConnectionDto1.getScheme() + "?allowMultiQueries=true&serverTimezone=Asia/Shanghai"));
             druidDataSource.setDriverClassName(databaseConnectionDto1.getDriver());
             druidDataSource.setDefaultAutoCommit(true);
             druidDataSource.setAsyncInit(true);

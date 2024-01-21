@@ -8,6 +8,6 @@ package site.cilicili.backend.api.domain.dto;
  *
  * @author BaiYiChen
  */
-public record GetApiListRequest(Boolean desc, Integer page, Integer pageSize, String sortBy, String apiGroup,
-                                String apiMethod) {
+public record GetApiListRequest(
+        Boolean desc, Integer page, Integer pageSize, String sortBy, String apiGroup, String apiMethod) {
 }

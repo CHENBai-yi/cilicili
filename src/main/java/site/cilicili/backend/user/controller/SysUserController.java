@@ -234,7 +234,6 @@ public class SysUserController {
     public R changePassword(
             @AuthenticationPrincipal AuthUserDetails authUserDetails,
             @RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
-        // return sysUserService.changePassword(authUserDetails,changePasswordRequest);
-        return R.no("aaa");
+        return sysUserService.changePassword(authUserDetails, changePasswordRequest);
     }
 }

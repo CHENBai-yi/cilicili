@@ -66,7 +66,9 @@ public class SysApiController {
     @PostMapping("add-api")
     public R addApi(@RequestBody @Validated final AddApiRequest addApiRequest, Errors errors) {
         if (!errors.getFieldErrors().isEmpty()) {
-            return R.no(errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
+            return R.no(errors.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining()));
         }
         return sysApiService.addApi(addApiRequest);
     }
@@ -81,7 +83,9 @@ public class SysApiController {
             summary = "删除api",
             parameters = {@Parameter(description = "sysButton 筛选条件")})
     @PostMapping("delete-api-by-id")
-    public R deleteApiById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
+    public R deleteApiById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
         return sysApiService.deleteApiById(authUserDetails, deleteOrQueryApiRequest);
     }
 
@@ -95,7 +99,9 @@ public class SysApiController {
             summary = "根据id查询api",
             parameters = {@Parameter(description = "sysButton 筛选条件")})
     @PostMapping("query-api-by-id")
-    public R queryApiById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
+    public R queryApiById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final DeleteOrQueryApiRequest deleteOrQueryApiRequest) {
         return sysApiService.queryApiById(authUserDetails, deleteOrQueryApiRequest);
     }
 
@@ -109,7 +115,9 @@ public class SysApiController {
             summary = "编辑api",
             parameters = {@Parameter(description = "sysButton 筛选条件")})
     @PostMapping("edit-api")
-    public R editApi(@RequestBody @Validated final SysApiDto.Records editRequest, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public R editApi(
+            @RequestBody @Validated final SysApiDto.Records editRequest,
+            @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return sysApiService.editApi(editRequest, authUserDetails);
     }
 }

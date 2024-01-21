@@ -20,7 +20,9 @@ public enum Error {
     COMMENT_NOT_FOUND("comment not found", HttpStatus.NOT_FOUND),
     COMMON_EXCEPTION("服务器有点呆。。。", HttpStatus.NOT_FOUND),
     EXCEED_UPLOAD_MAXSIZE("上传的文件太大.", HttpStatus.NOT_FOUND),
-    TOKEN_INVALIED("token已失效，登录过期", HttpStatus.NOT_FOUND);
+    TOKEN_INVALIED("token已失效，登录过期", HttpStatus.NOT_FOUND),
+    ALREADY_LOGIN("该账号已在别处登录！", HttpStatus.NOT_FOUND),
+    KICKED_USER("您已被强制下线！", HttpStatus.NOT_FOUND);
 
     private final String message;
     private final HttpStatus status;

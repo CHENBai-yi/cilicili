@@ -14,15 +14,16 @@ import site.cilicili.backend.menu.domain.pojo.SysMenuEntity;
  *
  * @author BaiYiChen
  */
-
 @Getter
 @Setter
 public class AddMenuRequest extends SysMenuEntity {
     @NotNull(message = "菜单编码不能为空")
     private String name;
+
     @NotNull(message = "菜单排序不能为空")
     @Positive(message = "排序不能为负数")
     private Long sort;
+
     @NotNull(message = "菜单名称不能为空")
     private String title;
 }

@@ -1,5 +1,6 @@
 package site.cilicili.authentication.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -33,9 +34,12 @@ public class UserEntity extends BaseEntity {
     @Schema(description = "用户名")
     private String username;
 
-    @Schema(description = "用户名")
+    @TableField(exist = false)
+    @Schema(description = "角色编码")
     private String roleCode;
-
+    @TableField(exist = false)
+    @Schema(description = "登录token")
+    private String token;
     @Schema(description = "用户昵称")
     private String nickname;
 

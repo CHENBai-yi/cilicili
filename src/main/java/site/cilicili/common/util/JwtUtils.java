@@ -52,14 +52,18 @@ public class JwtUtils {
     }
 
     public boolean validateToken(String jwt) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(jwt)
-                .getBody();
-        Instant now = Instant.now();
-        Date exp = claims.getExpiration();
-        return exp.after(Date.from(now));
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(jwt)
+                    .getBody();
+            Instant now = Instant.now();
+            Date exp = claims.getExpiration();
+            return exp.after(Date.from(now));
+        } catch (JwtException e) {
+            throw new JwtException(JWTAuthFilter.TOKEN_PREFIX + jwt);
+        }
     }
 
     public String refreshToken(String jwt) {

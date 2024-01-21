@@ -7,11 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import site.cilicili.backend.user.service.SysUserOnlineService;
 import site.cilicili.common.config.dynamicDb.MyDataSourceList;
 import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.db.domain.mapper.DbSourceToDruidDataSource;
 import site.cilicili.common.db.domain.pojo.DatabaseConnection;
 import site.cilicili.common.db.service.DatabaseConnectionService;
+import site.cilicili.common.exception.AppExceptionHandler;
 import site.cilicili.common.util.DbUtils;
 
 import javax.sql.DataSource;
@@ -33,6 +35,8 @@ public class DbInitialization implements CommandLineRunner {
     private final DatabaseConnectionService databaseConnectionService;
     private final MyDataSourceList dataSourceList;
     private final DbChangeConfig dbChangeConf;
+    private final SysUserOnlineService sysUserOnlineService;
+    private final AppExceptionHandler appExceptionHandler;
 
     /**
      * @param args incoming main method arguments
@@ -90,4 +94,17 @@ public class DbInitialization implements CommandLineRunner {
                 })
                 .orElse(false);
     }
+
+    /**
+     * 服务器下线前对所有用户强制下线处理
+     */
+    // @PreDestroy
+    // public void preDestroy() {
+    //     Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
+    //             .filter(r -> sysUserOnlineService.dropOnline())
+    //             .ifPresent(r -> {
+    //                 log.error("服务器停机，强制下线所有用户");
+    //                 appExceptionHandler.handleAppException(new AppException(Error.KICKED_USER));
+    //             });
+    // }
 }

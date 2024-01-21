@@ -246,7 +246,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
                         new QueryWrapper<SysRoleEntity>().eq("role_code", editRoleApiRequest.roleCode())))
                 .map(sysRole -> {
                     if (!editRoleApiRequest.roleApi().isEmpty()
-                            && sysRoleApiService.saveOrUpdateBatch(editRoleApiRequest.roleApi())) {
+                            && sysRoleApiService.insertOrUpdateBatch(editRoleApiRequest.roleApi())) {
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleApiRequest.roleCode()));
                     } else {
                         throw new AppException(Error.COMMON_EXCEPTION);

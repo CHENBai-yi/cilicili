@@ -8,6 +8,18 @@
         <result property="apiMethod" column="api_method" jdbcType="VARCHAR"/>
         <result property="apiPath" column="api_path" jdbcType="VARCHAR"/>
     </resultMap>
+    <insert id="insertOrUpdateBatch">
+        insert into sys_role_api(role_code,api_group,api_method,api_path)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.roleCode}, #{entity.apiGroup}, #{entity.apiMethod}, #{entity.apiPath})
+        </foreach>
+        on duplicate key update
+        role_code = values(role_code),
+        api_group = values(api_group),
+        api_method = values(api_method),
+        api_path = values(api_path)
+    </insert>
 
 </mapper>
 

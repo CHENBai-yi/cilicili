@@ -1,6 +1,7 @@
 package site.cilicili.backend.dept.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.dept.domain.pojo.SysDeptUserEntity;
 import site.cilicili.common.util.R;
 
@@ -54,11 +55,11 @@ public interface SysDeptUserService extends IService<SysDeptUserEntity> {
      */
     R deleteById(final String sysDeptDeptCode);
 
-    boolean insertDeptUserList(List<SysDeptUserEntity> toList);
+    boolean insertDeptUserList(@Param("toList") List<SysDeptUserEntity> toList);
 
-    boolean updateDeptUserList(List<SysDeptUserEntity> toList);
+    boolean updateDeptUserList(@Param("toList") List<SysDeptUserEntity> toList);
 
-    boolean insertSysDeptUserList(List<SysDeptUserEntity> toList);
+    boolean insertSysDeptUserList(@Param("toList") List<SysDeptUserEntity> toList);
 
     boolean removeByDeptCode(String deptCode);
 

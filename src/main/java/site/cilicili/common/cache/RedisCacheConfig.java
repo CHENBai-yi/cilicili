@@ -2,6 +2,7 @@ package site.cilicili.common.cache;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.redisson.api.RBloomFilter;
+import org.redisson.api.RHyperLogLog;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
@@ -82,5 +83,17 @@ public class RedisCacheConfig {
         RBloomFilter<R> rBloomFilter = redissonClient.getBloomFilter("CILICILIBloom");
         rBloomFilter.tryInit(100000, 0.05);
         return rBloomFilter;
+    }
+
+    @Bean
+    // @Bean("ONLINE_USER")
+    public RHyperLogLog<Object> onlineUserHyperLogLog(RedissonClient redissonClient) {
+        return redissonClient.getHyperLogLog("ONLINE_USER_IP");
+    }
+
+    @Bean
+    // @Bean("IP_ADDRESS")
+    public RHyperLogLog<Object> ipAddressHyperLogLog(RedissonClient redissonClient) {
+        return redissonClient.getHyperLogLog("IP_ADDRESS");
     }
 }

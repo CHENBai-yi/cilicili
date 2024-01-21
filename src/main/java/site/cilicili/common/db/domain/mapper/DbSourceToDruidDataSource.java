@@ -26,7 +26,7 @@ public interface DbSourceToDruidDataSource {
             @Mapping(
                     target = "url",
                     expression =
-                            "java( String.format(\"%1$s/%2$s?%3$s\", databaseConnection.getUrl(), databaseConnection.getScheme(),\"allowMultiQueries=true\") )"),
+                            "java( String.format(\"%1$s/%2$s?%3$s\", databaseConnection.getUrl(), databaseConnection.getScheme(),\"allowMultiQueries=true&serverTimezone=Asia/Shanghai\") )"),
             @Mapping(target = "driver", ignore = true)
     })
     DruidDataSource toDruidDataSource(DatabaseConnection databaseConnection);

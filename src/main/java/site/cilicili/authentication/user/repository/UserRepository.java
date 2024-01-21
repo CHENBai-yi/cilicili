@@ -20,6 +20,10 @@ public interface UserRepository extends BaseMapper<UserEntity> {
     Optional<UserEntity> findByEmail(String email);
 
     @Select(
-            "SELECT u.*,r.sys_role_role_code as roleCode  FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = #{username}")
+            "SELECT u.*,r.sys_role_role_code as roleCode FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = #{username}")
     Optional<UserEntity> findByUsername(@Param("username") String username);
+
+    @Select(
+            "SELECT u.*,r.sys_role_role_code as roleCode,l.token  FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username join sys_user_online l on u.username=l.username WHERE u.username = #{username}")
+    Optional<UserEntity> findByOnlineUsername(@Param("username") String username);
 }

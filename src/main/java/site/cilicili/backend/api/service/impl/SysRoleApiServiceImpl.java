@@ -11,6 +11,7 @@ import site.cilicili.backend.api.mapper.SysRoleApiMapper;
 import site.cilicili.backend.api.service.SysRoleApiService;
 import site.cilicili.common.util.R;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,5 +33,10 @@ public class SysRoleApiServiceImpl extends ServiceImpl<SysRoleApiMapper, SysRole
                         new QueryWrapper<SysRoleApiEntity>().eq("role_code", roleCode.roleCode())))
                 .map(sysRoleApiEntities -> R.yes("Success").setData("records", sysRoleApiEntities))
                 .orElse(R.no("Fail"));
+    }
+
+    @Override
+    public boolean insertOrUpdateBatch(final List<SysRoleApiEntity> roleApi) {
+        return baseMapper.insertOrUpdateBatch(roleApi) > 0;
     }
 }

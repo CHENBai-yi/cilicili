@@ -23,7 +23,7 @@ import site.cilicili.common.util.R;
 public class FileUploadController {
     private final UploadService uploadService;
 
-    @PostMapping("upload/upload-avatar")
+    @PostMapping({"upload/upload-avatar", "upload/upload-banner-image"})
     public R uploadUserAvatar(
             @AuthenticationPrincipal AuthUserDetails authUserDetails,
             @RequestPart(name = "file") MultipartFile[] multipartFile) {

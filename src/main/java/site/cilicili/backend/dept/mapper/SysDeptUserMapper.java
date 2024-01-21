@@ -88,11 +88,11 @@ public interface SysDeptUserMapper extends BaseMapper<SysDeptUserEntity> {
      */
     int deleteById(String sysDeptDeptCode);
 
-    int insertDeptUserList(List<SysDeptUserEntity> toList);
+    int insertDeptUserList(@Param("toList") List<SysDeptUserEntity> toList);
 
-    int updateDeptUserList(List<SysDeptUserEntity> toList);
+    int updateDeptUserList(@Param("toList") List<SysDeptUserEntity> toList);
 
-    int insertSysDeptUserList(List<SysDeptUserEntity> toList);
+    int insertSysDeptUserList(@Param("toList") List<SysDeptUserEntity> toList);
 
     int removeDeptUser(SysDeptUserEntity r);
 }

@@ -11,6 +11,7 @@ version = '0.0.1'
 java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
+
 jar {
     enabled(false)
 }
@@ -23,14 +24,7 @@ configurations {
 repositories {
     mavenCentral()
 }
-//jar {
-//    enabled = false
-//}
 
-bootJar {
-    dependsOn spotlessApply
-    duplicatesStrategy = 'exclude'
-}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
@@ -93,9 +87,12 @@ task copyJar(type: Copy, dependsOn: 'clearJar') {
 bootJar {
     // 例外所有的jar
     excludes = ["*.jar"]
+    TestLineNumber.main()
     // lib目录的清除和复制任务
     dependsOn clearJar
     dependsOn copyJar
+    dependsOn spotlessApply
+    duplicatesStrategy = 'exclude'
     // 指定依赖包的路径
     manifest {
         attributes 'Class-Path': configurations.runtimeClasspath.files.collect { "lib/$it.name" }.join(' ')
@@ -152,3 +149,48 @@ spotless {
     }
 }
 
+
+class TestLineNumber {
+    static int counter;
+
+    static void main(String[] args) throws Exception {
+        counterDirCodeLines(new File("src/main/java/site/cilicili"));
+        System.out.println("代码行数：" + counter);
+    }
+
+    /**
+     * 统计指定的目录的代码的行数
+     *
+     * @return
+     */
+    public static void counterDirCodeLines(File file) throws Exception {
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                counterDirCodeLines(f);
+            }
+        } else {
+            counter += counterFileCodeLines(file);
+        }
+    }
+
+    /**
+     * 统计指定文件的代码行数
+     *
+     * @param file
+     * @return
+     */
+    public static int counterFileCodeLines(File file) throws Exception {
+        LineNumberReader lnr = null;
+        try {
+            lnr = new LineNumberReader(new FileReader(file));
+            String str = lnr.readLine();
+            while (str != null) {
+                str = lnr.readLine();
+            }
+            return lnr.getLineNumber();
+        } finally {
+            lnr.close();
+        }
+    }
+}

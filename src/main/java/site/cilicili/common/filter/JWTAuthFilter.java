@@ -1,9 +1,7 @@
 package site.cilicili.common.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import site.cilicili.common.security.jwt.AuthenticationProvider;
 import site.cilicili.common.util.DbUtils;
 import site.cilicili.common.util.JwtUtils;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,14 +29,14 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     public static final String TOKEN_PREFIX = "Token ";
     private final JwtUtils jwtUtils;
     private final AuthenticationProvider authenticationProvider;
-    private final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    private final Logger logger = LoggerFactory.getLogger(JWTAuthFilter.class);
     private final AppExceptionHandler appExceptionHandler;
     private final DbChangeConfig dbChangeConf;
 
     @Override
     protected void doFilterInternal(
             final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain)
-            throws ServletException, IOException, ExpiredJwtException {
+            throws ExpiredJwtException {
         try {
             Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
                     .filter(authHeader -> Objects.nonNull(DbUtils.checkDb(dbChangeConf.getBackendInner()))
@@ -50,7 +47,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
                     .map(authenticationProvider::getAuthentication)
                     .ifPresent(SecurityContextHolder.getContext()::setAuthentication);
             filterChain.doFilter(request, response);
-        } catch (JwtException e) {
+        } catch (Exception e) {
+            logger.error(e.getMessage());
             appExceptionHandler.handleAppException(e);
         }
     }

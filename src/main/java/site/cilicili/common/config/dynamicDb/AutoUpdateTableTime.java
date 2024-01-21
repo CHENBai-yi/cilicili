@@ -9,6 +9,7 @@ import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -25,7 +26,9 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
     @Override
     public void insertFill(final MetaObject metaObject) {
         Optional.ofNullable(getAuthUserDetails()).ifPresent(authUserDetails -> {
-            this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject);
+            Optional.of(Objects.isNull(this.getFieldValByName("createdAt", metaObject)))
+                    .filter(f -> f)
+                    .ifPresent(s -> this.setFieldValByName("createdAt", LocalDateTime.now(), metaObject));
             this.setFieldValByName("logicalDelete", 1, metaObject);
             this.setFieldValByName("createdBy", authUserDetails.getUsername(), metaObject);
         });
@@ -41,7 +44,13 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
 
     public AuthUserDetails getAuthUserDetails() {
         return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
-                .map(authentication -> (AuthUserDetails) authentication.getPrincipal())
+                .map(authentication -> {
+                    if (authentication.getPrincipal() instanceof AuthUserDetails authUserDetails) {
+                        return authUserDetails;
+                    }
+                    final String s = "" + authentication.getPrincipal();
+                    return AuthUserDetails.builder().username(s).realName(s).build();
+                })
                 .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }
 }

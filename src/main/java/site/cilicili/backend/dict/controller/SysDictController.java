@@ -64,7 +64,9 @@ public class SysDictController {
      * @return R
      */
     @PostMapping("edit-dict")
-    public R editDict(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final SysDictDto.AddOrEditResponse editRequest) {
+    public R editDict(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final SysDictDto.AddOrEditResponse editRequest) {
         return sysDictService.editDict(authUserDetails, editRequest);
     }
 
@@ -74,7 +76,9 @@ public class SysDictController {
      * @return R
      */
     @PostMapping("delete-dict-by-id")
-    public R deleteDictById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final QueryAndDeleteRequest queryAndDeleteRequest) {
+    public R deleteDictById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final QueryAndDeleteRequest queryAndDeleteRequest) {
         return sysDictService.deleteDictById(authUserDetails, queryAndDeleteRequest);
     }
 }

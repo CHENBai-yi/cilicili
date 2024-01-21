@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.authentication.user.repository.UserRepository;
+import site.cilicili.common.exception.Error;
 
 /**
  * @author BaiYiChen
@@ -21,12 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
-                .findByUsername(username)
+                .findByOnlineUsername(username)
                 .map(userEntity -> AuthUserDetails.builder()
                         .id(userEntity.getId())
                         .username(userEntity.getUsername())
                         .roleCode(userEntity.getRoleCode())
+                        .realName(userEntity.getRealName())
                         .build())
-                .orElse(null);
+                .orElseThrow(() -> new UsernameNotFoundException(Error.KICKED_USER.getMessage()));
     }
 }

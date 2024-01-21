@@ -97,7 +97,8 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R addDict(final AddDictRequest addDictRequest) {
-        return Optional.of(save(BeanUtil.toBean(addDictRequest, SysDictEntity.class))).filter(f -> f)
+        return Optional.of(save(BeanUtil.toBean(addDictRequest, SysDictEntity.class)))
+                .filter(f -> f)
                 .map(r -> R.yes("添加成功."))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
@@ -106,7 +107,8 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
     @Transactional(readOnly = true)
     public R queryDictById(final QueryAndDeleteRequest queryAndDeleteRequest) {
         return Optional.ofNullable(baseMapper.queryDictById(queryAndDeleteRequest.id()))
-                .map(records -> R.yes("查找成功.").setData(SysDictDto.builder().records(records).build()))
+                .map(records -> R.yes("查找成功.")
+                        .setData(SysDictDto.builder().records(records).build()))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 
@@ -128,7 +130,5 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
                 .filter(this::removeById)
                 .map(sysDictEntity -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
-
     }
-
 }

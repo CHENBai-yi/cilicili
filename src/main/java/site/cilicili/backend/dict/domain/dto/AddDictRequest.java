@@ -17,9 +17,12 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AddDictRequest {
     @NotNull String dictCode;
+
     @NotNull String dictLabel;
+
     @JacksonInject("stable")
     String stable;
+
     String memo;
     String sort;
     String status;

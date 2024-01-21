@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.cilicili.backend.log.mapper.SysLogLoginMapper">
+    
+    <resultMap type="site.cilicili.backend.log.domain.pojo.SysLogLoginEntity" id="SysLogLoginMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="loginUsername" column="login_username" jdbcType="VARCHAR"/>
+        <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
+        <result property="loginBrowser" column="login_browser" jdbcType="VARCHAR"/>
+        <result property="loginOs" column="login_os" jdbcType="VARCHAR"/>
+        <result property="loginPlatform" column="login_platform" jdbcType="VARCHAR"/>
+        <result property="loginSuccess" column="login_success" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysLogLoginMap">
+        select id,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at,
+               sort,
+               stable,
+               status,
+               memo,
+               login_username,
+               login_ip,
+               login_browser,
+               login_os,
+               login_platform,
+               login_success
+        from sys_log_login
+        where id = #{id}
+    </select>
+    
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="SysLogLoginMap">
+        select
+        id, created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo, login_username,
+        login_ip, login_browser, login_os, login_platform, login_success
+        from sys_log_login
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="stable != null and stable != ''">
+                and stable = #{stable}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="memo != null and memo != ''">
+                and memo = #{memo}
+            </if>
+            <if test="loginUsername != null and loginUsername != ''">
+                and login_username = #{loginUsername}
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                and login_ip = #{loginIp}
+            </if>
+            <if test="loginBrowser != null and loginBrowser != ''">
+                and login_browser = #{loginBrowser}
+            </if>
+            <if test="loginOs != null and loginOs != ''">
+                and login_os = #{loginOs}
+            </if>
+            <if test="loginPlatform != null and loginPlatform != ''">
+                and login_platform = #{loginPlatform}
+            </if>
+            <if test="loginSuccess != null and loginSuccess != ''">
+                and login_success = #{loginSuccess}
+            </if>
+        </where>
+    </select>
+    
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from sys_log_login
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="stable != null and stable != ''">
+                and stable = #{stable}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="memo != null and memo != ''">
+                and memo = #{memo}
+            </if>
+            <if test="loginUsername != null and loginUsername != ''">
+                and login_username = #{loginUsername}
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                and login_ip = #{loginIp}
+            </if>
+            <if test="loginBrowser != null and loginBrowser != ''">
+                and login_browser = #{loginBrowser}
+            </if>
+            <if test="loginOs != null and loginOs != ''">
+                and login_os = #{loginOs}
+            </if>
+            <if test="loginPlatform != null and loginPlatform != ''">
+                and login_platform = #{loginPlatform}
+            </if>
+            <if test="loginSuccess != null and loginSuccess != ''">
+                and login_success = #{loginSuccess}
+            </if>
+        </where>
+    </select>
+    
+    <resultMap type="site.cilicili.backend.log.domain.dto.QueryLogResponse$LogLogin" id="SysLogLoginList">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="stable" column="stable" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="memo" column="memo" jdbcType="VARCHAR"/>
+        <result property="loginUsername" column="login_username" jdbcType="VARCHAR"/>
+        <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
+        <result property="loginBrowser" column="login_browser" jdbcType="VARCHAR"/>
+        <result property="loginOs" column="login_os" jdbcType="VARCHAR"/>
+        <result property="loginPlatform" column="login_platform" jdbcType="VARCHAR"/>
+        <result property="loginSuccess" column="login_success" jdbcType="VARCHAR"/>
+        <association property="createdByUser" column="created_by=created_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findCreatedByUser"/>
+        <association property="updatedByUser" column="updated_by=updated_by"
+                     select="site.cilicili.backend.role.mapper.SysRoleMapper.findUpdatedByUser"/>
+    </resultMap>
+    <select id="queryLogLoginList" resultMap="SysLogLoginList">
+        select * from sys_log_login
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="loginSuccess!=null and loginSuccess!=''">
+                    <bind name="rcl" value="'%'+loginSuccess+'%'"/>
+                    login_success like #{rcl}
+                </if>
+                <if test="loginUsername!=null and loginUsername!=''">
+                    <bind name="rl" value="'%'+loginUsername+'%'"/>
+                    and login_username like #{rl}
+                </if>
+            </trim>
+        </where>
+        <if test="desc">
+            order by #{sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
+    </select>
+    
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_login(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+                                  memo, login_username, login_ip, login_browser, login_os, login_platform,
+                                  login_success)
+        values (#{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt}, #{sort}, #{stable}, #{status},
+                #{memo}, #{loginUsername}, #{loginIp}, #{loginBrowser}, #{loginOs}, #{loginPlatform}, #{loginSuccess})
+    </insert>
+    
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_login(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+        memo, login_username, login_ip, login_browser, login_os, login_platform, login_success)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt},
+            #{entity.sort}, #{entity.stable}, #{entity.status}, #{entity.memo}, #{entity.loginUsername},
+            #{entity.loginIp}, #{entity.loginBrowser}, #{entity.loginOs}, #{entity.loginPlatform},
+            #{entity.loginSuccess})
+        </foreach>
+    </insert>
+    
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_login(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+        memo, login_username, login_ip, login_browser, login_os, login_platform, login_success)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt},
+            #{entity.sort}, #{entity.stable}, #{entity.status}, #{entity.memo}, #{entity.loginUsername},
+            #{entity.loginIp}, #{entity.loginBrowser}, #{entity.loginOs}, #{entity.loginPlatform},
+            #{entity.loginSuccess})
+        </foreach>
+        on duplicate key update
+        created_at = values(created_at),
+        created_by = values(created_by),
+        updated_at = values(updated_at),
+        updated_by = values(updated_by),
+        deleted_at = values(deleted_at),
+        sort = values(sort),
+        stable = values(stable),
+        status = values(status),
+        memo = values(memo),
+        login_username = values(login_username),
+        login_ip = values(login_ip),
+        login_browser = values(login_browser),
+        login_os = values(login_os),
+        login_platform = values(login_platform),
+        login_success = values(login_success)
+    </insert>
+    <insert id="insertLogLogin" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_log_login(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
+                                  memo, login_username, login_ip, login_browser, login_os, login_platform,
+                                  login_success)
+        values (#{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt},
+                #{sort}, #{stable}, #{status}, #{memo}, #{loginUsername},
+                #{loginIp}, #{loginBrowser}, #{loginOs}, #{loginPlatform},
+                #{loginSuccess})
+    
+    
+    </insert>
+    
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_log_login
+        <set>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="stable != null and stable != ''">
+                stable = #{stable},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="memo != null and memo != ''">
+                memo = #{memo},
+            </if>
+            <if test="loginUsername != null and loginUsername != ''">
+                login_username = #{loginUsername},
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                login_ip = #{loginIp},
+            </if>
+            <if test="loginBrowser != null and loginBrowser != ''">
+                login_browser = #{loginBrowser},
+            </if>
+            <if test="loginOs != null and loginOs != ''">
+                login_os = #{loginOs},
+            </if>
+            <if test="loginPlatform != null and loginPlatform != ''">
+                login_platform = #{loginPlatform},
+            </if>
+            <if test="loginSuccess != null and loginSuccess != ''">
+                login_success = #{loginSuccess},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from sys_log_login
+        where id = #{id}
+    </delete>
+
+
+</mapper>
+
+

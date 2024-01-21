@@ -13,12 +13,18 @@ public class AuthUserDetails implements UserDetails {
     private final Long id;
     private final String username;
     private final String roleCode;
+    private final String realName;
 
     @Builder
-    public AuthUserDetails(Long id, String username, String roleCode) {
+    public AuthUserDetails(Long id, String username, String roleCode, final String realName) {
         this.id = id;
         this.username = username;
         this.roleCode = roleCode;
+        this.realName = realName;
+    }
+
+    public String getRealName() {
+        return realName;
     }
 
     public String getRoleCode() {

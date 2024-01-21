@@ -3,6 +3,7 @@ package site.cilicili.backend.config.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.backend.config.domain.dto.QueryConfigRequest;
 import site.cilicili.backend.config.domain.dto.SysConfigFrontendDto;
 import site.cilicili.backend.config.domain.pojo.SysConfigFrontendEntity;
 
@@ -40,6 +41,7 @@ public interface SysConfigFrontendMapper extends BaseMapper<SysConfigFrontendEnt
      */
     long count(SysConfigFrontendEntity sysConfigFrontend);
 
+    @Override
     /**
      * 新增数据
      *
@@ -82,4 +84,6 @@ public interface SysConfigFrontendMapper extends BaseMapper<SysConfigFrontendEnt
     int deleteById(Long id);
 
     List<SysConfigFrontendDto.Records> queryConfigFrontAll();
+
+    List<SysConfigFrontendDto.Records> queryConfigFrontendList(QueryConfigRequest queryFrontendRequest);
 }

@@ -78,7 +78,9 @@ public class SysMenuController {
             summary = "根据id删除菜单",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("delete-menu-by-id")
-    public R deleteMenuById(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final FindOrDeleteRequest findOrDeleteRequest) {
+    public R deleteMenuById(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final FindOrDeleteRequest findOrDeleteRequest) {
         return sysMenuService.deleteMenuById(authUserDetails, findOrDeleteRequest);
     }
 
@@ -92,9 +94,14 @@ public class SysMenuController {
             summary = "添加菜单",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("add-menu")
-    public R addMenu(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final AddMenuRequest addMenuRequest, Errors errors) {
+    public R addMenu(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final AddMenuRequest addMenuRequest,
+            Errors errors) {
         if (!errors.getFieldErrors().isEmpty()) {
-            return R.no(errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining()));
+            return R.no(errors.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining()));
         }
         return sysMenuService.addMenu(authUserDetails, addMenuRequest);
     }
@@ -109,7 +116,9 @@ public class SysMenuController {
             summary = "编辑菜单",
             parameters = {@Parameter(description = "Long 筛选条件")})
     @PostMapping("edit-menu")
-    public R editMenu(@AuthenticationPrincipal AuthUserDetails authUserDetails, @RequestBody @Validated final SysMenuDto.EditMenuRequest addMenuRequest) {
+    public R editMenu(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated final SysMenuDto.EditMenuRequest addMenuRequest) {
         return sysMenuService.editMenu(authUserDetails, addMenuRequest);
     }
 }

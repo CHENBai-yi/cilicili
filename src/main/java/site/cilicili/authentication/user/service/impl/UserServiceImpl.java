@@ -2,6 +2,8 @@ package site.cilicili.authentication.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.redisson.api.RHyperLogLog;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +12,15 @@ import site.cilicili.authentication.user.dto.UserDto;
 import site.cilicili.authentication.user.entity.UserEntity;
 import site.cilicili.authentication.user.repository.UserRepository;
 import site.cilicili.authentication.user.service.UserService;
+import site.cilicili.backend.log.service.SysLogLoginService;
+import site.cilicili.backend.user.domain.dto.KickOnlineUserRequest;
+import site.cilicili.backend.user.service.SysUserOnlineService;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.JwtUtils;
+import site.cilicili.common.util.R;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -25,6 +32,9 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     private final UserRepository userRepository;
     private final JwtUtils jwtUtils;
     private final PasswordEncoder passwordEncoder;
+    private final SysUserOnlineService sysUserOnlineService;
+    private final SysLogLoginService sysLogLoginService;
+    private final RHyperLogLog<Object> ipAddressHyperLogLog;
 
     @Override
     public UserDto registration(final UserDto.Registration registration) {
@@ -43,24 +53,34 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
         return convertEntityToDto(userEntity);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(rollbackFor = Throwable.class)
     @Override
-    public UserDto login(UserDto.Login login) {
-        UserEntity userEntity = userRepository
-                .findByUsername(login.getUsername())
-                .filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword()))
-                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
-        return convertEntityToDto(userEntity);
+    public R login(UserDto.Login login, final HttpHeaders headers) {
+        ipAddressHyperLogLog.add(Objects.requireNonNull(headers.getHost()).getHostString());
+        return Optional.ofNullable(sysUserOnlineService.queryById(login.getUsername(), null))
+                .map(r -> R.no(Error.ALREADY_LOGIN.getMessage()))
+                .orElseGet(() -> userRepository
+                        .findByUsername(login.getUsername())
+                        .filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword()))
+                        .map(this::convertEntityToDto)
+                        .map(userDto -> R.yes("登录成功.").setData(userDto))
+                        .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage())));
+
     }
 
     private UserDto convertEntityToDto(UserEntity userEntity) {
-        return UserDto.builder()
-                .username(userEntity.getUsername())
-                .nickname(userEntity.getNickname())
-                .avatar(userEntity.getAvatar())
-                .realName(userEntity.getNickname())
-                .token(jwtUtils.encode(userEntity.getUsername()))
-                .build();
+        final String username = userEntity.getUsername();
+        final String encode = jwtUtils.encode(username);
+        return Optional.of(sysUserOnlineService.insertOrUpdate(username, encode))
+                .filter(f -> f)
+                .map(f -> UserDto.builder()
+                        .username(username)
+                        .nickname(userEntity.getNickname())
+                        .avatar(userEntity.getAvatar())
+                        .realName(userEntity.getNickname())
+                        .token(encode)
+                        .build())
+                .orElse(null);
     }
 
     @Transactional(readOnly = true)
@@ -110,5 +130,11 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
         userRepository.insert(userEntity);
         return convertEntityToDto(userEntity);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public R logout(final AuthUserDetails authUserDetails, final KickOnlineUserRequest kickOnlineUserRequest) {
+        return Optional.ofNullable(authUserDetails).map(auth -> this.sysUserOnlineService.kickOnlineUser(kickOnlineUserRequest)).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

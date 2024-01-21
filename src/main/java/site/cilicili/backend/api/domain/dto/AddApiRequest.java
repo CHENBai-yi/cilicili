@@ -18,17 +18,17 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AddApiRequest {
     String status;
-    @NotNull(message = "排序不能为空")
-    @Positive(message = "排序值必须为正数")
-    String sort;
+
+    @NotNull(message = "排序不能为空") @Positive(message = "排序值必须为正数") String sort;
+
     String memo;
-    @NotNull(message = "API路径不能为空")
-    String apiPath;
-    @NotNull(message = "API方法不能为空")
-    String apiMethod;
-    @NotNull(message = "API分组不能为空")
-    String apiGroup;
+
+    @NotNull(message = "API路径不能为空") String apiPath;
+
+    @NotNull(message = "API方法不能为空") String apiMethod;
+
+    @NotNull(message = "API分组不能为空") String apiGroup;
+
     @JacksonInject("stable")
     String stable;
 }
-

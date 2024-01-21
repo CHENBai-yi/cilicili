@@ -159,6 +159,30 @@
         select *
         from sys_config_backend;
     </select>
+    <select id="getConfigBackendList" resultMap="ConfigBackendDto">
+        select *
+        from sys_config_backend
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="configItem!=null and configItem!=''">
+                    <bind name="rcl" value="'%'+configItem+'%'"/>
+                    config_item like #{rcl}
+                </if>
+                <if test="memo!=null and memo!=''">
+                    <bind name="rl" value="'%'+memo+'%'"/>
+                    or memo like #{rl}
+                </if>
+            </trim>
+        </where>
+        <if test="desc">
+            order by #{sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

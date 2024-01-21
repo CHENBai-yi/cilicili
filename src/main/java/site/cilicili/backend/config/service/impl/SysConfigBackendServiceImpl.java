@@ -1,15 +1,19 @@
 package site.cilicili.backend.config.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.cilicili.backend.config.domain.dto.SysConfigBackendDto;
+import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.config.domain.dto.*;
 import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 import site.cilicili.backend.config.mapper.SysConfigBackendMapper;
 import site.cilicili.backend.config.service.SysConfigBackendService;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 
 import java.util.Optional;
@@ -93,5 +97,28 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
                 .map(records -> R.yes("Success.")
                         .setData(SysConfigBackendDto.builder().records(records).build()))
                 .orElse(R.no("没有更多了."));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public R getConfigBackendList(final QueryConfigRequest queryBackRequest) {
+        return Optional.ofNullable(baseMapper.getConfigBackendList(queryBackRequest)).map(records -> R.yes("Success.")
+                .setData(SysConfigFrontendDto.builder().records(records).build())).orElse(R.no("没有更多了."));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public R configBackendAdd(final AddConfigRequest addConfigRequest) {
+        return Optional.of(save(BeanUtil.toBean(addConfigRequest, SysConfigBackendEntity.class))).filter(f -> f).map(f -> R.yes("添加成功.")).orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public R editConfigBackend(final AuthUserDetails authUserDetails, final EditedBackendConfigRequest editedBackendConfigRequest) {
+        return Optional.ofNullable(authUserDetails)
+                .map(auth -> (baseMapper.selectById(editedBackendConfigRequest.getId())))
+                .filter(sysConfigFrontendEntity -> updateById(editedBackendConfigRequest))
+                .map(sysConfigFrontendEntity -> R.yes(String.format("%1$s修改成功.", authUserDetails.getusername())))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }
