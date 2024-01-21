@@ -1,5 +1,6 @@
 {
   "name": "cilicili-quasar-admin",
+  "license": "MIT",
   "version": "2.9.0",
   "description": "A full-featured management system based on Quasar2, Vue3, SpringBoot, cilicili, CILICILI",
   "productName": "Cilicili后台管理系统",

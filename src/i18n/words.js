@@ -249,6 +249,11 @@ export default {
     "en-US": "Actions",
     "ru": "Действия"
   },
+  Duration: {
+    "zh-CN": "在线时长",
+    "en-US": "Duration",
+    "ru": "Длительность"
+  },
   Avatar: {
     "zh-CN": "头像",
     "en-US": "Avatar",

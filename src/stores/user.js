@@ -11,10 +11,12 @@ export const useUserStore = defineStore('user', {
     realName: undefined,
     avatar: undefined,
     rememberMe: true,
+    option: {expires: 7, sameSite: "Strict"}
   }),
   getters: {},
   actions: {
     async HandleLogin(loginForm) {
+      if (!!this.GetToken()) return true;
       const res = await postAction('public/login', loginForm)
       if (res.code === 1) {
         const token = res.data.token
@@ -24,13 +26,13 @@ export const useUserStore = defineStore('user', {
         const avatar = res.data.avatar
         this.SetToken(token)
         this.username = username
-        Cookies.set('gqa-username', username)
+        Cookies.set('gqa-username', username, this.option)
         this.nickname = nickname
-        Cookies.set('gqa-nickname', nickname)
+        Cookies.set('gqa-nickname', nickname, this.option)
         this.realName = realName
-        Cookies.set('gqa-realName', realName)
+        Cookies.set('gqa-realName', realName, this.option)
         this.avatar = avatar
-        Cookies.set('gqa-avatar', avatar)
+        Cookies.set('gqa-avatar', avatar, this.option)
         return true
       } else {
         return
@@ -39,13 +41,22 @@ export const useUserStore = defineStore('user', {
     SetToken(token) {
       this.token = token
       if (this.rememberMe) {
-        Cookies.set('gqa-token', token)
+        Cookies.set('gqa-token', token, this.option)
       } else {
         SessionStorage.set('gqa-token', token)
       }
     },
     ChangeRememberMe(type) {
       this.rememberMe = type
+    },
+    async HandleUserLogout() {
+      if (!!this.GetToken()) {
+        const res = await postAction("public/logout", {username: this.username, token: this.GetToken()})
+        if (res.code === 1) {
+          this.HandleLogout()
+        }
+        return res.message;
+      }
     },
     HandleLogout() {
       const permissionStore = usePermissionStore()
