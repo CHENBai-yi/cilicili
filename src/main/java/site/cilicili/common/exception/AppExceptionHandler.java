@@ -55,7 +55,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return ok;
     }
 
-    @ExceptionHandler({JwtException.class, UsernameNotFoundException.class, ServletException.class, AppException.RefreshTokenException.class})
+    @ExceptionHandler({
+            JwtException.class,
+            UsernameNotFoundException.class,
+            ServletException.class,
+            AppException.RefreshTokenException.class
+    })
     public void handleAppException(Exception exception) {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

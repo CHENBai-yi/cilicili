@@ -77,7 +77,7 @@ public class LogOperationAspect {
                     }
                     return null;
                 })
-                .map(sysLogOperationDto -> BeanUtil.toBean(sysLogOperationDto, SysLogOperationEntity.class))
+                .map(sysLogOperationDto -> BeanUtil.toBean(sysLogOperationDto.build(), SysLogOperationEntity.class))
                 .ifPresent(sysLogOperationService::insert);
     }
 }

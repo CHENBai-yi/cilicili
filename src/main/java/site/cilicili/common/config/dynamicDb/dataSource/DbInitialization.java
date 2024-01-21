@@ -52,7 +52,8 @@ public class DbInitialization implements CommandLineRunner {
     }
 
     public Boolean isValid() {
-        return Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).isPresent();
+        return Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))
+                .isPresent();
     }
 
     public boolean setConnections(final DatabaseConnection connections) {
@@ -60,38 +61,45 @@ public class DbInitialization implements CommandLineRunner {
     }
 
     public boolean resolveSource(final List<DatabaseConnection> connections) {
-        return Optional.ofNullable(connections).map(databaseConnections -> {
-            try {
-                final Map<Object, Object> dataSourceMap = databaseConnections.stream().collect(Collectors.toMap(DatabaseConnection::getScheme, connection -> {
-                    final DruidDataSource druidDataSource = DbSourceToDruidDataSource.DB_SOURCE_TO_DRUID_DATA_SOURCE.toDruidDataSource(connection);
+        return Optional.ofNullable(connections)
+                .map(databaseConnections -> {
                     try {
-                        druidDataSource.setDriverClassName(connection.getDriver());
-                        druidDataSource.setDefaultAutoCommit(true);
-                        druidDataSource.setAsyncInit(true);
-                        druidDataSource.setKillWhenSocketReadTimeout(true);
-                        druidDataSource.setValidationQuery("select 1;");
-                        druidDataSource.setConnectionErrorRetryAttempts(3);
-                        druidDataSource.setFailFast(true);
-                        druidDataSource.init();
-                    } catch (SQLException e) {
+                        final Map<Object, Object> dataSourceMap = databaseConnections.stream()
+                                .collect(Collectors.toMap(
+                                        DatabaseConnection::getScheme,
+                                        connection -> {
+                                            final DruidDataSource druidDataSource =
+                                                    DbSourceToDruidDataSource.DB_SOURCE_TO_DRUID_DATA_SOURCE
+                                                            .toDruidDataSource(connection);
+                                            try {
+                                                druidDataSource.setDriverClassName(connection.getDriver());
+                                                druidDataSource.setDefaultAutoCommit(true);
+                                                druidDataSource.setAsyncInit(true);
+                                                druidDataSource.setKillWhenSocketReadTimeout(true);
+                                                druidDataSource.setValidationQuery("select 1;");
+                                                druidDataSource.setConnectionErrorRetryAttempts(3);
+                                                druidDataSource.setFailFast(true);
+                                                druidDataSource.init();
+                                            } catch (SQLException e) {
+                                                log.error(e.getMessage());
+                                                return null;
+                                            }
+                                            return druidDataSource;
+                                        },
+                                        (value1, value2) -> value1));
+                        if (!dataSourceMap.isEmpty()) {
+                            final Map<Object, DataSource> resolvedDataSources = dataSourceList.getResolvedDataSources();
+                            dataSourceMap.putAll(resolvedDataSources);
+                            dataSourceList.setTargetDataSources(dataSourceMap);
+                            dataSourceList.setDefaultTargetDataSource(CollUtil.getFirst(dataSourceMap.values()));
+                            dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
+                        }
+                    } catch (Exception e) {
                         log.error(e.getMessage());
-                        return null;
                     }
-                    return druidDataSource;
-                }, (value1, value2) -> value1));
-                if (!dataSourceMap.isEmpty()) {
-                    final Map<Object, DataSource> resolvedDataSources = dataSourceList.getResolvedDataSources();
-                    dataSourceMap.putAll(resolvedDataSources);
-                    dataSourceList.setTargetDataSources(dataSourceMap);
-                    dataSourceList.setDefaultTargetDataSource(CollUtil.getFirst(dataSourceMap.values()));
-                    dataSourceList.afterPropertiesSet(); // 重新解析数据源数量
-
-                }
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
-            return isValid();
-        }).orElse(false);
+                    return isValid();
+                })
+                .orElse(false);
     }
 
     /**

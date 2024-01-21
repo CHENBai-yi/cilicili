@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,7 +93,7 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "SysConfigFrontend", key = "#root.methodName")
+    @Cacheable(key = "#root.methodName")
     @Override
     public R queryConfigFrontAll() {
         return Optional.ofNullable(baseMapper.queryConfigFrontAll())
@@ -112,6 +113,7 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(allEntries = true)
     public R configFrontendAdd(final AddConfigRequest addConfigRequest) {
         return Optional.of(save(BeanUtil.toBean(addConfigRequest, SysConfigFrontendEntity.class)))
                 .filter(f -> f)
@@ -121,6 +123,7 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(allEntries = true)
     public R editConfigFrontend(
             final AuthUserDetails authUserDetails, final EditedFrontendConfigRequest editedFrontendConfigRequest) {
         return Optional.ofNullable(authUserDetails)

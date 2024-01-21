@@ -19,7 +19,6 @@ import java.util.Optional;
 /**
  * @author BaiYiChen
  */
-
 public class JwtUtils {
     private final Long validSeconds;
     private final Key key;

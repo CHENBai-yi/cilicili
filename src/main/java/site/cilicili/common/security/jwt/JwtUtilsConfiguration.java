@@ -16,7 +16,8 @@ public class JwtUtilsConfiguration {
     public JwtUtils getJwtUtils(
             @Value("${cilicili.auth.token.sign-key}") String signKey,
             @Value("${cilicili.auth.token.valid-time}") Long validTime,
-            @Value("${cilicili.auth.token.refresh-at}") Long refreshAt, AppExceptionHandler appExceptionHandler)
+            @Value("${cilicili.auth.token.refresh-at}") Long refreshAt,
+            AppExceptionHandler appExceptionHandler)
             throws Exception {
         if (signKey.length() < 32) {
             throw new Exception("signKey must have length at least 32");
