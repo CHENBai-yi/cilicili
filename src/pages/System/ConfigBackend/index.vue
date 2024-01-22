@@ -99,6 +99,7 @@
 </template>
 
 <script setup>
+import RecordDetail from './modules/recordDetail.vue'
 import useTableData from 'src/composables/useTableData'
 import {postAction} from 'src/api/manage'
 import {computed, onMounted} from 'vue'

@@ -182,6 +182,7 @@ import {postAction} from 'src/api/manage'
 import {useStorageStore} from 'src/stores/storage'
 import RecordDetail from './modules/recordDetail.vue'
 import {CheckComponent} from 'src/utils/check'
+import RecordDetail from './modules/recordDetail.vue'
 
 const storageStore = useStorageStore()
 const url = {
