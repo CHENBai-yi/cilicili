@@ -104,7 +104,6 @@ import useTableData from 'src/composables/useTableData'
 import {postAction} from 'src/api/manage'
 import {computed, onMounted} from 'vue'
 import {useStorageStore} from 'src/stores/storage'
-import RecordDetail from './modules/recordDetail.vue'
 import useTheme from 'src/composables/useTheme';
 
 const storageStore = useStorageStore()

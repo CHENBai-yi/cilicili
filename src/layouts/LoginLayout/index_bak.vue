@@ -55,6 +55,7 @@
 import useCommon from 'src/composables/useCommon'
 import {computed, onBeforeMount, ref} from 'vue'
 import SimpleView from './SimpleView/index.vue'
+
 import ComplexView from './ComplexView/index.vue'
 import InitDbView from './InitDbView/index.vue'
 import {useStorageStore} from 'src/stores/storage'
@@ -79,11 +80,11 @@ const dbNeedInit = ref(false)
 
 const loginLayout = computed(() => {
   if (gqaFrontend.value.loginLayoutStyle && gqaFrontend.value.loginLayoutStyle === 'loginLayoutStyle_login') {
-    return SimpleView
+    return Cli
   } else if (gqaFrontend.value.loginLayoutStyle && gqaFrontend.value.loginLayoutStyle === 'loginLayoutStyle_portal') {
-    return ComplexView
+    return Cli
   } else {
-    return SimpleView
+    return Cli
   }
 })
 

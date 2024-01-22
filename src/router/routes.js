@@ -3,7 +3,7 @@ export const PublicRoutes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('layouts/LoginLayout/login.vue'),
+    component: () => import('layouts/LoginLayout/index.vue'),
     children: []
   },
   {

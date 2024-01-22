@@ -4,9 +4,9 @@
     <q-page-container>
       <page-banner/>
       <component :is="pluginComponent" v-if="pluginCurrent && pluginComponent" :key="pluginCurrent"/>
-      <q-card v-else class="row items-center justify-center" style="padding: 20px 0;">
-        <q-btn :label="$t('LoginLayoutWithoutPlugin')" color="primary"></q-btn>
-      </q-card>
+      <!--      <q-card v-else class="row items-center justify-center" style="padding: 20px 0;">-->
+      <!--        <q-btn :label="$t('LoginLayoutWithoutPlugin')" color="primary"></q-btn>-->
+      <!--      </q-card>-->
       <page-footer/>
       <q-page-scroller :offset="[3, 18]" :scroll-offset="150" position="bottom-right">
         <q-btn color="primary" dense fab icon="keyboard_arrow_up" push/>
@@ -36,10 +36,10 @@ const {pluginComponent} = toRefs(props)
 const showScrollDown = ref(true)
 
 onBeforeMount(() => {
-  window.addEventListener('scroll', documentTop())
+  window.addEventListener('scroll', documentTop)
 })
 onUnmounted(() => {
-  window.removeEventListener('scroll', documentTop())
+  window.removeEventListener('scroll', documentTop)
 })
 
 const documentTop = () => {

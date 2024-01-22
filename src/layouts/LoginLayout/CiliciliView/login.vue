@@ -75,15 +75,15 @@ import GqaLanguage from 'src/components/GqaLanguage/index.vue'
 import {computed, onBeforeMount, ref} from 'vue'
 import DarkTheme from 'src/components/GqaTheme/DarkTheme.vue';
 import {randomWelcome} from 'src/utils/welcome'
-import DbInit from './myInitDbView/index.vue'
+import DbInit from '../myInitDbView/index.vue'
 import PageFooter from 'src/layouts/MainLayout/PageFooter.vue'
-import {useStorageStore} from 'src/stores/storage'
+import {useStorageStore} from 'stores/storage'
 import {useQuasar} from 'quasar'
 import {postAction} from "src/api/manage";
 import useCommon from "src/composables/useCommon";
-import {useUserStore} from 'src/stores/user'
+import {useUserStore} from 'stores/user'
 
-import {usePermissionStore} from 'src/stores/permission';
+import {usePermissionStore} from 'stores/permission';
 import {useRouter} from 'vue-router';
 
 const {gqaFrontend} = useCommon()

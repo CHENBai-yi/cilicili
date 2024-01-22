@@ -23,15 +23,15 @@
                     @click="isPwd = !isPwd"/>
           </template>
         </q-input>
-        <q-input v-model.trim="form.captcha" :disable="loading" :placeholder="$t('Captcha')"
-                 :rules="[(val) => (val && val.length > 0) || $t('NeedInput')]" color="black" dense no-error-icon
-                 outlined rounded>
-          <template v-slot:after>
-            <q-btn padding="none" style="width: 120px; height: 100%" @click="getCaptcha">
-              <q-img :src="captchaImage"/>
-            </q-btn>
-          </template>
-        </q-input>
+        <!--        <q-input v-model.trim="form.captcha" :disable="loading" :placeholder="$t('Captcha')"-->
+        <!--                 :rules="[(val) => (val && val.length > 0) || $t('NeedInput')]" color="black" dense no-error-icon-->
+        <!--                 outlined rounded>-->
+        <!--          <template v-slot:after>-->
+        <!--            <q-btn padding="none" style="width: 120px; height: 100%" @click="getCaptcha">-->
+        <!--              <q-img :src="captchaImage"/>-->
+        <!--            </q-btn>-->
+        <!--          </template>-->
+        <!--        </q-input>-->
         <div class="column q-gutter-y-md q-mt-none">
           <q-checkbox v-model="rememberMe" :disable="loading" :label="$t('RememberMe')" dense
                       @update:model-value="changeRememberMe"/>
