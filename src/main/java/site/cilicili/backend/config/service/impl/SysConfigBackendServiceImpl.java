@@ -99,8 +99,7 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
     public R queryConfigBackendAll() {
         return Optional.ofNullable(baseMapper.queryConfigBackendAll())
                 .map(records -> R.yes("Success.")
-                        .setData(SysConfigBackendDto.builder()
-                                .records(records).build()))
+                        .setData(SysConfigBackendDto.builder().records(records).build()))
                 .orElse(R.no("没有更多了."));
     }
 

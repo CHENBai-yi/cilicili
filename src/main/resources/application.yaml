@@ -5,6 +5,6 @@ cilicili:
   auth:
     token:
       sign-key: signKey012345678901234567890123456789
-      valid-time: 36000
+      valid-time: 360000
 #      valid-time: 15
       refresh-at: 3

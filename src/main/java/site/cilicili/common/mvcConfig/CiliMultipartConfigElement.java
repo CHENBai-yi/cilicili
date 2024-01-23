@@ -19,7 +19,7 @@ import java.util.Optional;
  * @author BaiYiChen
  */
 public class CiliMultipartConfigElement extends MultipartConfigElement {
-    private static final Long UNIT = 1024 * 1024L;
+    public static final Long UNIT = 1024 * 1024L;
     private final SysConfigBackendService sysConfigBackendService;
 
     public CiliMultipartConfigElement(

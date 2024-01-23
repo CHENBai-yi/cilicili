@@ -88,6 +88,9 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 response.addHeader("Access-Control-Expose-Headers", "refresh-token");
                 response.addHeader("refresh-token", e.getNewToken());
                 r = R.yes("token已刷新").setData("refresh", true);
+            } else {
+                response.setStatus(HttpStatus.OK.value());
+                r = R.no(exception.getMessage());
             }
             writer.write(objectMapper.writeValueAsString(r));
             writer.flush();

@@ -3,6 +3,7 @@ package site.cilicili.backend.upAndown.upload.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,13 +21,35 @@ import site.cilicili.common.util.R;
  */
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("upload")
 public class FileUploadController {
     private final UploadService uploadService;
 
-    @PostMapping({"upload/upload-avatar", "upload/upload-banner-image"})
+    @PostMapping({"upload-avatar"})
     public R uploadUserAvatar(
             @AuthenticationPrincipal AuthUserDetails authUserDetails,
             @RequestPart(name = "file") MultipartFile[] multipartFile) {
         return uploadService.uploadUserAvatar(authUserDetails, multipartFile);
+    }
+
+    @PostMapping({"upload-banner-image"})
+    public R uploadBannerImage(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestPart(name = "file") MultipartFile[] multipartFile) {
+        return uploadService.uploadBannerImage(authUserDetails, multipartFile);
+    }
+
+    @PostMapping({"upload-logo"})
+    public R uploadLogo(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestPart(name = "file") MultipartFile[] multipartFile) {
+        return uploadService.uploadLogo(authUserDetails, multipartFile);
+    }
+
+    @PostMapping({"upload-favicon"})
+    public R uploadFavicon(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestPart(name = "file") MultipartFile[] multipartFile) {
+        return uploadService.uploadFavicon(authUserDetails, multipartFile);
     }
 }

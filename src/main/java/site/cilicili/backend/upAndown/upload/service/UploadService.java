@@ -14,4 +14,10 @@ import site.cilicili.common.util.R;
  */
 public interface UploadService {
     R uploadUserAvatar(AuthUserDetails authUserDetails, MultipartFile[] multipartFile);
+
+    R uploadBannerImage(AuthUserDetails authUserDetails, MultipartFile[] multipartFile);
+
+    R uploadLogo(AuthUserDetails authUserDetails, MultipartFile[] multipartFile);
+
+    R uploadFavicon(AuthUserDetails authUserDetails, MultipartFile[] multipartFile);
 }

@@ -28,8 +28,6 @@ import site.cilicili.backend.config.service.SysConfigBackendService;
 import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.constant.ConfigBackend.BackendConfigItem;
-import site.cilicili.common.exception.AppException;
-import site.cilicili.common.exception.Error;
 
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
@@ -56,9 +54,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Value("${requestPath.avatar:avatar}")
     private String avatarRequestPath;
+    @Value("${requestPath.banner:banner}")
+    private String bannerRequestPath;
+    @Value("${requestPath.logo:logo}")
+    private String logoRequestPath;
+    @Value("${requestPath.favicon:favicon}")
+    private String faviconRequestPath;
 
     @Value("${requestPath.avatarPrefix:gqa-upload:}")
-    private String avatarPrefix;
+    private String commonPrefix;
 
     @PostConstruct
     public void postInit() {
@@ -83,25 +87,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         objectMapper.setInjectableValues(std);
     }
 
-    // @Override
-    // public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-    //     Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner())).ifPresent(it -> {
-    //         final String location = Optional.ofNullable(sysConfigBackendService
-    //                         .getBaseMapper()
-    //                         .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-    //                                 .eq(
-    //                                         BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-    //                                         BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
-    //                 .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
-    //                         .filter(StrUtil::isNotBlank)
-    //                         .orElse(sysConfigBackendEntity.getItemDefault()))
-    //                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
-    //         registry.addResourceHandler(String.format("/%1$s/**", location))
-    //                 .addResourceLocations(String.format("file:%1$s/", location));
-    //     });
-    //     WebMvcConfigurer.super.addResourceHandlers(registry);
-    // }
-    private String getAvatarSavePathFromDatabase() {
+    private String getAvatarSavePathFromDatabase(String item) {
         // 从数据库中获取头像保存路径配置
         return Optional.ofNullable(dbInitialization.isValid())
                 .filter(f -> f)
@@ -110,11 +96,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         .selectOne(new QueryWrapper<SysConfigBackendEntity>()
                                 .eq(
                                         BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getItem())))
+                                        item)))
                 .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                         .filter(StrUtil::isNotBlank)
                         .orElse(sysConfigBackendEntity.getItemDefault()))
-                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                .orElse(null);
     }
 
     @Override
@@ -148,7 +134,110 @@ public class WebMvcConfig implements WebMvcConfigurer {
                             final String resourceUrlPath,
                             final List<? extends Resource> locations,
                             final ResourceResolverChain chain) {
-                        String avatarSavePath = getAvatarSavePathFromDatabase();
+                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADAVATARSAVEPATH.getItem());
+                        Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
+                        return requestedPath.toUri().toString();
+                    }
+                });
+        registry.addResourceHandler(String.format("/%1$s/**", bannerRequestPath).trim())
+                .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS).cachePublic())
+                .resourceChain(true)
+                .addResolver(new AbstractResourceResolver() {
+                    @Override
+                    protected Resource resolveResourceInternal(
+                            final HttpServletRequest request,
+                            final String requestPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
+                        try {
+                            final String s = resolveUrlPathInternal(requestPath, locations, chain);
+                            // 检查资源是否存在，避免抛出异常
+                            return Optional.of(new UrlResource(s))
+                                    .filter(resource -> resource.exists() && resource.isReadable())
+                                    .orElse(null); // 返回null表示资源不存在，可以让PathResourceResolver使用默认的处理方式
+                        } catch (Exception e) {
+                            if (logger.isDebugEnabled()) {
+                                logger.error(e.getMessage());
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected String resolveUrlPathInternal(
+                            final String resourceUrlPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
+                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADBANNERIMAGESAVEPATH.getItem());
+                        Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
+                        return requestedPath.toUri().toString();
+                    }
+                });
+
+        registry.addResourceHandler(String.format("/%1$s/**", logoRequestPath).trim())
+                .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS).cachePublic())
+                .resourceChain(true)
+                .addResolver(new AbstractResourceResolver() {
+                    @Override
+                    protected Resource resolveResourceInternal(
+                            final HttpServletRequest request,
+                            final String requestPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
+                        try {
+                            final String s = resolveUrlPathInternal(requestPath, locations, chain);
+                            // 检查资源是否存在，避免抛出异常
+                            return Optional.of(new UrlResource(s))
+                                    .filter(resource -> resource.exists() && resource.isReadable())
+                                    .orElse(null); // 返回null表示资源不存在，可以让PathResourceResolver使用默认的处理方式
+                        } catch (Exception e) {
+                            if (logger.isDebugEnabled()) {
+                                logger.error(e.getMessage());
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected String resolveUrlPathInternal(
+                            final String resourceUrlPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
+                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADLOGOSAVEPATH.getItem());
+                        Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
+                        return requestedPath.toUri().toString();
+                    }
+                });
+        registry.addResourceHandler(String.format("/%1$s/**", faviconRequestPath).trim())
+                .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS).cachePublic())
+                .resourceChain(true)
+                .addResolver(new AbstractResourceResolver() {
+                    @Override
+                    protected Resource resolveResourceInternal(
+                            final HttpServletRequest request,
+                            final String requestPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
+                        try {
+                            final String s = resolveUrlPathInternal(requestPath, locations, chain);
+                            // 检查资源是否存在，避免抛出异常
+                            return Optional.of(new UrlResource(s))
+                                    .filter(resource -> resource.exists() && resource.isReadable())
+                                    .orElse(null); // 返回null表示资源不存在，可以让PathResourceResolver使用默认的处理方式
+                        } catch (Exception e) {
+                            if (logger.isDebugEnabled()) {
+                                logger.error(e.getMessage());
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected String resolveUrlPathInternal(
+                            final String resourceUrlPath,
+                            final List<? extends Resource> locations,
+                            final ResourceResolverChain chain) {
+                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADFAVICONSAVEPATH.getItem());
                         Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
                         return requestedPath.toUri().toString();
                     }

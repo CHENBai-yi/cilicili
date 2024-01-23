@@ -23,6 +23,8 @@ public enum Error {
     TOKEN_INVALIED("token已失效，登录过期", HttpStatus.NOT_FOUND),
     ALREADY_LOGIN("该账号已在别处登录！", HttpStatus.NOT_FOUND),
     AVATAREXT_DISALLOW("不支持的文件后缀.", HttpStatus.NOT_FOUND),
+    FILE_EXECEED("不支持的文件大小.", HttpStatus.NOT_FOUND),
+    UPLOAD_FAIL("上传文件失败.", HttpStatus.NOT_FOUND),
     KICKED_USER("您已被强制下线！", HttpStatus.NOT_FOUND);
 
     private final String message;
