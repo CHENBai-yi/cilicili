@@ -30,7 +30,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Service("sysConfigFrontendService")
-@CacheConfig(cacheNames = {"SysConfigFrontend#86400"})
+@CacheConfig(cacheNames = {"SysConfigFrontend"})
 public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendMapper, SysConfigFrontendEntity>
         implements SysConfigFrontendService {
 

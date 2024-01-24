@@ -33,7 +33,7 @@ spring:
   cache:
     type: redis
     redis:
-      time-to-live: 86400000
+      time-to-live: 86400
       key-prefix: CILI
 
   main:
@@ -124,7 +124,6 @@ decorator:
     datasource-proxy:
       json-format: true
       logging: slf4j
-
 management:
   health:
     db:
