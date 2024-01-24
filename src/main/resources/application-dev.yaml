@@ -125,7 +125,10 @@ decorator:
       json-format: true
       logging: slf4j
 
-
+management:
+  health:
+    db:
+      enabled: false
 
 
 

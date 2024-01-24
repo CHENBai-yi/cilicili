@@ -62,11 +62,22 @@ public class WebSecurityConfiguration {
                             .requestMatchers(AntPathRequestMatcher.antMatcher("/public/**"))
                             .permitAll()
                             .requestMatchers(
-                                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", webMvcConfig.getAvatarRequestPath()).trim()),
-                                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", webMvcConfig.getBannerRequestPath()).trim()),
-                                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", webMvcConfig.getFaviconRequestPath()).trim()),
-                                    AntPathRequestMatcher.antMatcher(HttpMethod.GET, String.format("/%1$s/**", webMvcConfig.getLogoRequestPath()).trim())
-                            )
+                                    AntPathRequestMatcher.antMatcher(
+                                            HttpMethod.GET,
+                                            String.format("/%1$s/**", webMvcConfig.getAvatarRequestPath())
+                                                    .trim()),
+                                    AntPathRequestMatcher.antMatcher(
+                                            HttpMethod.GET,
+                                            String.format("/%1$s/**", webMvcConfig.getBannerRequestPath())
+                                                    .trim()),
+                                    AntPathRequestMatcher.antMatcher(
+                                            HttpMethod.GET,
+                                            String.format("/%1$s/**", webMvcConfig.getFaviconRequestPath())
+                                                    .trim()),
+                                    AntPathRequestMatcher.antMatcher(
+                                            HttpMethod.GET,
+                                            String.format("/%1$s/**", webMvcConfig.getLogoRequestPath())
+                                                    .trim()))
                             .permitAll()
                             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/articles/**"))
                             .permitAll()

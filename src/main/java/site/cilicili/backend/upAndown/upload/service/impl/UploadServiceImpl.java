@@ -56,7 +56,8 @@ public class UploadServiceImpl implements UploadService {
      */
     @Transactional(rollbackFor = Throwable.class)
     public R uploadUserAvatars(final AuthUserDetails authUserDetails, final MultipartFile[] multipartFile) {
-        return getMultipartImageFilesCommon(multipartFile, BackendConfigItem.AVATAREXT.getItem(), BackendConfigItem.AVATARMAXSIZE.getItem())
+        return getMultipartImageFilesCommon(
+                multipartFile, BackendConfigItem.AVATAREXT.getItem(), BackendConfigItem.AVATARMAXSIZE.getItem())
                 .map(multipartFiles -> Optional.ofNullable(
                                 sysUserService.getBaseMapper().selectById(authUserDetails.getId()))
                         .map(userEntity -> {
@@ -80,9 +81,11 @@ public class UploadServiceImpl implements UploadService {
                                                     userEntity.setAvatar(avatar);
                                                     Optional.of(sysUserService.saveOrUpdate(userEntity))
                                                             .filter(f -> f)
-                                                            .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                                                            .orElseThrow(
+                                                                    () -> new AppException(Error.COMMON_EXCEPTION));
                                                     return avatar;
-                                                }).orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
+                                                })
+                                                .orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
                                     })
                                     .toList();
                             return Optional.of(list1)
@@ -97,9 +100,9 @@ public class UploadServiceImpl implements UploadService {
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R uploadUserAvatar(final AuthUserDetails authUserDetails, final MultipartFile[] multipartFile) {
-        return getMultipartImageFilesCommon(multipartFile, BackendConfigItem.AVATAREXT.getItem(), BackendConfigItem.AVATARMAXSIZE.getItem())
+        return getMultipartImageFilesCommon(
+                multipartFile, BackendConfigItem.AVATAREXT.getItem(), BackendConfigItem.AVATARMAXSIZE.getItem())
                 .map(multipartFiles -> {
-
                     final List<String> list1 = Arrays.stream(multipartFiles)
                             .map(item -> {
                                 final String fileName = getBasePath(item);
@@ -115,7 +118,8 @@ public class UploadServiceImpl implements UploadService {
                                                 webMvcConfig.getCommonPrefix(),
                                                 webMvcConfig.getAvatarRequestPath(),
                                                 BackendConfigItem.UPLOADAVATARSAVEPATH.getFrontedItem(),
-                                                fileName)).orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
+                                                fileName))
+                                        .orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
                             })
                             .toList();
                     return Optional.of(list1)
@@ -130,9 +134,11 @@ public class UploadServiceImpl implements UploadService {
     @Transactional(rollbackFor = Throwable.class)
     public R uploadBannerImage(final AuthUserDetails authUserDetails, final MultipartFile[] multipartFile) {
         return getMultipartImageFilesCommon(multipartFile, BackendConfigItem.BANNERIMAGEEXT.getItem(), null)
-                .map(multipartFiles -> Optional.ofNullable(
-                                sysConfigFrontendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigFrontendEntity>()
-                                        .eq(BackendConfigItem.UPLOADBANNERIMAGESAVEPATH.getKey(),
+                .map(multipartFiles -> Optional.ofNullable(sysConfigFrontendService
+                                .getBaseMapper()
+                                .selectOne(new QueryWrapper<SysConfigFrontendEntity>()
+                                        .eq(
+                                                BackendConfigItem.UPLOADBANNERIMAGESAVEPATH.getKey(),
                                                 BackendConfigItem.UPLOADBANNERIMAGESAVEPATH.getFrontedItem())))
                         .map(entity -> {
                             final List<String> list1 = Arrays.stream(multipartFiles)
@@ -155,7 +161,8 @@ public class UploadServiceImpl implements UploadService {
                                                     entity.setItemCustom(banner);
                                                     Optional.of(sysConfigFrontendService.saveOrUpdate(entity))
                                                             .filter(f -> f)
-                                                            .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                                                            .orElseThrow(
+                                                                    () -> new AppException(Error.COMMON_EXCEPTION));
                                                     return banner;
                                                 })
                                                 .orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
@@ -173,10 +180,13 @@ public class UploadServiceImpl implements UploadService {
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R uploadLogo(final AuthUserDetails authUserDetails, final MultipartFile[] multipartFile) {
-        return getMultipartImageFilesCommon(multipartFile, BackendConfigItem.LOGOEXT.getItem(), BackendConfigItem.LOGOMAXSIZE.getItem())
-                .map(multipartFiles -> Optional.ofNullable(
-                                sysConfigFrontendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigFrontendEntity>()
-                                        .eq(BackendConfigItem.UPLOADLOGOSAVEPATH.getKey(),
+        return getMultipartImageFilesCommon(
+                multipartFile, BackendConfigItem.LOGOEXT.getItem(), BackendConfigItem.LOGOMAXSIZE.getItem())
+                .map(multipartFiles -> Optional.ofNullable(sysConfigFrontendService
+                                .getBaseMapper()
+                                .selectOne(new QueryWrapper<SysConfigFrontendEntity>()
+                                        .eq(
+                                                BackendConfigItem.UPLOADLOGOSAVEPATH.getKey(),
                                                 BackendConfigItem.UPLOADLOGOSAVEPATH.getFrontedItem())))
                         .map(entity -> {
                             final List<String> list1 = Arrays.stream(multipartFiles)
@@ -199,7 +209,8 @@ public class UploadServiceImpl implements UploadService {
                                                     entity.setItemCustom(logo);
                                                     Optional.of(sysConfigFrontendService.saveOrUpdate(entity))
                                                             .filter(f -> f)
-                                                            .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                                                            .orElseThrow(
+                                                                    () -> new AppException(Error.COMMON_EXCEPTION));
                                                     return logo;
                                                 })
                                                 .orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
@@ -217,10 +228,15 @@ public class UploadServiceImpl implements UploadService {
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R uploadFavicon(final AuthUserDetails authUserDetails, final MultipartFile[] multipartFile) {
-        return getMultipartImageFilesCommon(multipartFile, BackendConfigItem.FAVICONEXT.getItem(), BackendConfigItem.FAVICONMAXSIZE.getItem())
-                .map(multipartFiles -> Optional.ofNullable(
-                                sysConfigFrontendService.getBaseMapper().selectOne(new QueryWrapper<SysConfigFrontendEntity>()
-                                        .eq(BackendConfigItem.UPLOADFAVICONSAVEPATH.getKey(),
+        return getMultipartImageFilesCommon(
+                multipartFile,
+                BackendConfigItem.FAVICONEXT.getItem(),
+                BackendConfigItem.FAVICONMAXSIZE.getItem())
+                .map(multipartFiles -> Optional.ofNullable(sysConfigFrontendService
+                                .getBaseMapper()
+                                .selectOne(new QueryWrapper<SysConfigFrontendEntity>()
+                                        .eq(
+                                                BackendConfigItem.UPLOADFAVICONSAVEPATH.getKey(),
                                                 BackendConfigItem.UPLOADFAVICONSAVEPATH.getFrontedItem())))
                         .map(entity -> {
                             final List<String> list1 = Arrays.stream(multipartFiles)
@@ -243,7 +259,8 @@ public class UploadServiceImpl implements UploadService {
                                                     entity.setItemCustom(logo);
                                                     Optional.of(sysConfigFrontendService.saveOrUpdate(entity))
                                                             .filter(f -> f)
-                                                            .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+                                                            .orElseThrow(
+                                                                    () -> new AppException(Error.COMMON_EXCEPTION));
                                                     return logo;
                                                 })
                                                 .orElseThrow(() -> new AppException(Error.AVATAREXT_DISALLOW));
@@ -258,25 +275,25 @@ public class UploadServiceImpl implements UploadService {
                 .orElseThrow(() -> new AppException(Error.UPLOAD_FAIL));
     }
 
-    private Optional<MultipartFile[]> getMultipartImageFilesCommon(final MultipartFile[] multipartFile, String ext, String size) {
+    private Optional<MultipartFile[]> getMultipartImageFilesCommon(
+            final MultipartFile[] multipartFile, String ext, String size) {
         return Optional.ofNullable(multipartFile)
                 .filter(multipartFiles -> multipartFiles.length > 0)
                 .filter(multipartFiles -> Optional.ofNullable(ext)
                         .map(e -> sysConfigBackendService
                                 .getBaseMapper()
                                 .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                        .eq(
-                                                BackendConfigItem.AVATAREXT.getKey(),
-                                                e)))
+                                        .eq(BackendConfigItem.AVATAREXT.getKey(), e)))
                         .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                                 .filter(StrUtil::isNotBlank)
                                 .orElse(sysConfigBackendEntity.getItemDefault()))
                         .map(suffix -> Optional.of(multipartFiles.length
                                         == Arrays.stream(multipartFiles)
-                                        .filter(item -> suffix.startsWith(Objects.requireNonNull(item.getOriginalFilename())
-                                                .substring(item.getOriginalFilename()
-                                                        .indexOf("."))
-                                                .toLowerCase(Locale.ROOT))
+                                        .filter(item -> suffix.startsWith(
+                                                Objects.requireNonNull(item.getOriginalFilename())
+                                                        .substring(item.getOriginalFilename()
+                                                                .indexOf("."))
+                                                        .toLowerCase(Locale.ROOT))
                                                 || suffix.endsWith(item.getOriginalFilename()
                                                 .substring(item.getOriginalFilename()
                                                         .indexOf("."))
@@ -288,14 +305,17 @@ public class UploadServiceImpl implements UploadService {
                         .map(s -> sysConfigBackendService
                                 .getBaseMapper()
                                 .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                        .eq(
-                                                BackendConfigItem.AVATAREXT.getKey(),
-                                                s)))
+                                        .eq(BackendConfigItem.AVATAREXT.getKey(), s)))
                         .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                                 .filter(StrUtil::isNotBlank)
                                 .orElse(sysConfigBackendEntity.getItemDefault()))
                         .map(s -> CiliMultipartConfigElement.UNIT * Long.parseLong(s))
-                        .map(s -> Optional.of(multipartFiles.length == Arrays.stream(multipartFiles).filter(item -> item.getSize() <= s).count()).filter(f -> f).orElseThrow(() -> new AppException(Error.FILE_EXECEED)))
+                        .map(s -> Optional.of(multipartFiles.length
+                                        == Arrays.stream(multipartFiles)
+                                        .filter(item -> item.getSize() <= s)
+                                        .count())
+                                .filter(f -> f)
+                                .orElseThrow(() -> new AppException(Error.FILE_EXECEED)))
                         .orElse(true));
     }
 
@@ -303,11 +323,9 @@ public class UploadServiceImpl implements UploadService {
         try {
             ClassPathResource resource = new ClassPathResource(storePath);
             if (resource.exists()) {
-                FileUtil.writeFromStream(
-                        item.getInputStream(), resource.getFile(), true);
+                FileUtil.writeFromStream(item.getInputStream(), resource.getFile(), true);
             } else {
-                FileUtil.writeFromStream(
-                        item.getInputStream(), new File(resource.getPath()), true);
+                FileUtil.writeFromStream(item.getInputStream(), new File(resource.getPath()), true);
             }
             return true;
         } catch (IOException e) {
@@ -322,12 +340,16 @@ public class UploadServiceImpl implements UploadService {
     }
 
     private String getStorePath(
-            String prefix, String backendItem, String requestPath, String fileName, String username, String originPath) {
+            String prefix,
+            String backendItem,
+            String requestPath,
+            String fileName,
+            String username,
+            String originPath) {
         return Optional.ofNullable(sysConfigBackendService
                         .getBaseMapper()
                         .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                .eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-                                        backendItem)))
+                                .eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(), backendItem)))
                 .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                         .filter(StrUtil::isNotBlank)
                         .orElse(sysConfigBackendEntity.getItemDefault()))

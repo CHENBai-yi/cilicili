@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80027
  Source Host           : localhost:3306
- Source Schema         : quasar-admin
+ Source Schema         : cili-quasar-admin
 
  Target Server Type    : MySQL
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 22/01/2024 01:26:46
+ Date: 24/01/2024 21:05:51
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `database_connection`
     `scheme`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 6
+  AUTO_INCREMENT = 7
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = DYNAMIC;
@@ -39,8 +39,6 @@ CREATE TABLE `database_connection`
 -- ----------------------------
 -- Records of database_connection
 -- ----------------------------
-INSERT INTO `database_connection`
-VALUES (5, 'jdbc:mysql://127.0.0.1:3306', 'root', '74521CBy', 'com.mysql.cj.jdbc.Driver', 'quasar-admin');
 
 -- ----------------------------
 -- Table structure for plugin_achievement_category
@@ -2124,10 +2122,10 @@ VALUES (4, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 4, '
         '验证码图片高度', 'captchaHeight', '80', '');
 INSERT INTO `sys_config_backend`
 VALUES (5, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 5, 'yesNo_yes', 'onOff_on', 'Jwt签发者',
-        'jwtIssuer', 'Gin-Quasar-Admin', '');
+        'jwtIssuer', 'Cili-Quasar-Admin', '');
 INSERT INTO `sys_config_backend`
 VALUES (6, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 6, 'yesNo_yes', 'onOff_on', 'Jwt签发者密钥',
-        'jwtKey', 'Gin-Quasar-Admin', '');
+        'jwtKey', 'Cili-Quasar-Admin', '');
 INSERT INTO `sys_config_backend`
 VALUES (7, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 7, 'yesNo_yes', 'onOff_on',
         'Jwt过期时间(秒)', 'jwtExpiresAt', '14400', '');
@@ -2222,8 +2220,8 @@ INSERT INTO `sys_config_frontend`
 VALUES (4, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 4, 'yesNo_yes', 'onOff_on', '网站描述',
         'webDescribe', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', '');
 INSERT INTO `sys_config_frontend`
-VALUES (5, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 5, 'yesNo_yes', 'onOff_on', '登录页风格',
-        'loginLayoutStyle', 'loginLayoutStyle_login', '');
+VALUES (5, '2023-12-04 13:02:17', 'admin', '2024-01-24 20:28:54', 'admin', NULL, 5, 'yesNo_yes', 'onOff_on',
+        '登录页风格', 'loginLayoutStyle', 'loginLayoutStyle_login', 'loginLayoutStyle_login');
 INSERT INTO `sys_config_frontend`
 VALUES (6, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 6, 'yesNo_yes', 'onOff_on', '登录页插件',
         'pluginLoginLayout', '', '');
@@ -2276,13 +2274,13 @@ CREATE TABLE `sys_dept`
 -- ----------------------------
 INSERT INTO `sys_dept`
 VALUES (1, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_no', 'onOff_on',
-        '这是Gin-Quasar-Admin部门', '', 'gin-quasar-admin', 'Gin-Quasar-Admin', 'admin');
+        '这是Cili-Quasar-Admin部门', '', 'cili-quasar-admin', 'Cili-Quasar-Admin', 'admin');
 INSERT INTO `sys_dept`
-VALUES (2, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_no', 'onOff_on', '这是Gin部门',
-        'gin-quasar-admin', 'gin', 'Gin', 'admin');
+VALUES (2, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, 'yesNo_no', 'onOff_on', '这是Cili部门',
+        'cili-quasar-admin', 'cil', 'Cil', 'admin');
 INSERT INTO `sys_dept`
 VALUES (3, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 2, 'yesNo_no', 'onOff_on', '这是Quasar部门',
-        'gin-quasar-admin', 'quasar', 'Quasar', 'admin');
+        'cili-quasar-admin', 'quasar', 'Quasar', 'admin');
 
 -- ----------------------------
 -- Table structure for sys_dept_user
@@ -2302,11 +2300,11 @@ CREATE TABLE `sys_dept_user`
 -- Records of sys_dept_user
 -- ----------------------------
 INSERT INTO `sys_dept_user`
-VALUES ('gin', 'test001');
+VALUES ('cili', 'test001');
 INSERT INTO `sys_dept_user`
-VALUES ('gin-quasar-admin', 'admin');
+VALUES ('cili-quasar-admin', 'admin');
 INSERT INTO `sys_dept_user`
-VALUES ('gin-quasar-admin', 'test001');
+VALUES ('cili-quasar-admin', 'test001');
 INSERT INTO `sys_dept_user`
 VALUES ('quasar', 'test001');
 
@@ -2483,7 +2481,7 @@ CREATE TABLE `sys_log_login`
     INDEX `idx_sys_log_login_login_ip` (`login_ip` ASC) USING BTREE,
     INDEX `idx_sys_log_login_login_success` (`login_success` ASC) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 13
+  AUTO_INCREMENT = 18
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = DYNAMIC;
@@ -2491,6 +2489,30 @@ CREATE TABLE `sys_log_login`
 -- ----------------------------
 -- Records of sys_log_login
 -- ----------------------------
+INSERT INTO `sys_log_login`
+VALUES (13, '2024-01-24 19:50:13', 'admin', '2024-01-24 19:50:23', NULL, NULL, 1, 'yesNo_no', 'onOff_on',
+        '登录成功. Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'SuperAdmin', '127.0.0.1', 'Chrome 121.0.0.0', 'Windows 10 or Windows Server 2016', 'Windows', 'yesNo_yes');
+INSERT INTO `sys_log_login`
+VALUES (14, '2024-01-24 19:50:33', 'admin', '2024-01-24 19:50:54', NULL, NULL, 1, 'yesNo_no', 'onOff_on',
+        '登录成功. Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'SuperAdmin', '127.0.0.1', 'Chrome 121.0.0.0', 'Windows 10 or Windows Server 2016', 'Windows', 'yesNo_yes');
+INSERT INTO `sys_log_login`
+VALUES (15, '2024-01-24 19:51:33', 'admin', '2024-01-24 19:51:53', NULL, NULL, 1, 'yesNo_no', 'onOff_on',
+        '登录成功. Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'SuperAdmin', '127.0.0.1', 'Chrome 121.0.0.0', 'Windows 10 or Windows Server 2016', 'Windows', 'yesNo_yes');
+INSERT INTO `sys_log_login`
+VALUES (16, '2024-01-24 20:20:20', 'admin', '2024-01-24 20:28:36', NULL, NULL, 1, 'yesNo_no', 'onOff_on',
+        '登录成功. Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'SuperAdmin', '127.0.0.1', 'Chrome 121.0.0.0', 'Windows 10 or Windows Server 2016', 'Windows', 'yesNo_yes');
+INSERT INTO `sys_log_login`
+VALUES (17, '2024-01-24 20:28:47', 'admin', '2024-01-24 20:29:01', NULL, NULL, 1, 'yesNo_no', 'onOff_on',
+        '登录成功. Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'SuperAdmin', '127.0.0.1', 'Chrome 121.0.0.0', 'Windows 10 or Windows Server 2016', 'Windows', 'yesNo_yes');
+INSERT INTO `sys_log_login`
+VALUES (18, '2024-01-24 21:03:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', 'onOff_on',
+        '该账号已在别处登录！ Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'admin', '127.0.0.1', 'Chrome 121.0.0.0', 'Windows 10 or Windows Server 2016', 'Windows', 'yesNo_no');
 
 -- ----------------------------
 -- Table structure for sys_log_operation
@@ -2519,7 +2541,7 @@ CREATE TABLE `sys_log_operation`
     INDEX `idx_sys_log_operation_created_by` (`created_by` ASC) USING BTREE,
     INDEX `idx_sys_log_operation_deleted_at` (`deleted_at` ASC) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 1
+  AUTO_INCREMENT = 141
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = DYNAMIC;
@@ -2527,6 +2549,474 @@ CREATE TABLE `sys_log_operation`
 -- ----------------------------
 -- Records of sys_log_operation
 -- ----------------------------
+INSERT INTO `sys_log_operation`
+VALUES (1, '2024-01-24 19:50:00', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/init-db', 200, '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (2, '2024-01-24 19:50:00', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (3, '2024-01-24 19:50:00', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (4, '2024-01-24 19:50:00', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (5, '2024-01-24 19:50:00', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (6, '2024-01-24 19:50:01', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (7, '2024-01-24 19:50:01', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (8, '2024-01-24 19:50:02', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (9, '2024-01-24 19:50:04', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (10, '2024-01-24 19:50:04', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (11, '2024-01-24 19:50:06', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (12, '2024-01-24 19:50:06', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (13, '2024-01-24 19:50:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-captcha', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (14, '2024-01-24 19:50:14', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (15, '2024-01-24 19:50:15', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (16, '2024-01-24 19:50:16', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin', '127.0.0.1',
+        'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (17, '2024-01-24 19:50:23', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin 下线成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/logout', 200, '{\"code\":1,\"message\":\"admin 下线成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (18, '2024-01-24 19:50:23', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (19, '2024-01-24 19:50:23', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (20, '2024-01-24 19:50:24', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (21, '2024-01-24 19:50:25', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (22, '2024-01-24 19:50:27', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-captcha', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (23, '2024-01-24 19:50:33', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (24, '2024-01-24 19:50:35', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (25, '2024-01-24 19:50:35', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin', '127.0.0.1',
+        'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (26, '2024-01-24 19:50:37', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/get-config-frontend-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (27, '2024-01-24 19:50:48', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin修改成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/edit-config-frontend', 200,
+        '{\"code\":1,\"message\":\"admin修改成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (28, '2024-01-24 19:50:50', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (29, '2024-01-24 19:50:53', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin 下线成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/logout', 200, '{\"code\":1,\"message\":\"admin 下线成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (30, '2024-01-24 19:50:54', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (31, '2024-01-24 19:50:54', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (32, '2024-01-24 19:50:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (33, '2024-01-24 19:50:56', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (34, '2024-01-24 19:51:24', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (35, '2024-01-24 19:51:24', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (36, '2024-01-24 19:51:25', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (37, '2024-01-24 19:51:26', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (38, '2024-01-24 19:51:33', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (39, '2024-01-24 19:51:34', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (40, '2024-01-24 19:51:35', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin', '127.0.0.1',
+        'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (41, '2024-01-24 19:51:42', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/get-config-frontend-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (42, '2024-01-24 19:51:46', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin修改成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/edit-config-frontend', 200,
+        '{\"code\":1,\"message\":\"admin修改成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (43, '2024-01-24 19:51:48', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (44, '2024-01-24 19:51:53', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin 下线成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/logout', 200, '{\"code\":1,\"message\":\"admin 下线成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (45, '2024-01-24 19:51:53', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (46, '2024-01-24 19:51:53', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (47, '2024-01-24 19:51:54', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (48, '2024-01-24 19:51:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (49, '2024-01-24 19:52:04', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (50, '2024-01-24 19:52:04', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (51, '2024-01-24 19:52:05', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (52, '2024-01-24 19:52:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (53, '2024-01-24 19:54:01', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (54, '2024-01-24 19:54:01', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (55, '2024-01-24 19:54:02', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (56, '2024-01-24 19:54:03', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (57, '2024-01-24 19:54:34', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (58, '2024-01-24 19:54:34', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (59, '2024-01-24 19:54:35', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (60, '2024-01-24 19:54:36', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (61, '2024-01-24 20:18:31', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (62, '2024-01-24 20:18:31', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (63, '2024-01-24 20:18:33', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (64, '2024-01-24 20:18:35', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (65, '2024-01-24 20:18:53', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (66, '2024-01-24 20:18:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (67, '2024-01-24 20:18:57', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (68, '2024-01-24 20:18:58', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (69, '2024-01-24 20:20:14', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-captcha', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (70, '2024-01-24 20:20:20', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (71, '2024-01-24 20:20:26', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (72, '2024-01-24 20:20:50', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin', '127.0.0.1',
+        'POST', '/public/get-captcha', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (73, '2024-01-24 20:21:07', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (74, '2024-01-24 20:21:53', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (75, '2024-01-24 20:22:46', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (76, '2024-01-24 20:23:57', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (77, '2024-01-24 20:24:34', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (78, '2024-01-24 20:25:31', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (79, '2024-01-24 20:26:52', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (80, '2024-01-24 20:26:54', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (81, '2024-01-24 20:28:06', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (82, '2024-01-24 20:28:09', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin', '127.0.0.1',
+        'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (83, '2024-01-24 20:28:36', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin 下线成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/logout', 200, '{\"code\":1,\"message\":\"admin 下线成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (84, '2024-01-24 20:28:38', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (85, '2024-01-24 20:28:38', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (86, '2024-01-24 20:28:39', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (87, '2024-01-24 20:28:39', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (88, '2024-01-24 20:28:41', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-captcha', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (89, '2024-01-24 20:28:47', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (90, '2024-01-24 20:28:48', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (91, '2024-01-24 20:28:48', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin', '127.0.0.1',
+        'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (92, '2024-01-24 20:28:50', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/get-config-frontend-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (93, '2024-01-24 20:28:54', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin修改成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/edit-config-frontend', 200,
+        '{\"code\":1,\"message\":\"admin修改成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (94, '2024-01-24 20:28:56', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (95, '2024-01-24 20:29:01', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'admin 下线成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/public/logout', 200, '{\"code\":1,\"message\":\"admin 下线成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (96, '2024-01-24 20:29:01', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (97, '2024-01-24 20:29:01', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (98, '2024-01-24 20:29:02', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (99, '2024-01-24 20:29:03', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (100, '2024-01-24 20:29:05', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (101, '2024-01-24 20:29:05', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (102, '2024-01-24 20:29:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (103, '2024-01-24 20:29:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (104, '2024-01-24 20:29:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (105, '2024-01-24 20:29:09', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (106, '2024-01-24 20:29:09', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (107, '2024-01-24 20:29:20', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/dept/get-dept-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (108, '2024-01-24 20:29:28', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '查找成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/dept/query-dept-by-id', 200, '{\"code\":1,\"message\":\"查找成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (109, '2024-01-24 20:29:52', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/api/get-api-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (110, '2024-01-24 20:30:14', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/role/get-role-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (111, '2024-01-24 20:30:16', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/dept/get-dept-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (112, '2024-01-24 20:30:21', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/menu/get-menu-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (113, '2024-01-24 20:30:26', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/dict/get-dict-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (114, '2024-01-24 20:30:29', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/api/get-api-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (115, '2024-01-24 20:30:33', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/role/get-role-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (116, '2024-01-24 20:30:35', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/get-config-frontend-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (117, '2024-01-24 20:30:37', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (118, '2024-01-24 20:30:37', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/dept/get-dept-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (119, '2024-01-24 20:30:39', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-frontend/get-config-frontend-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (120, '2024-01-24 20:30:40', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/config-backend/get-config-backend-list', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (121, '2024-01-24 20:30:45', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/log/get-log-login-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (122, '2024-01-24 20:30:48', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/log/get-log-operation-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (123, '2024-01-24 20:30:54', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (124, '2024-01-24 20:32:06', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/menu/get-menu-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (125, '2024-01-24 20:32:09', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '查找成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/menu/query-menu-by-id', 200, '{\"code\":1,\"message\":\"查找成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (126, '2024-01-24 20:45:18', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (127, '2024-01-24 20:45:19', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (128, '2024-01-24 20:45:22', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (129, '2024-01-24 20:45:22', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (130, '2024-01-24 20:45:23', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/menu/get-menu-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (131, '2024-01-24 20:48:02', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/dept/get-dept-list', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (132, '2024-01-24 20:56:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/init-db', 200, '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (133, '2024-01-24 20:56:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (134, '2024-01-24 20:56:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (135, '2024-01-24 20:56:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (136, '2024-01-24 20:56:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (137, '2024-01-24 20:56:55', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (138, '2024-01-24 20:56:56', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (139, '2024-01-24 20:56:56', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (140, '2024-01-24 20:56:57', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL,
+        '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown database \'quasar-admin\'\r\n### The error may exist in file [D:\\Documents\\JavaCode\\Code\\cilicili(嗤哩嗤哩)\\build\\resources\\main\\mapper\\sysUserOnline\\SysUserOnlineMapping.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select username,         token         from sys_user_online          WHERE username = ?\r\n### Cause: java.sql.SQLSyntaxErrorException: Unknown database \'quasar-admin\'\n; bad SQL grammar []',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/login', 422,
+        '{\"headers\":{},\"body\":{\"body\":[\"\\r\\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown database \'quasar-admin\'\\r\\n### The error may exist in file [D:\\\\Documents\\\\JavaCode\\\\Code\\\\cilicili(嗤哩嗤哩)\\\\build\\\\resources\\\\main\\\\mapper\\\\sysUserOnline\\\\SysUserOnlineMapping.xml]\\r\\n### The error may involve defaultParameterMap\\r\\n### The error occurred while setting parameters\\r\\n### SQL: select username,         token         from sys_user_online          WHERE username = ?\\r\\n### Cause: java.sql.SQLSyntaxErrorException: Unknown database \'quasar-admin\'\\n; bad SQL grammar []\"]},\"status_code\":\"UNPROCESSABLE_ENTITY\",\"status_code_value\":422}');
+INSERT INTO `sys_log_operation`
+VALUES (141, '2024-01-24 21:03:06', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '数据库初始化成功！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/check-db', 200,
+        '{\"code\":1,\"message\":\"数据库初始化成功！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (142, '2024-01-24 21:03:07', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-dict-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (143, '2024-01-24 21:03:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '该账号已在别处登录！',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":0,\"message\":\"该账号已在别处登录！\"}');
+INSERT INTO `sys_log_operation`
+VALUES (144, '2024-01-24 21:03:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-frontend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (145, '2024-01-24 21:03:08', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-captcha', 200, '{\"code\":1,\"message\":\"Success\"}');
+INSERT INTO `sys_log_operation`
+VALUES (146, '2024-01-24 21:03:09', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success.', 'anonymousUser',
+        '127.0.0.1', 'POST', '/public/get-config-backend-all', 200, '{\"code\":1,\"message\":\"Success.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (147, '2024-01-24 21:03:23', 'anonymousUser', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '登录成功.',
+        'anonymousUser', '127.0.0.1', 'POST', '/public/login', 200, '{\"code\":1,\"message\":\"登录成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (148, '2024-01-24 21:03:24', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, '获取用户菜单成功.', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user/get-user-menu', 200, '{\"code\":1,\"message\":\"获取用户菜单成功.\"}');
+INSERT INTO `sys_log_operation`
+VALUES (149, '2024-01-24 21:03:28', 'admin', NULL, NULL, NULL, 1, 'yesNo_no', NULL, 'Success', 'SuperAdmin',
+        '127.0.0.1', 'POST', '/user-online/get-user-online-list', 200, '{\"code\":1,\"message\":\"Success\"}');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -3153,6 +3643,10 @@ CREATE TABLE `sys_role_menu`
 INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'api');
 INSERT INTO `sys_role_menu`
+VALUES ('super-admin', 'CiliPluginAchievement');
+INSERT INTO `sys_role_menu`
+VALUES ('super-admin', 'CiliPluginExample');
+INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'config-backend');
 INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'config-frontend');
@@ -3168,10 +3662,6 @@ INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'genPlugin');
 INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'github');
-INSERT INTO `sys_role_menu`
-VALUES ('super-admin', 'GqaPluginAchievement');
-INSERT INTO `sys_role_menu`
-VALUES ('super-admin', 'GqaPluginExample');
 INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'log');
 INSERT INTO `sys_role_menu`
@@ -3295,9 +3785,9 @@ CREATE TABLE `sys_user`
 -- ----------------------------
 INSERT INTO `sys_user`
 VALUES (1, '2023-12-04 13:02:17', 'admin', '2024-01-08 20:21:14', 'admin', NULL, 1, 'yesNo_yes', 'onOff_on',
-        'Be the change you want to see in the world.', 'admin', 'Mr.J', 'SuperAdmin',
+        'Be the change you want to see in the world.', 'admin', 'Mr.C', 'SuperAdmin',
         '$2a$10$jGr2rP6BJdTR7QPx8RNVge2RxcbsJJgWXtUKf2cMz4RATXrx1/6wy',
-        'gqa-upload:avatar/admin/6b1a7fc094c24e9490491193e81cf5d8_20240108202113971.jpg', 'gender_unknown',
+        'cili-upload:avatar/admin/6b1a7fc094c24e9490491193e81cf5d8_20240108202113971.jpg', 'gender_unknown',
         '1234567890', '11111111111', b'1');
 INSERT INTO `sys_user`
 VALUES (2, '2024-01-05 00:03:39', 'admin', '2024-01-05 00:03:47', 'admin', NULL, NULL, NULL, 'onOff_on', '测试人员',

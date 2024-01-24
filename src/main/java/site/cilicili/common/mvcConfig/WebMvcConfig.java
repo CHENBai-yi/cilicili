@@ -8,13 +8,10 @@ import com.fasterxml.jackson.databind.InjectableValues;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -54,14 +51,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Value("${requestPath.avatar:avatar}")
     private String avatarRequestPath;
+
     @Value("${requestPath.banner:banner}")
     private String bannerRequestPath;
+
     @Value("${requestPath.logo:logo}")
     private String logoRequestPath;
+
     @Value("${requestPath.favicon:favicon}")
     private String faviconRequestPath;
 
-    @Value("${requestPath.avatarPrefix:gqa-upload:}")
+    @Value("${requestPath.avatarPrefix:cili-upload:}")
     private String commonPrefix;
 
     @PostConstruct
@@ -94,9 +94,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .map(f -> sysConfigBackendService
                         .getBaseMapper()
                         .selectOne(new QueryWrapper<SysConfigBackendEntity>()
-                                .eq(
-                                        BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(),
-                                        item)))
+                                .eq(BackendConfigItem.UPLOADAVATARSAVEPATH.getKey(), item)))
                 .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                         .filter(StrUtil::isNotBlank)
                         .orElse(sysConfigBackendEntity.getItemDefault()))
@@ -134,7 +132,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                             final String resourceUrlPath,
                             final List<? extends Resource> locations,
                             final ResourceResolverChain chain) {
-                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADAVATARSAVEPATH.getItem());
+                        String avatarSavePath =
+                                getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADAVATARSAVEPATH.getItem());
                         Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
                         return requestedPath.toUri().toString();
                     }
@@ -168,7 +167,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                             final String resourceUrlPath,
                             final List<? extends Resource> locations,
                             final ResourceResolverChain chain) {
-                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADBANNERIMAGESAVEPATH.getItem());
+                        String avatarSavePath =
+                                getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADBANNERIMAGESAVEPATH.getItem());
                         Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
                         return requestedPath.toUri().toString();
                     }
@@ -203,12 +203,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
                             final String resourceUrlPath,
                             final List<? extends Resource> locations,
                             final ResourceResolverChain chain) {
-                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADLOGOSAVEPATH.getItem());
+                        String avatarSavePath =
+                                getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADLOGOSAVEPATH.getItem());
                         Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
                         return requestedPath.toUri().toString();
                     }
                 });
-        registry.addResourceHandler(String.format("/%1$s/**", faviconRequestPath).trim())
+        registry.addResourceHandler(
+                        String.format("/%1$s/**", faviconRequestPath).trim())
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS).cachePublic())
                 .resourceChain(true)
                 .addResolver(new AbstractResourceResolver() {
@@ -237,7 +239,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                             final String resourceUrlPath,
                             final List<? extends Resource> locations,
                             final ResourceResolverChain chain) {
-                        String avatarSavePath = getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADFAVICONSAVEPATH.getItem());
+                        String avatarSavePath =
+                                getAvatarSavePathFromDatabase(BackendConfigItem.UPLOADFAVICONSAVEPATH.getItem());
                         Path requestedPath = Path.of(avatarSavePath, resourceUrlPath);
                         return requestedPath.toUri().toString();
                     }
@@ -245,18 +248,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 
-    @Bean
-    public MultipartConfigElement multipartConfigElement(MultipartProperties multipartProperties) {
-        return Optional.ofNullable(dbInitialization.isValid())
-                .filter(f -> !f)
-                .map(f -> multipartProperties.createMultipartConfig())
-                .orElseGet(() -> new CiliMultipartConfigElement(
-                        multipartProperties.getLocation(),
-                        multipartProperties.getMaxFileSize(),
-                        multipartProperties.getMaxRequestSize(),
-                        multipartProperties.getFileSizeThreshold(),
-                        sysConfigBackendService));
-    }
 
     /*@Bean
     public MultipartConfigElement multipartConfigElement(MultipartProperties multipartProperties) {
