@@ -57,6 +57,7 @@ const handleChangeNickname = async () => {
   if (success) {
     const res = await postAction(changeNicknameUrl, nicknameForm.value)
     if (res.code === 1) {
+      await userStore.HandleUserLogout()
       $q.notify({
         type: 'positive',
         message: t('Change') + ' ' + t('Nickname') + ' ' + t('Success') + ',' + t('Relogin'),

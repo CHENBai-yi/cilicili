@@ -15,7 +15,7 @@ const createLink = () => {
   CiliLink.rel = 'icon'
   CiliLink.setAttribute('name', 'Cili-link-href')
   if (CiliFrontend.value.favicon && CiliFrontend.value.favicon !== '') {
-    const favicon = process.env.API + CiliFrontend.value.favicon.substring(11)
+    const favicon = process.env.API + CiliFrontend.value.favicon.substring(12)
     CiliLink.href = favicon
   } else {
     CiliLink.href = 'favicon.ico'

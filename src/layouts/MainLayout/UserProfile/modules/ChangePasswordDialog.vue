@@ -89,6 +89,7 @@ const handleChangePasswrod = async () => {
     } else {
       const res = await postAction(changePasswordUrl, passwordForm.value)
       if (res.code === 1) {
+        await userStore.HandleUserLogout()
         $q.notify({
           type: 'positive',
           message: t('Change') + ' ' + t('Password') + ' ' + t('Success') + ',' + t('Relogin'),

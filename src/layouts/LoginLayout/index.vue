@@ -6,13 +6,14 @@
     <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
   </div>
 
+
 </template>
 
 <script setup>
 
 import Cli from './CiliciliView/login.vue'
 import ComplexView from './ComplexView/index.vue'
-import {computed, onBeforeMount, ref} from "vue";
+import {computed, onMounted, ref,} from "vue";
 import useCommon from "src/composables/useCommon";
 import {postAction} from "src/api/manage";
 import DbInit from './myInitDbView/index.vue'
@@ -56,9 +57,10 @@ const checkDb = async () => {
     }
   }
 }
-onBeforeMount(() => {
+onMounted(() => {
   checkDb()
 })
+
 
 const changeContainerImg = computed(() => {
   if (bannerImage.value === '') {
