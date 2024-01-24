@@ -11,6 +11,7 @@ import site.cilicili.backend.role.mapper.SysRoleMenuMapper;
 import site.cilicili.backend.role.service.SysRoleMenuService;
 import site.cilicili.common.util.R;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -90,5 +91,11 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
                         new QueryWrapper<SysRoleMenuEntity>().eq("sys_role_role_code", roleCode.roleCode())))
                 .map(sysRoleMenuEntities -> R.yes("Success").setData("records", sysRoleMenuEntities))
                 .orElse(R.no("Fail"));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public boolean insertOrBatch(final List<SysRoleMenuEntity> roleMenu) {
+        return baseMapper.insertOrUpdateBatch(roleMenu) > 0;
     }
 }

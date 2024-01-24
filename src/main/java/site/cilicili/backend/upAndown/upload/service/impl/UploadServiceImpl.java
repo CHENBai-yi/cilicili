@@ -21,7 +21,6 @@ import site.cilicili.backend.user.service.SysUserService;
 import site.cilicili.common.constant.ConfigBackend.BackendConfigItem;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
-import site.cilicili.common.mvcConfig.CiliMultipartConfigElement;
 import site.cilicili.common.mvcConfig.WebMvcConfig;
 import site.cilicili.common.util.R;
 
@@ -309,7 +308,7 @@ public class UploadServiceImpl implements UploadService {
                         .map(sysConfigBackendEntity -> Optional.ofNullable(sysConfigBackendEntity.getItemCustom())
                                 .filter(StrUtil::isNotBlank)
                                 .orElse(sysConfigBackendEntity.getItemDefault()))
-                        .map(s -> CiliMultipartConfigElement.UNIT * Long.parseLong(s))
+                        .map(s -> WebMvcConfig.UNIT * Long.parseLong(s))
                         .map(s -> Optional.of(multipartFiles.length
                                         == Arrays.stream(multipartFiles)
                                         .filter(item -> item.getSize() <= s)

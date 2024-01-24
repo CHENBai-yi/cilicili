@@ -11,6 +11,7 @@ import site.cilicili.backend.role.mapper.SysRoleButtonMapper;
 import site.cilicili.backend.role.service.SysRoleButtonService;
 import site.cilicili.common.util.R;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -78,5 +79,11 @@ public class SysRoleButtonServiceImpl extends ServiceImpl<SysRoleButtonMapper, S
                         new QueryWrapper<SysRoleButtonEntity>().eq("sys_role_role_code", roleCode.roleCode())))
                 .map(sysRoleButtonEntities -> R.yes("Success").setData("records", sysRoleButtonEntities))
                 .orElse(R.no("Fail"));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public boolean insertOrUpdateBatch(final List<SysRoleButtonEntity> roleButton) {
+        return baseMapper.insertOrUpdateBatch(roleButton) > 0;
     }
 }

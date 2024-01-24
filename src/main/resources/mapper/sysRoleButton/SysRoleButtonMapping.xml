@@ -53,13 +53,15 @@
     </insert>
     
     <insert id="insertOrUpdateBatch" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
-        insert into sys_role_button()
+        insert into sys_role_button(sys_role_role_code,sys_button_button_code)
         values
         <foreach collection="entities" item="entity" separator=",">
-            ()
+            (#{entity.sysRoleRoleCode},#{entity.sysButtonButtonCode})
         </foreach>
         on duplicate key update
-    
+        sys_role_role_code=values(sys_role_role_code),
+        sys_button_button_code=values(sys_button_button_code)
+
     </insert>
     
     <!--通过主键修改数据-->

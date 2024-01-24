@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.backend.api.domain.pojo.SysRoleApiEntity;
 import site.cilicili.backend.api.service.SysRoleApiService;
 import site.cilicili.backend.role.domain.dto.*;
 import site.cilicili.backend.role.domain.pojo.SysRoleButtonEntity;
@@ -224,11 +225,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
                     if ((!editRoleMenuRequest.roleMenu().isEmpty()
                             && (sysRoleMenuService.remove(new QueryWrapper<SysRoleMenuEntity>()
                             .eq("sys_role_role_code", sysRole.getRoleCode()))
-                            | sysRoleMenuService.saveBatch(editRoleMenuRequest.roleMenu())))
+                            | sysRoleMenuService.insertOrBatch(editRoleMenuRequest.roleMenu())))
                             | (!editRoleMenuRequest.roleButton().isEmpty()
                             && (sysRoleButtonService.remove(new QueryWrapper<SysRoleButtonEntity>()
                             .eq("sys_role_role_code", sysRole.getRoleCode()))
-                            | sysRoleButtonService.saveBatch(editRoleMenuRequest.roleButton())))) {
+                            | sysRoleButtonService.insertOrUpdateBatch(editRoleMenuRequest.roleButton())))) {
                         sysRole.setDefaultPage(editRoleMenuRequest.defaultPage());
                         baseMapper.update(sysRole);
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleMenuRequest.roleCode()));
@@ -246,7 +247,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
                         new QueryWrapper<SysRoleEntity>().eq("role_code", editRoleApiRequest.roleCode())))
                 .map(sysRole -> {
                     if (!editRoleApiRequest.roleApi().isEmpty()
-                            && sysRoleApiService.insertOrUpdateBatch(editRoleApiRequest.roleApi())) {
+                            && (sysRoleApiService.remove(new QueryWrapper<SysRoleApiEntity>().eq("role_code", sysRole.getRoleCode())) |
+                            sysRoleApiService.insertOrUpdateBatch(editRoleApiRequest.roleApi()))) {
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleApiRequest.roleCode()));
                     } else {
                         throw new AppException(Error.COMMON_EXCEPTION);

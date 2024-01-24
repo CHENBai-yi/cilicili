@@ -44,6 +44,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @Getter
 public class WebMvcConfig implements WebMvcConfigurer {
+    public static final Long UNIT = 1024 * 1024L;
     private final SysConfigBackendService sysConfigBackendService;
     private final ObjectMapper objectMapper;
     private final DbChangeConfig dbChangeConf;

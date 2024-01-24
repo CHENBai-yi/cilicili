@@ -27,8 +27,8 @@ public class AddConfigRequest {
     @JacksonInject("status")
     String status;
 
-    @JacksonInject("table")
-    String table;
+    @JacksonInject("stable")
+    String stable;
 
     @NotNull(message = "排序不能为空") @Positive(message = "排序不能为负数") Integer sort;
 }

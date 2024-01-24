@@ -5,6 +5,8 @@ import site.cilicili.backend.role.domain.dto.RoleButtonMenuRequest;
 import site.cilicili.backend.role.domain.pojo.SysRoleMenuEntity;
 import site.cilicili.common.util.R;
 
+import java.util.List;
+
 /**
  * (SysRoleMenu)表服务接口
  *
@@ -54,4 +56,6 @@ public interface SysRoleMenuService extends IService<SysRoleMenuEntity> {
     R deleteById(final String sysRoleRoleCode);
 
     R getRoleMenuList(RoleButtonMenuRequest roleCode);
+
+    boolean insertOrBatch(List<SysRoleMenuEntity> roleMenu);
 }

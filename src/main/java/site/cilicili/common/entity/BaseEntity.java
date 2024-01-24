@@ -30,26 +30,27 @@ public class BaseEntity {
     @TableId(type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    protected Long id;
 
     @TableField(fill = FieldFill.INSERT)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @TableField(fill = FieldFill.INSERT)
-    private String createdBy;
+    protected String createdBy;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime updatedAt;
+    protected LocalDateTime updatedAt;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updatedBy;
+    protected String updatedBy;
 
     @TableField(fill = FieldFill.UPDATE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime deletedAt;
+    protected LocalDateTime deletedAt;
+
 }

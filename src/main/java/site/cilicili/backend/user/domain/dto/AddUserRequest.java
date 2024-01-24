@@ -36,12 +36,12 @@ public class AddUserRequest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Records extends SysUserEntity {
         private List<DeptDto> dept;
-
         @JsonProperty(value = "dept")
         public void setDept(final JSONArray dept) {
             this.dept = JSONUtil.toList(dept, DeptDto.class);
         }
     }
+
 
     @Getter
     @Setter
@@ -54,13 +54,13 @@ public class AddUserRequest {
         @JsonProperty(value = "children")
         public void setChildren(final JSONArray children) {
             this.children = JSONUtil.toList(children, DeptDtoBase.class);
-            ;
         }
 
         @JsonProperty(value = "createdByUser")
         public void setCreatedByUser(final JSONObject children) {
             this.createdByUser = JSONUtil.toBean(children, UserDto.class);
         }
+
     }
 
     @Getter
@@ -68,7 +68,8 @@ public class AddUserRequest {
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class DeptDtoBase extends SysDeptEntity {
-        private Integer leaderUser;
+        private Object leaderUser;
+        // private Integer createdByUser;
     }
 
     @Getter

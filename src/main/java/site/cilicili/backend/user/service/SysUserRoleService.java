@@ -1,6 +1,7 @@
 package site.cilicili.backend.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
 import site.cilicili.backend.user.domain.dto.RemoveRoleUserRequest;
 import site.cilicili.backend.user.domain.pojo.SysUserRoleEntity;
 import site.cilicili.common.util.R;
@@ -57,7 +58,7 @@ public interface SysUserRoleService extends IService<SysUserRoleEntity> {
      */
     R deleteById(final String sysRoleRoleCode);
 
-    boolean insertSysUserRoleList(List<SysUserRoleEntity> toList);
+    boolean insertSysUserRoleList(@Param("toList") List<SysUserRoleEntity> toList);
 
     R removeRoleUser(RemoveRoleUserRequest removeRoleUserRequest);
 }
