@@ -79,7 +79,7 @@ const {
   pagination,
   queryParams,
   pageOptions,
-  GqaDictShow,
+  CiliDictShow,
   loading,
   tableData,
   recordDetailDialog,

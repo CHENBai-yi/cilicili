@@ -59,7 +59,7 @@ export default {
     "en-US": "Size or ext not allowed",
     "ru": "Размер или ext не допускаются"
   },
-  GqaSelectUserHelp: {
+  CiliSelectUserHelp: {
     "zh-CN": "只供添加用户使用，取消选择需从外部删除",
     "en-US": "Only for add users,delete them from the outside",
     "ru": "Только для добавления пользователей, удалите их извне"

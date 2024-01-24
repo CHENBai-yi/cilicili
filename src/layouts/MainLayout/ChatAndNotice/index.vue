@@ -12,20 +12,20 @@ import Notice from './modules/Notice.vue'
 import {useUserStore} from 'src/stores/user'
 import {computed, onMounted, onUnmounted, ref} from 'vue';
 import {useQuasar} from 'quasar';
-import {GqaDefaultUsername} from "src/config/default"
+import {CiliDefaultUsername} from "src/config/default"
 
 const $q = useQuasar()
 const userStore = useUserStore()
 const username = computed(() => userStore.GetUsername())
 const myName = computed(() => {
-  const nickname = $q.cookies.get('gqa-nickname')
-  const realName = $q.cookies.get('gqa-realName')
+  const nickname = $q.cookies.get('cili-nickname')
+  const realName = $q.cookies.get('cili-realName')
   if (nickname) {
     return nickname
   } else if (realName) {
     return realName
   } else {
-    return GqaDefaultUsername
+    return CiliDefaultUsername
   }
 })
 const ws = ref(null)

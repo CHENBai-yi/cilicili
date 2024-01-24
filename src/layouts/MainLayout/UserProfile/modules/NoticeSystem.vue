@@ -5,20 +5,20 @@
              row-key="id" separator="cell" style="max-height: 70vh;" @request="onRequest">
       <template v-slot:body-cell-notice_type="props">
         <q-td :props="props">
-          <GqaDictShow :dictCode="props.row.notice_type"/>
+          <CiliDictShow :dictCode="props.row.notice_type"/>
         </q-td>
       </template>
 
       <template v-slot:body-cell-notice_read="props">
         <q-td :props="props">
-          <GqaDictShow
+          <CiliDictShow
             :dictCode="props.row.notice_to_user.filter(item => item.to_user === username)[0].user_read"/>
         </q-td>
       </template>
 
       <template v-slot:body-cell-notice_sent="props">
         <q-td :props="props">
-          <GqaDictShow :dictCode="props.row.notice_sent"/>
+          <CiliDictShow :dictCode="props.row.notice_sent"/>
         </q-td>
       </template>
 
@@ -67,7 +67,7 @@ const {
   pagination,
   queryParams,
   pageOptions,
-  GqaDictShow,
+  CiliDictShow,
   loading,
   tableData,
   onRequest,

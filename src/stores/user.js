@@ -26,13 +26,13 @@ export const useUserStore = defineStore('user', {
         const avatar = res.data.avatar
         this.SetToken(token)
         this.username = username
-        Cookies.set('gqa-username', username, this.option)
+        Cookies.set('cili-username', username, this.option)
         this.nickname = nickname
-        Cookies.set('gqa-nickname', nickname, this.option)
+        Cookies.set('cili-nickname', nickname, this.option)
         this.realName = realName
-        Cookies.set('gqa-realName', realName, this.option)
+        Cookies.set('cili-realName', realName, this.option)
         this.avatar = avatar
-        Cookies.set('gqa-avatar', avatar, this.option)
+        Cookies.set('cili-avatar', avatar, this.option)
         return true
       } else {
         return
@@ -41,9 +41,9 @@ export const useUserStore = defineStore('user', {
     SetToken(token) {
       this.token = token
       if (this.rememberMe) {
-        Cookies.set('gqa-token', token, this.option)
+        Cookies.set('cili-token', token, this.option)
       } else {
-        SessionStorage.set('gqa-token', token)
+        SessionStorage.set('cili-token', token)
       }
     },
     ChangeRememberMe(type) {
@@ -61,14 +61,14 @@ export const useUserStore = defineStore('user', {
     HandleLogout() {
       const permissionStore = usePermissionStore()
       permissionStore.ClearMenu()
-      SessionStorage.remove('gqa-token')
-      Cookies.remove('gqa-token')
-      Cookies.remove('gqa-username')
-      Cookies.remove('gqa-nickname')
-      Cookies.remove('gqa-realName')
-      Cookies.remove('gqa-avatar')
+      SessionStorage.remove('cili-token')
+      Cookies.remove('cili-token')
+      Cookies.remove('cili-username')
+      Cookies.remove('cili-nickname')
+      Cookies.remove('cili-realName')
+      Cookies.remove('cili-avatar')
       // dont delete dict
-      // LocalStorage.remove('gqa-dict')
+      // LocalStorage.remove('cili-dict')
       this.token = undefined
       this.username = undefined
       this.nickname = undefined
@@ -76,10 +76,10 @@ export const useUserStore = defineStore('user', {
       this.avatar = undefined
     },
     GetToken() {
-      if (SessionStorage.getItem('gqa-token')) {
-        return SessionStorage.getItem('gqa-token')
-      } else if (Cookies.get('gqa-token')) {
-        return Cookies.get('gqa-token')
+      if (SessionStorage.getItem('cili-token')) {
+        return SessionStorage.getItem('cili-token')
+      } else if (Cookies.get('cili-token')) {
+        return Cookies.get('cili-token')
       } else {
         return this.token
       }
@@ -87,8 +87,8 @@ export const useUserStore = defineStore('user', {
     GetUsername() {
       if (this.username) {
         return this.username
-      } else if (Cookies.get('gqa-username')) {
-        return Cookies.get('gqa-username')
+      } else if (Cookies.get('cili-username')) {
+        return Cookies.get('cili-username')
       } else {
         return ""
       }
@@ -96,8 +96,8 @@ export const useUserStore = defineStore('user', {
     GetNickname() {
       if (this.nickname) {
         return this.nickname
-      } else if (Cookies.get('gqa-nickname')) {
-        return Cookies.get('gqa-nickname')
+      } else if (Cookies.get('cili-nickname')) {
+        return Cookies.get('cili-nickname')
       } else {
         return ""
       }
@@ -105,8 +105,8 @@ export const useUserStore = defineStore('user', {
     GetRealName() {
       if (this.realName) {
         return this.realName
-      } else if (Cookies.get('gqa-realName')) {
-        return Cookies.get('gqa-realName')
+      } else if (Cookies.get('cili-realName')) {
+        return Cookies.get('cili-realName')
       } else {
         return ""
       }
@@ -114,8 +114,8 @@ export const useUserStore = defineStore('user', {
     GetAvatar() {
       if (this.avatar) {
         return this.avatar
-      } else if (Cookies.get('gqa-avatar')) {
-        return Cookies.get('gqa-avatar')
+      } else if (Cookies.get('cili-avatar')) {
+        return Cookies.get('cili-avatar')
       } else {
         return ""
       }

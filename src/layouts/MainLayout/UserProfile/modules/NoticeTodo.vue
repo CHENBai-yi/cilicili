@@ -13,7 +13,7 @@
       </template>
       <template v-slot:body-cell-todo_status="props">
         <q-td :props="props">
-          <GqaDictShow :dictCode="props.row.todo_status"/>
+          <CiliDictShow :dictCode="props.row.todo_status"/>
         </q-td>
       </template>
 
@@ -58,7 +58,7 @@ const columns = computed(() => {
 const {
   pagination,
   pageOptions,
-  GqaDictShow,
+  CiliDictShow,
   loading,
   tableData,
   recordDetailDialog,

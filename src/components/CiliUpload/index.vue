@@ -1,8 +1,8 @@
 <template>
   <div>
-    <q-uploader :accept="gqaBackend.fileExt" :color="color" :factory="factoryFn"
+    <q-uploader :accept="CiliBackend.fileExt" :color="color" :factory="factoryFn"
                 :label="title === '' ? $t('Upload') + $t('File') : title"
-                :max-file-size="gqaBackend.fileMaxSize * 1024 * 1024" :multiple="multiple"
+                :max-file-size="CiliBackend.fileMaxSize * 1024 * 1024" :multiple="multiple"
                 style="width: 100%" @failed="failed" @finish="finish" @rejected="rejected"
                 @removed="removed" @uploaded="uploaded">
       <template v-slot:list="scope">
@@ -67,7 +67,7 @@ import {useI18n} from 'vue-i18n';
 const userStore = useUserStore()
 const $q = useQuasar()
 const {t} = useI18n()
-const {gqaBackend} = useCommon()
+const {CiliBackend} = useCommon()
 const token = computed(() => userStore.GetToken())
 
 const props = defineProps({
@@ -111,7 +111,7 @@ onMounted(() => {
 const factoryFn = (files) => {
   return {
     url: uploadUrl,
-    headers: [{name: 'Gqa-Token', value: token.value}],
+    headers: [{name: 'cili-token', value: token.value}],
     fieldName: 'file',
     method: 'POST',
   }

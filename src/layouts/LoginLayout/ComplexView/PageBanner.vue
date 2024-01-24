@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section id="gqa-banner" class="bg-black">
+    <section id="Cili-banner" class="bg-black">
       <div style="position: absolute; z-index: 10;">
         <div class="doc-stars doc-stars--sm"></div>
         <div class="doc-stars doc-stars--md"></div>
@@ -8,21 +8,21 @@
       </div>
 
       <div class="main-title row justify-center items-center">
-        <gqa-avatar :src="gqaFrontend.logo" size="xl" style="margin-right: 10px;"/>
-        {{ gqaFrontend.mainTitle }}
+        <Cili-avatar :src="CiliFrontend.logo" size="xl" style="margin-right: 10px;"/>
+        {{ CiliFrontend.mainTitle }}
       </div>
       <q-img :src="bannerImage" fit="cover" style="width: 100%; height: 95vh">
         <div class="container-custom">
 
           <div class="container-title">
             <h1>
-              {{ gqaFrontend.subTitle }}
+              {{ CiliFrontend.subTitle }}
             </h1>
             <p class="small-title">
-              {{ gqaFrontend.webDescribe }}
+              {{ CiliFrontend.webDescribe }}
             </p>
             <div class="buttons">
-              <q-btn v-if="gqaFrontend.showGit === 'yesNo_yes'" color="primary" push
+              <q-btn v-if="CiliFrontend.showGit === 'yesNo_yes'" color="primary" push
                      @click="openLink('https://gitee.com/cby-cby/cilicili')">
                 Gitee
               </q-btn>
@@ -31,7 +31,7 @@
                 {{ $t('Login') }}
               </q-btn>
 
-              <q-btn v-if="gqaFrontend.showGit === 'yesNo_yes'" color="primary" push
+              <q-btn v-if="CiliFrontend.showGit === 'yesNo_yes'" color="primary" push
                      @click="openLink('https://gitee.com/cby-cby/cilicili')">
                 Github
               </q-btn>
@@ -51,12 +51,12 @@ import {useStorageStore} from 'src/stores/storage'
 
 const loginDialog = ref(null);
 const storageStore = useStorageStore()
-const gqaFrontend = computed(() => {
-  return storageStore.GetGqaFrontend()
+const CiliFrontend = computed(() => {
+  return storageStore.GetCiliFrontend()
 })
 const bannerImage = computed(() => {
-  if (gqaFrontend.value.bannerImage && gqaFrontend.value.bannerImage.substring(0, 11) === 'gqa-upload:') {
-    return process.env.API + gqaFrontend.value.bannerImage.substring(11)
+  if (CiliFrontend.value.bannerImage && CiliFrontend.value.bannerImage.substring(0, 12) === 'cili-upload:') {
+    return process.env.API + CiliFrontend.value.bannerImage.substring(12)
   }
   return "planet.png"
 })
@@ -72,8 +72,8 @@ const openLink = (url) => {
 }
 
 const starColor = computed(() => {
-  if (gqaFrontend.value.starColor) {
-    return gqaFrontend.value.starColor
+  if (CiliFrontend.value.starColor) {
+    return CiliFrontend.value.starColor
   }
   return "#00b4ff"
 })

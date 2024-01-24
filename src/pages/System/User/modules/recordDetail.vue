@@ -8,17 +8,17 @@
             recordDetail.value.real_name ? recordDetail.value.real_name : ""
         }}
       </q-card-section>
-      <gqa-form-top :recordDetail="recordDetail" style="margin: 0 16px;"></gqa-form-top>
+      <Cili-form-top :recordDetail="recordDetail" style="margin: 0 16px;"></Cili-form-top>
       <div class="row">
         <q-card-section class="q-gutter-md col-8">
           <q-form ref="recordDetailForm">
             <div class="row q-gutter-md">
-              <q-file v-model="avatarFile" :accept="gqaBackend.avatarExt" :label="$t('Avatar')"
-                      :max-file-size="gqaBackend.avatarMaxSize * 1024 * 1024" class="col" hint=""
+              <q-file v-model="avatarFile" :accept="CiliBackend.avatarExt" :label="$t('Avatar')"
+                      :max-file-size="CiliBackend.avatarMaxSize * 1024 * 1024" class="col" hint=""
                       max-files="1" outlined
                       @rejected="rejected">
                 <template v-slot:prepend>
-                  <gqa-avatar :src="recordDetail.value.avatar"/>
+                  <Cili-avatar :src="recordDetail.value.avatar"/>
                 </template>
                 <template v-if="avatarFile" v-slot:after>
                   <q-btn color="primary" dense flat icon="cloud_upload" @click="handleUpload"/>
@@ -100,7 +100,7 @@ import {computed, ref, toRefs} from 'vue'
 import XEUtils from 'xe-utils'
 
 const storageStore = useStorageStore()
-const gqaBackend = computed(() => storageStore.GetGqaBackend())
+const CiliBackend = computed(() => storageStore.GetCiliBackend())
 const emit = defineEmits(['handleFinish'])
 const url = {
   add: 'user/add-user',

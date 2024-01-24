@@ -7,7 +7,7 @@
       </q-card-section>
       <q-separator/>
       <q-card-section>
-        <gqa-form-top :recordDetail="recordDetail"></gqa-form-top>
+        <Cili-form-top :recordDetail="recordDetail"></Cili-form-top>
         <q-form ref="recordDetailForm">
           <div class="row q-gutter-md">
             <q-input v-model="recordDetail.value.notice_title" :label="$t('Title')"

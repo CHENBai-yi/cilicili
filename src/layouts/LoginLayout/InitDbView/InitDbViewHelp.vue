@@ -1,7 +1,7 @@
 <template>
   <transition appear enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
     <div class="col column justify-center items-center" style="margin-top: -120px">
-      <GqaLottie :src="robot"/>
+      <CiliLottie :src="robot"/>
       <div class="col column q-gutter-y-xs" style="margin-left: 90px;">
                 <span class="text-weight-bold text-h5" style=" margin-top: -40px">
                     {{ $t('WelcomeTo') }}
@@ -36,13 +36,13 @@
 import {computed} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useStorageStore} from 'src/stores/storage'
-import GqaLottie from 'src/components/GqaLottie/index.vue'
+import CiliLottie from 'src/components/CiliLottie/index.vue'
 import robot from 'src/assets/robot.json'
 
 const {t} = useI18n()
 const storageStore = useStorageStore()
 const pluginList = computed(() => {
-  return storageStore.GetGqaPluginList()
+  return storageStore.GetCiliPluginList()
 })
 
 </script>

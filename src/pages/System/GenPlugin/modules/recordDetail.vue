@@ -7,7 +7,7 @@
       <q-separator/>
       <q-card-section>
         <q-form ref="recordDetailForm">
-          <gqa-form-top :recordDetail="recordDetail"></gqa-form-top>
+          <Cili-form-top :recordDetail="recordDetail"></Cili-form-top>
           <div class="row q-gutter-md">
             <q-input v-model.number="form.plugin_sort" :label="$t('Plugin') + $t('Sort')"
                      :rules="[val => val && val > 1000 || '>1000']" class="col" dense hint=""
@@ -50,7 +50,7 @@
                         {{ $t('Add') }}
                         {{ $t('Column') }}
                       </q-btn>
-                      <q-toggle v-model="item.with_gqa_column"
+                      <q-toggle v-model="item.with_Cili_column"
                                 :label="($t('With') + $t('Basic') + $t('Column'))"/>
                       <q-toggle v-model="item.with_public_list"
                                 :label="$t('With') + $t('Public') + 'List'"/>
@@ -208,7 +208,7 @@ const handleInputModel = () => {
     form.value.plugin_model.push({
       model_name: model,
       column_list: [],
-      with_gqa_column: true,
+      with_Cili_column: true,
       with_public_list: false,
       with_data_permission: false,
       with_log_operation: false,

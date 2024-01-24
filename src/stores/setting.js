@@ -13,65 +13,65 @@ export const useSettingStore = defineStore('setting', {
   actions: {
     SetThemeStyle(style) {
       this.themeStyle = style
-      LocalStorage.set('gqa-theme-style', style)
+      LocalStorage.set('cili-theme-style', style)
     },
     GetThemeStyle() {
       if (this.themeStyle) {
         return this.themeStyle
-      } else if (LocalStorage.getItem('gqa-theme-style')) {
-        return LocalStorage.getItem('gqa-theme-style')
+      } else if (LocalStorage.getItem('cili-theme-style')) {
+        return LocalStorage.getItem('cili-theme-style')
       } else {
         return 'Gin-Quasar-Admin'
       }
     },
     SetDarkTheme(val) {
       this.darkTheme = val
-      LocalStorage.set('gqa-dark-theme', val)
+      LocalStorage.set('cili-dark-theme', val)
     },
     GetDarkTheme() {
       if (this.darkTheme) {
         return this.darkTheme
-      } else if (LocalStorage.getItem('gqa-dark-theme')) {
-        return LocalStorage.getItem('gqa-dark-theme')
+      } else if (LocalStorage.getItem('cili-dark-theme')) {
+        return LocalStorage.getItem('cili-dark-theme')
       } else {
         return false
       }
     },
     SetSidebarDense(val) {
       this.sidebarDense = val
-      LocalStorage.set('gqa-sidebar-dense', val)
+      LocalStorage.set('cili-sidebar-dense', val)
     },
     GetSidebarDense() {
       if (this.sidebarDense) {
         return this.sidebarDense
-      } else if (LocalStorage.getItem('gqa-sidebar-dense')) {
-        return LocalStorage.getItem('gqa-sidebar-dense')
+      } else if (LocalStorage.getItem('cili-sidebar-dense')) {
+        return LocalStorage.getItem('cili-sidebar-dense')
       } else {
         return false
       }
     },
     ChangeLanguage(lang) {
       this.language = lang
-      Cookies.set('gqa-language', lang)
+      Cookies.set('cili-language', lang)
     },
     GetLanguage() {
       if (this.language) {
         return this.language
-      } else if (Cookies.get('gqa-language')) {
-        return Cookies.get('gqa-language')
+      } else if (Cookies.get('cili-language')) {
+        return Cookies.get('cili-language')
       } else {
         return 'zh-CN'
       }
     },
     SetSidebarWidth(width) {
       this.sidebarWidth = width
-      LocalStorage.set('gqa-sidebar-width', width)
+      LocalStorage.set('cili-sidebar-width', width)
     },
     GetSidebarWidth() {
       if (this.sidebarWidth) {
         return this.sidebarWidth
-      } else if (LocalStorage.getItem('gqa-sidebar-width')) {
-        return LocalStorage.getItem('gqa-sidebar-width')
+      } else if (LocalStorage.getItem('cili-sidebar-width')) {
+        return LocalStorage.getItem('cili-sidebar-width')
       } else {
         return 200
       }

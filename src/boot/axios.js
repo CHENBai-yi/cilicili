@@ -24,7 +24,7 @@ export default boot(({app, router}) => {
     request.headers = {
       'Content-Type': 'application/json;charset=utf-8',
       'Authorization': token,
-      'Gqa-Lang': Cookies.get("gqa-language") || "zh-CN"
+      'Cili-Lang': Cookies.get("cili-language") || "zh-CN"
     }
     if (DemoMode && ForbiddenUrl.some(item => item === request.url)) {
       Notify.create({
@@ -43,11 +43,11 @@ export default boot(({app, router}) => {
   api.interceptors.response.use(response => {
     // If the ExpiresAt of the JWT has expired,
     // but the RefreshAt has not expired,
-    // the background will insert a Gqa Refresh Token in the headers,
+    // the background will insert a Cili Refresh Token in the headers,
     // which will be saved here to form a token replacement logic
     if (response.headers['refresh-token'] && response.data.data.refresh) {
       userStore.SetToken(response.headers['refresh-token'])
-      // store.dispatch('user/SetToken', response.headers['gqa-refresh-token'])
+      // store.dispatch('user/SetToken', response.headers['Cili-refresh-token'])
       Notify.create({
         type: 'positive', message: i18n.global.t('Refresh') + 'Token' + i18n.global.t('Success'),
       })

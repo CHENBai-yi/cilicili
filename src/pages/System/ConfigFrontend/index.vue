@@ -22,25 +22,25 @@
           <template v-slot:body-cell-item_default="props">
             <q-td :props="props">
               <template v-if="props.row.config_item === 'logo'">
-                <gqa-avatar :src="props.row.item_default"/>
+                <Cili-avatar :src="props.row.item_default"/>
               </template>
               <template v-else-if="props.row.config_item === 'favicon'">
-                <gqa-avatar src="favicon.ico"/>
+                <Cili-avatar src="favicon.ico"/>
               </template>
               <template v-else-if="props.row.config_item === 'bannerImage'">
                 Default
               </template>
               <template v-else-if="props.row.config_item === 'loginLayoutStyle'">
-                <GqaDictShow :dictCode="props.row.item_default"/>
+                <CiliDictShow :dictCode="props.row.item_default"/>
               </template>
               <template v-else-if="props.row.config_item === 'pluginLoginLayout'">
                 系统默认
               </template>
               <template v-else-if="props.row.config_item === 'portalPage'">
-                <GqaDictShow :dictCode="props.row.item_default"/>
+                <CiliDictShow :dictCode="props.row.item_default"/>
               </template>
               <template v-else-if="props.row.config_item === 'showGit'">
-                <GqaDictShow :dictCode="props.row.item_default"/>
+                <CiliDictShow :dictCode="props.row.item_default"/>
               </template>
               <template v-else-if="props.row.config_item === 'starColor'">
                 <div class="row justify-center items-center q-gutter-x-xs">
@@ -57,12 +57,12 @@
           <template v-slot:body-cell-item_custom="props">
             <q-td :props="props">
               <template v-if="props.row.config_item === 'bannerImage'">
-                <q-file v-model="bannerImage" :accept="gqaBackend.bannerImageExt"
-                        :max-file-size="gqaBackend.bannerImageMaxSize * 1024 * 1024" clearable dense max-files="1"
+                <q-file v-model="bannerImage" :accept="CiliBackend.bannerImageExt"
+                        :max-file-size="CiliBackend.bannerImageMaxSize * 1024 * 1024" clearable dense max-files="1"
                         outlined
                         @rejected="rejected">
                   <template v-if="props.row.item_custom !== ''" v-slot:prepend>
-                    <gqa-avatar :src="props.row.item_custom"/>
+                    <Cili-avatar :src="props.row.item_custom"/>
                   </template>
                   <template v-if="bannerImage" v-slot:after>
                     <q-btn color="primary" dense flat icon="cloud_upload"
@@ -71,11 +71,11 @@
                 </q-file>
               </template>
               <template v-else-if="props.row.config_item === 'logo'">
-                <q-file v-model="logoFile" :accept="gqaBackend.logoExt"
-                        :max-file-size="gqaBackend.logoMaxSize * 1024 * 1024" clearable dense max-files="1"
+                <q-file v-model="logoFile" :accept="CiliBackend.logoExt"
+                        :max-file-size="CiliBackend.logoMaxSize * 1024 * 1024" clearable dense max-files="1"
                         outlined @rejected="rejected">
                   <template v-slot:prepend>
-                    <gqa-avatar :src="props.row.item_custom"/>
+                    <Cili-avatar :src="props.row.item_custom"/>
                   </template>
                   <template v-if="logoFile" v-slot:after>
                     <q-btn color="primary" dense flat icon="cloud_upload" @click="handleUploadLogo"/>
@@ -83,12 +83,12 @@
                 </q-file>
               </template>
               <template v-else-if="props.row.config_item === 'favicon'">
-                <q-file v-model="faviconFile" :accept="gqaBackend.faviconExt"
-                        :max-file-size="gqaBackend.faviconMaxSize * 1024 * 1024" clearable dense max-files="1"
+                <q-file v-model="faviconFile" :accept="CiliBackend.faviconExt"
+                        :max-file-size="CiliBackend.faviconMaxSize * 1024 * 1024" clearable dense max-files="1"
                         outlined
                         @rejected="rejected">
                   <template v-slot:prepend>
-                    <gqa-avatar :src="props.row.item_custom"/>
+                    <Cili-avatar :src="props.row.item_custom"/>
                   </template>
                   <template v-if="faviconFile" v-slot:after>
                     <q-btn color="primary" dense flat icon="cloud_upload"
@@ -146,12 +146,12 @@
           </template>
           <template v-slot:body-cell-status="props">
             <q-td :props="props">
-              <GqaDictShow :dictCode="props.row.status"/>
+              <CiliDictShow :dictCode="props.row.status"/>
             </q-td>
           </template>
           <template v-slot:body-cell-stable="props">
             <q-td :props="props">
-              <GqaDictShow :dictCode="props.row.stable"/>
+              <CiliDictShow :dictCode="props.row.stable"/>
             </q-td>
           </template>
           <template v-slot:body-cell-actions="props">
@@ -207,12 +207,12 @@ const columns = computed(() => {
 const {
   $q,
   t,
-  gqaBackend,
+  CiliBackend,
   dictOptions,
   pagination,
   queryParams,
   pageOptions,
-  GqaDictShow,
+  CiliDictShow,
   loading,
   tableData,
   recordDetailDialog,
@@ -234,8 +234,8 @@ const logoFile = ref(null)
 const faviconFile = ref(null)
 
 const pluginList = computed(() => {
-  if (Array.isArray($q.localStorage.getItem('gqa-pluginList'))) {
-    return $q.localStorage.getItem('gqa-pluginList')
+  if (Array.isArray($q.localStorage.getItem('cili-pluginList'))) {
+    return $q.localStorage.getItem('cili-pluginList')
   }
   return []
 })
@@ -265,7 +265,7 @@ const handleSave = async (row) => {
       type: 'positive',
       message: res.message,
     })
-    storageStore.SetGqaFrontend()
+    storageStore.SetCiliFrontend()
   }
 }
 const handleUploadBannerImage = () => {

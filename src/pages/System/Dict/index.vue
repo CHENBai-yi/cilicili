@@ -8,7 +8,7 @@
       <q-card-section>
         <q-hierarchy :columns="columns" :data="dictTree" dense separator="cell">
           <template v-slot:body="props">
-            <gqa-tree-td :treeTd="props" firstTd="sort"></gqa-tree-td>
+            <Cili-tree-td :treeTd="props" firstTd="sort"></Cili-tree-td>
             <td class="text-center">{{ props.item.dict_code }}</td>
             <td class="text-center">{{ props.item.dict_label }}</td>
             <td class="text-center">{{ props.item.dict_ext_1 }}</td>
@@ -17,10 +17,10 @@
             <td class="text-center">{{ props.item.dict_ext_4 }}</td>
             <td class="text-center">{{ props.item.dict_ext_5 }}</td>
             <td class="text-center">
-              <GqaDictShow :dictCode="props.item.status"/>
+              <CiliDictShow :dictCode="props.item.status"/>
             </td>
             <td class="text-center">
-              <GqaDictShow :dictCode="props.item.stable"/>
+              <CiliDictShow :dictCode="props.item.stable"/>
             </td>
             <td class="text-center q-gutter-x-md">
               <q-btn v-has="'dict:edit'" :label="$t('Edit')" color="primary" dense flat
@@ -81,7 +81,7 @@ const columns = computed(() => {
 const {
   t,
   pagination,
-  GqaDictShow,
+  CiliDictShow,
   tableData,
   recordDetailDialog,
   showAddForm,

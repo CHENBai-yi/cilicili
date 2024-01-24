@@ -11,7 +11,7 @@
 
       <q-card-section class="scroll q-gutter-md" style="max-height: 80vh">
         <q-form ref="recordDetailForm">
-          <gqa-form-top :recordDetail="recordDetail"></gqa-form-top>
+          <Cili-form-top :recordDetail="recordDetail"></Cili-form-top>
           <q-input v-model="recordDetail.value.notice_title" :label="$t('Title')"
                    :rules="[val => val && val.length > 0 || $t('NeedInput')]" readonly/>
 

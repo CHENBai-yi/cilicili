@@ -2,20 +2,20 @@ import {defineStore} from 'pinia';
 import {LocalStorage} from 'quasar';
 import {postAction} from 'src/api/manage';
 import {ArrayToTree} from 'src/utils/arrayAndTree'
-import {GqaBackendDefault, GqaFrontendDefault} from "src/config/default"
+import {CiliBackendDefault, CiliFrontendDefault} from "src/config/default"
 
 export const useStorageStore = defineStore('storage', {
   state: () => ({
-    gqaDict: undefined,
-    gqaBackend: undefined,
-    gqaFrontend: undefined,
+    CiliDict: undefined,
+    CiliBackend: undefined,
+    CiliFrontend: undefined,
     goVersion: undefined,
     ginVersion: undefined,
     pluginList: undefined
   }),
   getters: {},
   actions: {
-    async SetGqaDict() {
+    async SetCiliDict() {
       const res = await postAction('public/get-dict-all')
       if (res.code === 1) {
         const dictDetail = res.data.records
@@ -28,96 +28,96 @@ export const useStorageStore = defineStore('storage', {
         for (let d of dictList) {
           dict[d.dict_code] = d.children
         }
-        this.gqaDict = dict
-        LocalStorage.set('gqa-dict', dict)
+        this.CiliDict = dict
+        LocalStorage.set('cili-dict', dict)
       }
     },
 
 
-    async SetGqaBackend() {
+    async SetCiliBackend() {
       const res = await postAction('public/get-config-backend-all')
       if (res.code === 1) {
         const backend = {}
         res.data.records.forEach(item => {
           backend[item.config_item] = item.item_custom ? item.item_custom : item.item_default
         })
-        this.gqaBackend = backend
-        LocalStorage.set('gqa-backend', backend)
+        this.CiliBackend = backend
+        LocalStorage.set('cili-backend', backend)
       }
     },
 
-    async SetGqaFrontend() {
+    async SetCiliFrontend() {
       const res = await postAction('public/get-config-frontend-all')
       if (res.code === 1) {
         const frontend = {}
         res.data.records.forEach(item => {
           frontend[item.config_item] = item.item_custom ? item.item_custom : item.item_default
         })
-        this.gqaFrontend = frontend
-        LocalStorage.set('gqa-frontend', frontend)
+        this.CiliFrontend = frontend
+        LocalStorage.set('cili-frontend', frontend)
       }
     },
 
-    SetGqaGoVersion(goVersion) {
+    SetCiliGoVersion(goVersion) {
       this.goVersion = goVersion
-      LocalStorage.set('gqa-goVersion', goVersion)
+      LocalStorage.set('cili-goVersion', goVersion)
     },
 
-    SetGqaGinVersion(ginVersion) {
+    SetCiliGinVersion(ginVersion) {
       this.ginVersion = ginVersion
-      LocalStorage.set('gqa-ginVersion', ginVersion)
+      LocalStorage.set('cili-ginVersion', ginVersion)
     },
 
-    SetGqaPluginList(pluginList) {
+    SetCiliPluginList(pluginList) {
       this.pluginList = pluginList
-      LocalStorage.set('gqa-pluginList', pluginList)
+      LocalStorage.set('cili-pluginList', pluginList)
     },
-    GetGqaDict() {
-      const dict = LocalStorage.getItem("gqa-dict")
-      if (this.gqaDict) {
-        return this.gqaDict
+    GetCiliDict() {
+      const dict = LocalStorage.getItem("cili-dict")
+      if (this.CiliDict) {
+        return this.CiliDict
       } else {
         return dict
       }
     },
-    GetGqaBackend() {
-      const backend = LocalStorage.getItem("gqa-backend")
-      if (this.gqaBackend) {
-        return this.gqaBackend
+    GetCiliBackend() {
+      const backend = LocalStorage.getItem("cili-backend")
+      if (this.CiliBackend) {
+        return this.CiliBackend
       } else if (backend) {
         return backend
       } else {
-        return GqaBackendDefault
+        return CiliBackendDefault
       }
     },
-    GetGqaFrontend() {
-      const frontend = LocalStorage.getItem("gqa-frontend")
-      if (this.gqaFrontend) {
-        return this.gqaFrontend
+    GetCiliFrontend() {
+      const frontend = LocalStorage.getItem("cili-frontend")
+      if (this.CiliFrontend) {
+        return this.CiliFrontend
       } else if (frontend) {
         return frontend
       } else {
-        return GqaFrontendDefault
+        return CiliFrontendDefault
       }
     },
-    GetGqaGoVersion() {
-      const goversion = LocalStorage.getItem("gqa-goVersion")
+    GetCiliGoVersion() {
+      const goversion = LocalStorage.getItem("cili-goVersion")
       if (this.goVersion) {
         return this.goVersion
       } else {
         return goversion
       }
     },
-    GetGqaGinVersion() {
-      const ginversion = LocalStorage.getItem("gqa-ginVersion")
+    GetCiliGinVersion() {
+      const ginversion = LocalStorage.getItem("cili-ginVersion")
       if (this.ginVersion) {
         return this.ginVersion
       } else {
         return ginversion
       }
     },
-    GetGqaPluginList() {
-      const pluginList = LocalStorage.getItem("gqa-pluginList")
+    GetCiliPluginList() {
+      const pluginList = LocalStorage.getItem("cili-pluginList")
       if (this.pluginList) {
         return this.pluginList
       } else {

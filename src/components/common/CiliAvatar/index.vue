@@ -7,7 +7,7 @@
 <script setup>
 import {computed, toRefs} from 'vue';
 import {useQuasar} from 'quasar';
-import {GqaDefaultAvatar} from "src/config/default"
+import {CiliDefaultAvatar} from "src/config/default"
 
 const $q = useQuasar();
 const props = defineProps({
@@ -30,7 +30,7 @@ const props = defineProps({
 const {loginUser, src, size} = toRefs(props)
 
 const avatarSrc = computed(() => {
-  const cookieAvatar = $q.cookies.get('gqa-avatar')
+  const cookieAvatar = $q.cookies.get('cili-avatar')
   if (loginUser.value) {
     // Login user's avatar
     if (cookieAvatar) {
@@ -38,24 +38,24 @@ const avatarSrc = computed(() => {
       if (cookieAvatar.substring(0, 4) === 'http') {
         // avatar is a link
         return cookieAvatar
-      } else if (cookieAvatar.substring(0, 11) === 'gqa-upload:') {
+      } else if (cookieAvatar.substring(0, 12) === 'cili-upload:') {
         // avatar is uploaded
-        return process.env.API + cookieAvatar.substring(11)
+        return process.env.API + cookieAvatar.substring(12)
       }
       return cookieAvatar
     } else {
       // default avatar
-      return GqaDefaultAvatar
+      return CiliDefaultAvatar
     }
   } else if (src.value === '') {
     // Non login user, no avatar configuration
-    return GqaDefaultAvatar
+    return CiliDefaultAvatar
   } else if (src.value.substring(0, 4) === 'http') {
     // avatar is a link
     return src.value
-  } else if (src.value.substring(0, 11) === 'gqa-upload:') {
+  } else if (src.value.substring(0, 12) === 'cili-upload:') {
     // avatar is uploaded
-    return process.env.API + src.value.substring(11)
+    return process.env.API + src.value.substring(12)
   } else {
     return src.value
   }

@@ -1,15 +1,15 @@
 import {useStorageStore} from 'src/stores/storage';
 import {computed} from 'vue';
 import {FormatDate, FormatDateTime} from 'src/utils/date'
-import GqaDictShow from 'src/components/GqaDictShow/index.vue'
-import GqaShowName from 'src/components/GqaShowName/index.vue'
+import CiliDictShow from 'src/components/CiliDictShow/index.vue'
+import CiliShowName from 'src/components/CiliShowName/index.vue'
 import {useI18n} from 'vue-i18n';
 
 export default function useCommon() {
   const {t} = useI18n()
   const storageStore = useStorageStore();
-  const gqaFrontend = computed(() => storageStore.GetGqaFrontend());
-  const gqaBackend = computed(() => storageStore.GetGqaBackend());
+  const CiliFrontend = computed(() => storageStore.GetCiliFrontend());
+  const CiliBackend = computed(() => storageStore.GetCiliBackend());
 
   const openLink = (url) => {
     window.open(url)
@@ -38,12 +38,12 @@ export default function useCommon() {
   }
 
   return {
-    GqaDictShow,
-    GqaShowName,
+    CiliDictShow,
+    CiliShowName,
     showDateTime,
     showDate,
-    gqaFrontend,
-    gqaBackend,
+    CiliFrontend,
+    CiliBackend,
     openLink,
     selectOptionLabel,
     selectRouteLabel,

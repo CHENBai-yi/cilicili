@@ -1,5 +1,5 @@
 <template>
-  <div ref="gqaLottie" :style="{ height: height, width: width }"/>
+  <div ref="CiliLottie" :style="{ height: height, width: width }"/>
 </template>
 
 <script setup>
@@ -26,13 +26,13 @@ const props = defineProps({
   },
 })
 const {src, path, height} = toRefs(props)
-const gqaLottie = ref(null)
-watch(gqaLottie, () => {
+const CiliLottie = ref(null)
+watch(CiliLottie, () => {
   show()
 })
 const show = () => {
   lottie.loadAnimation({
-    container: gqaLottie.value,
+    container: CiliLottie.value,
     renderer: 'svg',
     loop: true,
     autoplay: true,

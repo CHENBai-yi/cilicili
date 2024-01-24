@@ -8,14 +8,14 @@
       <q-card-section>
         <q-hierarchy :columns="columns" :data="deptTree" dense separator="cell">
           <template v-slot:body="props">
-            <gqa-tree-td :treeTd="props" firstTd="sort"></gqa-tree-td>
+            <Cili-tree-td :treeTd="props" firstTd="sort"></Cili-tree-td>
             <td class="text-center">{{ props.item.dept_name }}</td>
             <td class="text-center">{{ props.item.dept_code }}</td>
             <td class="text-center">
-              <GqaShowName :customNameObject="props.item.leader_user"/>
+              <CiliShowName :customNameObject="props.item.leader_user"/>
             </td>
             <td class="text-center">
-              <GqaDictShow :dictCode="props.item.status"/>
+              <CiliDictShow :dictCode="props.item.status"/>
             </td>
             <td class="text-center q-gutter-x-md">
               <q-btn v-has="'dept:edit'" :label="$t('Edit')" color="primary" dense flat
@@ -79,8 +79,8 @@ const columns = computed(() => {
 const {
   t,
   pagination,
-  GqaDictShow,
-  GqaShowName,
+  CiliDictShow,
+  CiliShowName,
   tableData,
   recordDetailDialog,
   showAddForm,

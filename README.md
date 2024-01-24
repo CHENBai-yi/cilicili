@@ -1,4 +1,4 @@
-# Quasar App (gqa-vite)
+# Quasar App (Cili-vite)
 
 A Quasar Project
 

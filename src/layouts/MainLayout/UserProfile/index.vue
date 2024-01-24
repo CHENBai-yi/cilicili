@@ -11,10 +11,10 @@
       <q-card-section style="max-width: 95vw; height: 85vh;">
         <div class="row items-center" style="height: 100%">
           <div class="col-4 column items-center justify-center">
-            <gqa-avatar loginUser size="200px"/>
+            <Cili-avatar loginUser size="200px"/>
 
             <div class="text-subtitle1 q-mt-md q-mb-md">
-              <GqaShowName showMyName/>
+              <CiliShowName showMyName/>
             </div>
 
             <div class="row q-gutter-md">
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import GqaShowName from 'src/components/GqaShowName/index.vue'
+import CiliShowName from 'src/components/CiliShowName/index.vue'
 import NoticeTab from './modules/NoticeTab.vue'
 import ChangePasswordDialog from './modules/ChangePasswordDialog.vue'
 import ChangeNicknameDialog from './modules/ChangeNicknameDialog.vue'

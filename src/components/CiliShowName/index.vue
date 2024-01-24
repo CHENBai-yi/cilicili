@@ -7,7 +7,7 @@
 <script setup>
 import {useQuasar} from 'quasar';
 import {computed, toRefs} from 'vue';
-import {GqaDefaultUsername} from "src/config/default"
+import {CiliDefaultUsername} from "src/config/default"
 
 const $q = useQuasar()
 const props = defineProps({
@@ -45,15 +45,15 @@ const trueName = computed(() => {
       return customNameObject.value.username
     }
   } else if (showMyName.value) {
-    const nickname = $q.cookies.get('gqa-nickname')
-    const realName = $q.cookies.get('gqa-realName')
+    const nickname = $q.cookies.get('cili-nickname')
+    const realName = $q.cookies.get('cili-realName')
     if (nickname) {
       return nickname
     } else {
       return realName
     }
   } else {
-    return GqaDefaultUsername
+    return CiliDefaultUsername
   }
 })
 </script>

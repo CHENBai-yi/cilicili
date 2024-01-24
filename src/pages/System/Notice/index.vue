@@ -27,12 +27,12 @@
           </template>
           <template v-slot:body-cell-notice_type="props">
             <q-td :props="props">
-              <GqaDictShow :dictCode="props.row.notice_type"/>
+              <CiliDictShow :dictCode="props.row.notice_type"/>
             </q-td>
           </template>
           <template v-slot:body-cell-notice_sent="props">
             <q-td :props="props">
-              <GqaDictShow :dictCode="props.row.notice_sent"/>
+              <CiliDictShow :dictCode="props.row.notice_sent"/>
             </q-td>
           </template>
           <template v-slot:body-cell-actions="props">
@@ -79,7 +79,7 @@ const {
   pagination,
   queryParams,
   pageOptions,
-  GqaDictShow,
+  CiliDictShow,
   loading,
   tableData,
   recordDetailDialog,

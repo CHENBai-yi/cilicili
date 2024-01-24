@@ -10,7 +10,7 @@ export const HandleAsideMenu = function (menuData, key, parentKey) {
 
 function checkPathAndChildren(menu) {
   return menu.map(m => ({
-    ...m, path: m.path || uniqueId('gqa-null-path-'), ...m.children
+    ...m, path: m.path || uniqueId('Cili-null-path-'), ...m.children
       ? {children: checkPathAndChildren(m.children)}
       : {}
   }))

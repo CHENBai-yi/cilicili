@@ -11,7 +11,7 @@
       <template v-slot:top="props">
         <div class="row q-gutter-x-md">
           <q-btn color="primary" label="新增测试数据" @click="showAddForm()"/>
-          <GqaUploader url="plugin-example/import-test-data" @importFinish="getTableData"/>
+          <CiliUploader url="plugin-example/import-test-data" @importFinish="getTableData"/>
           <q-btn color="primary" label="下载模板" @click="downloadTemplate()"/>
           <q-btn color="primary" label="导出查询数据" @click="exportData()"/>
         </div>
@@ -43,7 +43,7 @@ import useTableData from 'src/composables/useTableData'
 import {computed, onMounted} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {FormatDateTimeShort} from 'src/utils/date'
-import GqaUploader from 'src/components/GqaUploader/index.vue'
+import CiliUploader from 'src/components/CiliUploader/index.vue'
 import useCommon from 'src/composables/useCommon'
 
 const {showDateTime} = useCommon()
@@ -94,7 +94,7 @@ const exportData = () => {
   params.sort_by = pagination.value.sortBy
   params.desc = pagination.value.descending
   const allParams = Object.assign({}, params, queryParams.value)
-  downloadAction(url.export, allParams, "GqaExport-" + FormatDateTimeShort(timeStamp) + '.xlsx')
+  downloadAction(url.export, allParams, "CiliExport-" + FormatDateTimeShort(timeStamp) + '.xlsx')
 }
 
 const downloadTemplate = () => {

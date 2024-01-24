@@ -3,8 +3,8 @@
     <q-list bordered dense separator>
       <q-item v-close-popup v-ripple clickable>
         <q-item-section>
-          <q-chip icon="img:icons/gqa32.png">
-            GQA: {{ gqaVersion }}
+          <q-chip icon="img:icons/Cili32.png">
+            Cili: {{ CiliVersion }}
           </q-chip>
         </q-item-section>
       </q-item>
@@ -47,7 +47,7 @@ import config from '../../../../package.json'
 
 const storageStore = useStorageStore()
 const showVersion = ref(false)
-const goVersion = computed(() => storageStore.GetGqaGoVersion())
-const ginVersion = computed(() => storageStore.GetGqaGinVersion())
-const gqaVersion = config.version
+const goVersion = computed(() => storageStore.GetCiliGoVersion())
+const ginVersion = computed(() => storageStore.GetCiliGinVersion())
+const CiliVersion = config.version
 </script>

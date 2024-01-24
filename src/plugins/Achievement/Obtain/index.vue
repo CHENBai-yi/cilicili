@@ -5,7 +5,7 @@
              row-key="id" separator="cell" @request="onRequest">
       <template v-slot:body-cell-created_by="props">
         <q-td :props="props">
-          <GqaShowName :customNameObject="props.row.created_by_user"/>
+          <CiliShowName :customNameObject="props.row.created_by_user"/>
         </q-td>
       </template>
       <template v-slot:body-cell-created_at="props">
@@ -21,7 +21,7 @@
 <script setup>
 import useTableData from 'src/composables/useTableData'
 import {computed, onMounted} from 'vue'
-import GqaShowName from 'src/components/GqaShowName/index.vue'
+import CiliShowName from 'src/components/CiliShowName/index.vue'
 import RecordDetail from 'src/pages/System/Menu/modules/recordDetail.vue'
 
 const url = {

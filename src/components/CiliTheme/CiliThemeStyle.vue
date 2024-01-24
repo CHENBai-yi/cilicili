@@ -61,7 +61,7 @@ const setThemeStyle = (style) => {
 }
 
 const setBrand = (type, color) => {
-  Cookies.set('gqa-theme-' + type, color)
+  Cookies.set('Cili-theme-' + type, color)
   setCssVar(type, color)
 }
 

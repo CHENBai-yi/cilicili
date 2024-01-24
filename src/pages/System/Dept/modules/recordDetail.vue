@@ -5,10 +5,10 @@
         {{ formTypeName }} {{ $t('Dept') }}:
         {{ recordDetail.value.dept_name }}
       </q-card-section>
-      <gqa-form-top :recordDetail="recordDetail" style="margin: 0 16px;"></gqa-form-top>
+      <Cili-form-top :recordDetail="recordDetail" style="margin: 0 16px;"></Cili-form-top>
       <div class="row">
         <q-card-section class="q-gutter-md col-8">
-          <!-- <gqa-form-top :recordDetail="recordDetail"></gqa-form-top> -->
+          <!-- <Cili-form-top :recordDetail="recordDetail"></Cili-form-top> -->
           <q-form ref="recordDetailForm">
             <div class="row q-gutter-md">
               <q-input v-model="recordDetail.value.dept_code" :disable="formType === 'edit'"
@@ -27,10 +27,10 @@
               <q-input v-model.number="recordDetail.value.sort" :label="$t('Sort')"
                        :rules="[val => val >= 1 || $t('SortRule')]" class="col" hint=""
                        outlined type="number"/>
-              <GqaSeleteUser v-model:selectUser="recordDetail.value.leader_user"
-                             v-model:selectUsername="recordDetail.value.leader" :label="$t('Leader')" class="col"
-                             hint=""
-                             outlined selection="single"/>
+              <CiliSeleteUser v-model:selectUser="recordDetail.value.leader_user"
+                              v-model:selectUsername="recordDetail.value.leader" :label="$t('Leader')" class="col"
+                              hint=""
+                              outlined selection="single"/>
               <q-field :label="$t('Status')" class="col" dense hint="" outlined stack-label>
                 <template v-slot:control>
                   <q-option-group v-model="recordDetail.value.status" :options="dictOptions.onOff"
@@ -72,7 +72,7 @@
 
 <script setup>
 import useRecordDetail from 'src/composables/useRecordDetail'
-import GqaSeleteUser from 'src/components/GqaSeleteUser/index.vue'
+import CiliSeleteUser from 'src/components/CiliSeleteUser/index.vue'
 import {toRefs} from 'vue'
 
 const emit = defineEmits(['handleFinish'])

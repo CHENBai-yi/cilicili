@@ -2,15 +2,15 @@
   <q-card-section>
     <q-card-section>
       <div class="text-center">
-        <gqa-avatar :src="gqaFrontend.logo" size="xl"/>
+        <Cili-avatar :src="CiliFrontend.logo" size="xl"/>
       </div>
       <div class="text-h4 text-center text-bold">
-        {{ gqaFrontend.subTitle }}
+        {{ CiliFrontend.subTitle }}
       </div>
       <div class="text-h6 text-center q-mt-md q-mb-xs">
         {{ $t('WelcomeBack') }}
       </div>
-      <q-form class="q-mt-lg gqa-form" @submit="onSubmit">
+      <q-form class="q-mt-lg Cili-form" @submit="onSubmit">
         <q-input v-model.trim="form.username" :disable="loading" :placeholder="$t('Username')"
                  :rules="[(val) => (val && val.length > 0) || $t('NeedInput')]" color="black" dense no-error-icon
                  outlined rounded/>
@@ -57,7 +57,7 @@ import {usePermissionStore} from 'src/stores/permission';
 import {useRoute, useRouter} from 'vue-router';
 import {useQuasar} from 'quasar';
 
-const {gqaFrontend} = useCommon()
+const {CiliFrontend} = useCommon()
 
 const isPwd = ref(true)
 const form = ref({

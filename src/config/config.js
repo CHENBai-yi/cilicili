@@ -40,7 +40,7 @@ export const AllowList = [
   '/new-tab/add-ywd',
 ]
 // 控制台打印内容
-export const GqaConsoleLogo = () => {
+export const CiliConsoleLogo = () => {
   console.info('Welcome to Gin-Quasar-Admin!')
   console.info('Github: https://gitee.com/cby-cby/cilicili ')
   console.info('Expecting Your Star!')

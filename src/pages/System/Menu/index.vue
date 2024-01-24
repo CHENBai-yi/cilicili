@@ -8,7 +8,7 @@
       <q-card-section>
         <q-hierarchy :columns="columns" :data="menuTree" dense separator="cell">
           <template v-slot:body="props">
-            <gqa-tree-td :treeTd="props" firstTd="sort"></gqa-tree-td>
+            <Cili-tree-td :treeTd="props" firstTd="sort"></Cili-tree-td>
             <td class="text-center">
               <q-icon :name="props.item.icon" size="md"/>
             </td>
@@ -25,13 +25,13 @@
               {{ props.item.component }}
             </td>
             <td class="text-center">
-              <GqaDictShow :dictCode="props.item.is_link"/>
+              <CiliDictShow :dictCode="props.item.is_link"/>
             </td>
             <td class="text-center">
-              <GqaDictShow :dictCode="props.item.hidden"/>
+              <CiliDictShow :dictCode="props.item.hidden"/>
             </td>
             <td class="text-center">
-              <GqaDictShow :dictCode="props.item.stable"/>
+              <CiliDictShow :dictCode="props.item.stable"/>
             </td>
             <td class="text-center q-gutter-x-md">
               <q-btn v-has="'menu:edit'" :label="$t('Edit')" color="primary" dense flat
@@ -101,7 +101,7 @@ const columns = computed(() => {
 const {
   t,
   pagination,
-  GqaDictShow,
+  CiliDictShow,
   tableData,
   recordDetailDialog,
   showAddForm,

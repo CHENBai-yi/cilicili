@@ -20,7 +20,7 @@
           </template>
           <template v-slot:body-cell-avatar="props">
             <q-td :props="props">
-              <gqa-avatar :src="props.row.avatar"/>
+              <Cili-avatar :src="props.row.avatar"/>
             </q-td>
           </template>
           <template v-slot:body-cell-username="props">

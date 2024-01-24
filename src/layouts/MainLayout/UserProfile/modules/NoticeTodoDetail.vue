@@ -11,7 +11,7 @@
 
       <q-card-section>
         <q-form ref="recordDetailForm">
-          <gqa-form-top :recordDetail="recordDetail"></gqa-form-top>
+          <Cili-form-top :recordDetail="recordDetail"></Cili-form-top>
           <q-input v-model="recordDetail.value.todo_detail" :label="$t('Detail')"
                    :rules="[val => val && val.length > 0 || $t('NeedInput')]"
                    type="textarea"/>

@@ -6,7 +6,7 @@
           {{ randomWelcome() }}
           <q-space/>
           <span class="text-bold">
-                        <GqaShowName showMyName/>
+                        <CiliShowName showMyName/>
                     </span>
           <q-inner-loading :showing="loading">
             <q-spinner-gears color="primary" size="50px"/>
@@ -77,7 +77,7 @@
 </template>
 
 <script setup>
-import GqaShowName from 'src/components/GqaShowName/index.vue'
+import CiliShowName from 'src/components/CiliShowName/index.vue'
 import PieChart from "./charts/PieChart.vue";
 import PieChart2 from "./charts/PieChart2.vue";
 import StarHistory from './charts/StarHistory.vue'

@@ -42,7 +42,7 @@ const router = useRouter()
 const userStore = useUserStore()
 const nicknameDialog = ref(false)
 const nicknameForm = ref({
-  nickname: $q.cookies.get('gqa-nickname')
+  nickname: $q.cookies.get('cili-nickname')
 })
 const changeNicknameUrl = 'user/change-nickname'
 const show = () => {

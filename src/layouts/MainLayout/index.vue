@@ -6,11 +6,11 @@
         <q-btn :icon="toggleLeftDrawer ? 'eva-arrowhead-left' : 'eva-arrowhead-right'" dense flat round
                @click="toggleLeftDrawer = !toggleLeftDrawer"/>
 
-        <gqa-avatar :src="gqaFrontend.logo" class="gin-quasar-admin-logo" @mouseenter="startCheck"
-                    @mouseleave="stopCheck"/>
+        <Cili-avatar :src="CiliFrontend.logo" class="gin-quasar-admin-logo" @mouseenter="startCheck"
+                     @mouseleave="stopCheck"/>
 
         <q-toolbar-title class="text-bold text-italic cursor-pointer" shrink style="padding: 0 5px;">
-          {{ gqaFrontend.subTitle }}
+          {{ CiliFrontend.subTitle }}
         </q-toolbar-title>
 
         <q-separator inset spaced vertical/>
@@ -31,7 +31,7 @@
           <!-- <ChoosePlugin @changePlugin="changeTop" /> -->
           <ChatAndNotice/>
           <AddTodo/>
-          <GitLink v-if="gqaFrontend.showGit === 'yesNo_yes'"/>
+          <GitLink v-if="CiliFrontend.showGit === 'yesNo_yes'"/>
           <UserMenu @showProfile="$refs.userProfile.show()"/>
           <Setting/>
         </div>
@@ -135,7 +135,7 @@ const miniStateMouseout = () => {
 }
 
 const {selectOptionLabel, selectRouteLabel} = useCommon()
-const gqaFrontend = computed(() => storageStore.GetGqaFrontend())
+const CiliFrontend = computed(() => storageStore.GetCiliFrontend())
 const drawerWidth = computed(() => settingStore.GetSidebarWidth())
 
 const changeTop = (childrenMenu) => {

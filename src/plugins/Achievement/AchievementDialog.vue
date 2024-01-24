@@ -1,6 +1,6 @@
 <template>
   <q-dialog v-model="visible" persistent position="bottom" transition-hide="rotate" transition-show="rotate">
-    <GqaCard endColor="#f68057" startColor="#fcbc25" style="width: 500px; box-shadow: 0 0 50px 10px #fcbc25;">
+    <CiliCard endColor="#f68057" startColor="#fcbc25" style="width: 500px; box-shadow: 0 0 50px 10px #fcbc25;">
       <q-card-section>
                 <span class="row justify-center text-h6 text-bold text-white">
                     新成就解锁
@@ -18,12 +18,12 @@
           </q-chip>
         </div>
       </q-card-section>
-    </GqaCard>
+    </CiliCard>
   </q-dialog>
 </template>
 
 <script setup>
-import GqaCard from 'src/components/GqaCard/index.vue'
+import CiliCard from 'src/components/CiliCard/index.vue'
 import {onBeforeUnmount, ref} from 'vue';
 
 const visible = ref(false)

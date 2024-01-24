@@ -5,7 +5,7 @@
         {{ formTypeName }} {{ $t('Menu') }}:
         {{ recordDetail.value.title ? $t(recordDetail.value.title) : '' }}
       </q-card-section>
-      <gqa-form-top :recordDetail="recordDetail" style="margin: 0 16px;"></gqa-form-top>
+      <Cili-form-top :recordDetail="recordDetail" style="margin: 0 16px;"></Cili-form-top>
       <div class="row">
         <q-card-section class="q-gutter-md col-8">
           <q-form ref="recordDetailForm">

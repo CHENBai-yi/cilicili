@@ -46,12 +46,12 @@ const {dictCode, withExt1, ext1} = toRefs(props)
 const dictList = ref([])
 
 onBeforeMount(async () => {
-  const detailLocal = $q.localStorage.getItem('gqa-dict')
+  const detailLocal = $q.localStorage.getItem('cili-dict')
   if (detailLocal) {
     dictList.value = detailLocal
   } else {
-    await storageStore.SetGqaDict()
-    dictList.value = $q.localStorage.getItem('gqa-dict')
+    await storageStore.SetCiliDict()
+    dictList.value = $q.localStorage.getItem('cili-dict')
   }
 })
 

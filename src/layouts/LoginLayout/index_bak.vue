@@ -4,12 +4,12 @@
       <ComplexView v-if="loginLayout === ComplexView && !dbNeedInit" :pluginComponent="pluginComponent"
                    :pluginCurrent="pluginCurrent"/>
       <div v-else
-           :class="changeContainerImg === '' ? 'gqa-login-layout-img-container' : 'gqa-login-layout-img-container-with-img'"
+           :class="changeContainerImg === '' ? 'Cili-login-layout-img-container' : 'Cili-login-layout-img-container-with-img'"
            :style="changeContainerImg === '' ? { background: $q.dark.isActive ? 'black' : '#e3f4fa' } : changeContainerImg">
         <div class="main-title-logo row justify-center items-center">
-          <gqa-avatar :src="gqaFrontend.logo" class="gin-quasar-admin-logo" size="45px"/>
+          <Cili-avatar :src="CiliFrontend.logo" class="gin-quasar-admin-logo" size="45px"/>
           <span class="text-weight-bold text-h4" style="margin-left:8px">
-                        {{ gqaFrontend.mainTitle }}
+                        {{ CiliFrontend.mainTitle }}
                     </span>
         </div>
         <figure class="primary-ball"/>
@@ -22,25 +22,25 @@
         </q-card>
         <audio ref="loginBgm" loop src="http://music.163.com/song/media/outer/url?id=1479760027.mp3"></audio>
         <div class="power-show">
-          {{ gqaFrontend.subTitle }}
+          {{ CiliFrontend.subTitle }}
           is powered by&nbsp;
           <a :style="{ color: $q.dark.isActive ? '#fff' : '#000' }" href="https://gitee.com/cby-cby/cilicili"
              style="text-decoration: none"
              target="_blank">
             Gin-Quasar-Admin
-            {{ gqaVersion }}
+            {{ CiliVersion }}
           </a>
         </div>
         <div class="version-git-show">
           <q-btn flat>
             {{ $t('Version') }}{{ $t('Info') }}
-            <gqa-version-menu/>
+            <Cili-version-menu/>
           </q-btn>
           <q-btn flat label="Github" @click="openLink('https://gitee.com/cby-cby/cilicili')"/>
           <q-btn flat label="Gitee" @click="openLink('https://gitee.com/cby-cby/cilicili')"/>
         </div>
         <div class="language-show">
-          <GqaLanguage style="width: 100%;"/>
+          <CiliLanguage style="width: 100%;"/>
         </div>
         <div class="dark-theme-show">
           <q-btn :icon="playFlag ? 'music_off' : 'music_note'" flat round @click="playBgm"></q-btn>
@@ -61,27 +61,27 @@ import InitDbView from './InitDbView/index.vue'
 import {useStorageStore} from 'src/stores/storage'
 import {useQuasar} from 'quasar'
 import {useI18n} from 'vue-i18n'
-import GqaLanguage from 'src/components/GqaLanguage/index.vue'
+import CiliLanguage from 'src/components/CiliLanguage/index.vue'
 import config from '../../../package.json'
-import DarkTheme from 'src/components/GqaTheme/DarkTheme.vue';
+import DarkTheme from 'src/components/CiliTheme/DarkTheme.vue';
 import useTheme from 'src/composables/useTheme';
-import {GqaConsoleLogo} from "src/config/config"
+import {CiliConsoleLogo} from "src/config/config"
 import {CheckComponent} from 'src/utils/check'
 
 const {darkThemeLoginCard} = useTheme()
-const gqaVersion = config.version
+const CiliVersion = config.version
 const $q = useQuasar()
 const {t} = useI18n()
-const {gqaFrontend} = useCommon()
+const {CiliFrontend} = useCommon()
 const storageStore = useStorageStore()
 const pluginCurrent = ref(null)
 const pluginComponent = ref(null)
 const dbNeedInit = ref(false)
 
 const loginLayout = computed(() => {
-  if (gqaFrontend.value.loginLayoutStyle && gqaFrontend.value.loginLayoutStyle === 'loginLayoutStyle_login') {
+  if (CiliFrontend.value.loginLayoutStyle && CiliFrontend.value.loginLayoutStyle === 'loginLayoutStyle_login') {
     return Cli
-  } else if (gqaFrontend.value.loginLayoutStyle && gqaFrontend.value.loginLayoutStyle === 'loginLayoutStyle_portal') {
+  } else if (CiliFrontend.value.loginLayoutStyle && CiliFrontend.value.loginLayoutStyle === 'loginLayoutStyle_portal') {
     return Cli
   } else {
     return Cli
@@ -90,7 +90,7 @@ const loginLayout = computed(() => {
 
 onBeforeMount(() => {
   checkDb()
-  GqaConsoleLogo()
+  CiliConsoleLogo()
 })
 
 const pluginsFile = import.meta.glob('../../plugins/**/LoginLayout/index.vue')
@@ -98,14 +98,14 @@ const pluginsFile = import.meta.glob('../../plugins/**/LoginLayout/index.vue')
 const checkDb = async () => {
   const res = await postAction('public/check-db')
   if (res.code === 1) {
-    storageStore.SetGqaGoVersion(res.data.go_version)
-    storageStore.SetGqaGinVersion(res.data.gin_version)
-    storageStore.SetGqaPluginList(res.data.plugin_list)
+    storageStore.SetCiliGoVersion(res.data.go_version)
+    storageStore.SetCiliGinVersion(res.data.gin_version)
+    storageStore.SetCiliPluginList(res.data.plugin_list)
     if (res.data.need_init === false) {
       dbNeedInit.value = false
-      await storageStore.SetGqaDict()
-      await storageStore.SetGqaFrontend()
-      await storageStore.SetGqaBackend()
+      await storageStore.SetCiliDict()
+      await storageStore.SetCiliFrontend()
+      await storageStore.SetCiliBackend()
       pluginCurrent.value = res.data.plugin_login_layout
       if (pluginCurrent.value) {
         const cc = CheckComponent(pluginCurrent.value, pluginsFile, 3)
@@ -149,8 +149,8 @@ const changeContainerImg = computed(() => {
   }
 })
 const bannerImage = computed(() => {
-  if (gqaFrontend.value.bannerImage && gqaFrontend.value.bannerImage.substring(0, 11) === 'gqa-upload:') {
-    return process.env.API + gqaFrontend.value.bannerImage.substring(11)
+  if (CiliFrontend.value.bannerImage && CiliFrontend.value.bannerImage.substring(0, 12) === 'cili-upload:') {
+    return process.env.API + CiliFrontend.value.bannerImage.substring(12)
   }
   return ''
 })

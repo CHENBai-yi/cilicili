@@ -24,7 +24,7 @@
             <q-td :props="props">
               <q-badge :color="props.row.login_success === 'yesNo_no' ? 'negative' : 'positive'"
                        align="middle">
-                <GqaDictShow :dictCode="props.row.login_success"/>
+                <CiliDictShow :dictCode="props.row.login_success"/>
               </q-badge>
             </q-td>
           </template>
@@ -86,7 +86,7 @@ const {
   pagination,
   queryParams,
   pageOptions,
-  GqaDictShow,
+  CiliDictShow,
   loading,
   tableData,
   onRequest,

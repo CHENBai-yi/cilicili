@@ -1,12 +1,12 @@
-import GqaAvatar from 'src/components/common/GqaAvatar/index.vue'
-import GqaFormTop from 'src/components/common/GqaFormTop/index.vue'
-import GqaTreeTd from 'src/components/common/GqaTreeTd/index.vue'
-import GqaVersionMenu from 'src/components/common/GqaVersionMenu/index.vue'
+import CiliAvatar from 'src/components/common/CiliAvatar/index.vue'
+import CiliFormTop from 'src/components/common/CiliFormTop/index.vue'
+import CiliTreeTd from 'src/components/common/CiliTreeTd/index.vue'
+import CiliVersionMenu from 'src/components/common/CiliVersionMenu/index.vue'
 
 // we globally register our component with Vue
 export default ({app}) => {
-  app.component('gqa-avatar', GqaAvatar)
-  app.component('gqa-form-top', GqaFormTop)
-  app.component('gqa-tree-td', GqaTreeTd)
-  app.component('gqa-version-menu', GqaVersionMenu)
+  app.component('Cili-avatar', CiliAvatar)
+  app.component('Cili-form-top', CiliFormTop)
+  app.component('Cili-tree-td', CiliTreeTd)
+  app.component('Cili-version-menu', CiliVersionMenu)
 }

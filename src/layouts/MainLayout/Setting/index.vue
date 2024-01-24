@@ -6,7 +6,7 @@
         <q-card-section>
           <div class="text-h6">
             {{ $t('Customize') + $t('Your') }}
-            {{ gqaFrontend.subTitle }}
+            {{ CiliFrontend.subTitle }}
             {{ $t('Display') + $t('Style') }}
           </div>
         </q-card-section>
@@ -36,16 +36,16 @@
                   </template>
                 </q-field>
               </div>
-              <GqaLanguage class="col-2"/>
+              <CiliLanguage class="col-2"/>
               <SidebarWidth/>
             </q-tab-panel>
 
             <q-tab-panel name="themeColor">
-              <GqaThemeColor/>
+              <CiliThemeColor/>
             </q-tab-panel>
 
             <q-tab-panel name="themeStyle">
-              <GqaThemeStyle/>
+              <CiliThemeStyle/>
             </q-tab-panel>
           </q-tab-panels>
         </q-card-section>
@@ -55,10 +55,10 @@
 </template>
 
 <script setup>
-import GqaLanguage from 'src/components/GqaLanguage/index.vue'
-import GqaThemeColor from 'src/components/GqaTheme/GqaThemeColor.vue'
-import GqaThemeStyle from 'src/components/GqaTheme/GqaThemeStyle.vue'
-import DarkTheme from 'src/components/GqaTheme/DarkTheme.vue';
+import CiliLanguage from 'src/components/CiliLanguage/index.vue'
+import CiliThemeColor from 'src/components/CiliTheme/CiliThemeColor.vue'
+import CiliThemeStyle from 'src/components/CiliTheme/CiliThemeStyle.vue'
+import DarkTheme from 'src/components/CiliTheme/DarkTheme.vue';
 import SidebarDense from './SidebarDense.vue';
 import SidebarWidth from './SidebarWidth.vue'
 import {computed, ref} from 'vue';
@@ -67,5 +67,5 @@ import {useStorageStore} from 'src/stores/storage';
 const right = ref(false)
 const tab = ref('basicSetting')
 const storageStore = useStorageStore();
-const gqaFrontend = computed(() => storageStore.GetGqaFrontend())
+const CiliFrontend = computed(() => storageStore.GetCiliFrontend())
 </script>

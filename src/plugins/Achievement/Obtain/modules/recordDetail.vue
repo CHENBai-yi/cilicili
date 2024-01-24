@@ -11,7 +11,7 @@
 
       <q-card-section>
         <q-form ref="recordDetailForm">
-          <gqa-form-top :recordDetail="recordDetail"></gqa-form-top>
+          <Cili-form-top :recordDetail="recordDetail"></Cili-form-top>
           <div class="row">
 
           </div>

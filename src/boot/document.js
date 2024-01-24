@@ -1,34 +1,34 @@
 import {computed, watch} from 'vue';
 import {useStorageStore} from 'src/stores/storage';
-import {GqaFrontendDefault} from "src/config/default"
+import {CiliFrontendDefault} from "src/config/default"
 
 const storageStore = useStorageStore();
-const gqaFrontend = computed(() => storageStore.GetGqaFrontend());
+const CiliFrontend = computed(() => storageStore.GetCiliFrontend());
 
 const createLink = () => {
-  const toDelete = document.getElementsByName('gqa-link-href')
+  const toDelete = document.getElementsByName('Cili-link-href')
   if (toDelete && toDelete.length) {
     document.getElementsByTagName('head')[0].removeChild(toDelete[0])
   }
-  const gqaLink = document.createElement('link')
-  gqaLink.type = 'image/ico'
-  gqaLink.rel = 'icon'
-  gqaLink.setAttribute('name', 'gqa-link-href')
-  if (gqaFrontend.value.favicon && gqaFrontend.value.favicon !== '') {
-    const favicon = process.env.API + gqaFrontend.value.favicon.substring(11)
-    gqaLink.href = favicon
+  const CiliLink = document.createElement('link')
+  CiliLink.type = 'image/ico'
+  CiliLink.rel = 'icon'
+  CiliLink.setAttribute('name', 'Cili-link-href')
+  if (CiliFrontend.value.favicon && CiliFrontend.value.favicon !== '') {
+    const favicon = process.env.API + CiliFrontend.value.favicon.substring(11)
+    CiliLink.href = favicon
   } else {
-    gqaLink.href = 'favicon.ico'
+    CiliLink.href = 'favicon.ico'
   }
-  document.getElementsByTagName('head')[0].appendChild(gqaLink)
+  document.getElementsByTagName('head')[0].appendChild(CiliLink)
 }
 
-watch(gqaFrontend, (newValue) => {
+watch(CiliFrontend, (newValue) => {
   document.title = newValue.subTitle
   createLink()
 })
 
 export default async () => {
-  document.title = gqaFrontend.value.subTitle || GqaFrontendDefault.subTitle
+  document.title = CiliFrontend.value.subTitle || CiliFrontendDefault.subTitle
   createLink()
 }

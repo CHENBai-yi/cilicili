@@ -8,7 +8,7 @@
       <q-separator/>
       <q-card-section>
         <q-form ref="recordDetailForm">
-          <gqa-form-top :recordDetail="recordDetail"></gqa-form-top>
+          <Cili-form-top :recordDetail="recordDetail"></Cili-form-top>
           <div class="row q-gutter-md">
             <q-input v-model.number="recordDetail.value.sort" :label="$t('Sort')"
                      :rules="[val => val >= 1 || $t('SortRule')]" class="col" hint=""

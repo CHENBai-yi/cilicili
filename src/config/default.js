@@ -1,12 +1,12 @@
-export const GqaDefaultUsername = 'GQA'
-export const GqaDefaultAvatar = "icons/favicon-128x128.png"
-export const GqaFrontendDefault = {
+export const CiliDefaultUsername = 'Cili'
+export const CiliDefaultAvatar = "icons/favicon-128x128.png"
+export const CiliFrontendDefault = {
   mainTitle: "Cilicili后台管理系统",
   subTitle: "Cilicili后台管理系统",
   webDescribe: "Be the change you want to see in the world.",
   showGit: "yesNo_yes"
 }
-export const GqaBackendDefault = {}
+export const CiliBackendDefault = {}
 export const ThemeStyleQuasar = {
   primary: '#1976D2',
   secondary: '#26A69A',

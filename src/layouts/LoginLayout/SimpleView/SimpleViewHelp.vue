@@ -1,11 +1,11 @@
 <template>
   <transition appear enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
     <div class="col column justify-center items-center" style="margin-top: -120px">
-      <GqaLottie :src="robot"/>
+      <CiliLottie :src="robot"/>
       <div class="col column q-gutter-y-xs" style="margin-left: 90px;">
                 <span class="text-weight-bold text-h5" style="margin-top: -40px">
                     {{ $t('WelcomeTo') }}
-                    {{ gqaFrontend.subTitle }}
+                    {{ CiliFrontend.subTitle }}
                 </span>
         <div class="row justify-start">
           <q-chip v-for="item in pluginList" class="glossy" color="primary" style="cursor: pointer;"
@@ -20,7 +20,7 @@
           </q-chip>
         </div>
         <span class="text-subtitle1">
-                    {{ gqaFrontend.webDescribe }}
+                    {{ CiliFrontend.webDescribe }}
                 </span>
       </div>
     </div>
@@ -29,15 +29,15 @@
 
 <script setup>
 import {computed} from 'vue';
-import GqaLottie from 'src/components/GqaLottie/index.vue'
+import CiliLottie from 'src/components/CiliLottie/index.vue'
 import robot from 'src/assets/robot.json'
 import useCommon from 'src/composables/useCommon'
 import {useStorageStore} from 'src/stores/storage'
 
-const {gqaFrontend} = useCommon()
+const {CiliFrontend} = useCommon()
 const storageStore = useStorageStore()
 
 const pluginList = computed(() => {
-  return storageStore.GetGqaPluginList()
+  return storageStore.GetCiliPluginList()
 })
 </script>

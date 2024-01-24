@@ -57,10 +57,9 @@
               </q-inner-loading>
             </q-card-section>
           </q-card>
-          <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
         </div>
         <div class="col-12 self-end ">
-          <GqaLanguage class="power-show " style="width: 90px"/>
+          <CiliLanguage class="power-show " style="width: 90px"/>
           <PageFooter/>
         </div>
       </q-page>
@@ -71,13 +70,11 @@
 </template>
 
 <script setup>
-import GqaLanguage from 'src/components/GqaLanguage/index.vue'
-import {computed, onBeforeMount, ref} from 'vue'
-import DarkTheme from 'src/components/GqaTheme/DarkTheme.vue';
+import CiliLanguage from 'src/components/CiliLanguage/index.vue'
+import {ref} from 'vue'
+import DarkTheme from 'src/components/CiliTheme/DarkTheme.vue';
 import {randomWelcome} from 'src/utils/welcome'
-import DbInit from '../myInitDbView/index.vue'
 import PageFooter from 'src/layouts/MainLayout/PageFooter.vue'
-import {useStorageStore} from 'stores/storage'
 import {useQuasar} from 'quasar'
 import {postAction} from "src/api/manage";
 import useCommon from "src/composables/useCommon";
@@ -86,7 +83,7 @@ import {useUserStore} from 'stores/user'
 import {usePermissionStore} from 'stores/permission';
 import {useRouter} from 'vue-router';
 
-const {gqaFrontend} = useCommon()
+const {CiliFrontend} = useCommon()
 const $q = useQuasar()
 const isPwd = ref(true)
 const form = ref({
@@ -102,35 +99,7 @@ const changeRememberMe = (value) => {
   userStore.ChangeRememberMe(value)
 }
 const loading = ref(false)
-const dbNeedInit = ref(false)
-const storageStore = useStorageStore()
-const changeContainerImg = computed(() => {
-  if (bannerImage.value === '') {
-    return ''
-  } else {
-    return {
-      background: 'url(' + bannerImage.value + ')',
-      backgroundRepeat: "no",
-      backgroundPosition: 'center',
-      backgroundSize: "cover",
-      overflow: 'hidden',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }
-  }
-})
-const bannerImage = computed(() => {
-  if (gqaFrontend.value.bannerImage && gqaFrontend.value.bannerImage.substring(0, 11) === 'gqa-upload:') {
-    return process.env.API + gqaFrontend.value.bannerImage.substring(11)
-  }
-  return ''
-})
 const permissionStore = usePermissionStore()
-onBeforeMount(() => {
-  checkDb()
-})
 const captchaImage = ref('')
 const getCaptcha = () => {
   postAction('public/get-captcha').then((res) => {
@@ -138,29 +107,6 @@ const getCaptcha = () => {
     form.value.captcha_id = res.data.captcha_id
   })
 }
-const checkDb = async () => {
-  const res = await postAction('public/check-db')
-
-  if (res.code === 1) {
-    storageStore.SetGqaGoVersion(res.data.go_version)
-    storageStore.SetGqaGinVersion(res.data.gin_version)
-    storageStore.SetGqaPluginList(res.data.plugin_list)
-    if (res.data.need_init === false) {
-      dbNeedInit.value = false
-      await storageStore.SetGqaDict()
-      await storageStore.SetGqaFrontend()
-      await storageStore.SetGqaBackend()
-    }
-    if (res.data.need_init === true) {
-      dbNeedInit.value = true
-      $q.notify({
-        type: 'warning',
-        message: res.message,
-      })
-    }
-  }
-}
-
 const onSubmit = async () => {
   loading.value = true
   const res = await userStore.HandleLogin({

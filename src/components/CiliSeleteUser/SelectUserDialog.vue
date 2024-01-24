@@ -17,7 +17,7 @@
                     </span>
         </div>
         <!-- <span class="text-subtitle2 text-negative row justify-center" v-if="selection === 'multiple'">
-            {{ $t('GqaSelectUserHelp') }}
+            {{ $t('CiliSelectUserHelp') }}
         </span> -->
         <q-btn :label="$t('Select')" color="primary" dense @click="handleSelectUser()"/>
       </q-card-section>

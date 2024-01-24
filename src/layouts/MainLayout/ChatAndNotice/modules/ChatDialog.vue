@@ -4,7 +4,7 @@
     <q-card bordered style="width: 800px; max-width: 50vw;">
       <q-toolbar>
         <q-toolbar-title>
-          {{ gqaFrontend.subTitle }}
+          {{ CiliFrontend.subTitle }}
           {{ $t('ChatRoom') }}
         </q-toolbar-title>
         <q-btn v-close-popup dense flat icon="close"/>
@@ -16,11 +16,11 @@
             <q-list>
               <q-item v-for="(item, index) in tableData" :key="index" v-ripple clickable>
                 <q-item-section avatar>
-                  <gqa-avatar :src="item.user.avatar"/>
+                  <Cili-avatar :src="item.user.avatar"/>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>
-                    <GqaShowName :customNameObject="item.user"/>
+                    <CiliShowName :customNameObject="item.user"/>
                   </q-item-label>
                 </q-item-section>
               </q-item>
@@ -41,7 +41,7 @@
             </div>
           </q-scroll-area>
           <q-toolbar>
-            <q-form ref="newMessageForm" class="gqa-form" style="width: 100%">
+            <q-form ref="newMessageForm" class="Cili-form" style="width: 100%">
               <q-input v-model="newMessage" :label="$t('Content')"
                        :rules="[val => val && val.length > 0 || $t('NeedInput')]" class="col-auto" dense
                        outlined rounded
@@ -63,7 +63,7 @@ import useTableData from 'src/composables/useTableData'
 import {useQuasar} from 'quasar'
 import {computed, nextTick, onMounted, ref, toRefs, watch} from 'vue'
 import {useI18n} from 'vue-i18n'
-import {GqaDefaultAvatar, GqaDefaultUsername} from "src/config/default"
+import {CiliDefaultAvatar, CiliDefaultUsername} from "src/config/default"
 
 const $q = useQuasar()
 const {t} = useI18n()
@@ -79,9 +79,9 @@ const props = defineProps({
 })
 const {oldMessage} = toRefs(props)
 const {
-  gqaFrontend,
+  CiliFrontend,
   pagination,
-  GqaShowName,
+  CiliShowName,
   loading,
   tableData,
   getTableData,
@@ -93,27 +93,27 @@ onMounted(() => {
 })
 
 const myAvatar = computed(() => {
-  const cookieAvatar = $q.cookies.get('gqa-avatar')
+  const cookieAvatar = $q.cookies.get('cili-avatar')
   if (cookieAvatar) {
     if (cookieAvatar.substring(0, 4) === 'http') {
       return cookieAvatar
-    } else if (cookieAvatar.substring(0, 11) === 'gqa-upload:') {
+    } else if (cookieAvatar.substring(0, 12) === 'cili-upload:') {
       return process.env.API + cookieAvatar.substring(11)
     }
     return cookieAvatar
   } else {
-    return GqaDefaultAvatar
+    return CiliDefaultAvatar
   }
 })
 const myName = computed(() => {
-  const nickname = $q.cookies.get('gqa-nickname')
-  const realName = $q.cookies.get('gqa-realName')
+  const nickname = $q.cookies.get('cili-nickname')
+  const realName = $q.cookies.get('cili-realName')
   if (nickname) {
     return nickname
   } else if (realName) {
     return realName
   } else {
-    return GqaDefaultUsername
+    return CiliDefaultUsername
   }
 })
 const chatDialogVisible = ref(false)

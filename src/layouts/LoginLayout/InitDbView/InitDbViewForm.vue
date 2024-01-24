@@ -14,7 +14,7 @@
           </q-toolbar-title>
         </q-toolbar>
         <q-card-section>
-          <q-form class="text-center gqa-form" @submit="onInitDb">
+          <q-form class="text-center Cili-form" @submit="onInitDb">
             <div class="q-gutter-y-md column">
               <div class="row q-gutter-md">
                 <q-input v-model.trim="form.db_type" :label="$t('Database') + $t('Type')"
@@ -74,7 +74,7 @@ const form = ref({
   db_type: 'Mysql',
   db_host: '127.0.0.1',
   db_port: '3306',
-  db_schema: 'quasar-admin',
+  db_schema: 'cili-quasar-admin',
   db_user: 'root',
   db_password: '74521CBy',
 })
@@ -92,9 +92,9 @@ const onInitDb = () => {
           type: 'positive',
           message: t('Database') + t('Init') + t('Success'),
         })
-        storageStore.SetGqaDict()
-        storageStore.SetGqaFrontend()
-        storageStore.SetGqaBackend()
+        storageStore.SetCiliDict()
+        storageStore.SetCiliFrontend()
+        storageStore.SetCiliBackend()
         emit('initDbSuccess')
       } else {
         $q.notify({

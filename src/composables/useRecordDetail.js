@@ -101,15 +101,15 @@ export default function useRecordDetail(url, emit) {
       })
     }
   }
-  const {showDateTime, showDate, gqaFrontend, gqaBackend, GqaDictShow, GqaShowName,} = useCommon()
+  const {showDateTime, showDate, CiliFrontend, CiliBackend, CiliDictShow, CiliShowName,} = useCommon()
   return {
     $q,
     t,
     bus,
-    GqaShowName,
-    GqaDictShow,
-    gqaFrontend,
-    gqaBackend,
+    CiliShowName,
+    CiliDictShow,
+    CiliFrontend,
+    CiliBackend,
     dictOptions,
     showDateTime,
     showDate,

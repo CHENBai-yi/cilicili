@@ -1,6 +1,6 @@
 import words from "./words"
 import sentences from "./sentences"
-import gqa from "./gqa"
+import Cili from "./Cili"
 import phrases from "./phrases"
 
-export default Object.assign({}, gqa, sentences, words, phrases)
+export default Object.assign({}, Cili, sentences, words, phrases)

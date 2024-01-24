@@ -31,7 +31,7 @@
 import useTableData from 'src/composables/useTableData'
 import {postAction} from 'src/api/manage'
 import {computed, ref} from 'vue'
-import SelectUserDialog from 'src/components/GqaSeleteUser/SelectUserDialog.vue'
+import SelectUserDialog from 'src/components/CiliSeleteUser/SelectUserDialog.vue'
 
 const url = {
   list: 'dept/query-user-by-dept',

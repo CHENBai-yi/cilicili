@@ -184,18 +184,18 @@ const colorList = computed(() => {
   return [...new Set(cl)]
 })
 
-const primary = ref(Cookies.get('gqa-theme-primary') || getCssVar('primary'));
-const secondary = ref(Cookies.get('gqa-theme-secondary') || getCssVar('secondary'));
-const accent = ref(Cookies.get('gqa-theme-accent') || getCssVar('accent'));
-const positive = ref(Cookies.get('gqa-theme-positive') || getCssVar('positive'));
-const negative = ref(Cookies.get('gqa-theme-negative') || getCssVar('negative'));
-const info = ref(Cookies.get('gqa-theme-info') || getCssVar('info'));
-const warning = ref(Cookies.get('gqa-theme-warning') || getCssVar('warning'));
-const dark = ref(Cookies.get('gqa-theme-dark') || getCssVar('dark'));
-const light = ref(Cookies.get('gqa-theme-light') || getCssVar('light'));
+const primary = ref(Cookies.get('Cili-theme-primary') || getCssVar('primary'));
+const secondary = ref(Cookies.get('Cili-theme-secondary') || getCssVar('secondary'));
+const accent = ref(Cookies.get('Cili-theme-accent') || getCssVar('accent'));
+const positive = ref(Cookies.get('Cili-theme-positive') || getCssVar('positive'));
+const negative = ref(Cookies.get('Cili-theme-negative') || getCssVar('negative'));
+const info = ref(Cookies.get('Cili-theme-info') || getCssVar('info'));
+const warning = ref(Cookies.get('Cili-theme-warning') || getCssVar('warning'));
+const dark = ref(Cookies.get('Cili-theme-dark') || getCssVar('dark'));
+const light = ref(Cookies.get('Cili-theme-light') || getCssVar('light'));
 
 const setBrand = (type, color) => {
-  Cookies.set('gqa-theme-' + type, color)
+  Cookies.set('Cili-theme-' + type, color)
   setCssVar(type, color)
   eval(type).value = color;
 }
