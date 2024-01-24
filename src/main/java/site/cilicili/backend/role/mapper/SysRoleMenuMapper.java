@@ -80,5 +80,4 @@ public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenuEntity> {
      * @return 影响行数
      */
     int deleteById(String sysRoleRoleCode);
-
 }
