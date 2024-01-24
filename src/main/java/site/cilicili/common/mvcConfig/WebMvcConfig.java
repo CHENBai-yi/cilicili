@@ -249,7 +249,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 
-
     /*@Bean
     public MultipartConfigElement multipartConfigElement(MultipartProperties multipartProperties) {
         Optional.ofNullable(DbUtils.checkDb(dbChangeConf.getBackendInner()))

@@ -2212,7 +2212,7 @@ VALUES (1, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1, '
         'bannerImage', '', '');
 INSERT INTO `sys_config_frontend`
 VALUES (2, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 2, 'yesNo_yes', 'onOff_on', '网站主标题',
-        'mainTitle', 'Cilicili-Admin', '');
+        'mainTitle', 'Cilicili-Admin', ' CiliCili(゜-゜)つロ 干杯~');
 INSERT INTO `sys_config_frontend`
 VALUES (3, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 3, 'yesNo_yes', 'onOff_on', '网站副标题',
         'subTitle', 'Cilicili后台管理系统', '');
@@ -2221,7 +2221,7 @@ VALUES (4, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 4, '
         'webDescribe', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', '');
 INSERT INTO `sys_config_frontend`
 VALUES (5, '2023-12-04 13:02:17', 'admin', '2024-01-24 20:28:54', 'admin', NULL, 5, 'yesNo_yes', 'onOff_on',
-        '登录页风格', 'loginLayoutStyle', 'loginLayoutStyle_login', 'loginLayoutStyle_login');
+        '登录页风格', 'loginLayoutStyle', 'loginLayoutStyle_login', '');
 INSERT INTO `sys_config_frontend`
 VALUES (6, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 6, 'yesNo_yes', 'onOff_on', '登录页插件',
         'pluginLoginLayout', '', '');
@@ -3787,7 +3787,7 @@ INSERT INTO `sys_user`
 VALUES (1, '2023-12-04 13:02:17', 'admin', '2024-01-08 20:21:14', 'admin', NULL, 1, 'yesNo_yes', 'onOff_on',
         'Be the change you want to see in the world.', 'admin', 'Mr.C', 'SuperAdmin',
         '$2a$10$jGr2rP6BJdTR7QPx8RNVge2RxcbsJJgWXtUKf2cMz4RATXrx1/6wy',
-        'cili-upload:avatar/admin/6b1a7fc094c24e9490491193e81cf5d8_20240108202113971.jpg', 'gender_unknown',
+        '', 'gender_unknown',
         '1234567890', '11111111111', b'1');
 INSERT INTO `sys_user`
 VALUES (2, '2024-01-05 00:03:39', 'admin', '2024-01-05 00:03:47', 'admin', NULL, NULL, NULL, 'onOff_on', '测试人员',

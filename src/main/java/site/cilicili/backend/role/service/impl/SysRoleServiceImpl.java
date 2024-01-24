@@ -229,7 +229,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
                             | (!editRoleMenuRequest.roleButton().isEmpty()
                             && (sysRoleButtonService.remove(new QueryWrapper<SysRoleButtonEntity>()
                             .eq("sys_role_role_code", sysRole.getRoleCode()))
-                            | sysRoleButtonService.insertOrUpdateBatch(editRoleMenuRequest.roleButton())))) {
+                            | sysRoleButtonService.insertOrUpdateBatch(
+                            editRoleMenuRequest.roleButton())))) {
                         sysRole.setDefaultPage(editRoleMenuRequest.defaultPage());
                         baseMapper.update(sysRole);
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleMenuRequest.roleCode()));
@@ -247,8 +248,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
                         new QueryWrapper<SysRoleEntity>().eq("role_code", editRoleApiRequest.roleCode())))
                 .map(sysRole -> {
                     if (!editRoleApiRequest.roleApi().isEmpty()
-                            && (sysRoleApiService.remove(new QueryWrapper<SysRoleApiEntity>().eq("role_code", sysRole.getRoleCode())) |
-                            sysRoleApiService.insertOrUpdateBatch(editRoleApiRequest.roleApi()))) {
+                            && (sysRoleApiService.remove(
+                            new QueryWrapper<SysRoleApiEntity>().eq("role_code", sysRole.getRoleCode()))
+                            | sysRoleApiService.insertOrUpdateBatch(editRoleApiRequest.roleApi()))) {
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleApiRequest.roleCode()));
                     } else {
                         throw new AppException(Error.COMMON_EXCEPTION);

@@ -31,7 +31,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("sysConfigBackendService")
-@CacheConfig(cacheNames = {"SysConfigBackend"})
+@CacheConfig(cacheNames = {"SysConfigBackend#86400"})
 public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMapper, SysConfigBackendEntity>
         implements SysConfigBackendService {
 

@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: dev
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 cilicili:
   auth:
     token:
@@ -8,3 +12,4 @@ cilicili:
       valid-time: 360000
 #      valid-time: 15
       refresh-at: 3
+# 设置单个文件大小
