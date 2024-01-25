@@ -43,9 +43,7 @@ public class RedisCacheConfig {
     @Bean
     public RedisCacheManager redisCacheManager(
             RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration redisCacheConfiguration) {
-        return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
-                .cacheDefaults(redisCacheConfiguration)
-                .build();
+        return new CiliRedisCacheManager(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory), redisCacheConfiguration);
     }
 
     /**
