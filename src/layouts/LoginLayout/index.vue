@@ -1,11 +1,12 @@
 <template>
-  <div
-    :class="changeContainerImg === '' ? 'Cili-login-layout-img-container' : 'Cili-login-layout-img-container-with-img'"
-    :style="changeContainerImg === '' ? { background: $q.dark.isActive ? 'black' : '#e3f4fa' } : changeContainerImg">
-    <component :is="loginLayout"/>
-    <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
-  </div>
-
+  <!--  <div-->
+  <!--    :class="changeContainerImg === '' ? 'Cili-login-layout-img-container' : 'Cili-login-layout-img-container-with-img'"-->
+  <!--    :style="changeContainerImg === '' ? { background: $q.dark.isActive ? 'black' : '#e3f4fa' } : changeContainerImg">-->
+  <!--    <component :is="loginLayout"/>-->
+  <!--    <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>-->
+  <!--  </div>-->
+  <component :is="loginLayout"/>
+  <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
 
 </template>
 
@@ -13,7 +14,7 @@
 
 import Cli from './CiliciliView/login.vue'
 import ComplexView from './ComplexView/index.vue'
-import {computed, onMounted, ref,} from "vue";
+import {computed, onBeforeMount, ref,} from "vue";
 import useCommon from "src/composables/useCommon";
 import {postAction} from "src/api/manage";
 import DbInit from './myInitDbView/index.vue'
@@ -44,9 +45,9 @@ const checkDb = async () => {
     storageStore.SetCiliPluginList(res.data.plugin_list)
     if (res.data.need_init === false) {
       dbNeedInit.value = false
-      await storageStore.SetCiliDict()
-      await storageStore.SetCiliFrontend()
-      await storageStore.SetCiliBackend()
+      storageStore.SetCiliFrontend()
+      storageStore.SetCiliDict()
+      storageStore.SetCiliBackend()
     }
     if (res.data.need_init === true) {
       dbNeedInit.value = true
@@ -57,7 +58,7 @@ const checkDb = async () => {
     }
   }
 }
-onMounted(() => {
+onBeforeMount(() => {
   checkDb()
 })
 
