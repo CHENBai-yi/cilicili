@@ -6,14 +6,14 @@ const storageStore = useStorageStore();
 const CiliFrontend = computed(() => storageStore.GetCiliFrontend());
 
 const createLink = () => {
-  const toDelete = document.getElementsByName('Cili-link-href')
+  const toDelete = document.getElementsByName('cili-link-href')
   if (toDelete && toDelete.length) {
     document.getElementsByTagName('head')[0].removeChild(toDelete[0])
   }
   const CiliLink = document.createElement('link')
   CiliLink.type = 'image/ico'
   CiliLink.rel = 'icon'
-  CiliLink.setAttribute('name', 'Cili-link-href')
+  CiliLink.setAttribute('name', 'cili-link-href')
   if (CiliFrontend.value.favicon && CiliFrontend.value.favicon !== '') {
     const favicon = process.env.API + CiliFrontend.value.favicon.substring(12)
     CiliLink.href = favicon
