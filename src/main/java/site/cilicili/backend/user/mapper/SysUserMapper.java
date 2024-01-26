@@ -87,4 +87,6 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
     SysUserEntity selectOneSysUser(String username);
 
     UserListDto.Records getUserById(Long id);
+
+    List<String> getUsernameList();
 }

@@ -14,6 +14,11 @@ public class AppException extends RuntimeException {
         this.error = error;
     }
 
+    public AppException(String eMsg) {
+        super(eMsg);
+        this.error = null;
+    }
+
     @Getter
     public static class RefreshTokenException extends RuntimeException {
         private String newToken;

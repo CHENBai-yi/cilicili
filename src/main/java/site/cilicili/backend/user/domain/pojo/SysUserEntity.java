@@ -28,7 +28,7 @@ import java.io.Serializable;
 public class SysUserEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -18979173431235042L;
 
-    @TableLogic
+    @TableLogic(value = "1", delval = "0")
     @TableField(fill = FieldFill.INSERT)
     @JsonIgnore
     protected Integer logicalDelete;

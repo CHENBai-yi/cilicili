@@ -85,6 +85,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         std.addValue("deptDataPermissionType", "deptDataPermissionType_user");
         std.addValue("defaultPage", "dashboard");
         std.addValue("sort", 1L);
+        std.addValue("userRead", "yesNo_no");
+        std.addValue("noticeSent", "yesNo_no");
+        std.addValue("noticeContent", " ");
+        std.addValue("todoStatus", "yesNo_no");
         objectMapper.setInjectableValues(std);
     }
 

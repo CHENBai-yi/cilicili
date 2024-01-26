@@ -247,6 +247,11 @@
         from sys_user
         where id = #{id}
     </select>
+    <select id="getUsernameList" resultType="java.lang.String">
+        select username
+        from sys_user
+        where logical_delete > 0
+    </select>
     
     
     <!--新增所有列-->

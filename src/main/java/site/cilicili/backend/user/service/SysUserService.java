@@ -6,6 +6,8 @@ import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.common.util.R;
 
+import java.util.List;
+
 /**
  * (SysUser)表服务接口
  *
@@ -69,4 +71,6 @@ public interface SysUserService extends IService<SysUserEntity> {
     R changeNickname(AuthUserDetails authUserDetails, ChangeNicknameRequest changeNicknameRequest);
 
     R changePassword(AuthUserDetails authUserDetails, ChangePasswordRequest changePasswordRequest);
+
+    List<String> getUsernameList();
 }
