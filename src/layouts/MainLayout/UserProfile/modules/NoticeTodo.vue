@@ -45,6 +45,7 @@ import NoticeTodoDetail from './NoticeTodoDetail.vue'
 const {t} = useI18n()
 const url = {
   list: 'todo/get-todo-list',
+  delete: 'todo/delete-todo-by-id'
 }
 const columns = computed(() => {
   return [

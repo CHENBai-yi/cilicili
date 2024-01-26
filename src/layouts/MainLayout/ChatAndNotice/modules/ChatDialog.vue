@@ -98,7 +98,7 @@ const myAvatar = computed(() => {
     if (cookieAvatar.substring(0, 4) === 'http') {
       return cookieAvatar
     } else if (cookieAvatar.substring(0, 12) === 'cili-upload:') {
-      return process.env.API + cookieAvatar.substring(11)
+      return process.env.API + cookieAvatar.substring(12)
     }
     return cookieAvatar
   } else {

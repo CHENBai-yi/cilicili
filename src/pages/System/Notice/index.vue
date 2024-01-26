@@ -57,6 +57,7 @@
 import useTableData from 'src/composables/useTableData'
 import {postAction} from 'src/api/manage'
 import {computed, onMounted} from 'vue'
+import RecordDetail from './modules/recordDetail.vue'
 
 const url = {
   list: 'notice/get-notice-list',

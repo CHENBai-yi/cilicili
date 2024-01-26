@@ -143,7 +143,7 @@ const handleAddOrEidt = async () => {
   }
   const success = await recordDetailForm.value.validate()
   if (success) {
-    if (recordDetail.value.noticeToUserType === 'some') {
+    if (recordDetail.value.notice_to_user_type === 'some') {
       recordDetail.value.notice_to_user = selectUser.value
     } else {
       recordDetail.value.notice_to_user = []
