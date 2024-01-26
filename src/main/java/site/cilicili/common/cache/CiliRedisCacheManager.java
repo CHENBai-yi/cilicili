@@ -16,9 +16,9 @@ import java.time.Duration;
  *
  * @author BaiYiChen
  */
-
 public class CiliRedisCacheManager extends RedisCacheManager {
-    public CiliRedisCacheManager(final RedisCacheWriter cacheWriter, final RedisCacheConfiguration defaultCacheConfiguration) {
+    public CiliRedisCacheManager(
+            final RedisCacheWriter cacheWriter, final RedisCacheConfiguration defaultCacheConfiguration) {
         super(cacheWriter, defaultCacheConfiguration);
     }
 

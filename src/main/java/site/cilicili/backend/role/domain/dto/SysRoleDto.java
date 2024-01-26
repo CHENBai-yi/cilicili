@@ -69,4 +69,14 @@ public class SysRoleDto implements Serializable {
         private List<Records> role;
         private List<SysDeptDto.Records> dept;
     }
+
+    @Getter
+    @Setter
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_EMPTY)
+    public static class Request extends SysUserDto {
+        private Request createdByUser;
+        private Request updatedByUser;
+        private List<Long> role;
+        private List<Long> dept;
+    }
 }

@@ -3127,8 +3127,8 @@ VALUES (17, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 14,
         'system', 'cron', '/cron', 'pages/System/Cron/index', '', 'Cron', 'eva-clock-outline', 'yesNo_no', 'yesNo_no',
         'yesNo_no');
 INSERT INTO `sys_menu`
-VALUES (18, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 100, 'yesNo_yes', 'onOff_on', 'Github',
-        'system', 'github', 'https://github.com/Junvary/gin-quasar-admin', '', '', 'Github', 'eva-github', 'yesNo_no',
+VALUES (18, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 100, 'yesNo_yes', 'onOff_on', 'Gitee',
+        'system', 'gitee', 'https://gitee.com/cby-cby', '', '', 'Gitee', 'fab fa-git', 'yesNo_no',
         'yesNo_no', 'yesNo_yes');
 INSERT INTO `sys_menu`
 VALUES (19, '2023-12-04 13:02:17', 'admin', '2023-12-04 13:02:58', '', NULL, 1101, 'yesNo_yes', 'onOff_on',
@@ -3661,7 +3661,7 @@ VALUES ('super-admin', 'dict');
 INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'genPlugin');
 INSERT INTO `sys_role_menu`
-VALUES ('super-admin', 'github');
+VALUES ('super-admin', 'gitee');
 INSERT INTO `sys_role_menu`
 VALUES ('super-admin', 'log');
 INSERT INTO `sys_role_menu`

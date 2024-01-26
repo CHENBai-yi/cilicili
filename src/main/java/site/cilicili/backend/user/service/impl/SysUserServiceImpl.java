@@ -19,6 +19,7 @@ import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -220,5 +221,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
                 })
                 .map(sysUserEntity -> R.yes(String.format("%1$s修改密码成功.", authUserDetails.getusername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> getUsernameList() {
+        return baseMapper.getUsernameList();
     }
 }
