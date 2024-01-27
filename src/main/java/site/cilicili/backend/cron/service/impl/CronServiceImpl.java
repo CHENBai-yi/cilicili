@@ -29,7 +29,9 @@ public class CronServiceImpl implements CronService {
 
     @Override
     public R getCronList(final CronListQueryRequest cronListQueryRequest) {
-        return R.yes("Success.").setRecords(BeanUtil.copyToList(Arrays.stream(CustomerTaskPool.TaskEnum.values()).toList(), Task.class));
+        return R.yes("Success.")
+                .setRecords(BeanUtil.copyToList(
+                        Arrays.stream(CustomerTaskPool.TaskEnum.values()).toList(), Task.class));
     }
 
     @Override
@@ -47,6 +49,4 @@ public class CronServiceImpl implements CronService {
                 .map(r -> R.yes("动态任务:" + task.getUuid() + " 已开启"))
                 .orElseGet(() -> R.no("任务正在运行中！"));
     }
-
-
 }

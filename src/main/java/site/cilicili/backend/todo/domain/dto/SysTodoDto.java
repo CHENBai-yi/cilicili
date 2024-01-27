@@ -34,23 +34,31 @@ import java.util.List;
 public class SysTodoDto implements Serializable {
     private static final long serialVersionUID = -29141488280380974L;
     List<Long> ids;
+
     @Schema(description = "id")
     private Long id;
+
     private Date createdAt;
     private String createdBy;
     private Date updatedAt;
     private String updatedBy;
     private Date deletedAt;
+
     @Schema(description = "排序")
     private Long sort;
+
     @Schema(description = "系统内置")
     private String stable;
+
     @Schema(description = "状态")
     private String status;
+
     @Schema(description = "备注描述")
     private String memo;
+
     @Schema(description = "内容")
     private String todoDetail;
+
     @Schema(description = "状态")
     private String todoStatus;
     /**

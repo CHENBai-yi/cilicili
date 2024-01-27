@@ -33,10 +33,13 @@ import java.util.List;
 public class SysNoticeToUserDto implements Serializable {
     private static final long serialVersionUID = -27962498952868920L;
     List<Long> ids;
+
     @Schema(description = "消息ID")
     private String noticeId;
+
     @Schema(description = "接收用户")
     private String toUser;
+
     @Schema(description = "是否阅读")
     private String userRead;
     /**

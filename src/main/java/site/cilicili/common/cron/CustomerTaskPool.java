@@ -41,7 +41,10 @@ public class CustomerTaskPool {
     public Map<String, ScheduledFuture<?>> taskMap = new ConcurrentHashMap<>();
 
     @Autowired
-    public CustomerTaskPool(final ThreadPoolTaskScheduler syncScheduler, final SysNoticeService SysNoticeService, final WebSocketEndpoint webSocketEndpoint) {
+    public CustomerTaskPool(
+            final ThreadPoolTaskScheduler syncScheduler,
+            final SysNoticeService SysNoticeService,
+            final WebSocketEndpoint webSocketEndpoint) {
         this.syncScheduler = syncScheduler;
         CustomerTaskPool.webSocketEndpoint = webSocketEndpoint;
         CustomerTaskPool.SysNoticeService = SysNoticeService;
@@ -51,7 +54,9 @@ public class CustomerTaskPool {
         if (null == taskMap.get(name)) {
             return false;
         }
-        final TaskEnum taskEnum = CollUtil.getFirst(Arrays.stream(TaskEnum.values()).filter(item -> item.uuid.equals(name)).toList());
+        final TaskEnum taskEnum = CollUtil.getFirst(Arrays.stream(TaskEnum.values())
+                .filter(item -> item.uuid.equals(name))
+                .toList());
         ScheduledFuture<?> scheduledFuture = taskMap.get(taskEnum.uuid);
         scheduledFuture.cancel(true);
         taskEnum.isRun = false;
@@ -69,7 +74,9 @@ public class CustomerTaskPool {
         // 参数：
         // 任务 – 触发器触发时执行的 Runnable
         // startTime – 任务所需的执行时间（如果这是过去，则任务将立即执行，即尽快执行）
-        final TaskEnum taskEnum = CollUtil.getFirst(Arrays.stream(TaskEnum.values()).filter(item -> item.uuid.equals(uuid)).toList());
+        final TaskEnum taskEnum = CollUtil.getFirst(Arrays.stream(TaskEnum.values())
+                .filter(item -> item.uuid.equals(uuid))
+                .toList());
         ScheduledFuture<?> schedule = syncScheduler.schedule(taskEnum, new CronTrigger(taskEnum.cron));
         taskEnum.isRun = true;
         taskMap.put(uuid, schedule);
@@ -79,7 +86,6 @@ public class CustomerTaskPool {
     @Getter
     @AllArgsConstructor
     public enum TaskEnum implements Runnable {
-
         PUT_MESSAGE("早上8:30推送通知", "0 30 8 * * ?", "@every 8:30", IdUtil.fastUUID(), 0L, false) {
             private static Long NUMBER = 0L;
 
@@ -127,6 +133,7 @@ public class CustomerTaskPool {
          * 设定动态任务开始时间
          */
         private final String cron;
+
         private final String spec;
         private final String uuid;
         private final Long id;
