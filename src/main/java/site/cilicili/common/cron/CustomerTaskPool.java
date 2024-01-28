@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +66,7 @@ public class CustomerTaskPool {
     public boolean add(String uuid) {
         // 此处的逻辑是 ，如果当前已经有这个名字的任务存在，先删除之前的，再添加现在的。（即重复就覆盖）
         if (null != taskMap.get(uuid)) {
-            stop(uuid);
+            return false;
         }
         // schedule :调度给定的Runnable ，在指定的执行时间调用它。
         // 一旦调度程序关闭或返回的ScheduledFuture被取消，执行将结束。
@@ -79,16 +78,14 @@ public class CustomerTaskPool {
                 .toList());
         ScheduledFuture<?> schedule = syncScheduler.schedule(taskEnum, new CronTrigger(taskEnum.cron));
         taskEnum.isRun = true;
+        ++taskEnum.NUMBER;
         taskMap.put(uuid, schedule);
         return true;
     }
 
     @Getter
-    @AllArgsConstructor
     public enum TaskEnum implements Runnable {
-        PUT_MESSAGE("早上8:30推送通知", "0 30 8 * * ?", "@every 8:30", IdUtil.fastUUID(), 0L, false) {
-            private static Long NUMBER = 0L;
-
+        PUT_MESSAGE("早上8:30推送通知", "0 30 8 * * ?", "@every 8:30", IdUtil.fastUUID(), 0L) {
             /**
              *
              */
@@ -119,12 +116,36 @@ public class CustomerTaskPool {
             @Override
             public Long getId() {
                 if (isRun) {
-                    return ++NUMBER;
+                    return NUMBER;
                 } else {
                     return PUT_MESSAGE.id;
                 }
             }
+        },
+        TEST_DEMO("测试任务2", "0/5 * * * * ?", "@peer 5", IdUtil.fastUUID(), 0L) {
+            /**
+             *
+             */
+            @Override
+            public void run() {
+                log.info("---动态定时任务运行---");
+                System.out.println("此时时间==>" + LocalDateTime.now());
+                log.info("---end--------");
+            }
+
+            /**
+             * @return
+             */
+            @Override
+            public Long getId() {
+                if (isRun) {
+                    return NUMBER;
+                } else {
+                    return TEST_DEMO.id;
+                }
+            }
         };
+        public Long NUMBER = 0L;
         /**
          * 动态任务名曾
          */
@@ -137,6 +158,14 @@ public class CustomerTaskPool {
         private final String spec;
         private final String uuid;
         private final Long id;
-        public Boolean isRun;
+        public Boolean isRun = false;
+
+        TaskEnum(final String name, final String cron, final String spec, final String uuid, final Long id) {
+            this.name = name;
+            this.cron = cron;
+            this.spec = spec;
+            this.uuid = uuid;
+            this.id = id;
+        }
     }
 }

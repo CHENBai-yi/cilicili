@@ -31,7 +31,8 @@ public class ChartServiceImpl implements ChartService {
 
         // 获取redis缓存命令统计信息
         // Properties commandStats = redisTemplate.getRequiredConnectionFactory().getConnection().info("commandstats");
-        Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.info("commandstats"));
+        Properties commandStats = (Properties)
+                redisTemplate.execute((RedisCallback<Object>) connection -> connection.info("commandstats"));
 
         // 获取redis缓存中可用键Key的总数
         // Long dbSize = redisTemplate.getRequiredConnectionFactory().getConnection().dbSize();
