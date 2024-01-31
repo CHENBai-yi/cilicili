@@ -76,7 +76,7 @@ public class WebSocketEndpoint {
     @OnClose
     public void onClose() {
         WEB_SOCKETS.remove(this);
-        SESSION_POOL.remove(this.userId);
+        SESSION_POOL.remove(this.username);
         log.info("关闭与UserID：{}的消息提醒计数连接", userId);
     }
 

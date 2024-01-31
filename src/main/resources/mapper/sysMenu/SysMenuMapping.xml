@@ -104,7 +104,7 @@
     <select id="getRoleMenuList" resultMap="SysMenuDto">
         select *from sys_menu
         <if test="sortBy!=null">
-            order by #{sortBy}
+            order by ${sortBy}
             <if test="desc">desc</if>
         </if>
         <if test="page>0 and pageSize>0">
