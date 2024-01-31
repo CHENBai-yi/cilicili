@@ -145,7 +145,7 @@
             and logical_delete>0
         </where>
         <if test="desc">
-            order by #{sortBy} desc
+            order by ${sortBy} desc
         </if>
         <if test="page>0 and pageSize>0">
             <bind name="cur" value="(page*pageSize)-pageSize"/>
@@ -311,7 +311,7 @@
         select sys_user.* from sys_user,(select sys_user_username from sys_user_role where
         sys_role_role_code=#{roleCode}) as b where username=b.sys_user_username
         <if test="desc">
-            order by #{sortBy} desc
+            order by ${sortBy} desc
         </if>
         <if test="page>0 and pageSize>0">
             <bind name="cur" value="(page*pageSize)-pageSize"/>
