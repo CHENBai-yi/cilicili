@@ -1,0 +1,155 @@
+// app global css in SCSS form
+@import "quasar.variables";
+
+@font-face {
+  font-family: rubikDoodleShadowRegular;
+  src: url(./fonts/RubikDoodleShadow-Regular.ttf);
+}
+
+// 声明一个应用它的类
+.my-font {
+  font-family: 'rubikDoodleShadowRegular', serif;
+}
+
+.v-popover {
+  position: absolute;
+  transition: .3s;
+  z-index: 1;
+}
+
+.v-popover.is-bottom {
+  top: 0;
+  left: -40%;
+}
+
+.v-popover-content {
+  position: relative;
+  background-color: $g1_float;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+  border-radius: 8px;
+  border: 1px solid $line_regular;
+  color: $text1;
+}
+
+.login-panel-popover {
+  padding: 22px 20px;
+  width: 359px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.login-tip-content.login-tip-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.login-panel-popover .login-btn {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  padding: 10px 0;
+  height: 40px;
+  border-radius: 8px;
+  color: #fff;
+  background-color: $brand_blue;;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+
+.login-panel-popover .register-tip {
+  margin-top: 16px;
+  color: $text1;
+  text-align: center;
+  letter-spacing: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.login-tip-content.login-tip-content > * {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  width: 50%;
+  height: 26px;
+}
+
+.login-tip-content.login-tip-content .login-tip-content-item-icon {
+  width: 24px;
+  height: 24px;
+  color: $brand_blue;
+}
+
+.login-tip-content.login-tip-content .lt-text {
+  margin-left: 6px;
+  color: $text1;
+  font-size: 14px;
+  line-height: 14px;
+  word-break: keep-all;
+}
+
+.login-panel-popover .register-exper {
+  color: #00b5e5;
+  cursor: pointer;
+}
+
+.login-panel-popover .tips {
+  margin-bottom: 24px;
+  color: $text3;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px
+}
+
+.v-popover.is-bottom-end {
+  top: 0;
+  right: 0;
+}
+
+.upload-panel-popover {
+  display: flex;
+  padding: 8px 10px;
+  width: auto;
+}
+
+.upload-panel-popover .upload-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 62px;
+  height: 63px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 63px;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+
+.upload-panel-popover .upload-item .item-title {
+  color: var(--text2);
+  font-size: 12px;
+  line-height: 17px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: color 0.2s ease;
+}
+
