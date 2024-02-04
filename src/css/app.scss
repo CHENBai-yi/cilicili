@@ -1,6 +1,9 @@
 // app global css in SCSS form
 @import "quasar.variables";
 
+@import 'primeicons/primeicons.css';
+@import 'primevue/resources/themes/aura-light-green/theme.css';
+@import 'element-plus/dist/index.css';
 @font-face {
   font-family: rubikDoodleShadowRegular;
   src: url(./fonts/RubikDoodleShadow-Regular.ttf);
@@ -29,6 +32,7 @@
   border-radius: 8px;
   border: 1px solid $line_regular;
   color: $text1;
+  text-align: center;
 }
 
 .login-panel-popover {
@@ -141,6 +145,7 @@
 }
 
 ::-webkit-scrollbar {
+  display: none;
   -webkit-appearance: none;
   width: 6px;
   height: 6px;
@@ -153,3 +158,24 @@
   transition: color 0.2s ease;
 }
 
+
+.scrollbar-flex-content {
+  display: flex;
+}
+
+.scrollbar-demo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 4px;
+  background: var(--el-color-danger-light-9);
+  color: var(--el-color-danger);
+}
+
+.q-hoverable:hover > .q-focus-helper {
+  opacity: 0 !important;
+}

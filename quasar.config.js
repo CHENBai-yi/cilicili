@@ -11,7 +11,8 @@
 
 const {configure} = require('quasar/wrappers');
 const path = require('path');
-
+const UnoCSS = require('unocss/vite').default;
+const {presetUno} = require('unocss')
 module.exports = configure(function (ctx) {
   return {
     eslint: {
@@ -30,10 +31,13 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-      'i18n',
+      'register-pinia',
+      'theme',
       'axios',
+      'element-plus',
+      'lang',
+      'i18n',
       'addressBarColor',
-      'element-plus'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -85,7 +89,14 @@ module.exports = configure(function (ctx) {
       // minify: false,
       // polyfillModulePreload: true,
       // distDir
-
+      extendViteConf(viteConf) {
+        viteConf.plugins.push(
+          ...UnoCSS({
+            presets: [presetUno()],
+            safelist: ['bg-#545c64', 'bg-#000c17']
+          })
+        )
+      },
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
 

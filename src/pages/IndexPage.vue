@@ -1,25 +1,17 @@
 <template>
-  <q-layout class="bg-grey-1" view="hHh lpR fFf">
-    <NavBar/>
+  <q-layout>
     <q-page-container>
-      <router-view/>
-    </q-page-container>
-    <h1>aaaaa</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <h1>布局测试1</h1>
-    <!-- Example with wrapping only one DOM element / component -->
+      <q-page style="overflow: hidden">
+        <NavBar/>
+        <h1 v-for="n in 50" :key="n">
+          ccc
+        </h1>
 
+      </q-page>
+    </q-page-container>
   </q-layout>
 </template>
-
-<script setup>
-import NavBar from 'src/components/navBar/index.vue'</script>
+<script setup></script>
 
 <style lang="sass">
 

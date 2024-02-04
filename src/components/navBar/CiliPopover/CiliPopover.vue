@@ -7,11 +7,16 @@
     @after-enter="afterEnter"
   >
     <template #reference>
-      <q-btn :class="clClass" :style="clStyle" :to="to" fab-mini flat rounded stack unelevated>
-        <slot name="badge"></slot>
-        <q-icon v-if="!!name" :class="{ 'example-fab-animate--hover': opened !== true }" :name=name/>
-          {{ label }}
+      <q-btn :class="clClass" :ripple="false" :style="clStyle" :to="to" fab-mini flat rounded stack unelevated>
+        <slot name="badge">
+
+        </slot>
+        <q-icon v-if="!!name" :class="{ 'example-fab-animate--hover': opened !== true }" :name=name>
+
+        </q-icon>
+        {{ label }}
       </q-btn>
+
     </template>
     <template #default>
       <slot></slot>
