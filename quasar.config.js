@@ -38,6 +38,7 @@ module.exports = configure(function (ctx) {
       'lang',
       'i18n',
       'addressBarColor',
+      'common'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -47,6 +48,7 @@ module.exports = configure(function (ctx) {
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
+      // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
       'ionicons-v4',
       'mdi-v6',

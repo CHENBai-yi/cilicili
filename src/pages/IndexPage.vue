@@ -1,18 +1,17 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <q-layout>
     <q-page-container>
       <q-page style="overflow: hidden">
         <NavBar/>
-        <h1 v-for="n in 50" :key="n">
-          ccc
-        </h1>
-
+        <cili-video-layout/>
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
-<script setup></script>
+<script setup>
+import CiliVideoLayout from 'src/components/CiliVideoLayout/CiliVideoLayout.vue'</script>
 
-<style lang="sass">
+<style lang="scss" scoped>
+
 
 </style>

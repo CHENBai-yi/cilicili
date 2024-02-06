@@ -31,7 +31,7 @@
         <template #default>
           <div class="v-popover is-bottom">
             <div class="v-popover-content">
-              <div class="login-panel-popover"><p class="title">{{ $t('LoginAndYouCan') }}</p>
+              <div :class="darkTheme" class="login-panel-popover"><p class="title">{{ $t('LoginAndYouCan') }}</p>
                 <div class="login-tip-content">
                   <div class="login-tip-content-item">
                     <svg class="login-tip-content-item-icon" fill="currentColor"
@@ -47,7 +47,7 @@
                         d="M14.5492 9.80269L14.5492 14.19735C15.1834 14.17465 15.76965 14.1047 16.2202 13.87005C16.47645 13.7365 16.6803 13.55365 16.82725 13.28815C16.97795 13.016 17.09375 12.6113 17.09375 12C17.09375 11.38875 16.97795 10.98405 16.82725 10.7119C16.6803 10.4464 16.47645 10.26359 16.2202 10.12998C15.76965 9.89535 15.1834 9.8254 14.5492 9.80269zM13.0492 9.28909C13.0492 8.73971 13.4943 8.28713 14.05195 8.28944C14.86295 8.29268 15.99115 8.31782 16.9166 8.80148C17.4017 9.05504 17.83555 9.43502 18.1409 9.98772C18.4426 10.5338 18.59375 11.20265 18.59375 12C18.59375 12.79745 18.4426 13.46625 18.1409 14.01235C17.83555 14.565 17.4017 14.945 16.9166 15.1986C15.99115 15.6822 14.86295 15.70735 14.05195 15.7106C13.4943 15.7129 13.0492 15.26035 13.0492 14.71095L13.0492 9.28909z"
                         fill="currentColor"></path>
                     </svg>
-                    <span class="lt-text">{{ $t('WatchFree') }}</span></div>
+                    <span :class="darkTheme" class="lt-text">{{ $t('WatchFree') }}</span></div>
                   <div class="login-tip-content-item">
                     <svg class="login-tip-content-item-icon" fill="currentColor"
                          height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@
                         d="M12 3.5C7.30558 3.5 3.5 7.30558 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5C16.6944 20.5 20.5 16.6944 20.5 12C20.5 7.30558 16.6944 3.5 12 3.5zM2 12C2 6.47715 6.47715 2 12 2C17.52285 2 22 6.47715 22 12C22 17.52285 17.52285 22 12 22C6.47715 22 2 17.52285 2 12z"
                         fill="currentColor"></path>
                     </svg>
-                    <span class="lt-text">{{ $t('MultiEnd') }}</span></div>
+                    <span :class="darkTheme" class="lt-text">{{ $t('MultiEnd') }}</span></div>
                   <div class="login-tip-content-item">
                     <svg class="login-tip-content-item-icon" fill="currentColor"
                          height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@
                         d="M9.375 12C9.375 12.4142 9.03921 12.75 8.625 12.75L8.125 12.75C7.71079 12.75 7.375 12.4142 7.375 12C7.375 11.5858 7.71079 11.25 8.125 11.25L8.625 11.25C9.03921 11.25 9.375 11.5858 9.375 12z"
                         fill="currentColor"></path>
                     </svg>
-                    <span class="lt-text">{{ $t('PostABarrage') }}</span></div>
+                    <span :class="darkTheme" class="lt-text">{{ $t('PostABarrage') }}</span></div>
                   <div class="login-tip-content-item">
                     <svg class="login-tip-content-item-icon" fill="currentColor"
                          height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -92,10 +92,10 @@
                         d="M14.7138 10.96875C15.50765 11.4271 15.50765 12.573 14.71375 13.0313L11.5362 14.8659C10.74235 15.3242 9.75 14.7513 9.75001 13.8346L9.75001 10.1655C9.75001 9.24881 10.74235 8.67587 11.5362 9.13422L14.7138 10.96875z"
                         fill="currentColor"></path>
                     </svg>
-                    <span class="lt-text">{{ $t('Watching') }}</span></div>
+                    <span :class="darkTheme" class="lt-text">{{ $t('Watching') }}</span></div>
                 </div>
                 <div class="login-btn">{{ $t('SignInNow') }}</div>
-                <div class="register-tip"> {{ $t('FirstTimeUse') }}<span
+                <div :class="darkTheme" class="register-tip"> {{ $t('FirstTimeUse') }}<span
                   class="register-exper">  {{ $t('ClickMeToRegiste') }}</span></div>
               </div>
             </div>
@@ -112,8 +112,10 @@
         </template>
         <template #default>
           <div class="v-popover is-bottom">
-            <div class="v-popover-content">
-              <div class="login-panel-popover"><p class="tips">{{ $t('LoginToViewMessageRecords') }}</p>
+            <div :class="darkTheme" class="v-popover-content">
+              <div class="login-panel-popover "><p :class="darkTheme" class="tips">{{
+                  $t('LoginToViewMessageRecords')
+                }}</p>
                 <div class="login-btn"> {{ $t('SignInNow') }}</div>
               </div>
             </div>
@@ -124,8 +126,10 @@
       <CiliPopover v-if="$q.screen.gt.sm" :label="$t('Collect')" name="hotel_class">
         <template #default>
           <div class="v-popover is-bottom">
-            <div class="v-popover-content">
-              <div class="login-panel-popover"><p class="tips">{{ $t('LoginToViewMyCollection') }}</p>
+            <div :class="darkTheme" class="v-popover-content">
+              <div class="login-panel-popover"><p :class="darkTheme" class="tips">{{
+                  $t('LoginToViewMyCollection')
+                }}</p>
                 <div class="login-btn"> {{ $t('SignInNow') }}</div>
               </div>
             </div>
@@ -135,8 +139,8 @@
 
       <CiliPopover v-if="$q.screen.gt.sm" :label="$t('Records')" name="access_time">
         <div class="v-popover is-bottom">
-          <div class="v-popover-content">
-            <div class="login-panel-popover"><p class="tips">{{ $t('LoginToViewHistory') }}</p>
+          <div :class="darkTheme" class="v-popover-content">
+            <div class="login-panel-popover"><p :class="darkTheme" class="tips">{{ $t('LoginToViewHistory') }}</p>
               <div class="login-btn"> {{ $t('SignInNow') }}</div>
             </div>
           </div>
@@ -198,10 +202,24 @@
 <script setup>
 import {ref} from 'vue'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
+import useTheme from "src/composables/useTheme"
 
+const {darkTheme} = useTheme()
 const search = ref('')
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
+@import "src/css/quasar.variables.scss"
+//.YL
+//
+//  &__toolbar-input-container
+//    min-width: 100px
+//    width: 55%
+//
+//    &:hover
+//      color: #000
 
+.upload-item
+  path
+    fill: $text2
 </style>

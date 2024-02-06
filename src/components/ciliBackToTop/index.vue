@@ -71,18 +71,19 @@ onMounted(() => window.addEventListener("scroll", handleScroll, true))
 onUnmounted(() => window.removeEventListener("scroll", handleScroll, true))
 
 const {darkTheme} = useTheme()
+const stepHeight = ref(document.documentElement.clientHeight * 0.7)
 const handleScroll = () => {
 
   let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
 
-  scrolltop >= document.documentElement.clientHeight * 0.7 ? (gotop.value = true) : (gotop.value = false);
+  scrolltop >= stepHeight.value ? (gotop.value = true) : (gotop.value = false);
 }
 const toTop = () => {
 
   let top = document.documentElement.scrollTop || document.body.scrollTop;
   // 实现滚动效果
   const timeTop = setInterval(() => {
-    document.body.scrollTop = document.documentElement.scrollTop = top -= 100;
+    document.body.scrollTop = document.documentElement.scrollTop = top -= stepHeight.value;
     if (top <= 0) {
       clearInterval(timeTop);
     }

@@ -1,103 +1,60 @@
 <template>
-  <div ref="der" :class="darkTheme">
+  <div :style="{height:height+'px'}">
+    <div ref="der" :class="darkTheme">
+      <transition appear
+                  enter-active-class="animated animate__fadeInDown"
+                  leave-active-class="animated animate__fadeOutUp">
+        <div v-if="!navBarShow">
+          <q-img
+            :src="bannerImage.img1"
+            class="rounded-borders absolute-full "
+            height="150px"
+            img-class="my-custom-image" placeholder-src="https://cdn.quasar.dev/img/parallax2.jpg"
+            spinner-color="white"
+          />
+          <cili-tool-bar/>
+        </div>
+      </transition>
+    </div>
+    <!-- place QPageSticky at end of page -->
     <transition appear
                 enter-active-class="animated animate__fadeInDown"
-                leave-active-class="animated animate__fadeOutUp">
-      <div v-if="!navBarShow">
-        <q-img
-          class="rounded-borders absolute-full "
-          height="150px"
-          img-class="my-custom-image"
-          spinner-color="white" src="https://cdn.quasar.dev/img/parallax2.jpg"
-        />
-        <cili-tool-bar/>
-      </div>
+                leave-active-class="animated animate__fadeOutUp"
+    >
+      <q-page-sticky v-if="navBarShow" :class="darkTheme" class="relative-position z-top" expand position="top">
+        <cili-tool-bar class="shadow-24"/>
+
+        <n-scrollbar class="col q-pl-md" x-scrollable>
+          <div class="scrollbar-flex-content ">
+            <span v-for="item in 50" :key="item" class="scrollbar-demo-item">
+                      标题{{ item }}
+            </span>
+          </div>
+        </n-scrollbar>
+        <div class="relative-position q-mr-md">
+          <q-btn :icon="open?'expand_less':'expand_more'" :ripple="false" color="#19181c" fab-mini flat push>
+            <q-popup-proxy breakpoint="none"
+                           @update:model-value="open=!open">
+              <cili-select-bar/>
+            </q-popup-proxy>
+          </q-btn>
+        </div>
+      </q-page-sticky>
     </transition>
   </div>
-  <!-- place QPageSticky at end of page -->
-  <transition appear
-              enter-active-class="animated animate__fadeInDown"
-              leave-active-class="animated animate__fadeOutUp"
-  >
-    <q-page-sticky v-if="navBarShow" :class="darkTheme" expand position="top">
-      <cili-tool-bar class="shadow-24"/>
-
-      <el-scrollbar class="q-pl-md col">
-        <div class="scrollbar-flex-content ">
-          <span v-for="item in 50" :key="item" class="scrollbar-demo-item">
-            标题{{ item }}
-          </span>
-
-        </div>
-
-      </el-scrollbar>
-      <div class="relative-position">
-        <q-btn :icon="open?'expand_less':'expand_more'" :ripple="false" color="primary" fab-mini flat push>
-          <q-popup-proxy breakpoint="none"
-                         @update:model-value="open=!open">
-            <div class="  p-megamenu  p-component card ">
-              <div class="row ">
-                <div v-for="item in 100" class="p-megamenu-col-3 ">
-                  <ul class="p-submenu-list p-megamenu-submenu"
-                  >
-                    <li class="p-megamenu-submenu-header p-submenu-header"
-                    >Home Theather
-                    </li>
-                    <li
-
-                    >
-                      <div class="p-menuitem-content"><a class="p-menuitem-link"
-
-
-                      ><span
-                        class="p-menuitem-text">Projector</span><span
-
-                        class="p-ink"></span></a></div>
-                    </li>
-
-                    <li
-
-                    >
-                      <div class="p-menuitem-content"><a class="p-menuitem-link"
-
-
-                      ><span
-                        class="p-menuitem-text">Speakers</span><span
-
-                        class="p-ink"></span></a></div>
-                    </li>
-
-                    <li
-
-                    >
-                      <div class="p-menuitem-content"><a class="p-menuitem-link"
-
-
-                      ><span
-                        class="p-menuitem-text">TVs</span><span
-
-                        class="p-ink"></span></a></div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </q-popup-proxy>
-        </q-btn>
-      </div>
-    </q-page-sticky>
-  </transition>
-
 </template>
 
 <script setup>
 import {onMounted, ref} from 'vue'
 import CiliToolBar from './CiliToolBar/CiliToolBar.vue'
+import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 import useTheme from "src/composables/useTheme"
 
 
 const {darkTheme} = useTheme()
 const der = ref(null)
+const height = ref(152)
+const change = ref(0)
 const navBarShow = ref(false)
 onMounted(() => {
   const options = {
@@ -113,12 +70,15 @@ const handleIntersection = (entries) => {
     console.log(entry)
     if (entry.isIntersecting) {
       navBarShow.value = false
+      height.value += change.value
       // 当元素进入视口时的操作
       console.log('Element is in viewport!');
     } else {
       // 当元素离开视口时的操作
       console.log('Element is out of viewport!');
       navBarShow.value = true
+      change.value = entry.boundingClientRect.top
+      height.value -= change.value
     }
   });
 }
@@ -128,7 +88,9 @@ const toggle = (event) => {
   op.value.toggle(event);
 }
 const open = ref(false)
-
+const bannerImage = ref({
+  img1: 'https://cdn.quasar.dev/img/parallax2.jpg'
+})
 
 const items = ref([
   {
@@ -227,21 +189,6 @@ const items = ref([
 </script>
 
 <style lang="sass" scoped>
-@import "src/css/quasar.variables.scss"
-.YL
 
-  &__toolbar-input-container
-    min-width: 100px
-    width: 55%
-
-    &:hover
-      color: #000
-
-.upload-item
-  path
-    fill: $text2
-
-ul
-  list-style: none
 
 </style>

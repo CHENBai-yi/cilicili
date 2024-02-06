@@ -1,10 +1,14 @@
 <template>
   <el-popover
+    :effect="$q.dark.isActive?'dark':'light'"
+    :show-arrow="false"
     :width="200"
     placement="bottom"
     trigger="hover"
     @before-enter="beforeEnter"
     @after-enter="afterEnter"
+    :teleported="false"
+
   >
     <template #reference>
       <q-btn :class="clClass" :ripple="false" :style="clStyle" :to="to" fab-mini flat rounded stack unelevated>
@@ -27,7 +31,6 @@
 <script setup>
 import {ref} from 'vue'
 
-
 defineProps({
   name: String,
   label: String,
@@ -40,10 +43,13 @@ defineProps({
 const opened = ref(true)
 const beforeEnter = () => {
   opened.value = true
+
 }
 const afterEnter = () => {
   opened.value = false
+
 }
+
 </script>
 
 <style lang="sass" scoped>

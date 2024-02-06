@@ -1,5 +1,5 @@
 import {boot} from 'quasar/wrappers'
-import {ElAffix, ElBacktop, ElButton, ElPopover, ElScrollbar, ElTag} from 'element-plus'
+import {ElAffix, ElBacktop, ElButton, ElLink, ElPopover, ElTag} from 'element-plus'
 
 import NavBar from 'src/components/navBar/index.vue'
 import CiliBackToTop from 'src/components/ciliBackToTop/index.vue'
@@ -12,6 +12,8 @@ import MegaMenu from 'primevue/megamenu';
 
 import AnimateOnScroll from 'primevue/animateonscroll';
 
+//native UI
+import {create, NButton, NCarousel, NEllipsis, NList, NListItem, NScrollbar, NSpace, NTag, NThing} from 'naive-ui'
 
 export default boot(({app}) => {
   app.use(ElPopover)
@@ -19,7 +21,7 @@ export default boot(({app}) => {
   app.use(ElButton)
   app.use(ElTag)
   app.use(ElBacktop)
-  app.use(ElScrollbar)
+  app.use(ElLink)
   app.component('CiliBackToTop', CiliBackToTop)
   app.component('NavBar', NavBar)
   app.use(PrimeVue);
@@ -27,6 +29,10 @@ export default boot(({app}) => {
   app.component('Button', Button);
   app.component('MegaMenu', MegaMenu);
   app.directive('animateonscroll', AnimateOnScroll);
-
+  //native ui
+  const naive = create({
+    components: [NButton, NCarousel, NList, NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar]
+  })
+  app.use(naive)
 })
 export {ElAffix, ElButton, ElPopover, ElTag, ElBacktop}
