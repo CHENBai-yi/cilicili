@@ -1,5 +1,5 @@
 <template>
-  <el-link :href="href" :underline="false">
+  <el-link :href="href" :target="target" :underline="false">
     <slot></slot>
   </el-link>
 </template>
@@ -23,6 +23,10 @@ defineProps({
   },
   weight: {
     type: Number
+  },
+  target: {
+    type: String,
+    default: '_blank'
   }
 })
 </script>

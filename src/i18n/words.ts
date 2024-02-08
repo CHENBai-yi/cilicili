@@ -1,4 +1,17 @@
 export default {
+  Lecturer: {
+    "zh-CN": "讲师",
+    "en-US": "Lecturer",
+    "ru": "преподавател"
+  }, Category: {
+    "zh-CN": "类别",
+    "en-US": "Category",
+    "ru": "категор"
+  }, Share: {
+    "zh-CN": "分享",
+    "en-US": "Share",
+    "ru": "подел"
+  },
   LoginExpiration: {
     "zh-CN": "登录失效",
     "en-US": "Login expiration",

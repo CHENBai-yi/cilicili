@@ -1,22 +1,28 @@
 <template>
-  <div ref="videoRef" class="rounded-borders" @mouseenter="handlePlay" @mouseleave="handlePause"></div>
-  <div class="mask ">
-    <div class="row  full-width no-wrap">
-      <div class="col-12 col-md-5 flex justify-start q-gutter-sm">
-        <div>
-          <q-icon name="fab fa-youtube"/>
-          {{ testData.view }}
+  <div ref="videoRef" :style="{height:height,width:'100%'}" class='rounded-borders'></div>
+  <transition appear
+              enter-active-class="animated animate__fadeIn"
+              leave-active-class="animated animate__fadeOut"
+  >
+    <div v-if="showMask" class="mask">
+      <div class="row  full-width no-wrap">
+        <div class="col-12 col-md-5 flex justify-start q-gutter-sm">
+          <div>
+            <q-icon name="fab fa-youtube"/>
+            {{ testData.view }}
+          </div>
+          <div>
+            <q-icon name="subtitles"/>
+            {{ testData.dm }}
+          </div>
         </div>
-        <div>
-          <q-icon name="subtitles"/>
-          {{ testData.dm }}
+        <div class="col-12 col-md-7  flex justify-end">
+          {{ testData.time }}
         </div>
-      </div>
-      <div class="col-12 col-md-7  flex justify-end">
-        {{ testData.time }}
       </div>
     </div>
-  </div>
+  </transition>
+
 </template>
 
 <script setup>
@@ -74,19 +80,28 @@ onMounted(() => {
   }
   console.log(player);
   state.instance = new DPlayer(player)
-  state.instance.video.addEventListener('canplaythrough', (e) => {
-    var timers = Math.ceil(state.instance.video.duration); //视频总时长
-    testData.time = timeToMinute(timers);
-    emit('isLoadCompleted', true)
-  });
+  state.instance.video.addEventListener('durationchange', loadShowMast);
 })
+const loadShowMast = (e) => {
+  var timers = Math.ceil(state.instance.video.duration); //视频总时长
+  testData.time = timeToMinute(timers);
+  emit('isLoadCompleted', true)
+}
 // 销毁
 onBeforeUnmount(() => {
-  state.instance.video.removeEventListener('canplaythrough');
+  state.instance.video.removeEventListener('canplaythrough', loadShowMast);
   state.instance.destroy()
 })
 
 const props = defineProps({
+  showMask: {
+    type: Boolean,
+    default: false
+  },
+  height: {
+    type: String,
+    default: '100%'
+  },
   // 是否自动播放
   autoplay: {
     type: Boolean,
@@ -186,6 +201,9 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
+})
+defineExpose({
+  handlePlay, handlePause
 })
 </script>
 

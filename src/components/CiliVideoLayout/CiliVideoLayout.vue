@@ -11,19 +11,22 @@
           <div class="col order-first">
             <q-card bordered flat style="max-width: 500px">
               <div v-show="loaded" class="column">
-                <div class="col">
+                <div class="col" @mouseenter="handlePlay" @mouseleave="handlePause">
                   <cili-video-player
+                    ref="ciliVideoPlayer"
                     :contextmenu="dplayerObj.contextmenu"
                     :highlight="dplayerObj.highlight"
                     :hotkey="false"
                     :preventClickToggle='true'
+                    :show-mask="showMask"
                     :video="dplayerObj.video"
+                    height="172px"
                     @isLoadCompleted="isLoadCompleted"
                   />
                 </div>
                 <div class="q-px-sm q-pt-xs">
 
-                  <CiliLink color="#19181c" font="15px" href="http://www.cilicili.site/admin">
+                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" font="15px" href="#/video">
                     <strong>
                       <n-ellipsis class="bili-video-card__info--author" line-clamp="2">
                         {{ testData.test1.title }}
@@ -32,7 +35,7 @@
                   </CiliLink>
                 </div>
                 <div class="q-px-sm q-pb-xs">
-                  <CiliLink href="http://www.cilicili.site/admin">
+                  <CiliLink href="#/video">
                     <div class="q-gutter-x-sm flex">
                       <n-tag v-if='!!testData.test1.faver' :bordered="false" size="small" type="warning">
                         {{ testData.test1.faver }}
@@ -496,11 +499,12 @@
 
 <script setup>
 import {reactive, ref} from 'vue'
-import Hls from 'hls.js';
 import CiliVideoPlayer from 'src/components/ciliVideoPlayer/CiliVideoPlayer.vue'
 import CiliLink from 'src/components/ciliLink/CiliLink.vue'
 import CiliCarousel from 'src/components/CiliCarousel/CiliCarousel.vue'
+import useTheme from "src/composables/useTheme"
 
+const {darkTheme} = useTheme()
 const items = ref([{}])
 const onLoad = (index, done) => {
   setTimeout(() => {
@@ -519,15 +523,17 @@ const testData = reactive({
 const loaded = ref(false)
 const dplayerObj = reactive({
   video: {
-    url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8', //视频地址
-    type: 'customHls',
-    customType: {
-      customHls: function (video, player) {
-        const hls = new Hls(); //实例化Hls  用于解析m3u8
-        hls.loadSource(video.src);
-        hls.attachMedia(video);
-      }
-    }
+    // url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8', //视频地址
+    url: 'http://vjs.zencdn.net/v/oceans.mp4', //视频地址
+    type: 'normal',
+    // type: 'customHls',
+    // customType: {
+    //   customHls: function (video, player) {
+    //     const hls = new Hls(); //实例化Hls  用于解析m3u8
+    //     hls.loadSource(video.src);
+    //     hls.attachMedia(video);
+    //   }
+    // }
   },
   danmaku: {
     id: '9E2E3368B56CDBB4',
@@ -566,6 +572,16 @@ const dplayerObj = reactive({
 const isLoadCompleted = (isLoadCompleted) => {
   console.log(isLoadCompleted)
   loaded.value = isLoadCompleted
+}
+const ciliVideoPlayer = ref(null);
+const showMask = ref(true)
+const handlePlay = () => {
+  showMask.value = false
+  ciliVideoPlayer.value.handlePlay()
+}
+const handlePause = () => {
+  showMask.value = true
+  ciliVideoPlayer.value.handlePause()
 }
 </script>
 
