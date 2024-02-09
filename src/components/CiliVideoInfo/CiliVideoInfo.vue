@@ -1,12 +1,12 @@
 <template>
-  <div :class="$q.screen.lt.sm?'q-ma-xs':'q-ml-xl'">
+  <div :class="$q.screen.lt.sm?'q-ma-sm':'q-ml-xl'">
     <div :class="$q.screen.lt.sm?'':'Cili_left'">
       <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
         <div class="title-box learn no-margin no-padding"></div>
       </div>
 
       <div>
-        <ul :class="$q.screen.lt.sm?'flex flex-start q-gutter-md':'content-box'" class="text-black q-mt-xs">
+        <ul :class="$q.screen.lt.sm?'flex flex-start no-padding q-gutter-md ':'content-box'" class="text-black q-mt-xs">
           <li v-for="(item,index) in testData.learn_more" :class="$q.dark.isActive&&$q.screen.lt.sm?'text-white':''">
             {{ item }}
           </li>

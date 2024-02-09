@@ -4,9 +4,9 @@
               enter-active-class="animated animate__fadeIn"
               leave-active-class="animated animate__fadeOut"
   >
-    <div v-if="showMask" class="mask">
-      <div class="row  full-width no-wrap">
-        <div class="col-12 col-md-5 flex justify-start q-gutter-sm">
+    <div v-if="showMask" class="relative-position">
+      <div class="row  full-width no-wrap mask">
+        <div class="col-11 flex justify-start q-gutter-sm">
           <div>
             <q-icon name="fab fa-youtube"/>
             {{ testData.view }}
@@ -16,7 +16,7 @@
             {{ testData.dm }}
           </div>
         </div>
-        <div class="col-12 col-md-7  flex justify-end">
+        <div class="col">
           {{ testData.time }}
         </div>
       </div>
@@ -215,7 +215,7 @@ defineExpose({
 
 .mask {
   position: absolute;
-  bottom: 89px;
+  bottom: 0;
   left: 0;
   z-index: 2;
   box-sizing: border-box;
