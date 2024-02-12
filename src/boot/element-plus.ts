@@ -1,5 +1,5 @@
 import {boot} from 'quasar/wrappers'
-import {ElAffix, ElBacktop, ElButton, ElLink, ElPopover, ElTag} from 'element-plus'
+import {ElAffix, ElBacktop, ElButton, ElCollapse, ElCollapseItem, ElIcon, ElLink, ElPopover, ElTag} from 'element-plus'
 
 import NavBar from 'src/components/navBar/index.vue'
 import CiliBackToTop from 'src/components/ciliBackToTop/index.vue'
@@ -20,6 +20,7 @@ import {
   create,
   NButton,
   NCarousel,
+  NDivider,
   NEllipsis,
   NH1,
   NH2,
@@ -34,6 +35,10 @@ import {
   NTag,
   NThing
 } from 'naive-ui'
+//评论组件
+import UndrawUi from 'undraw-ui'
+import 'undraw-ui/dist/style.css';
+
 
 export default boot(({app}) => {
   app.use(ElPopover)
@@ -42,10 +47,15 @@ export default boot(({app}) => {
   app.use(ElTag)
   app.use(ElBacktop)
   app.use(ElLink)
+  app.use(ElCollapse)
+  app.use(ElCollapseItem)
+  app.use(ElIcon)
   app.component('CiliBackToTop', CiliBackToTop)
   app.component('NavBar', NavBar)
   app.component('CiliLink', CiliLink)
   app.component('CiliToolBar', CiliToolBar)
+  //评论组件
+  app.use(UndrawUi)
   //prime UI
   app.use(PrimeVue);
   app.component('OverlayPanel', OverlayPanel);
@@ -55,7 +65,7 @@ export default boot(({app}) => {
   app.directive('animateonscroll', AnimateOnScroll);
   //native ui
   const naive = create({
-    components: [NButton, NH6, NH2, NH1, NCarousel, NList, NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NLayout, NLayoutSider, NLayoutContent]
+    components: [NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NLayout, NLayoutSider, NLayoutContent]
   })
   app.use(naive)
 })
