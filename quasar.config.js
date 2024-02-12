@@ -31,6 +31,7 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
+      'bus',
       'theme',
       'axios',
       'element-plus',
@@ -145,8 +146,8 @@ module.exports = configure(function (ctx) {
       // Quasar plugins
       plugins: [
         'LoadingBar', 'Notify', 'BottomSheet', 'AddressbarColor', 'Meta', 'LocalStorage',
-        'SessionStorage', 'Cookies'
-      ]
+        'SessionStorage', 'Cookies', 'Loading'
+      ],
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
 
@@ -155,6 +156,13 @@ module.exports = configure(function (ctx) {
       // you can manually specify Quasar components/directives to be available everywhere:
       //
       // components: [],
+      components: [
+        'QInnerLoading',
+
+        //... 如果使用自定义旋转器，
+        //无论如何请将其添加
+        'QSpinnerGears'
+      ]
       // directives: [],
 
 

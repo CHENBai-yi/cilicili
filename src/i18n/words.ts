@@ -7,6 +7,10 @@ export default {
     "zh-CN": "类别",
     "en-US": "Category",
     "ru": "категор"
+  }, Video: {
+    "zh-CN": "视频",
+    "en-US": "Video",
+    "ru": "видео"
   }, Share: {
     "zh-CN": "分享",
     "en-US": "Share",

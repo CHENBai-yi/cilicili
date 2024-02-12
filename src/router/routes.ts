@@ -11,7 +11,21 @@ const routes: RouteRecordRaw[] = [
         path: 'video', component: () => import('pages/CiliVideoDetailPage/CiliVideoDetail.vue'),
         children: [
           {path: '', component: () => import('src/components/CiliVideoInfo/CiliVideoInfo.vue')},
-          {path: 'info', component: () => import('src/components/CiliVideoInfo/CiliVideoInfo.vue')},
+          {
+            path: 'info',
+            component: () => import('src/components/CiliVideoInfo/CiliVideoInfo.vue'),
+            meta: {keepAlive: true}
+          },
+          {
+            path: 'catalogue',
+            component: () => import('src/components/CiliVideoCatalogue/CiliVideoCatalogue.vue'),
+            meta: {keepAlive: true}
+          },
+          {
+            path: 'comment',
+            component: () => import('src/components/CiliVideoComment/CiliVideoComment.vue'),
+            meta: {keepAlive: true}
+          },
         ]
       }
     ],

@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="col">
-        <div :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-md q-mr-sm q-my-sm'">
+        <div :class="$q.screen.lt.sm?'column q-mx-sm  q-gutter-y-md':'row q-gutter-x-md q-mr-sm q-my-sm'">
           <div class="col order-first">
             <q-card bordered flat style="max-width: 500px">
               <div v-show="loaded" class="column">
@@ -523,9 +523,10 @@ const testData = reactive({
 const loaded = ref(false)
 const dplayerObj = reactive({
   video: {
+    pic: 'VCG41N1403887001.jpg',
     // url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8', //视频地址
     url: 'http://vjs.zencdn.net/v/oceans.mp4', //视频地址
-    type: 'normal',
+    type: 'auto',
     // type: 'customHls',
     // customType: {
     //   customHls: function (video, player) {
@@ -586,16 +587,16 @@ const handlePause = () => {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .dplayer-menu,
-.dplayer-mask {
+:deep(.dplayer-menu,
+.dplayer-mask) {
   display: none !important;
 }
 
-::v-deep .dplayer-controller {
+:deep(.dplayer-controller) {
   display: none;
 }
 
-::v-deep .dplayer-controller-mask {
+:deep(.dplayer-controller-mask) {
   display: none;
 }
 

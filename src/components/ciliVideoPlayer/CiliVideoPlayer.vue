@@ -49,7 +49,8 @@ const handlePlay = () => {
 const handlePause = () => {
   const audioDom = state.instance.video
   audioDom.pause()
-  audioDom.currentTime = 0
+  audioDom.src = ''
+  audioDom.src = props.video.url
 }
 const emit = defineEmits(['isLoadCompleted'])
 const timeToMinute = inject('timeToMinute')
