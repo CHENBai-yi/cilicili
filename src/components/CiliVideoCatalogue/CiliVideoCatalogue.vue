@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="q-pl-md row">
-        <n-ellipsis :tooltip="false" class="col-8 no-margin desc" expand-trigger="click" line-clamp="2">
+        <n-ellipsis :tooltip="false" class="col-12 col-md-8 no-margin desc" expand-trigger="click" line-clamp="2">
           本次课程我们将了解计算机技术与软件专业技术资格(水平)考试中系统架构设计师专业的一般情况。内容包含软考介绍、证书价值介绍、考试介绍、考试科目介绍等。通过对系统架构设计师考试的三个科目
           (综合知识、案例分析、论文写作)的真题和考点分布的分析，总结行之有效的备考策略，并教会您典型真题的解题技巧。...
         </n-ellipsis>
@@ -33,23 +33,28 @@
         <ul v-show="videoListShow" class="q-gutter-y-sm">
           <li class="q-gutter-x-sm">
             <q-icon name="fas fa-video"/>
-            <font class="type-text">{{ $t('Video') }}:</font><span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
+            <div class="type-text">{{ $t('Video') }}:</div>
+            <span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
           </li>
           <li class="q-gutter-x-sm">
             <q-icon name="fas fa-video"/>
-            <font class="type-text">{{ $t('Video') }}:</font><span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
+            <div class="type-text">{{ $t('Video') }}:</div>
+            <span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
           </li>
           <li class="q-gutter-x-sm">
             <q-icon name="fas fa-video"/>
-            <font class="type-text">{{ $t('Video') }}:</font><span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
+            <div class="type-text">{{ $t('Video') }}:</div>
+            <span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
           </li>
           <li class="q-gutter-x-sm">
             <q-icon name="fas fa-video"/>
-            <font class="type-text">{{ $t('Video') }}:</font><span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
+            <div class="type-text">{{ $t('Video') }}:</div>
+            <span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
           </li>
           <li class="q-gutter-x-sm">
             <q-icon name="fas fa-video"/>
-            <font class="type-text">{{ $t('Video') }}:</font><span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
+            <div class="type-text">{{ $t('Video') }}:</div>
+            <span class="title_info">2-1 软件架构概念&常见分类与建模方法  (17:38)</span>
           </li>
         </ul>
       </transition>

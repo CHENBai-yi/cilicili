@@ -3,9 +3,9 @@ import {Cookies} from 'quasar';
 
 export const useCommonStore = defineStore('common', {
   state: () => ({
-    pos: '',
+    pos: 0,
     activeIndex: 0,
-    originPos: ''
+    originPos: 0
   }),
   getters: {},
   actions: {
