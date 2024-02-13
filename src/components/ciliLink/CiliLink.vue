@@ -18,8 +18,7 @@ defineProps({
     default: '#606266'
   },
   href: {
-    type: String,
-    default: '#'
+    type: String
   },
   weight: {
     type: Number

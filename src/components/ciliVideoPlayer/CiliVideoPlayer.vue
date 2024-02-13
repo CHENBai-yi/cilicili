@@ -35,6 +35,7 @@ const videoRef = ref()
 const state = reactive({
   instance: null
 })
+const dp = ref({})
 const testData = reactive({
   view: '1.3万',
   dm: 113,
@@ -81,6 +82,7 @@ onMounted(() => {
   }
   console.log(player);
   state.instance = new DPlayer(player)
+  dp.value = state.instance
   state.instance.video.addEventListener('durationchange', loadShowMast);
 })
 const loadShowMast = (e) => {
@@ -204,7 +206,7 @@ const props = defineProps({
   }
 })
 defineExpose({
-  handlePlay, handlePause
+  handlePlay, handlePause, dp
 })
 </script>
 
