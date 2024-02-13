@@ -1,17 +1,18 @@
 <template>
+
   <el-link :href="href" :target="target" :underline="false">
     <slot></slot>
   </el-link>
 </template>
 
 <script setup>
+import useTheme from "src/composables/useTheme"
+
+const {darkTheme} = useTheme()
 defineProps({
   size: {
     type: String,
     default: '14px'
-  },
-  font: {
-    type: String
   },
   color: {
     type: String,
@@ -21,7 +22,8 @@ defineProps({
     type: String
   },
   weight: {
-    type: Number
+    type: Number,
+    default: 500
   },
   target: {
     type: String,
@@ -31,9 +33,15 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-* {
-  --el-link-text-color: v-bind(color);
-  --el-link-font-size: v-bind(font);
+a {
+  font-size: v-bind(size);
   font-family: PingFang SC, HarmonyOS_Medium, Helvetica Neue, Microsoft YaHei, sans-serif;
+  font-weight: v-bind(weight);
+  color: v-bind(color);
+}
+
+a:hover,
+a:active {
+  color: var(--el-color-primary);
 }
 </style>
