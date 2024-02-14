@@ -29,6 +29,12 @@ const routes: RouteRecordRaw[] = [
         ]
       }
     ],
+  }, {
+    path: '/course',
+    component: () => import('layouts/CiliVideoCourseLayout.vue'),
+    children: [
+      {path: '', component: () => import('pages/CiliVideoCourse/CiliVideoCourse.vue')},
+    ],
   },
   // Always leave this as last one,
   // but you can also remove it
