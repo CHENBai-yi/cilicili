@@ -1,9 +1,20 @@
 export default {
+  Subject: {
+    "zh-CN": "学科",
+    "en-US": "Subject",
+    "ru": "дисциплин"
+  },
+  Kind: {
+    "zh-CN": "分类",
+    "en-US": "Kind",
+    "ru": "классификац"
+  },
   Lecturer: {
     "zh-CN": "讲师",
     "en-US": "Lecturer",
     "ru": "преподавател"
-  }, Category: {
+  },
+  Category: {
     "zh-CN": "类别",
     "en-US": "Category",
     "ru": "категор"

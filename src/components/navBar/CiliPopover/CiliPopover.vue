@@ -1,17 +1,18 @@
 <template>
   <el-popover
+    :disabled="$q.screen.lt.lg"
     :effect="$q.dark.isActive?'dark':'light'"
     :show-arrow="false"
+    :teleported="false"
     :width="200"
-    placement="bottom"
+    placement="top"
     trigger="hover"
     @before-enter="beforeEnter"
     @after-enter="afterEnter"
-    :teleported="false"
-
   >
     <template #reference>
-      <q-btn :class="clClass" :ripple="false" :style="clStyle" :to="to" fab-mini flat rounded stack unelevated>
+      <q-btn :class="clClass" :ripple="false" :style="clStyle" fab-mini flat rounded stack unelevated
+             @click="clickEvent">
         <slot name="badge">
 
         </slot>
@@ -37,7 +38,8 @@ defineProps({
   style: String,
   clClass: String,
   clStyle: String,
-  to: String
+  to: String,
+  clickEvent: Function
 
 })
 const opened = ref(true)

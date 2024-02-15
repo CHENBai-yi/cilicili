@@ -25,8 +25,7 @@
                   />
                 </div>
                 <div class="q-px-sm q-pt-xs">
-
-                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" font="15px" href="#/video">
+                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" href="#/video" size="15px">
                     <strong>
                       <n-ellipsis class="bili-video-card__info--author" line-clamp="2">
                         {{ testData.test1.title }}
@@ -35,7 +34,7 @@
                   </CiliLink>
                 </div>
                 <div class="q-px-sm q-pb-xs">
-                  <CiliLink href="#/video">
+                  <CiliLink :weight=600 href="#/video">
                     <div class="q-gutter-x-sm flex">
                       <n-tag v-if='!!testData.test1.faver' :bordered="false" size="small" type="warning">
                         {{ testData.test1.faver }}

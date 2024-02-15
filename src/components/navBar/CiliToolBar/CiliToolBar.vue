@@ -8,10 +8,10 @@
       </q-toolbar-title>
     </q-btn>
     <div :class="$q.screen.lt.sm?'q-gutter-xs-sm col items-center no-wrap':'q-gutter-xs-sm row items-center no-wrap'">
-      <q-btn fab-mini flat to="">
+      <q-btn fab-mini flat to="/">
         {{ $t('Index') }}
       </q-btn>
-      <q-btn fab-mini flat to="/keceng">
+      <q-btn fab-mini flat to="/course">
         {{ $t('Course') }}
       </q-btn>
     </div>
@@ -26,8 +26,8 @@
     </div>
     <div class="q-gutter-xs row  items-center no-wrap">
 
-      <CiliPopover :label="$t('Login')" clClass="shadow-up-3" clStyle="background: #2093da; color: white"
-                   to="/keceng">
+      <CiliPopover :click-event="showLoginFrom" :label="$t('Login')" clClass="shadow-up-3"
+                   clStyle="background: #2093da; color: white" to="/keceng">
         <template #default>
           <div class="v-popover is-bottom">
             <div class="v-popover-content">
@@ -94,7 +94,7 @@
                     </svg>
                     <span :class="darkTheme" class="lt-text">{{ $t('Watching') }}</span></div>
                 </div>
-                <div class="login-btn">{{ $t('SignInNow') }}</div>
+                <div class="login-btn" @click="showLoginFrom">{{ $t('SignInNow') }}</div>
                 <div :class="darkTheme" class="register-tip"> {{ $t('FirstTimeUse') }}<span
                   class="register-exper">  {{ $t('ClickMeToRegiste') }}</span></div>
               </div>
@@ -116,7 +116,7 @@
               <div class="login-panel-popover "><p :class="darkTheme" class="tips">{{
                   $t('LoginToViewMessageRecords')
                 }}</p>
-                <div class="login-btn"> {{ $t('SignInNow') }}</div>
+                <div class="login-btn" @click="showLoginFrom"> {{ $t('SignInNow') }}</div>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
               <div class="login-panel-popover"><p :class="darkTheme" class="tips">{{
                   $t('LoginToViewMyCollection')
                 }}</p>
-                <div class="login-btn"> {{ $t('SignInNow') }}</div>
+                <div class="login-btn" @click="showLoginFrom"> {{ $t('SignInNow') }}</div>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@
         <div class="v-popover is-bottom">
           <div :class="darkTheme" class="v-popover-content">
             <div class="login-panel-popover"><p :class="darkTheme" class="tips">{{ $t('LoginToViewHistory') }}</p>
-              <div class="login-btn"> {{ $t('SignInNow') }}</div>
+              <div class="login-btn" @click="showLoginFrom"> {{ $t('SignInNow') }}</div>
             </div>
           </div>
         </div>
@@ -194,18 +194,22 @@
       </CiliPopover>
     </div>
     <q-space/>
-
   </q-toolbar>
-
+  <CiliLoginFrom ref="LoginDialog"/>
 </template>
 
 <script setup>
 import {ref} from 'vue'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
+import CiliLoginFrom from 'src/components/CiliLoginFrom/CiliLoginFrom.vue'
 
 const {darkTheme} = useTheme()
 const search = ref('')
+const LoginDialog = ref(null)
+const showLoginFrom = () => {
+  console.log(LoginDialog.value.showLoginFrom())
+}
 </script>
 
 <style lang="sass" scoped>

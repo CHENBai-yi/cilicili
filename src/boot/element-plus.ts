@@ -20,6 +20,7 @@ import {
   create,
   NButton,
   NCarousel,
+  NCollapseTransition,
   NDivider,
   NEllipsis,
   NH1,
@@ -32,6 +33,7 @@ import {
   NListItem,
   NScrollbar,
   NSpace,
+  NSwitch,
   NTag,
   NThing
 } from 'naive-ui'
@@ -65,7 +67,11 @@ export default boot(({app}) => {
   app.directive('animateonscroll', AnimateOnScroll);
   //native ui
   const naive = create({
-    components: [NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NLayout, NLayoutSider, NLayoutContent]
+    components: [
+      NDivider, NButton, NH6, NH2, NH1, NCarousel, NList,
+      NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar,
+      NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition
+    ]
   })
   app.use(naive)
 })

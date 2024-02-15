@@ -12,12 +12,12 @@
           <component :is="Component"/>
           <q-inner-loading :showing="componentLoading">
             <q-spinner-bars
-              class="darkTheme" size="3em"
+              :class="darkTheme" size="3em"
             />
           </q-inner-loading>
         </router-view>
-        <CiliBackToTop/>
       </q-page-container>
+      <CiliBackToTop/>
     </q-pull-to-refresh>
   </q-layout>
 </template>

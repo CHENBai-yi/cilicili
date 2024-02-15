@@ -153,5 +153,19 @@ export default {
     "zh-CN": "登录即可查看历史记录.",
     "en-US": "Login to view history.",
     "ru": "Логин позволяет получить доступ к историческим записям."
+  },
+  ValidEmail: {
+    "zh-CN": "请输入有效的邮箱地址.",
+    "en-US": "Please enter a valid email address.",
+    "ru": "Пожалуйста, введите действующий адрес электронной почты."
+  },
+  ValidPassword: {
+    "zh-CN": "密码长度不少于6位.",
+    "en-US": "Please use minimum 6 characters.",
+    "ru": "Пожалуйста, используйте минимум 6 символов."
+  }, ValidEmailCode: {
+    "zh-CN": "无效的邮箱验证码.",
+    "en-US": "Please use minimum 6 characters.",
+    "ru": "Пожалуйста, используйте минимум 6 символов."
   }
 }
