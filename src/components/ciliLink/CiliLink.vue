@@ -1,6 +1,6 @@
 <template>
 
-  <el-link :href="href" :target="target" :underline="false">
+  <el-link :disabled="disabled" :href="href" :target="target" :underline="false">
     <slot></slot>
   </el-link>
 </template>
@@ -28,6 +28,10 @@ defineProps({
   target: {
     type: String,
     default: '_blank'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
