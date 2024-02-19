@@ -1,5 +1,5 @@
 <template>
-  <el-affix :offset="110" class="float-right on-left" position="bottom">
+  <el-affix :offset="110" class="float-right on-left fixed-bottom-right q-mb-xl z-top" position="bottom">
     <ul :class="darkTheme" class=" no-padding no-margin v-popover-content center" style="list-style: none">
       <li>
         <q-fab

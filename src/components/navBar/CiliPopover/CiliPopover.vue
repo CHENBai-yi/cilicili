@@ -4,9 +4,11 @@
     :effect="$q.dark.isActive?'dark':'light'"
     :show-arrow="false"
     :teleported="false"
-    :width="200"
-    placement="top"
+    placement="bottom"
+    popper-style="min-width:80px;border-radius: 8px;top:70px"
     trigger="hover"
+    width="auto"
+
     @before-enter="beforeEnter"
     @after-enter="afterEnter"
   >
@@ -39,6 +41,7 @@ defineProps({
   clClass: String,
   clStyle: String,
   to: String,
+  visible: Boolean,
   clickEvent: Function
 
 })

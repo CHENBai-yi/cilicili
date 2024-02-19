@@ -146,7 +146,7 @@ module.exports = configure(function (ctx) {
       // Quasar plugins
       plugins: [
         'LoadingBar', 'Notify', 'BottomSheet', 'AddressbarColor', 'Meta', 'LocalStorage',
-        'SessionStorage', 'Cookies', 'Loading'
+        'SessionStorage', 'Cookies', 'Loading', 'AppFullscreen'
       ],
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack

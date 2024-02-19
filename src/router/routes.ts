@@ -35,6 +35,25 @@ const routes: RouteRecordRaw[] = [
     children: [
       {path: '', component: () => import('pages/CiliVideoCourse/CiliVideoCourse.vue')},
     ],
+  }, {
+    path: '/notice',
+    component: () => import('layouts/CiliNoticeLayout.vue'),
+    children: [
+      {path: 'system', component: () => import('components/navBar/CiliToolBar/CiliNotice/CiliSystemNotice.vue')},
+    ],
+  },
+  {
+    path: '/create',
+    component: () => import('layouts/CiliUploadVideoLayout.vue'),
+    children: [
+      {path: '', component: () => import('src/components/CiliVideoUpload/CiliVideoUpload.vue'), meta: {active: true}},
+      {
+        path: 'upload',
+        component: () => import('src/components/CiliVideoUpload/CiliVideoUpload.vue'),
+        meta: {active: true}
+      },
+      {path: 'manage', component: () => import('src/components/CiliManageHistory/CiliManageHistory.vue')},
+    ],
   },
   // Always leave this as last one,
   // but you can also remove it

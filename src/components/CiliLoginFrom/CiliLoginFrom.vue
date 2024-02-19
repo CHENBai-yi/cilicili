@@ -46,8 +46,8 @@
                 《菠萝微课注册协议及隐私政策》
               </el-link>
             </div>
-            <q-btn class="col-12" color="red" icon-right="send" rounded>
-              <h2 class="rl-modal-header login no-margin ">登录</h2>
+            <q-btn class="col-12" color="red" rounded>
+              <h2 class="rl-modal-header login no-margin ">立即注册</h2>
             </q-btn>
             <div class="col-12 flex justify-center">
               <q-btn color="red" flat rounded @click="registerRapidly=false">
@@ -154,7 +154,7 @@
                          label="请输入邮箱验证码"
                          maxlength="6" standout="bg-teal text-white">
                   <template v-slot:after>
-                    <CiliLink :disabled="!CodeSpanReSend" :weight=600 color="#4eb7ed" size="14px"
+                    <CiliLink :disabled="!CodeSpanReSend" :weight=600 color="#2faee3" size="14px"
                               @click="handleEmailCode">
                     <span
                       v-show="CodeSpanReSend">获取验证码
@@ -225,8 +225,12 @@ const showLoginFrom = () => {
   tab.value = 'showPhoneSignin'
   icon.value = true
 }
+const showRegisterFrom = () => {
+  showLoginFrom()
+  registerRapidly.value = true
+}
 defineExpose({
-  showLoginFrom
+  showLoginFrom, showRegisterFrom
 })
 const CodeSpan = ref(null)
 const CodeSpanReSend = ref(true)

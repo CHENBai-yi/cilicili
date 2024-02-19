@@ -29,8 +29,8 @@
 }
 
 .v-popover.is-bottom {
-  top: 0;
-  left: -40%;
+  top: 10px;
+
 }
 
 .v-popover-content {
@@ -44,8 +44,8 @@
 }
 
 .login-panel-popover {
-  padding: 22px 20px;
-  width: 359px;
+  padding: 12px 10px 0 10px;
+  width: 333px;
   border-radius: 8px;
   text-align: left;
 }
@@ -73,7 +73,7 @@
 
 .login-panel-popover .register-tip {
   margin-top: 16px;
-  color: $text1;
+  color: inherit;
   text-align: center;
   letter-spacing: 0;
   font-size: 14px;
@@ -109,7 +109,7 @@
 
 .login-panel-popover .tips {
   margin-bottom: 24px;
-  color: $text3;
+  color: inherit;
   text-align: center;
   font-size: 14px;
   line-height: 20px
