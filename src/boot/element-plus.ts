@@ -57,6 +57,7 @@ import {
   NH1,
   NH2,
   NH6,
+  NImage,
   NInput,
   NInputNumber,
   NLayout,
@@ -70,7 +71,8 @@ import {
   NSwitch,
   NTable,
   NTag,
-  NThing
+  NThing,
+  NUpload
 } from 'naive-ui'
 //评论组件
 import UndrawUi from 'undraw-ui'
@@ -130,7 +132,7 @@ export default boot(({app}) => {
       NDivider, NButton, NH6, NH2, NH1, NCarousel, NList,
       NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar,
       NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition,
-      NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader
+      NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload
     ]
   })
   app.use(naive)

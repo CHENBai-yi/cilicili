@@ -400,7 +400,7 @@ const fileToBlob = (file) => {
 }
 const setCoursePoster = ({files, poster}) => {
   form.poster = poster
-  console.log(form)
+  console.log(form.catalog)
 }
 //章节处理
 const handleAdd = (id) => {

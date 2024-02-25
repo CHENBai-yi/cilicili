@@ -1,8 +1,9 @@
 import {boot} from 'quasar/wrappers'
-import {Cookies, getCssVar, setCssVar} from 'quasar'
-import {ThemeStyleQuasar} from 'src/config/default'
 import 'uno.css'
 import 'animate.css'
+import {Cookies, getCssVar, setCssVar} from 'quasar'
+import {ThemeStyleQuasar} from 'src/config/default'
+
 
 export default boot(({app}) => {
   const primary = Cookies.get('Cili-theme-primary') || getCssVar('primary') || ThemeStyleQuasar.primary
