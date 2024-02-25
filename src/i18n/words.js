@@ -364,9 +364,23 @@ export default {
     "en-US": "Api",
     "ru": "АПИ"
   },
+  Author: {
+    "zh-CN": "作者",
+    "en-US": "Author",
+    "ru": "Пользователь"
+  },
   User: {
     "zh-CN": "用户",
     "en-US": "User",
+    "ru": "Пользователь"
+  }, Audit: {
+    "zh-CN": "审核",
+    "en-US": "audit",
+    "ru": "Пользователь"
+  }
+  , Pass: {
+    "zh-CN": "通过",
+    "en-US": "Pass",
     "ru": "Пользователь"
   },
   Manage: {

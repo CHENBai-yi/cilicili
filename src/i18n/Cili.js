@@ -54,6 +54,11 @@ export default {
     "en-US": "Backend Manage",
     "ru": "Управление бэкендом"
   },
+  CourseManage: {
+    "zh-CN": "课程管理",
+    "en-US": "Course Manage",
+    "ru": "Управление бэкендом"
+  },
   LogManage: {
     "zh-CN": "日志管理",
     "en-US": "Log Manage",

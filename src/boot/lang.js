@@ -1,5 +1,6 @@
 import {Quasar} from 'quasar';
 import {computed} from 'vue';
+import {settingStore} from "boot/i18n";
 
 const langList = import.meta.glob('../../node_modules/quasar/lang/*.mjs')
 

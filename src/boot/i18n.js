@@ -1,7 +1,8 @@
 import {createI18n} from 'vue-i18n'
 import {Translator} from 'src/i18n'
-import {useSettingStore} from 'src/stores/setting'
+
 import Test from 'src/api/test.js'
+import {useSettingStore} from 'src/stores/setting'
 
 export const settingStore = useSettingStore()
 

@@ -31,6 +31,7 @@
     "@quasar/app-vite": "^1.7.0",
     "@quasar/quasar-app-extension-qiconpicker": "^2.0.7",
     "autoprefixer": "^10.4.2",
+    "naive-ui": "^2.38.0",
     "postcss": "^8.4.14",
     "quasar-app-extension-qcascader": "^0.0.5",
     "quasar-app-extension-qhierarchy": "^1.0.9",
