@@ -65,6 +65,7 @@ import {
   NLayoutSider,
   NList,
   NListItem,
+  NResult,
   NScrollbar,
   NSelect,
   NSpace,
@@ -132,7 +133,7 @@ export default boot(({app}) => {
       NDivider, NButton, NH6, NH2, NH1, NCarousel, NList,
       NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar,
       NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition,
-      NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload
+      NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload, NResult
     ]
   })
   app.use(naive)

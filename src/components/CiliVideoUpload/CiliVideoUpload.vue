@@ -55,7 +55,8 @@
                                  style="min-width: 50%"/>
                       </td>
                       <td>
-                        <n-input v-model:value="item.desc" clearable maxlength="100" placeholder="请输入内容" show-count
+                        <n-input v-model:value="item.description" clearable maxlength="100" placeholder="请输入内容"
+                                 show-count
                                  style="min-width: 50%"/>
                       </td>
                       <td class="no-wrap flex q-gutter-x-sm">
@@ -100,7 +101,7 @@
 
               </el-form-item>
               <el-form-item label="课程介绍：">
-                <el-input v-model="form.desc" type="textarea"/>
+                <el-input v-model="form.description" type="textarea"/>
               </el-form-item>
               <el-form-item label="课程封面：">
                 <CiliImageUpload @setPoster="setCoursePoster"/>
@@ -115,19 +116,20 @@
               </el-form-item>
               <el-form-item label="课程分类：">
                 <el-col :span="11">
-                  <n-select v-model:value="form.kind" :options="options" clearable filterable/>
+                  <n-select v-model:value="form.subject" :options="subjects" :render-option="renderOption" clearable
+                            filterable @update:value="onSelectUpdate"/>
                 </el-col>
                 <el-col :span="2" class="text-center">
                   <span class="text-gray-500">-</span>
                 </el-col>
                 <el-col :span="11">
-                  <n-select v-model:value="form.subject" :options="options" clearable filterable/>
+                  <n-select v-model:value="form.kind" :options="categories" clearable filterable/>
                 </el-col>
               </el-form-item>
               <el-form-item label="课程价格：">
-                <q-radio v-model="form.price" checked-icon="task_alt" color="green" keep-color label="免费"
-                         unchecked-icon="panorama_fish_eye"
-                         val="免费" @update:model-value="price=''"/>
+                <q-radio v-model="form.price" :val=0 checked-icon="task_alt" color="green" keep-color
+                         label="免费"
+                         unchecked-icon="panorama_fish_eye" @update:model-value="price=''"/>
                 <div>
                   <q-radio v-model="form.price" :val="price" checked-icon="task_alt" class="q-pr-xs"
                            label="自定义价格" unchecked-icon="panorama_fish_eye">
@@ -181,8 +183,8 @@
               </template>
 
               <template v-slot:default-body="prop">
-                <div v-if="prop.node.desc">
-                  <span class="text-weight-bold">{{ prop.node.desc }}</span>
+                <div v-if="prop.node.description">
+                  <span class="text-weight-bold">{{ prop.node.description }}</span>
                 </div>
               </template>
             </q-tree>
@@ -246,16 +248,24 @@
         </q-stepper-navigation>
       </q-step>
     </q-stepper>
+    <n-result v-if="uploadSuccess" class="q-mt-xl" description="正待审核" status="success" title="成功"/>
   </div>
 </template>
 
 <script setup>
-import {h, reactive, ref} from 'vue'
-import {NTag} from 'naive-ui'
+import {h, onMounted, reactive, ref} from 'vue'
+import {NTag, NTooltip} from 'naive-ui'
 import CiliImageUpload from 'src/components/CiliUploadComponent/CiliImageUpload/CiliImageUpload.vue'
 import {toChineseNumber} from 'src/utils/ToChineseNumber'
 import {useToast} from "primevue/usetoast";
+import {useQuasar} from "quasar";
+import {postAction} from 'src/api/manage'
 
+const urls = reactive({
+  add: 'courses/add',
+  subjectList: 'subject/get-subject-list',
+  categoryList: 'category/get-category-list',
+})
 const step = ref(1)
 // do not use same name with ref
 const form = reactive({
@@ -264,19 +274,34 @@ const form = reactive({
   catalog: [],
   kind: '',
   subject: '',
-  type: [],
   price: '',
-  desc: '',
+  description: '',
   tags: ['掌握Flutter必备的Dart基础', '快速上手企业级实战项目开发', '快速上手企业级实战项目开发'],
   poster: ''
 })
+const $q = useQuasar()
 const price = ref(null)
-const onSubmit = () => {
-  step.value = 4
+
+const onSubmit = async () => {
+  $q.loading.show({
+    message: 'Some important <b>process</b> is in progress.<br/><span class="text-amber text-italic">Please wait...</span>',
+    html: true
+  })
+  // const res = await postAction(urls.add, form)
+  postAction(urls.add, form)
+    .then(res => {
+      if (res.code === 1) {
+        step.value = 4
+        uploadSuccess.value = true
+        toast.add({severity: "success", summary: "Success", detail: res.message, life: 3000});
+      }
+    }).finally(() => {
+    $q.loading.hide()
+  })
   console.log(form)
 }
-
-const options = reactive([
+const uploadSuccess = ref(false)
+const subjects = ref([
   {
     label: "Everybody's Got Something to Hide Except Me and My Monkey",
     value: 'song0',
@@ -337,6 +362,13 @@ const options = reactive([
     type: 'success'
   }
 ])
+const categories = ref([
+  {
+    label: "Everybody's Got Something to Hide Except Me and My Monkey",
+    value: 'song0',
+    disabled: true,
+    type: 'success'
+  }])
 const uploadUrl = ref(process.env.API + 'upload/upload-video')
 const renderTag = (tag, index) => {
   return h(
@@ -407,7 +439,7 @@ const handleAdd = (id) => {
   form.catalog.push({
     id: id,
     title: '',
-    desc: '',
+    description: '',
     bar: [],
     selectable: false
   })
@@ -419,7 +451,7 @@ const handleAddBar = (cId, catalog) => {
     catalog: catalog,
     id: `${cId}-${catalog}`,
     title: '',
-    desc: ''
+    description: ''
   })
   console.log(form.catalog)
 }
@@ -445,5 +477,39 @@ const handleDel = (cId, catalog) => {
   }
   console.log(form.catalog, form.catalog.length)
 }
-
+onMounted(() => {
+  postAction(urls.subjectList, {})
+    .then(res => {
+      if (res.code === 1) {
+        const records = res.data.records
+        subjects.value = records.map(item => {
+          return {
+            label: item.subject_name,
+            value: item.subject_code,
+            type: 'success'
+          }
+        })
+      }
+    })
+})
+const renderOption = ({node, option}) => h(NTooltip, null, {
+  trigger: () => node,
+  default: () => option.label
+})
+const onSelectUpdate = (value) => {
+  console.log(value)
+  postAction(urls.categoryList, {subject_code: value})
+    .then(res => {
+      if (res.code === 1) {
+        const records = res.data
+        categories.value = records.records.map(item => {
+          return {
+            label: item.category_name,
+            value: item.category_name,
+            type: 'success'
+          }
+        })
+      }
+    })
+}
 </script>

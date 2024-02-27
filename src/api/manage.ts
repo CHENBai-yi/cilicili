@@ -8,8 +8,8 @@ export interface ApiResult<T> {
 }
 
 enum method {
-  Get = 'get', Post = 'post',
-  Put = 'put', Delete = 'delete'
+  Get = 'GET', Post = 'POST',
+  Put = 'PUT', Delete = 'DELETE'
 }
 
 export async function getAction<T>(url: string, params?: any): Promise<ApiResult<T>> {
@@ -22,9 +22,9 @@ export async function getAction<T>(url: string, params?: any): Promise<ApiResult
 
 export async function postAction<T>(url: string, params?: any): Promise<ApiResult<T>> {
   return api({
-    url,
-    params,
-    method: method.Post
+    url: url,
+    method: method.Post,
+    data: params,
   })
 }
 

@@ -25,7 +25,7 @@ export default boot(({app, router}) => {
     return request;
   }, error => {
     Notify.create({
-      type: 'negative', message: error,
+      type: 'negative', message: error.message,
     })
     return Promise.reject(error)
   })
@@ -35,7 +35,7 @@ export default boot(({app, router}) => {
     return response.data;
   }, error => {
     Notify.create({
-      type: 'negative', message: error,
+      type: 'negative', message: error.message,
     })
     return Promise.reject(error)
   })
