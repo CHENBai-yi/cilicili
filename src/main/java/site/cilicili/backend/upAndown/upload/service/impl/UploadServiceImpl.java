@@ -274,6 +274,13 @@ public class UploadServiceImpl implements UploadService {
                 .orElseThrow(() -> new AppException(Error.UPLOAD_FAIL));
     }
 
+    @Override
+    public R saveUploadedFiles(final MultipartFile uploadfile) {
+        return Optional.ofNullable(saveUploadedVideoFiles(uploadfile))
+                .map(path -> R.yes("上传成功").setRecords(path))
+                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+    }
+
     private Optional<MultipartFile[]> getMultipartImageFilesCommon(
             final MultipartFile[] multipartFile, String ext, String size) {
         return Optional.ofNullable(multipartFile)
@@ -375,5 +382,13 @@ public class UploadServiceImpl implements UploadService {
                         Objects.requireNonNull(item.getOriginalFilename())
                                 .substring(item.getOriginalFilename().indexOf(".")))
                 .trim();
+    }
+
+    private String saveUploadedVideoFiles(final MultipartFile file) {
+        final String storePath = String.format("%1$s/%2$s", "video", file.getOriginalFilename());
+        if (writtenImage(file, storePath)) {
+            return storePath;
+        }
+        return null;
     }
 }

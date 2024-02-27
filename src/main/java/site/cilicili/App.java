@@ -68,13 +68,19 @@ public class App {
 
     @Bean
     @Primary
-    public MyDataSourceList myDataSourceList(@Qualifier("backend") DataSource druidDataSource) {
+    public MyDataSourceList myDataSourceList(@Qualifier("backend") DataSource druidDataSource
+            , @Qualifier("frontend") DataSource frontendDatasource) {
         final HashMap<Object, Object> dataSourceMap = new HashMap<>();
         DataSource defaultDataSource = null;
         if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
             dataSourceMap.put(dbChangeConf.getBackend(), druidDataSource);
         } else if (StrUtil.isNotBlank(dbChangeConf.getBackendInner())) {
             dataSourceMap.put(dbChangeConf.getBackendInner(), druidDataSource);
+        }
+        if (StrUtil.isNotBlank(dbChangeConf.getFrontend())) {
+            dataSourceMap.put(dbChangeConf.getFrontend(), frontendDatasource);
+        } else if (StrUtil.isNotBlank(dbChangeConf.getFrontendInner())) {
+            dataSourceMap.put(dbChangeConf.getFrontendInner(), frontendDatasource);
         }
         if (!dataSourceMap.isEmpty()) {
             defaultDataSource = (DataSource) CollUtil.getLast(dataSourceMap.values());
@@ -105,6 +111,12 @@ public class App {
             druidDataSource.setFailFast(true);
         });
         return druidDataSource;
+    }
+
+    @Bean("frontend")
+    @ConfigurationProperties(prefix = "spring.datasource.slave")
+    public DruidDataSource frontend() {
+        return new DruidDataSource();
     }
 
     @Bean

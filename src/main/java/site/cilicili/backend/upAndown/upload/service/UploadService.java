@@ -20,4 +20,6 @@ public interface UploadService {
     R uploadLogo(AuthUserDetails authUserDetails, MultipartFile[] multipartFile);
 
     R uploadFavicon(AuthUserDetails authUserDetails, MultipartFile[] multipartFile);
+
+    R saveUploadedFiles(MultipartFile uploadfile);
 }

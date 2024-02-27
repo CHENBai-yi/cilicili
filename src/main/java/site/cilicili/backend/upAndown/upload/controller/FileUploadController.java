@@ -52,4 +52,11 @@ public class FileUploadController {
             @RequestPart(name = "file") MultipartFile[] multipartFile) {
         return uploadService.uploadFavicon(authUserDetails, multipartFile);
     }
+
+    @PostMapping("upload-video")
+    public R handleFileUpload(@RequestPart(value = "file") final MultipartFile uploadfile) {
+        return uploadService.saveUploadedFiles(uploadfile);
+    }
+
+
 }

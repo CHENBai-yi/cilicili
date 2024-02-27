@@ -3,6 +3,9 @@ package site.cilicili.backend.dict.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
@@ -26,6 +29,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor
 @Service("sysDictService")
+@CacheConfig(cacheNames = {"sysDict#21600"})
 public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity> implements SysDictService {
 
     /**
@@ -87,6 +91,8 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
     }
 
     @Override
+    @Transactional(readOnly = true)
+    @Cacheable(key = "#root.methodName")
     public R queryDictAll() {
         return Optional.ofNullable(baseMapper.queryDictAll())
                 .map(records -> R.yes("Success.")
@@ -96,6 +102,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(allEntries = true)
     public R addDict(final AddDictRequest addDictRequest) {
         return Optional.of(save(BeanUtil.toBean(addDictRequest, SysDictEntity.class)))
                 .filter(f -> f)
@@ -114,6 +121,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(allEntries = true)
     public R editDict(final AuthUserDetails authUserDetails, final SysDictDto.AddOrEditResponse editRequest) {
         return Optional.ofNullable(baseMapper.selectById(editRequest.getId()))
                 .filter(records -> !"yesNo_yes".equals(records.getStable()))
@@ -124,6 +132,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDictEntity
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(allEntries = true)
     public R deleteDictById(final AuthUserDetails authUserDetails, final QueryAndDeleteRequest queryAndDeleteRequest) {
         return Optional.ofNullable(authUserDetails)
                 .map(auth -> baseMapper.selectById(queryAndDeleteRequest.id()))
