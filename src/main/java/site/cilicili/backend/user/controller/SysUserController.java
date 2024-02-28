@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.menu.service.SysMenuService;
+import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.service.SysUserService;
@@ -235,5 +236,19 @@ public class SysUserController {
             @AuthenticationPrincipal AuthUserDetails authUserDetails,
             @RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
         return sysUserService.changePassword(authUserDetails, changePasswordRequest);
+    }
+
+    /**
+     * 查询所有角色关联的教师用户
+     *
+     * @param
+     * @return 单条数据
+     */
+    @Operation(
+            summary = "查询所有角色关联的教师用户",
+            parameters = {@Parameter(description = "id 主键")})
+    @PostMapping("get-user-list-by_role")
+    public R getTeacherList(final @RequestBody SysRoleEntity sysRole) {
+        return sysUserService.getTeacherList(sysRole);
     }
 }

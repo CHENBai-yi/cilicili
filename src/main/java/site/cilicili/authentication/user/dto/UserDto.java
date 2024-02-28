@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author BaiYiChen
@@ -51,16 +48,17 @@ public class UserDto {
     @Getter
     @AllArgsConstructor
     @Builder
+    @Setter
     @NoArgsConstructor
     @JsonTypeName("user")
     @JsonTypeInfo(use = JsonTypeInfo.Id.NONE, include = JsonTypeInfo.As.WRAPPER_OBJECT)
     public static class Login {
-        @NotNull
         private String username;
 
         @NotBlank
         @Size(min = 8, max = 32)
         private String password;
+        private String email;
     }
 
     @Getter
@@ -75,5 +73,35 @@ public class UserDto {
         private String bio;
         private String image;
         private String password;
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public static class FrontendRegistration {
+        private String username;
+        @NotNull
+        @Email
+        private String email;
+
+        @NotBlank
+        @Size(min = 8, max = 32)
+        private String password;
+        @NotBlank
+        @Size(min = 6, max = 6)
+        private String code;
+        private String realName;
+        @NotBlank
+        private String roleCode;
+
+    }
+
+    @Getter
+    @Setter
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public static class GetEmailCode {
+        @NotNull
+        @Email
+        private String email;
     }
 }

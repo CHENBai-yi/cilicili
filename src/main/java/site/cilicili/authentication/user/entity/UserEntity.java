@@ -15,7 +15,7 @@ import site.cilicili.common.entity.BaseEntity;
 @Getter
 @Setter
 @NoArgsConstructor
-@TableName("users")
+@TableName("sys_user")
 public class UserEntity extends BaseEntity {
     private static final long serialVersionUID = 372343052193092864L;
 

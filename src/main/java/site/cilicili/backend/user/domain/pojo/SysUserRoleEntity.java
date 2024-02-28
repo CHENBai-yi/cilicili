@@ -1,5 +1,6 @@
 package site.cilicili.backend.user.domain.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class SysUserRoleEntity implements Serializable {
     @Schema(description = "'角色编码'")
     private String sysRoleRoleCode;
 
+    @TableId
     @Schema(description = "'用户名'")
     private String sysUserUsername;
 }

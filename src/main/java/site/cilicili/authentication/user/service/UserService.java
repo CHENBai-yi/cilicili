@@ -18,4 +18,8 @@ public interface UserService extends IService<UserEntity> {
     UserDto update(final UserDto.Update update, final AuthUserDetails authUserDetails);
 
     R logout(final AuthUserDetails authUserDetails, KickOnlineUserRequest kickOnlineUserRequest);
+
+    R frontendRegistration(UserDto.FrontendRegistration registration);
+
+    R getEmailCodeForReg(String email);
 }

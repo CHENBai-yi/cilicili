@@ -52,15 +52,15 @@
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
-        insert into sys_user_role()
-        values ()
+        insert into sys_user_role(sys_role_role_code, sys_user_username)
+        values (#{sysRoleRoleCode}, #{sysUserUsername})
     </insert>
     
     <insert id="insertBatch" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
-        insert into sys_user_role()
+        insert into sys_user_role(sys_role_role_code,sys_user_username)
         values
         <foreach collection="entities" item="entity" separator=",">
-            ()
+            (#{entity.sysRoleRoleCode},#{entity.sysUserUsername})
         </foreach>
     </insert>
     
@@ -68,14 +68,13 @@
         insert into sys_user_role
         values
         <foreach collection="entities" item="entity" separator=",">
-            ()
+            (#{entity.sysRoleRoleCode},#{entity.sysUserUsername})
         </foreach>
         on duplicate key update
     
     </insert>
     <insert id="insertSysUserRoleList">
-        
-        
+    
         <foreach collection="toList" item="e" separator=";">
             insert into sys_user_role values(#{e.sysRoleRoleCode},#{e.sysUserUsername}) on duplicate key update
             sys_user_username=#{e.sysUserUsername}
@@ -87,6 +86,7 @@
     <update id="update">
         update sys_user_role
         <set>
+
         </set>
         where sys_role_role_code = #{sysRoleRoleCode}
     </update>

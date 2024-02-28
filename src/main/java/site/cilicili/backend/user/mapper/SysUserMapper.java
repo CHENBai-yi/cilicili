@@ -3,6 +3,7 @@ package site.cilicili.backend.user.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.user.domain.dto.GetUserListRequest;
 import site.cilicili.backend.user.domain.dto.UserListDto;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
@@ -89,4 +90,6 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
     UserListDto.Records getUserById(Long id);
 
     List<String> getUsernameList();
+
+    List<SysUserEntity> getTeacherList(final SysRoleEntity sysRole);
 }

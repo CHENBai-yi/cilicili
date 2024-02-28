@@ -5,11 +5,41 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+  #邮箱基本配置
+  mail:
+    #配置smtp服务主机地址
+    # qq邮箱为smtp.qq.com          端口号465或587
+    # sina    smtp.sina.cn
+    # aliyun  smtp.aliyun.com
+    # 163     smtp.163.com       端口号465或994
+    # gmail     smtp.gmail.com       端口号465或994
+    host: smtp.163.com
+    #发送者邮箱
+    username: cby7571@163.com
+    #配置密码,注意不是真正的密码，而是刚刚申请到的授权码
+    #    password: okiv rshm hrpf ceka
+    password: QGBCPIZSILTADZGC
+    #端口号465或587
+    port: 465
+    #默认的邮件编码为UTF-8
+    default-encoding: UTF-8
+    from: cby7571@163.com
+    #其他参数
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
+          #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
+#        debug: true
 cilicili:
   auth:
     token:
       sign-key: signKey012345678901234567890123456789
       valid-time: 360000
-#      valid-time: 15
+      #      valid-time: 15
       refresh-at: 3
-# 设置单个文件大小
+

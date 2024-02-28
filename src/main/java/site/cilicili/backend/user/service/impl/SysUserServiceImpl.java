@@ -11,6 +11,7 @@ import site.cilicili.backend.config.domain.pojo.SysConfigBackendEntity;
 import site.cilicili.backend.config.service.SysConfigBackendService;
 import site.cilicili.backend.dept.domain.pojo.SysDeptUserEntity;
 import site.cilicili.backend.dept.service.SysDeptUserService;
+import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.mapper.SysUserMapper;
@@ -227,5 +228,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     @Transactional(readOnly = true)
     public List<String> getUsernameList() {
         return baseMapper.getUsernameList();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getTeacherList(final SysRoleEntity sysRole) {
+        return Optional.ofNullable(baseMapper.getTeacherList(sysRole))
+                .map(rec -> R.yes("Success").setData(rec))
+                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
     }
 }

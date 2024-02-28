@@ -59,4 +59,24 @@ public class UsersController {
     public R getCaptcha() {
         return R.yes("Success").setData("captcha_image", "");
     }
+
+    @PostMapping("get-email-code")
+    public R getEmailCodeForReg(@RequestBody @Valid UserDto.GetEmailCode email, Errors errors) {
+        if (!errors.getFieldErrors().isEmpty()) {
+            return R.no(errors.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining()));
+        }
+        return userService.getEmailCodeForReg(email.getEmail());
+    }
+
+    @PostMapping("frontend/reg")
+    public R frontendRegistration(@RequestBody @Valid UserDto.FrontendRegistration registration, Errors errors) {
+        if (!errors.getFieldErrors().isEmpty()) {
+            return R.no(errors.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining()));
+        }
+        return userService.frontendRegistration(registration);
+    }
 }

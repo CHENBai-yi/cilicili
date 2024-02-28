@@ -2,6 +2,7 @@ package site.cilicili.backend.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.common.util.R;
@@ -73,4 +74,6 @@ public interface SysUserService extends IService<SysUserEntity> {
     R changePassword(AuthUserDetails authUserDetails, ChangePasswordRequest changePasswordRequest);
 
     List<String> getUsernameList();
+
+    R getTeacherList(final SysRoleEntity sysRole);
 }
