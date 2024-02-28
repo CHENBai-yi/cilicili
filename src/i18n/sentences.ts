@@ -167,5 +167,10 @@ export default {
     "zh-CN": "无效的邮箱验证码.",
     "en-US": "Please use minimum 6 characters.",
     "ru": "Пожалуйста, используйте минимум 6 символов."
+  },
+  ValidPassword8: {
+    "zh-CN": "密码长度不少于8位.",
+    "en-US": "Please use minimum 8 characters.",
+    "ru": "Пожалуйста, используйте минимум 6 символов."
   }
 }

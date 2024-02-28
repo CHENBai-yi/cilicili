@@ -1,13 +1,20 @@
 <template>
+  <n-message-provider>
+    <MessageApi/>
+  </n-message-provider>
   <router-view/>
+
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {useMeta} from 'quasar'
+import MessageApi from "./message-api.vue"
+import {NMessageProvider} from "naive-ui";
 
 export default defineComponent({
   name: 'App',
+  components: {MessageApi, NMessageProvider},
   setup() {
     useMeta({
       // 设置页面 title

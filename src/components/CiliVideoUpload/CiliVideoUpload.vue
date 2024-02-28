@@ -109,10 +109,15 @@
             </div>
             <div class="col">
               <el-form-item label="授课教师：">
-                <el-select v-model="form.teacher" placeholder="please select your zone">
-                  <el-option label="Zone one" value="shanghai"/>
-                  <el-option label="Zone two" value="beijing"/>
-                </el-select>
+                <n-select
+                  v-model:value="form.teacher"
+                  :loading="loading"
+                  :options="teachers"
+                  clearable
+                  filterable
+                  placeholder="搜索歌曲"
+                  @focus="handleSearch"
+                />
               </el-form-item>
               <el-form-item label="课程分类：">
                 <el-col :span="11">
@@ -264,6 +269,7 @@ import {postAction} from 'src/api/manage'
 const urls = reactive({
   add: 'courses/add',
   subjectList: 'subject/get-subject-list',
+  userList: 'user/get-user-list-by_role',
   categoryList: 'category/get-category-list',
 })
 const step = ref(1)
@@ -366,6 +372,13 @@ const categories = ref([
   {
     label: "Everybody's Got Something to Hide Except Me and My Monkey",
     value: 'song0',
+    disabled: true,
+    type: 'success'
+  }])
+const teachers = ref([
+  {
+    label: "教师",
+    value: 'teacher',
     disabled: true,
     type: 'success'
   }])
@@ -509,6 +522,31 @@ const onSelectUpdate = (value) => {
             type: 'success'
           }
         })
+      }
+    })
+}
+const loading = ref(false)
+const handleSearch = (query) => {
+  postAction(urls.userList, {role_code: 'test'})
+    .then(res => {
+      console.log(res)
+      if (res.code === 1) {
+        const records = res.data
+        if (!records.length) {
+          teachers.value = [];
+          return;
+        }
+        loading.value = true;
+        teachers.value = records.map(item => {
+          return {
+            label: item.real_name,
+            value: item.real_name,
+            type: 'success'
+          }
+        })
+        window.setTimeout(() => {
+          loading.value = false;
+        }, 1e3);
       }
     })
 }
