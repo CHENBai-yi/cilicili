@@ -1,8 +1,8 @@
 import {RouteRecordRaw} from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
-
   {
+    name: 'index',
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
@@ -25,9 +25,9 @@ const routes: RouteRecordRaw[] = [
             path: 'comment',
             component: () => import('src/components/CiliVideoComment/CiliVideoComment.vue'),
             meta: {keepAlive: true, index: 2}
-          },
+          }
         ]
-      }
+      },
     ],
   }, {
     path: '/course',
@@ -53,6 +53,24 @@ const routes: RouteRecordRaw[] = [
         meta: {active: true}
       },
       {path: 'manage', component: () => import('src/components/CiliManageHistory/CiliManageHistory.vue')},
+    ],
+  },
+  {
+    path: '/account',
+    component: () => import('src/layouts/CiliPersonalCenterLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('src/components/CiliPersonalCenter/CiliPersonalCenter.vue'),
+        meta: {active: true},
+        children: [
+          {
+            path: 'setting',
+            component: () => import('src/components/CiliPersonalCenter/CiliAccountInfo/CiliAccountInfo.vue'),
+            meta: {active: true}
+          },
+        ],
+      },
     ],
   },
   // Always leave this as last one,

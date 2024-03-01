@@ -527,7 +527,7 @@ const onSelectUpdate = (value) => {
 }
 const loading = ref(false)
 const handleSearch = (query) => {
-  postAction(urls.userList, {role_code: 'test'})
+  postAction(urls.userList, {role_code: 'teacher'})
     .then(res => {
       console.log(res)
       if (res.code === 1) {

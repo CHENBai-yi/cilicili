@@ -8,11 +8,11 @@
     popper-style="min-width:80px;border-radius: 8px;top:70px"
     trigger="hover"
     width="auto"
-
     @before-enter="beforeEnter"
     @after-enter="afterEnter"
   >
     <template #reference>
+
       <q-btn :class="clClass" :ripple="false" :style="clStyle" fab-mini flat rounded stack unelevated
              @click="clickEvent">
         <slot name="badge">
@@ -21,12 +21,14 @@
         <q-icon v-if="!!name" :class="{ 'example-fab-animate--hover': opened !== true }" :name=name>
 
         </q-icon>
+
         {{ label }}
       </q-btn>
 
     </template>
     <template #default>
-      <slot></slot>
+
+    <slot></slot>
     </template>
   </el-popover>
 </template>

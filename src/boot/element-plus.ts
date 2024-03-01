@@ -10,6 +10,7 @@ import {
   ElCollapse,
   ElCollapseItem,
   ElDatePicker,
+  ElDivider,
   ElDropdown,
   ElForm,
   ElFormItem,
@@ -111,6 +112,7 @@ export default boot(({app}) => {
   app.use(ElCollapse)
   app.use(ElCollapseItem)
   app.use(ElIcon)
+  app.use(ElDivider)
   app.component('CiliBackToTop', CiliBackToTop)
   app.component('NavBar', NavBar)
   app.component('CiliLink', CiliLink)

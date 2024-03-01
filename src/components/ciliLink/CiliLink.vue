@@ -1,8 +1,12 @@
 <template>
 
   <el-link :disabled="disabled" :href="href" :target="target" :underline="false">
+    <q-icon v-if="iconLeft" :name="iconLeft" left size="xs"></q-icon>
     <slot></slot>
+
+    <q-icon v-if="iconRight" :name="iconRight" right size="xs"></q-icon>
   </el-link>
+
 </template>
 
 <script setup>
@@ -10,6 +14,8 @@ import useTheme from "src/composables/useTheme"
 
 const {darkTheme} = useTheme()
 defineProps({
+  iconLeft: String,
+  iconRight: String,
   size: {
     type: String,
     default: '14px'

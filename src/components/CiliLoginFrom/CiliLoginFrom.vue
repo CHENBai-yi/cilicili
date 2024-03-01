@@ -98,10 +98,10 @@
             class="q-mb-lg"
             narrow-indicator
           >
-            <q-tab :ripple="false" class="text-purple" name="showPhoneSignin">
+            <q-tab :ripple="false" class="text-purple" name="showPhoneSignin" @click="codeSign=false">
               <h1 class="rl-modal-header">账号登录</h1>
             </q-tab>
-            <q-tab :ripple="false" class="text-teal" name="showCodeSignin">
+            <q-tab :ripple="false" class="text-teal" name="showCodeSignin" @click="codeSign=true">
               <h1 class="rl-modal-header">验证码登录</h1>
             </q-tab>
           </q-tabs>
@@ -115,7 +115,7 @@
                         @submit="onSubmit"-->
           <q-form
             class="q-gutter-md"
-
+            @submit="onLogin"
           >
             <q-tab-panels
               v-model="tab"
@@ -147,14 +147,15 @@
                 </q-input>
 
                 <q-checkbox
-                  v-model="freeOfLogin"
+                  v-model="rememberMe"
                   checked-icon="task_alt"
                   class="privacy_tip"
                   color="red"
                   label="7天内自动登录"
                   unchecked-icon="crop_square"
+                  @update:model-value="changeRememberMe"
                 />
-                <q-btn class="col-12" color="red" icon-right="send" rounded @click="onLogin">
+                <q-btn class="col-12" color="red" icon-right="send" rounded type="submit">
                   <h2 class="rl-modal-header login no-margin ">登录</h2>
                 </q-btn>
                 <div class="col-12 ">
@@ -197,14 +198,15 @@
                 </q-input>
 
                 <q-checkbox
-                  v-model="freeOfLogin"
+                  v-model="rememberMe"
                   checked-icon="task_alt"
                   class="privacy_tip"
                   color="red"
                   label="7天内自动登录"
                   unchecked-icon="crop_square"
+                  @update:model-value="changeRememberMe"
                 />
-                <q-btn class="col-12" color="red" icon-right="send" rounded @click="onLogin">
+                <q-btn class="col-12" color="red" icon-right="send" rounded type="submit">
                   <h2 class="rl-modal-header login no-margin ">登录</h2>
                 </q-btn>
                 <div class="col-12 ">
@@ -236,12 +238,13 @@
 import {computed, reactive, ref, watch} from "vue";
 import useTheme from "src/composables/useTheme"
 import {postAction} from 'src/api/manage'
+import {useUserStore} from "src/stores/user"
 
 const urls = reactive({
-  login: 'public/login',
   registry: 'public/frontend/reg',
   getEmailCode: 'public/get-email-code'
 })
+const userStore = useUserStore()
 const {darkTheme} = useTheme()
 const icon = ref(false)
 watch(icon, (newVal, oldVal) => {
@@ -249,12 +252,12 @@ watch(icon, (newVal, oldVal) => {
     registerRapidly.value = newVal
   }
 })
-
+const registerRapidly = ref(false)
 const suffix = ref('@qq.com')
 const emailCode = ref('')
 const realName = ref('')
 const accept = ref('maybe')
-const freeOfLogin = ref(false)
+const rememberMe = ref(false)
 const isPwd = ref(true)
 const tab = ref('showPhoneSignin')
 const email = ref('2565408606')
@@ -292,35 +295,33 @@ const handleEmailCode = () => {
   }
   console.log(typeof accept.value !== "boolean")
   console.log(typeof accept.value !== "boolean" && accept.value)
-  if (typeof accept.value === "boolean" && accept.value) {
-    postAction(urls.getEmailCode, {email: emailAccount.value})
-      .then(res => {
-        console.log(res)
-        if (res.code === 1) {
-          window.$message.success(res.message, {render: window.$render})
-          const codeSpan = CodeSpan.value
-          const innerText = codeSpan.innerText
-          let time = 60;
-          const timer = setInterval(() => {
-            codeSpan.innerText = `${innerText} ${time--}`
-            CodeSpanReSend.value = false
-            if (time < 0) {
-              clearInterval(timer)
-              codeSpan.innerText = innerText
-              CodeSpanReSend.value = true
-            }
-          }, 1000)
-          return
-        }
-        window.$message.error(res.message, {render: window.$render})
-      })
-  } else {
+  if (registerRapidly.value && !(typeof accept.value === "boolean" && accept.value)) {
     window.$message.warning("请勾选注册协议.", {render: window.$render})
+    return
   }
-
-
+  postAction(urls.getEmailCode, {email: emailAccount.value})
+    .then(res => {
+      console.log(res)
+      if (res.code === 1) {
+        window.$message.success(res.message, {render: window.$render})
+        const codeSpan = CodeSpan.value
+        const innerText = codeSpan.innerText
+        let time = 60;
+        const timer = setInterval(() => {
+          codeSpan.innerText = `${innerText} ${time--}`
+          CodeSpanReSend.value = false
+          if (time < 0) {
+            clearInterval(timer)
+            codeSpan.innerText = innerText
+            CodeSpanReSend.value = true
+          }
+        }, 1000)
+        return
+      }
+      window.$message.error(res.message, {render: window.$render})
+    })
 }
-const registerRapidly = ref(false)
+
 
 const onRegister = () => {
   postAction(urls.registry, {
@@ -339,27 +340,37 @@ const onRegister = () => {
       }
     })
 }
+const codeSign = ref(false)
+
 
 //登录
-const onLogin = () => {
-  postAction(urls.login, {
-    password: password.value,
-    email: emailAccount.value
-  })
-    .then(res => {
-      if (res.code === 1) {
-        window.$message.success(res.message, {render: window.$render})
-        console.log(res)
-      } else {
-        window.$message.error(res.message, {render: window.$render})
-      }
-    })
+const onLogin = (form) => {
+  if (codeSign.value) {
+    form.email = account.value
+    form.code = emailCode.value
+    form.password = 'codeSign'
+  } else {
+    form.email = emailAccount.value
+    form.password = password.value
+  }
+  const res = userStore.HandleLogin(form)
+  console.log(res)
+  if (res) {
+    console.log(res)
+    icon.value = false
+  } else {
+
+  }
+
+}
+const changeRememberMe = (value) => {
+  userStore.ChangeRememberMe(value)
 }
 </script>
 
 <style lang="scss" scoped>
 .erweima {
-  background: url("erweima.png") no-repeat 0 0;
+  //background: url("erweima.png") no-repeat 0 0;
   width: 60px;
   height: 60px;
   position: absolute;

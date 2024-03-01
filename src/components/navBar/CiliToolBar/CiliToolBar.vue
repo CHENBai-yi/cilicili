@@ -2,7 +2,7 @@
   <q-toolbar class="q-pt-sm">
     <q-space/>
     <q-btn v-if="$q.screen.gt.xs" :ripple="false" class="q-ml-xs no-pointer-events" fab-mini flat no-caps no-wrap>
-      <q-icon color="red" name="img:logo.svg" size="28px"/>
+      <q-icon class="q-card " color="red" name="img:logo.svg" size="28px"/>
       <q-toolbar-title class="text-weight-bold" shrink>
         {{ $t('Slogan') }}
       </q-toolbar-title>
@@ -26,10 +26,13 @@
     </div>
     <div class="q-gutter-xs row  items-center no-wrap">
 
-      <CiliPopover :click-event="showLoginFrom" :label="$t('Login')" clClass="shadow-up-3"
-                   clStyle="background: #2093da; color: white" to="/keceng">
+      <CiliPopover
+        :clStyle="!!token?`background: url(${avatar});background-size: cover;  background-position: center;`:'background: #2093da; color: white'"
+        :click-event="showLoginFrom" :label="!token?$t('Login'):''"
+        clClass="shadow-up-3"
+        to="/keceng">
         <template #default>
-          <div class="login-panel-popover"><p class="title">{{ $t('LoginAndYouCan') }}</p>
+          <div v-if="!token" class="login-panel-popover"><p class="title">{{ $t('LoginAndYouCan') }}</p>
             <div class="login-tip-content">
               <div class="login-tip-content-item">
                 <svg class="login-tip-content-item-icon" fill="currentColor"
@@ -96,6 +99,18 @@
             <div class="register-tip"> {{ $t('FirstTimeUse') }}<span
               class="register-exper" @click="showRegisterFrom">  {{ $t('ClickMeToRegiste') }}</span></div>
           </div>
+          <div v-else class="column q-gutter-xs items-start">
+            <CiliLink :weight="600" color="" href="#/account/setting" iconLeft="person"
+                      iconRight="eva-arrow-circle-right-outline">个人中心
+            </CiliLink>
+            <CiliLink :weight="600" color="" href="#/create/manage" iconLeft="eva-cloud-upload-outline"
+                      iconRight="eva-arrow-circle-right-outline">投稿管理
+            </CiliLink>
+            <div class="full-width q-py-sm">
+              <el-divider class="no-margin"/>
+            </div>
+            <CiliLink :weight="600" color="" iconLeft="ion-md-log-out" @click="logout">退出登录</CiliLink>
+          </div>
         </template>
       </CiliPopover>
 
@@ -107,7 +122,7 @@
           </q-badge>
         </template>
         <template #default>
-          <div v-if="!!token">
+          <div v-if="!token">
             <div class="login-panel-popover "><p class="tips">{{
                 $t('LoginToViewMessageRecords')
               }}</p>
@@ -194,15 +209,31 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, watch} from 'vue'
+import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
 import CiliLoginFrom from 'src/components/CiliLoginFrom/CiliLoginFrom.vue'
 import {useUserStore} from 'src/stores/user'
+import {getAvatar} from 'src/utils/common'
 
+import {useI18n} from 'vue-i18n'
 
+const {t} = useI18n()
 const userStore = useUserStore()
 const token = ref(userStore.GetToken())
+const avatar = ref(userStore.GetAvatar())
+watch(() => userStore.avatar, (newValue, oldValue) => {
+  if (getAvatar(newValue)) {
+    avatar.value = getAvatar(newValue)
+  }
+}, {
+  immediate: true,
+  deep: true
+})
+watch(() => userStore.token, (newValue, oldValue) => {
+  token.value = userStore.GetToken()
+})
 const {darkTheme} = useTheme()
 const search = ref('')
 const LoginDialog = ref(null)
@@ -212,6 +243,26 @@ const showLoginFrom = () => {
 const showRegisterFrom = () => {
   console.log(LoginDialog.value.showRegisterFrom())
 }
+//退出
+const logout = () => {
+  ElMessageBox.confirm(
+    t('Confirm') + t('Logout') + '?',
+    t('Logout'),
+    {
+      confirmButtonText: t('Confirm'),
+      cancelButtonText: t('Cancel'),
+      type: 'warning',
+    }
+  )
+    .then(async () => {
+      const res = await userStore.HandleUserLogout()
+      if (res) {
+        window.$message.success(t('Logout') + t('Success'), {render: window.$render})
+      }
+    })
+}
+
+
 </script>
 
 <style lang="sass" scoped>

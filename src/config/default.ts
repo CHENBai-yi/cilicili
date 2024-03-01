@@ -4,7 +4,15 @@ export const CiliFrontendDefault = {
   mainTitle: "Cilicili后台管理系统",
   subTitle: "Cilicili后台管理系统",
   webDescribe: "Be the change you want to see in the world.",
-  showGit: "yesNo_yes"
+  showGit: "yesNo_yes",
+  imageList: {
+    // bannerImg:'https://cdn.quasar.dev/img/parallax2.jpg',
+    // noticeBackgroundImg:'https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg',
+    // videoUploadLayoutImg:'https://cdn.quasar.dev/img/material.png'
+    bannerImg: 'https://cdn.quasar.dev/img/material.png',
+    noticeBackgroundImg: 'https://cdn.quasar.dev/img/material.png',
+    videoUploadLayoutImg: 'https://cdn.quasar.dev/img/material.png'
+  }
 }
 export const CiliBackendDefault = {}
 export const ThemeStyleQuasar = {

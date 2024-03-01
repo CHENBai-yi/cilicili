@@ -6,7 +6,7 @@
                   leave-active-class="animated animate__fadeOutUp">
         <div v-if="!navBarShow">
           <q-img
-            :src="bannerImage.img1"
+            :src="CiliFrontendDefault.imageList.bannerImg"
             class="rounded-borders absolute-full "
             height="150px"
             img-class="my-custom-image" placeholder-src="https://cdn.quasar.dev/img/parallax2.jpg"
@@ -49,6 +49,7 @@ import {onMounted, ref} from 'vue'
 import CiliToolBar from './CiliToolBar/CiliToolBar.vue'
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 import useTheme from "src/composables/useTheme"
+import {CiliFrontendDefault} from 'src/config/default'
 
 
 const {darkTheme} = useTheme()

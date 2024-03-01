@@ -53,13 +53,13 @@
         </q-list>
       </q-scroll-area>
 
-      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+      <q-img :src="CiliFrontendDefault.imageList.videoUploadLayoutImg" class="absolute-top" style="height: 150px">
         <div class="absolute-bottom bg-transparent">
           <q-avatar class="q-mb-sm" size="56px">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+            <img :src="avatar">
           </q-avatar>
-          <div class="text-weight-bold">Razvan Stoenescu</div>
-          <div>@rstoenescu</div>
+          <div class="text-weight-bold">{{ nickname }}</div>
+          <div>@{{ realName }}</div>
         </div>
       </q-img>
     </q-drawer>
@@ -79,12 +79,17 @@
 </template>
 
 <script setup>
-import {inject, nextTick, onMounted, ref} from 'vue'
+import {computed, inject, nextTick, onMounted, ref} from 'vue'
 import useTheme from "src/composables/useTheme"
+import {useUserStore} from 'src/stores/user'
+import {CiliFrontendDefault} from 'src/config/default'
 
+const userStore = useUserStore()
 const {darkTheme} = useTheme()
 const drawer = ref(false)
-
+const nickname = computed(() => userStore.GetNickname())
+const realName = computed(() => userStore.GetRealName())
+const avatar = computed(() => userStore.GetAvatar())
 const toggleLeftDrawer = () => {
   drawer.value = !drawer.value
 }
