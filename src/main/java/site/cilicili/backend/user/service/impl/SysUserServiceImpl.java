@@ -1,5 +1,7 @@
 package site.cilicili.backend.user.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import site.cilicili.backend.role.domain.pojo.SysRoleEntity;
 import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.mapper.SysUserMapper;
+import site.cilicili.backend.user.service.SysUserRoleService;
 import site.cilicili.backend.user.service.SysUserService;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
@@ -36,6 +39,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     public final SysDeptUserService sysDeptUserService;
     private final PasswordEncoder passwordEncoder;
     private final SysConfigBackendService sysConfigBackendService;
+    private final SysUserRoleService sysUserRoleService;
 
     /**
      * 通过ID查询单条数据
@@ -236,5 +240,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
         return Optional.ofNullable(baseMapper.getTeacherList(sysRole))
                 .map(rec -> R.yes("Success").setData(rec))
                 .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public R changeInfo(final AuthUserDetails authUserDetails, final SysUserEntity user) {
+        return Optional.ofNullable(baseMapper.selectById(authUserDetails.getId()))
+                .filter(sysUserEntity -> {
+                    BeanUtil.copyProperties(user, sysUserEntity, CopyOptions.create(null, true, "password", "username"));
+                    return updateById(sysUserEntity);
+                })
+                .map(sysUserEntity -> R.yes("修改成功."))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

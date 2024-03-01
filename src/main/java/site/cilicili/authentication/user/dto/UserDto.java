@@ -25,6 +25,8 @@ public class UserDto {
 
     private String nickname;
     private String avatar;
+    private String gender;
+    private String mobile;
 
     @Getter
     @AllArgsConstructor
@@ -55,10 +57,11 @@ public class UserDto {
     public static class Login {
         private String username;
 
-        @NotBlank
+        @NotNull
         @Size(min = 8, max = 32)
         private String password;
         private String email;
+        private String code;
     }
 
     @Getter

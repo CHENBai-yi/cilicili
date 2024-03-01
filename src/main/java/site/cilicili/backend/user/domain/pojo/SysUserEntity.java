@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +67,7 @@ public class SysUserEntity extends BaseEntity implements Serializable {
     @Schema(description = "性别")
     private String gender;
 
+    @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
     @Schema(description = "手机号")
     private String mobile;
 

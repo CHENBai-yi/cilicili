@@ -79,16 +79,23 @@
             insert into sys_user_role values(#{e.sysRoleRoleCode},#{e.sysUserUsername}) on duplicate key update
             sys_user_username=#{e.sysUserUsername}
         </foreach>
-    
+
     </insert>
     
     <!--通过主键修改数据-->
     <update id="update">
         update sys_user_role
         <set>
-
+        
         </set>
         where sys_role_role_code = #{sysRoleRoleCode}
+    </update>
+    <update id="updateUserRoleName">
+        update sys_user_role
+        <set>
+            sys_user_username=#{newName}
+        </set>
+        where sys_role_role_code = #{entity.sysRoleRoleCode} and sys_user_username = #{entity.sysUserUsername}
     </update>
     
     <!--通过主键删除-->

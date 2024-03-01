@@ -91,4 +91,6 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
     int deleteById(String sysRoleRoleCode);
 
     int insertSysUserRoleList(List<SysUserRoleEntity> toList);
+
+    int updateUserRoleName(@Param("entity") SysUserRoleEntity sysUserRoleEntity, @Param("newName") final String username);
 }

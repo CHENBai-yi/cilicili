@@ -6,7 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.authentication.Details.AuthUserDetails;
@@ -16,6 +18,9 @@ import site.cilicili.backend.user.domain.dto.*;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.service.SysUserService;
 import site.cilicili.common.util.R;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * (SysUser) 表控制层
@@ -236,6 +241,27 @@ public class SysUserController {
             @AuthenticationPrincipal AuthUserDetails authUserDetails,
             @RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
         return sysUserService.changePassword(authUserDetails, changePasswordRequest);
+    }
+
+    /**
+     * 修改前端用户信息
+     *
+     * @param sysUserEntity 请求参数
+     * @return R
+     */
+    @Operation(
+            summary = "修改用户信息",
+            parameters = {@Parameter(description = "sysUser 实体")})
+    @PostMapping("change-info")
+    public R changeInfo(
+            @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            @RequestBody @Validated SysUserEntity sysUserEntity, Errors errors) {
+        return Optional.of(errors.getFieldErrors())
+                .filter(e -> !e.isEmpty())
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
+                .orElse(sysUserService.changeInfo(authUserDetails, sysUserEntity));
     }
 
     /**

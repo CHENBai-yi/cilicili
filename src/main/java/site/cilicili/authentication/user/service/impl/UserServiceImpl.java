@@ -2,6 +2,7 @@ package site.cilicili.authentication.user.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RHyperLogLog;
@@ -71,21 +72,35 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Override
     public R login(UserDto.Login login, final HttpHeaders headers) {
         ipAddressHyperLogLog.add(Objects.requireNonNull(headers.getHost()).getHostString());
-        final String username = Optional.ofNullable(login.getUsername()).orElse(login.getEmail());
-        return Optional.ofNullable(sysUserOnlineService.queryById(username, null))
-                .map(r -> R.no(Error.ALREADY_LOGIN.getMessage()))
-                .orElseGet(() -> userRepository
-                        .findByUsername(login.getUsername(), login.getEmail())
-                        .filter(user -> passwordEncoder.matches(login.getPassword(), user.getPassword()))
-                        .map(user -> {
-                            login.setEmail(user.getEmail());
-                            login.setUsername(user.getUsername());
-                            return convertEntityToDto(user);
-                        })
-                        .filter(userDto ->
-                                sysUserOnlineService.insertOrUpdate(username, userDto.getToken()))
-                        .map(userDto -> R.yes("登录成功.").setData(userDto))
-                        .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage())));
+        if (Objects.nonNull(login.getCode()) && StrUtil.isNotEmpty(login.getCode())) {
+            final String code = stringRedisTemplate.opsForValue().get(login.getEmail());
+            if (Objects.nonNull(code) && StrUtil.isNotEmpty(code)) {
+                if (!code.equals(login.getCode())) {
+                    return R.no("验证码不正确！");
+                }
+                login.setPassword(code);
+            } else {
+                return R.no("验证码过期.");
+            }
+        }
+        return userRepository
+                .findByUsername(login.getUsername(), login.getEmail())
+                .map(r ->
+                        Optional.ofNullable(sysUserOnlineService.queryById(r.getUsername(), null))
+                                .map(rr -> R.no(Error.ALREADY_LOGIN.getMessage()))
+                                .orElseGet(() -> Optional.of(r)
+                                        .filter(user -> login.getPassword().equals(login.getCode()) || passwordEncoder.matches(login.getPassword(), user.getPassword()))
+                                        .map(user -> {
+                                            login.setEmail(user.getEmail());
+                                            login.setUsername(user.getUsername());
+                                            return convertEntityToDto(user);
+                                        })
+                                        .filter(userDto ->
+                                                sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
+                                        .map(userDto -> R.yes("登录成功.").setData(userDto)).orElse(R.no("登陆失败!"))
+
+                                ))
+                .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage()));
     }
 
     private UserDto convertEntityToDto(UserEntity userEntity) {
@@ -93,7 +108,9 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                 .username(userEntity.getUsername())
                 .nickname(userEntity.getNickname())
                 .avatar(userEntity.getAvatar())
-                .realName(userEntity.getNickname())
+                .realName(userEntity.getRealName())
+                .gender(userEntity.getGender())
+                .mobile(userEntity.getMobile())
                 .token(jwtUtils.encode(userEntity.getUsername()))
                 .build();
     }

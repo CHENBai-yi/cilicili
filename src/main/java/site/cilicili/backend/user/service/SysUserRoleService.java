@@ -61,4 +61,6 @@ public interface SysUserRoleService extends IService<SysUserRoleEntity> {
     boolean insertSysUserRoleList(@Param("toList") List<SysUserRoleEntity> toList);
 
     R removeRoleUser(RemoveRoleUserRequest removeRoleUserRequest);
+
+    boolean updateUserRoleName(SysUserRoleEntity sysUserRoleEntity, final String username);
 }

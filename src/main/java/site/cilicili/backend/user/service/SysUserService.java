@@ -76,4 +76,6 @@ public interface SysUserService extends IService<SysUserEntity> {
     List<String> getUsernameList();
 
     R getTeacherList(final SysRoleEntity sysRole);
+
+    R changeInfo(AuthUserDetails authUserDetails, SysUserEntity sysUserEntity);
 }

@@ -107,4 +107,10 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
                 .map(item -> R.yes("Success"))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public boolean updateUserRoleName(final SysUserRoleEntity sysUserRoleEntity, final String username) {
+        return baseMapper.updateUserRoleName(sysUserRoleEntity, username) > 0;
+    }
 }
