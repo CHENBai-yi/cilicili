@@ -62,4 +62,6 @@ public interface SysNoticeService extends IService<SysNoticeEntity> {
     R sendNotice(AuthUserDetails authUserDetails, SendNoticeRequest noticeListQueryRequest);
 
     R queryNoticeReadById(final AuthUserDetails authUserDetails, QueryNoticeReadRequest queryNoticeReadRequest);
+
+    R getNoticeListCount(NoticeListQueryRequest noticeListQueryRequest);
 }

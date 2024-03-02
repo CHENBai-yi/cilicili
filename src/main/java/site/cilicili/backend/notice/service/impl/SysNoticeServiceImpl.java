@@ -178,4 +178,17 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
                 .map(r -> R.yes("查询成功.").setRecords(r))
                 .orElseThrow(() -> new AppException("消息查看失败!"));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public R getNoticeListCount(final NoticeListQueryRequest noticeListQueryRequest) {
+        return Optional.ofNullable(baseMapper.selectNoticeCountByParam(noticeListQueryRequest))
+                .map(records -> R.yes("Success.")
+                        .setData(NoticeListQueryParamResponse.builder()
+                                .total(records.size())
+                                .page(noticeListQueryRequest.page())
+                                .pageSize(noticeListQueryRequest.pageSize())
+                                .build()))
+                .orElse(R.no("Fail."));
+    }
 }

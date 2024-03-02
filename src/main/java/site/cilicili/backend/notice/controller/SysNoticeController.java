@@ -171,4 +171,23 @@ public class SysNoticeController {
                         .collect(Collectors.joining())))
                 .orElse(sysNoticeService.getNoticeList(noticeListQueryRequest));
     }
+
+    /**
+     * 按条件查询通知列表
+     *
+     * @param noticeListQueryRequest 查询条件
+     * @return 通知列表
+     */
+    @Operation(
+            summary = "按条件查询通知列表",
+            parameters = {@Parameter(description = "id 主键")})
+    @PostMapping("get-notice-count")
+    public R getNoticeListCount(final @RequestBody @Validated NoticeListQueryRequest noticeListQueryRequest, Errors errors) {
+        return Optional.of(errors.getFieldErrors())
+                .filter(e -> !e.isEmpty())
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
+                .orElse(sysNoticeService.getNoticeListCount(noticeListQueryRequest));
+    }
 }

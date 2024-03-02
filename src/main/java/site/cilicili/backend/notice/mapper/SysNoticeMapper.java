@@ -91,4 +91,6 @@ public interface SysNoticeMapper extends BaseMapper<SysNoticeEntity> {
     int deleteById(Long id);
 
     List<NoticeListQueryParamResponse.Records> selectNoticeListByParam(NoticeListQueryRequest noticeListQueryRequest);
+
+    List<NoticeListQueryParamResponse.Records> selectNoticeCountByParam(NoticeListQueryRequest noticeListQueryRequest);
 }

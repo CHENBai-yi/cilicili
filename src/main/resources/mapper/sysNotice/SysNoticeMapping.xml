@@ -217,7 +217,27 @@
             <bind name="cur" value="(page*pageSize)-pageSize"/>
             limit #{cur},#{pageSize}
         </if>
-    
+
+    </select>
+    <select id="selectNoticeCountByParam"
+            resultMap="NoticeListQueryParamResponse">
+        select * from sys_notice JOIN sys_notice_to_user on sys_notice.notice_id=sys_notice_to_user.notice_id
+        <where>
+            <if test="noticeToUser!=null  and noticeToUser!=''">
+                to_user = #{noticeToUser}
+            </if>
+            <if test="noticeType!=null  and noticeType!=''">
+                or notice_type = #{noticeType}
+            </if>
+        </where>
+        <if test="sortBy!=null">
+            order by ${sortBy}
+            <if test="desc">desc</if>
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
     </select>
     
     <!--新增所有列-->
