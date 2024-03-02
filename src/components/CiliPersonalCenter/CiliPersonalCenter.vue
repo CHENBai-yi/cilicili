@@ -9,12 +9,14 @@
           <span style="margin-top:10px"> {{ username }}</span>
         </div>
         <q-separator class="full-width" inset/>
-        <CiliLink class="side-bar ">
+        <CiliLink :style="$route.path==='/account/setting'?{color:'#409eff'}:{}" class="side-bar "
+                  href="#/account/setting" target="_self">
           <q-icon left name="manage_accounts" size="xs"/>
           账号信息
         </CiliLink>
 
-        <CiliLink class="side-bar">
+        <CiliLink :style="$route.path==='/account/order'?{color:'#409eff'}:{}" class="side-bar" href="#/account/order"
+                  target="_self">
           <q-icon left name="shopping_cart" size="xs"/>
           我的订单
         </CiliLink>
@@ -32,7 +34,7 @@
 </template>
 
 <script setup>
-import {computed} from 'vue'
+import {computed, ref} from 'vue'
 import {useUserStore} from 'src/stores/user'
 import useTheme from "src/composables/useTheme"
 import {CiliFrontendDefault} from 'src/config/default'
@@ -41,7 +43,7 @@ const userStore = useUserStore()
 const {darkTheme} = useTheme()
 const avatar = computed(() => userStore.GetAvatar())
 const username = computed(() => userStore.GetNickname() || userStore.GetUsername())
-const css = `url(${CiliFrontendDefault.imageList.noticeBackgroundImg}) top/cover no-repeat fixed`
+const css = ref(`url(${CiliFrontendDefault.imageList.noticeBackgroundImg}) top/cover no-repeat fixed`)
 </script>
 
 <style scoped>

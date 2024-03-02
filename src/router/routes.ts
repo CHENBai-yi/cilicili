@@ -39,7 +39,16 @@ const routes: RouteRecordRaw[] = [
     path: '/notice',
     component: () => import('layouts/CiliNoticeLayout.vue'),
     children: [
-      {path: 'system', component: () => import('components/navBar/CiliToolBar/CiliNotice/CiliSystemNotice.vue')},
+      {
+        path: '', component: () => import('components/navBar/CiliToolBar/CiliNotice/index.vue'),
+        children: [
+          {
+            path: 'system',
+            component: () => import('src/components/navBar/CiliToolBar/CiliNotice/module/CiliSystemNotice.vue')
+          },
+          {path: 'me', component: () => import('src/components/navBar/CiliToolBar/CiliNotice/module/CiliMyNotice.vue')},
+        ]
+      },
     ],
   },
   {
@@ -67,6 +76,10 @@ const routes: RouteRecordRaw[] = [
           {
             path: 'setting',
             component: () => import('src/components/CiliPersonalCenter/CiliAccountInfo/CiliAccountInfo.vue'),
+            meta: {active: true}
+          }, {
+            path: 'order',
+            component: () => import('src/components/CiliPersonalCenter/CiliMyOrder/CiliMyOrder.vue'),
             meta: {active: true}
           },
         ],

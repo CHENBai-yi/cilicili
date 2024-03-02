@@ -2,6 +2,9 @@
 export const DemoMode = false
 // 演示模式禁止的API
 export const ForbiddenUrl = [
+  'account/setting',
+  'users',
+  //后台
   'user/edit-user',
   'user/delete-user-by-id',
   'user/reset-password',

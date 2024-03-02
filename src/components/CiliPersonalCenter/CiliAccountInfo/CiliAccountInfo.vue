@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-card">
+  <q-page :class="darkTheme" class="q-card">
     <div class="q-pl-lg q-pt-lg row items-center">
       <span id="bgc"></span><span class="text-h6 personal-concent">账号信息：</span></div>
     <div class="q-gutter-md q-pl-xl">
@@ -161,7 +161,7 @@
 </template>
 
 <script setup>
-import {computed, nextTick, onMounted, reactive, ref} from 'vue'
+import {computed, nextTick, reactive, ref, watch} from 'vue'
 import {useUserStore} from 'src/stores/user'
 import useTheme from "src/composables/useTheme"
 import ChangePasswordDialog from 'src/components/CiliPersonalCenter/ChangePasswordDialog/ChangePasswordDialog.vue'
@@ -169,6 +169,7 @@ import {getAction, postAction} from "../../../api/manage";
 import {getAvatar} from 'src/utils/common'
 
 const userStore = useUserStore()
+
 const {darkTheme} = useTheme()
 const form = reactive({
   avatar: computed(() => userStore.GetAvatar()).value,
@@ -194,7 +195,7 @@ const HandleGetUserInfo = async () => {
     userStore.token = UserDto.token
   }
 }
-onMounted(() => {
+watch(() => userStore.token, (newVal, oldVal) => {
   HandleGetUserInfo()
 })
 nextTick(() => HandleGetUserInfo())
@@ -265,7 +266,7 @@ const showPasswordDialog = () => {
   font-size: 20px;
   font-weight: bold;
 
-  color: #222;
+
 }
 
 #bgc {
@@ -281,6 +282,6 @@ const showPasswordDialog = () => {
 .security-nav-name {
   font-size: 16px;
   font-weight: bold;
-  color: rgba(51, 51, 51, 1);
+
 }
 </style>

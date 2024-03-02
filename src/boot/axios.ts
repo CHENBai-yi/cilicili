@@ -33,7 +33,6 @@ export default boot(({app, router}) => {
     request.headers.setContentType('application/json;charset=utf-8')
     // @ts-ignore
     request.headers.setAuthorization(token)
-
     if (DemoMode && ForbiddenUrl.some(item => item === request.url)) {
       // @ts-ignore
       window.$message.error(i18n.global.t('DemoMode'), {render: window.$render})
@@ -76,6 +75,7 @@ export default boot(({app, router}) => {
               {
                 // @ts-ignore
                 confirmButtonText: i18n.global.t('Relogin'),
+                showCancelButton: false,
                 type: 'warning',
               }
             )

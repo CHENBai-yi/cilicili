@@ -30,7 +30,9 @@
     "vfonts": "^0.0.3",
     "vue": "^3.4.15",
     "vue-i18n": "^9.2.2",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vxe-utils": "^2.0.1",
+    "xe-utils": "^3.5.20"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
