@@ -172,5 +172,10 @@ export default {
     "zh-CN": "密码长度不少于8位.",
     "en-US": "Please use minimum 8 characters.",
     "ru": "Пожалуйста, используйте минимум 6 символов."
+  },
+  WilleDeleteFromDataBase: {
+    "zh-CN": "将从数据库删除此记录.",
+    "en-US": "This record will be deleted from the database.",
+    "ru": "Эта запись будет удалена из базы данных."
   }
 }

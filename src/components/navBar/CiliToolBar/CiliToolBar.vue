@@ -101,10 +101,10 @@
           </div>
           <div v-else class="column q-gutter-xs items-start">
             <CiliLink :weight="600" color="" href="#/account/setting" iconLeft="person"
-                      iconRight="eva-arrow-circle-right-outline">个人中心
+                      iconRight="eva-arrow-circle-right-outline" target="_self">个人中心
             </CiliLink>
             <CiliLink :weight="600" color="" href="#/create/manage" iconLeft="eva-cloud-upload-outline"
-                      iconRight="eva-arrow-circle-right-outline">投稿管理
+                      iconRight="eva-arrow-circle-right-outline" target="_self">投稿管理
             </CiliLink>
             <div class="full-width q-py-sm">
               <el-divider class="no-margin"/>
@@ -117,8 +117,9 @@
 
       <CiliPopover v-if="$q.screen.gt.sm" :label="$t('Notice')" name="notifications">
         <template #badge>
-          <q-badge v-if="!!token" color="red" floating text-color="white">
-            2
+          <q-badge v-if="token" class="absolute" color="red" floating style="left:26px;display: table;"
+                   text-color="white">
+            {{ noticeCount }}
           </q-badge>
         </template>
         <template #default>
@@ -130,7 +131,7 @@
             </div>
           </div>
           <div v-else class="column q-gutter-xs items-start">
-            <CiliLink :weight="600" color="" href="#/notice/system">系统消息</CiliLink>
+            <CiliLink :weight="600" color="" href="#/notice/system" target="_self">系统消息</CiliLink>
             <!--            <CiliLink color="">我的消息</CiliLink>-->
             <!--            <CiliLink color="">@我的</CiliLink>-->
             <!--            <CiliLink color="">我收到的赞</CiliLink>-->
@@ -209,7 +210,7 @@
 </template>
 
 <script setup>
-import {ref, watch} from 'vue'
+import {ref, watch, watchEffect} from 'vue'
 import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
@@ -218,6 +219,7 @@ import {useUserStore} from 'src/stores/user'
 import {getAvatar} from 'src/utils/common'
 
 import {useI18n} from 'vue-i18n'
+import {postAction} from 'src/api/manage'
 
 const {t} = useI18n()
 const userStore = useUserStore()
@@ -261,8 +263,22 @@ const logout = () => {
       }
     })
 }
-
-
+const noticeCount = ref('')
+const getNoticeCount = ref('notice/get-notice-count')
+watchEffect(async () => {
+  if (userStore.GetToken()) {
+    const res = await postAction(getNoticeCount.value, {
+      notice_type: 'noticeType_system',
+      notice_to_user: userStore.GetUsername(),
+      page: 1,
+      page_size: 9999
+    })
+    if (res && res.code === 1) {
+      const {total} = res.data
+      noticeCount.value = total > 99 ? '99+' : total
+    }
+  }
+})
 </script>
 
 <style lang="sass" scoped>

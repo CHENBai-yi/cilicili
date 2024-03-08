@@ -166,18 +166,17 @@ import {useUserStore} from 'src/stores/user'
 import useTheme from "src/composables/useTheme"
 import ChangePasswordDialog from 'src/components/CiliPersonalCenter/ChangePasswordDialog/ChangePasswordDialog.vue'
 import {getAction, postAction} from "../../../api/manage";
-import {getAvatar} from 'src/utils/common'
 
 const userStore = useUserStore()
 
 const {darkTheme} = useTheme()
 const form = reactive({
-  avatar: computed(() => userStore.GetAvatar()).value,
-  nickname: computed(() => userStore.GetNickname() || userStore.GetUsername()).value,
-  real_name: computed(() => userStore.GetRealName()).value,
+  avatar: computed(() => userStore.GetAvatar()),
+  nickname: computed(() => userStore.GetNickname() || userStore.GetUsername()),
+  real_name: computed(() => userStore.GetRealName()),
   mobile: '',
   gender: '',
-  token: computed(() => userStore.GetToken()).value
+  token: computed(() => userStore.GetToken())
 })
 
 const getUserInfoUrl = 'users'
@@ -186,13 +185,11 @@ const HandleGetUserInfo = async () => {
   console.log(res)
   if (res) {
     const {UserDto} = res
-    form.avatar = getAvatar(UserDto.avatar)
     userStore.avatar = UserDto.avatar
     userStore.nickname = UserDto.nickname
     userStore.realName = UserDto.real_name
     form.mobile = UserDto.mobile
     form.gender = UserDto.gender
-    userStore.token = UserDto.token
   }
 }
 watch(() => userStore.token, (newVal, oldVal) => {
@@ -251,6 +248,7 @@ const save = async (data) => {
   if (res.code === 1) {
     await HandleGetUserInfo()
     window.$message.success(res.message, {render: window.$render});
+
     return true
   }
   return false

@@ -1,0 +1,160 @@
+<template>
+  <div class="q-pa-md ">
+    <q-table
+      v-model:pagination="pagination"
+      :columns="columns"
+      :loading="loading"
+      :rows="tableData"
+      :rows-per-page-options="pageOptions"
+      flat
+      row-key="name"
+      @request="onRequest"
+    >
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="name" :props="props">
+            {{ props.row.name }}
+          </q-td>
+          <q-td key="img" :props="props">
+            <n-image
+              :src="processApi+props.row.img"
+              fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+              height="72"
+              width="125"
+            />
+          </q-td>
+          <q-td key="author" :props="props">
+            <q-badge color="purple">
+              {{ props.row.author }}
+            </q-badge>
+          </q-td>
+          <q-td key="kind" :props="props">
+            <q-badge color="purple">
+              {{ props.row.kind }}
+            </q-badge>
+          </q-td>
+          <q-td key="price" :props="props">
+            <q-badge color="purple">
+              {{ props.row.price }}
+            </q-badge>
+          </q-td>
+          <q-td key="carbs" :props="props">
+            <q-badge color="orange">
+              {{ props.row.carbs }}
+            </q-badge>
+          </q-td>
+          <q-td key="protein" :props="props">
+            <q-badge color="primary">
+              {{ props.row.protein }}
+            </q-badge>
+          </q-td>
+          <q-td key="date" :props="props">
+            <q-badge color="teal">
+              {{ props.row.date }}
+            </q-badge>
+          </q-td>
+          <q-td key="calcium" :props="props">
+            <q-badge color="accent">
+              {{ props.row.calcium }}
+            </q-badge>
+          </q-td>
+          <q-td key="status" :props="props">
+            <CiliDictShow :dict-code="props.row.status"/>
+          </q-td>
+          <q-td key="operation" :props="props">
+            <q-btn color="red" flat label="取消审核" @click="canticleAudit(props.row.id)"></q-btn>
+          </q-td>
+        </q-tr>
+        <q-tr>
+          <q-td class="wrap" colspan="100%">
+            {{ props.row.desc }}
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
+  </div>
+</template>
+
+<script setup>
+import {defineEmits, onMounted, reactive, ref} from "vue";
+import UseCiliTableDate from 'src/composables/useCiliTableDate.js'
+import CiliDictShow from 'src/components/CiliDictShow/index.vue'
+import {postAction} from 'src/api/manage'
+import {ElMessageBox} from "element-plus";
+import {useI18n} from 'vue-i18n'
+
+const emits = defineEmits(['refresh'])
+const {t} = useI18n()
+const columns = reactive([
+  {
+    name: 'name',
+    required: true,
+    label: '标题',
+    align: 'center',
+    field: row => row.name,
+    format: val => `${val}`,
+
+  },
+  {name: 'img', align: 'center', label: '封面', field: 'img'},
+  {name: 'author', align: 'center', label: '作者', field: 'author'},
+  {name: 'kind', align: 'center', label: '类别', field: 'kind'},
+  {name: 'price', align: 'center', label: '价格', field: 'price'},
+  {name: 'carbs', align: 'center', label: '总节数', field: 'carbs'},
+  {name: 'protein', align: 'center', label: '总时长', field: 'protein'},
+  {name: 'date', align: 'center', label: '上传日期', field: 'date'},
+  {
+    name: 'status',
+    label: '状态',
+    align: 'center',
+    field: 'calcium',
+    sortable: true,
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
+  },
+  {name: 'operation', align: 'center', label: '操作', field: 'operation'}
+])
+const url = {
+  list: 'courses/get-course-info',
+  delete: 'courses/delete-course-info-by-id'
+}
+const processApi = ref(process.env.API)
+const {
+  getTableData,
+  onRequest,
+  loading,
+  tableData,
+  pageOptions,
+  queryParams,
+  pagination
+} = UseCiliTableDate(url)
+onMounted(() => {
+  queryParams.value.status = 'onOffPass_on'
+  getTableData()
+})
+const canticleAudit = (id) => {
+  ElMessageBox.confirm(
+    t('WilleDeleteFromDataBase'),
+    {
+      confirmButtonText: t('Confirm'),
+      cancelButtonText: t('Cancel'),
+      type: 'warning',
+    }
+  )
+    .then(async () => {
+      queryParams.id = id
+      const res = await postAction(url.delete, queryParams)
+      if (res && res.code === 1) {
+        emits('refresh')
+        getTableData()
+        window.$message.success(res.message, {render: window.$render})
+      } else {
+        window.$message.error(res.message, {render: window.$render})
+      }
+    })
+}
+</script>
+
+<style scoped>
+.q-table--no-wrap td {
+  white-space: pre-wrap;
+}
+</style>

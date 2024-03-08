@@ -45,6 +45,7 @@ export const useUserStore = defineStore('user', {
         this.avatar = avatar
         // @ts-ignore
         Cookies.set('cili-avatar-frontend', avatar, this.option)
+
         return true
       } else {
         return
@@ -87,6 +88,7 @@ export const useUserStore = defineStore('user', {
       this.nickname = undefined
       this.realName = undefined
       this.avatar = undefined
+
     },
     GetToken() {
       if (SessionStorage.getItem('cili-token-frontend')) {
