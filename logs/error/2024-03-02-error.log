@@ -1,0 +1,88 @@
+2024-03-02 02:34:13.228 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x5f6fd523, L:/172.20.10.3:61420 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:34:13.428 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x35d47401, L:/172.20.10.3:61421 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:34:13.828 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xfe5a2655, L:/172.20.10.3:61424 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:34:15.328 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xbb9734a0, L:/172.20.10.3:61430 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:34:16.727 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x83be4c0c, L:/172.20.10.3:61442 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:35:07.134 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x5ae39ba5, L:/172.20.10.3:39841 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:35:07.633 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x8c51f348, L:/172.20.10.3:39839 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-02 02:35:07.634 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x8e12dcd1, L:/172.20.10.3:39845 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-03-03 00:23:30.745 [http-nio-8889-exec-8] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:24:06.921 [http-nio-8889-exec-9] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:26:06.968 [http-nio-8889-exec-7] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:27:19.336 [http-nio-8889-exec-6] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:27:20.640 [http-nio-8889-exec-4] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:30:31.818 [http-nio-8889-exec-2] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:31:20.230 [http-nio-8889-exec-6] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-03-03 00:33:24.808 [http-nio-8889-exec-3] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！

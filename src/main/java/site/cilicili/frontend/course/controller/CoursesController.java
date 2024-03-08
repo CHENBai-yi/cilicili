@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
+import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.service.CoursesService;
 
@@ -117,6 +118,20 @@ public class CoursesController {
         return this.coursesService.addCourse(courses);
     }
 
+    @PostMapping("get-course-info")
+    public R getCourseInfo(final @RequestBody QueryCourseInfoRequest courses) {
+        return coursesService.getCourseInfo(courses);
+    }
+
+    @PostMapping("get-courses-count")
+    public R getCoursesCount(final @RequestBody CoursesEntity courses) {
+        return coursesService.getCoursesCount(courses);
+    }
+
+    @PostMapping("delete-course-info-by-id")
+    public R deleteCourseInfoById(final @RequestBody CoursesEntity courses) {
+        return coursesService.deleteCourseInfoById(courses);
+    }
 }
 
 

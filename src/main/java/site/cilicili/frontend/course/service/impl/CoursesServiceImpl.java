@@ -9,10 +9,13 @@ import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.service.BarsService;
 import site.cilicili.frontend.catalogs.service.CatalogsService;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
+import site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse;
+import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.mapper.CoursesMapper;
 import site.cilicili.frontend.course.service.CoursesService;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -46,9 +49,10 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
      * @param courses 筛选条件
      * @return 查询结果
      */
+    @Transactional(rollbackFor = Throwable.class)
     @Override
     public R queryAll(CoursesEntity courses) {
-        return R.ok().setData(baseMapper.queryAll(courses));
+        return R.yes("Success.").setData(baseMapper.queryAll(courses));
     }
 
     /**
@@ -107,6 +111,28 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                     }
                     return null;
                 }).orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getCourseInfo(final QueryCourseInfoRequest courses) {
+        final List<GetCourseInfoResponse.CourseList> courseLists = baseMapper.selectCourseByParam(courses);
+        log.warn(courseLists.toString());
+        return R.yes("Success").setData(GetCourseInfoResponse.builder().records(courseLists).page(1).pageSize(10).total(100).build());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getCoursesCount(final CoursesEntity courses) {
+        return R.yes("Success").setData(baseMapper.getCoursesCount(courses));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public R deleteCourseInfoById(final CoursesEntity courses) {
+        return Optional.of(baseMapper.logicalDeleteCourseInfoById(courses))
+                .filter(flag -> flag > 0)
+                .map(flag -> R.yes("操作成功.")).orElse(R.no("操作失败!"));
     }
 
 }

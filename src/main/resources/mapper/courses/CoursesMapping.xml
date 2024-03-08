@@ -32,9 +32,12 @@
     <!--查询指定行数据-->
     <select id="queryAll" resultMap="CoursesMap">
         select
-        course_id, name, teacher, kind, subject, price, description, poster, tag
+        course_id, name, teacher, kind, subject, price, description, poster, tag,status
         from courses
         <where>
+            <if test="status != null and status!=''">
+                and status = #{status}
+            </if>
             <if test="courseId != null">
                 and course_id = #{courseId}
             </if>
@@ -100,6 +103,84 @@
         </where>
     </select>
     
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList"
+               id="GetCourseInfoResponse">
+        <result property="id" column="course_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="author" column="teacher" jdbcType="VARCHAR"/>
+        <result property="img" column="poster" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="kind" column="kind" jdbcType="VARCHAR"/>
+        <result property="date" column="created_at" jdbcType="DATE"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="desc" column="description" jdbcType="VARCHAR"/>
+        <result property="protein" column="total_time" jdbcType="VARCHAR"/>
+        <result property="reason" column="reason" jdbcType="VARCHAR"/>
+        <association property="carbs" column="course_id" select="getCarbs"/>
+    </resultMap>
+    
+    <select id="selectCourseByParam" resultMap="GetCourseInfoResponse">
+        select *
+        from courses
+        <where>
+            <if test="status != null and status!=''">
+                and status = #{status}
+            </if>
+            and logical_delete>0
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+    </select>
+    <select id="getCarbs" resultType="integer">
+        select count(*)
+        from catalogs
+        where course_id = #{course_id}
+    </select>
+    
+    <resultMap type="site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse" id="CetCoursesCountResponse">
+        <association property="total" javaType="integer" select="getTotal" column="total"/>
+        <association property="off" javaType="integer" select="getOff" column="off"/>
+        <association property="pass" javaType="integer" select="getPass" column="pass"/>
+        <association property="on" javaType="integer" select="getOn" column="on"/>
+    </resultMap>
+    
+    <select id="getCoursesCount" resultMap="CetCoursesCountResponse">
+        select 'value' total,
+               'value' pass,
+               'value' `on`,
+               'value' off
+        from `cili-quasar-user`.courses
+        LIMIT 1
+    </select>
+    <select id="getTotal" resultType="integer">
+        select COUNT(*)
+        from `cili-quasar-user`.courses
+        where logical_delete > 0
+    </select>
+    <select id="getOff" resultType="integer">
+        select COUNT(*)
+        from `cili-quasar-user`.courses
+        where courses.status = 'onOffPass_off'
+          and logical_delete > 0
+    </select>
+    <select id="getPass" resultType="integer">
+        select COUNT(*)
+        from `cili-quasar-user`.courses
+        where courses.status = 'onOffPass_pass'
+          and logical_delete > 0
+    </select>
+    <select id="getOn" resultType="integer">
+        select COUNT(*)
+        from `cili-quasar-user`.courses
+        where courses.status = 'onOffPass_on'
+          and logical_delete > 0
+    </select>
+    
     <!--新增所有列-->
     <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">
         insert into courses(name, teacher, kind, subject, price, description, poster, tag)
@@ -163,6 +244,13 @@
             </if>
         </set>
         where course_id = #{courseId}
+    </update>
+    <update id="logicalDeleteCourseInfoById">
+        update courses
+        <set>
+            logical_delete=0
+        </set>
+        where course_id = #{id}
     </update>
     
     <!--通过主键删除-->

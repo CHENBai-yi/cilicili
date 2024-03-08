@@ -1,11 +1,14 @@
 package site.cilicili.frontend.course.domain.pojo;
 
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import site.cilicili.common.entity.BaseEntity;
 
 import java.io.Serializable;
 /**
@@ -27,9 +30,9 @@ import java.io.Serializable;
 @Setter
 @Schema(description = "Courses 实体类")
 @TableName("courses")
-public class CoursesEntity implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class CoursesEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 158204106956964287L;
-    @TableId
     @Schema(description = "课程ID")
     private Integer courseId;
     @Schema(description = "课程名称")
@@ -48,6 +51,13 @@ public class CoursesEntity implements Serializable {
     private String poster;
     @Schema(description = "标签")
     private String tag;
+    @Schema(description = "标签")
+    @JacksonInject("status")
+    private String status;
+    @TableLogic(value = "1", delval = "0")
+    private Integer logicalDelete;
+
+
 }
 
 

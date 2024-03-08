@@ -3,6 +3,7 @@ package site.cilicili.frontend.course.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
+import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 
 /**
@@ -54,6 +55,12 @@ public interface CoursesService extends IService<CoursesEntity> {
     R deleteById(final Integer courseId);
 
     R addCourse(AddCourseRequest courses);
+
+    R getCourseInfo(QueryCourseInfoRequest courses);
+
+    R getCoursesCount(CoursesEntity courses);
+
+    R deleteCourseInfoById(CoursesEntity courses);
 }
        
 

@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -31,25 +30,17 @@ import java.util.List;
 @Schema(description = "Courses数据传输类")
 public class CoursesDto implements Serializable {
     private static final long serialVersionUID = -49791560637850816L;
-    List<Long> ids;
-    @Schema(description = "课程ID")
-    private Integer courseId;
-    @Schema(description = "课程名称")
+    private int id;
     private String name;
-    @Schema(description = "教师姓名")
-    private String teacher;
-    @Schema(description = "课程种类")
+    private String img;
+    private String desc;
+    private String author;
+    private int carbs;
+    private int protein;
     private String kind;
-    @Schema(description = "学科")
-    private String subject;
-    @Schema(description = "价格")
-    private Double price;
-    @Schema(description = "描述")
-    private String description;
-    @Schema(description = "海报URL")
-    private String poster;
-    @Schema(description = "标签")
-    private String tag;
+    private double price;
+    private String date;
+    private String status;
     /**
      * 页
      */
@@ -69,11 +60,4 @@ public class CoursesDto implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
 
-    public Integer getPageNum() {
-        return pageNum == null ? 1 : pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize == null ? 10 : pageSize;
-    }
 }

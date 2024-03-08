@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableAsync;
 import site.cilicili.common.config.dynamicDb.MyDataSourceList;
 import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
+import site.cilicili.common.logger.ExplainInterceptor;
 import site.cilicili.common.util.DbUtils;
 
 import javax.sql.DataSource;
@@ -65,7 +66,13 @@ public class App {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 数据库类型是MySql，因此参数填写DbType.MYSQL
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        // interceptor.addInnerInterceptor(new ExplainInterceptor());
         return interceptor;
+    }
+
+    @Bean
+    public ExplainInterceptor explainInterceptor() {
+        return new ExplainInterceptor();
     }
 
     @Bean
