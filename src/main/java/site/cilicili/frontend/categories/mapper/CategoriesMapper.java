@@ -7,6 +7,7 @@ import site.cilicili.frontend.categories.domain.dto.GetCategoryListRequest;
 import site.cilicili.frontend.categories.domain.pojo.CategoriesEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -89,7 +90,4 @@ public interface CategoriesMapper extends BaseMapper<CategoriesEntity> {
     int deleteById(Integer id);
 
     List<CategoriesEntity> getCategoryList(GetCategoryListRequest categories);
-
 }
-
-

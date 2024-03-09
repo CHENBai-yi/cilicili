@@ -93,15 +93,21 @@ public class SubjectsServiceImpl extends ServiceImpl<SubjectsMapper, SubjectsEnt
     @Transactional(readOnly = true)
     @Override
     public R getSubjectList(final GetSubjectListRequest subjects) {
-        return Optional.ofNullable(baseMapper.getSubjectList(subjects)).map(records -> {
-            final GetSubjectListResponse build = GetSubjectListResponse.builder().page(subjects.getPage()).pageSize(subjects.getPageSize()).total(records.size()).build();
-            if (records.size() == 1) {
-                build.setRecords(records.get(0));
-            } else {
-                build.setRecords(records);
-            }
-            return R.yes("Success.").setData(build);
-        }).orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+        return Optional.ofNullable(baseMapper.getSubjectList(subjects))
+                .map(records -> {
+                    final GetSubjectListResponse build = GetSubjectListResponse.builder()
+                            .page(subjects.getPage())
+                            .pageSize(subjects.getPageSize())
+                            .total(records.size())
+                            .build();
+                    if (records.size() == 1) {
+                        build.setRecords(records.get(0));
+                    } else {
+                        build.setRecords(records);
+                    }
+                    return R.yes("Success.").setData(build);
+                })
+                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -112,7 +118,4 @@ public class SubjectsServiceImpl extends ServiceImpl<SubjectsMapper, SubjectsEnt
                 .map(f -> R.yes("Success."))
                 .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
     }
-
 }
-
-

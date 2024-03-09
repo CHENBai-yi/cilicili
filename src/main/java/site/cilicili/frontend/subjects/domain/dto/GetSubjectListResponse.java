@@ -14,14 +14,13 @@ import site.cilicili.frontend.common.pojo.BaseQueryResponse;
  *
  * @author BaiYiChen
  */
-
 @Data
-
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class GetSubjectListResponse extends BaseQueryResponse {
     @Builder
-    public GetSubjectListResponse(final Object records, final Integer page, final Integer pageSize, final Integer total) {
+    public GetSubjectListResponse(
+            final Object records, final Integer page, final Integer pageSize, final Integer total) {
         super(records, page, pageSize, total);
     }
 }

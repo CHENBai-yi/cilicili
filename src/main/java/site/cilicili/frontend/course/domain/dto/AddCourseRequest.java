@@ -32,5 +32,4 @@ public class AddCourseRequest extends CoursesEntity {
     public static class Catalog extends CatalogsEntity {
         private List<BarsEntity> bar;
     }
-
 }

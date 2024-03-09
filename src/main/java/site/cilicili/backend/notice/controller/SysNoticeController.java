@@ -182,7 +182,8 @@ public class SysNoticeController {
             summary = "按条件查询通知列表",
             parameters = {@Parameter(description = "id 主键")})
     @PostMapping("get-notice-count")
-    public R getNoticeListCount(final @RequestBody @Validated NoticeListQueryRequest noticeListQueryRequest, Errors errors) {
+    public R getNoticeListCount(
+            final @RequestBody @Validated NoticeListQueryRequest noticeListQueryRequest, Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
                 .map(e -> R.no(e.stream()

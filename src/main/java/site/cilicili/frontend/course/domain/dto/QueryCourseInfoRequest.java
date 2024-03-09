@@ -12,7 +12,6 @@ import lombok.Data;
  *
  * @author BaiYiChen
  */
-
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class QueryCourseInfoRequest {

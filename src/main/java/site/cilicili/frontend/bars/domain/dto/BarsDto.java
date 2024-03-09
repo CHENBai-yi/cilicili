@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -32,18 +33,25 @@ import java.util.List;
 public class BarsDto implements Serializable {
     private static final long serialVersionUID = -20488656213148048L;
     List<Long> ids;
+
     @Schema(description = "Bar ID")
     private Integer barId;
+
     @Schema(description = "关联的目录ID，外键参考catalogs表")
     private Integer catalogId;
+
     @Schema(description = "父级Bar ID")
     private Integer parentBarId;
+
     @Schema(description = "章节ID")
     private String id;
+
     @Schema(description = "Bar标题")
     private String title;
+
     @Schema(description = "Bar描述")
     private String description;
+
     @Schema(description = "视频URL")
     private String url;
     /**

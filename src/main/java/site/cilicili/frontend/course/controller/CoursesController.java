@@ -27,7 +27,6 @@ public class CoursesController {
     /**
      * 服务对象
      */
-
     private final CoursesService coursesService;
 
     /**
@@ -36,9 +35,9 @@ public class CoursesController {
      * @param courses 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "courses 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "courses 筛选条件")})
     @GetMapping
     public R queryAll(final CoursesEntity courses) {
         return this.coursesService.queryAll(courses);
@@ -50,9 +49,9 @@ public class CoursesController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") Integer id) {
         return this.coursesService.queryById(id);
@@ -64,10 +63,9 @@ public class CoursesController {
      * @param courses 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "courses 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "courses 实体")})
     @PostMapping
     public R add(final @RequestBody CoursesEntity courses) {
         return this.coursesService.insert(courses);
@@ -79,9 +77,9 @@ public class CoursesController {
      * @param courses 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "coursesEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "coursesEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody CoursesEntity courses) {
         return this.coursesService.update(courses);
@@ -93,9 +91,9 @@ public class CoursesController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final Integer id) {
         return this.coursesService.deleteById(id);
@@ -109,10 +107,9 @@ public class CoursesController {
      * @param courses 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "courses 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "courses 实体")})
     @PostMapping("add")
     public R addCourse(final @RequestBody AddCourseRequest courses) {
         return this.coursesService.addCourse(courses);
@@ -132,7 +129,9 @@ public class CoursesController {
     public R deleteCourseInfoById(final @RequestBody CoursesEntity courses) {
         return coursesService.deleteCourseInfoById(courses);
     }
+
+    @PostMapping("update-courses")
+    public R reAudit(final @RequestBody CoursesEntity courses) {
+        return coursesService.reAudit(courses);
+    }
 }
-
-
-

@@ -60,6 +60,7 @@ public class UserDto {
         @NotNull
         @Size(min = 8, max = 32)
         private String password;
+
         private String email;
         private String code;
     }
@@ -83,6 +84,7 @@ public class UserDto {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class FrontendRegistration {
         private String username;
+
         @NotNull
         @Email
         private String email;
@@ -90,13 +92,15 @@ public class UserDto {
         @NotBlank
         @Size(min = 8, max = 32)
         private String password;
+
         @NotBlank
         @Size(min = 6, max = 6)
         private String code;
+
         private String realName;
+
         @NotBlank
         private String roleCode;
-
     }
 
     @Getter

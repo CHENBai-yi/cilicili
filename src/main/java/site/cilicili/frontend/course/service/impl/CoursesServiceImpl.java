@@ -110,7 +110,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                         }
                     }
                     return null;
-                }).orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+                })
+                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
     }
 
     @Transactional(readOnly = true)
@@ -118,7 +119,13 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     public R getCourseInfo(final QueryCourseInfoRequest courses) {
         final List<GetCourseInfoResponse.CourseList> courseLists = baseMapper.selectCourseByParam(courses);
         log.warn(courseLists.toString());
-        return R.yes("Success").setData(GetCourseInfoResponse.builder().records(courseLists).page(1).pageSize(10).total(100).build());
+        return R.yes("Success")
+                .setData(GetCourseInfoResponse.builder()
+                        .records(courseLists)
+                        .page(1)
+                        .pageSize(10)
+                        .total(100)
+                        .build());
     }
 
     @Transactional(readOnly = true)
@@ -132,9 +139,16 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     public R deleteCourseInfoById(final CoursesEntity courses) {
         return Optional.of(baseMapper.logicalDeleteCourseInfoById(courses))
                 .filter(flag -> flag > 0)
-                .map(flag -> R.yes("操作成功.")).orElse(R.no("操作失败!"));
+                .map(flag -> R.yes("操作成功."))
+                .orElse(R.no("操作失败!"));
     }
 
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public R reAudit(final CoursesEntity courses) {
+        return Optional.of(baseMapper.update(courses))
+                .filter(f -> f > 0)
+                .map(r -> R.yes("Success."))
+                .orElse(R.no("Fail."));
+    }
 }
-
-

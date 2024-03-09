@@ -28,7 +28,6 @@ public class CategoriesController {
     /**
      * 服务对象
      */
-
     private final CategoriesService categoriesService;
 
     /**
@@ -37,9 +36,9 @@ public class CategoriesController {
      * @param categories 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "categories 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "categories 筛选条件")})
     @GetMapping
     public R queryAll(final CategoriesEntity categories) {
         return this.categoriesService.queryAll(categories);
@@ -51,9 +50,9 @@ public class CategoriesController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") Integer id) {
         return this.categoriesService.queryById(id);
@@ -65,10 +64,9 @@ public class CategoriesController {
      * @param categories 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "categories 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "categories 实体")})
     @PostMapping
     public R add(final @RequestBody CategoriesEntity categories) {
         return this.categoriesService.insert(categories);
@@ -80,9 +78,9 @@ public class CategoriesController {
      * @param categories 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "categoriesEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "categoriesEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody CategoriesEntity categories) {
         return this.categoriesService.update(categories);
@@ -94,9 +92,9 @@ public class CategoriesController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final Integer id) {
         return this.categoriesService.deleteById(id);
@@ -108,10 +106,9 @@ public class CategoriesController {
      * @param categories 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "categories 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "categories 实体")})
     @PostMapping("get-category-list")
     public R getCategoryList(final @RequestBody GetCategoryListRequest categories) {
         return this.categoriesService.getCategoryList(categories);
@@ -123,10 +120,9 @@ public class CategoriesController {
      * @param categories 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "categories 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "categories 实体")})
     @PostMapping("edit-category")
     public R editCategory(final @RequestBody EditCategoryRequest categories) {
         return this.categoriesService.editCategory(categories);
@@ -138,10 +134,9 @@ public class CategoriesController {
      * @param categories 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "categories 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "categories 实体")})
     @PostMapping("delete-category-by-id")
     public R deleteCategoryById(final @RequestBody CategoriesEntity categories) {
         return this.categoriesService.deleteCategoryById(categories);
@@ -153,17 +148,11 @@ public class CategoriesController {
      * @param categories 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "categories 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "categories 实体")})
     @PostMapping("add-category")
     public R addCategory(final @RequestBody AddCategoryRequest categories) {
         return this.categoriesService.addCategory(categories);
     }
-
-
 }
-
-
-

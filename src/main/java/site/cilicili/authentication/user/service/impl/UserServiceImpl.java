@@ -85,21 +85,20 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
         }
         return userRepository
                 .findByUsername(login.getUsername(), login.getEmail())
-                .map(r ->
-                        Optional.ofNullable(sysUserOnlineService.queryById(r.getUsername(), null))
-                                .map(rr -> R.no(Error.ALREADY_LOGIN.getMessage()))
-                                .orElseGet(() -> Optional.of(r)
-                                        .filter(user -> login.getPassword().equals(login.getCode()) || passwordEncoder.matches(login.getPassword(), user.getPassword()))
-                                        .map(user -> {
-                                            login.setEmail(user.getEmail());
-                                            login.setUsername(user.getUsername());
-                                            return convertEntityToDto(user);
-                                        })
-                                        .filter(userDto ->
-                                                sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
-                                        .map(userDto -> R.yes("登录成功.").setData(userDto)).orElse(R.no("登陆失败!"))
-
-                                ))
+                .map(r -> Optional.ofNullable(sysUserOnlineService.queryById(r.getUsername(), null))
+                        .map(rr -> R.no(Error.ALREADY_LOGIN.getMessage()))
+                        .orElseGet(() -> Optional.of(r)
+                                .filter(user -> login.getPassword().equals(login.getCode())
+                                        || passwordEncoder.matches(login.getPassword(), user.getPassword()))
+                                .map(user -> {
+                                    login.setEmail(user.getEmail());
+                                    login.setUsername(user.getUsername());
+                                    return convertEntityToDto(user);
+                                })
+                                .filter(userDto ->
+                                        sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
+                                .map(userDto -> R.yes("登录成功.").setData(userDto))
+                                .orElse(R.no("登陆失败!"))))
                 .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage()));
     }
 
@@ -180,13 +179,15 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                     if (!code.equals(registration.getCode())) {
                         return R.no("验证码不正确！");
                     }
-                    return baseMapper.findByEmail(registration.getEmail())
+                    return baseMapper
+                            .findByEmail(registration.getEmail())
                             .map(userEntity -> R.no("该账号已被注册"))
                             .orElseGet(() -> {
                                 registration.setUsername(String.format("%1$s%2$s", "用户", RandomUtil.randomNumbers(4)));
                                 registration.setPassword(passwordEncoder.encode(registration.getPassword()));
                                 if (saveOrUpdate(BeanUtil.toBean(registration, UserEntity.class))) {
-                                    final SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity(registration.getRoleCode(), registration.getUsername());
+                                    final SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity(
+                                            registration.getRoleCode(), registration.getUsername());
                                     if (sysUserRoleService.saveOrUpdate(sysUserRoleEntity)) {
                                         return R.yes("注册成功！");
                                     }
@@ -195,7 +196,6 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                             });
                 })
                 .orElse(R.no("验证码过期."));
-
     }
 
     @Override
@@ -207,7 +207,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
         final String randomNumbers = RandomUtil.randomNumbers(6);
         final int time = 60;
         try {
-            emailService.sendHtmlMail(email, "cilicili注册验证码测试邮件：", resolveHtmlTemplate(option, randomNumbers, time, "秒"));
+            emailService.sendHtmlMail(
+                    email, "cilicili注册验证码测试邮件：", resolveHtmlTemplate(option, randomNumbers, time, "秒"));
             stringRedisTemplate.opsForValue().setIfAbsent(email, randomNumbers, Duration.of(time, ChronoUnit.SECONDS));
             return R.yes("验证码发送成功！");
         } catch (IllegalArgumentException e) {

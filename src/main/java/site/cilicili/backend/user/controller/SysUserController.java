@@ -255,7 +255,8 @@ public class SysUserController {
     @PostMapping("change-info")
     public R changeInfo(
             @AuthenticationPrincipal AuthUserDetails authUserDetails,
-            @RequestBody @Validated SysUserEntity sysUserEntity, Errors errors) {
+            @RequestBody @Validated SysUserEntity sysUserEntity,
+            Errors errors) {
         return Optional.of(errors.getFieldErrors())
                 .filter(e -> !e.isEmpty())
                 .map(e -> R.no(e.stream()

@@ -59,5 +59,3 @@ public interface SubjectsService extends IService<SubjectsEntity> {
 
     R deleteSubjectById(SubjectsEntity id);
 }
-       
-

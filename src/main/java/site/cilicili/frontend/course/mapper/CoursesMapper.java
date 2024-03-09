@@ -9,6 +9,7 @@ import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -95,6 +96,5 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
     CetCoursesCountResponse getCoursesCount(CoursesEntity courses);
 
     int logicalDeleteCourseInfoById(CoursesEntity courses);
+
 }
-
-

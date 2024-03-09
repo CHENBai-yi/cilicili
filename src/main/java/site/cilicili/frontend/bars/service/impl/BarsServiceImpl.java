@@ -77,7 +77,4 @@ public class BarsServiceImpl extends ServiceImpl<BarsMapper, BarsEntity> impleme
         boolean del = baseMapper.deleteById(barId) > 0;
         return R.ok().setData(del);
     }
-
 }
-
-

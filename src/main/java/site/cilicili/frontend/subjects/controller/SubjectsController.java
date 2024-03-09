@@ -26,7 +26,6 @@ public class SubjectsController {
     /**
      * 服务对象
      */
-
     private final SubjectsService subjectsService;
 
     /**
@@ -35,9 +34,9 @@ public class SubjectsController {
      * @param subjects 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "subjects 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "subjects 筛选条件")})
     @GetMapping
     public R queryAll(final SubjectsEntity subjects) {
         return this.subjectsService.queryAll(subjects);
@@ -49,9 +48,9 @@ public class SubjectsController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") Integer id) {
         return this.subjectsService.queryById(id);
@@ -63,10 +62,9 @@ public class SubjectsController {
      * @param subjects 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "subjects 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "subjects 实体")})
     @PostMapping
     public R add(final @RequestBody SubjectsEntity subjects) {
         return this.subjectsService.insert(subjects);
@@ -78,9 +76,9 @@ public class SubjectsController {
      * @param subjects 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "subjectsEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "subjectsEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody SubjectsEntity subjects) {
         return this.subjectsService.update(subjects);
@@ -92,9 +90,9 @@ public class SubjectsController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final Integer id) {
         return this.subjectsService.deleteById(id);
@@ -108,10 +106,9 @@ public class SubjectsController {
      * @param subjects 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "subjects 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "subjects 实体")})
     @PostMapping("add-subject")
     public R addSubject(final @RequestBody SubjectsEntity subjects) {
         return this.subjectsService.addSubject(subjects);
@@ -123,9 +120,9 @@ public class SubjectsController {
      * @param subjects 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "subjects 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "subjects 筛选条件")})
     @PostMapping(path = {"get-subject-list", "query-subject-by-id"})
     public R getSubjectList(final @RequestBody GetSubjectListRequest subjects) {
         return this.subjectsService.getSubjectList(subjects);
@@ -137,15 +134,11 @@ public class SubjectsController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @PostMapping("delete-subject-by-id")
     public R deleteSubjectById(final @RequestBody SubjectsEntity id) {
         return this.subjectsService.deleteSubjectById(id);
     }
-
 }
-
-
-

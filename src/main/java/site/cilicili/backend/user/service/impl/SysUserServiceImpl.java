@@ -247,7 +247,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     public R changeInfo(final AuthUserDetails authUserDetails, final SysUserEntity user) {
         return Optional.ofNullable(baseMapper.selectById(authUserDetails.getId()))
                 .filter(sysUserEntity -> {
-                    BeanUtil.copyProperties(user, sysUserEntity, CopyOptions.create(null, true, "password", "username"));
+                    BeanUtil.copyProperties(
+                            user, sysUserEntity, CopyOptions.create(null, true, "password", "username"));
                     return updateById(sysUserEntity);
                 })
                 .map(sysUserEntity -> R.yes("修改成功."))

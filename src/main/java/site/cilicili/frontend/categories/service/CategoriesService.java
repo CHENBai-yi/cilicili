@@ -63,5 +63,3 @@ public interface CategoriesService extends IService<CategoriesEntity> {
 
     R addCategory(AddCategoryRequest categories);
 }
-       
-

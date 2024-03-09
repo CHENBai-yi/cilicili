@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -29,21 +30,26 @@ import java.io.Serializable;
 @TableName("bars")
 public class BarsEntity implements Serializable {
     private static final long serialVersionUID = -90162275262060559L;
+
     @TableId
     @Schema(description = "Bar ID")
     private Integer barId;
+
     @Schema(description = "关联的目录ID，外键参考catalogs表")
     private Integer catalogId;
+
     @Schema(description = "父级Bar ID")
     private Integer parentBarId;
+
     @Schema(description = "章节ID")
     private String id;
+
     @Schema(description = "Bar标题")
     private String title;
+
     @Schema(description = "Bar描述")
     private String description;
+
     @Schema(description = "视频URL")
     private String url;
 }
-
-

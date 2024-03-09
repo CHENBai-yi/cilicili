@@ -29,7 +29,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("categoriesService")
-public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, CategoriesEntity> implements CategoriesService {
+public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, CategoriesEntity>
+        implements CategoriesService {
 
     private final SubjectsService subjectsService;
 
@@ -95,7 +96,13 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
     @Override
     public R getCategoryList(final GetCategoryListRequest categories) {
         return Optional.ofNullable(baseMapper.getCategoryList(categories))
-                .map(records -> R.yes("Success.").setData(GetCategoryListResponse.builder().records(records).page(categories.getPage()).pageSize(categories.getPageSize()).total(records.size()).build()))
+                .map(records -> R.yes("Success.")
+                        .setData(GetCategoryListResponse.builder()
+                                .records(records)
+                                .page(categories.getPage())
+                                .pageSize(categories.getPageSize())
+                                .total(records.size())
+                                .build()))
                 .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
     }
 
@@ -120,17 +127,15 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
     @Transactional(rollbackFor = Throwable.class)
     @Override
     public R addCategory(final AddCategoryRequest categories) {
-        return Optional.ofNullable(subjectsService.getOne(new QueryWrapper<SubjectsEntity>()
-                        .eq("subject_code", categories.getSubjectCode())))
+        return Optional.ofNullable(subjectsService.getOne(
+                        new QueryWrapper<SubjectsEntity>().eq("subject_code", categories.getSubjectCode())))
                 .map(subjectsEntity -> {
                     final CategoriesEntity categoriesEntity = BeanUtil.toBean(categories, CategoriesEntity.class);
                     categoriesEntity.setSubjectId(subjectsEntity.getId());
                     return saveOrUpdate(categoriesEntity);
-                }).filter(f -> f)
+                })
+                .filter(f -> f)
                 .map(f -> R.yes("Success."))
                 .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
     }
-
 }
-
-

@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -29,15 +30,17 @@ import java.io.Serializable;
 @TableName("categories")
 public class CategoriesEntity implements Serializable {
     private static final long serialVersionUID = -65253973903327662L;
+
     @TableId
     @Schema(description = "ID")
     private Integer id;
+
     @Schema(description = "学科代码")
     private Integer subjectId;
+
     @Schema(description = "分类名称")
     private String categoryName;
+
     @Schema(description = "状态")
     private String status;
 }
-
-

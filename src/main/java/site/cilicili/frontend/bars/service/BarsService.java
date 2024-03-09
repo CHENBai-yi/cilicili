@@ -52,5 +52,3 @@ public interface BarsService extends IService<BarsEntity> {
      */
     R deleteById(final Integer barId);
 }
-       
-

@@ -38,4 +38,3 @@ public interface EmailService {
      */
     public void sendAttachmentsMail(String to, String subject, String content, String filePath);
 }
-

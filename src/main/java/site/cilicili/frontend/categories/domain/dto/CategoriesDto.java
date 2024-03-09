@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -32,10 +33,13 @@ import java.util.List;
 public class CategoriesDto implements Serializable {
     private static final long serialVersionUID = -54886948376450239L;
     List<Long> ids;
+
     @Schema(description = "ID")
     private Integer id;
+
     @Schema(description = "学科代码")
     private Integer subjectId;
+
     @Schema(description = "分类名称")
     private String categoryName;
     /**

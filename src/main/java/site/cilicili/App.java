@@ -77,8 +77,8 @@ public class App {
 
     @Bean
     @Primary
-    public MyDataSourceList myDataSourceList(@Qualifier("backend") DataSource druidDataSource
-            , @Qualifier("frontend") DataSource frontendDatasource) {
+    public MyDataSourceList myDataSourceList(
+            @Qualifier("backend") DataSource druidDataSource, @Qualifier("frontend") DataSource frontendDatasource) {
         final HashMap<Object, Object> dataSourceMap = new HashMap<>();
         DataSource defaultDataSource = null;
         if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {

@@ -77,7 +77,4 @@ public class CatalogsServiceImpl extends ServiceImpl<CatalogsMapper, CatalogsEnt
         boolean del = baseMapper.deleteById(catalogId) > 0;
         return R.ok().setData(del);
     }
-
 }
-
-

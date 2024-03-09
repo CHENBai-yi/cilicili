@@ -92,5 +92,6 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
 
     int insertSysUserRoleList(List<SysUserRoleEntity> toList);
 
-    int updateUserRoleName(@Param("entity") SysUserRoleEntity sysUserRoleEntity, @Param("newName") final String username);
+    int updateUserRoleName(
+            @Param("entity") SysUserRoleEntity sysUserRoleEntity, @Param("newName") final String username);
 }

@@ -57,6 +57,4 @@ public class FileUploadController {
     public R handleFileUpload(@RequestPart(value = "file") final MultipartFile uploadfile) {
         return uploadService.saveUploadedFiles(uploadfile);
     }
-
-
 }

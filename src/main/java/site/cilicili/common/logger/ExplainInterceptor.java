@@ -29,9 +29,7 @@ import java.util.Properties;
         @Signature(
                 type = Executor.class,
                 method = "query",
-                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class
-                }
-        )
+                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
 })
 public class ExplainInterceptor implements InnerInterceptor {
 
@@ -45,7 +43,14 @@ public class ExplainInterceptor implements InnerInterceptor {
      * @throws SQLException
      */
     @Override
-    public void beforeQuery(final Executor executor, final MappedStatement ms, final Object parameter, final RowBounds rowBounds, final ResultHandler resultHandler, final BoundSql boundSql) throws SQLException {
+    public void beforeQuery(
+            final Executor executor,
+            final MappedStatement ms,
+            final Object parameter,
+            final RowBounds rowBounds,
+            final ResultHandler resultHandler,
+            final BoundSql boundSql)
+            throws SQLException {
         if (ms.getSqlCommandType() == SqlCommandType.SELECT) {
             Configuration configuration = ms.getConfiguration();
             Connection connection = executor.getTransaction().getConnection();
@@ -61,7 +66,8 @@ public class ExplainInterceptor implements InnerInterceptor {
      * @throws SQLException
      */
     @Override
-    public void beforeUpdate(final Executor executor, final MappedStatement ms, final Object parameter) throws SQLException {
+    public void beforeUpdate(final Executor executor, final MappedStatement ms, final Object parameter)
+            throws SQLException {
         if (ms.getSqlCommandType() == SqlCommandType.UPDATE) {
             Configuration configuration = ms.getConfiguration();
             Connection connection = executor.getTransaction().getConnection();
@@ -71,7 +77,12 @@ public class ExplainInterceptor implements InnerInterceptor {
         InnerInterceptor.super.beforeUpdate(executor, ms, parameter);
     }
 
-    private void sqlExplain(Configuration configuration, MappedStatement mappedStatement, BoundSql boundSql, Connection connection, Object parameter) {
+    private void sqlExplain(
+            Configuration configuration,
+            MappedStatement mappedStatement,
+            BoundSql boundSql,
+            Connection connection,
+            Object parameter) {
         // 这里注意：EXPLAIN后面必须要有空格，否则sql为： explainselect报错
         StringBuilder explain = new StringBuilder("EXPLAIN ");
         String sqlExplain = explain.append(boundSql.getSql()).toString();
@@ -79,9 +90,11 @@ public class ExplainInterceptor implements InnerInterceptor {
         System.out.println(sqlExplain);
         System.out.println("============================================");
         StaticSqlSource sqlSource = new StaticSqlSource(configuration, sqlExplain, boundSql.getParameterMappings());
-        MappedStatement.Builder builder = new MappedStatement.Builder(configuration, "explain_sql", sqlSource, SqlCommandType.SELECT);
+        MappedStatement.Builder builder =
+                new MappedStatement.Builder(configuration, "explain_sql", sqlSource, SqlCommandType.SELECT);
         MappedStatement queryStatement = builder.build();
-        builder.resultMaps(mappedStatement.getResultMaps()).resultSetType(mappedStatement.getResultSetType())
+        builder.resultMaps(mappedStatement.getResultMaps())
+                .resultSetType(mappedStatement.getResultSetType())
                 .statementType(mappedStatement.getStatementType());
         DefaultParameterHandler handler = new DefaultParameterHandler(queryStatement, parameter, boundSql);
         try {
@@ -90,7 +103,8 @@ public class ExplainInterceptor implements InnerInterceptor {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int index = Optional.ofNullable(rs.getString("Extra"))
-                        .map(extra -> extra.indexOf("Using index")).orElse(0);
+                        .map(extra -> extra.indexOf("Using index"))
+                        .orElse(0);
                 // 判断，是否走了索引。还是走的Using where
                 if (index == -1) {
                     log.error("Error:Full table operator is prohibited. SQL: {}", boundSql.getSql());
@@ -103,7 +117,6 @@ public class ExplainInterceptor implements InnerInterceptor {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

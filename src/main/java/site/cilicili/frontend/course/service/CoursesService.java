@@ -61,6 +61,6 @@ public interface CoursesService extends IService<CoursesEntity> {
     R getCoursesCount(CoursesEntity courses);
 
     R deleteCourseInfoById(CoursesEntity courses);
-}
-       
 
+    R reAudit(CoursesEntity courses);
+}

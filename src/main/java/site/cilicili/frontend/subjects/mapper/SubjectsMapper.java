@@ -7,6 +7,7 @@ import site.cilicili.frontend.subjects.domain.dto.GetSubjectListRequest;
 import site.cilicili.frontend.subjects.domain.pojo.SubjectsEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -90,5 +91,3 @@ public interface SubjectsMapper extends BaseMapper<SubjectsEntity> {
 
     List<SubjectsEntity> getSubjectList(GetSubjectListRequest subjects);
 }
-
-

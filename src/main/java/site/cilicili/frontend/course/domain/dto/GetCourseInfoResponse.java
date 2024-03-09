@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
  *
  * @author BaiYiChen
  */
-
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class GetCourseInfoResponse extends BaseQueryResponse {
     @Builder
-    public GetCourseInfoResponse(final Object records, final Integer page, final Integer pageSize, final Integer total) {
+    public GetCourseInfoResponse(
+            final Object records, final Integer page, final Integer pageSize, final Integer total) {
         super(records, page, pageSize, total);
     }
 
@@ -42,11 +42,15 @@ public class GetCourseInfoResponse extends BaseQueryResponse {
         private Integer protein;
 
         private String kind;
+        private String subject;
 
         private Double price;
+
         @JsonFormat(pattern = "yyyy年MM月dd日 HH:mm")
         private LocalDateTime date;
+
         private String status;
         private String reason;
+        private Integer logicalDelete;
     }
 }

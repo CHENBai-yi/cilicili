@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -87,5 +88,3 @@ public interface CatalogsMapper extends BaseMapper<CatalogsEntity> {
      */
     int deleteById(Integer catalogId);
 }
-
-
