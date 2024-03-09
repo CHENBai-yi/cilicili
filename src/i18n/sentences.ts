@@ -163,7 +163,8 @@ export default {
     "zh-CN": "密码长度不少于6位.",
     "en-US": "Please use minimum 6 characters.",
     "ru": "Пожалуйста, используйте минимум 6 символов."
-  }, ValidEmailCode: {
+  },
+  ValidEmailCode: {
     "zh-CN": "无效的邮箱验证码.",
     "en-US": "Please use minimum 6 characters.",
     "ru": "Пожалуйста, используйте минимум 6 символов."
@@ -174,7 +175,17 @@ export default {
     "ru": "Пожалуйста, используйте минимум 6 символов."
   },
   WilleDeleteFromDataBase: {
-    "zh-CN": "将从数据库删除此记录.",
+    "zh-CN": "该记录将移入到未通过状态.",
+    "en-US": "This record will be deleted from the database.",
+    "ru": "Эта запись будет удалена из базы данных."
+  },
+  AuditOrder: {
+    "zh-CN": "下架后，用户将无法访问到此视频内容.",
+    "en-US": "This record will be deleted from the database.",
+    "ru": "Эта запись будет удалена из базы данных."
+  },
+  cancleAudit: {
+    "zh-CN": "用户手动取消审核.",
     "en-US": "This record will be deleted from the database.",
     "ru": "Эта запись будет удалена из базы данных."
   }

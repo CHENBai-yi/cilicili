@@ -27,9 +27,9 @@
             {{ props.row.author }}
           </q-badge>
         </q-td>
-        <q-td key="kind" :props="props">
+        <q-td key="subject" :props="props">
           <q-badge color="purple">
-            {{ props.row.kind }}
+            {{ props.row.subject }}
           </q-badge>
         </q-td>
         <q-td key="price" :props="props">
@@ -65,7 +65,7 @@
             <q-btn color="primary" flat label="编辑章节" @click="editCourse(props.row.id)"/>
             <q-btn color="primary" flat label="编辑小节" @click="editCourse2(props.row.id)"/>
           </div>
-          <q-btn color="black" flat label="重新提交审核"/>
+          <q-btn color="black" flat label="重新提交审核" @click="reAudit(props.row.id)"/>
           <q-btn color="red" flat label="查看原因" @click="showResult(props.row.reason)"/>
         </q-td>
       </q-tr>
@@ -82,16 +82,50 @@
           <div class="row q-gutter-x-md flex no-wrap">
             <q-input v-model="editFrom.name" label="章节标题" outlined/>
             <q-input v-model="editFrom.author" label="作者" outlined/>
-            <q-input v-model="editFrom.kind" label="分类" outlined/>
+            <q-input v-model="editFrom.subject" label="分类" outlined/>
             <q-input v-model="editFrom.price" label="价格" outlined prefix="￥" type="number"/>
           </div>
           <div class="col">
             <q-input v-model="editFrom.desc" label="详情" outlined type="textarea"/>
           </div>
+          <div class="row items-center">
+            <div class="security-nav-name">课程封面：</div>
+            <q-avatar size="150px" square>
+              <img :src="processApi+editFrom.img">
+            </q-avatar>
+
+            <div class="col no-wrap flex items-center q-gutter-x-sm q-ml-md">
+              <n-button
+                v-if="fileListLength"
+                secondary
+                strong
+                type="success"
+                @click="handleClick"
+              >
+                保存
+              </n-button>
+              <n-upload
+                ref="upload"
+                :action="uploadUrl"
+                :default-upload="false"
+                :headers="{Authorization:userStore.GetToken()}"
+                :max=1
+                accept="image/*"
+                class="flex items-center"
+                @change="handleChange"
+                @finish="handleFinish"
+                @before-upload="beforeUpload"
+              >
+                <n-button strong text type="info">更换</n-button>
+              </n-upload>
+            </div>
+
+
+          </div>
         </div>
         <div class="q-gutter-x-md q-mt-md flex justify-end">
-          <q-btn color="primary" label="确认"/>
-          <q-btn color="red" label="取消" @click="dialog=false"/>
+          <q-btn :label="t('Save')" color="primary" @click="saveCourse"/>
+          <q-btn :label="t('Cancel')" color="red" @click="dialog=false"/>
         </div>
       </q-card-section>
     </q-card>
@@ -107,7 +141,7 @@
           <div class="row q-gutter-x-md flex no-wrap">
             <q-input v-model="editFrom.name" label="章节标题" outlined readonly/>
             <q-input v-model="editFrom.author" label="作者" outlined readonly/>
-            <q-input v-model="editFrom.kind" label="分类" outlined readonly/>
+            <q-input v-model="editFrom.subject" label="分类" outlined readonly/>
             <q-input v-model="editFrom.price" label="价格" outlined prefix="￥" readonly type="number"/>
           </div>
           <div class="col">
@@ -186,23 +220,61 @@
           </div>
         </div>
         <div class="q-gutter-x-md q-mt-md flex justify-end">
-          <q-btn color="primary" label="确认"/>
-          <q-btn color="red" label="取消" @click="dialog3=false"/>
+          <q-btn :label="t('Save')" color="primary"/>
+          <q-btn :label="t('Cancel')" color="red" @click="dialog3=false"/>
         </div>
       </q-card-section>
     </q-card>
   </q-dialog>
+
 </template>
 
 <script setup>
-import {onMounted, reactive, ref} from 'vue'
+import {defineEmits, onMounted, reactive, ref} from 'vue'
 import useTheme from "src/composables/useTheme"
+import {postAction} from 'src/api/manage'
 import {useToast} from "primevue/usetoast";
 import {toChineseNumber} from 'src/utils/ToChineseNumber'
 import CiliDictShow from "src/components/CiliDictShow/index.vue";
 import UseCiliTableDate from "../../../composables/useCiliTableDate";
 import {ElMessageBox} from "element-plus";
+import {useUserStore} from 'src/stores/user'
+import {useI18n} from 'vue-i18n'
 
+const userStore = useUserStore()
+const upload = ref(null)
+const fileListLength = ref(0)
+const handleClick = async () => {
+  upload.value?.submit();
+}
+const handleChange = (options) => {
+  fileListLength.value = options.fileList.length;
+}
+const handleFinish = ({
+                        file,
+                        event
+                      }) => {
+  if (event.target) {
+    const res = JSON.parse(event.target.response)
+    if (res.code === 1) {
+      editFrom.value.img = res.data.records
+      fileListLength.value = 0
+    } else {
+      window.$message.error(res.message, {render: window.$render});
+    }
+  }
+  return file;
+};
+const beforeUpload = async (data) => {
+  console.log(data.file.file?.type)
+  if (!/image\/*/.test(data.file.file?.type)) {
+    window.$message.error("只能上传图片文件，请重新上传", {render: window.$render});
+    return false;
+  }
+  return true;
+}
+const emits = defineEmits(['refresh'])
+const {t} = useI18n()
 const processApi = ref(process.env.API)
 const videoSrc = ref('');
 const poster = ref('https://cdn.quasar.dev/img/parallax2.jpg');
@@ -245,7 +317,7 @@ const fileToBlob = (file) => {
     reader.readAsArrayBuffer(file)
   })
 }
-const uploadUrl = ref(process.env.API + 'upload/upload-video')
+const uploadUrl = ref(processApi.value + 'upload/upload-video')
 const toast = useToast();
 const {darkTheme} = useTheme()
 const dialog = ref(false)
@@ -307,19 +379,20 @@ const editFrom2 = reactive({
     }
   ]
 })
-const editFrom = reactive({
+const editFrom = ref({
   id: 1,
   name: 'JavaSe零基础之基础语法',
   img: 'JavaSe零基础之基础语法.jpg',
   desc: "本门课程作为2024年Flutter入门首选课，课程中结合了最新版的Flutter、Dart、主流插件技术进行企业级项目开发，并融入了大量Flutter版本更新问题的解决方案，以及与H5混合开发和通信、多屏适配等高频技能，课程中还将讲师近几年在一线开发中积累的大量开发、避坑等经验传授给大家，让各位小伙伴在实际开发中能更好的运用Flutter技术。",
   author: '尚硅谷',
-  price: '',
+  price: '39.9',
+  subject: 'java',
   protein: 4.0,
   date: '2024年12月24 12:30:05',
   status: '审核中'
 })
 const editCourse = (id) => {
-  console.log(id)
+  editFrom.value = Object.assign({}, tableData.value.filter(item => item.id === id)[0])
   dialog.value = true
 }
 const editCourse2 = (id) => {
@@ -338,7 +411,7 @@ const columns = reactive([
   },
   {name: 'img', align: 'center', label: '封面', field: 'img'},
   {name: 'author', align: 'center', label: '作者', field: 'author'},
-  {name: 'kind', align: 'center', label: '类别', field: 'kind'},
+  {name: 'subject', align: 'center', label: '类别', field: 'subject'},
   {name: 'price', align: 'center', label: '价格', field: 'price'},
   {name: 'carbs', align: 'center', label: '总节数', field: 'carbs'},
   {name: 'protein', align: 'center', label: '总时长', field: 'protein'},
@@ -355,7 +428,8 @@ const columns = reactive([
 ])
 
 const url = {
-  list: 'courses/get-course-info'
+  list: 'courses/get-course-info',
+  update: 'courses/update-courses'
 }
 const {
   getTableData,
@@ -382,6 +456,42 @@ const showResult = (e) => {
       center: true,
     }
   )
+}
+const reAudit = (id) => {
+  ElMessageBox.confirm(' <div><p> 1.内容合法性：上传的视频必须符合所有适用的法律法规，包括但不限于不涉及侵犯版权、诽谤、淫秽、恶意攻击、种族歧视等违法违规内容。</p><p> 2.版权规范：确保上传的视频不侵犯任何第三方的知识产权，包括但不限于音乐、图像、文字等。请仅上传您有权使用的内容。</p><p>3.广告宣传：禁止包含未经许可的广告或推广内容。上传者需确保视频内容不违反广告法规定，如虚假宣传等。</p><p>4.不当行为：视频内容不得涉及违法行为、暴力、虐待、恐怖主义等不当行为。我们鼓励积极向上、健康向善的内容。</p><p>5.隐私尊重：严禁上传侵犯他人隐私的视频。确保您具有合法获取并分享涉及他人的内容的权利。</p><p>6.技术规范：上传的视频必须符合平台的技术规范，包括但不限于分辨率、格式等要求。</p><p> 请上传者遵守以上审核细则，违规者将面临视频被删除或账号被禁的处理。</p></div>',
+    t('审核细则'),
+    {
+      confirmButtonText: t('我已阅读并知晓上述内容'),
+      cancelButtonText: t('Cancel'),
+      dangerouslyUseHTMLString: true,
+      showCancelButton: false,
+      type: 'warning',
+      center: true
+    }
+  )
+    .then(async () => {
+      queryParams.value.status = 'onOffPass_on'
+      queryParams.value.id = id
+      const res = await postAction(url.update, queryParams.value)
+      if (res && res.code === 1) {
+        emits('refresh')
+        queryParams.value.status = 'onOffPass_off'
+        getTableData()
+        window.$message.success(res.message, {render: window.$render})
+      } else {
+        window.$message.error(res.message, {render: window.$render})
+      }
+    })
+}
+const saveCourse = async () => {
+  const res = await postAction(url.update, editFrom.value)
+  if (res && res.code === 1) {
+    getTableData()
+    dialog.value = false
+    window.$message.success(res.message, {render: window.$render})
+  } else {
+    window.$message.error(res.message, {render: window.$render})
+  }
 }
 </script>
 

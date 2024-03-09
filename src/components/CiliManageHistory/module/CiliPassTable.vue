@@ -27,14 +27,14 @@
             {{ props.row.author }}
           </q-badge>
         </q-td>
-        <q-td key="author" :props="props">
+        <q-td key="subject" :props="props">
           <q-badge color="purple">
-            {{ props.row.author }}
+            {{ props.row.subject }}
           </q-badge>
         </q-td>
-        <q-td key="kind" :props="props">
+        <q-td key="price" :props="props">
           <q-badge color="purple">
-            {{ props.row.kind }}
+            {{ props.row.price }}
           </q-badge>
         </q-td>
         <q-td key="carbs" :props="props">
@@ -64,7 +64,9 @@
           <q-btn v-if="props.row.reason" color="primary" flat label="查看审核结果"
                  @click="showResult(props.row.reason)">
           </q-btn>
-          <q-btn color="red" flat label="删除该课程" @click="deleteCourse(props.row.id)">
+          <q-btn v-if="props.row.logical_delete>0" color="red" flat label="下架" @click="deleteCourse(props.row.id)">
+          </q-btn>
+          <q-btn v-else color="primary" flat label="上架" @click="uploadCourse(props.row.id)">
           </q-btn>
         </q-td>
       </q-tr>
@@ -95,7 +97,7 @@ const columns = reactive([
   },
   {name: 'img', align: 'center', label: '封面', field: 'img'},
   {name: 'author', align: 'center', label: '作者', field: 'author'},
-  {name: 'kind', align: 'center', label: '类别', field: 'kind'},
+  {name: 'subject', align: 'center', label: '类别', field: 'subject'},
   {name: 'price', align: 'center', label: '价格', field: 'price'},
   {name: 'carbs', align: 'center', label: '总节数', field: 'carbs'},
   {name: 'protein', align: 'center', label: '总时长', field: 'protein'},
@@ -112,7 +114,8 @@ const columns = reactive([
 ])
 const url = {
   list: 'courses/get-course-info',
-  delete: 'courses/delete-course-info-by-id'
+  delete: 'courses/delete-course-info-by-id',
+  update: 'courses/update-courses'
 }
 const {
   getTableData,
@@ -142,7 +145,7 @@ const showResult = (e) => {
 }
 const deleteCourse = (id) => {
   ElMessageBox.confirm(
-    t('WilleDeleteFromDataBase'),
+    t('AuditOrder'),
     {
       confirmButtonText: t('Confirm'),
       cancelButtonText: t('Cancel'),
@@ -150,8 +153,8 @@ const deleteCourse = (id) => {
     }
   )
     .then(async () => {
-      queryParams.id = id
-      const res = await postAction(url.delete, queryParams)
+      queryParams.value.id = id
+      const res = await postAction(url.delete, queryParams.value)
       if (res && res.code === 1) {
         emits('refresh')
         getTableData()
@@ -160,6 +163,18 @@ const deleteCourse = (id) => {
         window.$message.error(res.message, {render: window.$render})
       }
     })
+}
+const uploadCourse = async (id) => {
+  queryParams.value.id = id
+  queryParams.value.logical_delete = 1
+  const res = await postAction(url.update, queryParams.value)
+  if (res && res.code === 1) {
+    emits('refresh')
+    getTableData()
+    window.$message.success(res.message, {render: window.$render})
+  } else {
+    window.$message.error(res.message, {render: window.$render})
+  }
 }
 </script>
 

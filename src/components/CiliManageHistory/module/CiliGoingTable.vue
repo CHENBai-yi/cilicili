@@ -28,9 +28,9 @@
               {{ props.row.author }}
             </q-badge>
           </q-td>
-          <q-td key="kind" :props="props">
+          <q-td key="subject" :props="props">
             <q-badge color="purple">
-              {{ props.row.kind }}
+              {{ props.row.subject }}
             </q-badge>
           </q-td>
           <q-td key="price" :props="props">
@@ -97,7 +97,7 @@ const columns = reactive([
   },
   {name: 'img', align: 'center', label: '封面', field: 'img'},
   {name: 'author', align: 'center', label: '作者', field: 'author'},
-  {name: 'kind', align: 'center', label: '类别', field: 'kind'},
+  {name: 'subject', align: 'center', label: '类别', field: 'subject'},
   {name: 'price', align: 'center', label: '价格', field: 'price'},
   {name: 'carbs', align: 'center', label: '总节数', field: 'carbs'},
   {name: 'protein', align: 'center', label: '总时长', field: 'protein'},
@@ -114,7 +114,8 @@ const columns = reactive([
 ])
 const url = {
   list: 'courses/get-course-info',
-  delete: 'courses/delete-course-info-by-id'
+  delete: 'courses/delete-course-info-by-id',
+  update: 'courses/update-courses'
 }
 const processApi = ref(process.env.API)
 const {
@@ -140,10 +141,13 @@ const canticleAudit = (id) => {
     }
   )
     .then(async () => {
-      queryParams.id = id
-      const res = await postAction(url.delete, queryParams)
+      queryParams.value.status = 'onOffPass_off'
+      queryParams.value.id = id
+      queryParams.value.reason = t('cancleAudit')
+      const res = await postAction(url.update, queryParams.value)
       if (res && res.code === 1) {
         emits('refresh')
+        queryParams.value.status = 'onOffPass_on'
         getTableData()
         window.$message.success(res.message, {render: window.$render})
       } else {
