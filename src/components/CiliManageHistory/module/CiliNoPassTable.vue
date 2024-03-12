@@ -61,12 +61,14 @@
           <CiliDictShow :dict-code="props.row.status"/>
         </q-td>
         <q-td key="operation" :props="props">
-          <div>
-            <q-btn color="primary" flat label="编辑章节" @click="editCourse(props.row.id)"/>
-            <q-btn color="primary" flat label="编辑小节" @click="editCourse2(props.row.id)"/>
+          <div style="width:205px">
+            <div>
+              <q-btn color="primary" flat label="编辑章节" @click="editCourse(props.row.id)"/>
+              <q-btn color="primary" flat label="编辑小节" @click="editCourse2(props.row.id)"/>
+            </div>
+            <q-btn color="black" flat label="重新提交审核" @click="reAudit(props.row.id)"/>
+            <q-btn color="red" flat label="查看原因" @click="showResult(props.row.reason)"/>
           </div>
-          <q-btn color="black" flat label="重新提交审核" @click="reAudit(props.row.id)"/>
-          <q-btn color="red" flat label="查看原因" @click="showResult(props.row.reason)"/>
         </q-td>
       </q-tr>
     </template>
@@ -171,6 +173,30 @@
                   <span v-else>{{ prop.node.id }}</span>
                   <span v-if="!!prop.node.title">{{ prop.node.title }}</span>
                   <span v-else>未完成标题</span>
+
+                  <q-popup-edit v-slot="scope" v-model="prop.node.title"
+                                :validate="val => val.length > 5">
+                    <q-input
+                      v-model="scope.value"
+                      :model-value="scope.value"
+                      autofocus
+                      dense
+                    >
+                      <template v-slot:after>
+                        <q-btn
+                          color="negative" dense flat icon="cancel"
+                          @click.stop.prevent="scope.cancel"
+                        />
+
+                        <q-btn
+                          :disable="scope.validate(scope.value) === false || scope.initialValue === scope.value"
+                          color="positive" dense flat
+                          icon="check_circle"
+                          @click.stop.prevent="scope.set"
+                        />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
                 </div>
               </div>
             </template>
@@ -178,15 +204,42 @@
             <template v-slot:default-body="prop">
               <div v-if="prop.node.desc">
                 <span class="text-weight-bold">{{ prop.node.desc }}</span>
+                <q-popup-edit v-slot="scope" v-model="prop.node.desc"
+                              :validate="val => val.length > 5">
+                  <q-input
+                    v-model="scope.value"
+                    :model-value="scope.value"
+                    autofocus
+                    dense
+                  >
+                    <template v-slot:after>
+                      <q-btn
+                        color="negative" dense flat icon="cancel"
+                        @click.stop.prevent="scope.cancel"
+                      />
+
+                      <q-btn
+                        :disable="scope.validate(scope.value) === false || scope.initialValue === scope.value"
+                        color="positive" dense flat
+                        icon="check_circle"
+                        @click.stop.prevent="scope.set"
+                      />
+                    </template>
+                  </q-input>
+                </q-popup-edit>
               </div>
             </template>
           </q-tree>
+        </div>
+        <div class="q-gutter-x-md q-mt-md flex justify-end">
+          <q-btn :label="t('Save')" color="primary" @click="saveEditFrom"/>
+          <q-btn :label="t('Cancel')" color="red" @click="dialog2=false"/>
         </div>
       </q-card-section>
     </q-card>
   </q-dialog>
   <q-dialog v-model="dialog3" position="bottom">
-    <q-card :class="darkTheme">
+    <q-card :class="darkTheme" style="width:320px;">
       <q-card-section>
         <div class="text-h6">编辑小节：</div>
       </q-card-section>
@@ -197,7 +250,7 @@
 
             <video v-if="!videoSrc" :poster="poster" class="q-card full-width no-margin no-padding " controls
                    style="height:200px;"/>
-            <video v-else :src="videoSrc" class="q-card  no-margin  full-width no-padding " controls
+            <video v-else :src="videoSrc" class="q-card full-width no-margin no-padding " controls
                    style="height:200px;"/>
           </div>
           <div class="col flex justify-center">
@@ -220,7 +273,7 @@
           </div>
         </div>
         <div class="q-gutter-x-md q-mt-md flex justify-end">
-          <q-btn :label="t('Save')" color="primary"/>
+          <q-btn :label="t('Confirm')" color="primary" @click="saveEditCourse2"/>
           <q-btn :label="t('Cancel')" color="red" @click="dialog3=false"/>
         </div>
       </q-card-section>
@@ -241,6 +294,13 @@ import {ElMessageBox} from "element-plus";
 import {useUserStore} from 'src/stores/user'
 import {useI18n} from 'vue-i18n'
 
+const url = {
+  list: 'courses/get-course-info',
+  update: 'courses/update-courses',
+  getChildBar: 'courses/get-children-bar',
+  updateBar: 'bars/update-video-url',
+  updateCourse: 'courses/update'
+}
 const userStore = useUserStore()
 const upload = ref(null)
 const fileListLength = ref(0)
@@ -286,8 +346,8 @@ const uploaded = ({xhr}) => {
     if (resp.code === 0) {
       toast.add({severity: "error", summary: "Error", detail: resp.message, life: 3000});
     } else {
-      videoSrc.value = resp.data.records
-      tree.value.getNodeByKey(selected.value).url = videoSrc.value
+      videoSrc.value = processApi.value + resp.data.records
+      tree.value.getNodeByKey(selected.value).url = resp.data.records
       toast.add({severity: "success", summary: "Success", detail: resp.message, life: 3000});
     }
   }
@@ -326,6 +386,9 @@ const dialog3 = ref(false)
 const position = ref('top')
 const selected = ref('')
 const selectedTree = (e) => {
+  const node = tree.value.getNodeByKey(selected.value)
+  videoSrc.value = processApi.value + node.url
+  console.log(videoSrc.value, "这是当前选择的节点")
   dialog3.value = true
 }
 const createThumbnailUrl = (file) => {
@@ -342,7 +405,7 @@ const createThumbnailUrl = (file) => {
     }, 1000)
   })
 }
-const editFrom2 = reactive({
+const editFrom2 = ref({
   id: 1,
   name: 'JavaSe零基础之基础语法',
   url: '',
@@ -395,10 +458,35 @@ const editCourse = (id) => {
   editFrom.value = Object.assign({}, tableData.value.filter(item => item.id === id)[0])
   dialog.value = true
 }
-const editCourse2 = (id) => {
-  console.log(id)
-  dialog2.value = true
+const editCourse2 = async (id) => {
+  queryParams.value.id = id
+  const res = await postAction(url.getChildBar, queryParams.value)
+
+  if (res && res.code === 1) {
+    editFrom2.value = res.data.records
+    dialog2.value = true
+  }
+
 }
+const saveEditCourse2 = async () => {
+  const node = tree.value.getNodeByKey(selected.value)
+  console.log(node)
+  const res = await postAction(url.updateBar, node)
+  if (res && res.code === 1) {
+    window.$message.success(res.message, {render: window.$render})
+  }
+  console.log(node, "aaa")
+}
+
+const saveEditFrom = async () => {
+  const node = tree.value.nodes
+  const res = await postAction(url.updateCourse, node)
+  if (res && res.code === 1) {
+    dialog2.value = false
+    window.$message.success(res.message, {render: window.$render})
+  }
+}
+
 const columns = reactive([
   {
     name: 'name',
@@ -427,10 +515,7 @@ const columns = reactive([
   {name: 'operation', align: 'center', label: '操作', field: 'operation'}
 ])
 
-const url = {
-  list: 'courses/get-course-info',
-  update: 'courses/update-courses'
-}
+
 const {
   getTableData,
   onRequest,

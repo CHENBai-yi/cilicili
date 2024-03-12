@@ -61,13 +61,15 @@
           <CiliDictShow :dict-code="props.row.status"/>
         </q-td>
         <q-td key="operation" :props="props">
-          <q-btn v-if="props.row.reason" color="primary" flat label="查看审核结果"
-                 @click="showResult(props.row.reason)">
-          </q-btn>
-          <q-btn v-if="props.row.logical_delete>0" color="red" flat label="下架" @click="deleteCourse(props.row.id)">
-          </q-btn>
-          <q-btn v-else color="primary" flat label="上架" @click="uploadCourse(props.row.id)">
-          </q-btn>
+          <div style="width:176px">
+            <q-btn v-if="props.row.reason" color="primary" flat label="查看审核结果"
+                   @click="showResult(props.row.reason)">
+            </q-btn>
+            <q-btn v-if="props.row.logical_delete>0" color="red" flat label="下架" @click="deleteCourse(props.row.id)">
+            </q-btn>
+            <q-btn v-else color="primary" flat label="上架" @click="uploadCourse(props.row.id)">
+            </q-btn>
+          </div>
         </q-td>
       </q-tr>
     </template>

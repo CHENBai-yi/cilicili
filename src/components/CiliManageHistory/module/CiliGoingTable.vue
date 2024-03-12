@@ -62,7 +62,8 @@
             <CiliDictShow :dict-code="props.row.status"/>
           </q-td>
           <q-td key="operation" :props="props">
-            <q-btn color="red" flat label="取消审核" @click="canticleAudit(props.row.id)"></q-btn>
+            <q-btn class="no-padding" color="red" flat label="取消审核" style="width:100px"
+                   @click="canticleAudit(props.row.id)"></q-btn>
           </q-td>
         </q-tr>
         <q-tr>
