@@ -13,7 +13,7 @@
   >
     <template #reference>
 
-      <q-btn :class="clClass" :ripple="false" :style="clStyle" fab-mini flat rounded stack unelevated
+      <q-btn :class="clClass" :ripple="false" :style="clStyle" :to="to" fab-mini flat rounded stack unelevated
              @click="clickEvent">
         <slot name="badge">
 

@@ -94,15 +94,16 @@ export default boot(({app, router}) => {
     }
   }, error => {
     // 500
-    if (error + '' === 'Error: Request failed with status code 500') {
+    if (error + '' === 'AxiosError: Request failed with status code 500') {
       // @ts-ignore
-      window.$message.error(i18n.global.t('Data') + i18n.global.t('Exception') + ',' + i18n.global.t('Please') + i18n.global.t('Relogin'), {render: window.$render})
+      // window.$message.error(i18n.global.t('Data') + i18n.global.t('Exception') + ',' + i18n.global.t('Please') + i18n.global.t('Relogin'), {render: window.$render})
+      window.$message.error(i18n.global.t('Data') + i18n.global.t('Exception'), {render: window.$render})
     } else
       //Unauthorized
-    if (error + '' === 'Error: Request failed with status code 401') {
+    if (error + '' === 'AxiosError: Request failed with status code 401') {
       // @ts-ignore
       window.$message.error(error.config.url + i18n.global.t('Unauthorized'), {render: window.$render})
-    } else if (error + '' === 'Error: Request failed with status code 511') {
+    } else if (error + '' === 'AxiosError: Request failed with status code 511') {
       userStore.HandleLogout()
       Dialog.create({
         // @ts-ignore

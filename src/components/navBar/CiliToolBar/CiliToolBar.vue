@@ -155,11 +155,11 @@
       <!--        </div>-->
       <!--      </CiliPopover>-->
 
-      <CiliPopover :label="$t('Contribute')" name="cloud_upload">
+      <CiliPopover :label="$t('Contribute')" name="cloud_upload" to="/create/manage">
         <div class="">
           <div class="">
-            <div class=" upload-panel-popover">
-              <CiliLink color="" href="#/create">
+            <div class="upload-panel-popover">
+              <CiliLink color="" href="#/create/manage">
                 <div class="upload-item">
 
                   <svg class="item-icon" fill="none" height="26" viewBox="0 0 26 26" width="26"

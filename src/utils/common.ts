@@ -9,4 +9,22 @@ const getAvatar = (newValue: string): string => {
   }
   return ""
 }
-export {getAvatar}
+
+function getVideoLength(pl: HTMLVideoElement) {
+  const time = pl.duration;
+  var totalSecond = Math.ceil(time);
+  var lenght;
+  // 得到分钟数加秒数
+  if (totalSecond > 60) {
+    var minute: any = Math.floor(totalSecond / 60);
+    if (minute < 10) {
+      minute = "0" + minute;
+    }
+    lenght = minute + ":" + (totalSecond % 60)
+  } else {
+    lenght = "00:" + totalSecond
+  }
+  return {size: totalSecond, length: lenght};
+}
+
+export {getAvatar, getVideoLength}
