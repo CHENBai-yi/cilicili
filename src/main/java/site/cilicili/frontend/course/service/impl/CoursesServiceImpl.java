@@ -4,11 +4,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.bars.domain.mapper.BarsMapper;
 import site.cilicili.frontend.bars.service.BarsService;
+import site.cilicili.frontend.catalogs.domain.mapper.CatalogMapper;
 import site.cilicili.frontend.catalogs.service.CatalogsService;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
+import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
 import site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
@@ -150,5 +154,29 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                 .filter(f -> f > 0)
                 .map(r -> R.yes("Success."))
                 .orElse(R.no("Fail."));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getChildrenBar(final CoursesEntity courses) {
+
+        return Optional.ofNullable(courses.getCourseId())
+                .map(id -> baseMapper.getChildrenBar(id))
+                .map(data -> {
+                    log.debug(data.toString());
+                    return R.yes("Success.").setRecords(data);
+                })
+                .orElse(R.no("Fail."));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public R coursesUpdate(final List<GetChildrenBarResponse.Catalog> courses) {
+        return Optional.ofNullable(catalogsService.updateBatchById(CatalogMapper.CATALOG_MAPPER.cataLogsToCatalogsEntities(courses)))
+                .filter(f -> f)
+                .filter(f -> {
+                    final List<GetChildrenBarResponse.Bar> collect = courses.stream().flatMap(item -> item.getBar().stream()).toList();
+                    return barsService.updateBatchById(BarsMapper.BARS_MAPPER.barsToBarsEntities(collect));
+                }).map(r -> R.yes("Success.")).orElseThrow(() -> new AppException("修改视频数据失败！"));
     }
 }

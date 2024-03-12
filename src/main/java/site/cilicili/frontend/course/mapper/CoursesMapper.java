@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse;
+import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
 import site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
@@ -97,4 +98,5 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
 
     int logicalDeleteCourseInfoById(CoursesEntity courses);
 
+    GetChildrenBarResponse getChildrenBar(final Integer id);
 }

@@ -51,4 +51,6 @@ public interface BarsService extends IService<BarsEntity> {
      * @return 是否成功
      */
     R deleteById(final Integer barId);
+
+    R updateVideoUrl(BarsEntity bars);
 }
