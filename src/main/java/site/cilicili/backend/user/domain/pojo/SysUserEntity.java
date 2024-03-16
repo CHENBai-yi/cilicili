@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
@@ -26,6 +27,7 @@ import java.io.Serializable;
 @Setter
 @Schema(description = "SysUser 实体类")
 @TableName("sys_user")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SysUserEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -18979173431235042L;
 
@@ -59,6 +61,7 @@ public class SysUserEntity extends BaseEntity implements Serializable {
 
     @Schema(description = "用户密码")
     @TableField(fill = FieldFill.INSERT)
+    @JsonIgnore
     private String password;
 
     @Schema(description = "头像")

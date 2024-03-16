@@ -21,11 +21,12 @@ import java.util.List;
 public interface BarsMapper {
     BarsMapper BARS_MAPPER = Mappers.getMapper(BarsMapper.class);
 
-    @Mappings(value = {
-            @Mapping(source = "desc", target = "description"),
-            @Mapping(source = "catalog", target = "catalogId"),
-            @Mapping(source = "PId", target = "parentBarId")
-    })
+    @Mappings(
+            value = {
+                    @Mapping(source = "desc", target = "description"),
+                    @Mapping(source = "catalog", target = "catalogId"),
+                    @Mapping(source = "PId", target = "parentBarId")
+            })
     BarsEntity barsToBarsEntity(GetChildrenBarResponse.Bar bar);
 
     List<BarsEntity> barsToBarsEntities(List<GetChildrenBarResponse.Bar> catalog);

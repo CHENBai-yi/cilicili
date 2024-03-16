@@ -69,7 +69,6 @@ public class BarsController {
         return this.barsService.insert(bars);
     }
 
-
     /**
      * 编辑数据
      *
@@ -98,8 +97,4 @@ public class BarsController {
         return this.barsService.deleteById(id);
     }
 
-    @PostMapping("update-video-url")
-    public R updateVideoUrl(final @RequestBody BarsEntity bars) {
-        return this.barsService.updateVideoUrl(bars);
-    }
 }

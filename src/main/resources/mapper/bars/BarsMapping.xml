@@ -86,31 +86,34 @@
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="barId" useGeneratedKeys="true">
-        insert into bars(catalog_id, parent_bar_id, id, title, description, url)
-        values (#{catalogId}, #{parentBarId}, #{id}, #{title}, #{description}, #{url})
+        insert into bars(catalog_id, parent_bar_id, id, title, description, url, size, length)
+        values (#{catalogId}, #{parentBarId}, #{id}, #{title}, #{description}, #{url}, #{size}, #{length})
     </insert>
     
     <insert id="insertBatch" keyProperty="barId" useGeneratedKeys="true">
-        insert into bars(catalog_id,parent_bar_id, id, title, description, url)
+        insert into bars(catalog_id,parent_bar_id, id, title, description, url,size,length)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.catalogId},#{entity.parentBarId}, #{entity.id}, #{entity.title}, #{entity.description},
-            #{entity.url})
+            #{entity.url},#{entity.size},#{entity.length})
         </foreach>
     </insert>
     
     <insert id="insertOrUpdateBatch" keyProperty="barId" useGeneratedKeys="true">
-        insert into bars(parent_bar_id, id, title, description, url)
+        insert into bars(parent_bar_id, id, title, description, url,size,length)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.parentBarId}, #{entity.id}, #{entity.title}, #{entity.description}, #{entity.url})
+            (#{entity.parentBarId}, #{entity.id}, #{entity.title}, #{entity.description},
+            #{entity.url},#{entity.size},#{entity.length})
         </foreach>
         on duplicate key update
         parent_bar_id = values(parent_bar_id),
         id = values(id),
         title = values(title),
         description = values(description),
-        url = values(url)
+        url = values(url),
+        size = values(size),
+        length = values(length)
     </insert>
     
     <!--通过主键修改数据-->
@@ -131,6 +134,12 @@
             </if>
             <if test="url != null and url != ''">
                 url = #{url},
+            </if>
+            <if test="size != null">
+                size = #{size},
+            </if>
+            <if test="length != null and length != ''">
+                length = #{length},
             </if>
         </set>
         where bar_id = #{barId}

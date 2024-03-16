@@ -21,10 +21,7 @@ import java.util.List;
 public interface CatalogMapper {
     CatalogMapper CATALOG_MAPPER = Mappers.getMapper(CatalogMapper.class);
 
-    @Mappings(value = {
-            @Mapping(source = "desc", target = "description"),
-            @Mapping(target = "courseId", ignore = true)
-    })
+    @Mappings(value = {@Mapping(source = "desc", target = "description"), @Mapping(target = "courseId", ignore = true)})
     CatalogsEntity cataLogsToCatalogsEntity(GetChildrenBarResponse.Catalog catalog);
 
     List<CatalogsEntity> cataLogsToCatalogsEntities(List<GetChildrenBarResponse.Catalog> catalog);

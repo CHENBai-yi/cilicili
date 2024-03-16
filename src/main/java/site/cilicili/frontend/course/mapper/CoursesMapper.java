@@ -51,13 +51,6 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
      */
     long count(CoursesEntity courses);
 
-    /**
-     * 新增数据
-     *
-     * @param courses 实例对象
-     * @return 影响行数
-     */
-    int insert(CoursesEntity courses);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
@@ -99,4 +92,6 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
     int logicalDeleteCourseInfoById(CoursesEntity courses);
 
     GetChildrenBarResponse getChildrenBar(final Integer id);
+
+    List<CoursesEntity> getCourseList(QueryCourseInfoRequest queryCourseInfoRequest);
 }

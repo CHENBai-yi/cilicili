@@ -47,13 +47,13 @@ public interface CatalogsMapper extends BaseMapper<CatalogsEntity> {
      */
     long count(CatalogsEntity catalogs);
 
-    /**
-     * 新增数据
-     *
-     * @param catalogs 实例对象
-     * @return 影响行数
-     */
-    int insert(CatalogsEntity catalogs);
+    // /**
+    //  * 新增数据
+    //  *
+    //  * @param catalogs 实例对象
+    //  * @return 影响行数
+    //  */
+    // int insert(CatalogsEntity catalogs);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）

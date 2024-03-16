@@ -2,6 +2,7 @@ package site.cilicili.frontend.course.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
 import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
@@ -70,4 +71,10 @@ public interface CoursesService extends IService<CoursesEntity> {
     R getChildrenBar(CoursesEntity courses);
 
     R coursesUpdate(List<GetChildrenBarResponse.Catalog> courses);
+
+    R updateVideoUrl(BarsEntity bars);
+
+    Boolean updateVideoSize(BarsEntity barsEntity, List<BarsEntity> barsEntities);
+
+    R getCourseList(QueryCourseInfoRequest queryCourseInfoRequest);
 }

@@ -1,6 +1,5 @@
 package site.cilicili.frontend.course.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * @author BaiYiChen
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+
 public class GetChildrenBarResponse {
     private Integer id;
     private String name;
@@ -22,7 +21,6 @@ public class GetChildrenBarResponse {
     private List<Catalog> catalog;
 
     @Data
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class Catalog {
         private Integer id;
         private Integer catalogId;
@@ -30,11 +28,9 @@ public class GetChildrenBarResponse {
         private String desc;
         private List<Bar> bar;
         private Boolean selectable = false;
-
     }
 
     @Data
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class Bar {
         private Integer barId;
         private Integer pId;
@@ -43,6 +39,7 @@ public class GetChildrenBarResponse {
         private String title;
         private String desc;
         private String url;
-
+        private String length;
+        private Long size;
     }
 }

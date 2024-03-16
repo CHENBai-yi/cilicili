@@ -51,4 +51,5 @@ public interface CatalogsService extends IService<CatalogsEntity> {
      * @return 是否成功
      */
     R deleteById(final Integer catalogId);
+
 }

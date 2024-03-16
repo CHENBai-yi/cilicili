@@ -1,6 +1,9 @@
 package site.cilicili.frontend.course.service.impl;
 
+import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,17 +11,17 @@ import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.mapper.BarsMapper;
+import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.bars.service.BarsService;
 import site.cilicili.frontend.catalogs.domain.mapper.CatalogMapper;
+import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
 import site.cilicili.frontend.catalogs.service.CatalogsService;
-import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
-import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
-import site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse;
-import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
+import site.cilicili.frontend.course.domain.dto.*;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.mapper.CoursesMapper;
 import site.cilicili.frontend.course.service.CoursesService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +38,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     private final BarsService barsService;
     private final CatalogsService catalogsService;
+
+    private final HttpServletRequest httpServletRequest;
 
     /**
      * 通过ID查询单条数据
@@ -95,27 +100,26 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         return R.ok().setData(del);
     }
 
-    @Transactional(rollbackFor = Throwable.class)
-    @Override
-    public R addCourse(final AddCourseRequest courses) {
-        return Optional.ofNullable(courses)
-                .filter(b -> {
-                    courses.setTag(String.join(",", courses.getTags()));
-                    return saveOrUpdate(courses);
-                })
-                .map(c -> {
-                    for (final AddCourseRequest.Catalog catalog : c.getCatalog()) {
-                        catalog.setCourseId(c.getCourseId());
-                        if (catalogsService.saveOrUpdate(catalog)) {
-                            catalog.getBar().forEach(item -> item.setCatalogId(catalog.getCatalogId()));
-                            if (barsService.saveOrUpdateBatch(catalog.getBar())) {
-                                return R.yes("添加成功.");
-                            }
-                        }
-                    }
-                    return null;
-                })
-                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+    public static String formatDateTime(long mss) {
+        String DateTimes = null;
+        long days = mss / (60 * 60 * 24);
+        long hours = (mss % (60 * 60 * 24)) / (60 * 60);
+        long minutes = (mss % (60 * 60)) / 60;
+        long seconds = mss % 60;
+        if (days > 0) {
+            DateTimes = days + "天" + hours + "小时" + minutes + "分钟"
+                    + seconds + "秒";
+        } else if (hours > 0) {
+            DateTimes = hours + "小时" + minutes + "分钟"
+                    + seconds + "秒";
+        } else if (minutes > 0) {
+            DateTimes = minutes + "分钟"
+                    + seconds + "秒";
+        } else {
+            DateTimes = seconds + "秒";
+        }
+
+        return DateTimes;
     }
 
     @Transactional(readOnly = true)
@@ -171,12 +175,106 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(rollbackFor = Throwable.class)
     @Override
+    public R addCourse(final AddCourseRequest courses) {
+        return Optional.ofNullable(courses)
+                .filter(b -> {
+                    courses.setTag(String.join(",", courses.getTags()));
+                    return saveOrUpdate(courses);
+                })
+                .map(c -> {
+                    boolean isOk = false;
+                    for (final AddCourseRequest.Catalog catalog : c.getCatalog()) {
+                        catalog.setCourseId(c.getCourseId());
+                        if (catalogsService.saveOrUpdate(catalog)) {
+                            catalog.getBar().forEach(item -> item.setCatalogId(catalog.getCatalogId()));
+                            if (barsService.saveOrUpdateBatch(catalog.getBar())) {
+                                isOk = true;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+
+                    return isOk ? R.yes("添加成功.") : null;
+                })
+                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
     public R coursesUpdate(final List<GetChildrenBarResponse.Catalog> courses) {
-        return Optional.ofNullable(catalogsService.updateBatchById(CatalogMapper.CATALOG_MAPPER.cataLogsToCatalogsEntities(courses)))
+        return Optional.of(catalogsService.updateBatchById(
+                        CatalogMapper.CATALOG_MAPPER.cataLogsToCatalogsEntities(courses)))
                 .filter(f -> f)
                 .filter(f -> {
-                    final List<GetChildrenBarResponse.Bar> collect = courses.stream().flatMap(item -> item.getBar().stream()).toList();
+                    final List<GetChildrenBarResponse.Bar> collect = courses.stream()
+                            .flatMap(item -> item.getBar().stream())
+                            .toList();
                     return barsService.updateBatchById(BarsMapper.BARS_MAPPER.barsToBarsEntities(collect));
-                }).map(r -> R.yes("Success.")).orElseThrow(() -> new AppException("修改视频数据失败！"));
+                })
+                .map(r -> R.yes("Success."))
+                .orElseThrow(() -> new AppException("修改视频数据失败！"));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public R updateVideoUrl(final BarsEntity bars) {
+        return Optional.ofNullable(bars.getUrl())
+                .map(id -> barsService.updateById(bars))
+                .filter(f -> f)
+                .filter(f -> {
+                    final BarsEntity barsEntity = barsService.getById(bars.getBarId());
+                    final List<BarsEntity> barsEntities = barsService.list(new QueryWrapper<BarsEntity>().eq("catalog_id", barsEntity.getCatalogId()));
+                    return updateVideoSize(barsEntity, barsEntities);
+                })
+                .map(r -> R.yes("Success."))
+                .orElseThrow(() -> new AppException("url不能为空"));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public Boolean updateVideoSize(final BarsEntity barsEntity, final List<BarsEntity> barsEntities) {
+
+        final Long totalSecond = barsEntities.stream().map(BarsEntity::getSize).reduce(0L, Long::sum);
+        final CatalogsEntity catalogsEntity = new CatalogsEntity();
+        catalogsEntity.setCatalogId(barsEntity.getCatalogId());
+        catalogsEntity.setTotal(totalSecond);
+        catalogsEntity.setTotalTime(formatDateTime(totalSecond));
+        Boolean ff = catalogsService.updateById(catalogsEntity);
+        final CatalogsEntity catalogs = catalogsService.getOne(new QueryWrapper<CatalogsEntity>().eq("catalog_id", barsEntity.getCatalogId()));
+        final Long catalogsTotalSecond = catalogsService.list(new QueryWrapper<CatalogsEntity>().eq("course_id", catalogs.getCourseId())).stream().map(CatalogsEntity::getTotal).reduce(0L, Long::sum);
+        final CoursesEntity coursesEntity = new CoursesEntity();
+        coursesEntity.setCourseId(catalogs.getCourseId());
+        coursesEntity.setTotalTime(formatDateTime(catalogsTotalSecond));
+        Boolean fff = baseMapper.update(coursesEntity) > 0;
+        return ff && fff;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getCourseList(final QueryCourseInfoRequest queryCourseInfoRequest) {
+        return Optional.ofNullable(baseMapper.getCourseList(queryCourseInfoRequest))
+                .map(courseList -> courseList.stream().map(item -> {
+                    final GetCourseListResponse getCourseListResponse = new GetCourseListResponse();
+                    getCourseListResponse.setId(item.getCourseId());
+                    getCourseListResponse.setTitle(item.getName());
+                    getCourseListResponse.setAuthor(item.getTeacher());
+                    getCourseListResponse.setTime(DateUtil.format(item.getCreatedAt(), "MM-dd"));
+                    final GetCourseListResponse.Detail detail = new GetCourseListResponse.Detail();
+                    final GetCourseListResponse.Video video = new GetCourseListResponse.Video();
+                    final List<GetCourseListResponse.HighLight> highLights = new ArrayList<>();
+                    final String url = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
+                    video.setPic(url + item.getPoster());
+                    video.setUrl(url + item.getFirstBarUrl());
+                    highLights.add(new GetCourseListResponse.HighLight(20L, "这是第 20 秒"));
+                    highLights.add(new GetCourseListResponse.HighLight(120L, "这是 2 分钟"));
+                    detail.setVideo(video);
+                    detail.setHighlight(highLights);
+                    getCourseListResponse.setDetail(detail);
+                    return getCourseListResponse;
+                }).toList())
+                .map(r -> R.yes("Success.").setRecords(r)).orElse(R.no("Fail."));
     }
 }

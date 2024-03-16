@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
 import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
@@ -146,5 +147,15 @@ public class CoursesController {
     @PostMapping("update")
     public R coursesUpdate(final @RequestBody List<GetChildrenBarResponse.Catalog> courses) {
         return coursesService.coursesUpdate(courses);
+    }
+
+    @PostMapping("update-video-url")
+    public R updateVideoUrl(final @RequestBody BarsEntity bars) {
+        return this.coursesService.updateVideoUrl(bars);
+    }
+
+    @PostMapping("get-course-list")
+    public R getCourseList(final @RequestBody QueryCourseInfoRequest queryCourseInfoRequest) {
+        return this.coursesService.getCourseList(queryCourseInfoRequest);
     }
 }

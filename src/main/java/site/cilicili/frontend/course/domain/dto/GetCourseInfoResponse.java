@@ -39,7 +39,7 @@ public class GetCourseInfoResponse extends BaseQueryResponse {
 
         private Integer carbs;
 
-        private Integer protein;
+        private String protein;
 
         private String kind;
         private String subject;

@@ -46,4 +46,9 @@ public class CatalogsEntity implements Serializable {
 
     @Schema(description = "目录描述")
     private String description;
+    @Schema(description = "总秒数")
+    private Long total;
+    @Schema(description = "总时间")
+    private String totalTime;
+
 }

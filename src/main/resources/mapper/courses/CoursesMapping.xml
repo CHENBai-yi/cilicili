@@ -12,6 +12,7 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="poster" column="poster" jdbcType="VARCHAR"/>
         <result property="tag" column="tag" jdbcType="VARCHAR"/>
+        <result property="totalTime" column="total_time" jdbcType="VARCHAR"/>
     </resultMap>
     
     <!--查询单个-->
@@ -190,7 +191,7 @@
     
     <resultMap type="site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse$Catalog"
                id="Catalog">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="id" column="catalog_id" jdbcType="INTEGER"/>
         <result property="catalogId" column="catalog_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="desc" column="description" jdbcType="VARCHAR"/>
@@ -205,6 +206,8 @@
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="desc" column="description" jdbcType="VARCHAR"/>
         <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="size" column="size" jdbcType="BIGINT"/>
+        <result property="length" column="length" jdbcType="VARCHAR"/>
     </resultMap>
     
     <select id="getChildrenBar" resultMap="GetChildrenBarResponse">
@@ -223,11 +226,29 @@
         where catalog_id = #{catalog_id}
     </select>
     
+    
+    <select id="getCourseList" resultMap="CoursesMap">
+        select *
+        from courses
+        <where>
+            <if test="status != null and status!=''">
+                and status = #{status}
+            </if>
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+    </select>
+    
     <!--新增所有列-->
-    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">
-        insert into courses(name, teacher, kind, subject, price, description, poster, tag)
-        values (#{name}, #{teacher}, #{kind}, #{subject}, #{price}, #{description}, #{poster}, #{tag})
-    </insert>
+    <!--    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">-->
+    <!--        insert into courses(name, teacher, kind, subject, price, description, poster, tag)-->
+    <!--        values (#{name}, #{teacher}, #{kind}, #{subject}, #{price}, #{description}, #{poster}, #{tag})-->
+    <!--    </insert>-->
     
     <insert id="insertBatch" keyProperty="courseId" useGeneratedKeys="true">
         insert into courses(name, teacher, kind, subject, price, description, poster, tag)
@@ -292,6 +313,9 @@
             </if>
             <if test="tag != null and tag != ''">
                 tag = #{tag},
+            </if>
+            <if test="totalTime != null and totalTime != ''">
+                total_time = #{totalTime},
             </if>
         </set>
         where course_id = #{courseId}

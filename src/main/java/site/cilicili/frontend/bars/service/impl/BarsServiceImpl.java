@@ -4,13 +4,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.cilicili.common.exception.AppException;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.bars.mapper.BarsMapper;
 import site.cilicili.frontend.bars.service.BarsService;
-
-import java.util.Optional;
+import site.cilicili.frontend.catalogs.service.CatalogsService;
 
 /**
  * (Bars) 表服务实现类
@@ -22,6 +20,8 @@ import java.util.Optional;
 @Transactional(rollbackFor = Throwable.class)
 @Service("barsService")
 public class BarsServiceImpl extends ServiceImpl<BarsMapper, BarsEntity> implements BarsService {
+
+    private final CatalogsService catalogsService;
 
     /**
      * 通过ID查询单条数据
@@ -81,13 +81,4 @@ public class BarsServiceImpl extends ServiceImpl<BarsMapper, BarsEntity> impleme
         return R.ok().setData(del);
     }
 
-    @Transactional(rollbackFor = Throwable.class)
-    @Override
-    public R updateVideoUrl(final BarsEntity bars) {
-        return Optional.ofNullable(bars.getUrl())
-                .map(id -> updateById(bars))
-                .filter(f -> f)
-                .map(r -> R.yes("Success."))
-                .orElseThrow(() -> new AppException("url不能为空"));
-    }
 }
