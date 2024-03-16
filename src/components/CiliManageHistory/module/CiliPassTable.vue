@@ -33,8 +33,11 @@
           </q-badge>
         </q-td>
         <q-td key="price" :props="props">
-          <q-badge color="purple">
-            {{ props.row.price }}
+          <q-badge v-if="props.row.price>0" color="purple">
+            {{ '￥' + props.row.price }}
+          </q-badge>
+          <q-badge v-else color="positive" outline>
+            免费
           </q-badge>
         </q-td>
         <q-td key="carbs" :props="props">

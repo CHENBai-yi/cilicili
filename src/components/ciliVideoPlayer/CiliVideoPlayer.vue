@@ -1,19 +1,21 @@
 <template>
-  <div ref="videoRef" :style="{height:height,width:'100%'}" class='rounded-borders'></div>
+  <div ref="videoRef" :style="{height:height,width:'100%'}" class='rounded-borders'
+       @mouseenter="$emit('handlePlay',handlePlay)" @mouseleave="$emit('handlePause',handlePause)"></div>
   <transition appear
               enter-active-class="animated animate__fadeIn"
               leave-active-class="animated animate__fadeOut"
   >
     <div v-if="showMask" class="relative-position">
       <div class="row  full-width no-wrap mask">
-        <div class="col-11 flex justify-start q-gutter-sm">
-          <div>
+        <div class="col-11 flex justify-start q-gutter-sm ">
+          <div class="flex items-center">
             <q-icon name="fab fa-youtube"/>
-            {{ testData.view }}
+            <div class="q-pl-xs"> {{ testData.view }}</div>
           </div>
-          <div>
+          <div class="flex items-center">
             <q-icon name="subtitles"/>
-            {{ testData.dm }}
+
+            <div class="q-pl-xs"> {{ testData.dm }}</div>
           </div>
         </div>
         <div class="col">
@@ -22,7 +24,6 @@
       </div>
     </div>
   </transition>
-
 </template>
 
 <script setup>
@@ -31,75 +32,18 @@ import Hls from 'hls.js';
 import {inject, onBeforeUnmount, onMounted, reactive, ref} from 'vue'
 import v from 'src/css/variables.scss'
 
-const videoRef = ref()
-const state = reactive({
-  instance: null
-})
-const dp = ref({})
-const testData = reactive({
-  view: '1.3万',
-  dm: 113,
-  time: ''
-})
-const handlePlay = () => {
-  const audioDom = state.instance.video
-  audioDom.muted = "true"
-  audioDom && audioDom.click() // 【主要代码 - 解决报错】先模拟与页面进行交互，防止报错
-  audioDom && audioDom.play() // 播放音频
-}
-const handlePause = () => {
-  const audioDom = state.instance.video
-  audioDom.pause()
-  audioDom.src = ''
-  audioDom.src = props.video.url
-}
-const emit = defineEmits(['isLoadCompleted'])
-const timeToMinute = inject('timeToMinute')
-onMounted(() => {
-  let player = {
-    container: videoRef.value,
-    autoplay: props.autoplay,
-    theme: props.theme,
-    loop: props.loop,
-    lang: props.lang,
-    screenshot: props.screenshot,
-    hotkey: props.hotkey,
-    preload: props.preload,
-    volume: props.volume,
-    playbackSpeed: props.playbackSpeed,
-    logo: props.logo,
-    video: props.video,
-    contextmenu: props.contextmenu,
-    highlight: props.highlight,
-    mutex: props.mutex,
-    preventClickToggle: props.preventClickToggle
-  }
-  if (props.subtitle.url) {
-    player.subtitle = props.subtitle
-  }
-  if (props.danmaku) {
-    player.danmaku = props.danmaku
-  }
-  console.log(player);
-  state.instance = new DPlayer(player)
-  dp.value = state.instance
-  state.instance.video.addEventListener('durationchange', loadShowMast);
-})
-const loadShowMast = (e) => {
-  var timers = Math.ceil(state.instance.video.duration); //视频总时长
-  testData.time = timeToMinute(timers);
-  emit('isLoadCompleted', true)
-}
-// 销毁
-onBeforeUnmount(() => {
-  state.instance.video.removeEventListener('canplaythrough', loadShowMast);
-  state.instance.destroy()
-})
-
 const props = defineProps({
-  showMask: {
-    type: Boolean,
-    default: false
+  view: {
+    type: String,
+    default: '1.3万'
+  },
+  dm: {
+    type: Number,
+    default: 113
+  },
+  time: {
+    type: String,
+    default: ''
   },
   height: {
     type: String,
@@ -205,6 +149,78 @@ const props = defineProps({
     default: true
   }
 })
+const videoRef = ref()
+const state = reactive({
+  instance: null
+})
+const dp = ref({})
+const testData = reactive({
+  view: props.view,
+  dm: props.dm,
+  time: props.time
+})
+const showMask = ref(true)
+const handlePlay = () => {
+  showMask.value = false
+  const audioDom = state.instance.video
+  audioDom.muted = "true"
+  audioDom && audioDom.click() // 【主要代码 - 解决报错】先模拟与页面进行交互，防止报错
+  audioDom && audioDom.play() // 播放音频
+}
+const handlePause = () => {
+
+  const audioDom = state.instance.video
+  audioDom.pause()
+  audioDom.src = ''
+  audioDom.src = props.video.url
+  showMask.value = true
+}
+
+
+const emit = defineEmits(['isLoadCompleted'])
+const timeToMinute = inject('timeToMinute')
+onMounted(() => {
+  let player = {
+    container: videoRef.value,
+    autoplay: props.autoplay,
+    theme: props.theme,
+    loop: props.loop,
+    lang: props.lang,
+    screenshot: props.screenshot,
+    hotkey: props.hotkey,
+    preload: props.preload,
+    volume: props.volume,
+    playbackSpeed: props.playbackSpeed,
+    logo: props.logo,
+    video: props.video,
+    contextmenu: props.contextmenu,
+    highlight: props.highlight,
+    mutex: props.mutex,
+    preventClickToggle: props.preventClickToggle
+  }
+  if (props.subtitle.url) {
+    player.subtitle = props.subtitle
+  }
+  if (props.danmaku) {
+    player.danmaku = props.danmaku
+  }
+  console.log(player);
+  state.instance = new DPlayer(player)
+  dp.value = state.instance
+  state.instance.video.addEventListener('durationchange', loadShowMast);
+})
+const loadShowMast = (e) => {
+  var timers = Math.ceil(state.instance.video.duration); //视频总时长
+  testData.time = timeToMinute(timers);
+  emit('isLoadCompleted', true)
+}
+// 销毁
+onBeforeUnmount(() => {
+  state.instance.video.removeEventListener('canplaythrough', loadShowMast);
+  state.instance.destroy()
+})
+
+
 defineExpose({
   handlePlay, handlePause, dp
 })

@@ -217,9 +217,10 @@
           </q-drawer>
           <q-page-container class="q-ma-sm ">
             <q-page class="q-gutter-y-md column">
-              <video v-if="!videoSrc" :poster="poster" class="q-card full-width no-margin no-padding " controls
+              <video v-if="!videoSrc" ref="videoCom" :poster="poster" class="q-card full-width no-margin no-padding "
+                     controls
                      style="height:437px"/>
-              <video v-else :src="videoSrc" class="q-card  no-margin  full-width no-padding " controls
+              <video v-else ref="videoCom" :src="videoSrc" class="q-card  no-margin  full-width no-padding " controls
                      style="height:437px"/>
               <q-card class="col">
                 <q-card-section>
@@ -265,6 +266,7 @@ import {toChineseNumber} from 'src/utils/ToChineseNumber'
 import {useToast} from "primevue/usetoast";
 import {useQuasar} from "quasar";
 import {postAction} from 'src/api/manage'
+import {getVideoLength} from "../../utils/common";
 
 const urls = reactive({
   add: 'courses/add',
@@ -405,6 +407,7 @@ const toast = useToast();
 const videoSrc = ref('');
 const poster = ref('https://cdn.quasar.dev/img/parallax2.jpg');
 const tree = ref(null)
+const videoCom = ref(null)
 const uploaded = ({xhr}) => {
   const {readyState, status, response} = xhr
   if (readyState === 4 && status === 200) {
@@ -412,8 +415,12 @@ const uploaded = ({xhr}) => {
     if (resp.code === 0) {
       toast.add({severity: "error", summary: "Error", detail: resp.message, life: 3000});
     } else {
+      const nodeByKey = tree.value.getNodeByKey(selected.value);
       videoSrc.value = resp.data.records
-      tree.value.getNodeByKey(selected.value).url = videoSrc.value
+      nodeByKey.url = videoSrc.value
+      const videoLength = getVideoLength(videoCom.value)
+      nodeByKey.size = videoLength.size; //得到时长为秒，小数，182.36
+      nodeByKey.length = videoLength.length
       toast.add({severity: "success", summary: "Success", detail: resp.message, life: 3000});
     }
   }
