@@ -243,7 +243,134 @@
             limit #{cur},#{pageSize}
         </if>
     </select>
+    <select id="queryByParams" resultType="site.cilicili.frontend.course.domain.pojo.CoursesEntity">
+        select *
+        from courses
+        <where>
+            <if test="courseId != null">
+                and course_id = #{courseId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="teacher != null and teacher != ''">
+                and teacher = #{teacher}
+            </if>
+            <if test="kind != null and kind != ''">
+                and kind = #{kind}
+            </if>
+            <if test="subject != null and subject != ''">
+                and subject = #{subject}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="poster != null and poster != ''">
+                and poster = #{poster}
+            </if>
+            <if test="tag != null and tag != ''">
+                and tag = #{tag}
+            </if>
+        </where>
+    </select>
     
+    
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse"
+               id="GetCourseVideoInfoByIdResponse">
+        <association property="video" column="course_id" select="SelectVideoInfo"/>
+        <collection property="videoList" column="course_id" select="SelectVideoList"/>
+        <collection property="catalog" column="course_id" select="SelectCatalogList"/>
+    </resultMap>
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse$Video"
+               id="Video">
+        <result property="author" column="teacher" jdbcType="VARCHAR"/>
+        <result property="pic" column="poster" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="thumbnails" column="poster" jdbcType="VARCHAR"/>
+        <result property="title" column="name" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DOUBLE"/>
+        <result property="view" column="course_id" jdbcType="BIGINT"/>
+    </resultMap>
+    
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse$Content"
+               id="Content">
+        <association property="video" column="bar_id" select="SelectChildrenVideoInfo"/>
+    </resultMap>
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse$VideoList"
+               id="VideoList">
+        
+        <result property="barId" column="bar_id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <association property="content" column="bar_id" select="SelectContent"/>
+    </resultMap>
+    
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse$Catalog"
+               id="CatalogList">
+        <result property="section" column="section" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="detail" column="description" jdbcType="VARCHAR"/>
+        <result property="time" column="total_time" jdbcType="VARCHAR"/>
+        <association property="total" column="catalog_id" select="selectBarsCount"/>
+        <collection property="detailList" column="catalog_id" select="selectDetailList"/>
+    </resultMap>
+    
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse$Catalog$Detail"
+               id="Detail">
+        <result property="tag" column="id" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="time" column="length" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+    <select id="getCourseVideoInfoById"
+            resultMap="GetCourseVideoInfoByIdResponse">
+        select course_id
+        from courses
+        where course_id = #{courseId}
+          and name = #{name}
+    </select>
+    <select id="SelectVideoInfo" resultMap="Video">
+        select *
+        from courses
+        where course_id = #{course_id}
+    </select>
+    <select id="SelectVideoList" resultMap="VideoList">
+        SELECT bars.*
+        from courses
+                 INNER JOIN catalogs ON courses.course_id = catalogs.course_id
+                 INNER JOIN bars ON bars.catalog_id = catalogs.catalog_id
+        WHERE courses.course_id = #{course_id}
+    </select>
+    <select id="SelectChildrenVideoInfo" resultMap="Video">
+        select url
+        from bars
+        where bar_id = #{bar_id}
+    </select>
+    <select id="SelectContent" resultMap="Content">
+        select bar_id, title
+        from bars
+        where bar_id = #{bar_id}
+    </select>
+    
+    <select id="selectBarsCount" resultType="integer">
+        select count(*) as total
+        from bars
+        where catalog_id = #{catalog_id};
+    </select>
+    <select id="selectDetailList" resultMap="Detail">
+        select id, title, length
+        from bars
+        where catalog_id = #{catalog_id}
+        order by id;
+    </select>
+    <select id="SelectCatalogList" resultMap="CatalogList">
+        select section, title, description, total_time, catalog_id
+        from catalogs
+        where course_id = #{course_id}
+    </select>
     <!--新增所有列-->
     <!--    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">-->
     <!--        insert into courses(name, teacher, kind, subject, price, description, poster, tag)-->

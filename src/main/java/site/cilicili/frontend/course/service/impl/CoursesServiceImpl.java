@@ -22,8 +22,10 @@ import site.cilicili.frontend.course.mapper.CoursesMapper;
 import site.cilicili.frontend.course.service.CoursesService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * (Courses) 表服务实现类
@@ -38,8 +40,29 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     private final BarsService barsService;
     private final CatalogsService catalogsService;
-
     private final HttpServletRequest httpServletRequest;
+
+    public static String formatDateTime(long mss) {
+        String DateTimes = null;
+        long days = mss / (60 * 60 * 24);
+        long hours = (mss % (60 * 60 * 24)) / (60 * 60);
+        long minutes = (mss % (60 * 60)) / 60;
+        long seconds = mss % 60;
+        if (days > 0) {
+            DateTimes = days + "天" + hours + "小时" + minutes + "分钟"
+                    + seconds + "秒";
+        } else if (hours > 0) {
+            DateTimes = hours + "小时" + minutes + "分钟"
+                    + seconds + "秒";
+        } else if (minutes > 0) {
+            DateTimes = minutes + "分钟"
+                    + seconds + "秒";
+        } else {
+            DateTimes = seconds + "秒";
+        }
+
+        return DateTimes;
+    }
 
     /**
      * 通过ID查询单条数据
@@ -98,28 +121,6 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     public R deleteById(Integer courseId) {
         boolean del = baseMapper.deleteById(courseId) > 0;
         return R.ok().setData(del);
-    }
-
-    public static String formatDateTime(long mss) {
-        String DateTimes = null;
-        long days = mss / (60 * 60 * 24);
-        long hours = (mss % (60 * 60 * 24)) / (60 * 60);
-        long minutes = (mss % (60 * 60)) / 60;
-        long seconds = mss % 60;
-        if (days > 0) {
-            DateTimes = days + "天" + hours + "小时" + minutes + "分钟"
-                    + seconds + "秒";
-        } else if (hours > 0) {
-            DateTimes = hours + "小时" + minutes + "分钟"
-                    + seconds + "秒";
-        } else if (minutes > 0) {
-            DateTimes = minutes + "分钟"
-                    + seconds + "秒";
-        } else {
-            DateTimes = seconds + "秒";
-        }
-
-        return DateTimes;
     }
 
     @Transactional(readOnly = true)
@@ -276,5 +277,35 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                     return getCourseListResponse;
                 }).toList())
                 .map(r -> R.yes("Success.").setRecords(r)).orElse(R.no("Fail."));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getCourseInfoById(final CoursesEntity courses) {
+        return Optional.ofNullable(baseMapper.queryByParams(courses))
+                .map(r -> R.yes("Success.").setRecords(GetCourseInfoByIdResponse.builder().into(r.getDescription()).learnMore(Arrays.asList(r.getTag().split(","))).build()))
+                .orElseThrow(() -> new AppException("暂无该课程信息."));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getCourseVideoInfoById(final CoursesEntity courses) {
+        //
+        final String url = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
+        final GetCourseVideoInfoByIdResponse courseVideoInfoById = baseMapper.getCourseVideoInfoById(courses);
+        log.debug(courseVideoInfoById.toString());
+        return Optional.of(courseVideoInfoById)
+                .map(GetCourseVideoInfoByIdResponse::getVideoList)
+                .map(videoLists ->
+                        videoLists.stream().map(GetCourseVideoInfoByIdResponse.VideoList::getContent).map(GetCourseVideoInfoByIdResponse.Content::getVideo).peek(video -> video.setUrl(url + video.getUrl())).collect(Collectors.toList())
+                )
+                .map(videos -> courseVideoInfoById.getVideo())
+                .map(video -> {
+                    video.setPic(url + video.getPic());
+                    video.setThumbnails(url + video.getThumbnails());
+                    return video;
+                })
+                .map(data -> R.yes("Success").setRecords(courseVideoInfoById))
+                .orElseThrow(() -> new AppException("暂无该课程信息."));
     }
 }

@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 public class App {
     private final DbChangeConfig dbChangeConf;
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         SpringApplication.run(App.class, args);
     }
 

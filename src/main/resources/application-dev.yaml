@@ -113,6 +113,7 @@ mybatis-plus:
     cache-enabled: true
     lazy-loading-enabled: true
     aggressive-lazy-loading: true
+    auto-mapping-unknown-column-behavior: none
   global-config:
     db-config:
       id-type: auto

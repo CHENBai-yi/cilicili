@@ -3,10 +3,7 @@ package site.cilicili.frontend.course.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse;
-import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
-import site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse;
-import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
+import site.cilicili.frontend.course.domain.dto.*;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 
 import java.util.List;
@@ -34,6 +31,8 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
      * @return 实例对象
      */
     CoursesEntity queryById(Integer courseId);
+
+    CoursesEntity queryByParams(CoursesEntity courses);
 
     /**
      * 查询指定行数据
@@ -94,4 +93,6 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
     GetChildrenBarResponse getChildrenBar(final Integer id);
 
     List<CoursesEntity> getCourseList(QueryCourseInfoRequest queryCourseInfoRequest);
+
+    GetCourseVideoInfoByIdResponse getCourseVideoInfoById(CoursesEntity courses);
 }

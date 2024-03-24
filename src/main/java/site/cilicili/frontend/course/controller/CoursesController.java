@@ -158,4 +158,14 @@ public class CoursesController {
     public R getCourseList(final @RequestBody QueryCourseInfoRequest queryCourseInfoRequest) {
         return this.coursesService.getCourseList(queryCourseInfoRequest);
     }
+
+    @PostMapping("get-course-info-by-id")
+    public R getCourseInfoById(final @RequestBody CoursesEntity courses) {
+        return this.coursesService.getCourseInfoById(courses);
+    }
+
+    @PostMapping("get-course-video-info-by-id")
+    public R getCourseVideoInfoById(final @RequestBody CoursesEntity courses) {
+        return this.coursesService.getCourseVideoInfoById(courses);
+    }
 }

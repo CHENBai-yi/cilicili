@@ -77,4 +77,8 @@ public interface CoursesService extends IService<CoursesEntity> {
     Boolean updateVideoSize(BarsEntity barsEntity, List<BarsEntity> barsEntities);
 
     R getCourseList(QueryCourseInfoRequest queryCourseInfoRequest);
+
+    R getCourseInfoById(CoursesEntity courses);
+
+    R getCourseVideoInfoById(CoursesEntity courses);
 }
