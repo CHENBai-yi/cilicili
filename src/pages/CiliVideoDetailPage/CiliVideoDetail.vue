@@ -20,7 +20,7 @@
                   ref="dp"
                   :danmaku="dplayerObj.danmaku"
                   :highlight="dplayerObj.highlight"
-                  :showMask="false"
+                  :showShadow="false"
                   :video="dplayerObj.video"
                 />
               </n-layout-content>
@@ -59,26 +59,31 @@
             </n-layout>
           </n-space>
           <div>
-            <n-h2 :class="darkTheme" class="no-margin flex items-center q-gutter-x-sm">
+            <n-h2 :class="darkTheme" class="no-margin flex items-center q-gutter-x-sm ">
               <q-icon name="fas fa-graduation-cap"/>
               <n-ellipsis style="max-width: 300px">{{ videoInfo.title }}</n-ellipsis>
             </n-h2>
             <div class="no-margin flex items-center q-gutter-x-xs">
-              <div class="q-pr-lg">{{ $t('Lecturer') }}:<span class="q-pl-sm">{{ videoInfo.author }}</span></div>
-              <div class="q-pr-lg">{{ $t('Category') }}:<span class="q-pl-sm">{{ videoInfo.tag }}</span></div>
-              <div class="q-pr-lg">
+              <div class="q-pr-lg text-weight-medium">{{ $t('Lecturer') }}:<span class="q-pl-sm ">{{
+                  videoInfo.author
+                }}</span></div>
+              <div class="q-pr-lg text-weight-medium">{{ $t('Category') }}:<span class="q-pl-sm">{{
+                  videoInfo.tag
+                }}</span></div>
+              <div class="q-pr-lg text-weight-medium">
                 <q-icon name="visibility"/>
                 <em class="q-pl-xs">{{ videoInfo.view }}</em></div>
-              <CiliLink class="q-pr-lg" color="">
+              <CiliLink class="q-pr-lg " color="">
                 <q-icon name="share"/>
-                <em class="q-pl-xs">{{ $t('Share') }}</em></CiliLink>
+                <em class="q-pl-xs text-weight-medium">{{ $t('Share') }}</em></CiliLink>
             </div>
           </div>
         </div>
         <div :class="$q.dark.isActive?'cili_dark':''" class="card q-mt-lg">
           <TabMenu :active-index="$route.meta.index" :model="items">
             <template #item="{ item, props }">
-              <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route">
+              <router-link v-if="item.route" v-slot="{ href, navigate }"
+                           :to="'/video/'+$route.params.name+'/'+$route.params.id+'/'+item.route" append>
                 <a v-ripple :href="href" v-bind="props.action" @click="navigate">
                   <span v-bind="props.icon"/>
                   <span v-bind="props.label">{{ item.label }}</span>
@@ -96,7 +101,9 @@
         <router-view v-slot="{ Component }">
           <transition :duration="50"
                       appear enter-active-class="animated animate__fadeIn">
-            <component :is="Component"/>
+            <keep-alive>
+              <component :is="Component"/>
+            </keep-alive>
           </transition>
         </router-view>
       </div>
@@ -111,8 +118,10 @@ import Hls from 'hls.js';
 import CiliVideoPlayer from 'src/components/ciliVideoPlayer/CiliVideoPlayer.vue'
 import {scroll, useQuasar} from 'quasar'
 import {useCommonStore} from 'src/stores/common'
+import {useRoute} from 'vue-router'
 
 const $q = useQuasar()
+const $router = useRoute()
 const commonStore = useCommonStore()
 const {getScrollTarget, setVerticalScrollPosition} = scroll
 const videoArea = ref(null)
@@ -129,21 +138,21 @@ function scrollToElement(el, pos) {
   setVerticalScrollPosition(target, offset, duration)
 }
 
-
 const {darkTheme} = useTheme()
 const items = ref([
-  {label: '课程信息', icon: 'pi pi-info-circle', route: '/video/info'},
+  {label: '课程信息', icon: 'pi pi-info-circle', route: 'info'},
   {
     label: '目录',
     icon: 'pi pi-list',
-    route: '/video/catalogue'
+    route: 'catalogue'
   },
   // {label: '服务', icon: 'fab fa-servicestack', url: 'https://vuejs.org/'},
-  {label: '评价', icon: 'fas fa-comment-alt', route: '/video/comment'},
+  {label: '评价', icon: 'fas fa-comment-alt', route: 'comment'},
 ]);
+
 const dplayerObj = reactive({
   video: {
-    pic: 'VCG41N1403887001.jpg',
+    pic: "VCG41N1403887001.jpg",
     url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8', //视频地址
     type: 'customHls',
     customType: {
@@ -196,15 +205,26 @@ onBeforeUpdate(() => {
 })
 const videoList = ref([])
 const videoInfo = ref({})
-onMounted(() => {
-  videoList.value = commonStore.GetVideoDetail("aaaa").videoList
-  videoInfo.value = commonStore.GetVideoDetail("aaaa").video
+const urls = reactive({
+  info: 'courses/get-course-video-info-by-id'
+})
+onMounted(async () => {
+  const data = {
+    name: $router.params.name,
+    id: $router.params.id
+  }
+  const res = await commonStore.GetVideoDetail(urls.info, data)
+  console.log(res, "res")
+  dplayerObj.video.pic = res.video.pic
+  videoList.value = res.videoList
+  videoInfo.value = res.video
+  dp.value.render()
 })
 const dp = ref(null)
 const switchVideo = (e) => {
   console.log(e)
-  dp.value.dp.video.autoplay = true
   dp.value.dp.switchVideo(e.video, e.danmu);
+  dp.value.dp.video.autoplay = true
 }
 </script>
 <style lang="scss" scoped>

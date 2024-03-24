@@ -13,9 +13,9 @@
         </n-ellipsis>
       </div>
       <q-btn :ripple="false" color="blue"
-             flat @click="videoListShowChange">
+             flat @click="videoListShowChange(item)">
         <template #default>
-          <div v-if="videoListShow">
+          <div v-if="item.show">
             <span>收起列表</span>
             <q-icon name="keyboard_double_arrow_up"/>
           </div>
@@ -29,8 +29,8 @@
                   enter-active-class="animated animate__fadeIn"
                   leave-active-class="animated animate__fadeOut"
       >
-        <ul v-show="videoListShow" class="q-gutter-y-sm">
-          <li v-for="(list,index) in item.detailList" :key="list.tag" class="q-gutter-x-sm">
+        <ul v-show="item.show" class="q-gutter-y-sm">
+          <li v-for="(list,index) in item.detail_list" :key="list.tag" class="q-gutter-x-sm">
             <q-icon name="fas fa-video"/>
             <div class="type-text">{{ $t('Video') }}:</div>
             <span class="title_info">{{ list.tag }} {{ list.title }}  ({{ list.time }})</span>
@@ -49,8 +49,8 @@ import useTheme from "src/composables/useTheme"
 import {useCommonStore} from 'src/stores/common'
 
 const videoListShow = ref(true)
-const videoListShowChange = () => {
-  videoListShow.value = !videoListShow.value
+const videoListShowChange = (e) => {
+  e.show = !e.show
 }
 const {darkTheme} = useTheme()
 

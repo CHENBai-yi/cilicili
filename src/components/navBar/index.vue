@@ -26,8 +26,8 @@
 
         <n-scrollbar class="col q-pl-md" x-scrollable>
           <div class="scrollbar-flex-content ">
-            <span v-for="item in 50" :key="item" class="scrollbar-demo-item">
-                      标题{{ item }}
+            <span v-for="(item,index) in catagroy" :key="item" class="scrollbar-demo-item">
+                      {{ item.category_name }}
             </span>
           </div>
         </n-scrollbar>
@@ -50,14 +50,18 @@ import CiliToolBar from './CiliToolBar/CiliToolBar.vue'
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 import useTheme from "src/composables/useTheme"
 import {CiliFrontendDefault} from 'src/config/default'
+import {getAction} from 'src/api/manage'
 
-
+const urls = {
+  list: 'category'
+}
+const catagroy = ref([])
 const {darkTheme} = useTheme()
 const der = ref(null)
 const height = ref(152)
 const change = ref(0)
 const navBarShow = ref(false)
-onMounted(() => {
+onMounted(async () => {
   const options = {
     root: null,
     rootMargin: '0px',
@@ -65,6 +69,11 @@ onMounted(() => {
   };
   const observer = new IntersectionObserver(handleIntersection, options);
   observer.observe(der.value);
+  const res = await getAction(urls.list)
+  console.log(res)
+  if (res && res.code === 200) {
+    catagroy.value = res.data
+  }
 })
 const handleIntersection = (entries) => {
   entries.forEach(entry => {
@@ -186,7 +195,6 @@ const items = ref([
     ]
   }
 ]);
-
 </script>
 
 <style lang="sass" scoped>

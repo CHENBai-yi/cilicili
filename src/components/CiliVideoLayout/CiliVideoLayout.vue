@@ -27,7 +27,8 @@
                   />
                 </div>
                 <div class="q-px-sm q-pt-xs  items-center flex justify-center" style="height:60px">
-                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" href="#/video" size="15px">
+                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" :href="'#/video/'+item.title+'/'+item.id+'/info'"
+                            size="15px">
                     <strong>
                       <n-ellipsis class="bili-video-card__info--author" line-clamp="2">
                         {{ item.title }}
@@ -36,7 +37,7 @@
                   </CiliLink>
                 </div>
                 <div class="q-px-sm q-pb-xs author">
-                  <CiliLink :weight=600 href="#/video">
+                  <CiliLink :href="'#/video/'+item.title+'/'+item.id+'/info'" :weight=600>
                     <div class="q-gutter-x-sm flex">
                       <n-tag v-if='!!item.faver' :bordered="false" size="small" type="warning">
                         {{ item.faver }}
@@ -114,7 +115,8 @@
                   />
                 </div>
                 <div class="q-px-sm q-pt-xs items-center flex justify-center" style="height:60px">
-                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" href="#/video" size="15px">
+                  <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" :href="'#/video/'+item.title+'/'+item.id+'/info'"
+                            size="15px">
                     <strong>
                       <n-ellipsis class="bili-video-card__info--author" line-clamp="2">
                         {{ item.title }}
@@ -123,7 +125,7 @@
                   </CiliLink>
                 </div>
                 <div class="q-px-sm q-pb-xs author">
-                  <CiliLink :weight=600 href="#/video">
+                  <CiliLink :href="'#/video/'+item.title+'/'+item.id+'/info'" :weight=600>
                     <div class="q-gutter-x-sm flex">
                       <n-tag v-if='!!item.faver' :bordered="false" size="small" type="warning">
                         {{ item.faver }}
@@ -205,7 +207,8 @@
               />
             </div>
             <div class="q-px-sm q-pt-xs items-center flex justify-center" style="height:60px">
-              <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" href="#/video" size="15px">
+              <CiliLink :color="$q.dark.isActive?'#FFF':'#19181c'" :href="'#/video/'+i.title+'/'+i.id+'/info'"
+                        size="15px">
                 <strong>
                   <n-ellipsis class="bili-video-card__info--author" line-clamp="2">
                     {{ i.title }}
@@ -214,7 +217,7 @@
               </CiliLink>
             </div>
             <div class="q-px-sm q-pb-xs author">
-              <CiliLink :weight=600 href="#/video">
+              <CiliLink :href="'#/video/'+i.title+'/'+i.id+'/info'" :weight=600>
                 <div class="q-gutter-x-sm flex">
                   <n-tag v-if='!!i.faver' :bordered="false" size="small" type="warning">
                     {{ i.faver }}
@@ -274,7 +277,8 @@
     </div>
     <template v-slot:loading>
       <div class="row justify-center q-my-md">
-        <q-spinner-dots color="primary" size="40px"/>
+        <q-spinner-dots v-if="onLoadFlag" color="red" size="40px"/>
+        <p v-else class="text-blue-3">~~~没有更多数据了</p>
       </div>
     </template>
   </q-infinite-scroll>
@@ -655,16 +659,21 @@ onMounted(async () => {
     item2.value = arr.slice(-3, 6)
   }
 })
+const onLoadFlag = ref(true)
 const onLoad = (index, done) => {
   setTimeout(async () => {
     pagination.value.page_size = size
     pagination.value.page += 1
     const res = await postAction(urls.list, pagination.value)
-    if (res && res.code === 1) {
+    if (res && res.code === 1 && res.data.records.length > 0) {
       items.value.push(res.data.records)
       loaded.value = true
+      onLoadFlag.value = true
+      done()
+    } else {
+      onLoadFlag.value = false
     }
-    done()
+
   }, 2000)
 }
 const testData = reactive({

@@ -11,10 +11,9 @@
         <router-view v-slot="{ Component }">
           <component :is="Component"/>
           <q-inner-loading :showing="componentLoading">
-            <q-spinner-bars
-              :class="darkTheme" size="3em"
-            />
+            <q-spinner-bars class="fixed" size="3em" style="top:50%;left:50%"/>
           </q-inner-loading>
+
         </router-view>
       </q-page-container>
       <CiliBackToTop/>

@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {Cookies} from 'quasar';
+import {postAction} from 'src/api/manage'
 // @ts-ignore
 import CiliVideoDetail_Json from "/public/mockData/CiliVideoDetail.json"
 
@@ -29,11 +30,17 @@ export const useCommonStore = defineStore('common', {
       }
       return this.activeIndex
     },
-    GetVideoDetail(url: string) {
-      // postAction(url)
-      this.videoInfo = CiliVideoDetail_Json.data.info
-      this.videoCatalog = CiliVideoDetail_Json.data.catalog
-      return {video: CiliVideoDetail_Json.data.video, videoList: CiliVideoDetail_Json.data.videoList}
+    async GetVideoDetail(url: string, data: Object) {
+      const res = await postAction(url, data)
+      let video, videoList
+      if (res.code === 1) {
+        const {records}: any = res.data
+        video = records.video
+        videoList = records.video_list
+        this.videoCatalog = records.catalog
+      }
+
+      return {video: video, videoList: videoList}
     }
   }
 })

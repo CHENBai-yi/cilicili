@@ -29,11 +29,14 @@
 
 <script setup>
 
-import {reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import useTheme from "src/composables/useTheme"
+import {postAction} from "src/api/manage"
+import {useRoute} from 'vue-router'
 
 const {darkTheme} = useTheme()
-const testData = reactive({
+const $router = useRoute()
+const testData = ref({
   learn_more: [
     '掌握Flutter必备的Dart基础',
     'Flutter项目开发避坑技巧',
@@ -43,6 +46,15 @@ const testData = reactive({
     '移动端原生开发必备新技能'
   ],
   into: " 本门课程作为2024年Flutter入门首选课，课程中结合了最新版的Flutter、Dart、主流插件技术进行企业级项目开发，并融入了大量Flutter版本更新问题的解决方案，以及与H5混合开发和通信、多屏适配等高频技能，课程中还将讲师近几年在一线开发中积累的大量开发、避坑等经验传授给大家，让各位小伙伴在实际开发中能更好的运用Flutter技术。"
+})
+const urls = reactive({
+  info: 'courses/get-course-info-by-id'
+})
+onMounted(async () => {
+  const res = await postAction(urls.info, {name: $router.params.name, id: $router.params.id})
+  if (res.code === 1) {
+    testData.value = res.data.records
+  }
 })
 </script>
 

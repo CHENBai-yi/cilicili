@@ -1,6 +1,7 @@
 <template>
   <div ref="videoRef" :style="{height:height,width:'100%'}" class='rounded-borders'
-       @mouseenter="$emit('handlePlay',handlePlay)" @mouseleave="$emit('handlePause',handlePause)"></div>
+       @mouseenter="showMask?$emit('handlePlay',handlePlay):''"
+       @mouseleave="!showMask?$emit('handlePause',handlePause):''"></div>
   <transition appear
               enter-active-class="animated animate__fadeIn"
               leave-active-class="animated animate__fadeOut"
@@ -33,6 +34,10 @@ import {inject, onBeforeUnmount, onMounted, reactive, ref} from 'vue'
 import v from 'src/css/variables.scss'
 
 const props = defineProps({
+  showShadow: {
+    type: Boolean,
+    default: true
+  },
   view: {
     type: String,
     default: '1.3万'
@@ -159,7 +164,7 @@ const testData = reactive({
   dm: props.dm,
   time: props.time
 })
-const showMask = ref(true)
+const showMask = ref(props.showShadow)
 const handlePlay = () => {
   showMask.value = false
   const audioDom = state.instance.video
@@ -179,7 +184,7 @@ const handlePause = () => {
 
 const emit = defineEmits(['isLoadCompleted'])
 const timeToMinute = inject('timeToMinute')
-onMounted(() => {
+const render = () => {
   let player = {
     container: videoRef.value,
     autoplay: props.autoplay,
@@ -204,25 +209,30 @@ onMounted(() => {
   if (props.danmaku) {
     player.danmaku = props.danmaku
   }
-  console.log(player);
   state.instance = new DPlayer(player)
   dp.value = state.instance
   state.instance.video.addEventListener('durationchange', loadShowMast);
+}
+onMounted(() => {
+  if (props.showShadow)
+    render()
 })
+
+
 const loadShowMast = (e) => {
   var timers = Math.ceil(state.instance.video.duration); //视频总时长
   testData.time = timeToMinute(timers);
   emit('isLoadCompleted', true)
 }
+
 // 销毁
 onBeforeUnmount(() => {
   state.instance.video.removeEventListener('canplaythrough', loadShowMast);
   state.instance.destroy()
 })
 
-
 defineExpose({
-  handlePlay, handlePause, dp
+  handlePlay, handlePause, dp, render
 })
 </script>
 
