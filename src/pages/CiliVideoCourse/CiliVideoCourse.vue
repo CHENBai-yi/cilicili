@@ -5,10 +5,10 @@
       <div class="nice-class col-10 ">
         <ul class="nice-class-list  clearfix q-gutter-y-md flex wrap ">
           <li v-for="(item,index) in courses.courses" :key="item.title" class="ali clearfix q-pb-md q-mr-md">
-            <a>
+            <a :href="'#/video/'+item.title+'/'+item.id+'/info'">
               <img :src=item.pic>
             </a>
-            <a class='a-tittile' href="#">{{ item.title }}</a>
+            <a :href="'#/video/'+item.title+'/'+item.id+'/info'" class='a-tittile'>{{ item.title }}</a>
             <p :class="$q.dark.isActive?`${darkTheme}`:''">
               {{ item.subtitle }}
             </p>
@@ -95,6 +95,7 @@
 <script setup>
 import useTheme from "src/composables/useTheme"
 import {onMounted, ref} from 'vue'
+import {getAction} from 'src/api/manage'
 import CiliCiliVideoCourse from "/public/mockData/CiliCiliVideoCourse.json"
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 
@@ -102,7 +103,16 @@ const {darkTheme} = useTheme()
 const show = ref(false)
 const open = ref(false)
 const courses = ref({})
-onMounted(() => {
+const urls = {
+  list: 'courses/get-subject-categories'
+}
+onMounted(async () => {
+  const res = await getAction(urls.list)
+  console.log(res.data)
+  if (res && res.code === 1) {
+    courses.value = res.data
+    return
+  }
   courses.value = CiliCiliVideoCourse.data
 })
 </script>

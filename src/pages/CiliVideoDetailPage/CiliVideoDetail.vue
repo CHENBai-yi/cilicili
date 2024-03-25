@@ -216,8 +216,11 @@ onMounted(async () => {
   const res = await commonStore.GetVideoDetail(urls.info, data)
   console.log(res, "res")
   dplayerObj.video.pic = res.video.pic
+  dplayerObj.video.quality[0].url = res.video.url
+  dplayerObj.video.quality[1].url = res.video.url
   videoList.value = res.videoList
   videoInfo.value = res.video
+
   dp.value.render()
 })
 const dp = ref(null)
