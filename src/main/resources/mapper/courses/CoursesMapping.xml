@@ -288,7 +288,7 @@
                id="Video">
         <result property="author" column="teacher" jdbcType="VARCHAR"/>
         <result property="pic" column="poster" jdbcType="VARCHAR"/>
-        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="url" column="first_bar_url" jdbcType="VARCHAR"/>
         <result property="thumbnails" column="poster" jdbcType="VARCHAR"/>
         <result property="title" column="name" jdbcType="VARCHAR"/>
         <result property="price" column="price" jdbcType="DOUBLE"/>
@@ -371,6 +371,52 @@
         from catalogs
         where course_id = #{course_id}
     </select>
+    
+    
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesResponse"
+               id="GetSubjectCategoriesResponse">
+        <collection property="subject" column="course_id" select="SelectSubject"/>
+        <collection property="classify" column="course_id" select="SelectClassify"/>
+        <collection property="classifyMore" column="course_id" select="SelectClassifyMore"/>
+        <collection property="courses" column="course_id" select="SelectMoreCourses"/>
+    </resultMap>
+    <resultMap type="site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesResponse$Courses"
+               id="Courses">
+        <result property="id" column="course_id" jdbcType="INTEGER"/>
+        <result property="title" column="name" jdbcType="VARCHAR"/>
+        <result property="subtitle" column="description" jdbcType="VARCHAR"/>
+        <result property="pic" column="poster" jdbcType="VARCHAR"/>
+        <result property="stars" column="stars" jdbcType="BIGINT"/>
+        <result property="view" column="view" jdbcType="BIGINT"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <select id="getSubjectCategories" resultMap="GetSubjectCategoriesResponse">
+        select count(course_id) as course_id
+        from courses;
+    </select>
+    
+    <select id="SelectSubject" resultType="string">
+        select subject_name
+        from subjects;
+    </select>
+    
+    <select id="SelectClassify" resultType="string">
+        select category_name
+        from categories
+        limit 11;
+    </select>
+    
+    <select id="SelectClassifyMore" resultType="string">
+        select category_name
+        from categories
+        LIMIT 11 OFFSET 11;
+    </select>
+    <select id="SelectMoreCourses" resultMap="Courses">
+        select *
+        from courses;
+    </select>
+    
     <!--新增所有列-->
     <!--    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">-->
     <!--        insert into courses(name, teacher, kind, subject, price, description, poster, tag)-->

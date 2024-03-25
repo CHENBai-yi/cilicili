@@ -302,10 +302,22 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                 .map(videos -> courseVideoInfoById.getVideo())
                 .map(video -> {
                     video.setPic(url + video.getPic());
+                    video.setUrl(url + video.getUrl());
                     video.setThumbnails(url + video.getThumbnails());
                     return video;
                 })
                 .map(data -> R.yes("Success").setRecords(courseVideoInfoById))
                 .orElseThrow(() -> new AppException("暂无该课程信息."));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getSubjectCategories() {
+        final GetSubjectCategoriesResponse subjectCategories = baseMapper.getSubjectCategories();
+        final String url = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
+        subjectCategories.getCourses().forEach(item -> item.setPic(url + item.getPic()));
+        log.debug(subjectCategories.toString());
+        return R.yes("Success.")
+                .setData(subjectCategories);
     }
 }

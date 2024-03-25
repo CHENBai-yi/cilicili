@@ -168,4 +168,9 @@ public class CoursesController {
     public R getCourseVideoInfoById(final @RequestBody CoursesEntity courses) {
         return this.coursesService.getCourseVideoInfoById(courses);
     }
+
+    @GetMapping("get-subject-categories")
+    public R getSubjectCategories() {
+        return this.coursesService.getSubjectCategories();
+    }
 }

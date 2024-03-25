@@ -81,4 +81,6 @@ public interface CoursesService extends IService<CoursesEntity> {
     R getCourseInfoById(CoursesEntity courses);
 
     R getCourseVideoInfoById(CoursesEntity courses);
+
+    R getSubjectCategories();
 }

@@ -95,4 +95,6 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
     List<CoursesEntity> getCourseList(QueryCourseInfoRequest queryCourseInfoRequest);
 
     GetCourseVideoInfoByIdResponse getCourseVideoInfoById(CoursesEntity courses);
+
+    GetSubjectCategoriesResponse getSubjectCategories();
 }
