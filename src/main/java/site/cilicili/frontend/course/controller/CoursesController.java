@@ -10,6 +10,7 @@ import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
 import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
+import site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesRequest;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.service.CoursesService;
@@ -169,8 +170,8 @@ public class CoursesController {
         return this.coursesService.getCourseVideoInfoById(courses);
     }
 
-    @GetMapping("get-subject-categories")
-    public R getSubjectCategories() {
-        return this.coursesService.getSubjectCategories();
+    @PostMapping("get-subject-categories")
+    public R getSubjectCategories(@RequestBody GetSubjectCategoriesRequest getSubjectCategoriesRequest) {
+        return this.coursesService.getSubjectCategories(getSubjectCategoriesRequest);
     }
 }

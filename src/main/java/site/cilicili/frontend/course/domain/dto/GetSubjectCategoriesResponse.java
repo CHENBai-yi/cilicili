@@ -14,7 +14,6 @@ import java.util.List;
  * @author BaiYiChen
  */
 @Data
-
 public class GetSubjectCategoriesResponse {
 
     private List<String> subject;

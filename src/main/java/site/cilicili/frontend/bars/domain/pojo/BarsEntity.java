@@ -52,9 +52,10 @@ public class BarsEntity implements Serializable {
 
     @Schema(description = "视频URL")
     private String url;
+
     @Schema(description = "视频长度信息")
     private String length;
+
     @Schema(description = "视频分钟数")
     private Long size;
-
 }

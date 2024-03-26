@@ -234,6 +234,10 @@
             <if test="status != null and status!=''">
                 and status = #{status}
             </if>
+            <if test="kind != null and kind!=''">
+                and kind = #{kind}
+            </if>
+            and logical_delete = 1
         </where>
         <if test="desc">
             order by ${sortBy} desc
@@ -343,6 +347,7 @@
                  INNER JOIN catalogs ON courses.course_id = catalogs.course_id
                  INNER JOIN bars ON bars.catalog_id = catalogs.catalog_id
         WHERE courses.course_id = #{course_id}
+          and courses.logical_delete = 1;
     </select>
     <select id="SelectChildrenVideoInfo" resultMap="Video">
         select url
@@ -378,7 +383,8 @@
         <collection property="subject" column="course_id" select="SelectSubject"/>
         <collection property="classify" column="course_id" select="SelectClassify"/>
         <collection property="classifyMore" column="course_id" select="SelectClassifyMore"/>
-        <collection property="courses" column="course_id" select="SelectMoreCourses"/>
+        <collection property="courses" column="{course_id=course_id,subject=subject,kind=kind}"
+                    select="SelectMoreCourses"/>
     </resultMap>
     <resultMap type="site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesResponse$Courses"
                id="Courses">
@@ -392,8 +398,9 @@
     </resultMap>
     
     <select id="getSubjectCategories" resultMap="GetSubjectCategoriesResponse">
-        select count(course_id) as course_id
-        from courses;
+        select count(course_id) as course_id, #{subject} as subject, #{kind} as kind
+        from courses
+        where courses.logical_delete = 1;
     </select>
     
     <select id="SelectSubject" resultType="string">
@@ -414,7 +421,16 @@
     </select>
     <select id="SelectMoreCourses" resultMap="Courses">
         select *
-        from courses;
+        from courses
+        <where>
+            <if test="subject!=null and subject!=''">
+                and subject=#{subject}
+            </if>
+            <if test="kind!=null and kind!=''">
+                and kind=#{kind}
+            </if>
+            and courses.logical_delete = 1
+        </where>
     </select>
     
     <!--新增所有列-->

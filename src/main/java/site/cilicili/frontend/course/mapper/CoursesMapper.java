@@ -50,7 +50,6 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
      */
     long count(CoursesEntity courses);
 
-
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
@@ -96,5 +95,5 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
 
     GetCourseVideoInfoByIdResponse getCourseVideoInfoById(CoursesEntity courses);
 
-    GetSubjectCategoriesResponse getSubjectCategories();
+    GetSubjectCategoriesResponse getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest);
 }

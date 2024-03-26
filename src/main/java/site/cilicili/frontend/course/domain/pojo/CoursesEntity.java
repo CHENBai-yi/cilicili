@@ -39,6 +39,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CoursesEntity implements Serializable {
     private static final long serialVersionUID = 158204106956964287L;
+
     @TableField(fill = FieldFill.INSERT)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -62,6 +63,7 @@ public class CoursesEntity implements Serializable {
 
     @Schema(description = "描述")
     private String description;
+
     @TableField(fill = FieldFill.INSERT)
     protected String createdBy;
 
@@ -74,19 +76,24 @@ public class CoursesEntity implements Serializable {
 
     @Schema(description = "审核理由")
     private String reason;
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     protected LocalDateTime updatedAt;
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updatedBy;
+
     @TableLogic(value = "1", delval = "0")
     @Schema(description = "逻辑删除")
     private Integer logicalDelete;
+
     @TableField(fill = FieldFill.UPDATE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     protected LocalDateTime deletedAt;
+
     @JsonIdentityReference(alwaysAsId = true)
     @TableId(type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -94,11 +101,14 @@ public class CoursesEntity implements Serializable {
     @Schema(description = "课程ID")
     @JsonProperty("id")
     private Integer courseId;
+
     @Schema(description = "第一小集url")
     private String firstBarUrl;
+
     @Schema(description = "标签")
     @JacksonInject("videoStatus")
     private String status;
+
     @Schema(description = "总时间")
     private String totalTime;
 }

@@ -20,4 +20,5 @@ public class QueryCourseInfoRequest {
     private @NotNull Integer pageSize;
     private String sortBy;
     private String status;
+    private String kind;
 }

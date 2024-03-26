@@ -5,6 +5,7 @@ import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
 import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
+import site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesRequest;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 
@@ -82,5 +83,5 @@ public interface CoursesService extends IService<CoursesEntity> {
 
     R getCourseVideoInfoById(CoursesEntity courses);
 
-    R getSubjectCategories();
+    R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest);
 }

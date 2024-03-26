@@ -13,7 +13,6 @@ import java.util.List;
  * @author BaiYiChen
  */
 @Data
-
 public class GetChildrenBarResponse {
     private Integer id;
     private String name;

@@ -49,14 +49,11 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         long minutes = (mss % (60 * 60)) / 60;
         long seconds = mss % 60;
         if (days > 0) {
-            DateTimes = days + "天" + hours + "小时" + minutes + "分钟"
-                    + seconds + "秒";
+            DateTimes = days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒";
         } else if (hours > 0) {
-            DateTimes = hours + "小时" + minutes + "分钟"
-                    + seconds + "秒";
+            DateTimes = hours + "小时" + minutes + "分钟" + seconds + "秒";
         } else if (minutes > 0) {
-            DateTimes = minutes + "分钟"
-                    + seconds + "秒";
+            DateTimes = minutes + "分钟" + seconds + "秒";
         } else {
             DateTimes = seconds + "秒";
         }
@@ -227,7 +224,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                 .filter(f -> f)
                 .filter(f -> {
                     final BarsEntity barsEntity = barsService.getById(bars.getBarId());
-                    final List<BarsEntity> barsEntities = barsService.list(new QueryWrapper<BarsEntity>().eq("catalog_id", barsEntity.getCatalogId()));
+                    final List<BarsEntity> barsEntities = barsService.list(
+                            new QueryWrapper<BarsEntity>().eq("catalog_id", barsEntity.getCatalogId()));
                     return updateVideoSize(barsEntity, barsEntities);
                 })
                 .map(r -> R.yes("Success."))
@@ -244,8 +242,14 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         catalogsEntity.setTotal(totalSecond);
         catalogsEntity.setTotalTime(formatDateTime(totalSecond));
         Boolean ff = catalogsService.updateById(catalogsEntity);
-        final CatalogsEntity catalogs = catalogsService.getOne(new QueryWrapper<CatalogsEntity>().eq("catalog_id", barsEntity.getCatalogId()));
-        final Long catalogsTotalSecond = catalogsService.list(new QueryWrapper<CatalogsEntity>().eq("course_id", catalogs.getCourseId())).stream().map(CatalogsEntity::getTotal).reduce(0L, Long::sum);
+        final CatalogsEntity catalogs =
+                catalogsService.getOne(new QueryWrapper<CatalogsEntity>().eq("catalog_id", barsEntity.getCatalogId()));
+        final Long catalogsTotalSecond =
+                catalogsService
+                        .list(new QueryWrapper<CatalogsEntity>().eq("course_id", catalogs.getCourseId()))
+                        .stream()
+                        .map(CatalogsEntity::getTotal)
+                        .reduce(0L, Long::sum);
         final CoursesEntity coursesEntity = new CoursesEntity();
         coursesEntity.setCourseId(catalogs.getCourseId());
         coursesEntity.setTotalTime(formatDateTime(catalogsTotalSecond));
@@ -257,33 +261,44 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     @Override
     public R getCourseList(final QueryCourseInfoRequest queryCourseInfoRequest) {
         return Optional.ofNullable(baseMapper.getCourseList(queryCourseInfoRequest))
-                .map(courseList -> courseList.stream().map(item -> {
-                    final GetCourseListResponse getCourseListResponse = new GetCourseListResponse();
-                    getCourseListResponse.setId(item.getCourseId());
-                    getCourseListResponse.setTitle(item.getName());
-                    getCourseListResponse.setAuthor(item.getTeacher());
-                    getCourseListResponse.setTime(DateUtil.format(item.getCreatedAt(), "MM-dd"));
-                    final GetCourseListResponse.Detail detail = new GetCourseListResponse.Detail();
-                    final GetCourseListResponse.Video video = new GetCourseListResponse.Video();
-                    final List<GetCourseListResponse.HighLight> highLights = new ArrayList<>();
-                    final String url = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
-                    video.setPic(url + item.getPoster());
-                    video.setUrl(url + item.getFirstBarUrl());
-                    highLights.add(new GetCourseListResponse.HighLight(20L, "这是第 20 秒"));
-                    highLights.add(new GetCourseListResponse.HighLight(120L, "这是 2 分钟"));
-                    detail.setVideo(video);
-                    detail.setHighlight(highLights);
-                    getCourseListResponse.setDetail(detail);
-                    return getCourseListResponse;
-                }).toList())
-                .map(r -> R.yes("Success.").setRecords(r)).orElse(R.no("Fail."));
+                .map(courseList -> courseList.stream()
+                        .map(item -> {
+                            final GetCourseListResponse getCourseListResponse = new GetCourseListResponse();
+                            getCourseListResponse.setId(item.getCourseId());
+                            getCourseListResponse.setTitle(item.getName());
+                            getCourseListResponse.setAuthor(item.getTeacher());
+                            getCourseListResponse.setTime(DateUtil.format(item.getCreatedAt(), "MM-dd"));
+                            final GetCourseListResponse.Detail detail = new GetCourseListResponse.Detail();
+                            final GetCourseListResponse.Video video = new GetCourseListResponse.Video();
+                            final List<GetCourseListResponse.HighLight> highLights = new ArrayList<>();
+                            final String url = httpServletRequest
+                                    .getRequestURL()
+                                    .toString()
+                                    .replace(httpServletRequest.getRequestURI(), "")
+                                    + "/";
+                            video.setPic(url + item.getPoster());
+                            video.setUrl(url + item.getFirstBarUrl());
+                            highLights.add(new GetCourseListResponse.HighLight(20L, "这是第 20 秒"));
+                            highLights.add(new GetCourseListResponse.HighLight(120L, "这是 2 分钟"));
+                            detail.setVideo(video);
+                            detail.setHighlight(highLights);
+                            getCourseListResponse.setDetail(detail);
+                            return getCourseListResponse;
+                        })
+                        .toList())
+                .map(r -> R.yes("Success.").setRecords(r))
+                .orElse(R.no("Fail."));
     }
 
     @Transactional(readOnly = true)
     @Override
     public R getCourseInfoById(final CoursesEntity courses) {
         return Optional.ofNullable(baseMapper.queryByParams(courses))
-                .map(r -> R.yes("Success.").setRecords(GetCourseInfoByIdResponse.builder().into(r.getDescription()).learnMore(Arrays.asList(r.getTag().split(","))).build()))
+                .map(r -> R.yes("Success.")
+                        .setRecords(GetCourseInfoByIdResponse.builder()
+                                .into(r.getDescription())
+                                .learnMore(Arrays.asList(r.getTag().split(",")))
+                                .build()))
                 .orElseThrow(() -> new AppException("暂无该课程信息."));
     }
 
@@ -291,14 +306,17 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     @Override
     public R getCourseVideoInfoById(final CoursesEntity courses) {
         //
-        final String url = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
+        final String url =
+                httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
         final GetCourseVideoInfoByIdResponse courseVideoInfoById = baseMapper.getCourseVideoInfoById(courses);
         log.debug(courseVideoInfoById.toString());
         return Optional.of(courseVideoInfoById)
                 .map(GetCourseVideoInfoByIdResponse::getVideoList)
-                .map(videoLists ->
-                        videoLists.stream().map(GetCourseVideoInfoByIdResponse.VideoList::getContent).map(GetCourseVideoInfoByIdResponse.Content::getVideo).peek(video -> video.setUrl(url + video.getUrl())).collect(Collectors.toList())
-                )
+                .map(videoLists -> videoLists.stream()
+                        .map(GetCourseVideoInfoByIdResponse.VideoList::getContent)
+                        .map(GetCourseVideoInfoByIdResponse.Content::getVideo)
+                        .peek(video -> video.setUrl(url + video.getUrl()))
+                        .collect(Collectors.toList()))
                 .map(videos -> courseVideoInfoById.getVideo())
                 .map(video -> {
                     video.setPic(url + video.getPic());
@@ -312,12 +330,12 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
-    public R getSubjectCategories() {
-        final GetSubjectCategoriesResponse subjectCategories = baseMapper.getSubjectCategories();
-        final String url = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
+    public R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest) {
+        final GetSubjectCategoriesResponse subjectCategories = baseMapper.getSubjectCategories(getSubjectCategoriesRequest);
+        final String url =
+                httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
         subjectCategories.getCourses().forEach(item -> item.setPic(url + item.getPic()));
         log.debug(subjectCategories.toString());
-        return R.yes("Success.")
-                .setData(subjectCategories);
+        return R.yes("Success.").setData(subjectCategories);
     }
 }

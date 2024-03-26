@@ -31,8 +31,10 @@ public class GetCourseVideoInfoByIdResponse {
         private String thumbnails;
         private String title;
         private String author;
+
         @JsonIgnore
         private Double price;
+
         private String tag;
         private Long view;
 
@@ -51,8 +53,10 @@ public class GetCourseVideoInfoByIdResponse {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class VideoList {
         private String section;
+
         @JsonIgnore
         private Long barId;
+
         private String title;
         private Content content;
 

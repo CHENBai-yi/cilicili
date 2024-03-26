@@ -96,5 +96,4 @@ public class BarsController {
     public R deleteById(final Integer id) {
         return this.barsService.deleteById(id);
     }
-
 }
