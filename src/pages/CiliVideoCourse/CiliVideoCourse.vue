@@ -39,27 +39,31 @@
         <n-space class="full-width justify-start q-pl-lg q-gutter-x-xl" vertical>
           <div class="flex justify-start row  q-ml-xl q-pt-sm">
             <h2 class="selectTitle no-margin q-pl-xl">{{ $t('Subject') }}:</h2>
-            <div class="col-10 flex justify-start  items-center q-gutter-md q-pa-md ">
-              <n-tag class="selectTitle" round type="error">
+            <div class="col-10 flex justify-start  items-center q-gutter-xs q-pa-md ">
+              <n-tag class="selectTitle" round type="error" @click="queryParam.subject='';refresh()">
                 {{ $t('All') }}
               </n-tag>
-              <CiliLink v-for="(item,index) in courses.subject" :weight=600 color="" size="18px">
+              <n-button v-for="(item,index) in courses.subject" :key="index" class="text-h6" quaternary
+                        style="font-size:16px;font-weight:600"
+                        @click="queryParam.subject=item;refresh()">
                 {{ item }}
-              </CiliLink>
+              </n-button>
+
             </div>
           </div>
           <n-divider class="no-margin"/>
           <div class="flex justify-start row  q-ml-xl q-pt-sm" @mouseenter="show=true"
                @mouseleave="show=false">
             <h2 class="selectTitle no-margin q-pl-xl">{{ $t('Kind') }}:</h2>
-            <div class="col-10 flex justify-start  items-center q-gutter-md q-pa-md ">
-              <n-tag class="selectTitle subTitle" round type="error">
+            <div class="col-10 flex justify-start  items-center q-gutter-xs q-pa-md ">
+              <n-tag class="selectTitle subTitle" round type="error" @click="queryParam.kind='';refresh()">
                 {{ $t('All') }}
               </n-tag>
-              <CiliLink v-for="(item,index) in courses.classify" :key="index" :weight=500 color="" size="16px">
+              <n-button v-for="(item,index) in courses.classify" :key="index" class="text-h6" quaternary
+                        style="font-size:18px;font-weight:500"
+                        @click="queryParam.kind=item;refresh()">
                 {{ item }}
-              </CiliLink>
-
+              </n-button>
               <n-collapse-transition :show="show" class="q-gutter-md" style="margin-left:0;margin-top:0">
                 <CiliLink v-for="(item,index) in courses.classify_more" :weight=500 color="" size="16px">
                   {{ item }}
@@ -94,8 +98,8 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
-import {onMounted, ref} from 'vue'
-import {getAction} from 'src/api/manage'
+import {onMounted, reactive, ref} from 'vue'
+import {postAction} from 'src/api/manage'
 import CiliCiliVideoCourse from "/public/mockData/CiliCiliVideoCourse.json"
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 
@@ -106,17 +110,28 @@ const courses = ref({})
 const urls = {
   list: 'courses/get-subject-categories'
 }
-onMounted(async () => {
-  const res = await getAction(urls.list)
+const queryParam = reactive({
+  subject: '',
+  kind: '',
+})
+const refresh = async () => {
+  const res = await postAction(urls.list, queryParam)
   console.log(res.data)
   if (res && res.code === 1) {
     courses.value = res.data
     return
   }
   courses.value = CiliCiliVideoCourse.data
+}
+onMounted(() => {
+  refresh()
 })
 </script>
 <style lang="scss" scoped>
+n-tag:hover {
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
 }

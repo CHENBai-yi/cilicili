@@ -26,9 +26,14 @@
 
         <n-scrollbar class="col q-pl-md" x-scrollable>
           <div class="scrollbar-flex-content ">
-            <span v-for="(item,index) in catagroy" :key="item" class="scrollbar-demo-item">
-                      {{ item.category_name }}
-            </span>
+            <n-tag class="selectTitle subTitle scrollbar-demo-item" secondary size="large" strong type="tertiary"
+                   @click="bus.emit('selectKind','')">
+              {{ $t('All') }}
+            </n-tag>
+            <n-button v-for="(item,index) in catagroy" :key="item" class="selectTitle subTitle scrollbar-demo-item"
+                      secondary strong type="tertiary" @click="bus.emit('selectKind',item.category_name)">
+              {{ item.category_name }}
+            </n-button>
           </div>
         </n-scrollbar>
         <div class="relative-position q-mr-md">
@@ -45,13 +50,15 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+
+import {inject, onMounted, ref} from 'vue'
 import CiliToolBar from './CiliToolBar/CiliToolBar.vue'
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 import useTheme from "src/composables/useTheme"
 import {CiliFrontendDefault} from 'src/config/default'
 import {getAction} from 'src/api/manage'
 
+const bus = inject('bus')
 const urls = {
   list: 'category'
 }

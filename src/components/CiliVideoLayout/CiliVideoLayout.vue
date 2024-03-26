@@ -285,7 +285,7 @@
 </template>
 
 <script setup>
-import {onMounted, reactive, ref} from 'vue'
+import {inject, onMounted, reactive, ref} from 'vue'
 import CiliVideoPlayer from 'src/components/ciliVideoPlayer/CiliVideoPlayer.vue'
 import CiliLink from 'src/components/ciliLink/CiliLink.vue'
 import CiliCarousel from 'src/components/CiliCarousel/CiliCarousel.vue'
@@ -647,17 +647,27 @@ const size = 4
 const pagination = ref({
   sort_by: 'created_at',
   desc: false,
+  kind: '',
   page: 1,
   page_size: 10,
 })
-onMounted(async () => {
-  pagination.value.page_size -= size
+const refresh = async () => {
+  pagination.value.page = 1
+  pagination.value.page_size = 6
   const res = await postAction(urls.list, pagination.value)
   if (res && res.code === 1) {
     const arr = res.data.records
     item1.value = arr.slice(0, 3)
     item2.value = arr.slice(-3, 6)
   }
+}
+const bus = inject('bus')
+onMounted(() => {
+  bus.on('selectKind', (kind) => {
+    pagination.value.kind = kind
+    refresh()
+  })
+  refresh()
 })
 const onLoadFlag = ref(true)
 const onLoad = (index, done) => {
