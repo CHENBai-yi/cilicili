@@ -1,0 +1,2047 @@
+2024-03-28 00:24:47.350 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-03-28 00:24:47.528 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 13228 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-03-28 00:24:47.532 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-03-28 00:24:51.372 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-28 00:24:51.375 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-03-28 00:24:51.594 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 206 ms. Found 0 MongoDB repository interfaces.
+2024-03-28 00:24:51.618 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-28 00:24:51.621 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-03-28 00:24:51.770 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 121 ms. Found 0 Redis repository interfaces.
+2024-03-28 00:24:54.733 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8889 (http)
+2024-03-28 00:24:54.734 [main] INFO  o.a.c.c.AprLifecycleListener - An older version [2.0.1] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [2.0.5]
+2024-03-28 00:24:54.735 [main] INFO  o.a.c.c.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.1] using APR version [1.7.0].
+2024-03-28 00:24:54.742 [main] INFO  o.a.c.c.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.5 5 Jul 2022]
+2024-03-28 00:24:54.759 [main] INFO  o.a.c.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8889"]
+2024-03-28 00:24:54.762 [main] INFO  o.a.c.core.StandardService - Starting service [Tomcat]
+2024-03-28 00:24:54.763 [main] INFO  o.a.c.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-03-28 00:24:54.947 [main] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-03-28 00:24:54.948 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7300 ms
+2024-03-28 00:24:57.704 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-03-28 00:24:58.133 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-03-28 00:24:58.254 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-03-28 00:24:58.551 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-03-28 00:24:59.810 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-03-28 00:25:00.831 [redisson-netty-1-4] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-03-28 00:25:03.007 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-03-28 00:25:06.342 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@67e7fe73, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2daf650b, org.springframework.security.web.context.SecurityContextHolderFilter@361a618e, org.springframework.security.web.header.HeaderWriterFilter@2100d881, org.springframework.web.filter.CorsFilter@4d7a4317, org.springframework.security.web.authentication.logout.LogoutFilter@5854e526, site.cilicili.common.filter.JWTAuthFilter@7c816f46, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@8497c23, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@500e995b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f1d270a, org.springframework.security.web.access.ExceptionTranslationFilter@7671c02d, org.springframework.security.web.access.intercept.AuthorizationFilter@63c07eaf]
+2024-03-28 00:25:12.547 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-03-28 00:25:12.704 [main] INFO  o.a.c.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8889"]
+2024-03-28 00:25:12.730 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8889 (http) with context path ''
+2024-03-28 00:25:12.747 [main] INFO  site.cilicili.App - Started App in 26.22 seconds (process running for 29.383)
+2024-03-28 00:25:12.860 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-03-28 00:25:12.936 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:61)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:52)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:25:12.975 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-03-28 00:25:16.123 [http-nio-8889-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-28 00:25:16.123 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-03-28 00:25:16.125 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
+2024-03-28 00:25:16.251 [http-nio-8889-exec-1] INFO  s.c.c.w.WebSocketEndpoint - 建立与Username：admin的消息提醒计数连接
+2024-03-28 00:58:25.986 [http-nio-8889-exec-2] INFO  s.c.c.w.WebSocketEndpoint - 关闭与UserID：null的消息提醒计数连接
+2024-03-28 00:58:32.889 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 1
+- Execution Time                          : 4 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:32.900 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 00:58:33.032 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  username,token  [34mFROM[0m sys_user_online 
+ 
+ [34mWHERE[0m (username = [34mNULL[0m [34mOR[0m token = [36m'Token eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLnlKjmiLc5NTY5IiwiUmVmcmVzaEF0IjoxNzExOTA4Njg2MjI5LCJpYXQiOjE3MTE1NDg2ODksImV4cCI6MTcxMTkwODY4OX0.3rLmHFKp4DooR1o-v-l-zjZ5DG8uyhMlmg6vUuXwWYo'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 2
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.authentication.user.controller.UsersController.logout(UsersController.java:55)
+	 4. site.cilicili.authentication.user.service.impl.UserServiceImpl.logout(UserServiceImpl.java:170)
+	 5. site.cilicili.authentication.user.service.impl.UserServiceImpl.lambda$logout$14(UserServiceImpl.java:170)
+	 6. site.cilicili.backend.user.service.impl.SysUserOnlineServiceImpl.kickOnlineUser(SysUserOnlineServiceImpl.java:75)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:33.041 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mDELETE[0m [34mFROM[0m sys_user_online 
+ 
+ [34mWHERE[0m (username = [34mNULL[0m [34mOR[0m token = [36m'Token eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLnlKjmiLc5NTY5IiwiUmVmcmVzaEF0IjoxNzExOTA4Njg2MjI5LCJpYXQiOjE3MTE1NDg2ODksImV4cCI6MTcxMTkwODY4OX0.3rLmHFKp4DooR1o-v-l-zjZ5DG8uyhMlmg6vUuXwWYo'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 2
+- Execution Time                          : 5 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.authentication.user.controller.UsersController.logout(UsersController.java:55)
+	 4. site.cilicili.authentication.user.service.impl.UserServiceImpl.logout(UserServiceImpl.java:170)
+	 5. site.cilicili.authentication.user.service.impl.UserServiceImpl.lambda$logout$14(UserServiceImpl.java:170)
+	 6. site.cilicili.backend.user.service.impl.SysUserOnlineServiceImpl.kickOnlineUser(SysUserOnlineServiceImpl.java:76)
+	 7. site.cilicili.backend.user.service.impl.SysUserOnlineServiceImpl.lambda$kickOnlineUser$0(SysUserOnlineServiceImpl.java:76)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:33.045 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 00:58:33.090 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T00:58:33.082303200'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'用户9569 下线成功.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/public/logout'[0m, 200,
+                [36m'{"code":1,"message":"用户9569 下线成功."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 3
+- Execution Time                          : 5 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:33.095 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 00:58:40.286 [http-nio-8889-exec-9] INFO  c.a.druid.pool.DruidDataSource - {dataSource-3} inited
+2024-03-28 00:58:40.293 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m
+        id, subject_id, category_name
+        [34mfrom[0m categories
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 4
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.categories.controller.CategoriesController.queryAll(CategoriesController.java:44)
+	 4. site.cilicili.frontend.categories.service.impl.CategoriesServiceImpl.queryAll(CategoriesServiceImpl.java:56)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:40.296 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 00:58:40.301 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  logical_delete = 1 
+         
+         
+             
+            limit 0,6
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 5
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseList(CoursesController.java:160)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseList(CoursesServiceImpl.java:263)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:40.337 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T00:58:40.332505100'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'OK'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'[34mGET[0m'[0m, [36m'/category'[0m, 200,
+                [36m'{"code":200,"message":"OK"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 6
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:40.337 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 00:58:40.339 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 00:58:40.368 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T00:58:40.365510600'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 7
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:40.370 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 00:58:41.918 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  logical_delete = 1 
+         
+         
+             
+            limit 4,4
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 8
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseList(CoursesController.java:160)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseList(CoursesServiceImpl.java:263)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:41.923 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 00:58:41.950 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T00:58:41.947468700'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 9
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 00:58:41.952 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:34.237 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  logical_delete = 1 
+         
+         
+             
+            limit 0,6
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 11
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseList(CoursesController.java:160)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseList(CoursesServiceImpl.java:263)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:34.252 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m
+        id, subject_id, category_name
+        [34mfrom[0m categories
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 10
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.categories.controller.CategoriesController.queryAll(CategoriesController.java:44)
+	 4. site.cilicili.frontend.categories.service.impl.CategoriesServiceImpl.queryAll(CategoriesServiceImpl.java:56)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:34.256 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:15:34.279 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:34.352 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:34.344576900'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 13
+- Execution Time                          : 4 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:34.355 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:34.364 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:34.358578900'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'OK'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'[34mGET[0m'[0m, [36m'/category'[0m, 200,
+                [36m'{"code":200,"message":"OK"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 12
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:34.371 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:15:35.914 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  logical_delete = 1 
+         
+         
+             
+            limit 4,4
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 14
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseList(CoursesController.java:160)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseList(CoursesServiceImpl.java:263)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:35.921 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:35.954 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:35.949260300'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 15
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:35.957 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:42.581 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mWHERE[0m u.username = [34mNULL[0m [34mOR[0m u.email = [36m'2565408606@qq.com'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 16
+- Execution Time                          : 8 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.authentication.user.controller.UsersController.login(UsersController.java:42)
+	 4. site.cilicili.authentication.user.service.impl.UserServiceImpl.login(UserServiceImpl.java:87)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:42.595 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m username,
+        token
+        [34mfrom[0m sys_user_online
+         [34mWHERE[0m username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 16
+- Execution Time                          : 4 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.authentication.user.controller.UsersController.login(UsersController.java:42)
+	 4. site.cilicili.authentication.user.service.impl.UserServiceImpl.login(UserServiceImpl.java:88)
+	 5. site.cilicili.authentication.user.service.impl.UserServiceImpl.lambda$login$7(UserServiceImpl.java:88)
+	 6. site.cilicili.backend.user.service.impl.SysUserOnlineServiceImpl.queryById(SysUserOnlineServiceImpl.java:104)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:42.775 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_user_online(username, token)
+        [34mvalues[0m ([36m'用户9569'[0m, [36m'Token eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLnlKjmiLc5NTY5IiwiUmVmcmVzaEF0IjoxNzExOTIzMzM5NzM1LCJpYXQiOjE3MTE1NjMzNDIsImV4cCI6MTcxMTkyMzM0Mn0.x0Tl_d9xclABnACynWj3u57Gxnid0oq1VZ7O0_4b1d8'[0m)
+        [34mon[0m duplicate [34mkey[0m [34mupdate[0m username = [34mvalues[0m(username),
+                                token    = [34mvalues[0m(token)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 16
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.authentication.user.controller.UsersController.login(UsersController.java:42)
+	 4. site.cilicili.authentication.user.service.impl.UserServiceImpl.login(UserServiceImpl.java:88)
+	 5. site.cilicili.authentication.user.service.impl.UserServiceImpl.lambda$login$7(UserServiceImpl.java:90)
+	 6. site.cilicili.authentication.user.service.impl.UserServiceImpl.lambda$login$6(UserServiceImpl.java:98)
+	 7. site.cilicili.authentication.user.service.impl.UserServiceImpl.lambda$login$4(UserServiceImpl.java:99)
+	 8. site.cilicili.backend.user.service.impl.SysUserOnlineServiceImpl.insertOrUpdate(SysUserOnlineServiceImpl.java:98)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:42.791 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:15:42.835 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:42.829792'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'登录成功.'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/public/login'[0m, 200,
+                [36m'{"code":1,"message":"登录成功."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 17
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:42.841 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:15:43.043 [http-nio-8889-exec-9] INFO  s.c.c.m.LogOperationAspect - 用户9569 IP:127.0.0.1-->R(code=1, message=登录成功., data=site.cilicili.authentication.user.dto.UserDto@36ff539a)
+2024-03-28 02:15:43.160 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 18
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.163 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:15:43.199 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m * [34mfrom[0m sys_notice [34mJOIN[0m sys_notice_to_user [34mon[0m sys_notice.notice_id=sys_notice_to_user.notice_id
+         [34mWHERE[0m to_user = [36m'用户9569'[0m
+            
+            
+                [34mor[0m notice_type = [36m'noticeType_system'[0m 
+         
+         
+             
+            limit 0,9999
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 19
+- Execution Time                          : 7 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.backend.notice.controller.SysNoticeController.getNoticeListCount(SysNoticeController.java:192)
+	 4. site.cilicili.backend.notice.service.impl.SysNoticeServiceImpl.getNoticeListCount(SysNoticeServiceImpl.java:185)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.332 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m sys_user
+        [34mwhere[0m username = [36m'admin'[0m;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 19
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.backend.notice.controller.SysNoticeController.getNoticeListCount(SysNoticeController.java:192)
+	 4. site.cilicili.backend.notice.service.impl.SysNoticeServiceImpl.getNoticeListCount(SysNoticeServiceImpl.java:185)
+	 5. site.cilicili.backend.notice.domain.dto.NoticeListQueryParamResponse$Records_$$_jvstc79_0.getNoticeToUser(NoticeListQueryParamResponse$Records_$$_jvstc79_0.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.356 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m sys_user
+        [34mwhere[0m username = [36m'admin'[0m;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 19
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.backend.notice.controller.SysNoticeController.getNoticeListCount(SysNoticeController.java:192)
+	 4. site.cilicili.backend.notice.service.impl.SysNoticeServiceImpl.getNoticeListCount(SysNoticeServiceImpl.java:185)
+	 5. site.cilicili.backend.notice.domain.dto.NoticeListQueryParamResponse$Records_$$_jvstc79_0.getNoticeToUser(NoticeListQueryParamResponse$Records_$$_jvstc79_0.java)
+	 6. site.cilicili.backend.notice.domain.dto.NoticeListQueryParamResponse$Records_$$_jvstc79_0.setUpdatedByUser(NoticeListQueryParamResponse$Records_$$_jvstc79_0.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.472 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m sys_role.*
+        [34mfrom[0m sys_role,
+             ([34mselect[0m sys_role_role_code [34mfrom[0m sys_user_role [34mwhere[0m sys_user_username = [36m'admin'[0m) [34mas[0m b
+        [34mwhere[0m sys_role.logical_delete > 0
+          [34mand[0m sys_role.role_code = b.sys_role_role_code;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 19
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.backend.notice.controller.SysNoticeController.getNoticeListCount(SysNoticeController.java:192)
+	 4. site.cilicili.backend.notice.service.impl.SysNoticeServiceImpl.getNoticeListCount(SysNoticeServiceImpl.java:185)
+	 5. site.cilicili.backend.role.domain.dto.SysRoleDto$User_$$_jvstc79_1.setUpdatedByUser(SysRoleDto$User_$$_jvstc79_1.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.491 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m sys_dept.*
+        [34mfrom[0m sys_dept,
+             ([34mselect[0m sys_dept_dept_code [34mfrom[0m sys_dept_user [34mwhere[0m sys_user_username = [36m'admin'[0m) [34mas[0m b
+        [34mwhere[0m dept_code = b.sys_dept_dept_code;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 19
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.backend.notice.controller.SysNoticeController.getNoticeListCount(SysNoticeController.java:192)
+	 4. site.cilicili.backend.notice.service.impl.SysNoticeServiceImpl.getNoticeListCount(SysNoticeServiceImpl.java:185)
+	 5. site.cilicili.backend.role.domain.dto.SysRoleDto$User_$$_jvstc79_1.setUpdatedByUser(SysRoleDto$User_$$_jvstc79_1.java)
+	 6. site.cilicili.backend.role.domain.dto.SysRoleDto$User_$$_jvstc79_1.setUpdatedByUser(SysRoleDto$User_$$_jvstc79_1.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.504 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:15:43.546 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:43.541430100'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/notice/[34mget[0m-notice-count'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 20
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:43.550 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:15:47.241 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 21
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.242 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 22
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.243 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:47.243 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:15:47.252 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  status = [36m'onOffPass_on'[0m 
+         
+         
+             
+            limit 0,10
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 23
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:126)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.293 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 18
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 23
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.310 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 19
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 23
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.313 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 20
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 23
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.317 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 21
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 23
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.329 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:47.348 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m [36m'[34mvalue[0m'[0m total,
+               [36m'[34mvalue[0m'[0m pass,
+               [36m'[34mvalue[0m'[0m [32m`[34mon[0m`[0m,
+               [36m'[34mvalue[0m'[0m off
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        LIMIT 1
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 24
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCoursesCount(CoursesController.java:130)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCoursesCount(CoursesServiceImpl.java:140)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.352 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:15:47.361 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:47.355982700'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-info'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 25
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.363 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:15:47.385 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 26
+- Execution Time                          : 4 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.388 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        [34mwhere[0m courses.status = [36m'onOffPass_pass'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 27
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 7. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setTotal(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.391 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        [34mwhere[0m courses.status = [36m'onOffPass_off'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 28
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 7. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setTotal(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 8. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setPass(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.394 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        [34mwhere[0m courses.status = [36m'onOffPass_on'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 29
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 7. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setTotal(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 8. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setPass(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 9. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setOff(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.398 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:47.396990'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-courses-count'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 30
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:47.400 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:15:53.389 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 31
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:53.391 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:15:53.400 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m * [34mfrom[0m subjects
+          
+         
+         
+        ;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 32
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.subjects.controller.SubjectsController.getSubjectList(SubjectsController.java:128)
+	 4. site.cilicili.frontend.subjects.service.impl.SubjectsServiceImpl.getSubjectList(SubjectsServiceImpl.java:96)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:53.414 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:15:53.437 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:15:53.435784900'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/subject/[34mget[0m-subject-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 33
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:15:53.440 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:17:48.603 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 34
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:48.605 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:17:48.621 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m id,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at,
+               sort,
+               stable,
+               status,
+               memo,
+               username,
+               nickname,
+               real_name,
+               avatar,
+               gender,
+               mobile,
+               email
+        [34mfrom[0m sys_user
+        [34mwhere[0m username [34min[0m ([34mSELECT[0m sys_user_role.sys_user_username
+                           [34mfrom[0m sys_role
+                                    [34mINNER[0m [34mJOIN[0m sys_user_role [34mON[0m sys_role.role_code = sys_user_role.sys_role_role_code
+                           [34mWHERE[0m sys_user_role.sys_role_role_code = [36m'teacher'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 35
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.backend.user.controller.SysUserController.getTeacherList(SysUserController.java:279)
+	 4. site.cilicili.backend.user.service.impl.SysUserServiceImpl.getTeacherList(SysUserServiceImpl.java:240)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:48.623 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:17:48.648 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:17:48.646817100'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/[34muser[0m/[34mget[0m-[34muser[0m-list-by_role'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 36
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:48.650 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:17:51.632 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 37
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:51.633 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:17:51.642 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m * [34mfrom[0m categories
+         [34mWHERE[0m subject_id [34min[0m ([34mSELECT[0m [34mDISTINCT[0m id [34mfrom[0m subjects [34mwhere[0m subject_code=[36m'python'[0m) 
+         
+         
+        ;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 38
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.categories.controller.CategoriesController.getCategoryList(CategoriesController.java:114)
+	 4. site.cilicili.frontend.categories.service.impl.CategoriesServiceImpl.getCategoryList(CategoriesServiceImpl.java:98)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:51.658 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:17:51.683 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:17:51.681158400'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/category/[34mget[0m-category-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 39
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:51.685 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-03-28 02:17:53.736 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 40
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:53.739 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:17:53.743 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m * [34mfrom[0m categories
+         [34mWHERE[0m subject_id [34min[0m ([34mSELECT[0m [34mDISTINCT[0m id [34mfrom[0m subjects [34mwhere[0m subject_code=[36m'java'[0m) 
+         
+         
+        ;
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 41
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.categories.controller.CategoriesController.getCategoryList(CategoriesController.java:114)
+	 4. site.cilicili.frontend.categories.service.impl.CategoriesServiceImpl.getCategoryList(CategoriesServiceImpl.java:98)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:53.744 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:17:53.767 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:17:53.764453700'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/category/[34mget[0m-category-list'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 42
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:17:53.769 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:21:14.556 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:21:14.551464200'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 43
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:21:14.558 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-03-28 02:21:22.225 [http-nio-8889-exec-4] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:21:22.222979200'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 44
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:21:22.227 [http-nio-8889-exec-4] INFO  p6spy - 
+2024-03-28 02:24:34.058 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 45
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.059 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 46
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.060 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:24:34.061 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-03-28 02:24:34.068 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  status = [36m'onOffPass_on'[0m 
+         
+         
+             
+            limit 0,10
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 47
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:126)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.069 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m [36m'[34mvalue[0m'[0m total,
+               [36m'[34mvalue[0m'[0m pass,
+               [36m'[34mvalue[0m'[0m [32m`[34mon[0m`[0m,
+               [36m'[34mvalue[0m'[0m off
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        LIMIT 1
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 48
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCoursesCount(CoursesController.java:130)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCoursesCount(CoursesServiceImpl.java:140)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.070 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-03-28 02:24:34.076 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 18
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 47
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.127 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 19
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 47
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.131 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 20
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 47
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.133 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 21
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 47
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.134 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:24:34.159 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 49
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.161 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        [34mwhere[0m courses.status = [36m'onOffPass_pass'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 50
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 7. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setTotal(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.165 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        [34mwhere[0m courses.status = [36m'onOffPass_off'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 51
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 7. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setTotal(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 8. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setPass(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.167 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m COUNT(*)
+        [34mfrom[0m [32m`cili-quasar-[34muser[0m`[0m.courses
+        [34mwhere[0m courses.status = [36m'onOffPass_on'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 52
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:64)
+	 5. site.cilicili.common.mvcConfig.LogOperationAspect.lambda$writeOperationLog$1(LogOperationAspect.java:67)
+	 6. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.equals(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 7. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setTotal(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 8. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setPass(CetCoursesCountResponse_$$_jvstc79_4.java)
+	 9. site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse_$$_jvstc79_4.setOff(CetCoursesCountResponse_$$_jvstc79_4.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.171 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:24:34.169596900'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-courses-count'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 53
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.171 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:24:34.169596900'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-info'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 54
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:24:34.172 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-03-28 02:24:34.173 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-03-28 02:26:03.817 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 55
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:03.819 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-03-28 02:26:03.824 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  status = [36m'onOffPass_pass'[0m 
+         
+         
+             
+            limit 0,10
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 56
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:126)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:03.828 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 6
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 56
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:03.829 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-03-28 02:26:03.851 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:26:03.849620400'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-info'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 57
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:03.853 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-03-28 02:26:58.253 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 58
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.255 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:26:58.260 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m *
+        [34mfrom[0m courses
+         [34mWHERE[0m  status = [36m'onOffPass_off'[0m 
+         
+         
+             
+            limit 0,10
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 59
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:126)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.268 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 4
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 59
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.270 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 5
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 59
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.272 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 7
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 59
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.273 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 8
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 59
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.275 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m count(*)
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 9
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 59
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getCourseInfo(CoursesController.java:125)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getCourseInfo(CoursesServiceImpl.java:127)
+	 5. site.cilicili.frontend.course.domain.dto.GetCourseInfoResponse$CourseList_$$_jvstc79_3.toString(GetCourseInfoResponse$CourseList_$$_jvstc79_3.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.277 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:26:58.300 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:26:58.298576600'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-course-info'[0m, 200,
+                [36m'{"code":1,"message":"Success"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 60
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:26:58.302 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-03-28 02:30:28.353 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 61
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:28.356 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-03-28 02:30:28.361 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m course_id, name, poster
+        [34mfrom[0m courses
+        [34mwhere[0m course_id = 4
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 62
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:166)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$4(CoursesServiceImpl.java:166)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:28.365 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m id, title, description, catalog_id
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 4
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 62
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:167)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$5(CoursesServiceImpl.java:168)
+	 6. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5.toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:28.368 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-03-28 02:30:28.392 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:30:28.389695400'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-children-bar'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 63
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:28.395 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-03-28 02:30:32.688 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 64
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:32.689 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:30:32.695 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m course_id, name, poster
+        [34mfrom[0m courses
+        [34mwhere[0m course_id = 5
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 65
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:166)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$4(CoursesServiceImpl.java:166)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:32.697 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m id, title, description, catalog_id
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 5
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 65
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:167)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$5(CoursesServiceImpl.java:168)
+	 6. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5.toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:32.697 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:30:32.721 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:30:32.718087700'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-children-bar'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 66
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:32.723 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-03-28 02:30:35.756 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m u.*,r.sys_role_role_code [34mas[0m roleCode,l.token  [34mFROM[0m sys_user u [34mJOIN[0m sys_user_role r [34mon[0m u.username=r.sys_user_username [34mjoin[0m sys_user_online l [34mon[0m u.username=l.username [34mWHERE[0m u.username = [36m'用户9569'[0m
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 67
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:49)
+	 2. site.cilicili.common.security.jwt.AuthenticationProvider.getAuthentication(AuthenticationProvider.java:22)
+	 3. site.cilicili.authentication.user.service.impl.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:25)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:35.759 [http-nio-8889-exec-10] INFO  p6spy - 
+2024-03-28 02:30:35.763 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m course_id, name, poster
+        [34mfrom[0m courses
+        [34mwhere[0m course_id = 7
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 68
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:166)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$4(CoursesServiceImpl.java:166)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:35.766 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m id, title, description, catalog_id
+        [34mfrom[0m catalogs
+        [34mwhere[0m course_id = 7
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 68
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:167)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$5(CoursesServiceImpl.java:168)
+	 6. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5.toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:35.780 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m parent_bar_id, catalog_id, id, title, bar_id, description, url
+        [34mfrom[0m bars
+        [34mwhere[0m catalog_id = 2
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 68
+- Execution Time                          : 10 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:167)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$5(CoursesServiceImpl.java:168)
+	 6. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5.toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+	 7. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5._d16toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+	 8. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse.toString(GetChildrenBarResponse.java:15)
+	 9. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse$Catalog_$$_jvstc79_6.toString(GetChildrenBarResponse$Catalog_$$_jvstc79_6.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:35.790 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mselect[0m parent_bar_id, catalog_id, id, title, bar_id, description, url
+        [34mfrom[0m bars
+        [34mwhere[0m catalog_id = 3
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 68
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.frontend.course.controller.CoursesController.getChildrenBar(CoursesController.java:145)
+	 4. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.getChildrenBar(CoursesServiceImpl.java:167)
+	 5. site.cilicili.frontend.course.service.impl.CoursesServiceImpl.lambda$getChildrenBar$5(CoursesServiceImpl.java:168)
+	 6. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5.toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+	 7. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse_$$_jvstc79_5._d16toString(GetChildrenBarResponse_$$_jvstc79_5.java)
+	 8. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse.toString(GetChildrenBarResponse.java:15)
+	 9. site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse$Catalog_$$_jvstc79_6.toString(GetChildrenBarResponse$Catalog_$$_jvstc79_6.java)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:35.791 [http-nio-8889-exec-10] INFO  p6spy - 
+2024-03-28 02:30:35.812 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-03-28T02:30:35.810856400'[0m, [36m'用户9569'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'Success.'[0m, [36m'java继父'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/courses/[34mget[0m-children-bar'[0m, 200,
+                [36m'{"code":1,"message":"Success."}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 69
+- Execution Time                          : 0 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:60)
+
+----------------------------------------------------------------------------------------------------
+
+2024-03-28 02:30:35.814 [http-nio-8889-exec-10] INFO  p6spy - 
