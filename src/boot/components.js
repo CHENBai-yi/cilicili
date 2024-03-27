@@ -2,7 +2,7 @@ import CiliAvatar from 'src/components/common/CiliAvatar/index.vue'
 import CiliFormTop from 'src/components/common/CiliFormTop/index.vue'
 import CiliTreeTd from 'src/components/common/CiliTreeTd/index.vue'
 import CiliVersionMenu from 'src/components/common/CiliVersionMenu/index.vue'
-import {create, NImage} from 'naive-ui'
+import {create, NButton, NImage, NPopconfirm} from 'naive-ui'
 // we globally register our component with Vue
 export default ({app}) => {
   app.component('Cili-avatar', CiliAvatar)
@@ -12,7 +12,7 @@ export default ({app}) => {
   //native ui
   const naive = create({
     components: [
-      NImage
+      NImage, NPopconfirm, NButton
     ]
   })
   app.use(naive)

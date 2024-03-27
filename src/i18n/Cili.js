@@ -58,6 +58,10 @@ export default {
     "zh-CN": "课程管理",
     "en-US": "Course Manage",
     "ru": "Управление бэкендом"
+  }, ClassifyManage: {
+    "zh-CN": "分类管理",
+    "en-US": "Classify Manage",
+    "ru": "Управление бэкендом"
   },
   LogManage: {
     "zh-CN": "日志管理",

@@ -1,4 +1,13 @@
 export default {
+  Classify: {
+    "zh-CN": "学科",
+    "en-US": "Classify",
+    "ru": "Имя пользователя"
+  }, Category: {
+    "zh-CN": "分类",
+    "en-US": "Category",
+    "ru": "Имя пользователя"
+  },
   LoginExpiration: {
     "zh-CN": "登录失效",
     "en-US": "Login expiration",
@@ -381,6 +390,11 @@ export default {
   , Pass: {
     "zh-CN": "通过",
     "en-US": "Pass",
+    "ru": "Пользователь"
+  },
+  Wait: {
+    "zh-CN": "等待",
+    "en-US": "Wait",
     "ru": "Пользователь"
   },
   Manage: {
