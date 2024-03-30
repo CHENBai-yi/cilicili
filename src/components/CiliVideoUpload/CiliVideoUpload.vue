@@ -21,17 +21,17 @@
         icon="settings"
         title="填写课程基本信息"
       >
-        <el-form :model="form" label-width="120px">
+        <el-form ref="validatedFrom" :model="form" :rules="rules" label-width="120px">
           <div :class="$q.screen.lt.sm?'column':'row'">
 
             <div class="col-8">
-              <el-form-item label="课程名称：">
-                <el-input v-model="form.name"/>
+              <el-form-item label="课程名称：" prop="name">
+                <el-input v-model="form.name" placeholder="请完成标题"/>
               </el-form-item>
-              <el-form-item label="课程卖点：">
+              <el-form-item label="课程卖点：" prop="tags">
                 <n-dynamic-tags v-model:value="form.tags" :render-tag="renderTag"/>
               </el-form-item>
-              <el-form-item label="课程目录：">
+              <el-form-item label="课程目录：" prop="catalog">
 
                 <n-table :bordered="false">
                   <thead>
@@ -48,7 +48,7 @@
                   <template v-for="(item,index) in form.catalog" :key="item.id">
                     <tr align="center">
                       <td width="100">
-                        <n-input v-model:value="item.id" placeholder="请输入内容"/>
+                        <n-input v-model:value="item.id" placeholder="请输入内容" readonly/>
                       </td>
                       <td>
                         <n-input v-model:value="item.title" clearable maxlength="50" placeholder="请输入内容" show-count
@@ -73,7 +73,7 @@
                         :key="item2.id"
                         align="center">
                       <td width="100">
-                        <n-input v-model:value="item2.id" placeholder="请输入内容"/>
+                        <n-input v-model:value="item2.id" placeholder="请输入内容" readonly/>
                       </td>
                       <td colspan="2">
                         <n-input v-model:value="item2.title" clearable maxlength="50" placeholder="请输入小节标题"
@@ -101,37 +101,39 @@
 
               </el-form-item>
               <el-form-item label="课程介绍：">
-                <el-input v-model="form.description" type="textarea"/>
+                <el-input v-model="form.description" placeholder="请填写课程内容描述" type="textarea"/>
               </el-form-item>
-              <el-form-item label="课程封面：">
+              <el-form-item label="课程封面：" prop="poster">
                 <CiliImageUpload @setPoster="setCoursePoster"/>
               </el-form-item>
             </div>
             <div class="col">
-              <el-form-item label="授课教师：">
+              <el-form-item label="授课教师：" prop="teacher">
                 <n-select
                   v-model:value="form.teacher"
                   :loading="loading"
                   :options="teachers"
-                  clearable
+
                   filterable
                   placeholder="搜索歌曲"
                   @focus="handleSearch"
                 />
               </el-form-item>
-              <el-form-item label="课程分类：">
+              <el-form-item label="课程分类：" prop="subject">
                 <el-col :span="11">
-                  <n-select v-model:value="form.subject" :options="subjects" :render-option="renderOption" clearable
+                  <n-select v-model:value="form.subject" :options="subjects" :render-option="renderOption"
                             filterable @update:value="onSelectUpdate"/>
                 </el-col>
                 <el-col :span="2" class="text-center">
                   <span class="text-gray-500">-</span>
                 </el-col>
                 <el-col :span="11">
-                  <n-select v-model:value="form.kind" :options="categories" clearable filterable/>
+                  <el-form-item prop="kind">
+                    <n-select v-model:value="form.kind" :options="categories" filterable/>
+                  </el-form-item>
                 </el-col>
               </el-form-item>
-              <el-form-item label="课程价格：">
+              <el-form-item label="课程价格：" prop="price">
                 <q-radio v-model="form.price" :val=0 checked-icon="task_alt" color="green" keep-color
                          label="免费"
                          unchecked-icon="panorama_fish_eye" @update:model-value="price=''"/>
@@ -148,7 +150,8 @@
           </div>
         </el-form>
         <q-stepper-navigation>
-          <q-btn color="primary" label="保存并下一步" @click="() => { done1 = true; step = 2 }"/>
+          <q-btn color="primary" label="保存并下一步"
+                 @click="validatedFrom.validate().then(res=>{done1 = true; step = 2 ;})"/>
         </q-stepper-navigation>
       </q-step>
 
@@ -233,7 +236,7 @@
         </q-layout>
 
         <q-stepper-navigation>
-          <q-btn color="primary" label="保存并下一步" @click="() => { step = 3 }"/>
+          <q-btn color="primary" label="保存并下一步" @click="next3"/>
           <q-btn class="q-ml-sm" color="primary" flat label="返回" @click="step = 1"/>
         </q-stepper-navigation>
       </q-step>
@@ -267,7 +270,9 @@ import {useToast} from "primevue/usetoast";
 import {useQuasar} from "quasar";
 import {postAction} from 'src/api/manage'
 import {getVideoLength} from "../../utils/common";
+import XEUtils from 'xe-utils'
 
+const validatedFrom = ref(null)
 const urls = reactive({
   add: 'courses/add',
   subjectList: 'subject/get-subject-list',
@@ -282,7 +287,7 @@ const form = reactive({
   catalog: [],
   kind: '',
   subject: '',
-  price: '',
+  price: 0,
   description: '',
   tags: ['掌握Flutter必备的Dart基础', '快速上手企业级实战项目开发', '快速上手企业级实战项目开发'],
   poster: ''
@@ -389,11 +394,11 @@ const renderTag = (tag, index) => {
   return h(
     NTag,
     {
-      type: index < 3 ? 'success' : 'error',
-      disabled: index > 3,
+      type: index < 5 ? 'success' : (index < 10 ? 'info' : 'warning'),
       closable: true,
+      size: 'large',
       onClose: () => {
-        tags.value.splice(index, 1)
+        form.tags.splice(index, 1)
       }
     },
     {
@@ -418,6 +423,7 @@ const uploaded = ({xhr}) => {
       const nodeByKey = tree.value.getNodeByKey(selected.value);
       videoSrc.value = resp.data.records
       nodeByKey.url = videoSrc.value
+      videoSrc.value = process.env.API + videoSrc.value
       const videoLength = getVideoLength(videoCom.value)
       nodeByKey.size = videoLength.size; //得到时长为秒，小数，182.36
       nodeByKey.length = videoLength.length
@@ -556,5 +562,36 @@ const handleSearch = (query) => {
         }, 1e3);
       }
     })
+}
+const rules = reactive({
+  name: [
+    {required: true, message: '请完成标题', trigger: 'blur'},
+    {max: 50, message: '长度保持在50个字符内', trigger: 'blur'},
+  ],
+  catalog: [
+    {required: true, message: '请完成课程大纲信息的填写', trigger: 'blur'},
+  ],
+  teacher: [
+    {required: true, message: '请选择授课教师姓名', trigger: 'blur'},
+  ],
+  kind: [
+    {required: true, message: '请完成课程类型选择', trigger: 'blur'},
+  ],
+  subject: [
+    {required: true, message: '请完成课程大类选择', trigger: 'blur'},
+  ],
+  price: [
+    {required: true, message: '请完成课程金额定义', trigger: 'blur'},
+  ],
+  poster: [
+    {required: true, message: '请完成上传课程封面', trigger: 'blur'},
+  ]
+})
+const next3 = () => {
+  if (XEUtils.every(form.catalog, (item) => XEUtils.every(item.bar, (i) => XEUtils.has(i, 'url')))) {
+    step.value = 3;
+  } else {
+    toast.add({severity: "warn", summary: "Warning", detail: '请将每小节的视频进行上传', life: 3000});
+  }
 }
 </script>

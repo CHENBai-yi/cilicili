@@ -67,7 +67,7 @@ const props = defineProps({
   // 视频是否循环播放
   loop: {
     type: Boolean,
-    default: true
+    default: false
   },
   // 语言(可选值: 'en', 'zh-cn', 'zh-tw')
   lang: {
@@ -173,11 +173,9 @@ const handlePlay = () => {
   audioDom && audioDom.play() // 播放音频
 }
 const handlePause = () => {
-
   const audioDom = state.instance.video
-  audioDom.pause()
-  audioDom.src = ''
   audioDom.src = props.video.url
+  audioDom.pause()
   showMask.value = true
 }
 

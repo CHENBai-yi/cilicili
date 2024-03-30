@@ -96,7 +96,7 @@
           </div>
         </div>
         <div :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-md q-mr-sm q-my-md'">
-          <div v-for="(item,index) in item1" :key="item.faver" class="col order-none">
+          <div v-for="(item,index) in item2" :key="item.faver" class="col order-none">
             <q-card bordered flat style="max-width: 500px;height:260px;max-height:260px">
               <div v-show="loaded" class="column">
                 <div class="col">
@@ -291,6 +291,7 @@ import CiliLink from 'src/components/ciliLink/CiliLink.vue'
 import CiliCarousel from 'src/components/CiliCarousel/CiliCarousel.vue'
 import useTheme from "src/composables/useTheme"
 import {postAction} from 'src/api/manage'
+import XEUtils from 'xe-utils'
 
 const {darkTheme} = useTheme()
 const items = ref([])
@@ -644,21 +645,25 @@ const urls = reactive({
   list: 'courses/get-course-list'
 })
 const size = 4
+const pageSize = ref(6)
 const pagination = ref({
   sort_by: 'created_at',
-  desc: false,
+  desc: true,
+  status: 'onOffPass_pass',
   kind: '',
   page: 1,
-  page_size: 10,
+  page_size: pageSize.value,
 })
 const refresh = async () => {
   pagination.value.page = 1
-  pagination.value.page_size = 6
+  pagination.value.page_size = pageSize.value
   const res = await postAction(urls.list, pagination.value)
   if (res && res.code === 1) {
     const arr = res.data.records
     item1.value = arr.slice(0, 3)
-    item2.value = arr.slice(-3, 6)
+    XEUtils.remove(arr, item => XEUtils.includes(item1.value, item))
+    item2.value = arr
+    console.log(item1.value, item2.value)
   }
 }
 const bus = inject('bus')
@@ -673,12 +678,14 @@ const onLoadFlag = ref(true)
 const onLoad = (index, done) => {
   setTimeout(async () => {
     pagination.value.page_size = size
-    pagination.value.page += 1
+    pagination.value.page += pageSize.value
     const res = await postAction(urls.list, pagination.value)
     if (res && res.code === 1 && res.data.records.length > 0) {
+      console.log(res.data.records)
       items.value.push(res.data.records)
       loaded.value = true
       onLoadFlag.value = true
+      pageSize.value = size
       done()
     } else {
       onLoadFlag.value = false

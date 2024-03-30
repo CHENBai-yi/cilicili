@@ -1,6 +1,6 @@
 <template>
   <q-page :class="$q.dark.isActive?`nice-class-out ${darkTheme}`:'nice-class-out'"
-          :style="$q.screen.lt.sm?{paddingTop: '60px'}:{paddingTop: '160px'}" style="overflow: hidden;">
+          :style="$q.screen.lt.sm?{paddingTop: '70px'}:{paddingTop: '170px'}" style="overflow: hidden;">
     <div class="row">
       <div class="nice-class col-10 ">
         <ul class="nice-class-list  clearfix q-gutter-y-md flex wrap ">
@@ -8,7 +8,11 @@
             <a :href="'#/video/'+item.title+'/'+item.id+'/info'">
               <img :src=item.pic>
             </a>
-            <a :href="'#/video/'+item.title+'/'+item.id+'/info'" class='a-tittile'>{{ item.title }}</a>
+            <a class='a-tittile'>
+              <n-ellipsis :line-clamp="2" :tooltip="false">
+                <a :href="'#/video/'+item.title+'/'+item.id+'/info'" class='a-tittile'>{{ item.title }}</a>
+              </n-ellipsis>
+            </a>
             <p :class="$q.dark.isActive?`${darkTheme}`:''">
               {{ item.subtitle }}
             </p>

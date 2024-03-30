@@ -127,7 +127,7 @@ module.exports = configure(function (ctx) {
     framework: {
       config: {
         loadingBar: { /* look at QuasarConfOptions from the API card */
-          color: 'primary teal-10'
+          color: 'light-blue-6'
         },
         notify: {
           progress: true,

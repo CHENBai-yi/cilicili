@@ -29,8 +29,7 @@
       <CiliPopover
         :clStyle="!!token?`background: url(${avatar});background-size: cover;  background-position: center;`:'background: #2093da; color: white'"
         :click-event="showLoginFrom" :label="!token?$t('Login'):''"
-        clClass="shadow-up-3"
-        to="/keceng">
+        clClass="shadow-up-3">
         <template #default>
           <div v-if="!token" class="login-panel-popover"><p class="title">{{ $t('LoginAndYouCan') }}</p>
             <div class="login-tip-content">
@@ -155,11 +154,11 @@
       <!--        </div>-->
       <!--      </CiliPopover>-->
 
-      <CiliPopover :label="$t('Contribute')" name="cloud_upload" to="/create/manage">
+      <CiliPopover :label="$t('Contribute')" name="cloud_upload" to="/create/upload">
         <div class="">
           <div class="">
             <div class="upload-panel-popover">
-              <CiliLink color="" href="#/create/manage">
+              <CiliLink color="" href="#/create/upload">
                 <div class="upload-item">
 
                   <svg class="item-icon" fill="none" height="26" viewBox="0 0 26 26" width="26"
@@ -251,9 +250,11 @@ const logout = () => {
     t('Confirm') + t('Logout') + '?',
     t('Logout'),
     {
+      distinguishCancelAndClose: true,
       confirmButtonText: t('Confirm'),
       cancelButtonText: t('Cancel'),
       type: 'warning',
+      lockScroll: true
     }
   )
     .then(async () => {

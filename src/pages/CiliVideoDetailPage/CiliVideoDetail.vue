@@ -22,6 +22,7 @@
                   :highlight="dplayerObj.highlight"
                   :showShadow="false"
                   :video="dplayerObj.video"
+                  :loop="false"
                 />
               </n-layout-content>
               <n-layout-sider
@@ -36,8 +37,8 @@
                 content-style="padding-left:15px;overflow:hidden"
               >
 
-                <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
-                  <div class="left q-mb-sm rounded-borders"></div>
+                <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders ':''">
+                  <div class="left q-mb-sm rounded-borders "></div>
                 </div>
                 <n-scrollbar>
                   <div class="q-gutter-sm">
@@ -51,7 +52,8 @@
                         </n-ellipsis>
                       </div>
                     </CiliLink>
-
+                    <p v-if="!videoList||videoList.length===0" class="text-weight-bolder text-blue-grey">
+                      没有更多小节信息</p>
                   </div>
                 </n-scrollbar>
 
@@ -214,13 +216,11 @@ onMounted(async () => {
     id: $router.params.id
   }
   const res = await commonStore.GetVideoDetail(urls.info, data)
-  console.log(res, "res")
   dplayerObj.video.pic = res.video.pic
   dplayerObj.video.quality[0].url = res.video.url
   dplayerObj.video.quality[1].url = res.video.url
   videoList.value = res.videoList
   videoInfo.value = res.video
-
   dp.value.render()
 })
 const dp = ref(null)

@@ -1,5 +1,5 @@
 <template>
-  <div :class="$q.screen.lt.sm?'q-ma-sm':'q-ml-xl'">
+  <div :class="$q.screen.lt.sm?'q-ma-sm glossy':'q-ml-xl glossy'">
     <div :class="$q.screen.lt.sm?'':'Cili_left'">
       <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
         <div class="title-box learn no-margin no-padding"></div>
@@ -13,8 +13,8 @@
         </ul>
       </div>
     </div>
-    <div id="classDesc" class="course-desc-container">
-      <div class="wrapper no-margin">
+    <div id="classDesc" class="course-desc-container ">
+      <div class="wrapper no-margin ">
         <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
           <div class="title-box detail"></div>
         </div>
@@ -94,11 +94,15 @@ ol, ul {
 
 ul.content-box {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: flex-start;
   height: 96px;
   width: 700px;
   margin: 42px 0 0 13px;
+  //align-items: center;
+  li {
+    margin: 5px 10px;
+  }
 }
 
 .wrapper {

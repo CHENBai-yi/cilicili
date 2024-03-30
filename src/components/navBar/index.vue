@@ -26,12 +26,12 @@
 
         <n-scrollbar class="col q-pl-md" x-scrollable>
           <div class="scrollbar-flex-content ">
-            <n-tag class="selectTitle subTitle scrollbar-demo-item" secondary size="large" strong type="tertiary"
+            <n-tag class="selectTitle subTitle scrollbar-demo-item" size="large" strong type="error"
                    @click="bus.emit('selectKind','')">
               {{ $t('All') }}
             </n-tag>
             <n-button v-for="(item,index) in catagroy" :key="item" class="selectTitle subTitle scrollbar-demo-item"
-                      secondary strong type="tertiary" @click="bus.emit('selectKind',item.category_name)">
+                      strong type="error" @click="bus.emit('selectKind',item.category_name)">
               {{ item.category_name }}
             </n-button>
           </div>
@@ -77,14 +77,12 @@ onMounted(async () => {
   const observer = new IntersectionObserver(handleIntersection, options);
   observer.observe(der.value);
   const res = await getAction(urls.list)
-  console.log(res)
   if (res && res.code === 200) {
     catagroy.value = res.data
   }
 })
 const handleIntersection = (entries) => {
   entries.forEach(entry => {
-    console.log(entry)
     if (entry.isIntersecting) {
       navBarShow.value = false
       height.value += change.value

@@ -147,13 +147,13 @@
                 </q-input>
 
                 <q-checkbox
-                  v-model="rememberMe"
+                  v-model="userStore.rememberMe"
                   checked-icon="task_alt"
                   class="privacy_tip"
                   color="red"
                   label="7天内自动登录"
                   unchecked-icon="crop_square"
-                  @update:model-value="changeRememberMe"
+                  @update:model-value="userStore.rememberMe"
                 />
                 <q-btn class="col-12" color="red" icon-right="send" rounded type="submit">
                   <h2 class="rl-modal-header login no-margin ">登录</h2>
@@ -198,13 +198,13 @@
                 </q-input>
 
                 <q-checkbox
-                  v-model="rememberMe"
+                  v-model="userStore.rememberMe"
                   checked-icon="task_alt"
                   class="privacy_tip"
                   color="red"
                   label="7天内自动登录"
                   unchecked-icon="crop_square"
-                  @update:model-value="changeRememberMe"
+                  @update:model-value="userStore.rememberMe"
                 />
                 <q-btn class="col-12" color="red" icon-right="send" rounded type="submit">
                   <h2 class="rl-modal-header login no-margin ">登录</h2>
@@ -363,9 +363,6 @@ const onLogin = (form) => {
 
   }
 
-}
-const changeRememberMe = (value) => {
-  userStore.ChangeRememberMe(value)
 }
 </script>
 
