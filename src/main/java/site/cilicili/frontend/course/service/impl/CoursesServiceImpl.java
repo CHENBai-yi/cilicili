@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
@@ -21,10 +22,7 @@ import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.mapper.CoursesMapper;
 import site.cilicili.frontend.course.service.CoursesService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -122,22 +120,37 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
-    public R getCourseInfo(final QueryCourseInfoRequest courses) {
-        final List<GetCourseInfoResponse.CourseList> courseLists = baseMapper.selectCourseByParam(courses);
-        log.warn(courseLists.toString());
-        return R.yes("Success")
-                .setData(GetCourseInfoResponse.builder()
-                        .records(courseLists)
-                        .page(1)
-                        .pageSize(10)
-                        .total(100)
-                        .build());
+    public R getCourseInfo(final QueryCourseInfoRequest courses, final AuthUserDetails authUserDetails) {
+        return Optional.ofNullable(authUserDetails)
+                .map(authUserDetails1 -> {
+                    if (Objects.isNull(courses.getCreatedBy())) {
+                        courses.setCreatedBy(authUserDetails1.getusername());
+                    }
+                    return baseMapper.selectCourseByParam(courses);
+                })
+                .map(courseLists -> {
+                    log.warn(courseLists.toString());
+                    return R.yes("Success")
+                            .setData(GetCourseInfoResponse.builder()
+                                    .records(courseLists)
+                                    .page(1)
+                                    .pageSize(10)
+                                    .total(100)
+                                    .build());
+                })
+                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
+
     }
 
     @Transactional(readOnly = true)
     @Override
-    public R getCoursesCount(final CoursesEntity courses) {
-        return R.yes("Success").setData(baseMapper.getCoursesCount(courses));
+    public R getCoursesCount(final CoursesEntity courses, final AuthUserDetails authUserDetails) {
+        return Optional.ofNullable(authUserDetails)
+                .map(authUserDetails1 -> {
+                    courses.setCreatedBy(authUserDetails1.getusername());
+                    return R.yes("Success").setData(baseMapper.getCoursesCount(courses));
+                }).orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
+
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -173,31 +186,32 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(rollbackFor = Throwable.class)
     @Override
-    public R addCourse(final AddCourseRequest courses) {
-        return Optional.ofNullable(courses)
-                .filter(b -> {
-                    courses.setTag(String.join(",", courses.getTags()));
-                    return saveOrUpdate(courses);
-                })
-                .map(c -> {
-                    boolean isOk = false;
-                    for (final AddCourseRequest.Catalog catalog : c.getCatalog()) {
-                        catalog.setCourseId(c.getCourseId());
-                        if (catalogsService.saveOrUpdate(catalog)) {
-                            catalog.getBar().forEach(item -> item.setCatalogId(catalog.getCatalogId()));
-                            if (barsService.saveOrUpdateBatch(catalog.getBar())) {
-                                isOk = true;
-                            } else {
-                                break;
+    public R addCourse(final AddCourseRequest courses, final AuthUserDetails authUserDetails) {
+        return Optional.ofNullable(authUserDetails)
+                .map(authUserDetails1 -> Optional.ofNullable(courses)
+                        .filter(b -> {
+                            courses.setTag(String.join(",", courses.getTags()));
+                            return saveOrUpdate(courses);
+                        })
+                        .map(c -> {
+                            boolean isOk = false;
+                            for (final AddCourseRequest.Catalog catalog : c.getCatalog()) {
+                                catalog.setCourseId(c.getCourseId());
+                                if (catalogsService.saveOrUpdate(catalog)) {
+                                    catalog.getBar().forEach(item -> item.setCatalogId(catalog.getCatalogId()));
+                                    if (barsService.saveOrUpdateBatch(catalog.getBar())) {
+                                        isOk = true;
+                                    } else {
+                                        break;
+                                    }
+                                } else {
+                                    break;
+                                }
                             }
-                        } else {
-                            break;
-                        }
-                    }
 
-                    return isOk ? R.yes("添加成功.") : null;
-                })
-                .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()));
+                            return isOk ? R.yes("添加成功.") : null;
+                        })
+                        .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()))).orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -304,6 +318,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
+    // 仅仅
     public R getCourseVideoInfoById(final CoursesEntity courses) {
         //
         final String url =

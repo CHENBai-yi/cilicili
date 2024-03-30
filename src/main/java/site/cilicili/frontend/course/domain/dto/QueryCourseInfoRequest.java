@@ -1,5 +1,6 @@
 package site.cilicili.frontend.course.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -18,7 +19,9 @@ import java.util.Optional;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIgnoreProperties(value = {"createdBy"})
 public class QueryCourseInfoRequest {
+    private String createdBy;
     private boolean desc;
     private @NotNull Integer page;
     private @NotNull Integer pageSize;

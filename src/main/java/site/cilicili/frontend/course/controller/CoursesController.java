@@ -5,7 +5,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
@@ -116,18 +118,18 @@ public class CoursesController {
             summary = "新增数据",
             parameters = {@Parameter(description = "courses 实体")})
     @PostMapping("add")
-    public R addCourse(final @RequestBody AddCourseRequest courses) {
-        return this.coursesService.addCourse(courses);
+    public R addCourse(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody AddCourseRequest courses) {
+        return this.coursesService.addCourse(courses, authUserDetails);
     }
 
     @PostMapping("get-course-info")
-    public R getCourseInfo(final @RequestBody QueryCourseInfoRequest courses) {
-        return coursesService.getCourseInfo(courses);
+    public R getCourseInfo(final @RequestBody QueryCourseInfoRequest courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return coursesService.getCourseInfo(courses, authUserDetails);
     }
 
     @PostMapping("get-courses-count")
-    public R getCoursesCount(final @RequestBody CoursesEntity courses) {
-        return coursesService.getCoursesCount(courses);
+    public R getCoursesCount(final @RequestBody CoursesEntity courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return coursesService.getCoursesCount(courses, authUserDetails);
     }
 
     @PostMapping("delete-course-info-by-id")

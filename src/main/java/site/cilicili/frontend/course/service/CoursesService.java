@@ -1,6 +1,7 @@
 package site.cilicili.frontend.course.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
@@ -59,11 +60,11 @@ public interface CoursesService extends IService<CoursesEntity> {
      */
     R deleteById(final Integer courseId);
 
-    R addCourse(AddCourseRequest courses);
+    R addCourse(AddCourseRequest courses, final AuthUserDetails authUserDetails);
 
-    R getCourseInfo(QueryCourseInfoRequest courses);
+    R getCourseInfo(QueryCourseInfoRequest courses, final AuthUserDetails authUserDetails);
 
-    R getCoursesCount(CoursesEntity courses);
+    R getCoursesCount(CoursesEntity courses, final AuthUserDetails authUserDetails);
 
     R deleteCourseInfoById(CoursesEntity courses);
 

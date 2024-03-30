@@ -125,6 +125,9 @@
         select *
         from courses
         <where>
+            <if test="createdBy != null and createdBy!=''">
+                and created_by = #{createdBy}
+            </if>
             <if test="status != null and status!=''">
                 and status = #{status}
             </if>
@@ -151,40 +154,52 @@
     </select>
     
     <resultMap type="site.cilicili.frontend.course.domain.dto.CetCoursesCountResponse" id="CetCoursesCountResponse">
-        <association property="total" javaType="integer" select="getTotal" column="total"/>
-        <association property="off" javaType="integer" select="getOff" column="off"/>
-        <association property="pass" javaType="integer" select="getPass" column="pass"/>
-        <association property="on" javaType="integer" select="getOn" column="on"/>
+        <association property="total" javaType="integer" select="getTotal" column="created_by"/>
+        <association property="off" javaType="integer" select="getOff" column="created_by"/>
+        <association property="pass" javaType="integer" select="getPass" column="created_by"/>
+        <association property="on" javaType="integer" select="getOn" column="created_by"/>
     </resultMap>
     
     <select id="getCoursesCount" resultMap="CetCoursesCountResponse">
-        select 'value' total,
-               'value' pass,
-               'value' `on`,
-               'value' off
+        select created_by
         from `cili-quasar-user`.courses
+        <where>
+            <if test="createdBy!=null and createdBy!=''">
+                created_by=#{createdBy}
+            </if>
+        </where>
         LIMIT 1
     </select>
     <select id="getTotal" resultType="integer">
         select COUNT(*)
         from `cili-quasar-user`.courses
+        <where>
+            created_by=#{created_by}
+        </where>
     </select>
     <select id="getOff" resultType="integer">
         select COUNT(*)
         from `cili-quasar-user`.courses
-        where courses.status = 'onOffPass_off'
-
+        <where>
+            created_by=#{created_by}
+            and courses.status = 'onOffPass_off'
+        </where>
     </select>
     <select id="getPass" resultType="integer">
         select COUNT(*)
         from `cili-quasar-user`.courses
-        where courses.status = 'onOffPass_pass'
-
+        <where>
+            created_by=#{created_by}
+            and courses.status = 'onOffPass_pass'
+        </where>
     </select>
     <select id="getOn" resultType="integer">
         select COUNT(*)
         from `cili-quasar-user`.courses
-        where courses.status = 'onOffPass_on'
+        <where>
+            created_by=#{created_by}
+            and courses.status = 'onOffPass_on'
+        </where>
     </select>
     
     
@@ -238,19 +253,19 @@
         select *
         from courses
         <where>
+            logical_delete = 1
             <if test="status != null and status!=''">
                 and status = #{status}
             </if>
             <if test="kind != null and kind!=''">
                 and kind = #{kind}
             </if>
-            and logical_delete = 1
         </where>
         <if test="desc">
             order by ${sortBy} desc
         </if>
         <if test="page>0 and pageSize>0">
-            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            <bind name="cur" value="page-1"/>
             limit #{cur},#{pageSize}
         </if>
     </select>
@@ -258,6 +273,7 @@
         select *
         from courses
         <where>
+            logical_delete=1
             <if test="courseId != null">
                 and course_id = #{courseId}
             </if>
@@ -285,6 +301,7 @@
             <if test="tag != null and tag != ''">
                 and tag = #{tag}
             </if>
+
         </where>
     </select>
     
@@ -340,8 +357,15 @@
             resultMap="GetCourseVideoInfoByIdResponse">
         select course_id
         from courses
-        where course_id = #{courseId}
-          and name = #{name}
+        <where>
+            logical_delete = 1
+            <if test="courseId!=null">
+                and course_id = #{courseId}
+            </if>
+            <if test="name!=null and name != ''">
+                and name = #{name}
+            </if>
+        </where>
     </select>
     <select id="SelectVideoInfo" resultMap="Video">
         select *
@@ -354,10 +378,9 @@
                  INNER JOIN catalogs ON courses.course_id = catalogs.course_id
                  INNER JOIN bars ON bars.catalog_id = catalogs.catalog_id
         WHERE courses.course_id = #{course_id}
-          and courses.logical_delete = 1;
     </select>
     <select id="SelectChildrenVideoInfo" resultMap="Video">
-        select url
+        select url as first_bar_url
         from bars
         where bar_id = #{bar_id}
     </select>
@@ -407,7 +430,8 @@
     <select id="getSubjectCategories" resultMap="GetSubjectCategoriesResponse">
         select count(course_id) as course_id, #{subject} as subject, #{kind} as kind
         from courses
-        where courses.logical_delete = 1;
+        where status = 'onOffPass_pass'
+          and courses.logical_delete = 1;
     </select>
     
     <select id="SelectSubject" resultType="string">
@@ -436,7 +460,8 @@
             <if test="kind!=null and kind!=''">
                 and kind=#{kind}
             </if>
-            and courses.logical_delete = 1
+            and courses.logical_delete = 1 and status = 'onOffPass_pass'
+            order by created_at desc
         </where>
     </select>
     
