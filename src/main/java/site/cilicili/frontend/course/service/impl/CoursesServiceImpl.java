@@ -17,6 +17,7 @@ import site.cilicili.frontend.bars.service.BarsService;
 import site.cilicili.frontend.catalogs.domain.mapper.CatalogMapper;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
 import site.cilicili.frontend.catalogs.service.CatalogsService;
+import site.cilicili.frontend.common.pojo.SearchRedisHelper;
 import site.cilicili.frontend.course.domain.dto.*;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.mapper.CoursesMapper;
@@ -39,6 +40,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     private final BarsService barsService;
     private final CatalogsService catalogsService;
     private final HttpServletRequest httpServletRequest;
+    private final SearchRedisHelper searchRedisHelper;
 
     public static String formatDateTime(long mss) {
         String DateTimes = null;
@@ -273,7 +275,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
-    public R getCourseList(final QueryCourseInfoRequest queryCourseInfoRequest) {
+    public R getCourseList(final QueryCourseInfoRequest queryCourseInfoRequest, final AuthUserDetails authUserDetails) {
         return Optional.ofNullable(baseMapper.getCourseList(queryCourseInfoRequest))
                 .map(courseList -> courseList.stream()
                         .map(item -> {
@@ -300,7 +302,16 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                             return getCourseListResponse;
                         })
                         .toList())
-                .map(r -> R.yes("Success.").setRecords(r))
+                .map(r -> {
+                    Optional.ofNullable(queryCourseInfoRequest.getQuery())
+                            .ifPresent(query -> {
+                                Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> {
+                                    searchRedisHelper.addRedisRecentSearch(queryCourseInfoRequest.getQuery(), authUserDetails1.getId());
+                                });
+                                searchRedisHelper.addRedisHotSearch(r);
+                            });
+                    return R.yes("Success.").setRecords(r);
+                })
                 .orElse(R.no("Fail."));
     }
 
@@ -352,5 +363,26 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         subjectCategories.getCourses().forEach(item -> item.setPic(url + item.getPic()));
         log.debug(subjectCategories.toString());
         return R.yes("Success.").setData(subjectCategories);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public R listHotSearch() {
+        return R.yes("Success.").setRecords(searchRedisHelper.listHotSearch());
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public R listRecentSearch(final AuthUserDetails authUserDetails) {
+        return R.yes("Success.").setRecords(searchRedisHelper.listRecentSearch(authUserDetails.getId()));
+    }
+
+    @Override
+    public R recentAndHotSearch(final AuthUserDetails authUserDetails) {
+        return R.yes(null).setData("records", searchRedisHelper.listRecentSearch(authUserDetails.getId())).setData("hot", searchRedisHelper.listHotSearch());
     }
 }

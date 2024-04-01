@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.authentication.Details.AuthUserDetails;
@@ -35,6 +36,7 @@ public class CoursesController {
      * 服务对象
      */
     private final CoursesService coursesService;
+    private final RedisTemplate redisTemplate;
 
     /**
      * 全查询
@@ -78,6 +80,8 @@ public class CoursesController {
         return this.coursesService.insert(courses);
     }
 
+    // 自定义逻辑
+
     /**
      * 编辑数据
      *
@@ -105,8 +109,6 @@ public class CoursesController {
     public R deleteById(final Integer id) {
         return this.coursesService.deleteById(id);
     }
-
-    // 自定义逻辑
 
     /**
      * 新增数据
@@ -157,9 +159,15 @@ public class CoursesController {
         return this.coursesService.updateVideoUrl(bars);
     }
 
+    /**
+     * 搜索
+     *
+     * @param queryCourseInfoRequest
+     * @return
+     */
     @PostMapping("get-course-list")
-    public R getCourseList(final @RequestBody QueryCourseInfoRequest queryCourseInfoRequest) {
-        return this.coursesService.getCourseList(queryCourseInfoRequest);
+    public R getCourseList(final @RequestBody QueryCourseInfoRequest queryCourseInfoRequest, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return this.coursesService.getCourseList(queryCourseInfoRequest, authUserDetails);
     }
 
     @PostMapping("get-course-info-by-id")
@@ -176,4 +184,49 @@ public class CoursesController {
     public R getSubjectCategories(@RequestBody GetSubjectCategoriesRequest getSubjectCategoriesRequest) {
         return this.coursesService.getSubjectCategories(getSubjectCategoriesRequest);
     }
+
+    /**
+     * 删除redis
+     *
+     * @param key
+     * @return
+     */
+    @GetMapping("/w/remove")
+    public R removeRedis(String key) {
+        return R.yes(redisTemplate.delete(key) ? "Success" : "Fail");
+    }
+
+    /**
+     * 热搜列表
+     *
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/r/list/hot/search")
+    public R listHotSearch() {
+        return coursesService.listHotSearch();
+    }
+
+    /**
+     * 最近搜索列表
+     *
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/r/list/recent/search")
+    public R recentHotSearch(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return coursesService.listRecentSearch(authUserDetails);
+    }
+
+    /**
+     * 最近搜索列表
+     *
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("search")
+    public R recentAndHotSearch(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return coursesService.recentAndHotSearch(authUserDetails);
+    }
+
 }

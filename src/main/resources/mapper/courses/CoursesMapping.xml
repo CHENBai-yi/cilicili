@@ -260,6 +260,10 @@
             <if test="kind != null and kind!=''">
                 and kind = #{kind}
             </if>
+            <if test="query != null and query!=''">
+                <bind value="'_'+query+'%'" name="l"/>
+                and (name like #{l} or teacher like #{l})
+            </if>
         </where>
         <if test="desc">
             order by ${sortBy} desc

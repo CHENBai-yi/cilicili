@@ -1,9 +1,12 @@
 package site.cilicili.frontend.course.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +18,10 @@ import java.util.List;
  * @author BaiYiChen
  */
 @Data
-public class GetCourseListResponse {
+public class GetCourseListResponse implements Serializable {
+    @Serial
+    @JsonIgnore
+    private static final long serialVersionUID = -4035754716493701436L;
     private String view;
     private Long dm;
     private Integer id;

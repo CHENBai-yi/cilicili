@@ -78,11 +78,23 @@ public interface CoursesService extends IService<CoursesEntity> {
 
     Boolean updateVideoSize(BarsEntity barsEntity, List<BarsEntity> barsEntities);
 
-    R getCourseList(QueryCourseInfoRequest queryCourseInfoRequest);
+    R getCourseList(QueryCourseInfoRequest queryCourseInfoRequest, final AuthUserDetails authUserDetails);
 
     R getCourseInfoById(CoursesEntity courses);
 
     R getCourseVideoInfoById(CoursesEntity courses);
 
     R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest);
+
+    // 课程热搜与最近搜索实现
+    R listHotSearch();
+
+    /**
+     * 最近搜索列表
+     *
+     * @return
+     */
+    R listRecentSearch(final AuthUserDetails authUserDetails);
+
+    R recentAndHotSearch(AuthUserDetails authUserDetails);
 }
