@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="q-pt-sm">
+  <q-toolbar :class="$q.screen.lt.md?'q-pt-sm':'q-pt-sm margin-top'">
     <q-space/>
     <q-btn v-if="$q.screen.gt.xs" :ripple="false" class="q-ml-xs no-pointer-events" fab-mini flat no-caps no-wrap>
       <q-icon class="q-card " color="red" name="img:logo.svg" size="28px"/>
@@ -18,9 +18,42 @@
     <div class="YL__toolbar-input-container row no-wrap q-mr-sm">
       <q-input
         v-model="search"
-        :placeholder="$t('KeyWord')" clearable debounce="500" dense standout="bg-grey-7 text-white">
+        :placeholder="$t('KeyWord')" clearable debounce="500" dense standout="bg-grey-7 text-white"
+        @blur="showTip=false" @click="queryRecent">
         <template v-slot:prepend>
-          <q-btn flat icon="search" padding="none" rounded size="md" unelevated/>
+          <q-btn flat icon="search" padding="none" rounded size="md" unelevated @click="handleSearch()"/>
+          <transition appear
+                      enter-active-class="animated animate__fadeIn"
+                      leave-active-class="animated animate__fadeOut">
+            <q-card v-if="showTip &&(recentQueryRecord.length>0||hotQueryRecord.length>0)" :class="darkTheme" bordered
+                    class="my-card z-top overflow-hidden">
+              <div v-if="recentQueryRecord.length>0">
+                <n-gradient-text class="q-pa-xs flex" size="medium" text>最新搜索过
+                </n-gradient-text>
+                <q-card-section class="q-pa-xs q-gutter-sm">
+                  <n-button v-for="(item,index) in recentQueryRecord" :key="index"
+                            size="large"
+                            text @click="recentSearch(item.search_info)">{{ item.search_info }}
+                  </n-button>
+                </q-card-section>
+              </div>
+              <div v-if="hotQueryRecord.length>0">
+                <div class="flex  items-center  justify-end q-mx-sm text-red">
+                  <q-icon class="q-mx-xs" name="ion-ios-flame" size="medium"/>
+                  <n-gradient-text class="q-pa-xs" size="medium" text>
+                    热搜榜单
+                  </n-gradient-text>
+                </div>
+                <q-card-section class="q-pa-xs q-gutter-sm">
+                  <n-button v-for="(item,index) in hotQueryRecord" :key="index" size="large"
+                            text @click="recentSearch(item.course_list_response.title)">{{
+                      item.course_list_response.title
+                    }}
+                  </n-button>
+                </q-card-section>
+              </div>
+            </q-card>
+          </transition>
         </template>
       </q-input>
     </div>
@@ -209,7 +242,7 @@
 </template>
 
 <script setup>
-import {ref, watch, watchEffect} from 'vue'
+import {inject, ref, watch, watchEffect} from 'vue'
 import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
@@ -218,8 +251,20 @@ import {useUserStore} from 'src/stores/user'
 import {getAvatar} from 'src/utils/common'
 
 import {useI18n} from 'vue-i18n'
-import {postAction} from 'src/api/manage'
+import {getAction, postAction} from 'src/api/manage'
 
+const showTip = ref(false)
+const queryRecentUrl = ref('courses/search')
+const recentQueryRecord = ref([])
+const hotQueryRecord = ref([])
+const queryRecent = async () => {
+  const res = await getAction(queryRecentUrl.value)
+  if (res && res.code === 1) {
+    recentQueryRecord.value = res.data.records
+    hotQueryRecord.value = res.data.hot
+    showTip.value = true
+  }
+}
 const {t} = useI18n()
 const userStore = useUserStore()
 const token = ref(userStore.GetToken())
@@ -280,6 +325,15 @@ watchEffect(async () => {
     }
   }
 })
+const bus = inject("bus")
+const handleSearch = () => {
+  bus.emit('handleSearch', search.value)
+  showTip.value = false
+}
+const recentSearch = (w) => {
+  search.value = w
+  handleSearch()
+}
 </script>
 
 <style lang="sass" scoped>
@@ -296,4 +350,12 @@ watchEffect(async () => {
 .upload-item
   path
     fill: $text2
+
+.my-card
+  position: fixed
+  top: 92px
+  width: 190px
+
+.margin-top
+  top: 28px
 </style>

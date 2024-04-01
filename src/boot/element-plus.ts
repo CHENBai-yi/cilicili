@@ -55,6 +55,7 @@ import {
   NDynamicInput,
   NDynamicTags,
   NEllipsis,
+  NGradientText,
   NH1,
   NH2,
   NH6,
@@ -132,7 +133,7 @@ export default boot(({app}) => {
   //native ui
   const naive = create({
     components: [
-      NDivider, NButton, NH6, NH2, NH1, NCarousel, NList,
+      NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NGradientText,
       NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar,
       NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition,
       NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload, NResult

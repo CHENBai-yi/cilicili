@@ -672,6 +672,10 @@ onMounted(() => {
     pagination.value.kind = kind
     refresh()
   })
+  bus.on('handleSearch', (query) => {
+    pagination.value.query = query
+    refresh()
+  })
   refresh()
 })
 const onLoadFlag = ref(true)
