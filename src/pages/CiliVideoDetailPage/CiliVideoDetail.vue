@@ -4,7 +4,7 @@
                 enter-active-class="animated animate__fadeInDown"
                 leave-active-class="animated animate__fadeOutUp">
       <q-header :class="darkTheme">
-        <cili-tool-bar class="shadow-6"/>
+        <cili-tool-bar :isJump="true" class="shadow-6"/>
       </q-header>
     </transition>
     <q-page-container>
@@ -20,9 +20,9 @@
                   ref="dp"
                   :danmaku="dplayerObj.danmaku"
                   :highlight="dplayerObj.highlight"
+                  :loop="false"
                   :showShadow="false"
                   :video="dplayerObj.video"
-                  :loop="false"
                 />
               </n-layout-content>
               <n-layout-sider
@@ -115,15 +115,16 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
-import {onBeforeUpdate, onMounted, reactive, ref} from 'vue'
+import {inject, onBeforeUpdate, onMounted, reactive, ref} from 'vue'
 import Hls from 'hls.js';
 import CiliVideoPlayer from 'src/components/ciliVideoPlayer/CiliVideoPlayer.vue'
 import {scroll, useQuasar} from 'quasar'
 import {useCommonStore} from 'src/stores/common'
-import {useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 
 const $q = useQuasar()
 const $router = useRoute()
+const $Router = useRouter()
 const commonStore = useCommonStore()
 const {getScrollTarget, setVerticalScrollPosition} = scroll
 const videoArea = ref(null)
@@ -210,7 +211,15 @@ const videoInfo = ref({})
 const urls = reactive({
   info: 'courses/get-course-video-info-by-id'
 })
+
+
+const bus = inject('bus')
 onMounted(async () => {
+  bus.on('handleSearch', (query) => {
+    const routeData = $Router.resolve(`/course?query=${query}`);
+    window.open(routeData.href, '_blank');
+  })
+
   const data = {
     name: $router.params.name,
     id: $router.params.id

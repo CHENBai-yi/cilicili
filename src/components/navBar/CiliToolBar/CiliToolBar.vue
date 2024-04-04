@@ -25,9 +25,11 @@
           <transition appear
                       enter-active-class="animated animate__fadeIn"
                       leave-active-class="animated animate__fadeOut">
-            <q-card v-if="showTip &&(recentQueryRecord.length>0||hotQueryRecord.length>0)" :class="darkTheme" bordered
-                    class="my-card z-top overflow-hidden">
-              <div v-if="recentQueryRecord.length>0">
+            <q-card
+                v-if="showTip &&((!!recentQueryRecord&&recentQueryRecord.length>0)||(!!hotQueryRecord&&hotQueryRecord.length>0))"
+                :class="darkTheme" bordered
+                class="my-card z-top overflow-hidden">
+              <div v-if="!!recentQueryRecord&&recentQueryRecord.length>0">
                 <n-gradient-text class="q-pa-xs flex" size="medium" text>最新搜索过
                 </n-gradient-text>
                 <q-card-section class="q-pa-xs q-gutter-sm">
@@ -37,7 +39,7 @@
                   </n-button>
                 </q-card-section>
               </div>
-              <div v-if="hotQueryRecord.length>0">
+              <div v-if="!!hotQueryRecord&&hotQueryRecord.length>0">
                 <div class="flex  items-center  justify-end q-mx-sm text-red">
                   <q-icon class="q-mx-xs" name="ion-ios-flame" size="medium"/>
                   <n-gradient-text class="q-pa-xs" size="medium" text>
@@ -149,7 +151,7 @@
 
       <CiliPopover v-if="$q.screen.gt.sm" :label="$t('Notice')" name="notifications">
         <template #badge>
-          <q-badge v-if="token" class="absolute" color="red" floating style="left:26px;display: table;"
+          <q-badge v-if="token" class="absolute" color="secondary" floating style="left:26px;display: table;"
                    text-color="white">
             {{ noticeCount }}
           </q-badge>
@@ -242,17 +244,19 @@
 </template>
 
 <script setup>
-import {inject, ref, watch, watchEffect} from 'vue'
+import {inject, onMounted, ref, watch, watchEffect} from 'vue'
 import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
 import CiliLoginFrom from 'src/components/CiliLoginFrom/CiliLoginFrom.vue'
 import {useUserStore} from 'src/stores/user'
 import {getAvatar} from 'src/utils/common'
+import {useRouter} from 'vue-router'
 
 import {useI18n} from 'vue-i18n'
 import {getAction, postAction} from 'src/api/manage'
 
+const $router = useRouter()
 const showTip = ref(false)
 const queryRecentUrl = ref('courses/search')
 const recentQueryRecord = ref([])
@@ -334,6 +338,11 @@ const recentSearch = (w) => {
   search.value = w
   handleSearch()
 }
+onMounted(() => {
+  bus.on('searchValue', (query) => {
+    search.value = query
+  })
+})
 </script>
 
 <style lang="sass" scoped>

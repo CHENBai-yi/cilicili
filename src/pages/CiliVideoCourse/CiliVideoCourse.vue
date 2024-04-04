@@ -33,6 +33,7 @@
             </div>
           </li>
         </ul>
+        <n-result v-if="showNoData" description="色即是空，空即是色" status="418" title="什么也没有"/>
       </div>
     </div>
     <!-- place QPageSticky at end of page -->
@@ -81,7 +82,7 @@
 
       <q-page-sticky v-else :class="darkTheme" class="relative-position z-top" expand position="top">
         <n-scrollbar class="col q-pl-md" x-scrollable>
-          <div class="scrollbar-flex-content ">
+          <div class="scrollbar-flex-content">
             <span v-for="(item,index) in courses.subject" :key="item" class="scrollbar-demo-item">
                       {{ item }}
             </span>
@@ -102,12 +103,16 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
-import {onMounted, reactive, ref} from 'vue'
+import {inject, onMounted, reactive, ref} from 'vue'
 import {postAction} from 'src/api/manage'
 import CiliCiliVideoCourse from "/public/mockData/CiliCiliVideoCourse.json"
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
+import {useRoute} from 'vue-router'
 
 const {darkTheme} = useTheme()
+const bus = inject('bus')
+const $route = useRoute()
+const showNoData = ref(false)
 const show = ref(false)
 const open = ref(false)
 const courses = ref({})
@@ -119,15 +124,30 @@ const queryParam = reactive({
   kind: '',
 })
 const refresh = async () => {
+  const q = $route.query.query
+  if (!!q) {
+    bus.emit('searchValue', q)
+    queryParam.query = q
+  }
   const res = await postAction(urls.list, queryParam)
-  console.log(res.data)
   if (res && res.code === 1) {
-    courses.value = res.data
+    const data = res.data
+    if (!!data.courses && data.courses.length > 0) {
+      courses.value = data
+      showNoData.value = false
+    } else {
+      showNoData.value = !showNoData.value
+    }
     return
   }
   courses.value = CiliCiliVideoCourse.data
 }
+
 onMounted(() => {
+  bus.on('handleSearch', (query) => {
+    queryParam.query = query
+    refresh()
+  })
   refresh()
 })
 </script>

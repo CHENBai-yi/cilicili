@@ -467,7 +467,8 @@ const handleAdd = (id) => {
     title: '',
     description: '',
     bar: [],
-    selectable: false
+    selectable: false,
+    section: '第' + toChineseNumber(id) + '章'
   })
   console.log(form.catalog)
 }
@@ -491,6 +492,7 @@ const handleDel = (cId, catalog) => {
     for (let i = 0; i < form.catalog.length; i++) {
       let id = i + 1
       form.catalog[i].id = id
+      form.catalog[i].section = '第' + toChineseNumber(id) + '章'
       if (!!form.catalog[i].bar) {
         for (let j = 0; j < form.catalog[cId - 1].bar.length; j++) {
           let catalog = j + 1

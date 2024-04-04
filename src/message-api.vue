@@ -19,7 +19,7 @@ export default defineComponent({
           style: {
             boxShadow: "var(--n-box-shadow)",
             maxWidth: "calc(100vw - 32px)",
-            width: "480px"
+            width: "480px",
           }
         },
         {
