@@ -1,5 +1,6 @@
 package site.cilicili.frontend.common.pojo;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -123,8 +124,8 @@ public class SearchRedisHelper {
         Set<ZSetOperations.TypedTuple<UserRecentSearch>> typedTuples = redisTemplate.opsForZSet().reverseRangeWithScores(RECENT_SEARCH, 0, -1);
         return Optional.ofNullable(typedTuples)
                 .map(tuples -> tuples.stream()
-                        .map(ZSetOperations.TypedTuple::getValue)
-                        .filter(Objects::nonNull)
+                        .map(ZSetOperations.TypedTuple::getValue).filter(Objects::nonNull)
+                        .filter(userRecentSearch -> StrUtil.isNotBlank(userRecentSearch.getSearchInfo()))
                         .filter(userRecentSearch -> Objects.equals(userRecentSearch.getUnionId(), userId))
 //                         .filter(userRecentSearch -> Objects.equals(userRecentSearch.getUnionId(), 100434L))
                         .collect(Collectors.collectingAndThen(

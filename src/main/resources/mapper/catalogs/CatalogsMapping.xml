@@ -8,6 +8,9 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="total" column="total" jdbcType="BIGINT"/>
+        <result property="totalTime" column="total_time" jdbcType="VARCHAR"/>
+        <result property="section" column="section" jdbcType="VARCHAR"/>
     </resultMap>
     
     <!--查询单个-->
@@ -70,28 +73,33 @@
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="catalogId" useGeneratedKeys="true">
-        insert into catalogs(course_id, id, title, description)
-        values (#{courseId}, #{id}, #{title}, #{description})
+        insert into catalogs(course_id, id, title, description, total, total_time, section)
+        values (#{courseId}, #{id}, #{title}, #{description}, #{total}, #{totalTime}, #{section})
     </insert>
     
     <insert id="insertBatch" keyProperty="catalogId" useGeneratedKeys="true">
-        insert into catalogs(course_id,id, title, description)
+        insert into catalogs(course_id,id, title, description,total,total_time,section)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.courseId}, #{entity.id}, #{entity.title}, #{entity.description})
+            (#{entity.courseId}, #{entity.id}, #{entity.title}, #{entity.description},#{entity.total},
+            #{entity.totalTime}, #{entity.section})
         </foreach>
     </insert>
     
     <insert id="insertOrUpdateBatch" keyProperty="catalogId" useGeneratedKeys="true">
-        insert into catalogs(id, title, description)
+        insert into catalogs(id, title, description,total,total_time,section)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.id}, #{entity.title}, #{entity.description})
+            (#{entity.id}, #{entity.title}, #{entity.description},#{entity.total}, #{entity.totalTime},
+            #{entity.section})
         </foreach>
         on duplicate key update
         id = values(id),
         title = values(title),
         description = values(description)
+        total = values(total)
+        total_time = values(total_time)
+        section = values(section)
     </insert>
     
     <!--通过主键修改数据-->
@@ -106,6 +114,15 @@
             </if>
             <if test="description != null and description != ''">
                 description = #{description},
+            </if>
+            <if test="total != null and total != ''">
+                total = #{total},
+            </if>
+            <if test="totalTime != null and totalTime != ''">
+                total_time = #{totalTime},
+            </if>
+            <if test="section != null and section != ''">
+                section = #{section},
             </if>
         </set>
         where catalog_id = #{catalogId}

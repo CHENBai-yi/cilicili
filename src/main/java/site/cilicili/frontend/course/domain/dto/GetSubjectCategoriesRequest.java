@@ -14,4 +14,5 @@ import lombok.Data;
 public class GetSubjectCategoriesRequest {
     private String subject;
     private String kind;
+    private String query;
 }

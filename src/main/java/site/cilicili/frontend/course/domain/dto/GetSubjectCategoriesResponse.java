@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * PROJECT:cilicili
@@ -31,5 +32,14 @@ public class GetSubjectCategoriesResponse {
         private String pic;
         private Long view = 99L;
         private Long stars = 4L;
+        private Long dm;
+        private String faver;
+        private String author;
+        private String time;
+
+        public String getPrice() {
+            return Objects.nonNull(price) ? (Double.parseDouble(price) > 0 ? "￥ " + price : "免费") : "体验课";
+
+        }
     }
 }

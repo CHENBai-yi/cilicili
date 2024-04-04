@@ -417,7 +417,7 @@
         <collection property="subject" column="course_id" select="SelectSubject"/>
         <collection property="classify" column="course_id" select="SelectClassify"/>
         <collection property="classifyMore" column="course_id" select="SelectClassifyMore"/>
-        <collection property="courses" column="{course_id=course_id,subject=subject,kind=kind}"
+        <collection property="courses" column="{course_id=course_id,subject=subject,kind=kind,query=query}"
                     select="SelectMoreCourses"/>
     </resultMap>
     <resultMap type="site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesResponse$Courses"
@@ -426,13 +426,14 @@
         <result property="title" column="name" jdbcType="VARCHAR"/>
         <result property="subtitle" column="description" jdbcType="VARCHAR"/>
         <result property="pic" column="poster" jdbcType="VARCHAR"/>
+        <result property="author" column="teacher" jdbcType="VARCHAR"/>
         <result property="stars" column="stars" jdbcType="BIGINT"/>
         <result property="view" column="view" jdbcType="BIGINT"/>
         <result property="price" column="price" jdbcType="DECIMAL"/>
     </resultMap>
     
     <select id="getSubjectCategories" resultMap="GetSubjectCategoriesResponse">
-        select count(course_id) as course_id, #{subject} as subject, #{kind} as kind
+        select count(course_id) as course_id, #{subject} as subject, #{kind} as kind, #{query} as query
         from courses
         where status = 'onOffPass_pass'
           and courses.logical_delete = 1;
@@ -463,6 +464,10 @@
             </if>
             <if test="kind!=null and kind!=''">
                 and kind=#{kind}
+            </if>
+            <if test="query != null and query!=''">
+                <bind value="'_'+query+'%'" name="l"/>
+                and (name like #{l} or teacher like #{l})
             </if>
             and courses.logical_delete = 1 and status = 'onOffPass_pass'
             order by created_at desc

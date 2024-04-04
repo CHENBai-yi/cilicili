@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.authentication.Details.AuthUserDetails;
@@ -181,8 +182,8 @@ public class CoursesController {
     }
 
     @PostMapping("get-subject-categories")
-    public R getSubjectCategories(@RequestBody GetSubjectCategoriesRequest getSubjectCategoriesRequest) {
-        return this.coursesService.getSubjectCategories(getSubjectCategoriesRequest);
+    public R getSubjectCategories(@RequestBody GetSubjectCategoriesRequest getSubjectCategoriesRequest, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return this.coursesService.getSubjectCategories(getSubjectCategoriesRequest, authUserDetails);
     }
 
     /**
@@ -223,6 +224,7 @@ public class CoursesController {
      *
      * @return
      */
+    @PreAuthorize("isAnonymous()")
     @ResponseBody
     @GetMapping("search")
     public R recentAndHotSearch(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {

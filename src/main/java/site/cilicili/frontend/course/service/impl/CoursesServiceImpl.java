@@ -1,5 +1,6 @@
 package site.cilicili.frontend.course.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -356,8 +357,16 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
-    public R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest) {
+    public R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest, final AuthUserDetails authUserDetails) {
+
         final GetSubjectCategoriesResponse subjectCategories = baseMapper.getSubjectCategories(getSubjectCategoriesRequest);
+        Optional.ofNullable(getSubjectCategoriesRequest.getQuery())
+                .ifPresent(query -> {
+                    Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> {
+                        searchRedisHelper.addRedisRecentSearch(getSubjectCategoriesRequest.getQuery(), authUserDetails1.getId());
+                    });
+                    searchRedisHelper.addRedisHotSearch(subjectCategories.getCourses().stream().map(item -> BeanUtil.copyProperties(item, GetCourseListResponse.class)).toList());
+                });
         final String url =
                 httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
         subjectCategories.getCourses().forEach(item -> item.setPic(url + item.getPic()));
@@ -383,6 +392,9 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Override
     public R recentAndHotSearch(final AuthUserDetails authUserDetails) {
-        return R.yes(null).setData("records", searchRedisHelper.listRecentSearch(authUserDetails.getId())).setData("hot", searchRedisHelper.listHotSearch());
+        return Optional.ofNullable(authUserDetails)
+                .map(r -> R.yes(null).setData("records", searchRedisHelper.listRecentSearch(authUserDetails.getId())).setData("hot", searchRedisHelper.listHotSearch()))
+                .orElse(R.yes(null).setData("hot", searchRedisHelper.listHotSearch()));
+
     }
 }
