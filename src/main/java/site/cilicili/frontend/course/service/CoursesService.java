@@ -82,9 +82,10 @@ public interface CoursesService extends IService<CoursesEntity> {
 
     R getCourseInfoById(CoursesEntity courses);
 
-    R getCourseVideoInfoById(CoursesEntity courses);
+    R getCourseVideoInfoById(CoursesEntity courses, final AuthUserDetails authUserDetails);
 
-    R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest, final AuthUserDetails authUserDetails);
+    R getSubjectCategories(
+            final GetSubjectCategoriesRequest getSubjectCategoriesRequest, final AuthUserDetails authUserDetails);
 
     // 课程热搜与最近搜索实现
     R listHotSearch();

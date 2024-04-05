@@ -137,6 +137,11 @@
     <delete id="dropOnline">
         delete
         from sys_user_online
+        <where>
+            <if test="username!=null and username!=''">
+                username=#{username}
+            </if>
+        </where>
     </delete>
 
 

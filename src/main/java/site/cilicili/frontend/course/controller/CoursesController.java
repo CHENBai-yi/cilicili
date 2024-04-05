@@ -37,6 +37,7 @@ public class CoursesController {
      * 服务对象
      */
     private final CoursesService coursesService;
+
     private final RedisTemplate redisTemplate;
 
     /**
@@ -121,17 +122,22 @@ public class CoursesController {
             summary = "新增数据",
             parameters = {@Parameter(description = "courses 实体")})
     @PostMapping("add")
-    public R addCourse(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody AddCourseRequest courses) {
+    public R addCourse(
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            final @RequestBody AddCourseRequest courses) {
         return this.coursesService.addCourse(courses, authUserDetails);
     }
 
     @PostMapping("get-course-info")
-    public R getCourseInfo(final @RequestBody QueryCourseInfoRequest courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public R getCourseInfo(
+            final @RequestBody QueryCourseInfoRequest courses,
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return coursesService.getCourseInfo(courses, authUserDetails);
     }
 
     @PostMapping("get-courses-count")
-    public R getCoursesCount(final @RequestBody CoursesEntity courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public R getCoursesCount(
+            final @RequestBody CoursesEntity courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return coursesService.getCoursesCount(courses, authUserDetails);
     }
 
@@ -167,7 +173,9 @@ public class CoursesController {
      * @return
      */
     @PostMapping("get-course-list")
-    public R getCourseList(final @RequestBody QueryCourseInfoRequest queryCourseInfoRequest, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public R getCourseList(
+            final @RequestBody QueryCourseInfoRequest queryCourseInfoRequest,
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return this.coursesService.getCourseList(queryCourseInfoRequest, authUserDetails);
     }
 
@@ -177,12 +185,14 @@ public class CoursesController {
     }
 
     @PostMapping("get-course-video-info-by-id")
-    public R getCourseVideoInfoById(final @RequestBody CoursesEntity courses) {
-        return this.coursesService.getCourseVideoInfoById(courses);
+    public R getCourseVideoInfoById(final @RequestBody CoursesEntity courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return this.coursesService.getCourseVideoInfoById(courses, authUserDetails);
     }
 
     @PostMapping("get-subject-categories")
-    public R getSubjectCategories(@RequestBody GetSubjectCategoriesRequest getSubjectCategoriesRequest, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public R getSubjectCategories(
+            @RequestBody GetSubjectCategoriesRequest getSubjectCategoriesRequest,
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return this.coursesService.getSubjectCategories(getSubjectCategoriesRequest, authUserDetails);
     }
 
@@ -230,5 +240,4 @@ public class CoursesController {
     public R recentAndHotSearch(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return coursesService.recentAndHotSearch(authUserDetails);
     }
-
 }

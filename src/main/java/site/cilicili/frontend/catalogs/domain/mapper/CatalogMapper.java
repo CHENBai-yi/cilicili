@@ -3,6 +3,7 @@ package site.cilicili.frontend.catalogs.domain.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
 import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author BaiYiChen
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CatalogMapper {
     CatalogMapper CATALOG_MAPPER = Mappers.getMapper(CatalogMapper.class);
 

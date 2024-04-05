@@ -39,7 +39,6 @@ public class GetSubjectCategoriesResponse {
 
         public String getPrice() {
             return Objects.nonNull(price) ? (Double.parseDouble(price) > 0 ? "￥ " + price : "免费") : "体验课";
-
         }
     }
 }

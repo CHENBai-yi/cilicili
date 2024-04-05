@@ -46,7 +46,7 @@ public interface SysUserOnlineService extends IService<SysUserOnlineEntity> {
 
     SysUserOnlineEntity queryById(String id, String token);
 
-    boolean dropOnline();
+    boolean dropOnline(String username);
 
     boolean removeByNameOrToken(String username, String token);
 }

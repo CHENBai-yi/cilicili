@@ -97,5 +97,5 @@ public interface SysUserOnlineMapper extends BaseMapper<SysUserOnlineEntity> {
 
     int insertOrUpdate(@Param("username") String username, @Param("token") String token);
 
-    int dropOnline();
+    int dropOnline(final String username);
 }

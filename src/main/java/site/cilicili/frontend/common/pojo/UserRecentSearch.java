@@ -29,4 +29,3 @@ public class UserRecentSearch implements Serializable {
     @JsonIgnore
     private Long unionId;
 }
-

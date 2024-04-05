@@ -106,12 +106,14 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public boolean dropOnline() {
-        return baseMapper.dropOnline() > 0;
+    public boolean dropOnline(String username) {
+        return baseMapper.dropOnline(username) > 0;
     }
 
     @Override
     public boolean removeByNameOrToken(final String username, final String token) {
         return baseMapper.deleteById(username, token) > 0;
     }
+
+
 }

@@ -13,19 +13,15 @@
         <result property="poster" column="poster" jdbcType="VARCHAR"/>
         <result property="tag" column="tag" jdbcType="VARCHAR"/>
         <result property="totalTime" column="total_time" jdbcType="VARCHAR"/>
+        <result property="vis" column="vis" jdbcType="BIGINT"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="reason" column="reason" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIME"/>
     </resultMap>
     
     <!--查询单个-->
     <select id="queryById" resultMap="CoursesMap">
-        select course_id,
-               name,
-               teacher,
-               kind,
-               subject,
-               price,
-               description,
-               poster,
-               tag
+        select *
         from courses
         where course_id = #{courseId}
     </select>
@@ -567,8 +563,29 @@
         from courses
         where course_id = #{courseId}
     </delete>
-
-
+    
+    
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="coursesEntities" item="course" separator=";">
+            UPDATE courses
+            <set>
+                <if test="course.name != null">name = #{course.name},</if>
+                <if test="course.teacher != null">teacher = #{course.teacher},</if>
+                <if test="course.kind != null">kind = #{course.kind},</if>
+                <if test="course.subject != null">subject = #{course.subject},</if>
+                <if test="course.price != null">price = #{course.price},</if>
+                <if test="course.description != null">description = #{course.description},</if>
+                <if test="course.poster != null">poster = #{course.poster},</if>
+                <if test="course.tag != null">tag = #{course.tag},</if>
+                <if test="course.totalTime != null">total_time = #{course.totalTime},</if>
+                <if test="course.vis != null">vis = #{course.vis},</if>
+                <if test="course.status != null">status = #{course.status},</if>
+                <if test="course.reason != null">reason = #{course.reason},</if>
+                <if test="course.updatedAt != null">updated_at = #{course.updatedAt},</if>
+            </set>
+            WHERE course_id = #{course.courseId}
+        </foreach>
+    </update>
 </mapper>
 
 

@@ -29,6 +29,5 @@ public class HotSearch implements Serializable {
         this.courseListResponse = courseListResponse;
     }
 
-    //.....等属性
+    // .....等属性
 }
-

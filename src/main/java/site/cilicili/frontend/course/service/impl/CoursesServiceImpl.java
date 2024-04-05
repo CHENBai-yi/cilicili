@@ -2,6 +2,8 @@ package site.cilicili.frontend.course.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.mapper.CoursesMapper;
 import site.cilicili.frontend.course.service.CoursesService;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -142,7 +145,6 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                                     .build());
                 })
                 .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
-
     }
 
     @Transactional(readOnly = true)
@@ -152,8 +154,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                 .map(authUserDetails1 -> {
                     courses.setCreatedBy(authUserDetails1.getusername());
                     return R.yes("Success").setData(baseMapper.getCoursesCount(courses));
-                }).orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
-
+                })
+                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -214,7 +216,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
                             return isOk ? R.yes("添加成功.") : null;
                         })
-                        .orElse(R.no(Error.COMMON_EXCEPTION.getMessage()))).orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
+                        .orElse(R.no(Error.COMMON_EXCEPTION.getMessage())))
+                .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -285,6 +288,12 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                             getCourseListResponse.setTitle(item.getName());
                             getCourseListResponse.setAuthor(item.getTeacher());
                             getCourseListResponse.setTime(DateUtil.format(item.getCreatedAt(), "MM-dd"));
+                            if (NumberUtil.isGreater(BigDecimal.valueOf(item.getVis()), BigDecimal.valueOf(10000))) {
+                                getCourseListResponse.setView(NumberUtil.roundStr(item.getVis() / 10000.0, 1) + "万");
+                            } else {
+                                getCourseListResponse.setView(item.getVis() + "");
+                            }
+                            getCourseListResponse.setDm(RandomUtil.randomLong(6L, 100L));
                             final GetCourseListResponse.Detail detail = new GetCourseListResponse.Detail();
                             final GetCourseListResponse.Video video = new GetCourseListResponse.Video();
                             final List<GetCourseListResponse.HighLight> highLights = new ArrayList<>();
@@ -304,13 +313,13 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                         })
                         .toList())
                 .map(r -> {
-                    Optional.ofNullable(queryCourseInfoRequest.getQuery())
-                            .ifPresent(query -> {
-                                Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> {
-                                    searchRedisHelper.addRedisRecentSearch(queryCourseInfoRequest.getQuery(), authUserDetails1.getId());
-                                });
-                                searchRedisHelper.addRedisHotSearch(r);
-                            });
+                    Optional.ofNullable(queryCourseInfoRequest.getQuery()).ifPresent(query -> {
+                        Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> {
+                            searchRedisHelper.addRedisRecentSearch(
+                                    queryCourseInfoRequest.getQuery(), authUserDetails1.getId());
+                        });
+                        searchRedisHelper.addRedisHotSearch(r);
+                    });
                     return R.yes("Success.").setRecords(r);
                 })
                 .orElse(R.no("Fail."));
@@ -330,12 +339,13 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
-    // 仅仅
-    public R getCourseVideoInfoById(final CoursesEntity courses) {
+    public R getCourseVideoInfoById(final CoursesEntity courses, final AuthUserDetails authUserDetails) {
         //
         final String url =
                 httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
         final GetCourseVideoInfoByIdResponse courseVideoInfoById = baseMapper.getCourseVideoInfoById(courses);
+        // 使用redis根据课程id统计该课程每天一个用户的访问次数
+
         log.debug(courseVideoInfoById.toString());
         return Optional.of(courseVideoInfoById)
                 .map(GetCourseVideoInfoByIdResponse::getVideoList)
@@ -349,6 +359,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                     video.setPic(url + video.getPic());
                     video.setUrl(url + video.getUrl());
                     video.setThumbnails(url + video.getThumbnails());
+                    Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> searchRedisHelper.setVisitCountIncr(courses.getCourseId().longValue()));
+                    video.setView(searchRedisHelper.getVisitCountIncr(courses.getCourseId().longValue()));
                     return video;
                 })
                 .map(data -> R.yes("Success").setRecords(courseVideoInfoById))
@@ -357,16 +369,20 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
 
     @Transactional(readOnly = true)
     @Override
-    public R getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest, final AuthUserDetails authUserDetails) {
+    public R getSubjectCategories(
+            final GetSubjectCategoriesRequest getSubjectCategoriesRequest, final AuthUserDetails authUserDetails) {
 
-        final GetSubjectCategoriesResponse subjectCategories = baseMapper.getSubjectCategories(getSubjectCategoriesRequest);
-        Optional.ofNullable(getSubjectCategoriesRequest.getQuery())
-                .ifPresent(query -> {
-                    Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> {
-                        searchRedisHelper.addRedisRecentSearch(getSubjectCategoriesRequest.getQuery(), authUserDetails1.getId());
-                    });
-                    searchRedisHelper.addRedisHotSearch(subjectCategories.getCourses().stream().map(item -> BeanUtil.copyProperties(item, GetCourseListResponse.class)).toList());
-                });
+        final GetSubjectCategoriesResponse subjectCategories =
+                baseMapper.getSubjectCategories(getSubjectCategoriesRequest);
+        Optional.ofNullable(getSubjectCategoriesRequest.getQuery()).ifPresent(query -> {
+            Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> {
+                searchRedisHelper.addRedisRecentSearch(
+                        getSubjectCategoriesRequest.getQuery(), authUserDetails1.getId());
+            });
+            searchRedisHelper.addRedisHotSearch(subjectCategories.getCourses().stream()
+                    .map(item -> BeanUtil.copyProperties(item, GetCourseListResponse.class))
+                    .toList());
+        });
         final String url =
                 httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
         subjectCategories.getCourses().forEach(item -> item.setPic(url + item.getPic()));
@@ -393,8 +409,9 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     @Override
     public R recentAndHotSearch(final AuthUserDetails authUserDetails) {
         return Optional.ofNullable(authUserDetails)
-                .map(r -> R.yes(null).setData("records", searchRedisHelper.listRecentSearch(authUserDetails.getId())).setData("hot", searchRedisHelper.listHotSearch()))
+                .map(r -> R.yes(null)
+                        .setData("records", searchRedisHelper.listRecentSearch(authUserDetails.getId()))
+                        .setData("hot", searchRedisHelper.listHotSearch()))
                 .orElse(R.yes(null).setData("hot", searchRedisHelper.listHotSearch()));
-
     }
 }

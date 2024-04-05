@@ -34,6 +34,10 @@ public class QueryCourseInfoRequest {
     private List<String> s;
 
     public List<String> getS() {
-        return Optional.ofNullable(status1).map(status -> "yes".equals(status.split("_")[1]) ? List.of("onOffPass_on") : Arrays.asList("onOffPass_off", "onOffPass_pass")).orElse(List.of(""));
+        return Optional.ofNullable(status1)
+                .map(status -> "yes".equals(status.split("_")[1])
+                        ? List.of("onOffPass_on")
+                        : Arrays.asList("onOffPass_off", "onOffPass_pass"))
+                .orElse(List.of(""));
     }
 }

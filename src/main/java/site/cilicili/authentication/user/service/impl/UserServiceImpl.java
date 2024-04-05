@@ -86,6 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
         return userRepository
                 .findByUsername(login.getUsername(), login.getEmail())
                 .map(r -> Optional.ofNullable(sysUserOnlineService.queryById(r.getUsername(), null))
+                        .filter(userEntity -> stringRedisTemplate.hasKey(r.getUsername()))
                         .map(rr -> R.no(Error.ALREADY_LOGIN.getMessage()))
                         .orElseGet(() -> Optional.of(r)
                                 .filter(user -> login.getPassword().equals(login.getCode())

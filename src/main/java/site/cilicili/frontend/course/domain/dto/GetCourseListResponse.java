@@ -22,6 +22,7 @@ public class GetCourseListResponse implements Serializable {
     @Serial
     @JsonIgnore
     private static final long serialVersionUID = -4035754716493701436L;
+
     private String view;
     private Long dm;
     private Integer id;

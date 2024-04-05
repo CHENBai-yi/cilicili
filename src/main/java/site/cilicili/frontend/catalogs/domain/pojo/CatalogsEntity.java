@@ -52,5 +52,6 @@ public class CatalogsEntity implements Serializable {
 
     @Schema(description = "总时间")
     private String totalTime;
+
     private String section;
 }
