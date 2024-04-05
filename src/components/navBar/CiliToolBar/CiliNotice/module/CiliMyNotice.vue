@@ -59,6 +59,8 @@ const getNoticeTypeSystem = async () => {
     notice_type: 'noticeType_system',
     notice_to_user: userStore.GetUsername(),
     page: 1,
+    desc: true,
+    sort_by: 'created_at',
     page_size: 9999
   })
   if (res && res.code === 1) {

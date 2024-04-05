@@ -57,6 +57,8 @@ const getNoticeUrl = ref('notice/get-notice-list')
 const getNoticeTypeSystem = async () => {
   const res = await postAction(getNoticeUrl.value, {
     notice_type: 'noticeType_system',
+    desc: true,
+    sort_by: 'created_at',
     page: 1,
     page_size: 9999
   })
