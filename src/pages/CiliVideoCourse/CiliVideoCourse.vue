@@ -3,7 +3,8 @@
           :style="$q.screen.lt.sm?{paddingTop: '70px'}:{paddingTop: '170px'}" style="overflow: hidden;">
     <div class="row">
       <div class="nice-class col-10 ">
-        <ul class="nice-class-list  clearfix q-gutter-y-md flex wrap ">
+        <ul v-if="!showNoData&&!!courses.courses&&courses.courses.length>0"
+            class="nice-class-list  clearfix q-gutter-y-md flex wrap ">
           <li v-for="(item,index) in courses.courses" :key="item.title" class="ali clearfix q-pb-md q-mr-md">
             <a :href="'#/video/'+item.title+'/'+item.id+'/info'">
               <img :src=item.pic>
