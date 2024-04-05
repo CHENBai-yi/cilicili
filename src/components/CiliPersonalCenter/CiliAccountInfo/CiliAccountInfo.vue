@@ -172,8 +172,22 @@ const userStore = useUserStore()
 const {darkTheme} = useTheme()
 const form = reactive({
   avatar: computed(() => userStore.GetAvatar()),
-  nickname: computed(() => userStore.GetNickname() || userStore.GetUsername()),
-  real_name: computed(() => userStore.GetRealName()),
+  nickname: computed({
+    get: () => {
+      return userStore.GetNickname() || userStore.GetUsername()
+    },
+    set: (val) => {
+      userStore.nickname = val
+    }
+  }),
+  real_name: computed({
+    get: () => {
+      return userStore.GetRealName()
+    },
+    set: (val) => {
+      userStore.realName = val
+    }
+  }),
   mobile: '',
   gender: '',
   token: computed(() => userStore.GetToken())

@@ -8,7 +8,7 @@
       </q-header>
     </transition>
     <q-page-container>
-      <q-page :class="$q.screen.lt.sm?'q-pa-xs':'q-pa-md q-px-xl q-mt-sm'" style="min-height: 263px;">
+      <q-page :class="$q.screen.lt.sm?'q-pa-xs':'q-pa-sm q-px-xl'" style="min-height: 263px;">
         <div>
           <n-space size="large" style="justify-content: center;flex-flow:nowrap">
             <n-layout :style="$q.screen.lt.sm?{height:'300px'}:{height:'550px',width:'1500px'}" embedded has-sider

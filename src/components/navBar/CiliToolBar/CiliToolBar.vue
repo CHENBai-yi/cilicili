@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar :class="$q.screen.lt.md?'q-pt-sm':'q-pt-sm margin-top'">
+  <q-toolbar :class="$q.screen.lt.md?'q-pt-sm':'q-pt-sm margin-top q-pb-md'">
     <q-space/>
     <q-btn v-if="$q.screen.gt.xs" :ripple="false" class="q-ml-xs no-pointer-events" fab-mini flat no-caps no-wrap>
       <q-icon class="q-card " color="red" name="img:logo.svg" size="28px"/>
