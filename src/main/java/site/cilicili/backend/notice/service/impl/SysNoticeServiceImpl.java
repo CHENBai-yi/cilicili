@@ -129,16 +129,19 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(rollbackFor = Throwable.class)
     public R getNoticeList(final NoticeListQueryRequest noticeListQueryRequest) {
         return Optional.ofNullable(baseMapper.selectNoticeListByParam(noticeListQueryRequest))
-                .map(records -> R.yes("Success.")
-                        .setData(NoticeListQueryParamResponse.builder()
-                                .records(records)
-                                .total(records.size())
-                                .page(noticeListQueryRequest.page())
-                                .pageSize(noticeListQueryRequest.pageSize())
-                                .build()))
+                .map(records -> {
+                    baseMapper.updateNoticeStatus(noticeListQueryRequest);
+                    return R.yes("Success.")
+                            .setData(NoticeListQueryParamResponse.builder()
+                                    .records(records)
+                                    .total(records.size())
+                                    .page(noticeListQueryRequest.page())
+                                    .pageSize(noticeListQueryRequest.pageSize())
+                                    .build());
+                })
                 .orElse(R.no("Fail."));
     }
 

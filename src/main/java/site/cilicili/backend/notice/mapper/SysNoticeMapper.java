@@ -93,4 +93,6 @@ public interface SysNoticeMapper extends BaseMapper<SysNoticeEntity> {
     List<NoticeListQueryParamResponse.Records> selectNoticeListByParam(NoticeListQueryRequest noticeListQueryRequest);
 
     List<NoticeListQueryParamResponse.Records> selectNoticeCountByParam(NoticeListQueryRequest noticeListQueryRequest);
+
+    Integer updateNoticeStatus(NoticeListQueryRequest noticeListQueryRequest);
 }

@@ -6,6 +6,7 @@ import cn.hutool.json.JSONUtil;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
  * @author BaiYiChen
  */
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class SearchRedisHelper {
     /**
@@ -158,13 +160,23 @@ public class SearchRedisHelper {
     }
 
     public void setVisitCountIncr(final Long courseId) {
-        final ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
         final String key = String.format(VISIT, courseId);
-        if (Objects.nonNull(ops.get(key))) {
-            ops.increment(key);
-        } else {
-            final CoursesEntity coursesEntity = coursesMapper.queryById(courseId.intValue());
-            ops.setIfAbsent(key, coursesEntity.getVis() + "");
+        try {
+            if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(key))) {
+                stringRedisTemplate.opsForValue().increment(key);
+            } else {
+                final CoursesEntity coursesEntity = coursesMapper.queryById(courseId.intValue());
+                stringRedisTemplate
+                        .opsForValue()
+                        .setIfAbsent(
+                                key,
+                                Optional.ofNullable(coursesEntity.getVis())
+                                        .map(String::valueOf)
+                                        .orElse("1"));
+            }
+        } catch (Exception e) {
+            log.error(getClass() + "::异常");
+            stringRedisTemplate.delete(key);
         }
     }
 
@@ -190,8 +202,10 @@ public class SearchRedisHelper {
                         final String courseId = key.split(":")[1];
                         final CoursesEntity coursesEntity = new CoursesEntity();
                         coursesEntity.setCourseId(Integer.parseInt(courseId));
-                        coursesEntity.setVis(
-                                Optional.ofNullable(vis).map(Long::parseLong).orElse(1L));
+                        coursesEntity.setVis(Optional.ofNullable(vis)
+                                .filter(c -> !StrUtil.isNullOrUndefined(c))
+                                .map(Long::parseLong)
+                                .orElse(1L));
                         return coursesEntity;
                     })
                     .toList();

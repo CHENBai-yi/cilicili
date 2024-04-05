@@ -112,6 +112,6 @@ public class CoursesEntity implements Serializable {
     @Schema(description = "总时间")
     private String totalTime;
 
-    @Schema(description = "总时间")
+    @Schema(description = "访问量")
     private Long vis;
 }
