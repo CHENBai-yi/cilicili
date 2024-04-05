@@ -39,6 +39,7 @@ public class SearchRedisHelper {
      * 最近搜索的KEY
      */
     public static final String RECENT_SEARCH = "course_recent_search";
+
     public static final String VISIT = "visit:%1$s";
     /**
      * 最近搜索的大小
@@ -182,20 +183,21 @@ public class SearchRedisHelper {
     public void preDestroy() {
         final String pattern = String.format(VISIT, "*");
         final Set<String> keys = stringRedisTemplate.keys(pattern);
-        Optional.ofNullable(keys)
-                .filter(CollUtil::isNotEmpty)
-                .ifPresent(keyList -> {
-                    final List<CoursesEntity> coursesEntities = keyList.stream().map(key -> {
+        Optional.ofNullable(keys).filter(CollUtil::isNotEmpty).ifPresent(keyList -> {
+            final List<CoursesEntity> coursesEntities = keyList.stream()
+                    .map(key -> {
                         final String vis = stringRedisTemplate.opsForValue().get(key);
                         final String courseId = key.split(":")[1];
                         final CoursesEntity coursesEntity = new CoursesEntity();
                         coursesEntity.setCourseId(Integer.parseInt(courseId));
-                        coursesEntity.setVis(Optional.ofNullable(vis).map(Long::parseLong).orElse(1L));
+                        coursesEntity.setVis(
+                                Optional.ofNullable(vis).map(Long::parseLong).orElse(1L));
                         return coursesEntity;
-                    }).toList();
-                    DbThreadLocalContextHolder.setDbUse(dbChangeConf.getFrontend());
-                    coursesMapper.updateBatch(coursesEntities);
-                    stringRedisTemplate.delete(keyList);
-                });
+                    })
+                    .toList();
+            DbThreadLocalContextHolder.setDbUse(dbChangeConf.getFrontend());
+            coursesMapper.updateBatch(coursesEntities);
+            stringRedisTemplate.delete(keyList);
+        });
     }
 }

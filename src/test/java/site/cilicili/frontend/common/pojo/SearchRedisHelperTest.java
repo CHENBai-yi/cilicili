@@ -27,10 +27,13 @@ class SearchRedisHelperTest {
 
     @Mock
     private RedisTemplate mockRedisTemplate;
+
     @Mock
     private StringRedisTemplate mockStringRedisTemplate;
+
     @Mock
     private CoursesMapper mockCoursesMapper;
+
     @Mock
     private DbChangeConfig mockDbChangeConf;
 
@@ -38,8 +41,8 @@ class SearchRedisHelperTest {
 
     @BeforeEach
     void setUp() {
-        searchRedisHelperUnderTest = new SearchRedisHelper(mockRedisTemplate, mockStringRedisTemplate,
-                mockCoursesMapper, mockDbChangeConf);
+        searchRedisHelperUnderTest =
+                new SearchRedisHelper(mockRedisTemplate, mockStringRedisTemplate, mockCoursesMapper, mockDbChangeConf);
     }
 
     @Test

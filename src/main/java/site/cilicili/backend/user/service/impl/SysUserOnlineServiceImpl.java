@@ -114,6 +114,4 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
     public boolean removeByNameOrToken(final String username, final String token) {
         return baseMapper.deleteById(username, token) > 0;
     }
-
-
 }

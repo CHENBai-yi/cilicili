@@ -288,11 +288,13 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                             getCourseListResponse.setTitle(item.getName());
                             getCourseListResponse.setAuthor(item.getTeacher());
                             getCourseListResponse.setTime(DateUtil.format(item.getCreatedAt(), "MM-dd"));
-                            if (NumberUtil.isGreater(BigDecimal.valueOf(item.getVis()), BigDecimal.valueOf(10000))) {
-                                getCourseListResponse.setView(NumberUtil.roundStr(item.getVis() / 10000.0, 1) + "万");
-                            } else {
-                                getCourseListResponse.setView(item.getVis() + "");
-                            }
+                            Optional.ofNullable(item.getVis()).ifPresent(vis -> {
+                                if (NumberUtil.isGreater(BigDecimal.valueOf(vis), BigDecimal.valueOf(10000))) {
+                                    getCourseListResponse.setView(NumberUtil.roundStr(vis / 10000.0, 1) + "万");
+                                } else {
+                                    getCourseListResponse.setView(item.getVis() + "");
+                                }
+                            });
                             getCourseListResponse.setDm(RandomUtil.randomLong(6L, 100L));
                             final GetCourseListResponse.Detail detail = new GetCourseListResponse.Detail();
                             final GetCourseListResponse.Video video = new GetCourseListResponse.Video();
@@ -359,8 +361,11 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                     video.setPic(url + video.getPic());
                     video.setUrl(url + video.getUrl());
                     video.setThumbnails(url + video.getThumbnails());
-                    Optional.ofNullable(authUserDetails).ifPresent(authUserDetails1 -> searchRedisHelper.setVisitCountIncr(courses.getCourseId().longValue()));
-                    video.setView(searchRedisHelper.getVisitCountIncr(courses.getCourseId().longValue()));
+                    Optional.ofNullable(authUserDetails)
+                            .ifPresent(authUserDetails1 -> searchRedisHelper.setVisitCountIncr(
+                                    courses.getCourseId().longValue()));
+                    video.setView(searchRedisHelper.getVisitCountIncr(
+                            courses.getCourseId().longValue()));
                     return video;
                 })
                 .map(data -> R.yes("Success").setRecords(courseVideoInfoById))

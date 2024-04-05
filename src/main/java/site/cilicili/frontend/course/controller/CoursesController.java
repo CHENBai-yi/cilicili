@@ -185,7 +185,8 @@ public class CoursesController {
     }
 
     @PostMapping("get-course-video-info-by-id")
-    public R getCourseVideoInfoById(final @RequestBody CoursesEntity courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public R getCourseVideoInfoById(
+            final @RequestBody CoursesEntity courses, final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return this.coursesService.getCourseVideoInfoById(courses, authUserDetails);
     }
 
