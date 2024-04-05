@@ -105,7 +105,6 @@
 import useTheme from "src/composables/useTheme"
 import {inject, onMounted, reactive, ref} from 'vue'
 import {postAction} from 'src/api/manage'
-import CiliCiliVideoCourse from "/public/mockData/CiliCiliVideoCourse.json"
 import CiliSelectBar from 'src/components/ciliSelectBar/ciliSelectBar.vue'
 import {useRoute} from 'vue-router'
 
@@ -138,9 +137,7 @@ const refresh = async () => {
     } else {
       showNoData.value = !showNoData.value
     }
-    return
   }
-  courses.value = CiliCiliVideoCourse.data
 }
 
 onMounted(() => {

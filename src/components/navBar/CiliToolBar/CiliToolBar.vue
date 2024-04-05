@@ -26,9 +26,9 @@
                       enter-active-class="animated animate__fadeIn"
                       leave-active-class="animated animate__fadeOut">
             <q-card
-                v-if="showTip &&((!!recentQueryRecord&&recentQueryRecord.length>0)||(!!hotQueryRecord&&hotQueryRecord.length>0))"
-                :class="darkTheme" bordered
-                class="my-card z-top overflow-hidden">
+              v-if="showTip &&((!!recentQueryRecord&&recentQueryRecord.length>0)||(!!hotQueryRecord&&hotQueryRecord.length>0))"
+              :class="darkTheme" bordered
+              class="my-card z-top overflow-hidden">
               <div v-if="!!recentQueryRecord&&recentQueryRecord.length>0">
                 <n-gradient-text class="q-pa-xs flex" size="medium" text>最新搜索过
                 </n-gradient-text>
@@ -151,7 +151,8 @@
 
       <CiliPopover v-if="$q.screen.gt.sm" :label="$t('Notice')" name="notifications">
         <template #badge>
-          <q-badge v-if="token" class="absolute" color="secondary" floating style="left:26px;display: table;"
+          <q-badge v-if="token&&noticeCount>0" class="absolute" color="secondary" floating
+                   style="left:26px;display: table;"
                    text-color="white">
             {{ noticeCount }}
           </q-badge>
@@ -315,18 +316,23 @@ const logout = () => {
 }
 const noticeCount = ref('')
 const getNoticeCount = ref('notice/get-notice-count')
-watchEffect(async () => {
+const handleNoticeCount = async () => {
+  const res = await postAction(getNoticeCount.value, {
+    notice_read: "yesNo_no",
+    // notice_type: 'noticeType_system',
+    notice_sent: 'yesNo_yes',
+    notice_to_user: userStore.GetUsername(),
+    page: 1,
+    page_size: 9999
+  })
+  if (res && res.code === 1) {
+    const {total} = res.data
+    noticeCount.value = total > 99 ? '99+' : total
+  }
+}
+watchEffect(() => {
   if (userStore.GetToken()) {
-    const res = await postAction(getNoticeCount.value, {
-      notice_type: 'noticeType_system',
-      notice_to_user: userStore.GetUsername(),
-      page: 1,
-      page_size: 9999
-    })
-    if (res && res.code === 1) {
-      const {total} = res.data
-      noticeCount.value = total > 99 ? '99+' : total
-    }
+    handleNoticeCount()
   }
 })
 const bus = inject("bus")
@@ -341,6 +347,9 @@ const recentSearch = (w) => {
 onMounted(() => {
   bus.on('searchValue', (query) => {
     search.value = query
+  })
+  bus.on('handleNoticeCount', (query) => {
+    handleNoticeCount()
   })
 })
 </script>

@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {inject, onMounted, ref} from 'vue'
 import {postAction} from 'src/api/manage'
 import {useUserStore} from 'src/stores/user'
 import XEUtils from 'xe-utils'
@@ -54,15 +54,18 @@ const noticeList = ref([
 const userStore = useUserStore()
 const css = ref(`url(${CiliFrontendDefault.imageList.noticeBackgroundImg}) top/cover no-repeat fixed`)
 const getNoticeUrl = ref('notice/get-notice-list')
+const bus = inject("bus")
 const getNoticeTypeSystem = async () => {
   const res = await postAction(getNoticeUrl.value, {
     notice_type: 'noticeType_system',
     desc: true,
+    notice_to_user: userStore.GetUsername(),
     sort_by: 'created_at',
     page: 1,
     page_size: 9999
   })
   if (res && res.code === 1) {
+    bus.emit('handleNoticeCount')
     noticeList.value = res.data.records.map(item => {
       item.created_at = XEUtils.toDateString(item.created_at, 'yyyy年MM月dd日 HH:mm')
       return item
