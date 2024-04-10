@@ -21,9 +21,8 @@
                 enter-active-class="animated animate__fadeInDown"
                 leave-active-class="animated animate__fadeOutUp"
     >
-      <q-page-sticky v-if="navBarShow" :class="darkTheme" class="relative-position z-top" expand position="top">
+      <q-page-sticky v-if="navBarShow" :class="darkTheme" class=" z-top relative-position " expand position="top">
         <cili-tool-bar class="shadow-24"/>
-
         <n-scrollbar class="col q-pl-md" x-scrollable>
           <div class="scrollbar-flex-content ">
             <n-tag class="selectTitle subTitle scrollbar-demo-item" size="large" strong type="error"

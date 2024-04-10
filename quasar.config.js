@@ -84,7 +84,7 @@ module.exports = configure(function (ctx) {
           // 测试代理地址
           ? "http://127.0.0.1:8889/"
           // 正式代理地址
-          : "http://cilicili.site/api/"
+          : "http://pixx.site/api/"
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

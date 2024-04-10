@@ -18,12 +18,15 @@
               {{ item.subtitle }}
             </p>
             <div class="li-bottom row flex items-center "><!---->
-              <div class="li-vip col-4" style="font-size: 12px; color: rgb(255, 129, 9);">
+              <div class="li-vip " style="font-size: 12px; color: rgb(255, 129, 9);">
                 <!--              ￥99.99-->
-                ￥{{ item.price }}
+                {{ item.price }}
               </div>
-              <div class="col ">
-                <q-icon :class="$q.dark.isActive?`${darkTheme}`:''" name="bi-eye">&nbsp;{{ item.view }}</q-icon>
+              <div class="col">
+
+<pre>
+     <q-icon :class="$q.dark.isActive?`${darkTheme}`:''" name="bi-eye" style="float:none">&nbsp;{{ item.view }}</q-icon>
+</pre>
               </div>
               <span class="stars col-3">
               <q-icon v-for="(star,index) in item.stars" :key="star"

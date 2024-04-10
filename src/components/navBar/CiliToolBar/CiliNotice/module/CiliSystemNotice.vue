@@ -59,7 +59,7 @@ const getNoticeTypeSystem = async () => {
   const res = await postAction(getNoticeUrl.value, {
     notice_type: 'noticeType_system',
     desc: true,
-    notice_to_user: userStore.GetUsername(),
+    // notice_to_user: userStore.GetUsername(),
     sort_by: 'created_at',
     page: 1,
     page_size: 9999
