@@ -27,26 +27,6 @@ const routes: RouteRecordRaw[] = [
           }
         ]
       },
-      {
-        path: 'pay.html', component: () => import('pages/CiliPayPage/index.vue'),
-        /*  children: [
-            {
-              path: ':name/:id/info',
-              component: () => import('src/components/CiliVideoInfo/CiliVideoInfo.vue'),
-              meta: {keepAlive: true, index: 0}
-            },
-            {
-              path: ':name/:id/catalogue',
-              component: () => import('src/components/CiliVideoCatalogue/CiliVideoCatalogue.vue'),
-              meta: {keepAlive: true, index: 1}
-            },
-            {
-              path: ':name/:id/comment',
-              component: () => import('src/components/CiliVideoComment/CiliVideoComment.vue'),
-              meta: {keepAlive: true, index: 2}
-            }
-          ]*/
-      },
     ],
   }, {
     path: '/course',
@@ -104,6 +84,17 @@ const routes: RouteRecordRaw[] = [
         ],
       },
     ],
+  },
+  {
+    path: '/pay',
+    component: () => import('src/layouts/CiliPayLayout.vue'),
+    children: [
+      {
+        path: 'pay.html',
+        component: () => import('src/pages/CiliPayPage/index.vue'),
+        meta: {active: true}
+      }
+    ]
   },
   // Always leave this as last one,
   // but you can also remove it

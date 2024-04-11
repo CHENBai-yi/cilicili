@@ -1,6 +1,12 @@
 <template>
+  <q-page class="overflow-hidden ">
+    <cili-tool-bar class="shadow-24"/>
+    <!--    <div class="row justify-center   q-mt-xs q-gutter-md ">-->
+    <div class="row justify-center   q-mt-xs q-gutter-md container_d">
+      <PayInfoComponent/>
+    </div>
+  </q-page>
 
-  <PayInfoComponent/>
 </template>
 
 <script setup>

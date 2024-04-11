@@ -225,8 +225,11 @@ const loadShowMast = (e) => {
 
 // 销毁
 onBeforeUnmount(() => {
-  state.instance.video.removeEventListener('canplaythrough', loadShowMast);
-  state.instance.destroy()
+  const v = state.instance
+  if (!!v) {
+    v.video.removeEventListener('canplaythrough', loadShowMast);
+    v.destroy();
+  }
 })
 
 defineExpose({

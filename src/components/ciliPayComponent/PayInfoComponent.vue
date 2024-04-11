@@ -7,7 +7,7 @@
             <div id="order-contcent">会员充值</div>
             <span class="pay-concent-price q-pb-xl">¥39.99</span>
             <ul class="order-details"><h3 class="text-weight-bolder no-padding no-margin" style="line-height:unset">
-              用户名：198****6235</h3>
+              用户名：{{ username }}</h3>
               <li></li>
               <h3 class="text-weight-bolder q-mb-none q-pb-xs">订单详情：</h3>
               <li class="text-weight-medium">商品名称：蚂蚁课堂</li>
@@ -17,6 +17,7 @@
           </div>
           <div
             style="display: flex;flex-direction: column;align-items: flex-start;align-content: flex-start;flex-wrap: nowrap;">
+
             <h4>支付方式：</h4>
             <div class="container" style="display: flex; flex-direction: row; justify-content: flex-end;">
               <div><a class="payment-method" href="#">
@@ -48,8 +49,11 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
+import {computed} from "vue"
+import {useUserStore} from 'src/stores/user'
 
-
+const userStore = useUserStore()
+const username = computed(() => ((userStore.GetNickname() || userStore.GetRealName()).replace(/(.{2,4}).*(.{3})/, '$1***$2')));
 const {darkTheme} = useTheme()
 </script>
 
@@ -63,7 +67,7 @@ const {darkTheme} = useTheme()
   margin: 0 auto 63px;
 
   div {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 16px;
     font-family: MicrosoftYaHei-Bold;
     font-weight: bold;
@@ -123,7 +127,7 @@ a {
     width: 1150px;
     padding-left: 200px;
     margin: 0 auto;
-    line-height: 90px;
+    line-height: 60px;
     color: rgba(102, 102, 102, 1);
     font-size: 26px;
     font-weight: 400;

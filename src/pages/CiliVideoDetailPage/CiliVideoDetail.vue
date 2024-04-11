@@ -4,7 +4,7 @@
                 enter-active-class="animated animate__fadeInDown"
                 leave-active-class="animated animate__fadeOutUp">
       <q-header :class="darkTheme">
-        <cili-tool-bar :isJump="true" class="shadow-6"/>
+        <cili-tool-bar :isJump="true" class="shadow-6 "/>
       </q-header>
     </transition>
     <q-page-container>
@@ -24,7 +24,12 @@
                   :showShadow="false"
                   :video="dplayerObj.video"
                 />
+                <div class="el-loading-mask"
+                     style="display: flex; align-items: center; justify-content: center;z-index:1">
+                  <img onclick="javascript:window.location='#/pay/pay.html'" src="public/pay/bz.png">
+                </div>
               </n-layout-content>
+
               <n-layout-sider
                 :collapsed-width="0"
                 :default-collapsed="$q.screen.lt.sm"
@@ -61,7 +66,8 @@
             </n-layout>
           </n-space>
           <div>
-            <n-h2 :class="darkTheme" class="no-margin flex items-center q-gutter-x-sm ">
+
+          <n-h2 :class="darkTheme" class="no-margin flex items-center q-gutter-x-sm ">
               <q-icon name="fas fa-graduation-cap"/>
               <n-ellipsis style="max-width: 300px">{{ videoInfo.title }}</n-ellipsis>
             </n-h2>
