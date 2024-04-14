@@ -20,23 +20,16 @@
 
             <h4>支付方式：</h4>
             <div class="container" style="display: flex; flex-direction: row; justify-content: flex-end;">
-              <div><a class="payment-method" href="#">
-                <div class="Alipay"><img src="pay/icon332@2x.png"> <span>支付宝支付</span></div>
-                <div>
-                  <form
-                    action="https://openapi.alipay.com/gateway.do?charset=UTF-8&amp;method=alipay.trade.page.pay&amp;sign=q6jGX7NWXLbeZnvFl%2Fzi9WTzytMkZQBuKpYLdwAOGj%2FUd2UGezB%2FFCkliwzI3P5EA8eQN90lPtpSI91fj9qWJZNu2jksVKKnFztxaq4k83Yqqb%2FccD8aOjSE5eQKY18zmWK3%2BvXjPpMzRL5xVUchbjrMVAvmvPYLwbXkG8lZScuzxcVPYutPnDJreVzBgnpwWbmwsGZ%2FW9ClVEiXGeQMr9ZJs31DHWBvYkUNM72aifoiIMGvsHSdfbZKIapHCDXsQn71ZJKyJNr1BZ2Uk6jdPUU46WJNRx3xAWFS6g%2BgvzicvfWLYEbwunxECJ12LqWdmafrHXKZQ2taO00dAUDyww%3D%3D&amp;return_url=http%3A%2F%2Fwww.mayikt.com%2FpaySuccess.html&amp;notify_url=http%3A%2F%2F47.92.32.162%3A8083%2Fapi%2Fasync%2FaliPay&amp;version=1.0&amp;app_id=2021003112631675&amp;sign_type=RSA2&amp;timestamp=2024-04-10+22%3A27%3A12&amp;alipay_sdk=alipay-sdk-java-dynamicVersionNo&amp;format=json"
-                    method="post"
-                    name="punchout_form">
-                    <input name="biz_content" type="hidden"
-                           value="{&quot;out_trade_no&quot;:&quot;1778067210112204800&quot;,&quot;product_code&quot;:&quot;FAST_INSTANT_TRADE_PAY&quot;,&quot;subject&quot;:&quot;购买每特教育IT教学网站课程&quot;,&quot;total_amount&quot;:&quot;39.99&quot;}">
-                    <input style="display:none" type="submit" value="立即支付">
-                  </form>
-
-                </div>
-              </a></div>
+              <div>
+                <a class="payment-method">
+                  <div class="Alipay" @click="toPay"><img src="pay/icon332@2x.png"> <span>支付宝支付</span></div>
+                  <div ref="pay" v-html="submit">
+                  </div>
+                </a>
+              </div>
               <div> &nbsp; &nbsp; &nbsp; &nbsp;</div>
               <div><a class="payment-method" href="#">
-                <div class="Alipay"><img src="pay/weixinPay.png"> <span>微信支付</span></div>
+                <!--                <div class="Alipay"><img src="pay/weixinPay.png"> <span>微信支付</span></div>-->
               </a></div>
             </div>
           </div>
@@ -49,12 +42,28 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
-import {computed} from "vue"
+import {computed, inject, ref} from "vue"
 import {useUserStore} from 'src/stores/user'
+import {postAction} from 'src/api/manage'
 
+const pay = ref(null);
+const bus = inject("bus")
+const submit = ref('');
 const userStore = useUserStore()
 const username = computed(() => ((userStore.GetNickname() || userStore.GetRealName()).replace(/(.{2,4}).*(.{3})/, '$1***$2')));
 const {darkTheme} = useTheme()
+const toPay = () => {
+  postAction("courses/member", {})
+    .then(({code, message, data}) => {
+      if (code === 0) {
+        window.$message.error(message, {render: window.$render})
+        bus.emit('showLoginFrom')
+        return
+      }
+      submit.value = data
+      setTimeout(() => pay.value.children[0].submit(), 300)
+    })
+}
 </script>
 
 <style lang="scss" scoped>

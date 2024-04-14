@@ -10,7 +10,19 @@
 </template>
 
 <script setup>
-import PayInfoComponent from 'src/components/ciliPayComponent/PayInfoComponent.vue'</script>
+import {onMounted} from 'vue'
+import {useCommonStore} from 'src/stores/common'
+import PayInfoComponent from 'src/components/ciliPayComponent/PayInfoComponent.vue'
+
+const commonStore = useCommonStore()
+
+onMounted(() => {
+  if (!!commonStore.getCurrentVideoAddress()) {
+    window.location.href = commonStore.getCurrentVideoAddress()
+    console.log(commonStore.getCurrentVideoAddress())
+  }
+})
+</script>
 
 <style scoped>
 

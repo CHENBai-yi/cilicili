@@ -24,9 +24,8 @@
                   :showShadow="false"
                   :video="dplayerObj.video"
                 />
-                <div class="el-loading-mask"
-                     style="display: flex; align-items: center; justify-content: center;z-index:1">
-                  <img onclick="javascript:window.location='#/pay/pay.html'" src="public/pay/bz.png">
+                <div v-if="!dplayerObj.buy" class="el-loading-mask cili_mask">
+                  <img onclick="javascript:window.location='#/pay/pay.html'" src="/pay/pc-fhy.gif" style="width:100%">
                 </div>
               </n-layout-content>
 
@@ -67,7 +66,7 @@
           </n-space>
           <div>
 
-          <n-h2 :class="darkTheme" class="no-margin flex items-center q-gutter-x-sm ">
+            <n-h2 :class="darkTheme" class="no-margin flex items-center q-gutter-x-sm ">
               <q-icon name="fas fa-graduation-cap"/>
               <n-ellipsis style="max-width: 300px">{{ videoInfo.title }}</n-ellipsis>
             </n-h2>
@@ -121,7 +120,7 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
-import {inject, onBeforeUpdate, onMounted, reactive, ref} from 'vue'
+import {inject, onBeforeUnmount, onBeforeUpdate, onMounted, reactive, ref} from 'vue'
 import Hls from 'hls.js';
 import CiliVideoPlayer from 'src/components/ciliVideoPlayer/CiliVideoPlayer.vue'
 import {scroll, useQuasar} from 'quasar'
@@ -232,6 +231,7 @@ onMounted(async () => {
   }
   const res = await commonStore.GetVideoDetail(urls.info, data)
   dplayerObj.video.pic = res.video.pic
+  dplayerObj.buy = res.video.buy
   dplayerObj.video.quality[0].url = res.video.url
   dplayerObj.video.quality[1].url = res.video.url
   videoList.value = res.videoList
@@ -244,6 +244,11 @@ const switchVideo = (e) => {
   dp.value.dp.switchVideo(e.video, e.danmu);
   dp.value.dp.video.autoplay = true
 }
+
+onBeforeUnmount(() => {
+  commonStore.SetCurrentVideoAddress(window.location.href)
+  console.log(commonStore.getCurrentVideoAddress())
+})
 </script>
 <style lang="scss" scoped>
 .left {
@@ -272,5 +277,11 @@ const switchVideo = (e) => {
   }
 }
 
+.cili_mask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12
+}
 
 </style>

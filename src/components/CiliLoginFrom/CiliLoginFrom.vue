@@ -235,7 +235,7 @@
 </template>
 
 <script setup>
-import {computed, reactive, ref, watch} from "vue";
+import {computed, inject, onMounted, reactive, ref, watch} from "vue";
 import useTheme from "src/composables/useTheme"
 import {postAction} from 'src/api/manage'
 import {useUserStore} from "src/stores/user"
@@ -271,6 +271,7 @@ const showLoginFrom = () => {
   registerRapidly.value = false
   icon.value = true
 }
+const bus = inject('bus')
 const showRegisterFrom = () => {
   showLoginFrom()
   registerRapidly.value = true
@@ -364,6 +365,9 @@ const onLogin = (form) => {
   }
 
 }
+onMounted(() => {
+  bus.on('showLoginFrom', showLoginFrom)
+})
 </script>
 
 <style lang="scss" scoped>

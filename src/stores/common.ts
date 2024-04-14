@@ -11,6 +11,7 @@ export const useCommonStore = defineStore('common', {
     originPos: 0,
     videoInfo: {},
     videoCatalog: {},
+    currentAddress: ''
   }),
   getters: {},
   actions: {
@@ -41,6 +42,22 @@ export const useCommonStore = defineStore('common', {
       }
 
       return {video: video, videoList: videoList}
-    }
+    },
+    SetCurrentVideoAddress(url: string) {
+      Cookies.set("cili-currentAddress", url)
+      this.currentAddress = url
+    },
+    getCurrentVideoAddress(): string | null {
+      if (!!this.currentAddress)
+        return this.currentAddress;
+      else if (Cookies.has("cili-currentAddress"))
+        return Cookies.get("cili-currentAddress")
+      else return ""
+    },
+    delCurrentVideoAddress() {
+      Cookies.remove("cili-currentAddress")
+      // @ts-ignore
+      this.currentAddress = undefined
+    },
   }
 })
