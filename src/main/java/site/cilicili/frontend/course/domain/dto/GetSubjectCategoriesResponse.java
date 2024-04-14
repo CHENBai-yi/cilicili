@@ -38,7 +38,22 @@ public class GetSubjectCategoriesResponse {
         private String time;
 
         public String getPrice() {
-            return Objects.nonNull(price) ? (Double.parseDouble(price) > 0 ? "￥ " + price : "免费") : "体验课";
+            return "￥ " + (Objects.nonNull(price) ? (Double.parseDouble(price) > 0 ? price : "免费") : "体验课");
+        }
+
+        public Long getStars() {
+            if (view > 500) {
+                stars = 5L;
+            } else if (view > 400) {
+                stars = 4L;
+            } else if (view > 300) {
+                stars = 3L;
+            } else if (view > 200) {
+                stars = 2L;
+            } else {
+                stars = 1L;
+            }
+            return stars;
         }
     }
 }

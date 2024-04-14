@@ -223,11 +223,14 @@
             resultMap="NoticeListQueryParamResponse">
         select * from sys_notice JOIN sys_notice_to_user on sys_notice.notice_id=sys_notice_to_user.notice_id
         <where>
-            <if test="noticeToUser!=null  and noticeToUser!=''">
-                to_user = #{noticeToUser}
+            <if test="noticeRead!=null  and noticeRead!=''">
+                and user_read = #{noticeRead}
             </if>
-            <if test="noticeType!=null  and noticeType!=''">
-                or notice_type = #{noticeType}
+            <if test="noticeToUser!=null  and noticeToUser!=''">
+                and to_user = #{noticeToUser}
+            </if>
+            <if test="noticeSent!=null  and noticeSent!=''">
+                and notice_sent = #{noticeSent}
             </if>
         </where>
         <if test="sortBy!=null">
@@ -340,6 +343,21 @@
             </if>
         </set>
         where id = #{id}
+    </update>
+    <update id="updateNoticeStatus">
+        update sys_notice a,sys_notice_to_user b
+        set b.user_read='yesNo_yes'
+        <where>
+            and a.notice_id = b.notice_id
+            and a.notice_sent = 'yesNo_yes'
+            <if test="noticeToUser!=null and noticeToUser!=''">
+                and b.to_user = #{noticeToUser}
+            </if>
+            <if test="noticeType!=null and noticeType!=''">
+                and a.notice_type = #{noticeType}
+            </if>
+        </where>
+    
     </update>
     
     <!--通过主键删除-->

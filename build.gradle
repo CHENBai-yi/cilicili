@@ -22,6 +22,7 @@ configurations {
 }
 configurations.all {
     exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    exclude group: "commons-logging", module: 'commons-logging'
 }
 repositories {
     mavenCentral()
@@ -29,6 +30,7 @@ repositories {
 
 
 dependencies {
+    implementation group: 'com.alipay.sdk', name: 'alipay-sdk-java', version: '4.39.40.ALL'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
@@ -117,7 +119,7 @@ sourceSets {
     }
 }
 test {
-    enabled(false)
+    enabled(true)
 }
 tasks.withType(Test.class) {
     useJUnitPlatform()

@@ -13,10 +13,10 @@
         <result property="poster" column="poster" jdbcType="VARCHAR"/>
         <result property="tag" column="tag" jdbcType="VARCHAR"/>
         <result property="totalTime" column="total_time" jdbcType="VARCHAR"/>
-        <result property="vis" column="vis" jdbcType="BIGINT"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <result property="reason" column="reason" jdbcType="VARCHAR"/>
         <result property="updatedAt" column="updated_at" jdbcType="TIME"/>
+        <result property="vis" column="vis" jdbcType="BIGINT"/>
     </resultMap>
     
     <!--查询单个-->
@@ -424,7 +424,7 @@
         <result property="pic" column="poster" jdbcType="VARCHAR"/>
         <result property="author" column="teacher" jdbcType="VARCHAR"/>
         <result property="stars" column="stars" jdbcType="BIGINT"/>
-        <result property="view" column="view" jdbcType="BIGINT"/>
+        <result property="view" column="vis" jdbcType="BIGINT"/>
         <result property="price" column="price" jdbcType="DECIMAL"/>
     </resultMap>
     
@@ -569,6 +569,7 @@
         <foreach collection="coursesEntities" item="course" separator=";">
             UPDATE courses
             <set>
+                <if test="course.vis != null">vis = #{course.vis},</if>
                 <if test="course.name != null">name = #{course.name},</if>
                 <if test="course.teacher != null">teacher = #{course.teacher},</if>
                 <if test="course.kind != null">kind = #{course.kind},</if>
@@ -578,7 +579,6 @@
                 <if test="course.poster != null">poster = #{course.poster},</if>
                 <if test="course.tag != null">tag = #{course.tag},</if>
                 <if test="course.totalTime != null">total_time = #{course.totalTime},</if>
-                <if test="course.vis != null">vis = #{course.vis},</if>
                 <if test="course.status != null">status = #{course.status},</if>
                 <if test="course.reason != null">reason = #{course.reason},</if>
                 <if test="course.updatedAt != null">updated_at = #{course.updatedAt},</if>

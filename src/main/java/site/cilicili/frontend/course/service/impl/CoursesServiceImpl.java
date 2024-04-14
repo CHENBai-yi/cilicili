@@ -2,8 +2,12 @@ package site.cilicili.frontend.course.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.json.JSONUtil;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,8 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
+import site.cilicili.common.constant.pay.AliPayStatus;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
+import site.cilicili.common.pay.AlipayTemplate;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.mapper.BarsMapper;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
@@ -25,8 +31,11 @@ import site.cilicili.frontend.course.domain.dto.*;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.mapper.CoursesMapper;
 import site.cilicili.frontend.course.service.CoursesService;
+import site.cilicili.frontend.memberShip.service.MemberShipService;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -45,6 +54,8 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     private final CatalogsService catalogsService;
     private final HttpServletRequest httpServletRequest;
     private final SearchRedisHelper searchRedisHelper;
+    private final MemberShipService memberShipService;
+    private final AlipayTemplate alipayTemplate;
 
     public static String formatDateTime(long mss) {
         String DateTimes = null;
@@ -342,13 +353,19 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     @Transactional(readOnly = true)
     @Override
     public R getCourseVideoInfoById(final CoursesEntity courses, final AuthUserDetails authUserDetails) {
-        //
-        final String url =
-                httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
         final GetCourseVideoInfoByIdResponse courseVideoInfoById = baseMapper.getCourseVideoInfoById(courses);
-        // 使用redis根据课程id统计该课程每天一个用户的访问次数
-
-        log.debug(courseVideoInfoById.toString());
+        final String url = Optional.of(courseVideoInfoById)
+                .map(GetCourseVideoInfoByIdResponse::getVideo)
+                .map(video -> {
+                    final String ss = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
+                    if (video.getPrice() > 0 && (Objects.isNull(authUserDetails) || !memberShipService.isMember(authUserDetails.getId(), authUserDetails.getusername()))) {
+                        video.setBuy(false);
+                        return "please buy this course/";
+                    }
+                    return ss;
+                })
+                .orElse("please buy this course/");
+        courseVideoInfoById.toString();
         return Optional.of(courseVideoInfoById)
                 .map(GetCourseVideoInfoByIdResponse::getVideoList)
                 .map(videoLists -> videoLists.stream()
@@ -361,6 +378,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                     video.setPic(url + video.getPic());
                     video.setUrl(url + video.getUrl());
                     video.setThumbnails(url + video.getThumbnails());
+                    // 使用redis根据课程id统计该课程每天一个用户的访问次数
                     Optional.ofNullable(authUserDetails)
                             .ifPresent(authUserDetails1 -> searchRedisHelper.setVisitCountIncr(
                                     courses.getCourseId().longValue()));
@@ -419,4 +437,28 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                         .setData("hot", searchRedisHelper.listHotSearch()))
                 .orElse(R.yes(null).setData("hot", searchRedisHelper.listHotSearch()));
     }
+
+    @Override
+    public R becomeMemberShip(final AuthUserDetails authUserDetails) {
+        return Optional.ofNullable(authUserDetails)
+                .map(authUserDetails1 -> {
+                    try {
+                        AlipayTradeAppPayModel payModel = new AlipayTradeAppPayModel();
+                        final String tradeNo = IdUtil.objectId();
+                        payModel.setOutTradeNo(tradeNo);
+                        payModel.setTotalAmount(alipayTemplate.price);
+                        payModel.setSubject(alipayTemplate.subject);
+                        payModel.setBody(alipayTemplate.desc);
+                        payModel.setProductCode(AliPayStatus.PRODUCT.getStatus());
+                        payModel.setTimeoutExpress(alipayTemplate.timeExpire);
+                        payModel.setPassbackParams(URLEncoder.encode(JSONUtil.toJsonStr(authUserDetails), StandardCharsets.UTF_8));
+                        return R.yes(null).setData(alipayTemplate.pay(payModel));
+                    } catch (AlipayApiException e) {
+                        return R.no("支付表单生成失败！");
+                    }
+                })
+                .orElse(R.no("请登录后操作."));
+
+    }
+
 }

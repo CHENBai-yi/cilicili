@@ -31,6 +31,7 @@ public class GetCourseVideoInfoByIdResponse {
         private String thumbnails;
         private String title;
         private String author;
+        private Boolean buy = true;
 
         @JsonIgnore
         private Double price;

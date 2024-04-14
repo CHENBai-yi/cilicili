@@ -80,8 +80,8 @@ spring:
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 60
       validation-query: SELECT 1 FROM DUAL
-      #      url: jdbc:mysql://127.0.0.1:3306/cili-quasar-user?allowMultiQueries=true&serverTimezone=Asia/Shanghai
-      url: jdbc:mysql://8.217.182.161:3306/cili-quasar-user?allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://127.0.0.1:3306/cili-quasar-user?allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      #      url: jdbc:mysql://8.217.182.161:3306/cili-quasar-user?allowMultiQueries=true&serverTimezone=Asia/Shanghai
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 74521CBy

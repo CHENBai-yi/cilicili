@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import site.cilicili.common.config.dynamicDb.MyDataSourceList;
 import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.logger.ExplainInterceptor;
@@ -47,6 +48,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RequiredArgsConstructor
 @EnableAspectJAutoProxy
+@EnableTransactionManagement
 @SpringBootApplication(
         exclude = {
                 MongoAutoConfiguration.class,

@@ -18,8 +18,10 @@ import site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesRequest;
 import site.cilicili.frontend.course.domain.dto.QueryCourseInfoRequest;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 import site.cilicili.frontend.course.service.CoursesService;
+import site.cilicili.frontend.memberShip.service.MemberShipService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Courses) 表控制层
@@ -230,15 +232,29 @@ public class CoursesController {
         return coursesService.listRecentSearch(authUserDetails);
     }
 
+    private final MemberShipService memberShipService;
+
     /**
      * 最近搜索列表
      *
      * @return
      */
-    @PreAuthorize("isAnonymous()")
+    @PreAuthorize("isAnonymous()||isAuthenticated()")
     @ResponseBody
     @GetMapping("search")
     public R recentAndHotSearch(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return coursesService.recentAndHotSearch(authUserDetails);
     }
+
+    @PostMapping("member")
+    public R becomeMemberShip(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return coursesService.becomeMemberShip(authUserDetails);
+    }
+
+    @PreAuthorize("isAnonymous()")
+    @PostMapping("pay")
+    public R payNotify(final @RequestParam Map<String, String> params) {
+        return memberShipService.payNotify(params);
+    }
+
 }
