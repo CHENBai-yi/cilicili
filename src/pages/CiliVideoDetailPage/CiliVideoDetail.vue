@@ -24,7 +24,7 @@
                   :showShadow="false"
                   :video="dplayerObj.video"
                 />
-                <div v-if="!dplayerObj.buy" class="el-loading-mask cili_mask">
+                <div v-if="dplayerObj.buy!==undefined&&!dplayerObj.buy" class="el-loading-mask cili_mask">
                   <img onclick="javascript:window.location='#/pay/pay.html'" src="/pay/pc-fhy.gif" style="width:100%">
                 </div>
               </n-layout-content>
@@ -120,12 +120,13 @@
 
 <script setup>
 import useTheme from "src/composables/useTheme"
-import {inject, onBeforeUnmount, onBeforeUpdate, onMounted, reactive, ref} from 'vue'
+import {inject, onBeforeUpdate, onMounted, reactive, ref} from 'vue'
 import Hls from 'hls.js';
 import CiliVideoPlayer from 'src/components/ciliVideoPlayer/CiliVideoPlayer.vue'
 import {scroll, useQuasar} from 'quasar'
 import {useCommonStore} from 'src/stores/common'
 import {useRoute, useRouter} from 'vue-router'
+import {Base64} from "js-base64";
 
 const $q = useQuasar()
 const $router = useRoute()
@@ -159,6 +160,7 @@ const items = ref([
 ]);
 
 const dplayerObj = reactive({
+  buy: undefined,
   video: {
     pic: "VCG41N1403887001.jpg",
     url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8', //视频地址
@@ -220,11 +222,16 @@ const urls = reactive({
 
 const bus = inject('bus')
 onMounted(async () => {
+  if (!!$router.query.t) {
+    window.$message.success(Base64.decode($router.query.t), {render: window.$render})
+    dplayerObj.buy = true
+  } else {
+    commonStore.SetCurrentVideoAddress($router.path)
+  }
   bus.on('handleSearch', (query) => {
     const routeData = $Router.resolve(`/course?query=${query}`);
     window.open(routeData.href, '_blank');
   })
-
   const data = {
     name: $router.params.name,
     id: $router.params.id
@@ -245,10 +252,6 @@ const switchVideo = (e) => {
   dp.value.dp.video.autoplay = true
 }
 
-onBeforeUnmount(() => {
-  commonStore.SetCurrentVideoAddress(window.location.href)
-  console.log(commonStore.getCurrentVideoAddress())
-})
 </script>
 <style lang="scss" scoped>
 .left {

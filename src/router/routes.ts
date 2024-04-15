@@ -93,6 +93,11 @@ const routes: RouteRecordRaw[] = [
         path: 'pay.html',
         component: () => import('src/pages/CiliPayPage/index.vue'),
         meta: {active: true}
+      },
+      {
+        path: 'success.html',
+        component: () => import('src/pages/result/Success.vue'),
+        meta: {active: true}
       }
     ]
   },

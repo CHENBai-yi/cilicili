@@ -46,6 +46,7 @@ import AnimateOnScroll from 'primevue/animateonscroll';
 //native UI
 import {
   create,
+  NA,
   NButton,
   NCarousel,
   NCascader,
@@ -134,7 +135,7 @@ export default boot(({app}) => {
   const naive = create({
     components: [
       NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NGradientText,
-      NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar,
+      NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NA,
       NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition,
       NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload, NResult
     ]

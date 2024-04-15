@@ -57,7 +57,9 @@ const toPay = () => {
     .then(({code, message, data}) => {
       if (code === 0) {
         window.$message.error(message, {render: window.$render})
-        bus.emit('showLoginFrom')
+        if (data) {
+          bus.emit('showLoginFrom')
+        }
         return
       }
       submit.value = data
