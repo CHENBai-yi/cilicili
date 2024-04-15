@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.authentication.user.entity.UserEntity;
 import site.cilicili.common.constant.pay.AliPayStatus;
 import site.cilicili.common.util.R;
@@ -111,6 +112,21 @@ public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberS
                             }).orElse(R.no("支付失败！"));
                 })
                 .orElse(R.no("支付失败"));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getMemberPosition(final AuthUserDetails authUserDetails) {
+        return Optional.ofNullable(authUserDetails)
+                .map(authUserDetails1 -> baseMapper.getMemberPosition(authUserDetails1.getId()))
+                .map(r -> R.yes(null).setData(r))
+                .orElse(R.no("您还未登录哦！！！"));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Boolean checkIsAlreadyMemberShip(final Long id) {
+        return Objects.isNull(baseMapper.queryByIdOrUsername(id, null));
     }
 
 }

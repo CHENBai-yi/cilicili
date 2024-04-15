@@ -89,6 +89,8 @@ public interface MemberShipMapper extends BaseMapper<MemberShipEntity> {
     int deleteById(Integer id);
 
     MemberShipEntity queryByIdOrUsername(@Param("id") Long id, @Param("username") String username);
+
+    Integer getMemberPosition(Long id);
 }
 
 

@@ -1,6 +1,7 @@
 package site.cilicili.frontend.memberShip.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity;
 
@@ -57,6 +58,10 @@ public interface MemberShipService extends IService<MemberShipEntity> {
     Boolean isMember(Long id, String getusername);
 
     R payNotify(Map<String, String> params);
+
+    R getMemberPosition(AuthUserDetails authUserDetails);
+
+    Boolean checkIsAlreadyMemberShip(Long id);
 }
        
 

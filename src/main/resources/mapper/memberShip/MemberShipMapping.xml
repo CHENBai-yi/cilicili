@@ -118,6 +118,11 @@
             </if>
         </where>
     </select>
+    <select id="getMemberPosition" resultType="java.lang.Integer">
+        select count(*)
+        from member_ship a
+        where exists(select id from member_ship b where user_id = #{id} and b.id > a.id)
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

@@ -442,22 +442,26 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
     public R becomeMemberShip(final AuthUserDetails authUserDetails) {
         return Optional.ofNullable(authUserDetails)
                 .map(authUserDetails1 -> {
-                    try {
-                        AlipayTradeAppPayModel payModel = new AlipayTradeAppPayModel();
-                        final String tradeNo = IdUtil.objectId();
-                        payModel.setOutTradeNo(tradeNo);
-                        payModel.setTotalAmount(alipayTemplate.price);
-                        payModel.setSubject(alipayTemplate.subject);
-                        payModel.setBody(alipayTemplate.desc);
-                        payModel.setProductCode(AliPayStatus.PRODUCT.getStatus());
-                        payModel.setTimeoutExpress(alipayTemplate.timeExpire);
-                        payModel.setPassbackParams(URLEncoder.encode(JSONUtil.toJsonStr(authUserDetails), StandardCharsets.UTF_8));
-                        return R.yes(null).setData(alipayTemplate.pay(payModel));
-                    } catch (AlipayApiException e) {
-                        return R.no("支付表单生成失败！");
-                    }
+                    return Optional.ofNullable(memberShipService.checkIsAlreadyMemberShip(authUserDetails1.getId()))
+                            .filter(f -> f)
+                            .map(r -> {
+                                try {
+                                    AlipayTradeAppPayModel payModel = new AlipayTradeAppPayModel();
+                                    final String tradeNo = IdUtil.objectId();
+                                    payModel.setOutTradeNo(tradeNo);
+                                    payModel.setTotalAmount(alipayTemplate.price);
+                                    payModel.setSubject(alipayTemplate.subject);
+                                    payModel.setBody(alipayTemplate.desc);
+                                    payModel.setProductCode(AliPayStatus.PRODUCT.getStatus());
+                                    payModel.setTimeoutExpress(alipayTemplate.timeExpire);
+                                    payModel.setPassbackParams(URLEncoder.encode(JSONUtil.toJsonStr(authUserDetails), StandardCharsets.UTF_8));
+                                    return R.yes(null).setData(alipayTemplate.pay(payModel));
+                                } catch (AlipayApiException e) {
+                                    return R.no("支付表单生成失败！");
+                                }
+                            }).orElse(R.no("您已经是尊贵得会员了！").setData(false));
                 })
-                .orElse(R.no("请登录后操作."));
+                .orElse(R.no("请登录后操作.").setData(true));
 
     }
 

@@ -5,7 +5,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity;
 import site.cilicili.frontend.memberShip.service.MemberShipService;
@@ -99,6 +101,13 @@ public class MemberShipController {
         return this.memberShipService.deleteById(id);
     }
 
+    @Operation(summary = "删除数据", parameters = {
+            @Parameter(description = "id 主键")
+    })
+    @GetMapping("id")
+    public R getMemberPosition(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return this.memberShipService.getMemberPosition(authUserDetails);
+    }
 }
 
 
