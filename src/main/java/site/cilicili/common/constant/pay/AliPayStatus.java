@@ -12,8 +12,9 @@ import lombok.Getter;
  */
 @Getter
 public enum AliPayStatus {
-
-    SUCCESS("TRADE_SUCCESS"), FINISHED("TRADE_FINISHED"), PRODUCT("FAST_INSTANT_TRADE_PAY");
+    SUCCESS("TRADE_SUCCESS"),
+    FINISHED("TRADE_FINISHED"),
+    PRODUCT("FAST_INSTANT_TRADE_PAY");
     private String status;
 
     AliPayStatus(final java.lang.String status) {

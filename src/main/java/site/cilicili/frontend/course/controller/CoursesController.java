@@ -256,5 +256,4 @@ public class CoursesController {
     public R payNotify(final @RequestParam Map<String, String> params) {
         return memberShipService.payNotify(params);
     }
-
 }

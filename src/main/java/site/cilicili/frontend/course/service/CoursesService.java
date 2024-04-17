@@ -100,5 +100,4 @@ public interface CoursesService extends IService<CoursesEntity> {
     R recentAndHotSearch(AuthUserDetails authUserDetails);
 
     R becomeMemberShip(final AuthUserDetails authUserDetails);
-
 }

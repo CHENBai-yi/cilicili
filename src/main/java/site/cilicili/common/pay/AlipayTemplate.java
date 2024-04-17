@@ -23,7 +23,9 @@ import java.io.IOException;
  * @author BaiYiChen
  */
 @ConfigurationProperties(prefix = "alipay")
-@PropertySource(value = {"classpath:aliPay.properties"}, encoding = "UTF-8")
+@PropertySource(
+        value = {"classpath:aliPay.properties"},
+        encoding = "UTF-8")
 @Data
 @Component
 @Slf4j
@@ -31,7 +33,7 @@ public class AlipayTemplate {
     public String desc;
     public String subject;
     public String price;
-    //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // ↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     public String timeExpire;
     // 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
     public String appId;
@@ -58,7 +60,7 @@ public class AlipayTemplate {
     // public String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";
     public String gatewayUrl;
     public String logPath;
-    //↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // ↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     /**
      * 写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
@@ -81,20 +83,13 @@ public class AlipayTemplate {
             } catch (IOException e) {
                 log.error(e.getMessage());
             }
-
         }
     }
 
     public String pay(AlipayTradeAppPayModel model) throws AlipayApiException {
         // 获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(
-                gatewayUrl,
-                appId,
-                merchantPrivateKey,
-                dataType,
-                charset,
-                alipayPublicKey,
-                signType);
+                gatewayUrl, appId, merchantPrivateKey, dataType, charset, alipayPublicKey, signType);
         // 设置请求参数
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
         alipayRequest.setReturnUrl(returnUrl);

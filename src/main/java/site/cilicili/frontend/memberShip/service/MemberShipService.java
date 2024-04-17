@@ -63,5 +63,3 @@ public interface MemberShipService extends IService<MemberShipEntity> {
 
     Boolean checkIsAlreadyMemberShip(Long id);
 }
-       
-

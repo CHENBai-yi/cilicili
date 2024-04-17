@@ -1,0 +1,141 @@
+2024-04-16 21:48:51.490 [XNIO-1 task-6] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-04-16 21:48:51.499 [XNIO-1 task-7] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-04-16 21:48:51.499 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-04-16 21:52:18.327 [XNIO-1 task-7] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 21:52:18.370 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 21:52:18.394 [XNIO-1 task-6] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 21:53:00.760 [XNIO-1 task-6] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:04:46.039 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Unable to load cache item
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:75)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:130)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:531)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:308)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:779)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:597)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:68)
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/common/entity/BaseEntity
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1012)
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(BuiltinClassLoader.java:862)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(BuiltinClassLoader.java:760)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:681)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:639)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.springframework.cglib.core.ReflectUtils.addAllMethods(ReflectUtils.java:396)
+	at org.springframework.cglib.proxy.Enhancer.getMethods(Enhancer.java:627)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:664)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:366)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:107)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.common.entity.BaseEntity
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 45 common frames omitted
+2024-04-16 23:21:36.322 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Unable to load cache item
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:75)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:130)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:531)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:308)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:779)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:597)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:68)
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/common/entity/BaseEntity
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1012)
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(BuiltinClassLoader.java:862)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(BuiltinClassLoader.java:760)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:681)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:639)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.springframework.cglib.core.ReflectUtils.addAllMethods(ReflectUtils.java:396)
+	at org.springframework.cglib.proxy.Enhancer.getMethods(Enhancer.java:627)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:664)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:366)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:107)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.common.entity.BaseEntity
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 45 common frames omitted
+2024-04-16 23:25:50.390 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:30:26.289 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:30:26.289 [XNIO-1 task-3] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:30:26.293 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:30:26.295 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:30:40.946 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:30:41.749 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:32:42.673 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:32:43.470 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:32:48.550 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:36:58.875 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:36:58.890 [XNIO-1 task-3] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:37:10.399 [XNIO-1 task-3] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:39:09.833 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:39:09.894 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:39:26.254 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:44:16.313 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:59:26.973 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:59:27.067 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:59:27.228 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:59:27.252 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:59:27.261 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-16 23:59:29.097 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-17 00:00:27.904 [XNIO-1 task-3] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。

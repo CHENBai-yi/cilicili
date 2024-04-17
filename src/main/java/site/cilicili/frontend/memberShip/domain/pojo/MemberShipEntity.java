@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -62,13 +63,13 @@ public class MemberShipEntity implements Serializable {
 
     @Schema(description = "会员id")
     private Long userId;
+
     @Schema(description = "会员名")
     private String username;
+
     private String email;
     private String status;
     private Integer logicalDelete;
     private String tradeNo;
     private String product;
 }
-
-

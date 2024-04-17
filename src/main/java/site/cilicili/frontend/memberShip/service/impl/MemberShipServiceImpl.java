@@ -28,7 +28,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("memberShipService")
-public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberShipEntity> implements MemberShipService {
+public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberShipEntity>
+        implements MemberShipService {
 
     /**
      * 通过ID查询单条数据
@@ -97,10 +98,13 @@ public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberS
     @Override
     public R payNotify(final Map<String, String> params) {
         return Optional.ofNullable(params)
-                .filter(data -> Objects.nonNull(params.get("trade_status")) && AliPayStatus.SUCCESS.getStatus().equals(params.get("trade_status")))
+                .filter(data -> Objects.nonNull(params.get("trade_status"))
+                        && AliPayStatus.SUCCESS.getStatus().equals(params.get("trade_status")))
                 .map(r -> {
                     final String passbackParams = r.get("passback_params");
-                    return Optional.ofNullable(JSONUtil.toBean(JSONUtil.parseObj(URLDecoder.decode(passbackParams, StandardCharsets.UTF_8)), UserEntity.class))
+                    return Optional.ofNullable(JSONUtil.toBean(
+                                    JSONUtil.parseObj(URLDecoder.decode(passbackParams, StandardCharsets.UTF_8)),
+                                    UserEntity.class))
                             .map(authUserDetails -> {
                                 final MemberShipEntity entity = new MemberShipEntity();
                                 entity.setProduct(r.get("body"));
@@ -109,7 +113,8 @@ public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberS
                                 entity.setUserId(authUserDetails.getId());
                                 entity.setUsername(authUserDetails.getUsername());
                                 return baseMapper.insert(entity) > 0 ? R.yes("支付成功！") : R.no("订单插入数据库异常！");
-                            }).orElse(R.no("支付失败！"));
+                            })
+                            .orElse(R.no("支付失败！"));
                 })
                 .orElse(R.no("支付失败"));
     }
@@ -128,7 +133,4 @@ public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberS
     public Boolean checkIsAlreadyMemberShip(final Long id) {
         return Objects.isNull(baseMapper.queryByIdOrUsername(id, null));
     }
-
 }
-
-

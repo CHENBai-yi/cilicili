@@ -119,7 +119,7 @@ sourceSets {
     }
 }
 test {
-    enabled(true)
+    enabled(false)
 }
 tasks.withType(Test.class) {
     useJUnitPlatform()

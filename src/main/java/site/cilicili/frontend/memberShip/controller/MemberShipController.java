@@ -27,7 +27,6 @@ public class MemberShipController {
     /**
      * 服务对象
      */
-
     private final MemberShipService memberShipService;
 
     /**
@@ -36,9 +35,9 @@ public class MemberShipController {
      * @param memberShip 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "memberShip 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "memberShip 筛选条件")})
     @GetMapping
     public R queryAll(final MemberShipEntity memberShip) {
         return this.memberShipService.queryAll(memberShip);
@@ -50,9 +49,9 @@ public class MemberShipController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") Integer id) {
         return this.memberShipService.queryById(id);
@@ -64,10 +63,9 @@ public class MemberShipController {
      * @param memberShip 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "memberShip 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "memberShip 实体")})
     @PostMapping
     public R add(final @RequestBody MemberShipEntity memberShip) {
         return this.memberShipService.insert(memberShip);
@@ -79,9 +77,9 @@ public class MemberShipController {
      * @param memberShip 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "memberShipEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "memberShipEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody MemberShipEntity memberShip) {
         return this.memberShipService.update(memberShip);
@@ -93,22 +91,19 @@ public class MemberShipController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final Integer id) {
         return this.memberShipService.deleteById(id);
     }
 
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("id")
     public R getMemberPosition(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return this.memberShipService.getMemberPosition(authUserDetails);
     }
 }
-
-
-

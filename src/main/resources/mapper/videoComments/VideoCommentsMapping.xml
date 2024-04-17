@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.cilicili.frontend.comments.mapper.VideoCommentsMapper">
+    
+    <resultMap type="site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity" id="VideoCommentsMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parentId" jdbcType="INTEGER"/>
+        <result property="courseId" column="course_id" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="likes" column="likes" jdbcType="INTEGER"/>
+        <result property="contentImg" column="contentImg" jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="INTEGER"/>
+        <result property="homeLink" column="homeLink" jdbcType="VARCHAR"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <!--查询单个-->
+    <select id="queryById" resultMap="VideoCommentsMap">
+        select id,
+               parentId,
+               uid,
+               address,
+               content,
+               likes,
+               contentImg,
+               createTime,
+               username,
+               avatar,
+               level,
+               homeLink,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at
+        from video_comments
+        where id = #{id}
+    </select>
+    
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="VideoCommentsMap">
+        select
+        id, parentId, uid, address, content, likes, contentImg, createTime, username, avatar, level, homeLink,
+        created_at, created_by, updated_at, updated_by, deleted_at
+        from video_comments
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="course_id != null">
+                and course_id = #{course_id}
+            </if>
+            <if test="parentid != null">
+                and parentId = #{parentid}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="likes != null">
+                and likes = #{likes}
+            </if>
+            <if test="contentimg != null and contentimg != ''">
+                and contentImg = #{contentimg}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="homelink != null and homelink != ''">
+                and homeLink = #{homelink}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+        
+        </where>
+    </select>
+    
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from video_comments
+        <where>
+            ISNULL(parentId)
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="courseId!=null">
+                and course_id=#{courseId}
+            </if>
+            <if test="parentId != null">
+                and parentId = #{parentid}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="likes != null">
+                and likes = #{likes}
+            </if>
+            <if test="contentImg != null and contentimg != ''">
+                and contentImg = #{contentimg}
+            </if>
+            <if test="createTime != null">
+                and createTime = #{createtime}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="homeLink != null and homelink != ''">
+                and homeLink = #{homelink}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+        </where>
+    </select>
+    <select id="queryCommentsListByParam"
+            resultType="site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity">
+        select *from video_comments
+        <where>
+            <if test="id!=null">
+                course_id=#{id}
+            </if>
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+    </select>
+    
+    <resultMap id="QueryCommentListResponseReplay"
+               type="site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse$Replay">
+        <association property="total" column="{uid=uid,course_id=course_id}" select="findReplayCount"/>
+        <collection property="list" column="{uid=uid,course_id=course_id}" select="findReplayUser"/>
+    </resultMap>
+    <resultMap id="QueryCommentListResponseUser"
+               type="site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse$User">
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="INTEGER"/>
+        <result property="homeLink" column="homeLink" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="QueryCommentListResponse"
+               type="site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse$Records">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parentId" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="likes" column="likes" jdbcType="INTEGER"/>
+        <result property="contentImg" column="contentImg" jdbcType="VARCHAR"/>
+        <result property="createTime" column="created_at" jdbcType="TIMESTAMP"/>
+        <association property="user" column="{id=id,course_id=course_id}" select="findUser"/>
+        <association property="reply" column="{id=id,course_id=course_id}" select="findReplay"/>
+    </resultMap>
+    
+    <select id="queryCommentsListByParam2"
+            resultMap="QueryCommentListResponse">
+        select *from video_comments
+        <where>
+            ISNULL(parentId)
+            <if test="id!=null">
+                and course_id=#{id}
+            </if>
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+    </select>
+    <select id="findUser" resultMap="QueryCommentListResponseUser">
+        select *
+        from video_comments
+        where id = #{id}
+          and course_id = #{course_id}
+    </select>
+    <select id="findReplay" resultMap="QueryCommentListResponseReplay">
+        select *
+        from video_comments
+        where id = #{id}
+          and course_id = #{course_id}
+    </select>
+    <select id="findReplayCount" resultType="integer">
+        select count(*) total
+        from video_comments
+        where parentId = #{uid}
+          and course_id = #{course_id}
+    </select>
+    <select id="findReplayUser" resultMap="QueryCommentListResponse">
+        select *
+        from video_comments
+        where parentId = #{uid}
+          and course_id = #{course_id}
+    </select>
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into video_comments(parentId, uid, address, content, likes, contentImg, createTime, username, avatar,
+                                   level, homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
+        values (#{parentid}, #{uid}, #{address}, #{content}, #{likes}, #{contentimg}, #{createtime}, #{username},
+                #{avatar}, #{level}, #{homelink}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt})
+    </insert>
+    
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into video_comments(parentId, uid, address, content, likes, contentImg, createTime, username, avatar,
+        level, homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.parentid}, #{entity.uid}, #{entity.address}, #{entity.content}, #{entity.likes},
+            #{entity.contentimg}, #{entity.createtime}, #{entity.username}, #{entity.avatar}, #{entity.level},
+            #{entity.homelink}, #{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy},
+            #{entity.deletedAt})
+        </foreach>
+    </insert>
+    
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into video_comments(parentId, uid, address, content, likes, contentImg, createTime, username, avatar,
+        level, homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.parentid}, #{entity.uid}, #{entity.address}, #{entity.content}, #{entity.likes},
+            #{entity.contentimg}, #{entity.createtime}, #{entity.username}, #{entity.avatar}, #{entity.level},
+            #{entity.homelink}, #{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy},
+            #{entity.deletedAt})
+        </foreach>
+        on duplicate key update
+        parentId = values(parentId),
+        uid = values(uid),
+        address = values(address),
+        content = values(content),
+        likes = values(likes),
+        contentImg = values(contentImg),
+        createTime = values(createTime),
+        username = values(username),
+        avatar = values(avatar),
+        level = values(level),
+        homeLink = values(homeLink),
+        created_at = values(created_at),
+        created_by = values(created_by),
+        updated_at = values(updated_at),
+        updated_by = values(updated_by),
+        deleted_at = values(deleted_at)
+    </insert>
+    
+    <!--通过主键修改数据-->
+    <update id="update">
+        update video_comments
+        <set>
+            <if test="parentid != null">
+                parentId = #{parentid},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="likes != null">
+                likes = #{likes},
+            </if>
+            <if test="contentimg != null and contentimg != ''">
+                contentImg = #{contentimg},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="homelink != null and homelink != ''">
+                homeLink = #{homelink},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from video_comments
+        where id = #{id}
+    </delete>
+
+
+</mapper>
+
+

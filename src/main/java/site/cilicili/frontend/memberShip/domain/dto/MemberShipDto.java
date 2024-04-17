@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -34,14 +35,18 @@ public class MemberShipDto implements Serializable {
     private static final long serialVersionUID = 399862768936488873L;
     List<Long> ids;
     private Integer id;
+
     @Schema(description = "会员id")
     private Long userId;
+
     private Date createdAt;
     private String createdBy;
     private Date updatedAt;
     private String updatedBy;
+
     @Schema(description = "会员名")
     private String username;
+
     private String email;
     private String status;
     private Integer logicalDelete;

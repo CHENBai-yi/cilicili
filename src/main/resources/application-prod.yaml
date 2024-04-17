@@ -33,10 +33,12 @@ spring:
   cache:
     type: redis
     redis:
-      time-to-live: 86400000
+      time-to-live: 86400
       key-prefix: CILI
+
   main:
     allow-circular-references: true
+    allow-bean-definition-overriding: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -78,6 +80,10 @@ spring:
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 60
       validation-query: SELECT 1 FROM DUAL
+      url: jdbc:mysql://8.217.182.161:3306/cili-quasar-user?allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 74521CBy
   devtools:
     restart:
       enabled: true
@@ -94,7 +100,10 @@ spring:
       lettuce:
         pool:
           enabled: true
+          max-wait: 60000
       host: 8.217.182.161
+      timeout: 60000
+      connect-timeout: 60000
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
@@ -104,6 +113,7 @@ mybatis-plus:
     cache-enabled: true
     lazy-loading-enabled: true
     aggressive-lazy-loading: true
+    auto-mapping-unknown-column-behavior: none
   global-config:
     db-config:
       id-type: auto
@@ -119,9 +129,10 @@ decorator:
     datasource-proxy:
       json-format: true
       logging: slf4j
-
-
-
+management:
+  health:
+    db:
+      enabled: false
 
 
 

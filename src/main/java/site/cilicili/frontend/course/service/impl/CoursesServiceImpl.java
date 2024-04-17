@@ -357,8 +357,15 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         final String url = Optional.of(courseVideoInfoById)
                 .map(GetCourseVideoInfoByIdResponse::getVideo)
                 .map(video -> {
-                    final String ss = httpServletRequest.getRequestURL().toString().replace(httpServletRequest.getRequestURI(), "") + "/";
-                    if (video.getPrice() > 0 && (Objects.isNull(authUserDetails) || !memberShipService.isMember(authUserDetails.getId(), authUserDetails.getusername()))) {
+                    final String ss = httpServletRequest
+                            .getRequestURL()
+                            .toString()
+                            .replace(httpServletRequest.getRequestURI(), "")
+                            + "/";
+                    if (video.getPrice() > 0
+                            && (Objects.isNull(authUserDetails)
+                            || !memberShipService.isMember(
+                            authUserDetails.getId(), authUserDetails.getusername()))) {
                         video.setBuy(false);
                         return "please buy this course/";
                     }
@@ -454,15 +461,15 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                                     payModel.setBody(alipayTemplate.desc);
                                     payModel.setProductCode(AliPayStatus.PRODUCT.getStatus());
                                     payModel.setTimeoutExpress(alipayTemplate.timeExpire);
-                                    payModel.setPassbackParams(URLEncoder.encode(JSONUtil.toJsonStr(authUserDetails), StandardCharsets.UTF_8));
+                                    payModel.setPassbackParams(URLEncoder.encode(
+                                            JSONUtil.toJsonStr(authUserDetails), StandardCharsets.UTF_8));
                                     return R.yes(null).setData(alipayTemplate.pay(payModel));
                                 } catch (AlipayApiException e) {
                                     return R.no("支付表单生成失败！");
                                 }
-                            }).orElse(R.no("您已经是尊贵得会员了！").setData(false));
+                            })
+                            .orElse(R.no("您已经是尊贵得会员了！").setData(false));
                 })
                 .orElse(R.no("请登录后操作.").setData(true));
-
     }
-
 }

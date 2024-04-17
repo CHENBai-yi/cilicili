@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -92,5 +93,3 @@ public interface MemberShipMapper extends BaseMapper<MemberShipEntity> {
 
     Integer getMemberPosition(Long id);
 }
-
-
