@@ -10,7 +10,7 @@
               用户名：{{ username }}</h3>
               <li></li>
               <h3 class="text-weight-bolder q-mb-none q-pb-xs">订单详情：</h3>
-              <li class="text-weight-medium">商品名称：蚂蚁课堂</li>
+              <li class="text-weight-medium">商品名称：菠萝微课会员</li>
               <li class="text-weight-medium">应付金额：￥39.99</li>
               <li class="text-weight-medium">有限期：永久权限</li>
             </ul>

@@ -2,7 +2,8 @@
 
   <div :class="$q.screen.lt.sm?'q-ma-sm':'q-ml-xl'">
     <u-comment-scroll :disable="disable" @more="more">
-      <u-comment :config="config" relative-time upload @like="like" @submit="submit" @show-info="showInfo">
+      <u-comment :config="config" relative-time upload @like="like" @submit="submit" @show-info="showInfo"
+                 @reply-page="replyPage">
         <!-- <div>导航栏卡槽</div> -->
         <!-- <template #header>头部卡槽</template> -->
         <!-- <template #info>用户信息卡槽</template> -->
@@ -56,10 +57,23 @@
 // 下载表情包资源emoji.zip https://gitee.com/undraw/undraw-ui/releases/tag/v0.0.0
 // static文件放在public下,引入emoji.ts文件可以移动assets下引入,也可以自定义到指定位置
 import emoji from './emoji'
-import {reactive, ref} from 'vue'
-import {CommentApi, ConfigApi, createObjectURL, SubmitParamApi, useLevel, UToast} from 'undraw-ui'
-import {commentSize, getComment} from './comment'
+import {onMounted, reactive, ref} from 'vue'
+import {
+  CommentApi,
+  ConfigApi,
+  createObjectURL,
+  ReplyApi,
+  ReplyPageParamApi,
+  SubmitParamApi,
+  useLevel,
+  usePage,
+  UToast
+} from 'undraw-ui'
+import {getComment} from './comment'
 import defaultImage from 'src/assets/quasar-logo-vertical.svg'
+import {useRoute} from 'vue-router'
+
+const $router = useRoute()
 // 用户信息是否加载
 const loading = ref(false)
 // 请求获取用户详细信息
@@ -89,31 +103,33 @@ const config = reactive<ConfigApi>({
     username: 'jack',
     avatar: 'https://static.juzicon.com/avatars/avatar-200602130320-HMR2.jpeg?x-oss-process=image/resize,w_100',
     // 评论id数组 建议:存储方式用户uid和评论id组成关系,根据用户uid来获取对应点赞评论id,然后加入到数组中返回
-    likeIds: [1, 2, 3]
+    likeIds: [1, 2]
   },
   emoji: emoji,
   comments: [],
   total: 10
 })
-
-// 初始化评论列表
-config.comments = getComment(1, 1)
-
-// 是否禁用滚动加载评论
-const disable = ref(false)
-
 // 当前页数
 let pageNum = 2
 // 页大小
 let pageSize = 1
 // 评论总数量
-let total = commentSize
+let total = 1
+// 初始化评论列表
+onMounted(async () => {
+  const res = await getComment(pageNum - 1, pageSize, $router.params.id)
+  config.comments = res.data
+  total = res.total
+})
+// 是否禁用滚动加载评论
+const disable = ref(false)
 // 加载更多评论
-const more = () => {
+const more = async () => {
   console.log(disable.value)
   if (pageNum <= Math.ceil(total / pageSize)) {
+    const res = await getComment(pageNum, pageSize, $router.params.id)
     setTimeout(() => {
-      config.comments.push(...getComment(pageNum, 1))
+      config.comments.push(...res.data)
       pageNum++
     }, 200)
   } else {
@@ -164,7 +180,58 @@ const like = (id: string, finish: () => void) => {
 const setDefaultImage = (e: { target: { src: string; }; }) => {
   e.target.src = defaultImage
 }
-
+//回复分页
+const reply = {
+  total: 6,
+  list: [
+    {
+      id: '34',
+      parentId: '3',
+      uid: '9',
+      address: '来自西安',
+      likes: 34,
+      content: '不要由于别人不能成为我们所希望的人而愤怒，因为我们自己也难以成为自己所希望的人。',
+      createTime: '1天前',
+      user: {
+        username: 'poli301',
+        avatar:
+          'https://static.juzicon.com/avatars/avatar-190919180043-XPLP.jpg?x-oss-process=image/resize,m_fill,w_100,h_100',
+        level: 4,
+        homeLink: '/34'
+      }
+    },
+    {
+      id: '35',
+      parentId: '3',
+      uid: '10',
+      username: 'fish_eno',
+      avatar:
+        'https://static.juzicon.com/avatars/avatar-190919180320-NAQJ.jpg?x-oss-process=image/resize,m_fill,w_100,h_100',
+      level: 6,
+      link: '/35',
+      likes: 32,
+      address: '来自武汉',
+      content: '世上莫名其妙走霉运的人多的是，都是一边为命运生气，一边化愤怒为力量地活着。',
+      createTime: '11小时前',
+      user: {
+        username: 'poli301',
+        avatar:
+          'https://static.juzicon.com/avatars/avatar-190919180043-XPLP.jpg?x-oss-process=image/resize,m_fill,w_100,h_100',
+        level: 4,
+        homeLink: '/34'
+      }
+    }
+  ]
+} as ReplyApi
+const replyPage = ({parentId, pageNum, pageSize, finish}: ReplyPageParamApi) => {
+  let tmp = {
+    total: reply.total,
+    list: usePage(pageNum, pageSize, reply.list)
+  }
+  setTimeout(() => {
+    finish(tmp)
+  }, 200)
+}
 </script>
 <style lang="scss" scoped>
 .user-card {
