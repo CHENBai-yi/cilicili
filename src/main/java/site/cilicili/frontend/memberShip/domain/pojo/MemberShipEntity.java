@@ -1,7 +1,9 @@
 package site.cilicili.frontend.memberShip.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -15,6 +17,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -36,6 +39,7 @@ import java.time.LocalDateTime;
 @Setter
 @Schema(description = "MemberShip 实体类")
 @TableName("member_ship")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MemberShipEntity implements Serializable {
     private static final long serialVersionUID = 344637209176291202L;
 
@@ -48,6 +52,7 @@ public class MemberShipEntity implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected LocalDateTime createdAt;
 
     @TableField(fill = FieldFill.INSERT)
@@ -60,7 +65,6 @@ public class MemberShipEntity implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updatedBy;
-
     @Schema(description = "会员id")
     private Long userId;
 
@@ -72,4 +76,6 @@ public class MemberShipEntity implements Serializable {
     private Integer logicalDelete;
     private String tradeNo;
     private String product;
+    private String method;
+    private BigDecimal price;
 }

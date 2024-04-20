@@ -92,4 +92,6 @@ public interface MemberShipMapper extends BaseMapper<MemberShipEntity> {
     MemberShipEntity queryByIdOrUsername(@Param("id") Long id, @Param("username") String username);
 
     Integer getMemberPosition(Long id);
+
+    MemberShipEntity queryByUserId(Long id);
 }

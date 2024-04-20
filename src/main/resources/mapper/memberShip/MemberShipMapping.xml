@@ -121,15 +121,20 @@
     <select id="getMemberPosition" resultType="java.lang.Integer">
         select count(*)
         from member_ship a
-        where exists(select id from member_ship b where user_id = #{id} and b.id > a.id)
+        where exists(select id from member_ship b where user_id = #{id} and b.id >= a.id)
+    </select>
+    <select id="queryByUserId" resultType="site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity">
+        select *
+        from member_ship
+        where user_id = #{id}
     </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into member_ship(user_id, created_at, created_by, updated_at, updated_by, username, email, status,
-                                logical_delete, trade_no, product)
+                                logical_delete, trade_no, product, price, method)
         values (#{userId}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{username}, #{email}, #{status},
-                #{logicalDelete}, #{tradeNo}, #{product})
+                #{logicalDelete}, #{tradeNo}, #{product}, #{price}, #{method})
     </insert>
     
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">

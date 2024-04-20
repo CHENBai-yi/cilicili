@@ -106,4 +106,9 @@ public class MemberShipController {
     public R getMemberPosition(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return this.memberShipService.getMemberPosition(authUserDetails);
     }
+
+    @GetMapping("detail")
+    public R memberShipDetail(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return this.memberShipService.memberShipDetail(authUserDetails);
+    }
 }

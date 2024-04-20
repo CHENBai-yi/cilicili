@@ -62,4 +62,6 @@ public interface MemberShipService extends IService<MemberShipEntity> {
     R getMemberPosition(AuthUserDetails authUserDetails);
 
     Boolean checkIsAlreadyMemberShip(Long id);
+
+    R memberShipDetail(AuthUserDetails authUserDetails);
 }
