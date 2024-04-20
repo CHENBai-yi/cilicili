@@ -47,7 +47,7 @@
           </div>
         </template>
         <template #operate="scope">
-          <Operate :comment="scope" @remove="remove"/>
+          <Operate v-if="config.user?.id==scope.uid" :comment="scope" @remove="remove"/>
         </template>
         <!-- <template #func>功能区域卡槽</template> -->
       </u-comment>
