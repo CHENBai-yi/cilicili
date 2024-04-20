@@ -6,11 +6,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.comments.domain.dto.QueryCommentListRequest;
+import site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse;
 import site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity;
 import site.cilicili.frontend.comments.service.VideoCommentsService;
+import site.cilicili.frontend.comments.service.VideoCommentsUserInfoService;
 
 /**
  * (VideoComments) 表控制层
@@ -108,6 +112,28 @@ public class VideoCommentsController {
     @PostMapping("list_comments")
     public R commentsList(final @RequestBody QueryCommentListRequest queryCommentListRequest) {
         return this.videoCommentsService.commentsList2(queryCommentListRequest);
+    }
+
+    private final VideoCommentsUserInfoService videoCommentsUserInfoService;
+
+    @PostMapping("user_comment_detail")
+    public R commentUserInfo(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody QueryCommentListRequest queryCommentListRequest) {
+        return this.videoCommentsUserInfoService.commentUserInfo(authUserDetails, queryCommentListRequest);
+    }
+
+    @PostMapping("user_comment_add/{id}")
+    public R commentUserAdd(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody QueryCommentListResponse.Records records, final @PathVariable("id") Long courseId) {
+        return this.videoCommentsUserInfoService.commentUserAdd(authUserDetails, records, courseId);
+    }
+
+    @PostMapping("add_favorite/{id}")
+    public R favorite(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @PathVariable("id") Long courseId) {
+        return this.videoCommentsUserInfoService.favorite(authUserDetails, courseId);
+    }
+
+    @PostMapping("del_comments/{id}")
+    public R delComments(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @PathVariable("id") Long commentId) {
+        return this.videoCommentsService.delComments(authUserDetails, commentId);
     }
 }
 

@@ -192,8 +192,8 @@
     
     <resultMap id="QueryCommentListResponseReplay"
                type="site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse$Replay">
-        <association property="total" column="{uid=uid,course_id=course_id}" select="findReplayCount"/>
-        <collection property="list" column="{uid=uid,course_id=course_id}" select="findReplayUser"/>
+        <association property="total" column="{id=id,course_id=course_id}" select="findReplayCount"/>
+        <collection property="list" column="{id=id,course_id=course_id}" select="findReplayUser"/>
     </resultMap>
     <resultMap id="QueryCommentListResponseUser"
                type="site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse$User">
@@ -248,21 +248,44 @@
     <select id="findReplayCount" resultType="integer">
         select count(*) total
         from video_comments
-        where parentId = #{uid}
+        where parentId = #{id}
           and course_id = #{course_id}
     </select>
     <select id="findReplayUser" resultMap="QueryCommentListResponse">
         select *
         from video_comments
-        where parentId = #{uid}
+        where parentId = #{id}
           and course_id = #{course_id}
+    </select>
+    <select id="queryByUid" resultType="site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity">
+        select id,
+               parentId,
+               uid,
+               address,
+               content,
+               likes,
+               contentImg,
+               createTime,
+               username,
+               avatar,
+               level,
+               homeLink,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at
+        from video_comments
+        where uid = #{id}
     </select>
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into video_comments(parentId, uid, address, content, likes, contentImg, createTime, username, avatar,
-                                   level, homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
-        values (#{parentid}, #{uid}, #{address}, #{content}, #{likes}, #{contentimg}, #{createtime}, #{username},
-                #{avatar}, #{level}, #{homelink}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt})
+                                   level, homeLink, created_at, created_by, updated_at, updated_by, deleted_at,
+                                   course_id)
+        values (#{parentId}, #{uid}, #{address}, #{content}, #{likes}, #{contentImg}, #{createTime}, #{username},
+                #{avatar}, #{level}, #{homeLink}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt},
+                #{courseId})
     </insert>
     
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
@@ -367,6 +390,17 @@
         delete
         from video_comments
         where id = #{id}
+    </delete>
+    <delete id="delComments">
+        delete from video_comments
+        <where>
+            uid=#{uid} and id=#{commentId}
+        </where>
+        ;
+        delete from video_comments
+        <where>
+            id in(SELECT id from (select id from video_comments where parentId=#{commentId}) a)
+        </where>
     </delete>
 
 

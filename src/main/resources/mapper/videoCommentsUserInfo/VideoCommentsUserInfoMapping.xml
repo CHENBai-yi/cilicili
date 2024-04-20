@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.cilicili.frontend.comments.mapper.VideoCommentsUserInfoMapper">
+    
+    <resultMap type="site.cilicili.frontend.comments.domain.pojo.VideoCommentsUserInfoEntity"
+               id="VideoCommentsUserInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="like" column="like" jdbcType="INTEGER"/>
+        <result property="attention" column="attention" jdbcType="INTEGER"/>
+        <result property="follower" column="follower" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="INTEGER"/>
+        <result property="homelink" column="homeLink" jdbcType="VARCHAR"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <!--查询单个-->
+    <select id="queryById" resultMap="VideoCommentsUserInfoMap">
+        select id,
+               uid,
+               address,
+               content,
+               `like`,
+               attention,
+               follower,
+               username,
+               avatar,
+               level,
+               homeLink,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at
+        from video_comments_user_info
+        where id = #{id}
+    </select>
+    
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="VideoCommentsUserInfoMap">
+        select
+        id, uid, address, content, like, attention, follower, username, avatar, level, homeLink, created_at, created_by,
+        updated_at, updated_by, deleted_at
+        from video_comments_user_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="like != null">
+                and like = #{like}
+            </if>
+            <if test="attention != null">
+                and attention = #{attention}
+            </if>
+            <if test="follower != null">
+                and follower = #{follower}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="homelink != null and homelink != ''">
+                and homeLink = #{homelink}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+        </where>
+    </select>
+    
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from video_comments_user_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="like != null">
+                and like = #{like}
+            </if>
+            <if test="attention != null">
+                and attention = #{attention}
+            </if>
+            <if test="follower != null">
+                and follower = #{follower}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="homelink != null and homelink != ''">
+                and homeLink = #{homelink}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+        </where>
+    </select>
+    <select id="queryByUid"
+            resultType="site.cilicili.frontend.comments.domain.pojo.VideoCommentsUserInfoEntity">
+        select id,
+               uid,
+               address,
+               content,
+               `like`,
+               attention,
+               follower,
+               username,
+               avatar,
+               likeIds,
+               level,
+               homeLink,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at
+        from video_comments_user_info
+        where uid = #{id}
+    </select>
+    
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into video_comments_user_info(address, content, like, attention, follower, username, avatar, level,
+                                             homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
+        values (#{address}, #{content}, #{like}, #{attention}, #{follower}, #{username}, #{avatar}, #{level},
+                #{homelink}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt})
+    </insert>
+    
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into video_comments_user_info(address, content, like, attention, follower, username, avatar, level,
+        homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.address}, #{entity.content}, #{entity.like}, #{entity.attention}, #{entity.follower},
+            #{entity.username}, #{entity.avatar}, #{entity.level}, #{entity.homelink}, #{entity.createdAt},
+            #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt})
+        </foreach>
+    </insert>
+    
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into video_comments_user_info(address, content, like, attention, follower, username, avatar, level,
+        homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.address}, #{entity.content}, #{entity.like}, #{entity.attention}, #{entity.follower},
+            #{entity.username}, #{entity.avatar}, #{entity.level}, #{entity.homelink}, #{entity.createdAt},
+            #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt})
+        </foreach>
+        on duplicate key update
+        address = values(address),
+        content = values(content),
+        like = values(like),
+        attention = values(attention),
+        follower = values(follower),
+        username = values(username),
+        avatar = values(avatar),
+        level = values(level),
+        homeLink = values(homeLink),
+        created_at = values(created_at),
+        created_by = values(created_by),
+        updated_at = values(updated_at),
+        updated_by = values(updated_by),
+        deleted_at = values(deleted_at)
+    </insert>
+    <update id="like">
+        update video_comments_user_info
+        <set>
+            `like`=`like`+1,
+            likeIds=concat(likeIds,",",#{commentId})
+        </set>
+        <where>
+            uid=#{uid}
+        </where>;
+        update video_comments
+        <set>
+            likes=likes+1
+        </set>
+        <where>
+            id=#{commentId}
+        </where>
+    </update>
+    
+    <!--通过主键修改数据-->
+    <update id="update">
+        update video_comments_user_info
+        <set>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="like != null">
+                like = #{like},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+            <if test="follower != null">
+                follower = #{follower},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="homelink != null and homelink != ''">
+                homeLink = #{homelink},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="unlike">
+        update video_comments_user_info
+        <set>
+            <bind name="r" value="','+commentId"/>
+            `like`=`like`-1,
+            likeIds=REPLACE(likeIds,#{r}, '')
+        </set>
+        <where>
+            uid=#{uid}
+        </where>;
+        update video_comments
+        <set>
+            likes=likes-1
+        </set>
+        <where>
+            id=#{commentId}
+        </where>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from video_comments_user_info
+        where id = #{id}
+    </delete>
+
+
+</mapper>
+
+

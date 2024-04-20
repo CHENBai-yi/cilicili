@@ -1,13 +1,16 @@
 package site.cilicili.frontend.comments.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.comments.domain.dto.QueryCommentListRequest;
 import site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse;
+import site.cilicili.frontend.comments.domain.dto.VideoCommentsDto;
 import site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity;
 import site.cilicili.frontend.comments.mapper.VideoCommentsMapper;
 import site.cilicili.frontend.comments.service.VideoCommentsService;
@@ -132,6 +135,32 @@ public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, V
                             .page(queryCommentListRequest.page())
                             .build());
                 }).orElse(R.no("Fail."));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R userInfo(final AuthUserDetails authUserDetails) {
+
+        return Optional.ofNullable(baseMapper.queryByUid(Math.toIntExact(authUserDetails.getId())))
+                .map(r -> R.yes("Success.").setData(VideoCommentsDto.builder().id(r.getUid()).username(String.format("%1$s%2$s", r.getUsername(), r.getUid())).avatar(r.getAvatar()).level(r.getLevel())
+                        .likes(r.getLikes())
+                        .attention(RandomUtil.randomInt(0, 100))
+                        .follower(RandomUtil.randomInt(0, 10000))
+                        .build()))
+                .orElse(R.no("Fail."));
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    @Override
+    public R delComments(final AuthUserDetails authUserDetails, final Long commentId) {
+        return Optional.ofNullable(Optional.ofNullable(baseMapper.queryById(Math.toIntExact(commentId)))
+                .map(VideoCommentsEntity::getParentId)
+                .filter(id -> removeById(commentId))
+                .map(r -> R.yes("删除成功."))
+                .orElseGet(() -> Optional.ofNullable(baseMapper.delComments(authUserDetails.getId(), commentId))
+                        .filter(f -> f > 0)
+                        .map(r -> R.yes("删除成功."))
+                        .orElse(null))).orElse(R.no("Fail."));
     }
 
 }

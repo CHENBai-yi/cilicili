@@ -1,6 +1,8 @@
 package site.cilicili.frontend.comments.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +32,7 @@ import java.util.List;
 @Builder
 @Accessors(chain = true)
 @Schema(description = "VideoComments数据传输类")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class VideoCommentsDto implements Serializable {
     private static final long serialVersionUID = -59949174454521019L;
     List<Long> ids;
@@ -44,6 +47,8 @@ public class VideoCommentsDto implements Serializable {
     private String username;
     private String avatar;
     private Integer level;
+    private Integer attention;
+    private Integer follower;
     private String homelink;
     private Date createdAt;
     private String createdBy;
@@ -53,10 +58,12 @@ public class VideoCommentsDto implements Serializable {
     /**
      * 页
      */
+    @JsonIgnore
     private Integer pageNum;
     /**
      * 条
      */
+    @JsonIgnore
     private Integer pageSize;
     /**
      * 开始时间

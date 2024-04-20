@@ -1,5 +1,7 @@
 package site.cilicili.frontend.comments.domain.pojo;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -35,6 +37,7 @@ public class VideoCommentsEntity extends BaseEntity implements Serializable {
     private Integer parentId;
     private Integer courseId;
     private Integer uid;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String address;
     private String content;
     private Integer likes;

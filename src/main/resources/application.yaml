@@ -1,6 +1,15 @@
+server:
+  undertow:
+    accesslog:
+      enabled: true
+    max-http-post-size: 100MB
+    no-request-timeout: 60000
+    threads:
+      io: 100
+      worker: 100
 spring:
   profiles:
-#    active: prod
+    #    active: prod
     active: dev
   servlet:
     multipart:

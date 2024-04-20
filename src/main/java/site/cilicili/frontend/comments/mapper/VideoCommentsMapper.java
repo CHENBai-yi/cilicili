@@ -93,6 +93,10 @@ public interface VideoCommentsMapper extends BaseMapper<VideoCommentsEntity> {
     List<VideoCommentsEntity> queryCommentsListByParam(QueryCommentListRequest queryCommentListRequest);
 
     List<QueryCommentListResponse.Records> queryCommentsListByParam2(QueryCommentListRequest queryCommentListRequest);
+
+    VideoCommentsEntity queryByUid(int id);
+
+    Integer delComments(@Param("uid") Long id, @Param("commentId") Long commentId);
 }
 
 

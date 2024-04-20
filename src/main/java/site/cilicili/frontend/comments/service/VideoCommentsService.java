@@ -1,6 +1,7 @@
 package site.cilicili.frontend.comments.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.comments.domain.dto.QueryCommentListRequest;
 import site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity;
@@ -56,6 +57,10 @@ public interface VideoCommentsService extends IService<VideoCommentsEntity> {
     R commentsList(QueryCommentListRequest queryCommentListRequest);
 
     R commentsList2(QueryCommentListRequest queryCommentListRequest);
+
+    R userInfo(AuthUserDetails authUserDetails);
+
+    R delComments(AuthUserDetails authUserDetails, Long commentId);
 }
        
 

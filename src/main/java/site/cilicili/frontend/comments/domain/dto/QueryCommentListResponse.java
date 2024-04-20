@@ -2,6 +2,7 @@ package site.cilicili.frontend.comments.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,12 +40,15 @@ public class QueryCommentListResponse {
     @NoArgsConstructor
     public static class Records {
         private String id;
+        @JsonProperty("parentId")
         private Integer parentId;
         private String uid;
         private String address;
         private String content;
         private Integer likes;
+        @JsonProperty("contentImg")
         private String contentImg;
+        @JsonProperty("createTime")
         private String createTime;
         private User user;
         private Replay reply;
@@ -66,6 +70,7 @@ public class QueryCommentListResponse {
         public Replay getReplyDetail() {
             return Optional.ofNullable(reply).filter(replay -> replay.total != 0).orElse(null);
         }
+
     }
 
     @Data
@@ -75,6 +80,7 @@ public class QueryCommentListResponse {
         private String username;
         private String avatar;
         private Integer level;
+        @JsonProperty("homeLink")
         private String homeLink;
 
         @Builder
