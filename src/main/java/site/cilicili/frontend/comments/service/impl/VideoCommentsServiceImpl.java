@@ -27,7 +27,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("videoCommentsService")
-public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, VideoCommentsEntity> implements VideoCommentsService {
+public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, VideoCommentsEntity>
+        implements VideoCommentsService {
 
     /**
      * 通过ID查询单条数据
@@ -92,30 +93,33 @@ public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, V
     public R commentsList(final QueryCommentListRequest queryCommentListRequest) {
         return Optional.ofNullable(baseMapper.queryCommentsListByParam(queryCommentListRequest))
                 .map(videoCommentsEntities -> {
-                    final List<QueryCommentListResponse.Records> collect = videoCommentsEntities.stream().map(item -> QueryCommentListResponse.Records.builder()
-                            .createTime(DateUtil.formatDate(item.getCreateTime()))
-                            .contentImg(item.getContentImg())
-                            .likes(item.getLikes())
-                            .content(item.getContent())
-                            .address(item.getAddress())
-                            .uid(String.valueOf(item.getUid()))
-                            .parentId(item.getParentId())
-                            .id(String.valueOf(item.getId()))
-                            .user(QueryCommentListResponse.User.builder()
-                                    .level(item.getLevel())
-                                    .avatar(item.getAvatar())
-                                    .username(item.getUsername())
-                                    .homeLink(item.getHomeLink())
+                    final List<QueryCommentListResponse.Records> collect = videoCommentsEntities.stream()
+                            .map(item -> QueryCommentListResponse.Records.builder()
+                                    .createTime(DateUtil.formatDate(item.getCreateTime()))
+                                    .contentImg(item.getContentImg())
+                                    .likes(item.getLikes())
+                                    .content(item.getContent())
+                                    .address(item.getAddress())
+                                    .uid(String.valueOf(item.getUid()))
+                                    .parentId(item.getParentId())
+                                    .id(String.valueOf(item.getId()))
+                                    .user(QueryCommentListResponse.User.builder()
+                                            .level(item.getLevel())
+                                            .avatar(item.getAvatar())
+                                            .username(item.getUsername())
+                                            .homeLink(item.getHomeLink())
+                                            .build())
                                     .build())
-                            .build()).toList();
+                            .toList();
                     final VideoCommentsEntity comments = new VideoCommentsEntity();
                     comments.setCourseId(queryCommentListRequest.id());
-                    return R.yes("Success.").setData(QueryCommentListResponse.builder()
-                            .records(collect)
-                            .total(Math.toIntExact(baseMapper.count(comments)))
-                            .pageSize(queryCommentListRequest.pageSize())
-                            .page(queryCommentListRequest.page())
-                            .build());
+                    return R.yes("Success.")
+                            .setData(QueryCommentListResponse.builder()
+                                    .records(collect)
+                                    .total(Math.toIntExact(baseMapper.count(comments)))
+                                    .pageSize(queryCommentListRequest.pageSize())
+                                    .page(queryCommentListRequest.page())
+                                    .build());
                 })
                 .orElse(R.no("Fail."));
     }
@@ -128,13 +132,15 @@ public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, V
         return Optional.ofNullable(baseMapper.queryCommentsListByParam2(queryCommentListRequest))
                 .map(collect -> {
                     collect.toString();
-                    return R.yes("Success.").setData(QueryCommentListResponse.builder()
-                            .records(collect)
-                            .total(Math.toIntExact(baseMapper.count(comments)))
-                            .pageSize(queryCommentListRequest.pageSize())
-                            .page(queryCommentListRequest.page())
-                            .build());
-                }).orElse(R.no("Fail."));
+                    return R.yes("Success.")
+                            .setData(QueryCommentListResponse.builder()
+                                    .records(collect)
+                                    .total(Math.toIntExact(baseMapper.count(comments)))
+                                    .pageSize(queryCommentListRequest.pageSize())
+                                    .page(queryCommentListRequest.page())
+                                    .build());
+                })
+                .orElse(R.no("Fail."));
     }
 
     @Transactional(readOnly = true)
@@ -142,11 +148,16 @@ public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, V
     public R userInfo(final AuthUserDetails authUserDetails) {
 
         return Optional.ofNullable(baseMapper.queryByUid(Math.toIntExact(authUserDetails.getId())))
-                .map(r -> R.yes("Success.").setData(VideoCommentsDto.builder().id(r.getUid()).username(String.format("%1$s%2$s", r.getUsername(), r.getUid())).avatar(r.getAvatar()).level(r.getLevel())
-                        .likes(r.getLikes())
-                        .attention(RandomUtil.randomInt(0, 100))
-                        .follower(RandomUtil.randomInt(0, 10000))
-                        .build()))
+                .map(r -> R.yes("Success.")
+                        .setData(VideoCommentsDto.builder()
+                                .id(r.getUid())
+                                .username(String.format("%1$s%2$s", r.getUsername(), r.getUid()))
+                                .avatar(r.getAvatar())
+                                .level(r.getLevel())
+                                .likes(r.getLikes())
+                                .attention(RandomUtil.randomInt(0, 100))
+                                .follower(RandomUtil.randomInt(0, 10000))
+                                .build()))
                 .orElse(R.no("Fail."));
     }
 
@@ -154,15 +165,13 @@ public class VideoCommentsServiceImpl extends ServiceImpl<VideoCommentsMapper, V
     @Override
     public R delComments(final AuthUserDetails authUserDetails, final Long commentId) {
         return Optional.ofNullable(Optional.ofNullable(baseMapper.queryById(Math.toIntExact(commentId)))
-                .map(VideoCommentsEntity::getParentId)
-                .filter(id -> removeById(commentId))
-                .map(r -> R.yes("删除成功."))
-                .orElseGet(() -> Optional.ofNullable(baseMapper.delComments(authUserDetails.getId(), commentId))
-                        .filter(f -> f > 0)
+                        .map(VideoCommentsEntity::getParentId)
+                        .filter(id -> removeById(commentId))
                         .map(r -> R.yes("删除成功."))
-                        .orElse(null))).orElse(R.no("Fail."));
+                        .orElseGet(() -> Optional.ofNullable(baseMapper.delComments(authUserDetails.getId(), commentId))
+                                .filter(f -> f > 0)
+                                .map(r -> R.yes("删除成功."))
+                                .orElse(null)))
+                .orElse(R.no("Fail."));
     }
-
 }
-
-

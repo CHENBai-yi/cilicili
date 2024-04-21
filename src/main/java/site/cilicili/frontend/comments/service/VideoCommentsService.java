@@ -62,5 +62,3 @@ public interface VideoCommentsService extends IService<VideoCommentsEntity> {
 
     R delComments(AuthUserDetails authUserDetails, Long commentId);
 }
-       
-

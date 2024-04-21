@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.frontend.comments.domain.pojo.VideoCommentsUserInfoEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -94,5 +95,3 @@ public interface VideoCommentsUserInfoMapper extends BaseMapper<VideoCommentsUse
 
     int unlike(@Param("uid") Long id, @Param("commentId") Long courseId);
 }
-
-

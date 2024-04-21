@@ -31,7 +31,6 @@ public class VideoCommentsController {
     /**
      * 服务对象
      */
-
     private final VideoCommentsService videoCommentsService;
 
     /**
@@ -40,9 +39,9 @@ public class VideoCommentsController {
      * @param videoComments 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "videoComments 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "videoComments 筛选条件")})
     @GetMapping
     public R queryAll(final VideoCommentsEntity videoComments) {
         return this.videoCommentsService.queryAll(videoComments);
@@ -54,9 +53,9 @@ public class VideoCommentsController {
      * @param id 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @GetMapping("{id}")
     public R queryById(final @PathVariable("id") Integer id) {
         return this.videoCommentsService.queryById(id);
@@ -68,10 +67,9 @@ public class VideoCommentsController {
      * @param videoComments 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "videoComments 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "videoComments 实体")})
     @PostMapping
     public R add(final @RequestBody VideoCommentsEntity videoComments) {
         return this.videoCommentsService.insert(videoComments);
@@ -83,9 +81,9 @@ public class VideoCommentsController {
      * @param videoComments 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "videoCommentsEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "videoCommentsEntity 实体")})
     @PutMapping
     public R edit(final @RequestBody VideoCommentsEntity videoComments) {
         return this.videoCommentsService.update(videoComments);
@@ -97,17 +95,17 @@ public class VideoCommentsController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @DeleteMapping
     public R deleteById(final Integer id) {
         return this.videoCommentsService.deleteById(id);
     }
 
-    @Operation(summary = "查询评论数据", parameters = {
-            @Parameter(description = "QueryCommentListRequest 实体")
-    })
+    @Operation(
+            summary = "查询评论数据",
+            parameters = {@Parameter(description = "QueryCommentListRequest 实体")})
     @PreAuthorize("isAnonymous()||isAuthenticated()")
     @PostMapping("list_comments")
     public R commentsList(final @RequestBody QueryCommentListRequest queryCommentListRequest) {
@@ -117,25 +115,29 @@ public class VideoCommentsController {
     private final VideoCommentsUserInfoService videoCommentsUserInfoService;
 
     @PostMapping("user_comment_detail")
-    public R commentUserInfo(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody QueryCommentListRequest queryCommentListRequest) {
+    public R commentUserInfo(
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            final @RequestBody QueryCommentListRequest queryCommentListRequest) {
         return this.videoCommentsUserInfoService.commentUserInfo(authUserDetails, queryCommentListRequest);
     }
 
     @PostMapping("user_comment_add/{id}")
-    public R commentUserAdd(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestBody QueryCommentListResponse.Records records, final @PathVariable("id") Long courseId) {
+    public R commentUserAdd(
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            final @RequestBody QueryCommentListResponse.Records records,
+            final @PathVariable("id") Long courseId) {
         return this.videoCommentsUserInfoService.commentUserAdd(authUserDetails, records, courseId);
     }
 
     @PostMapping("add_favorite/{id}")
-    public R favorite(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @PathVariable("id") Long courseId) {
+    public R favorite(
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @PathVariable("id") Long courseId) {
         return this.videoCommentsUserInfoService.favorite(authUserDetails, courseId);
     }
 
     @PostMapping("del_comments/{id}")
-    public R delComments(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @PathVariable("id") Long commentId) {
+    public R delComments(
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @PathVariable("id") Long commentId) {
         return this.videoCommentsService.delComments(authUserDetails, commentId);
     }
 }
-
-
-

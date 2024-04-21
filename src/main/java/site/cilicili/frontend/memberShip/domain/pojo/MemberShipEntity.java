@@ -70,6 +70,7 @@ public class MemberShipEntity implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updatedBy;
+
     @Schema(description = "会员id")
     @JsonProperty("uId")
     private Long userId;
@@ -84,16 +85,22 @@ public class MemberShipEntity implements Serializable {
     private String product;
     private String method;
     private BigDecimal price;
+
     @TableField(exist = false)
     private String days;
+
     @TableField(exist = false)
     private String type = "实名认证资格购买";
+
     @TableField(exist = false)
     private BigDecimal discount;
 
     @JsonGetter("days")
     public String getDaysJson() {
-        return DateUtil.formatBetween(Date.from(createdAt.atZone(ZoneId.systemDefault()).toInstant()), DateUtil.date(), BetweenFormatter.Level.DAY);
+        return DateUtil.formatBetween(
+                Date.from(createdAt.atZone(ZoneId.systemDefault()).toInstant()),
+                DateUtil.date(),
+                BetweenFormatter.Level.DAY);
     }
 
     public String getStatus() {

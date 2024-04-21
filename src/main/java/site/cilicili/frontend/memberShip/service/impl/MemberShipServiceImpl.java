@@ -119,7 +119,9 @@ public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberS
                                 entity.setStatus(r.get("trade_status"));
                                 entity.setUserId(authUserDetails.getId());
                                 entity.setMethod("支付宝");
-                                entity.setPrice(BigDecimal.valueOf(Double.parseDouble(Optional.ofNullable(r.get("receipt_amount")).orElse("0.0"))));
+                                entity.setPrice(BigDecimal.valueOf(
+                                        Double.parseDouble(Optional.ofNullable(r.get("receipt_amount"))
+                                                .orElse("0.0"))));
                                 entity.setUsername(authUserDetails.getUsername());
                                 return baseMapper.insert(entity) > 0 ? R.yes("支付成功！") : R.no("订单插入数据库异常！");
                             })

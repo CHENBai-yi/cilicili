@@ -61,5 +61,3 @@ public interface VideoCommentsUserInfoService extends IService<VideoCommentsUser
 
     R favorite(AuthUserDetails authUserDetails, Long courseId);
 }
-       
-

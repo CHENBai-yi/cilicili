@@ -39,6 +39,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MemberShipDto implements Serializable {
     private static final long serialVersionUID = 399862768936488873L;
+
     @JsonIgnore
     protected Long id;
 
@@ -49,25 +50,32 @@ public class MemberShipDto implements Serializable {
 
     @JsonIgnore
     protected String createdBy;
+
     @JsonIgnore
     protected LocalDateTime updatedAt;
+
     @JsonIgnore
     protected String updatedBy;
+
     @JsonIgnore
     @Schema(description = "会员id")
     private Long userId;
+
     @JsonIgnore
     @Schema(description = "会员名")
     private String username;
+
     private String email;
+
     @JsonIgnore
     private String status;
+
     @JsonIgnore
     private Integer logicalDelete;
+
     private String tradeNo;
     private String product;
     private String method;
     private BigDecimal price;
     private BigDecimal discount;
-
 }

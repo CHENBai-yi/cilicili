@@ -29,7 +29,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("videoCommentsUserInfoService")
-public class VideoCommentsUserInfoServiceImpl extends ServiceImpl<VideoCommentsUserInfoMapper, VideoCommentsUserInfoEntity> implements VideoCommentsUserInfoService {
+public class VideoCommentsUserInfoServiceImpl
+        extends ServiceImpl<VideoCommentsUserInfoMapper, VideoCommentsUserInfoEntity>
+        implements VideoCommentsUserInfoService {
 
     private final VideoCommentsService videoCommentsService;
 
@@ -93,8 +95,10 @@ public class VideoCommentsUserInfoServiceImpl extends ServiceImpl<VideoCommentsU
 
     @Transactional(readOnly = true)
     @Override
-    public R commentUserInfo(final AuthUserDetails authUserDetails, final QueryCommentListRequest queryCommentListRequest) {
-        final Integer uid = Optional.ofNullable(queryCommentListRequest.id()).orElse(Math.toIntExact(authUserDetails.getId()));
+    public R commentUserInfo(
+            final AuthUserDetails authUserDetails, final QueryCommentListRequest queryCommentListRequest) {
+        final Integer uid =
+                Optional.ofNullable(queryCommentListRequest.id()).orElse(Math.toIntExact(authUserDetails.getId()));
         return Optional.ofNullable(baseMapper.queryByUid(uid))
                 .map(data -> {
                     data.setId(data.getUid());
@@ -105,10 +109,21 @@ public class VideoCommentsUserInfoServiceImpl extends ServiceImpl<VideoCommentsU
 
     @Transactional(rollbackFor = Throwable.class)
     @Override
-    public R commentUserAdd(final AuthUserDetails authUserDetails, final QueryCommentListResponse.Records records, final Long courseId) {
+    public R commentUserAdd(
+            final AuthUserDetails authUserDetails,
+            final QueryCommentListResponse.Records records,
+            final Long courseId) {
         return Optional.ofNullable(authUserDetails)
                 .map(authUserDetails1 -> baseMapper.queryByUid(Math.toIntExact(authUserDetails1.getId())))
-                .map(videoCommentsUserInfoEntity -> BeanUtil.copyProperties(videoCommentsUserInfoEntity, VideoCommentsEntity.class, "id", "createdAt", "createdBy", "updatedAt", "updatedBy", "deletedAt"))
+                .map(videoCommentsUserInfoEntity -> BeanUtil.copyProperties(
+                        videoCommentsUserInfoEntity,
+                        VideoCommentsEntity.class,
+                        "id",
+                        "createdAt",
+                        "createdBy",
+                        "updatedAt",
+                        "updatedBy",
+                        "deletedAt"))
                 .map(videoCommentsEntity -> {
                     videoCommentsEntity.setContent(records.getContent());
                     videoCommentsEntity.setCourseId(Math.toIntExact(courseId));
@@ -137,16 +152,11 @@ public class VideoCommentsUserInfoServiceImpl extends ServiceImpl<VideoCommentsU
                         .filter(likeStr -> likeStr.contains(String.valueOf(commentId)))
                         .flatMap(r -> Optional.of(baseMapper.unlike(authUserDetails.getId(), commentId))
                                 .filter(integer -> integer > 0)
-                                .map(rr -> R.yes("Success."))).orElseGet(() -> Optional.of(baseMapper.like(authUserDetails.getId(), commentId))
+                                .map(rr -> R.yes("Success.")))
+                        .orElseGet(() -> Optional.of(baseMapper.like(authUserDetails.getId(), commentId))
                                 .filter(integer -> integer > 0)
                                 .map(rr -> R.yes("Success."))
-                                .orElse(null))
-                )
+                                .orElse(null)))
                 .orElse(R.no("Fail."));
-
     }
-
-
 }
-
-

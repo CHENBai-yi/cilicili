@@ -28,7 +28,8 @@ public class QueryCommentListResponse {
     private Integer total;
 
     @Builder
-    public QueryCommentListResponse(final Object records, final Integer page, final Integer pageSize, final Integer total) {
+    public QueryCommentListResponse(
+            final Object records, final Integer page, final Integer pageSize, final Integer total) {
         this.records = records;
         this.page = page;
         this.pageSize = pageSize;
@@ -40,21 +41,35 @@ public class QueryCommentListResponse {
     @NoArgsConstructor
     public static class Records {
         private String id;
+
         @JsonProperty("parentId")
         private Integer parentId;
+
         private String uid;
         private String address;
         private String content;
         private Integer likes;
+
         @JsonProperty("contentImg")
         private String contentImg;
+
         @JsonProperty("createTime")
         private String createTime;
+
         private User user;
         private Replay reply;
 
         @Builder
-        public Records(final String id, final Integer parentId, final String uid, final String address, final String content, final Integer likes, final String contentImg, final String createTime, final User user) {
+        public Records(
+                final String id,
+                final Integer parentId,
+                final String uid,
+                final String address,
+                final String content,
+                final Integer likes,
+                final String contentImg,
+                final String createTime,
+                final User user) {
             this.id = id;
             this.parentId = parentId;
             this.uid = uid;
@@ -68,9 +83,10 @@ public class QueryCommentListResponse {
 
         @JsonGetter("reply")
         public Replay getReplyDetail() {
-            return Optional.ofNullable(reply).filter(replay -> replay.total != 0).orElse(null);
+            return Optional.ofNullable(reply)
+                    .filter(replay -> replay.total != 0)
+                    .orElse(null);
         }
-
     }
 
     @Data
@@ -80,6 +96,7 @@ public class QueryCommentListResponse {
         private String username;
         private String avatar;
         private Integer level;
+
         @JsonProperty("homeLink")
         private String homeLink;
 

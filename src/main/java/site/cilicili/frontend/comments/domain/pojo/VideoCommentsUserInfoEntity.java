@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -46,16 +47,18 @@ public class VideoCommentsUserInfoEntity extends BaseEntity implements Serializa
     private String avatar;
     private Integer level;
     private String homelink;
+
     @JsonIgnore
     private String likeIds;
+
     @TableField(exist = false)
     @JsonProperty("likeIds")
     private List<Integer> likeIdsArr;
 
     public List<Integer> getLikeIdsArr() {
-        return Optional.ofNullable(likeIds).map(likeIds -> Arrays.stream(likeIds.split(",")).map(Integer::valueOf).toList()).orElse(Collections.emptyList());
+        return Optional.ofNullable(likeIds)
+                .map(likeIds ->
+                        Arrays.stream(likeIds.split(",")).map(Integer::valueOf).toList())
+                .orElse(Collections.emptyList());
     }
-
 }
-
-

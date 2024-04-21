@@ -12,6 +12,7 @@ import site.cilicili.common.entity.BaseEntity;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -34,11 +35,14 @@ import java.util.Date;
 public class VideoCommentsEntity extends BaseEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 129133568072969282L;
+
     private Integer parentId;
     private Integer courseId;
     private Integer uid;
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String address;
+
     private String content;
     private Integer likes;
     private String contentImg;
@@ -48,5 +52,3 @@ public class VideoCommentsEntity extends BaseEntity implements Serializable {
     private Integer level;
     private String homeLink;
 }
-
-

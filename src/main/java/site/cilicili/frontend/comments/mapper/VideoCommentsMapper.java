@@ -8,6 +8,7 @@ import site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse;
 import site.cilicili.frontend.comments.domain.pojo.VideoCommentsEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -98,5 +99,3 @@ public interface VideoCommentsMapper extends BaseMapper<VideoCommentsEntity> {
 
     Integer delComments(@Param("uid") Long id, @Param("commentId") Long commentId);
 }
-
-

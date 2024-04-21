@@ -115,7 +115,9 @@ public class MemberShipController {
     }
 
     @GetMapping("detail")
-    public R memberShipDetail(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestParam(value = "id", required = false) Long uId) {
+    public R memberShipDetail(
+            final @AuthenticationPrincipal AuthUserDetails authUserDetails,
+            final @RequestParam(value = "id", required = false) Long uId) {
         return this.memberShipService.memberShipDetail(authUserDetails, uId);
     }
 
