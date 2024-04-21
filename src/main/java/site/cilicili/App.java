@@ -56,6 +56,7 @@ import java.util.concurrent.TimeUnit;
                 RabbitAutoConfiguration.class,
                 H2ConsoleAutoConfiguration.class
         })
+
 public class App {
     private final DbChangeConfig dbChangeConf;
 

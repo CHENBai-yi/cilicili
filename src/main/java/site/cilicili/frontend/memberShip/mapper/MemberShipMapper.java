@@ -3,6 +3,7 @@ package site.cilicili.frontend.memberShip.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.frontend.memberShip.domain.dto.QueryMemberShipRequest;
 import site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity;
 
 import java.util.List;
@@ -94,4 +95,6 @@ public interface MemberShipMapper extends BaseMapper<MemberShipEntity> {
     Integer getMemberPosition(Long id);
 
     MemberShipEntity queryByUserId(Long id);
+
+    List<MemberShipEntity> queryMemberShipList(QueryMemberShipRequest queryMemberShipRequest);
 }

@@ -1,9 +1,10 @@
 package site.cilicili.frontend.memberShip.domain.pojo;
 
+import cn.hutool.core.date.BetweenFormatter;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.NumberUtil;
 import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import site.cilicili.common.constant.pay.AliPayStatus;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,9 @@ import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Optional;
 
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -66,6 +71,7 @@ public class MemberShipEntity implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updatedBy;
     @Schema(description = "会员id")
+    @JsonProperty("uId")
     private Long userId;
 
     @Schema(description = "会员名")
@@ -78,4 +84,33 @@ public class MemberShipEntity implements Serializable {
     private String product;
     private String method;
     private BigDecimal price;
+    @TableField(exist = false)
+    private String days;
+    @TableField(exist = false)
+    private String type = "实名认证资格购买";
+    @TableField(exist = false)
+    private BigDecimal discount;
+
+    @JsonGetter("days")
+    public String getDaysJson() {
+        return DateUtil.formatBetween(Date.from(createdAt.atZone(ZoneId.systemDefault()).toInstant()), DateUtil.date(), BetweenFormatter.Level.DAY);
+    }
+
+    public String getStatus() {
+        if (AliPayStatus.SUCCESS.getStatus().equals(status)) {
+            return "交易成功";
+        } else if (AliPayStatus.FINISHED.getStatus().equals(status)) {
+            return "交易完成";
+        } else {
+            return "已付款";
+        }
+    }
+
+    public BigDecimal getPrice() {
+        return NumberUtil.round(Optional.ofNullable(price).orElse(BigDecimal.ZERO), 2);
+    }
+
+    public BigDecimal getDiscount() {
+        return NumberUtil.round(Optional.ofNullable(discount).orElse(BigDecimal.ZERO), 2);
+    }
 }

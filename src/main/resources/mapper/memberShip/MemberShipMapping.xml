@@ -128,6 +128,30 @@
         from member_ship
         where user_id = #{id}
     </select>
+    <select id="queryMemberShipList"
+            resultType="site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity">
+        select * from member_ship
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="loginSuccess!=null and loginSuccess!=''">
+                    <bind name="rcl" value="'%'+loginSuccess+'%'"/>
+                    login_success like #{rcl}
+                </if>
+                <if test="loginUsername!=null and loginUsername!=''">
+                    <bind name="rl" value="'%'+loginUsername+'%'"/>
+                    and login_username like #{rl}
+                </if>
+            </trim>
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        <if test="page>0 and pageSize>0">
+            <bind name="cur" value="(page*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.authentication.user.entity.UserEntity;
+import site.cilicili.backend.log.domain.dto.QueryLogResponse;
 import site.cilicili.common.constant.pay.AliPayStatus;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.memberShip.domain.dto.MemberShipDto;
+import site.cilicili.frontend.memberShip.domain.dto.QueryMemberShipRequest;
 import site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity;
 import site.cilicili.frontend.memberShip.mapper.MemberShipMapper;
 import site.cilicili.frontend.memberShip.service.MemberShipService;
@@ -141,7 +145,22 @@ public class MemberShipServiceImpl extends ServiceImpl<MemberShipMapper, MemberS
 
     @Transactional(readOnly = true)
     @Override
-    public R memberShipDetail(final AuthUserDetails authUserDetails) {
-        return R.yes("Success.").setData(BeanUtil.toBean(baseMapper.queryByUserId(authUserDetails.getId()), MemberShipDto.class));
+    public R memberShipDetail(final AuthUserDetails authUserDetails, final Long uId) {
+        final Long id = Optional.ofNullable(uId).orElse(authUserDetails.getId());
+        return R.yes("Success.").setData(BeanUtil.toBean(baseMapper.queryByUserId(id), MemberShipDto.class));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getMemberShipList(final QueryMemberShipRequest queryMemberShipRequest) {
+        return Optional.ofNullable(baseMapper.queryMemberShipList(queryMemberShipRequest))
+                .map(userList -> R.yes("Success")
+                        .setData(QueryLogResponse.builder()
+                                .total(userList.size())
+                                .page(queryMemberShipRequest.page())
+                                .pageSize(queryMemberShipRequest.pageSize())
+                                .records(userList)
+                                .build()))
+                .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
     }
 }

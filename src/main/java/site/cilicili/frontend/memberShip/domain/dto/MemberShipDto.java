@@ -68,4 +68,6 @@ public class MemberShipDto implements Serializable {
     private String product;
     private String method;
     private BigDecimal price;
+    private BigDecimal discount;
+
 }

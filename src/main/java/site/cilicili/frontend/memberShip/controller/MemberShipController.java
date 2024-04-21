@@ -5,12 +5,19 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.memberShip.domain.dto.QueryMemberShipRequest;
 import site.cilicili.frontend.memberShip.domain.pojo.MemberShipEntity;
 import site.cilicili.frontend.memberShip.service.MemberShipService;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * (MemberShip) 表控制层
@@ -108,7 +115,20 @@ public class MemberShipController {
     }
 
     @GetMapping("detail")
-    public R memberShipDetail(final @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        return this.memberShipService.memberShipDetail(authUserDetails);
+    public R memberShipDetail(final @AuthenticationPrincipal AuthUserDetails authUserDetails, final @RequestParam(value = "id", required = false) Long uId) {
+        return this.memberShipService.memberShipDetail(authUserDetails, uId);
+    }
+
+    @Operation(
+            summary = "根据条件查询交易信息",
+            parameters = {@Parameter(description = "id 主键")})
+    @PostMapping("member-ship-list")
+    public R memberShipList(@RequestBody @Validated QueryMemberShipRequest queryMemberShipRequest, Errors errors) {
+        return Optional.of(errors.getFieldErrors())
+                .filter(e -> !e.isEmpty())
+                .map(e -> R.no(e.stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.joining())))
+                .orElse(memberShipService.getMemberShipList(queryMemberShipRequest));
     }
 }
