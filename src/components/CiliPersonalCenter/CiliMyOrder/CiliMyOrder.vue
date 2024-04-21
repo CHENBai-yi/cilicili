@@ -32,7 +32,7 @@
           </div>
           <div>
             <n-tag :bordered="false" size="small">优惠金额:</n-tag>
-            0.00
+            {{ order.discount }}
           </div>
         </div>
       </n-thing>
@@ -48,18 +48,19 @@ const urls = reactive({
   get: 'memberShip/detail'
 })
 const order = ref({
-  method: '',
-  product: '',
-  status: '',
-  trade_no: '',
-  created_at: '',
-  price: ''
+  method: '-',
+  product: '-',
+  status: '-',
+  trade_no: '-',
+  created_at: '-',
+  price: '-',
+  discount: '-'
 })
 onMounted(async () => {
   const res = await getAction(urls.get)
   if (res.code === 1) {
     console.log(res.data)
-    order.value = res.data
+    order.value = {...order.value, ...res.data}
   }
 })
 </script>

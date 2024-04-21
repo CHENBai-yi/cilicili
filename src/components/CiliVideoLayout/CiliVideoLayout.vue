@@ -1,4 +1,5 @@
 <template>
+  <NoticeBar/>
   <q-infinite-scroll :offset="250" class="" @load="onLoad">
     <div :class="$q.screen.lt.sm?'column ':'row'">
       <div v-if="$q.screen.gt.sm" class="col-4">
@@ -292,6 +293,7 @@ import CiliCarousel from 'src/components/CiliCarousel/CiliCarousel.vue'
 import useTheme from "src/composables/useTheme"
 import {postAction} from 'src/api/manage'
 import XEUtils from 'xe-utils'
+import NoticeBar from 'src/components/noticeBar/index.vue'
 
 const {darkTheme} = useTheme()
 const items = ref([])

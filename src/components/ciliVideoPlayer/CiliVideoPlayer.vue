@@ -174,7 +174,7 @@ const handlePlay = () => {
 }
 const handlePause = () => {
   const audioDom = state.instance.video
-  audioDom.src = props.video.url
+  audioDom.src = props.video?.url
   audioDom.pause()
   showMask.value = true
 }
