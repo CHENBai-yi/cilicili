@@ -57,11 +57,37 @@ export default {
   CourseManage: {
     "zh-CN": "课程管理",
     "en-US": "Course Manage",
-    "ru": "Управление бэкендом"
-  }, ClassifyManage: {
+    "ru": "Управление курсами"
+  },
+  ClassifyManage: {
     "zh-CN": "分类管理",
     "en-US": "Classify Manage",
-    "ru": "Управление бэкендом"
+    "ru": "Управление классификацией"
+  },
+  SubjectManage: {
+    "zh-CN": "学科管理",
+    "en-US": "Subject Manage",
+    "ru": "Дисциплинарное управление"
+  },
+  TradeManage: {
+    "zh-CN": "交易管理",
+    "en-US": "Trade Manage",
+    "ru": "Управление торговлей"
+  },
+  MediaManage: {
+    "zh-CN": "媒体管理",
+    "en-US": "Media Manage",
+    "ru": "Управление сми"
+  },
+  Carousel: {
+    "zh-CN": "轮播图管理",
+    "en-US": "Carousel",
+    "ru": "Управление колесной диаграммой"
+  },
+  Advertising: {
+    "zh-CN": "广告管理",
+    "en-US": "Advertising",
+    "ru": "Управление рекламой"
   },
   LogManage: {
     "zh-CN": "日志管理",

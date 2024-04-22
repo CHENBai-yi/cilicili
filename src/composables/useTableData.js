@@ -49,6 +49,7 @@ export default function useTableData(url) {
     params.desc = props.pagination.descending
     params.page = props.pagination.page
     params.page_size = props.pagination.rowsPerPage
+    params.created_by = ""
     const allParams = Object.assign({}, params, queryParams.value)
 
     await postAction(url.list, allParams).then(res => {

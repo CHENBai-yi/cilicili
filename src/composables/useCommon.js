@@ -25,16 +25,18 @@ export default function useCommon() {
     }
   })
   const selectOptionLabel = (opt) => {
-    if (opt.name === 'system' || opt.parent_code === 'system' || opt.parent_code === 'log') {
-      return t(opt.title)
-    }
-    return opt.title
+    return t(opt.title)
+    /*   if (opt.name === 'system' || opt.parent_code === 'system' || opt.parent_code === 'log') {
+          return t(opt.title)
+        }
+        return opt.title*/
   }
   const selectRouteLabel = (opt) => {
-    if (opt.name === 'system' || opt.meta.parent_code === 'system' || opt.meta.parent_code === 'log') {
-      return t(opt.meta.title)
-    }
-    return opt.meta.title
+    return t(opt.meta.title)
+    /*    if (opt.name === 'system' || opt.meta.parent_code === 'system' || opt.meta.parent_code === 'log') {
+          return t(opt.meta.title)
+        }
+        return opt.meta.title*/
   }
 
   return {

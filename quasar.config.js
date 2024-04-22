@@ -78,7 +78,7 @@ module.exports = configure(function (ctx) {
           // 测试代理地址
           ? "http://127.0.0.1:8889/"
           // 正式代理地址
-          : "http://cilicili.site/api/"
+          : "http://pixx.site/api/"
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
@@ -120,8 +120,6 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
-
       iconSet: 'material-icons', // Quasar icon set
       lang: 'zh-CN', // Quasar language pack
 
@@ -142,7 +140,12 @@ module.exports = configure(function (ctx) {
         'LoadingBar',
         'Dialog',
         'AppFullscreen',
-      ]
+      ],
+      config: {
+        loadingBar: { /* look at QuasarConfOptions from the API card */
+          color: 'light-green-13 teal-10'
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations

@@ -7,7 +7,7 @@ import {AllowList} from 'src/config/config'
 import {i18n} from './i18n'
 
 LoadingBar.setDefaults({
-  color: 'red',
+  color: 'yellow-9',
   size: '4px',
   position: 'top'
 })
