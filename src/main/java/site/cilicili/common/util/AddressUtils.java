@@ -41,7 +41,9 @@ public class AddressUtils {
         if (internalIp(ip)) {
             return "内网IP";
         }
-        try (final HttpResponse httpResponse = HttpUtil.createGet(IP_URL + "ip=" + ip + "&json=true").charset(CharsetUtil.CHARSET_GBK).execute()) {
+        try (final HttpResponse httpResponse = HttpUtil.createGet(IP_URL + "ip=" + ip + "&json=true")
+                .charset(CharsetUtil.CHARSET_GBK)
+                .execute()) {
             if (!httpResponse.isOk()) {
                 return UNKNOWN;
             }
@@ -176,8 +178,4 @@ public class AddressUtils {
         }
         return bytes;
     }
-
-
 }
-
-

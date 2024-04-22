@@ -82,7 +82,7 @@
                      from sys_role_menu
                      where sys_role_role_code = #{roleCode}
                        and sys_role_menu.sys_menu_name = sys_menu.name)
-        order by id
+        order by sort
     </select>
     <select id="findDefaultPageList" resultType="string">
         select default_page
@@ -93,7 +93,8 @@
     <select id="findChildrenMenu" resultMap="SysMenuDto">
         select *
         from sys_menu
-        where parent_code = #{name};
+        where parent_code = #{name}
+        order by sort;
     </select>
     <select id="findMenuButton" resultMap="site.cilicili.backend.button.mapper.SysButtonMapper.SysButtonMap">
         select *
