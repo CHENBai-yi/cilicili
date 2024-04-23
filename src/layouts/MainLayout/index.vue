@@ -37,7 +37,6 @@
         </div>
       </q-toolbar>
     </q-header>
-
     <q-drawer v-model="toggleLeftDrawer" :mini="miniState" :mini-to-overlay="miniStateOut ? true : false"
               :width="drawerWidth" bordered
               show-if-above @mouseout="miniStateMouseout" @mouseover="miniStateMouseover">

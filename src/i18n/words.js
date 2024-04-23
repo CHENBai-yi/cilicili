@@ -406,6 +406,10 @@ export default {
     "zh-CN": "系统",
     "en-US": "System",
     "ru": "Система"
+  }, Jump: {
+    "zh-CN": "跳转",
+    "en-US": "Jump",
+    "ru": "Система"
   },
   Dashboard: {
     "zh-CN": "仪表盘",
