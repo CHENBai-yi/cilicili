@@ -32,13 +32,15 @@
             <q-item-section v-if="file.__img" class="gt-xs" thumbnail>
               <img :src="file.__img.src">
             </q-item-section>
+            <q-item-section v-else class="gt-xs" thumbnail>
+              <q-img src='http://localhost:8889/video/lenovo20221012090534.png'></q-img>
+            </q-item-section>
 
             <q-item-section side top>
               <q-btn class="gt-xs" dense flat icon="delete" round size="12px"
                      @click="scope.removeFile(file)"/>
             </q-item-section>
           </q-item>
-
         </q-list>
       </template>
     </q-uploader>
@@ -60,7 +62,7 @@
 import useCommon from 'src/composables/useCommon';
 import {downloadAction} from 'src/api/manage'
 import {useUserStore} from 'src/stores/user'
-import {computed, onMounted, ref, toRefs, watch} from 'vue';
+import {computed, defineEmits, onMounted, ref, toRefs, watch} from 'vue';
 import {useQuasar} from 'quasar';
 import {useI18n} from 'vue-i18n';
 
@@ -69,7 +71,7 @@ const $q = useQuasar()
 const {t} = useI18n()
 const {CiliBackend} = useCommon()
 const token = computed(() => userStore.GetToken())
-
+const emit = defineEmits(['update:attachment', "setUrl"])
 const props = defineProps({
   title: {
     type: String,
@@ -97,6 +99,7 @@ const {title, attachment, multiple, color} = toRefs(props)
 const uploadUrl = process.env.API + 'upload/upload-file'
 
 const fileList = ref([])
+
 watch(props, () => {
   if (attachment.value && attachment.value !== '') {
     fileList.value = JSON.parse(attachment.value)
@@ -107,7 +110,6 @@ onMounted(() => {
     fileList.value = JSON.parse(attachment.value)
   }
 })
-
 const factoryFn = (files) => {
   return {
     url: uploadUrl,
@@ -117,15 +119,19 @@ const factoryFn = (files) => {
   }
 }
 const uploaded = (info) => {
-  $q.notify({
-    type: 'positive',
-    message: t('Upload') + t('Success'),
-  })
   const res = JSON.parse(info.xhr.response)
-  fileList.value.push({
-    filename: info.files[0].name,
-    fileUrl: res.data.records,
-  })
+  if (res.code === 1) {
+    $q.notify({
+      type: 'positive',
+      message: t('Upload') + t('Success'),
+    })
+    let url = res.data.records
+    emit('setUrl', url)
+    fileList.value.push({
+      filename: info.files[0].name,
+      fileUrl: url,
+    })
+  }
 }
 const failed = (info) => {
   $q.notify({
@@ -147,7 +153,6 @@ const rejected = (rejectedEntries) => {
 const handleDownload = (item) => {
   downloadAction(item.fileUrl.substring(11), item.filename)
 }
-const emit = defineEmits(['update:attachment'])
 const finish = () => {
   if (fileList.value.length) {
     emit('update:attachment', JSON.stringify(fileList.value))

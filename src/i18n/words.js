@@ -83,6 +83,16 @@ export default {
     "en-US": "Start",
     "ru": "Остановить"
   },
+  End: {
+    "zh-CN": "结束",
+    "en-US": "End",
+    "ru": "Запуск"
+  },
+  Time: {
+    "zh-CN": "时间",
+    "en-US": "Time",
+    "ru": "Остановить"
+  },
   Stop: {
     "zh-CN": "停止",
     "en-US": "Stop",
@@ -386,6 +396,11 @@ export default {
     "zh-CN": "审核",
     "en-US": "audit",
     "ru": "Пользователь"
+  },
+  Banner: {
+    "zh-CN": "轮播图",
+    "en-US": "Banner",
+    "ru": "Управление колесной диаграммой"
   }
   , Pass: {
     "zh-CN": "通过",
@@ -689,6 +704,10 @@ export default {
   Path: {
     "zh-CN": "路径",
     "en-US": "Path",
+    "ru": "Путь"
+  }, Link: {
+    "zh-CN": "链接",
+    "en-US": "Link",
     "ru": "Путь"
   },
   Redirect: {
