@@ -133,17 +133,20 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
     public R getNoticeList(final NoticeListQueryRequest noticeListQueryRequest) {
         Integer total = baseMapper.countByParam(noticeListQueryRequest);
         return Optional.ofNullable(baseMapper.selectNoticeListByParam(noticeListQueryRequest))
-                .map(records -> R.yes("Success.")
-                        .setData(NoticeListQueryParamResponse.builder()
-                                .records(records)
-                                .total(total)
-                                .page(noticeListQueryRequest.page())
-                                .pageSize(noticeListQueryRequest.pageSize())
-                                .build()))
+                .map(records -> {
+                    Optional.ofNullable(noticeListQueryRequest.read())
+                            .filter(f -> f).ifPresent(f -> baseMapper.updateNoticeStatus(noticeListQueryRequest));
+                    return R.yes("Success.")
+                            .setData(NoticeListQueryParamResponse.builder()
+                                    .records(records)
+                                    .total(total)
+                                    .page(noticeListQueryRequest.page())
+                                    .pageSize(noticeListQueryRequest.pageSize())
+                                    .build());
+                })
                 .orElse(R.no("Fail."));
     }
 
-    // todo 完成消息发送
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public R sendNotice(final AuthUserDetails authUserDetails, final SendNoticeRequest noticeListQueryRequest) {

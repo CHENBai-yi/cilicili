@@ -11,7 +11,6 @@ import jakarta.validation.constraints.NotNull;
  * @author BaiYiChen
  */
 public record GetTodoListRequest(
-
         boolean desc,
         String sortBy,
         String todoStatus,

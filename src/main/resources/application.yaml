@@ -9,8 +9,8 @@ server:
       worker: 100
 spring:
   profiles:
-    #active: prod
-    active: dev
+    active: prod
+    #active: dev
   servlet:
     multipart:
       max-file-size: 2GB

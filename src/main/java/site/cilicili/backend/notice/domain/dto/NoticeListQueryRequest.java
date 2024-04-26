@@ -18,6 +18,7 @@ public record NoticeListQueryRequest(
         String noticeTitle,
         String noticeType,
         String noticeToUser,
+        Boolean read,
         @NotNull(message = "页面大小不能为空") Integer pageSize,
         @NotNull(message = "页码不能为空") Integer page) {
 }

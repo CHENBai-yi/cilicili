@@ -83,14 +83,17 @@ public class SysLogLoginEntity extends BaseEntity implements Serializable {
                 .map(f -> {
                     String interval = null;
                     if (DateUtil.between(beginDate, endDate, DateUnit.DAY, true) >= 1) {
-                        interval = String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.DAY));
+                        interval = String.format(
+                                "%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.DAY));
                     } else if (DateUtil.between(beginDate, endDate, DateUnit.HOUR, true) >= 1) {
-                        interval = String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.HOUR));
+                        interval = String.format(
+                                "%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.HOUR));
                     } else if (DateUtil.between(beginDate, endDate, DateUnit.MINUTE, true) >= 1) {
-                        interval =
-                                String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.MINUTE));
+                        interval = String.format(
+                                "%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.MINUTE));
                     } else if (DateUtil.between(beginDate, endDate, DateUnit.SECOND, true) >= 1) {
-                        interval = String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.SECOND));
+                        interval = String.format(
+                                "%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.SECOND));
                     }
                     return interval;
                 })
