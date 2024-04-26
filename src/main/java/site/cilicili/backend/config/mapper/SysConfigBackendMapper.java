@@ -85,4 +85,6 @@ public interface SysConfigBackendMapper extends BaseMapper<SysConfigBackendEntit
     List<SysConfigBackendDto.Records> queryConfigBackendAll();
 
     List<SysConfigBackendDto.Records> getConfigBackendList(QueryConfigRequest queryBackRequest);
+
+    Integer countByParam(QueryConfigRequest queryBackRequest);
 }

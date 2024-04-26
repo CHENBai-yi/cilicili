@@ -86,4 +86,6 @@ public interface SysConfigFrontendMapper extends BaseMapper<SysConfigFrontendEnt
     List<SysConfigFrontendDto.Records> queryConfigFrontAll();
 
     List<SysConfigFrontendDto.Records> queryConfigFrontendList(QueryConfigRequest queryFrontendRequest);
+
+    Integer countByParam(QueryConfigRequest queryFrontendRequest);
 }

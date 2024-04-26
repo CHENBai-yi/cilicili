@@ -94,4 +94,6 @@ public interface SysLogLoginMapper extends BaseMapper<SysLogLoginEntity> {
     List<QueryLogResponse.LogLogin> queryLogLoginList(QueryLogRequest queryLogRequest);
 
     int insertLogLogin(SysLogLoginEntity sysLogLogin);
+
+    Integer countByParam(QueryLogRequest queryLogRequest);
 }

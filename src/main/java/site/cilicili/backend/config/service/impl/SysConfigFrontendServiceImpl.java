@@ -105,13 +105,14 @@ public class SysConfigFrontendServiceImpl extends ServiceImpl<SysConfigFrontendM
     @Transactional(readOnly = true)
     @Override
     public R getConfigFrontendList(final QueryConfigRequest queryFrontendRequest) {
+        Integer total = baseMapper.countByParam(queryFrontendRequest);
         return Optional.ofNullable(baseMapper.queryConfigFrontendList(queryFrontendRequest))
                 .map(records -> R.yes("Success.")
                         .setData(SysConfigFrontendDto.builder()
                                 .records(records)
                                 .page(queryFrontendRequest.page())
                                 .pageSize(queryFrontendRequest.pageSize())
-                                .total(records.size())
+                                .total(total)
                                 .build()))
                 .orElse(R.no("没有更多了."));
     }

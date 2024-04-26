@@ -88,10 +88,11 @@ public class SysLogOperationServiceImpl extends ServiceImpl<SysLogOperationMappe
     @Override
     @Transactional(readOnly = true)
     public R getLogOperationList(final QueryLogRequest queryLogRequest) {
+        Integer total = baseMapper.countByParam(queryLogRequest);
         return Optional.ofNullable(baseMapper.queryLogOperationList(queryLogRequest))
                 .map(userList -> R.yes("Success")
                         .setData(QueryLogResponse.builder()
-                                .total(userList.size())
+                                .total(total)
                                 .page(queryLogRequest.page())
                                 .pageSize(queryLogRequest.pageSize())
                                 .records(userList)

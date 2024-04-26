@@ -11,8 +11,10 @@ import jakarta.validation.constraints.NotNull;
  * @author BaiYiChen
  */
 public record GetTodoListRequest(
+
         boolean desc,
         String sortBy,
+        String todoStatus,
         @NotNull(message = "页面大小不能为空") Integer pageSize,
         @NotNull(message = "页码不能为空") Integer page) {
 }

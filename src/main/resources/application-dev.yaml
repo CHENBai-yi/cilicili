@@ -133,6 +133,7 @@ mybatis-plus:
       logic-delete-value: 0
       logic-not-delete-value: 1
       logic-delete-field: "logical_delete"
+  lazy-initialization: true
 decorator:
   datasource:
     p6spy:

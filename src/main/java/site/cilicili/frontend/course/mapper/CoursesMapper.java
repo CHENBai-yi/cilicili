@@ -98,4 +98,6 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
     GetSubjectCategoriesResponse getSubjectCategories(final GetSubjectCategoriesRequest getSubjectCategoriesRequest);
 
     Integer updateBatch(@Param("coursesEntities") List<CoursesEntity> coursesEntities);
+
+    Integer countByParam(QueryCourseInfoRequest courses);
 }

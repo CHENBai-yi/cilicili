@@ -202,6 +202,26 @@
         </if>
         ;
     </select>
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
+    <select id="countByParam" resultType="java.lang.Integer">
+        select count(*) from sys_log_login
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="loginSuccess!=null and loginSuccess!=''">
+                    <bind name="rcl" value="'%'+loginSuccess+'%'"/>
+                    login_success like #{rcl}
+                </if>
+                <if test="loginUsername!=null and loginUsername!=''">
+                    <bind name="rl" value="'%'+loginUsername+'%'"/>
+                    and login_username like #{rl}
+                </if>
+            </trim>
+        </where>
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

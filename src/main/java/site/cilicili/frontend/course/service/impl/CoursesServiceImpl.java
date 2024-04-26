@@ -147,12 +147,13 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                 })
                 .map(courseLists -> {
                     log.warn(courseLists.toString());
+                    Integer total = baseMapper.countByParam(courses);
                     return R.yes("Success")
                             .setData(GetCourseInfoResponse.builder()
                                     .records(courseLists)
-                                    .page(1)
-                                    .pageSize(10)
-                                    .total(100)
+                                    .page(courses.getPage())
+                                    .pageSize(courses.getPageSize())
+                                    .total(total)
                                     .build());
                 })
                 .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));

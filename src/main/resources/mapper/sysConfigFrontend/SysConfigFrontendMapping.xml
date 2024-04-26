@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.cilicili.backend.config.mapper.SysConfigFrontendMapper">
-    
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
     <resultMap type="site.cilicili.backend.config.domain.pojo.SysConfigFrontendEntity" id="SysConfigFrontendMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
@@ -183,6 +187,22 @@
             limit #{cur},#{pageSize}
         </if>
         ;
+    </select>
+    <select id="countByParam" resultType="java.lang.Integer">
+        select count(*)
+        from sys_config_frontend
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="configItem!=null and configItem!=''">
+                    <bind name="rcl" value="'%'+configItem+'%'"/>
+                    config_item like #{rcl}
+                </if>
+                <if test="memo!=null and memo!=''">
+                    <bind name="rl" value="'%'+memo+'%'"/>
+                    or memo like #{rl}
+                </if>
+            </trim>
+        </where>
     </select>
     
     

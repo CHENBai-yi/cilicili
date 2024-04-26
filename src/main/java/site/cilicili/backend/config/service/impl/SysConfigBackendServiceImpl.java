@@ -106,13 +106,14 @@ public class SysConfigBackendServiceImpl extends ServiceImpl<SysConfigBackendMap
     @Override
     @Transactional(readOnly = true)
     public R getConfigBackendList(final QueryConfigRequest queryBackRequest) {
+        Integer total = baseMapper.countByParam(queryBackRequest);
         return Optional.ofNullable(baseMapper.getConfigBackendList(queryBackRequest))
                 .map(records -> R.yes("Success.")
                         .setData(SysConfigBackendDto.builder()
                                 .records(records)
                                 .page(queryBackRequest.page())
                                 .pageSize(queryBackRequest.pageSize())
-                                .total(records.size())
+                                .total(total)
                                 .build()))
                 .orElse(R.no("没有更多了."));
     }

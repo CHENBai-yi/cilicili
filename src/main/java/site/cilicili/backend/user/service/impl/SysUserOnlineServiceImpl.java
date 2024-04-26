@@ -81,10 +81,11 @@ public class SysUserOnlineServiceImpl extends ServiceImpl<SysUserOnlineMapper, S
     @Override
     @Transactional(readOnly = true)
     public R getUserOnlineList(final QueryUserOnlineListRequest queryUserOnlineListRequest) {
+        Integer total = baseMapper.countByParam(queryUserOnlineListRequest);
         return Optional.ofNullable(baseMapper.queryUserOnlineList(queryUserOnlineListRequest))
                 .map(userList -> R.yes("Success")
                         .setData(QueryLogResponse.builder()
-                                .total(userList.size())
+                                .total(total)
                                 .page(queryUserOnlineListRequest.page())
                                 .pageSize(queryUserOnlineListRequest.pageSize())
                                 .records(userList)

@@ -1,5 +1,6 @@
 package site.cilicili.backend.log.domain.pojo;
 
+import cn.hutool.core.date.BetweenFormatter;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
@@ -81,17 +82,15 @@ public class SysLogLoginEntity extends BaseEntity implements Serializable {
                 .filter(f -> f)
                 .map(f -> {
                     String interval = null;
-                    if (DateUtil.between(beginDate, endDate, DateUnit.WEEK, true) >= 1) {
-                        interval = String.format("%1$s周前", DateUtil.between(beginDate, endDate, DateUnit.WEEK, true));
-                    } else if (DateUtil.between(beginDate, endDate, DateUnit.DAY, true) >= 1) {
-                        interval = String.format("%1$s天前", DateUtil.between(beginDate, endDate, DateUnit.DAY, true));
+                    if (DateUtil.between(beginDate, endDate, DateUnit.DAY, true) >= 1) {
+                        interval = String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.DAY));
                     } else if (DateUtil.between(beginDate, endDate, DateUnit.HOUR, true) >= 1) {
-                        interval = String.format("%1$s小时前", DateUtil.between(beginDate, endDate, DateUnit.HOUR, true));
+                        interval = String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.HOUR));
                     } else if (DateUtil.between(beginDate, endDate, DateUnit.MINUTE, true) >= 1) {
                         interval =
-                                String.format("%1$s分钟前", DateUtil.between(beginDate, endDate, DateUnit.MINUTE, true));
+                                String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.MINUTE));
                     } else if (DateUtil.between(beginDate, endDate, DateUnit.SECOND, true) >= 1) {
-                        interval = String.format("%1$s秒前", DateUtil.between(beginDate, endDate, DateUnit.SECOND, true));
+                        interval = String.format("%1$s", DateUtil.formatBetween(beginDate, endDate, BetweenFormatter.Level.SECOND));
                     }
                     return interval;
                 })

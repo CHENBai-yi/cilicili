@@ -147,6 +147,11 @@
             resultMap="TodoListResponse">
         select *
         from sys_todo
+        <where>
+            <if test="todoStatus!=null and todoStatus!=''">
+                todo_status=#{todoStatus}
+            </if>
+        </where>
         <if test="sortBy!=null">
             order by ${sortBy}
             <if test="desc">desc</if>

@@ -92,4 +92,6 @@ public interface SysLogOperationMapper extends BaseMapper<SysLogOperationEntity>
     int deleteById(Long id);
 
     List<QueryLogResponse.LogOperation> queryLogOperationList(QueryLogRequest queryLogRequest);
+
+    Integer countByParam(QueryLogRequest queryLogRequest);
 }

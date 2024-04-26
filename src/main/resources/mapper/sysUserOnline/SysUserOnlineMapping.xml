@@ -75,6 +75,15 @@
         </if>
         ;
     </select>
+    <select id="countByParam" resultType="java.lang.Integer">
+        select count(*) from sys_user_online
+        <where>
+            <if test="username!=null and username!=''">
+                <bind name="rcl" value="'%'+username+'%'"/>
+                username like #{rcl}
+            </if>
+        </where>
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="" useGeneratedKeys="true">

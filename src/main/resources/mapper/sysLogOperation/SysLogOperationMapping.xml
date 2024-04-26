@@ -198,6 +198,26 @@
         </if>
         ;
     </select>
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
+    <select id="countByParam" resultType="java.lang.Integer" useCache="true">
+        select count(*) from sys_log_operation
+        <where>
+            <trim prefix="(" suffix=")" prefixOverrides="or">
+                <if test="operationUsername!=null and operationUsername!=''">
+                    <bind name="rcl" value="'%'+operationUsername+'%'"/>
+                    operation_username like #{rcl}
+                </if>
+            </trim>
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        ;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

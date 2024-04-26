@@ -242,6 +242,27 @@
             limit #{cur},#{pageSize}
         </if>
     </select>
+    <select id="countByParam" resultType="java.lang.Integer">
+        select count(*) from sys_notice JOIN sys_notice_to_user on sys_notice.notice_id=sys_notice_to_user.notice_id
+        <where>
+            <if test="noticeTitle!=null and noticeTitle!=''">
+                <bind name="rl" value="'%'+noticeTitle+'%'"/>
+                notice_title like #{rl}
+            </if>
+            <if test="noticeRead!=null  and noticeRead!=''">
+                and user_read = #{noticeRead}
+            </if>
+            <if test="noticeToUser!=null  and noticeToUser!=''">
+                and to_user = #{noticeToUser}
+            </if>
+            <if test="noticeType!=null  and noticeType!=''">
+                and notice_type = #{noticeType}
+            </if>
+            <if test="noticeSent!=null  and noticeSent!=''">
+                and notice_sent = #{noticeSent}
+            </if>
+        </where>
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
