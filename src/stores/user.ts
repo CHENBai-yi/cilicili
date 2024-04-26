@@ -33,6 +33,10 @@ export const useUserStore = defineStore('user', {
         // @ts-ignore
         const avatar = res.data.avatar
         this.SetToken(token)
+
+        this.avatar = avatar
+        // @ts-ignore
+        Cookies.set('cili-avatar-frontend', avatar, this.option)
         this.username = username
         // @ts-ignore
         Cookies.set('cili-username-frontend', username, this.option)
@@ -42,9 +46,7 @@ export const useUserStore = defineStore('user', {
         this.realName = realName
         // @ts-ignore
         Cookies.set('cili-realName-frontend', realName, this.option)
-        this.avatar = avatar
-        // @ts-ignore
-        Cookies.set('cili-avatar-frontend', avatar, this.option)
+
 
         return true
       } else {
