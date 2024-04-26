@@ -110,10 +110,10 @@ const getCoursesCount = async () => {
   const res = await postAction(urls.value, {})
   if (res.code) {
     const {data} = res
-    total.value = data.total
-    pass.value = data.pass
-    on.value = data.on
-    off.value = data.off
+    total.value = data?.total
+    pass.value = data?.pass
+    on.value = data?.on
+    off.value = data?.off
   }
 }
 onMounted(() => getCoursesCount())

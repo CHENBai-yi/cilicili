@@ -62,7 +62,7 @@ const videoCatalog = computed(() => commonStore.videoCatalog)
 .Cili_left {
   width: 800px;
   height: 220px;
-  background-image: url("/studyed-left.png");
+  background-image: url("/images/studyed-left.png");
   background-size: cover;
   background-position: center;
 }
@@ -80,11 +80,11 @@ const videoCatalog = computed(() => commonStore.videoCatalog)
   margin: 22px 0 30px 0;
 
   &.learn {
-    background-image: url("/studyed-title.png");
+    background-image: url("/images/studyed-title.png");
   }
 
   &.detail {
-    background-image: url("/course-desc-title.png");
+    background-image: url("/images/course-desc-title.png");
   }
 }
 

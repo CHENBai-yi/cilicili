@@ -257,7 +257,7 @@ const switchVideo = (e) => {
 .left {
   width: 117px;
   height: 28px;
-  background-image: url('/catalogue-title.png');
+  background-image: url('/images/catalogue-title.png');
   background-size: cover;
   background-position: center;
 }

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: http://pixx.site/sitemap.xml
