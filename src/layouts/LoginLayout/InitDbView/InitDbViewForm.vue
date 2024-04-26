@@ -4,7 +4,7 @@
       <q-card flat style="background: rgba(0, 0, 0, 0);">
         <q-toolbar>
           <q-avatar class="gin-quasar-admin-logo" font-size="52px" size="100px">
-            <img src="logo.png"/>
+            <img src="images/logo.png"/>
           </q-avatar>
           <q-toolbar-title class="row items-center">
                         <span class="text-weight-bold">

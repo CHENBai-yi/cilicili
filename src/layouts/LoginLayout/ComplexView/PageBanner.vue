@@ -58,7 +58,7 @@ const bannerImage = computed(() => {
   if (CiliFrontend.value.bannerImage && CiliFrontend.value.bannerImage.substring(0, 12) === 'cili-upload:') {
     return process.env.API + CiliFrontend.value.bannerImage.substring(12)
   }
-  return "planet.png"
+  return "images/planet.png"
 })
 
 const showLoginForm = () => {
