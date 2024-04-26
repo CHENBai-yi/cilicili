@@ -18,7 +18,7 @@ import {
   NText,
   NThing,
   NUpload,
-  NUploadDragger
+  NUploadDragger,NCarousel,NCarouselItem
 } from 'naive-ui'
 // we globally register our component with Vue
 export default ({app}) => {
@@ -31,7 +31,7 @@ export default ({app}) => {
     components: [
       NImage, NPopconfirm, NButton,
       NList, NCard, NSwitch,
-      NListItem, NThing, NSpace, NTag, NDatePicker, NUpload, NP, NText, NUploadDragger
+      NListItem, NThing, NSpace, NTag, NDatePicker, NUpload, NP, NText, NUploadDragger,NCarousel,NCarouselItem
     ]
   })
   app.use(naive)

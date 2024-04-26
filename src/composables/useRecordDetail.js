@@ -25,7 +25,16 @@ export default function useRecordDetail(url, emit) {
   })
   const recordDetail = reactive({})
   const recordDetailVisible = ref(false)
+  const recordDetailVisible2 = ref(false)
   const loading = ref(false)
+  const preShowCarousel = (row) => {
+    if (!!row && row instanceof Array) {
+      recordDetail.value = row.map(item => {
+        return {url: item.image_url, sort: item.sort, memo: item.memo}
+      }).sort((a, b) => a.sort - b.sort)
+      recordDetailVisible2.value = true
+    }
+  }
   const show = (row) => {
     loading.value = true
     recordDetail.value = {}
@@ -115,10 +124,12 @@ export default function useRecordDetail(url, emit) {
     showDate,
     loading,
     show,
+    preShowCarousel,
     formType,
     formTypeName,
     recordDetail,
     recordDetailVisible,
+    recordDetailVisible2,
     handleQueryById,
     recordDetailForm,
     handleAddOrEidt,

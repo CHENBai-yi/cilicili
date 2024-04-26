@@ -72,7 +72,7 @@ const websocketOnmessage = (e) => {
     }
     playNotificationSound(newData.sent)
   } else {
-    moduleNotice.value.getNoticeAndTodoData()
+    moduleNotice.value?.getNoticeAndTodoData()
   }
 
 }

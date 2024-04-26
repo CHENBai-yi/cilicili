@@ -78,6 +78,7 @@ const {
 const username = computed(() => userStore.GetUsername())
 onMounted(() => {
   queryParams.value = {
+    notice_read: 'yesNo_no',
     notice_type: 'noticeType_system',
     notice_sent: 'yesNo_yes',
     notice_to_user: String(username.value),

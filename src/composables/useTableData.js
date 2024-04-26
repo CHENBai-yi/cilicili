@@ -20,11 +20,14 @@ export default function useTableData(url) {
     sortBy: 'sort',
     descending: false,
     page: 1,
-    rowsPerPage: 10,
+    rowsPerPage: 10
   })
   const queryParams = ref({})
   const pageOptions = ref([10, 30, 50, 100])
 
+  const showCarousel = (row) => {
+    recordDetailDialog.value.preShowCarousel(row)
+  }
   const showAddForm = () => {
     recordDetailDialog.value.formType = 'add'
     recordDetailDialog.value.show()
@@ -119,6 +122,7 @@ export default function useTableData(url) {
     recordDetailDialog,
     showAddForm,
     showEditForm,
+    showCarousel,
     onRequest,
     getTableData,
     handleSearch,
