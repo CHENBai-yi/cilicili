@@ -5,7 +5,7 @@
 
       <q-toolbar>
         <q-btn v-if="$q.screen.lt.sm" dense flat icon="menu" round @click="drawer = !drawer"/>
-        <q-icon color="red" name="img:logo.svg" size="40px"/>
+        <q-icon color="red" name="img:static/images/logo.svg" size="40px"/>
         <q-toolbar-title>
           <div class="text-h5">创作中心</div>
         </q-toolbar-title>

@@ -162,7 +162,7 @@ const items = ref([
 const dplayerObj = reactive({
   buy: undefined,
   video: {
-    pic: "VCG41N1403887001.jpg",
+    pic: "static/images/VCG41N1403887001.jpg",
     url: 'https://api.dogecloud.com/player/get.m3u8?vcode=5ac682e6f8231991&userId=17&ext=.m3u8', //视频地址
     type: 'customHls',
     customType: {

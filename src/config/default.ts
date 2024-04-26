@@ -9,9 +9,9 @@ export const CiliFrontendDefault = {
     // bannerImg:'https://cdn.quasar.dev/img/parallax2.jpg',
     // noticeBackgroundImg:'https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg',
     // videoUploadLayoutImg:'https://cdn.quasar.dev/img/material.png'
-    bannerImg: 'material.png',
+    bannerImg: 'static/images/material.png',
     noticeBackgroundImg: 'https://cdn.quasar.dev/img/parallax2.jpg',
-    videoUploadLayoutImg: 'material.png'
+    videoUploadLayoutImg: 'static/images/material.png'
   }
 }
 export const CiliBackendDefault = {}

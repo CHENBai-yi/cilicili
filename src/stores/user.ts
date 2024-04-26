@@ -132,7 +132,7 @@ export const useUserStore = defineStore('user', {
       } else if (Cookies.get('cili-avatar-frontend')) {
         return getAvatar(Cookies.get('cili-avatar-frontend'))
       } else {
-        return 'logo.svg'
+        return 'static/images/logo.svg'
       }
     },
   },

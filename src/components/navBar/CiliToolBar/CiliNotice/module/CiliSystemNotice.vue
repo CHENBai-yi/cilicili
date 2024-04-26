@@ -62,7 +62,8 @@ const getNoticeTypeSystem = async () => {
     // notice_to_user: userStore.GetUsername(),
     sort_by: 'created_at',
     page: 1,
-    page_size: 9999
+    page_size: 9999,
+    read: true
   })
   if (res && res.code === 1) {
     bus.emit('handleNoticeCount')

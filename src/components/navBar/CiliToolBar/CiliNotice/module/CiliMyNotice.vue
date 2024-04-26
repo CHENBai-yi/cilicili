@@ -62,7 +62,8 @@ const getNoticeTypeSystem = async () => {
     page: 1,
     desc: true,
     sort_by: 'created_at',
-    page_size: 9999
+    page_size: 9999,
+    read: true
   })
   if (res && res.code === 1) {
     bus.emit('handleNoticeCount')
