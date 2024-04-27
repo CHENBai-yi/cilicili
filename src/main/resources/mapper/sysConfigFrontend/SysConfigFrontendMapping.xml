@@ -182,6 +182,9 @@
         <if test="desc">
             order by ${sortBy} desc
         </if>
+        <if test="!desc">
+            order by ${sortBy} asc
+        </if>
         <if test="page>0 and pageSize>0">
             <bind name="cur" value="(page*pageSize)-pageSize"/>
             limit #{cur},#{pageSize}

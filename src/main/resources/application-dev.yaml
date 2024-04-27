@@ -114,7 +114,7 @@ spring:
         pool:
           enabled: true
           max-wait: 60000
-      host: 8.217.182.161
+      host: 127.0.0.1
       timeout: 60000
       connect-timeout: 60000
 mybatis-plus:

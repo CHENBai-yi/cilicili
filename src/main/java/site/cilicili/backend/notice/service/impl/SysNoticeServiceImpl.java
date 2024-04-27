@@ -135,7 +135,8 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
         return Optional.ofNullable(baseMapper.selectNoticeListByParam(noticeListQueryRequest))
                 .map(records -> {
                     Optional.ofNullable(noticeListQueryRequest.read())
-                            .filter(f -> f).ifPresent(f -> baseMapper.updateNoticeStatus(noticeListQueryRequest));
+                            .filter(f -> f)
+                            .ifPresent(f -> baseMapper.updateNoticeStatus(noticeListQueryRequest));
                     return R.yes("Success.")
                             .setData(NoticeListQueryParamResponse.builder()
                                     .records(records)
