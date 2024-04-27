@@ -168,6 +168,11 @@ export default {
     "en-US": "Logout",
     "ru": "Выход из системы"
   },
+  Input: {
+    "zh-CN": "输入",
+    "en-US": "Input",
+    "ru": "Пожалуйста, введите что-нибудь"
+  },
   Refresh: {
     "zh-CN": "刷新",
     "en-US": "Refresh",
@@ -323,6 +328,11 @@ export default {
     "en-US": "Edit",
     "ru": "Редактировать"
   },
+  Flush: {
+    "zh-CN": "刷新",
+    "en-US": "Flush",
+    "ru": "Редактировать"
+  },
   Add: {
     "zh-CN": "新增",
     "en-US": "Add",
@@ -400,6 +410,10 @@ export default {
   Banner: {
     "zh-CN": "轮播图",
     "en-US": "Banner",
+    "ru": "Управление колесной диаграммой"
+  }, Ad: {
+    "zh-CN": "广告",
+    "en-US": "Advertising",
     "ru": "Управление колесной диаграммой"
   }
   , Pass: {

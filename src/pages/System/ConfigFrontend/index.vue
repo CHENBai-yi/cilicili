@@ -27,6 +27,9 @@
               <template v-else-if="props.row.config_item === 'favicon'">
                 <Cili-avatar src="favicon.ico"/>
               </template>
+              <template v-else-if="props.row.config_item === 'priceImage'">
+                <Cili-avatar src="favicon.ico"/>
+              </template>
               <template v-else-if="props.row.config_item === 'bannerImage'">
                 Default
               </template>
@@ -93,6 +96,18 @@
                   <template v-if="faviconFile" v-slot:after>
                     <q-btn color="primary" dense flat icon="cloud_upload"
                            @click="handleUploadFavicon"/>
+                  </template>
+                </q-file>
+              </template>
+              <template v-else-if="props.row.config_item === 'priceImage'">
+                <q-file v-model="priceImage" :accept="CiliBackend.fileExt"
+                        :max-file-size="CiliBackend.fileMaxSize * 1024 * 1024" clearable dense max-files="1"
+                        outlined @rejected="rejected">
+                  <template v-slot:prepend>
+                    <Cili-avatar :src="props.row.item_custom"/>
+                  </template>
+                  <template v-if="priceImage" v-slot:after>
+                    <q-btn color="primary" dense flat icon="cloud_upload" @click="handleUploadPriceImage"/>
                   </template>
                 </q-file>
               </template>
@@ -189,6 +204,7 @@ const url = {
   edit: 'config-frontend/edit-config-frontend',
   delete: 'config-frontend/delete-config-frontend-by-id',
   uploadBannerImage: 'upload/upload-banner-image',
+  uploadPriceImage: 'upload/upload-file',
   uploadLogo: 'upload/upload-logo',
   uploadFavicon: 'upload/upload-favicon',
 }
@@ -230,6 +246,7 @@ onMounted(() => {
 })
 
 const bannerImage = ref(null)
+const priceImage = ref(null)
 const logoFile = ref(null)
 const faviconFile = ref(null)
 
@@ -268,6 +285,30 @@ const handleSave = async (row) => {
     storageStore.SetCiliFrontend()
   }
 }
+const handleUploadPriceImage = () => {
+  if (!priceImage.value) {
+    $q.notify({
+      type: 'negative',
+      message: t('Please') + t('Select') + t('File'),
+    })
+    return
+  }
+  let form = new FormData()
+  form.append('file', priceImage.value)
+  postAction(url.uploadPriceImage, form).then((res) => {
+    if (res.code === 1) {
+      const bi = tableData.value.filter((item) => {
+        return item.config_item === 'priceImage'
+      })
+      bi[0].item_custom = res.data.records
+      priceImage.value = null
+      $q.notify({
+        type: 'positive',
+        message: t('Upload') + t('Success'),
+      })
+    }
+  })
+}
 const handleUploadBannerImage = () => {
   if (!bannerImage.value) {
     $q.notify({
@@ -280,6 +321,7 @@ const handleUploadBannerImage = () => {
   form.append('file', bannerImage.value)
   postAction(url.uploadBannerImage, form).then((res) => {
     if (res.code === 1) {
+      console.log(tableData.value)
       const bi = tableData.value.filter((item) => {
         return item.config_item === 'bannerImage'
       })
