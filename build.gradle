@@ -138,12 +138,11 @@ tasks.create('runProd') {
 tasks.register('buildProd') {
     group("打包")
     description("生产环境")
-    dependsOn 'clean'
     doFirst {
         System.setProperty("profile", "prod")
     }
     copR('prod')
-    finalizedBy 'bootJar'
+//    finalizedBy 'bootJar'
 }
 
 tasks.register('buildDev') {
@@ -168,12 +167,14 @@ tasks.create('runDev') {
 
 
 bootJar {
+
     duplicatesStrategy = 'exclude'
     // 例外所有的jar
     excludes = ["*.jar"]
 //    TestLineNumber.main()
     // lib目录的清除和复制任务
-//    dependsOn spotlessApply
+    dependsOn buildProd
+    dependsOn spotlessApply
     dependsOn clearJar
     dependsOn copyJar
     // 指定依赖包的路径
@@ -260,7 +261,7 @@ class TestLineNumber {
      * @param file
      * @return
      */
-    public static int counterFileCodeLines(File file) throws Exception {
+    static int counterFileCodeLines(File file) throws Exception {
         LineNumberReader lnr = null;
         try {
             lnr = new LineNumberReader(new FileReader(file));

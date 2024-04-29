@@ -12,8 +12,8 @@ server:
 spring:
   profiles:
     #active: prod
-    active: dev
-    #active: @activeProfile@
+    #    active: dev
+    active: @activeProfile@
   servlet:
     multipart:
       max-file-size: 2GB

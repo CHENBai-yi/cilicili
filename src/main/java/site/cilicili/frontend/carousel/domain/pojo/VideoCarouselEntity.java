@@ -10,6 +10,7 @@ import site.cilicili.common.entity.BaseEntity;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -32,6 +33,7 @@ import java.util.Date;
 public class VideoCarouselEntity extends BaseEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 712870790852201207L;
+
     private String imageUrl;
     private String backgroundColor;
     private Long itemId;
@@ -47,5 +49,3 @@ public class VideoCarouselEntity extends BaseEntity implements Serializable {
     private Date start;
     private Date end;
 }
-
-

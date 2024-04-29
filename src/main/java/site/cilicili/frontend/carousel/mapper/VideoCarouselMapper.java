@@ -7,6 +7,7 @@ import site.cilicili.frontend.carousel.domain.dto.VideoCarouselDto;
 import site.cilicili.frontend.carousel.domain.pojo.VideoCarouselEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -90,5 +91,3 @@ public interface VideoCarouselMapper extends BaseMapper<VideoCarouselEntity> {
 
     List<VideoCarouselEntity> queryAllByParam(VideoCarouselDto videoCarousel);
 }
-
-

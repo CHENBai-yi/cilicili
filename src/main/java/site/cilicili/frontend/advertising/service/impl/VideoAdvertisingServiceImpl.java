@@ -18,7 +18,8 @@ import site.cilicili.frontend.advertising.service.VideoAdvertisingService;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("videoAdvertisingService")
-public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMapper, VideoAdvertisingEntity> implements VideoAdvertisingService {
+public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMapper, VideoAdvertisingEntity>
+        implements VideoAdvertisingService {
 
     /**
      * 通过ID查询单条数据
@@ -77,7 +78,4 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
         boolean del = baseMapper.deleteById(id) > 0;
         return R.ok().setData(del);
     }
-
 }
-
-

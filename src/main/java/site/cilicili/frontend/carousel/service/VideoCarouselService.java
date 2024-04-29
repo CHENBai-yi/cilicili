@@ -53,5 +53,3 @@ public interface VideoCarouselService extends IService<VideoCarouselEntity> {
      */
     R deleteById(final VideoCarouselDto id);
 }
-       
-

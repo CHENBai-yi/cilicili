@@ -52,5 +52,3 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      */
     R deleteById(final Long id);
 }
-       
-

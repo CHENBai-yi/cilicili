@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import site.cilicili.frontend.advertising.domain.pojo.VideoAdvertisingEntity;
 
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -87,5 +88,3 @@ public interface VideoAdvertisingMapper extends BaseMapper<VideoAdvertisingEntit
      */
     int deleteById(Long id);
 }
-
-

@@ -25,7 +25,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Throwable.class)
 @Service("videoCarouselService")
-public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, VideoCarouselEntity> implements VideoCarouselService {
+public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, VideoCarouselEntity>
+        implements VideoCarouselService {
 
     /**
      * 通过ID查询单条数据
@@ -53,15 +54,16 @@ public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, V
         return Optional.ofNullable(baseMapper.count(new VideoCarouselEntity()))
                 .filter(f -> f > 0)
                 .flatMap(total -> Optional.ofNullable(baseMapper.queryAllByParam(videoCarousel))
-                        .map(videoCarouselEntities -> BeanUtil.copyToList(videoCarouselEntities, VideoCarouselDto.class))
-                        .map(videoCarouselDtos ->
-                                R.yes("Success.").setData(
-                                        QueryCarouselResponse.builder()
-                                                .records(videoCarouselDtos)
-                                                .page(videoCarousel.getPageNum())
-                                                .pageSize(videoCarousel.getPageSize())
-                                                .total(total.intValue())
-                                                .build()))).orElse(R.no("Fail"));
+                        .map(videoCarouselEntities ->
+                                BeanUtil.copyToList(videoCarouselEntities, VideoCarouselDto.class))
+                        .map(videoCarouselDtos -> R.yes("Success.")
+                                .setData(QueryCarouselResponse.builder()
+                                        .records(videoCarouselDtos)
+                                        .page(videoCarousel.getPageNum())
+                                        .pageSize(videoCarousel.getPageSize())
+                                        .total(total.intValue())
+                                        .build())))
+                .orElse(R.no("Fail"));
     }
 
     /**
@@ -90,7 +92,8 @@ public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, V
                 .map(idd -> baseMapper.update(BeanUtil.copyProperties(videoCarousel, VideoCarouselEntity.class)))
                 .filter(f -> f > 0)
                 .map(r -> R.yes("Success."))
-                .orElseThrow(() -> AppException.builder().error(Error.COMMON_EXCEPTION).build());
+                .orElseThrow(() ->
+                        AppException.builder().error(Error.COMMON_EXCEPTION).build());
     }
 
     /**
@@ -105,9 +108,7 @@ public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, V
                 .map(idd -> baseMapper.deleteById(idd))
                 .filter(f -> f > 0)
                 .map(r -> R.yes("Success."))
-                .orElseThrow(() -> AppException.builder().error(Error.COMMON_EXCEPTION).build());
+                .orElseThrow(() ->
+                        AppException.builder().error(Error.COMMON_EXCEPTION).build());
     }
-
 }
-
-

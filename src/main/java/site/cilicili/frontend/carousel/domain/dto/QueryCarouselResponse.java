@@ -15,7 +15,8 @@ import site.cilicili.frontend.common.pojo.BaseQueryResponse;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class QueryCarouselResponse extends BaseQueryResponse {
     @Builder
-    public QueryCarouselResponse(final Object records, final Integer page, final Integer pageSize, final Integer total) {
+    public QueryCarouselResponse(
+            final Object records, final Integer page, final Integer pageSize, final Integer total) {
         super(records, page, pageSize, total);
     }
 }

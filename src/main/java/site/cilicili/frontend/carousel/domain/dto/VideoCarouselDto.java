@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -38,14 +39,19 @@ public class VideoCarouselDto {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected LocalDateTime createdAt;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected String createdBy;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected LocalDateTime updatedAt;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected String updatedBy;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected LocalDateTime deletedAt;
+
     List<Long> ids;
     private Long id;
     private Long[] time;
@@ -53,21 +59,29 @@ public class VideoCarouselDto {
     private String backgroundColor;
     private Long itemId;
     private Long catId;
+
     @JsonProperty("jump_type")
     private String type;
+
     private Integer sort;
+
     @JacksonInject("isShow")
     private Boolean isShow;
+
     private String memo;
     private String status;
     private String stable;
+
     @Pattern(regexp = "^http://.*?", message = "不是正确的链接地址")
     @JsonProperty("link_path")
     private String link;
+
     @JsonProperty("link_page")
     private String page;
+
     @JsonIgnore
     private Date start;
+
     @JsonIgnore
     private Date end;
     /**
@@ -89,6 +103,7 @@ public class VideoCarouselDto {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
+
     private String sortBy;
     private Boolean desc;
 

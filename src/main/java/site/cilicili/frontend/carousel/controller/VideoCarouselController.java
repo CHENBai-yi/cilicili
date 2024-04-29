@@ -29,7 +29,6 @@ public class VideoCarouselController {
     /**
      * 服务对象
      */
-
     private final VideoCarouselService videoCarouselService;
 
     /**
@@ -38,9 +37,9 @@ public class VideoCarouselController {
      * @param videoCarousel 筛选条件
      * @return 查询结果
      */
-    @Operation(summary = "全查询", parameters = {
-            @Parameter(description = "videoCarousel 筛选条件")
-    })
+    @Operation(
+            summary = "全查询",
+            parameters = {@Parameter(description = "videoCarousel 筛选条件")})
     @PostMapping("list")
     public R queryAll(final @RequestBody VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.queryAll(videoCarousel);
@@ -52,9 +51,9 @@ public class VideoCarouselController {
      * @param videoCarousel 主键
      * @return 单条数据
      */
-    @Operation(summary = "通过主键查询单条数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "通过主键查询单条数据",
+            parameters = {@Parameter(description = "id 主键")})
     @PostMapping("query-carousel-by-id")
     public R queryById(final @RequestBody VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.queryById(videoCarousel.getId());
@@ -66,10 +65,9 @@ public class VideoCarouselController {
      * @param videoCarousel 实体
      * @return 新增结果
      */
-
-    @Operation(summary = "新增数据", parameters = {
-            @Parameter(description = "videoCarousel 实体")
-    })
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "videoCarousel 实体")})
     @PostMapping
     public R add(final @RequestBody @Validated VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.insert(videoCarousel);
@@ -81,9 +79,9 @@ public class VideoCarouselController {
      * @param videoCarousel 实体
      * @return 编辑结果
      */
-    @Operation(summary = "编辑数据", parameters = {
-            @Parameter(description = "videoCarouselEntity 实体")
-    })
+    @Operation(
+            summary = "编辑数据",
+            parameters = {@Parameter(description = "videoCarouselEntity 实体")})
     @PostMapping("edit-carousel")
     public R edit(final @RequestBody VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.update(videoCarousel);
@@ -95,14 +93,11 @@ public class VideoCarouselController {
      * @param videoCarousel 主键
      * @return 删除是否成功
      */
-    @Operation(summary = "删除数据", parameters = {
-            @Parameter(description = "id 主键")
-    })
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
     @PostMapping("delete-carousel-by-id")
     public R deleteById(final @RequestBody VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.deleteById(videoCarousel);
     }
 }
-
-
-

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
  *
@@ -46,5 +47,3 @@ public class VideoAdvertisingEntity implements Serializable {
     private Date start;
     private Date end;
 }
-
-
