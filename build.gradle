@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.6'
@@ -14,6 +16,9 @@ java {
 
 jar {
     enabled(false)
+}
+ext {
+    env = ["dev", "prod", "test"]
 }
 configurations {
     compileOnly {
@@ -86,6 +91,9 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.4'
     implementation 'org.hibernate:hibernate-core:5.5.7.Final' // 替换为您使用的 Hibernate 版本
 }
+tasks.withType(Copy).all {
+    duplicatesStrategy 'exclude'
+}
 // 配置bootJar进行打包
 // 清除现有的lib目录
 task clearJar(type: Delete) {
@@ -97,27 +105,84 @@ task copyJar(type: Copy, dependsOn: 'clearJar') {
     from configurations.runtimeClasspath
     into "$buildDir\\libs\\lib"
 }
+processResources {
+    doFirst {
+        filter ReplaceTokens, tokens: [activeProfile: System.getProperty("profile", "dev")]
+    }
+}
+def copR = {
+    p ->
+        sourceSets {
+            main {
+                java {
+                    srcDir "src/main/java"
+                }
+                resources {
+                    srcDirs 'src/main/resources'
+                    exclude('gin-quasar-admin_bak.sql')
+                    for (final def i in env) {
+                        if (i != p) exclude("application-${i}.yaml")
+                    }
+                }
+            }
+        }
+}
+tasks.create('runProd') {
+    group("运行")
+    description("开发环境")
+    doFirst {
+        System.setProperty("profile", "prod")
+    }
+    finalizedBy 'bootRun'
+}
+tasks.register('buildProd') {
+    group("打包")
+    description("生产环境")
+    dependsOn 'clean'
+    doFirst {
+        System.setProperty("profile", "prod")
+    }
+    copR('prod')
+    finalizedBy 'bootJar'
+}
+
+tasks.register('buildDev') {
+    group("打包")
+    description("开发环境")
+    dependsOn 'clean'
+    doFirst {
+        System.setProperty("profile", "dev")
+    }
+    copR('dev')
+    finalizedBy 'bootJar'
+}
+
+tasks.create('runDev') {
+    group("运行")
+    description("开发环境")
+    doFirst {
+        System.setProperty("profile", "dev")
+    }
+    finalizedBy 'bootRun'
+}
+
+
 bootJar {
+    duplicatesStrategy = 'exclude'
     // 例外所有的jar
     excludes = ["*.jar"]
-    TestLineNumber.main()
+//    TestLineNumber.main()
     // lib目录的清除和复制任务
+//    dependsOn spotlessApply
     dependsOn clearJar
     dependsOn copyJar
-    dependsOn spotlessApply
-    duplicatesStrategy = 'exclude'
     // 指定依赖包的路径
     manifest {
+        mainClass = 'site.cilicili.App'
         attributes 'Class-Path': configurations.runtimeClasspath.files.collect { "lib/$it.name" }.join(' ')
     }
 }
-sourceSets {
-    main {
-        resources {
-            exclude("gin-quasar-admin_bak.sql")
-        }
-    }
-}
+
 test {
     enabled(false)
 }
@@ -160,6 +225,8 @@ spotless {
         indentWithSpaces()
         trimTrailingWhitespace()
     }
+
+
 }
 
 
