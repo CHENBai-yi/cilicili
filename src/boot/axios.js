@@ -130,11 +130,11 @@ export default boot(({app, router}) => {
     } else if (error.response && error.response.status === 404) {
       Notify.create({
         type: 'negative',
-        message: i18n.global.t('Request') + i18n.global.t('Address') + i18n.global.t('NotFound') + ' ' + error.response.request.responseURL,
+        message: i18n.global.t('Request') + i18n.global.t('Address') + i18n.global.t('NotFound') + ' ' + error.response?.request.responseURL,
       })
     } else {
       Notify.create({
-        type: 'negative', message: error.response.request.responseURL + ' ' + error.message
+        type: 'negative', message: error.response?.request.responseURL + ' ' + error.message
       })
     }
     return Promise.reject(error)

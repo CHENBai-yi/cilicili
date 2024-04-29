@@ -4,6 +4,7 @@ import {postAction} from 'src/api/manage'
 import {useQuasar} from 'quasar'
 import {useI18n} from 'vue-i18n'
 import useCommon from './useCommon'
+import {RealUrl} from "src/utils/convert"
 
 export default function useRecordDetail(url, emit) {
   const {t} = useI18n()
@@ -30,7 +31,7 @@ export default function useRecordDetail(url, emit) {
   const preShowCarousel = (row) => {
     if (!!row && row instanceof Array) {
       recordDetail.value = row.map(item => {
-        return {url: item.image_url, sort: item.sort, memo: item.memo}
+        return {url: RealUrl(item.image_url), sort: item.sort, memo: item.memo}
       }).sort((a, b) => a.sort - b.sort)
       recordDetailVisible2.value = true
     }

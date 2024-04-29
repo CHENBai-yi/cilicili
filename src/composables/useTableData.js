@@ -4,7 +4,6 @@ import {useI18n} from 'vue-i18n'
 import {postAction} from 'src/api/manage'
 import {DictOptions} from 'src/utils/dict'
 import useCommon from './useCommon'
-
 export default function useTableData(url) {
   const {t} = useI18n()
   const $q = useQuasar()

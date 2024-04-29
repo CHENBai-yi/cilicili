@@ -7,7 +7,7 @@
 <script setup>
 import {computed, toRefs} from 'vue';
 import {useQuasar} from 'quasar';
-import {CiliDefaultAvatar} from "src/config/default"
+import {RealUrl} from "src/utils/convert"
 
 const $q = useQuasar();
 const props = defineProps({
@@ -33,33 +33,9 @@ const avatarSrc = computed(() => {
   const cookieAvatar = $q.cookies.get('cili-avatar')
   if (loginUser.value) {
     // Login user's avatar
-    if (cookieAvatar) {
-      // avatar in the cookies
-      if (cookieAvatar.substring(0, 4) === 'http') {
-        // avatar is a link
-        return cookieAvatar
-      } else if (cookieAvatar.substring(0, 12) === 'cili-upload:') {
-        // avatar is uploaded
-        return process.env.API + cookieAvatar.substring(12)
-      }
-      return cookieAvatar
-    } else {
-      // default avatar
-      return CiliDefaultAvatar
-    }
-  } else if (src.value === '') {
-    // Non login user, no avatar configuration
-    return CiliDefaultAvatar
-  } else if (src.value.substring(0, 4) === 'http') {
-    // avatar is a link
-    return src.value
-  } else if (src.value.substring(0, 12) === 'cili-upload:') {
-    // avatar is uploaded
-    return process.env.API + src.value.substring(12)
-  } else if (src.value.substring(0, 5) === 'video') {
-    return process.env.API + src.value
+    return RealUrl(cookieAvatar)
   } else {
-    return src.value
+    return RealUrl(src.value)
   }
 })
 </script>
