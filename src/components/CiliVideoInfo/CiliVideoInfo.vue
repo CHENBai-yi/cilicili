@@ -62,7 +62,7 @@ onMounted(async () => {
 .Cili_left {
   width: 800px;
   height: 220px;
-  background-image: url("/images/studyed-left.png");
+  background-image: url("/static/images/studyed-left.png");
   background-size: cover;
   background-position: center;
 }
@@ -80,11 +80,11 @@ onMounted(async () => {
   margin: 22px 0 30px 0;
 
   &.learn {
-    background-image: url("/images/studyed-title.png");
+    background-image: url("/static/images/studyed-title.png");
   }
 
   &.detail {
-    background-image: url("/images/course-desc-title.png");
+    background-image: url("/static/images/course-desc-title.png");
   }
 }
 
