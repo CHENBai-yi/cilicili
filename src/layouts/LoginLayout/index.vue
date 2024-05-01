@@ -1,13 +1,12 @@
 <template>
-  <!--  <div-->
-  <!--    :class="changeContainerImg === '' ? 'Cili-login-layout-img-container' : 'Cili-login-layout-img-container-with-img'"-->
-  <!--    :style="changeContainerImg === '' ? { background: $q.dark.isActive ? 'black' : '#e3f4fa' } : changeContainerImg">-->
-  <!--    <component :is="loginLayout"/>-->
-  <!--    <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>-->
-  <!--  </div>-->
-  <component :is="loginLayout"/>
-  <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
-
+  <div
+    :class="changeContainerImg === '' ? 'Cili-login-layout-img-container' : 'Cili-login-layout-img-container-with-img'"
+    :style="changeContainerImg === '' ? { background: $q.dark.isActive ? 'black' : '#e3f4fa' } : changeContainerImg">
+    <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
+    <component :is="loginLayout"/>
+  </div>
+  <!--  <DbInit v-if="dbNeedInit" @initDbSuccess="checkDb"/>
+    <component :is="loginLayout"/>-->
 </template>
 
 <script setup>
@@ -38,7 +37,6 @@ const loginLayout = computed(() => {
 
 const checkDb = async () => {
   const res = await postAction('public/check-db')
-
   if (res.code === 1) {
     storageStore.SetCiliGoVersion(res.data.go_version)
     storageStore.SetCiliGinVersion(res.data.gin_version)

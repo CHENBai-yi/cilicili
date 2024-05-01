@@ -1,7 +1,7 @@
 <template>
   <footer>
     <q-img :src="bannerImage" fit="cover" style="width: 100%; height: 5vh;">
-      <div class="row items-center justify-center" style="width: 100%; height: 100%">
+      <div class="row items-center justify-center no-wrap" style="width: 100%; height: 100%;">
         {{ CiliFrontend.subTitle }}
         is powered by&nbsp;
         <a href="https://gitee.com/cby-cby/cilicili" style="color: white; text-decoration: none;"
