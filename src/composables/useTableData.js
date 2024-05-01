@@ -128,5 +128,6 @@ export default function useTableData(url) {
     resetSearch,
     handleFinish,
     handleDelete,
+    postAction
   }
 }

@@ -10,6 +10,8 @@
       <template v-slot:control>
         <CiliShowName v-if="recordDetail.value.created_by_user"
                       :customNameObject="recordDetail.value.created_by_user"/>
+        <CiliShowName v-else-if="recordDetail.value.created_by"
+                      :custom-name-string="recordDetail.value.created_by"/>
       </template>
     </q-field>
     <q-field :label="$t('UpdatedAt')" class="col" dense hint="" readonly stack-label>
@@ -21,6 +23,8 @@
       <template v-slot:control>
         <CiliShowName v-if="recordDetail.value.updated_by_user"
                       :customNameObject="recordDetail.value.updated_by_user"/>
+        <CiliShowName v-else-if="recordDetail.value.updated_by"
+                      :custom-name-string="recordDetail.value.updated_by"/>
       </template>
     </q-field>
   </div>
