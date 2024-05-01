@@ -2,6 +2,7 @@ package site.cilicili.frontend.advertising.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.advertising.domain.dto.VideoAdvertisingDto;
 import site.cilicili.frontend.advertising.domain.pojo.VideoAdvertisingEntity;
 
 /**
@@ -18,7 +19,7 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      * @param id 主键
      * @return 实例对象
      */
-    R queryById(final Long id);
+    R queryById(final VideoAdvertisingDto id);
 
     /**
      * 全查询
@@ -26,7 +27,7 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      * @param videoAdvertising 筛选条件
      * @return 查询结果
      */
-    R queryAll(final VideoAdvertisingEntity videoAdvertising);
+    R queryAll(final VideoAdvertisingDto videoAdvertising);
 
     /**
      * 新增数据
@@ -34,7 +35,7 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      * @param videoAdvertising 实例对象
      * @return 实例对象
      */
-    R insert(final VideoAdvertisingEntity videoAdvertising);
+    R insert(final VideoAdvertisingDto videoAdvertising);
 
     /**
      * 修改数据
@@ -42,7 +43,7 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      * @param videoAdvertising 实例对象
      * @return 实例对象
      */
-    R update(final VideoAdvertisingEntity videoAdvertising);
+    R update(final VideoAdvertisingDto videoAdvertising);
 
     /**
      * 通过主键删除数据
@@ -50,5 +51,5 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      * @param id 主键
      * @return 是否成功
      */
-    R deleteById(final Long id);
+    R deleteById(final VideoAdvertisingDto id);
 }

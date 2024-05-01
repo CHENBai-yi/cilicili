@@ -89,7 +89,7 @@ public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, V
     @Override
     public R update(VideoCarouselDto videoCarousel) {
         return Optional.ofNullable(videoCarousel.getId())
-                .map(idd -> baseMapper.update(BeanUtil.copyProperties(videoCarousel, VideoCarouselEntity.class)))
+                .map(idd -> baseMapper.updateById(BeanUtil.copyProperties(videoCarousel, VideoCarouselEntity.class)))
                 .filter(f -> f > 0)
                 .map(r -> R.yes("Success."))
                 .orElseThrow(() ->

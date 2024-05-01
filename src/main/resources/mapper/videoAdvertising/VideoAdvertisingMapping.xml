@@ -19,6 +19,7 @@
         <result property="adverLink" column="adver_link" jdbcType="VARCHAR"/>
         <result property="start" column="start" jdbcType="TIMESTAMP"/>
         <result property="end" column="end" jdbcType="TIMESTAMP"/>
+        <result property="isShow" column="is_show" jdbcType="TINYINT"/>
     </resultMap>
     
     <!--查询单个-->
@@ -38,7 +39,8 @@
                adver_content,
                adver_link,
                start,
-               end
+               end,
+               is_show
         from video_advertising
         where id = #{id}
     </select>
@@ -47,7 +49,7 @@
     <select id="queryAll" resultMap="VideoAdvertisingMap">
         select
         id, created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo, adver_type,
-        adver_url, adver_content, adver_link, start, end
+        adver_url, adver_content, adver_link, start, end,is_show
         from video_advertising
         <where>
             <if test="id != null">
@@ -156,23 +158,90 @@
             </if>
         </where>
     </select>
+    <select id="queryAllByParam" resultMap="VideoAdvertisingMap">
+        select
+        id, created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status, memo, adver_type,
+        adver_url, adver_content, adver_link, start, end,is_show
+        from video_advertising
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="stable != null and stable != ''">
+                and stable = #{stable}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="memo != null and memo != ''">
+                and memo = #{memo}
+            </if>
+            <if test="adverType != null and adverType != ''">
+                and adver_type = #{adverType}
+            </if>
+            <if test="adverUrl != null and adverUrl != ''">
+                and adver_url = #{adverUrl}
+            </if>
+            <if test="adverContent != null and adverContent != ''">
+                and adver_content = #{adverContent}
+            </if>
+            <if test="adverLink != null and adverLink != ''">
+                and adver_link = #{adverLink}
+            </if>
+            <if test="start != null">
+                and start = #{start}
+            </if>
+            <if test="end != null">
+                and end = #{end}
+            </if>
+        </where>
+        <if test="desc">
+            order by ${sortBy} desc
+        </if>
+        <if test="!desc">
+            order by ${sortBy} asc
+        </if>
+        <if test="pageNum>0 and pageSize>0">
+            <bind name="cur" value="(pageNum*pageSize)-pageSize"/>
+            limit #{cur},#{pageSize}
+        </if>
+        ;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into video_advertising(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
-                                      memo, adver_type, adver_url, adver_content, adver_link, start, end)
+                                      memo, adver_type, adver_url, adver_content, adver_link, start, end, is_show)
         values (#{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt}, #{sort}, #{stable}, #{status},
-                #{memo}, #{adverType}, #{adverUrl}, #{adverContent}, #{adverLink}, #{start}, #{end})
+                #{memo}, #{adverType}, #{adverUrl}, #{adverContent}, #{adverLink}, #{start}, #{end}, #{isShow})
     </insert>
     
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
         insert into video_advertising(created_at, created_by, updated_at, updated_by, deleted_at, sort, stable, status,
-        memo, adver_type, adver_url, adver_content, adver_link, start, end)
+        memo, adver_type, adver_url, adver_content, adver_link, start, end,is_show)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.createdAt}, #{entity.createdBy}, #{entity.updatedAt}, #{entity.updatedBy}, #{entity.deletedAt},
             #{entity.sort}, #{entity.stable}, #{entity.status}, #{entity.memo}, #{entity.adverType}, #{entity.adverUrl},
-            #{entity.adverContent}, #{entity.adverLink}, #{entity.start}, #{entity.end})
+            #{entity.adverContent}, #{entity.adverLink}, #{entity.start}, #{entity.end},#{entity.isShow})
         </foreach>
     </insert>
     
@@ -251,6 +320,9 @@
             </if>
             <if test="end != null">
                 end = #{end},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow},
             </if>
         </set>
         where id = #{id}

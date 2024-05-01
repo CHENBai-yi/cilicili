@@ -173,7 +173,7 @@ bootJar {
     excludes = ["*.jar"]
 //    TestLineNumber.main()
     // lib目录的清除和复制任务
-    dependsOn buildProd
+//    dependsOn buildProd
     dependsOn spotlessApply
     dependsOn clearJar
     dependsOn copyJar

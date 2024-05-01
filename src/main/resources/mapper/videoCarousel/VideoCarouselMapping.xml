@@ -147,9 +147,6 @@
             <if test="sort != null">
                 and sort = #{sort}
             </if>
-            <if test="isShow != null and isShow != ''">
-                and is_show = #{isShow}
-            </if>
             <if test="createdAt != null">
                 and created_at = #{createdAt}
             </if>
@@ -214,9 +211,6 @@
             </if>
             <if test="sort != null">
                 and sort = #{sort}
-            </if>
-            <if test="isShow != null and isShow != ''">
-                and is_show = #{isShow}
             </if>
             <if test="memo != null and memo != ''">
                 and memo = #{memo}

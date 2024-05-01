@@ -3,6 +3,7 @@ package site.cilicili.frontend.advertising.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.frontend.advertising.domain.dto.VideoAdvertisingDto;
 import site.cilicili.frontend.advertising.domain.pojo.VideoAdvertisingEntity;
 
 import java.util.List;
@@ -87,4 +88,6 @@ public interface VideoAdvertisingMapper extends BaseMapper<VideoAdvertisingEntit
      * @return 影响行数
      */
     int deleteById(Long id);
+
+    List<VideoAdvertisingEntity> queryAllByParam(VideoAdvertisingDto videoAdvertising);
 }

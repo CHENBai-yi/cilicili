@@ -4,15 +4,13 @@ import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.annotation.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -64,7 +62,7 @@ public class VideoCarouselDto {
     private String type;
 
     private Integer sort;
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JacksonInject("isShow")
     private Boolean isShow;
 
@@ -87,11 +85,12 @@ public class VideoCarouselDto {
     /**
      * 页
      */
-    @JsonProperty("page")
+    @JsonProperty(value = "page", access = JsonProperty.Access.WRITE_ONLY)
     private Integer pageNum;
     /**
      * 条
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer pageSize;
     /**
      * 开始时间
@@ -103,25 +102,35 @@ public class VideoCarouselDto {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String sortBy;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Boolean desc;
 
     @JsonGetter("time")
+    @SneakyThrows
     public Long[] getJsonTime() {
         return new Long[]{start.getTime(), end.getTime()};
     }
 
-    public Boolean getIsShow() {
-        return "onOff_on".equals(status);
+    @JsonSetter("status")
+    public void setJsonStatus(String val) {
+        this.status = val;
+        this.isShow = Objects.nonNull(status) ? "onOff_on".equals(status) : isShow;
+    }
+
+    @JsonSetter("is_show")
+    public void setJsonIsShow(Boolean val) {
+        this.isShow = val;
+        this.status = Objects.nonNull(isShow) ? (isShow ? "onOff_on" : "onOff_off") : status;
     }
 
     public Date getStart() {
-        return DateUtil.date(time[0]);
+        return Objects.nonNull(time) ? DateUtil.date(time[0]) : start;
     }
 
     public Date getEnd() {
-        return DateUtil.date(time[1]);
+        return Objects.nonNull(time) ? DateUtil.date(time[1]) : end;
     }
 
     public Integer getPageNum() {

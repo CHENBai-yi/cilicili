@@ -1,13 +1,20 @@
 package site.cilicili.frontend.advertising.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.advertising.domain.dto.VideoAdvertisingDto;
 import site.cilicili.frontend.advertising.domain.pojo.VideoAdvertisingEntity;
 import site.cilicili.frontend.advertising.mapper.VideoAdvertisingMapper;
 import site.cilicili.frontend.advertising.service.VideoAdvertisingService;
+import site.cilicili.frontend.carousel.domain.dto.QueryCarouselResponse;
+
+import java.util.Optional;
 
 /**
  * (VideoAdvertising) 表服务实现类
@@ -28,8 +35,12 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
      * @return 实例对象
      */
     @Override
-    public R queryById(Long id) {
-        return R.ok().setData(baseMapper.queryById(id));
+    public R queryById(VideoAdvertisingDto id) {
+        return Optional.ofNullable(id.getId())
+                .map(idd -> baseMapper.queryById(idd))
+                .map(videoAdvertising -> BeanUtil.copyProperties(videoAdvertising, VideoAdvertisingDto.class))
+                .map(videoAdvertisingDto -> R.yes("Success.").setRecords(videoAdvertisingDto))
+                .orElse(R.no("Fail."));
     }
 
     /**
@@ -39,8 +50,20 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
      * @return 查询结果
      */
     @Override
-    public R queryAll(VideoAdvertisingEntity videoAdvertising) {
-        return R.ok().setData(baseMapper.queryAll(videoAdvertising));
+    public R queryAll(VideoAdvertisingDto videoAdvertising) {
+        return Optional.of(baseMapper.count(new VideoAdvertisingEntity()))
+                .filter(f -> f > 0)
+                .flatMap(total -> Optional.ofNullable(baseMapper.queryAllByParam(videoAdvertising))
+                        .map(videoCarouselEntities ->
+                                BeanUtil.copyToList(videoCarouselEntities, VideoAdvertisingDto.class))
+                        .map(videoCarouselDtos -> R.yes("Success.")
+                                .setData(QueryCarouselResponse.builder()
+                                        .records(videoCarouselDtos)
+                                        .page(videoAdvertising.getPageNum())
+                                        .pageSize(videoAdvertising.getPageSize())
+                                        .total(total.intValue())
+                                        .build())))
+                .orElse(R.no("Fail"));
     }
 
     /**
@@ -50,9 +73,11 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
      * @return 实例对象
      */
     @Override
-    public R insert(VideoAdvertisingEntity videoAdvertising) {
-        baseMapper.insert(videoAdvertising);
-        return R.ok().setData(videoAdvertising);
+    public R insert(VideoAdvertisingDto videoAdvertising) {
+        return Optional.of(baseMapper.insert(BeanUtil.copyProperties(videoAdvertising, VideoAdvertisingEntity.class)))
+                .filter(f -> f > 0)
+                .map(r -> R.yes("Success."))
+                .orElse(R.no("Fail."));
     }
 
     /**
@@ -62,20 +87,28 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
      * @return 实例对象
      */
     @Override
-    public R update(VideoAdvertisingEntity videoAdvertising) {
-        baseMapper.update(videoAdvertising);
-        return R.ok().setData(this.queryById(videoAdvertising.getId()));
+    public R update(VideoAdvertisingDto videoAdvertising) {
+        return Optional.ofNullable(videoAdvertising.getId())
+                .map(idd -> baseMapper.updateById(BeanUtil.copyProperties(videoAdvertising, VideoAdvertisingEntity.class)))
+                .filter(f -> f > 0)
+                .map(r -> R.yes("Success."))
+                .orElseThrow(() ->
+                        AppException.builder().error(Error.COMMON_EXCEPTION).build());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param videoAdvertising 主键
      * @return 是否成功
      */
     @Override
-    public R deleteById(Long id) {
-        boolean del = baseMapper.deleteById(id) > 0;
-        return R.ok().setData(del);
+    public R deleteById(VideoAdvertisingDto videoAdvertising) {
+        return Optional.ofNullable(videoAdvertising.getId())
+                .map(idd -> baseMapper.deleteById(idd))
+                .filter(f -> f > 0)
+                .map(r -> R.yes("Success."))
+                .orElseThrow(() ->
+                        AppException.builder().error(Error.COMMON_EXCEPTION).build());
     }
 }

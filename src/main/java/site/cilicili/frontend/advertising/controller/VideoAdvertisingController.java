@@ -5,10 +5,20 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
-import site.cilicili.frontend.advertising.domain.pojo.VideoAdvertisingEntity;
+import site.cilicili.frontend.advertising.domain.dto.VideoAdvertisingDto;
 import site.cilicili.frontend.advertising.service.VideoAdvertisingService;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * (VideoAdvertising) 表控制层
@@ -19,7 +29,7 @@ import site.cilicili.frontend.advertising.service.VideoAdvertisingService;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("videoAdvertising")
+@RequestMapping("advertising")
 @Tag(name = "(VideoAdvertising) 表控制层")
 public class VideoAdvertisingController {
     /**
@@ -36,23 +46,23 @@ public class VideoAdvertisingController {
     @Operation(
             summary = "全查询",
             parameters = {@Parameter(description = "videoAdvertising 筛选条件")})
-    @GetMapping
-    public R queryAll(final VideoAdvertisingEntity videoAdvertising) {
+    @PostMapping("list")
+    public R queryAll(final @RequestBody VideoAdvertisingDto videoAdvertising) {
         return this.videoAdvertisingService.queryAll(videoAdvertising);
     }
 
     /**
      * 通过主键查询单条数据
      *
-     * @param id 主键
+     * @param videoAdvertising 主键
      * @return 单条数据
      */
     @Operation(
             summary = "通过主键查询单条数据",
             parameters = {@Parameter(description = "id 主键")})
-    @GetMapping("{id}")
-    public R queryById(final @PathVariable("id") Long id) {
-        return this.videoAdvertisingService.queryById(id);
+    @PostMapping("query-advertising-by-id")
+    public R queryById(final @RequestBody VideoAdvertisingDto videoAdvertising) {
+        return this.videoAdvertisingService.queryById(videoAdvertising);
     }
 
     /**
@@ -65,7 +75,12 @@ public class VideoAdvertisingController {
             summary = "新增数据",
             parameters = {@Parameter(description = "videoAdvertising 实体")})
     @PostMapping
-    public R add(final @RequestBody VideoAdvertisingEntity videoAdvertising) {
+    public R add(final @RequestBody @Validated VideoAdvertisingDto videoAdvertising, Errors exception) {
+        if (
+                exception.hasFieldErrors()
+        ) {
+            throw new AppException(exception.getFieldErrors().stream().map(item -> Optional.ofNullable(item.getDefaultMessage()).orElse(Error.COMMON_EXCEPTION.getMessage())).collect(Collectors.joining(",")));
+        }
         return this.videoAdvertisingService.insert(videoAdvertising);
     }
 
@@ -78,22 +93,36 @@ public class VideoAdvertisingController {
     @Operation(
             summary = "编辑数据",
             parameters = {@Parameter(description = "videoAdvertisingEntity 实体")})
-    @PutMapping
-    public R edit(final @RequestBody VideoAdvertisingEntity videoAdvertising) {
+    @PostMapping("edit-advertising")
+    public R edit(final @RequestBody VideoAdvertisingDto videoAdvertising) {
         return this.videoAdvertisingService.update(videoAdvertising);
     }
 
     /**
      * 删除数据
      *
-     * @param id 主键
+     * @param videoAdvertising 主键
      * @return 删除是否成功
      */
     @Operation(
             summary = "删除数据",
             parameters = {@Parameter(description = "id 主键")})
-    @DeleteMapping
-    public R deleteById(final Long id) {
-        return this.videoAdvertisingService.deleteById(id);
+    @PostMapping("delete-advertising-by-id")
+    public R deleteById(final @RequestBody VideoAdvertisingDto videoAdvertising) {
+        return this.videoAdvertisingService.deleteById(videoAdvertising);
+    }
+
+    /**
+     * 修改状态
+     *
+     * @param status 状态属性
+     * @return 删除是否成功
+     */
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
+    @PostMapping("change-status")
+    public R changeStatus(final @RequestBody VideoAdvertisingDto status) {
+        return this.videoAdvertisingService.update(status);
     }
 }

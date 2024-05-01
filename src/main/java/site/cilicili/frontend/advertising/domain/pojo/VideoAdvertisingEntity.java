@@ -5,7 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import site.cilicili.common.entity.BaseEntity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -28,14 +30,9 @@ import java.util.Date;
 @Setter
 @Schema(description = "VideoAdvertising 实体类")
 @TableName("video_advertising")
-public class VideoAdvertisingEntity implements Serializable {
+public class VideoAdvertisingEntity extends BaseEntity implements Serializable {
+    @Serial
     private static final long serialVersionUID = -75835453629995802L;
-    private Long id;
-    private Date createdAt;
-    private String createdBy;
-    private Date updatedAt;
-    private String updatedBy;
-    private Date deletedAt;
     private Long sort;
     private String stable;
     private String status;
@@ -46,4 +43,5 @@ public class VideoAdvertisingEntity implements Serializable {
     private String adverLink;
     private Date start;
     private Date end;
+    private Boolean isShow;
 }

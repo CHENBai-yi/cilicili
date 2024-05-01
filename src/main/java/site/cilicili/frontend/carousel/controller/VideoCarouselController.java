@@ -5,14 +5,21 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.carousel.domain.dto.VideoCarouselDto;
 import site.cilicili.frontend.carousel.service.VideoCarouselService;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * (VideoCarousel) 表控制层
@@ -69,7 +76,12 @@ public class VideoCarouselController {
             summary = "新增数据",
             parameters = {@Parameter(description = "videoCarousel 实体")})
     @PostMapping
-    public R add(final @RequestBody @Validated VideoCarouselDto videoCarousel) {
+    public R add(final @RequestBody @Validated VideoCarouselDto videoCarousel, Errors exception) throws BindException {
+        if (
+                exception.hasFieldErrors()
+        ) {
+            throw new AppException(exception.getFieldErrors().stream().map(item -> Optional.ofNullable(item.getDefaultMessage()).orElse(Error.COMMON_EXCEPTION.getMessage())).collect(Collectors.joining(",")));
+        }
         return this.videoCarouselService.insert(videoCarousel);
     }
 
@@ -99,5 +111,19 @@ public class VideoCarouselController {
     @PostMapping("delete-carousel-by-id")
     public R deleteById(final @RequestBody VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.deleteById(videoCarousel);
+    }
+
+    /**
+     * 修改状态
+     *
+     * @param status 状态属性
+     * @return 删除是否成功
+     */
+    @Operation(
+            summary = "删除数据",
+            parameters = {@Parameter(description = "id 主键")})
+    @PostMapping("change-status")
+    public R changeStatus(final @RequestBody VideoCarouselDto status) {
+        return this.videoCarouselService.update(status);
     }
 }
