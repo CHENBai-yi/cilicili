@@ -245,7 +245,7 @@
 </template>
 
 <script setup>
-import {inject, onMounted, ref, watch, watchEffect} from 'vue'
+import {inject, onMounted, ref, watch, watchEffect, defineProps} from 'vue'
 import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
@@ -254,6 +254,9 @@ import {useUserStore} from 'src/stores/user'
 import {getAvatar} from 'src/utils/common'
 import {useRouter} from 'vue-router'
 
+defineProps({
+  isJump: Boolean
+})
 import {useI18n} from 'vue-i18n'
 import {getAction, postAction} from 'src/api/manage'
 

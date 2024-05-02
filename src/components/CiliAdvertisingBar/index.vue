@@ -43,7 +43,6 @@ const show2 = ref(true)
 const src = ref()
 onMounted(() => {
   src.value = storageStore.GetCiliAdvertisingImg()
-  console.log(src.value, "srcccccccc")
   const coupletsAd = $(".hui-couplets-ad");
   const coupletsClose = $("a.hui-couplets-ad-close");
   const screen_w = screen.width;

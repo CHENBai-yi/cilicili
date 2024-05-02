@@ -1,4 +1,5 @@
 import {boot} from 'quasar/wrappers'
+import 'uno.css';
 import {
   ElAffix,
   ElBacktop,
@@ -24,7 +25,18 @@ import {
   ElRadioGroup,
   ElSelect,
   ElTag,
-  ElTimePicker
+  ElTimePicker,
+  ElCarouselItem,
+  ElAvatar,
+  ElCarousel,
+  ElDialog,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElEmpty,
+  ElImage,
+  ElInfiniteScroll,
+  ElPagination,
+  ElScrollbar,
 } from 'element-plus'
 
 import NavBar from 'src/components/navBar/index.vue'
@@ -81,12 +93,8 @@ import {
 } from 'naive-ui'
 //评论组件
 import UndrawUi from "undraw-ui"
-import 'undraw-ui/dist/style.css';
 
 export default boot(({app}) => {
-  //评论组件
-  // @ts-ignore
-  app.use(UndrawUi)
   app.use(ElForm)
   app.use(ElFormItem)
   app.use(ElSelect)
@@ -100,12 +108,11 @@ export default boot(({app}) => {
   app.use(ElRadio)
   app.use(ElInput)
   app.use(ElInputNumber)
+  app.use(ElCarouselItem)
 
   //ElForm,
   //   ElFormItem,ElSelect,ElOption,ElCol,ElDatePicker,ElTimePicker,
   //   ElCheckboxGroup,ElCheckbox,ElRadioGroup,ElRadio,ElInput
-
-
   app.use(ElPopover)
   app.use(ElAffix)
   app.use(ElButton)
@@ -118,11 +125,24 @@ export default boot(({app}) => {
   app.use(ElCollapseItem)
   app.use(ElIcon)
   app.use(ElDivider)
+  app.use(ElAvatar)
+  app.use(ElCarousel)
+  app.use(ElDialog)
+  app.use(ElDropdownItem)
+  app.use(ElDropdownMenu)
+  app.use(ElEmpty)
+  app.use(ElImage)
+  app.use(ElInfiniteScroll)
+  app.use(ElPagination)
+  app.use(ElScrollbar)
+
+
   app.component('CiliBackToTop', CiliBackToTop)
   app.component('NavBar', NavBar)
   app.component('CiliLink', CiliLink)
   app.component('CiliToolBar', CiliToolBar)
-
+  // //评论组件
+  app.use(UndrawUi)
   //prime UI
   app.directive('animateonscroll', AnimateOnScroll);
   app.use(PrimeVue);
@@ -144,4 +164,16 @@ export default boot(({app}) => {
   })
   app.use(naive)
 })
-export {ElAffix, ElButton, ElPopover, ElTag, ElBacktop}
+export {
+  ElAffix, ElButton, ElPopover, ElTag, ElBacktop, ElCarouselItem,
+  ElAvatar,
+  ElCarousel,
+  ElDialog,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElEmpty,
+  ElImage,
+  ElInfiniteScroll,
+  ElPagination,
+  ElScrollbar
+}

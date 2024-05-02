@@ -1,12 +1,16 @@
 // app global css in SCSS form
 @import "quasar.variables";
+@import 'animate.css';
 //评论组件
+@import 'undraw-ui/dist/style.css';
+@import 'element-plus/dist/index.css';
 @import 'primeicons/primeicons.css';
 @import 'primevue/resources/themes/aura-light-green/theme.css';
 @import 'element-plus/dist/index.css';
 @import 'vfonts/Lato.css';
 // 等宽字体
 @import 'vfonts/FiraCode.css';
+
 @font-face {
   font-family: rubikDoodleShadowRegular;
   src: url(./fonts/RubikDoodleShadow-Regular.ttf);

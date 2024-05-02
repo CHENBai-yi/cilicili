@@ -180,7 +180,7 @@ const handlePause = () => {
 }
 
 
-const emit = defineEmits(['isLoadCompleted'])
+const emit = defineEmits(['isLoadCompleted', 'handlePlay', 'handlePause'])
 const timeToMinute = inject('timeToMinute')
 const render = () => {
   let player = {

@@ -11,7 +11,7 @@
 </template>
 <script setup>
 import {UNoticeBar} from 'undraw-ui'
-import {ref, onMounted} from 'vue'
+import {onMounted, ref} from 'vue'
 import {useStorageStore} from 'src/stores/storage'
 
 const storageStore = useStorageStore();

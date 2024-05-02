@@ -1,6 +1,4 @@
 import {boot} from 'quasar/wrappers'
-import 'uno.css'
-import 'animate.css'
 import {Cookies, getCssVar, setCssVar} from 'quasar'
 import {ThemeStyleQuasar} from 'src/config/default'
 
