@@ -1,9 +1,11 @@
 <template>
   <n-carousel autoplay class="rounded-borders" show-arrow>
-    <img v-for="(url,index) in urls"
-         :src=url
-         class="carousel-img"
-    >
+    <a v-for="(url,index) in urls" :href="url.link">
+      <img
+        :src=url.img
+        class="carousel-img"
+      >
+    </a>
     <template #arrow="{ prev, next }">
       <div class="custom-arrow">
         <button class="custom-arrow--left" type="button" @click="prev">
@@ -28,14 +30,14 @@
 </template>
 
 <script setup>
-import {reactive} from 'vue'
+import {onMounted, ref} from 'vue'
+import {useStorageStore} from 'src/stores/storage'
 
-const urls = reactive([
-  "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg",
-  "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg",
-  "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg",
-  "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-])
+const storageStore = useStorageStore();
+const urls = ref([])
+onMounted(() => {
+  urls.value = storageStore.GetCiliCarousel()
+})
 </script>
 
 <style scoped>

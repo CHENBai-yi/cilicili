@@ -43,7 +43,6 @@ export default defineComponent({
           }
         }
       },
-
       // CSS tags
       // link: {
       //   material: {rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
@@ -84,6 +83,7 @@ export default defineComponent({
       noscript: {
         default: 'This is content for browsers with no JS (or disabled JS)'
       }
+
     })
   }
 });

@@ -22,15 +22,18 @@
 </template>
 <script setup>
 import useTheme from "src/composables/useTheme"
-
+import {useStorageStore} from 'src/stores/storage'
 import {inject, nextTick, onMounted, ref} from "vue";
 
+const storageStore = useStorageStore();
 const componentLoading = ref(true)
 const bus = inject('bus')
 onMounted(() => {
   bus.on('changeRoute', (val) => {
     componentLoading.value = val
   })
+  storageStore.SetCiliAdvertising();
+  storageStore.SetCiliCarousel();
 })
 const {darkTheme} = useTheme()
 const refresh = (done) => {

@@ -45,7 +45,10 @@
                   <div class="left q-mb-sm rounded-borders "></div>
                 </div>
                 <n-scrollbar>
-                  <div class="q-gutter-sm">
+                  <div class="q-gutter-sm" style="display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;">
                     <CiliLink v-for="(item ,index) in videoList" :key="index" :weight=600 color=""
                               @click="switchVideo(item.content)">
                       <div class="flex no-wrap items-center justify-evenly">

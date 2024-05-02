@@ -6,8 +6,18 @@
 
     <div v-if="show" class="hui-couplets-ad hui-couplets-ad-l">
       <transition appear enter-active-class="animated animate__headShake">
-        <div v-if="show2" class="dual_con"><img height="300" src="//images.h-ui.net/www/AD-100x300.gif" width="100">
+        <div v-show="show2" class="dual_con">
+          <n-carousel autoplay style="height:300px;width:100px">
+            <a v-for="(item,index) in src" :key="index" :href="item.link">
+              <img
+                :src="item.content"
+                class="carousel-img"
+                style="object-fit: cover;"
+              >
+            </a>
+          </n-carousel>
         </div>
+        <!--        //images.h-ui.net/www/AD-100x300.gif-->
       </transition>
       <a class="hui-couplets-ad-close" href="#">X关闭</a>
     </div>
@@ -25,10 +35,15 @@
 <script setup>
 import $ from 'jquery'
 import {onMounted, ref} from 'vue'
+import {useStorageStore} from 'src/stores/storage'
 
+const storageStore = useStorageStore();
 const show = ref(true)
 const show2 = ref(true)
+const src = ref()
 onMounted(() => {
+  src.value = storageStore.GetCiliAdvertisingImg()
+  console.log(src.value, "srcccccccc")
   const coupletsAd = $(".hui-couplets-ad");
   const coupletsClose = $("a.hui-couplets-ad-close");
   const screen_w = screen.width;
@@ -45,13 +60,14 @@ onMounted(() => {
     show.value = false
     return false
   });
-  setTimeout(() => {
-    show.value = false
-  }, 10000);
+  // setTimeout(() => {
+  //   show.value = false
+  // }, 10000);
   setInterval(() => {
     show2.value = !show2.value
-    setTimeout(() => show2.value = !show2.value, 10)
+    setTimeout(() => show2.value = !show2.value, 1)
   }, 4000)
+
 })
 
 </script>
