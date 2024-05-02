@@ -80,11 +80,13 @@ import {
   NUpload
 } from 'naive-ui'
 //评论组件
-import UndrawUi from 'undraw-ui'
+import UndrawUi from "undraw-ui"
 import 'undraw-ui/dist/style.css';
 
-
 export default boot(({app}) => {
+  //评论组件
+  // @ts-ignore
+  app.use(UndrawUi)
   app.use(ElForm)
   app.use(ElFormItem)
   app.use(ElSelect)
@@ -120,8 +122,7 @@ export default boot(({app}) => {
   app.component('NavBar', NavBar)
   app.component('CiliLink', CiliLink)
   app.component('CiliToolBar', CiliToolBar)
-  //评论组件
-  app.use(UndrawUi)
+
   //prime UI
   app.directive('animateonscroll', AnimateOnScroll);
   app.use(PrimeVue);
