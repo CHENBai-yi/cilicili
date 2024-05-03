@@ -79,6 +79,8 @@ export const useStorageStore = defineStore('storage', {
       if (res.code === 1) {
         let arr = res.data.records
         if (arr) {
+          this.CiliAdvertisingText = ''
+          this.CiliAdvertisingImg = undefined
           let temp = arr.filter(item => 'contentType_text' === item.type)
           temp = temp.map(item => item.content)
           let str = '\t';
@@ -186,36 +188,6 @@ export const useStorageStore = defineStore('storage', {
         return pluginList
       }
     },
-    FlushAdverConfig() {
-      if (window.EventSource) {
-        // 建立连接
-        this.source = new EventSource(`${process.env.API}public/subscribe-carousel`);
 
-        this.source.onmessage = async function (event) {
-          if (event) {
-            let data = event?.data
-            try {
-              data = JSON.parse(data)
-              if (data.code === 1) {
-                console.log(data)
-                await this.SetCiliAdvertising()
-                await this.SetCiliCarousel()
-              }
-            } catch (e) {
-
-            }
-          }
-        }
-        /* this.source.onerror = (error) => {
-           console.log('SSE链接失败');
-         };
-
-         this.source.onopen = function (event) {
-           console.log('SSE链接成功');
-         }*/
-      } else {
-        alert("你的浏览器不支持SSE");
-      }
-    },
   },
 });

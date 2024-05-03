@@ -1,10 +1,9 @@
 <template>
   <transition appear
               leave-active-class="animated animate__fadeOut">
-    <div v-if="!!noticeList && noticeList.length>0" class="flex row no-wrap content-center items-center q-pl-sm">
+    <div v-show="!!noticeList && noticeList.length>0" class="flex row no-wrap content-center items-center q-pl-sm">
 
       <q-icon color="negative" name="campaign" size="25px"/>
-
       <transition appear
                   enter-active-class="animated animate__fadeInRight"
                   leave-active-class="animated animate__fadeOut">

@@ -59,7 +59,9 @@ const initEventSource = () => {
         try {
           data = JSON.parse(data)
           if (data.code === 1) {
-            flush()
+            console.log(data, "EventSource")
+            storageStore.SetCiliAdvertising();
+            storageStore.SetCiliCarousel();
           }
         } catch (e) {
         }
