@@ -1,6 +1,6 @@
 <template>
   <q-page :class="$q.dark.isActive?`nice-class-out ${darkTheme}`:'nice-class-out'"
-          :style="$q.screen.lt.sm?{paddingTop: '70px'}:{paddingTop: '170px'}" style="overflow: hidden;">
+          :style="$q.screen.lt.sm?{paddingTop: '70px'}:{paddingTop: '215px'}" style="overflow: hidden;">
     <div class="row">
       <div class="nice-class col-10 ">
         <ul v-if="!showNoData&&!!courses.courses&&courses.courses.length>0"
@@ -57,7 +57,6 @@
                         @click="queryParam.subject=item;refresh()">
                 {{ item }}
               </n-button>
-
             </div>
           </div>
           <n-divider class="no-margin"/>
