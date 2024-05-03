@@ -4,6 +4,7 @@ import {useI18n} from 'vue-i18n'
 import {postAction} from 'src/api/manage'
 import {DictOptions} from 'src/utils/dict'
 import useCommon from './useCommon'
+
 export default function useTableData(url) {
   const {t} = useI18n()
   const $q = useQuasar()
@@ -102,6 +103,26 @@ export default function useTableData(url) {
     })
   }
   const {showDateTime, showDate, CiliFrontend, CiliBackend, CiliDictShow, CiliShowName,} = useCommon()
+  const flushCarouselList = async () => {
+    if (url === undefined || !url.flush) {
+      $q.notify({
+        type: 'negative',
+        message: t('UrlNotConfig'),
+      })
+      return
+    }
+    loading.value = true
+    await postAction(url.flush, {}).then(res => {
+      if (res.code === 1) {
+        $q.notify({
+          type: 'positive',
+          message: res?.message,
+        })
+      }
+    }).finally(() => {
+      loading.value = false
+    })
+  }
   return {
     $q,
     t,
@@ -110,6 +131,7 @@ export default function useTableData(url) {
     CiliDictShow,
     CiliFrontend,
     CiliBackend,
+    flushCarouselList,
     dictOptions,
     showDateTime,
     showDate,

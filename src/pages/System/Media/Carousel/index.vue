@@ -15,7 +15,7 @@
               <q-btn v-has="'notice:add'" :label="$t('效果预览')" color="positive"
                      @click="showCarousel(tableData)"/>
               <q-btn v-has="'notice:add'" :label="$t('刷新')" color="positive"
-                     @click="showAddForm()"/>
+                     @click="flushCarouselList"/>
             </div>
             <q-space/>
             <q-btn :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" class="q-ml-md" dense flat
@@ -100,6 +100,7 @@ const url = {
   delete: 'carousel/delete-carousel-by-id',
   send: 'notice/send-notice',
   change: 'carousel/change-status',
+  flush: 'carousel/flush-carousel-list'
 
 }
 const columns = computed(() => {
@@ -136,7 +137,8 @@ const {
   resetSearch,
   handleFinish,
   handleDelete,
-  postAction
+  postAction,
+  flushCarouselList
 } = useTableData(url)
 onMounted(async () => {
   pagination.value.sortBy = 'sort'
