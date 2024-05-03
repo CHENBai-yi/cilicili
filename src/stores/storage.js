@@ -16,7 +16,8 @@ export const useStorageStore = defineStore('storage', {
     CiliCarousel: undefined,
     CiliAdvertising: undefined,
     CiliAdvertisingText: '',
-    CiliAdvertisingImg: undefined
+    CiliAdvertisingImg: undefined,
+    source: undefined
   }),
   getters: {},
   actions: {
@@ -96,7 +97,6 @@ export const useStorageStore = defineStore('storage', {
       this.goVersion = goVersion
       LocalStorage.set('cili-goVersion', goVersion)
     },
-
     SetCiliGinVersion(ginVersion) {
       this.ginVersion = ginVersion
       LocalStorage.set('cili-ginVersion', ginVersion)
@@ -108,11 +108,15 @@ export const useStorageStore = defineStore('storage', {
     },
     GetCiliAdvertisingText() {
       const advertising = LocalStorage.getItem("cili-advertising-text")
-      if (this.CiliAdvertisingText) {
-        return this.CiliAdvertisingText
-      } else {
+      if (advertising) {
         return advertising
+      } else {
+        return this.CiliAdvertisingText
       }
+    },
+    DelCiliAdvertisingText() {
+      this.CiliAdvertisingText = '';
+      LocalStorage.remove("cili-advertising-text")
     },
     GetCiliAdvertisingImg() {
       const advertising = LocalStorage.getItem("cili-advertising-img")
@@ -180,6 +184,37 @@ export const useStorageStore = defineStore('storage', {
         return this.pluginList
       } else {
         return pluginList
+      }
+    },
+    FlushAdverConfig() {
+      if (window.EventSource) {
+        // 建立连接
+        this.source = new EventSource(`${process.env.API}public/subscribe-carousel`);
+
+        this.source.onmessage = async function (event) {
+          if (event) {
+            let data = event?.data
+            try {
+              data = JSON.parse(data)
+              if (data.code === 1) {
+                console.log(data)
+                await this.SetCiliAdvertising()
+                await this.SetCiliCarousel()
+              }
+            } catch (e) {
+
+            }
+          }
+        }
+        /* this.source.onerror = (error) => {
+           console.log('SSE链接失败');
+         };
+
+         this.source.onopen = function (event) {
+           console.log('SSE链接成功');
+         }*/
+      } else {
+        alert("你的浏览器不支持SSE");
       }
     },
   },

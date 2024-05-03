@@ -34,15 +34,14 @@
 
 <script setup>
 import $ from 'jquery'
-import {onMounted, ref} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import {useStorageStore} from 'src/stores/storage'
 
 const storageStore = useStorageStore();
 const show = ref(true)
 const show2 = ref(true)
-const src = ref()
+const src = computed(() => storageStore.CiliAdvertisingImg)
 onMounted(() => {
-  src.value = storageStore.GetCiliAdvertisingImg()
   const coupletsAd = $(".hui-couplets-ad");
   const coupletsClose = $("a.hui-couplets-ad-close");
   const screen_w = screen.width;

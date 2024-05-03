@@ -30,13 +30,15 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {computed} from 'vue'
 import {useStorageStore} from 'src/stores/storage'
 
 const storageStore = useStorageStore();
-const urls = ref([])
-onMounted(() => {
-  urls.value = storageStore.GetCiliCarousel()
+const urls = computed(() => {
+  if (storageStore.GetCiliCarousel()) {
+    return storageStore.GetCiliCarousel()
+  }
+  return storageStore.CiliCarousel
 })
 </script>
 
