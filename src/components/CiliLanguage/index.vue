@@ -19,7 +19,7 @@ const langOptions = appLanguages.map((lang) => ({
   value: lang.isoName,
 }))
 const $q = useQuasar()
-const lang = ref($q.lang.isoName)``
+const lang = ref($q.lang.isoName)
 const {locale} = useI18n({useScope: 'global'})
 
 onMounted(() => {
