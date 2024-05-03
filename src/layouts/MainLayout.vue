@@ -60,6 +60,7 @@ const initEventSource = () => {
           data = JSON.parse(data)
           if (data.code === 1) {
             console.log(data, "EventSource")
+            storageStore.DelCiliAdvertisingText()
             storageStore.SetCiliAdvertising();
             storageStore.SetCiliCarousel();
           }

@@ -1,13 +1,13 @@
 <template>
-
   <transition appear
               enter-active-class="animated animate__fadeInLeft"
               leave-active-class="animated animate__fadeOutLeft">
 
-    <div v-if="show" class="hui-couplets-ad hui-couplets-ad-l">
-      <transition appear enter-active-class="animated animate__headShake">
-        <div v-show="show2" class="dual_con">
-          <n-carousel autoplay style="height:300px;width:100px">
+    <div v-show="show" class="hui-couplets-ad hui-couplets-ad-l">
+      <div v-show="show3">
+        <transition appear enter-active-class="animated animate__headShake">
+
+          <n-carousel v-show="show2" autoplay style="height:300px;width:100px">
             <a v-for="(item,index) in src" :key="index" :href="item.link">
               <img
                 :src="item.content"
@@ -16,10 +16,11 @@
               >
             </a>
           </n-carousel>
-        </div>
-        <!--        //images.h-ui.net/www/AD-100x300.gif-->
-      </transition>
-      <a class="hui-couplets-ad-close" href="#">X关闭</a>
+
+          <!--        //images.h-ui.net/www/AD-100x300.gif-->
+        </transition>
+        <a v-show="show3" class="hui-couplets-ad-close" href="#">X关闭</a>
+      </div>
     </div>
   </transition>
   <!--  <transition appear-->
@@ -37,10 +38,15 @@ import $ from 'jquery'
 import {computed, onMounted, ref} from 'vue'
 import {useStorageStore} from 'src/stores/storage'
 
+
 const storageStore = useStorageStore();
 const show = ref(true)
 const show2 = ref(true)
-const src = computed(() => storageStore.CiliAdvertisingImg)
+const show3 = ref(true)
+const src = computed(() => {
+  show3.value = !!storageStore.CiliAdvertisingImg && storageStore.CiliAdvertisingImg.length > 0;
+  return storageStore.CiliAdvertisingImg
+})
 onMounted(() => {
   const coupletsAd = $(".hui-couplets-ad");
   const coupletsClose = $("a.hui-couplets-ad-close");
@@ -55,7 +61,7 @@ onMounted(() => {
     });
   });
   coupletsClose.click(function () {
-    show.value = false
+    show3.value = false
     return false
   });
   // setTimeout(() => {
@@ -63,7 +69,7 @@ onMounted(() => {
   // }, 10000);
   setInterval(() => {
     show2.value = !show2.value
-    setTimeout(() => show2.value = !show2.value, 1)
+    setTimeout(() => show2.value = !show2.value, 10)
   }, 4000)
 
 })

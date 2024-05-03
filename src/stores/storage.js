@@ -79,8 +79,6 @@ export const useStorageStore = defineStore('storage', {
       if (res.code === 1) {
         let arr = res.data.records
         if (arr) {
-          this.CiliAdvertisingText = ''
-          this.CiliAdvertisingImg = undefined
           let temp = arr.filter(item => 'contentType_text' === item.type)
           temp = temp.map(item => item.content)
           let str = '\t';
@@ -117,15 +115,19 @@ export const useStorageStore = defineStore('storage', {
       }
     },
     DelCiliAdvertisingText() {
-      this.CiliAdvertisingText = '';
       LocalStorage.remove("cili-advertising-text")
+      this.CiliAdvertisingText = '';
+    },
+    DelCiliAdvertisingImg() {
+      LocalStorage.removeItem("cili-advertising-img")
+      this.CiliAdvertisingImg = undefined;
     },
     GetCiliAdvertisingImg() {
       const advertising = LocalStorage.getItem("cili-advertising-img")
-      if (this.CiliAdvertisingImg) {
-        return this.CiliAdvertisingImg
-      } else {
+      if (advertising) {
         return advertising
+      } else {
+        return this.CiliAdvertisingImg
       }
     },
     GetCiliCarousel() {
