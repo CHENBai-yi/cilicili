@@ -79,11 +79,14 @@ import {getComment, postAction, urls} from './comment'
 import defaultImage from 'src/assets/quasar-logo-vertical.svg'
 import {useRoute} from 'vue-router'
 import {useI18n} from "vue-i18n";
+import {useUserStore} from "src/stores/user";
 
 const {t} = useI18n()
 const $router = useRoute()
 const commentRef = ref<CommentInstance>()
+const userStore = useUserStore()
 // 用户信息是否加载
+
 const loading = ref(false)
 // 请求获取用户详细信息
 const showInfo = (uid: string, finish: Function) => {
@@ -118,13 +121,15 @@ let total = 1
 // 初始化评论列表
 onMounted(async () => {
   loading.value = true
-  postAction(urls.userInfo, {id: null})
-    .then(res => {
-      if (res.code === 1) {
-        //@ts-ignore
-        config.user = res.data
-      }
-    }).finally(() => loading.value = false)
+  if (!!userStore.GetToken()) {
+    postAction(urls.userInfo, {id: null})
+      .then(res => {
+        if (res.code === 1) {
+          //@ts-ignore
+          config.user = res.data
+        }
+      }).finally(() => loading.value = false)
+  }
   const res = await getComment(pageNum - 1, pageSize, $router.params.id)
   config.comments.push(...res.data)
   total = res.total
