@@ -3,12 +3,12 @@
   <q-infinite-scroll :offset="250" class="" @load="onLoad">
     <div :class="$q.screen.lt.sm?'column ':'row'">
       <div v-if="$q.screen.gt.sm" class="col-4">
-        <div :class="$q.screen.lt.sm?'column q-mt-sm q-mx-sm':'row q-gutter-x-md q-ma-sm q-mb-md'">
+        <div :class="$q.screen.lt.sm?'column q-mt-sm q-mx-sm ':'row q-gutter-x-md q-mx-sm  q-mb-md '">
           <CiliCarousel/>
         </div>
       </div>
       <div class="col">
-        <div :class="$q.screen.lt.sm?'column q-mx-sm  q-gutter-y-md':'row q-gutter-x-md q-mr-sm q-my-sm'">
+        <div :class="$q.screen.lt.sm?'column q-mx-sm  q-gutter-y-md':'row q-gutter-x-xs q-mr-md q-mb-xs'">
           <div v-for="(item,index) in item1" :key="item.title" class="col order-first">
             <q-card bordered flat style="height:260px;max-height:260px;max-width: 500px">
               <div v-show="loaded" class="column">
@@ -96,7 +96,8 @@
             </q-card>
           </div>
         </div>
-        <div :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-md q-mr-sm q-my-md'">
+        <!--        row q-gutter-x-md q-mr-sm q-my-md-->
+        <div :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-xs q-mr-md q-mb-xs'">
           <div v-for="(item,index) in item2" :key="item.faver" class="col order-none">
             <q-card bordered flat style="max-width: 500px;height:260px;max-height:260px">
               <div v-show="loaded" class="column">
@@ -187,7 +188,7 @@
       </div>
     </div>
     <div v-for="(item, index) in items" :key="index"
-         :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-md q-ma-xs q-mb-md'"
+         :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-md q-mx-sm q-mr-md q-mb-md '"
     >
       <div v-for="(i,index) in item" :key="i.title" class="col order-none">
         <q-card bordered flat style="height:260px;max-height:260px;">

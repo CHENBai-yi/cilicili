@@ -8,5 +8,10 @@
 <script setup>
 import CiliVideoLayout from 'src/components/CiliVideoLayout/CiliVideoLayout.vue'
 import CiliAdvertisingBar from 'src/components/CiliAdvertisingBar/index.vue'</script>
+<style lang="scss" scoped>
+:deep(video) {
+  object-fit: cover;
+}
+</style>
 
 

@@ -1,5 +1,5 @@
 <template>
-  <n-carousel autoplay class="rounded-borders" show-arrow>
+  <n-carousel autoplay class="rounded-borders" show-arrow style="height:525px;min-height:525px">
     <a v-for="(url,index) in urls" :href="url.link">
       <img
         :src=url.img

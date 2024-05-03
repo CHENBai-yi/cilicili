@@ -13,6 +13,8 @@
     "build": "quasar build"
   },
   "dependencies": {
+    "@element-plus/icons": "^0.0.11",
+    "@element-plus/icons-vue": "^2.3.1",
     "@quasar/extras": "^1.16.4",
     "@vicons/ionicons5": "^0.12.0",
     "animate.css": "^4.1.1",
@@ -39,7 +41,7 @@
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "@quasar/app-vite": "^1.4.3",
-    "@types/node": "^12.20.21",
+    "@types/node": "^12.20.55",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "@vue/devtools": "^7.0.13",
