@@ -13,7 +13,7 @@
               <q-btn v-has="'notice:add'" :label="$t('Add')" color="primary"
                      @click="showAddForm()"/>
               <q-btn v-has="'notice:add'" :label="$t('Flush')" color="positive"
-                     @click="showAddForm()"/>
+                     @click="flushCarouselList()"/>
             </div>
             <q-space/>
             <q-btn :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" class="q-ml-md" dense flat
@@ -57,7 +57,9 @@
           <template v-slot:body-cell-link="props">
             <q-td :props="props" class="q-gutter-y-sm">
               <n-tag :bordered="false" type="success">
-                {{ props.row.adver_path }}
+                <n-ellipsis style="max-width: 220px">
+                  {{ props.row.adver_path }}
+                </n-ellipsis>
               </n-tag>
             </q-td>
           </template>
@@ -90,6 +92,7 @@ const url = {
   delete: 'advertising/delete-advertising-by-id',
   send: 'notice/send-notice',
   change: 'advertising/change-status',
+  flush: 'carousel/flush-carousel-list'
 
 }
 const columns = computed(() => {
@@ -125,6 +128,7 @@ const {
   resetSearch,
   handleFinish,
   handleDelete,
+  flushCarouselList
 } = useTableData(url)
 onMounted(async () => {
   pagination.value.sortBy = 'sort'

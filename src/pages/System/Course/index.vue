@@ -14,7 +14,7 @@
       <q-card-section>
         <q-table v-model:pagination="pagination" :columns="columns" :loading="loading" :rows="tableData"
                  :rows-per-page-options="pageOptions"
-                 row-key="id" separator="cell" @request="onRequest" dense>
+                 dense row-key="id" separator="cell" @request="onRequest">
           <template v-slot:top="props">
             <q-space/>
             <q-btn :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" class="q-ml-md" dense flat
@@ -33,7 +33,7 @@
                   width="125"
                 />
               </q-td>
-              <q-td key="author" :props="props" >
+              <q-td key="author" :props="props">
                 <q-badge color="purple">
                   {{ props.row.author }}
                 </q-badge>
@@ -75,10 +75,12 @@
                 <Status :dictCode="props.row.status"/>
               </q-td>
               <q-td key="operation" :props="props">
-                <q-btn v-if="props.row.status==='onOffPass_on'" color="primary" flat label="审核通过" :ripple="false" />
+                <q-btn v-if="props.row.status==='onOffPass_on'" :ripple="false" color="primary" flat label="审核通过"
+                       @click="pass(props.row)"/>
                 <PopConfirm v-if="props.row.status==='onOffPass_off'" :reason="props.row.reason"></PopConfirm>
-                <q-btn v-if="props.row.status==='onOffPass_off'" disable color="red" flat label="驳回" @click="prompt(props.row)" :ripple="false" />
-                <q-btn v-else color="red" flat label="驳回" @click="prompt(props.row)" :ripple="false" />
+                <q-btn v-if="props.row.status==='onOffPass_off'" :ripple="false" color="red" disable flat
+                       label="驳回" @click="prompt(props.row)"/>
+                <q-btn v-else :ripple="false" color="red" flat label="驳回" @click="prompt(props.row)"/>
               </q-td>
             </q-tr>
           </template>
@@ -197,8 +199,8 @@ const prompt = (row) => {
     persistent: true
   }).onOk(async data => {
     console.log('>>>> OK, received', data)
-    const res=await postAction(url.update, {id: row.id, reason: data, status: 'onOffPass_off'})
-    if (res&&res.code===1){
+    const res = await postAction(url.update, {id: row.id, reason: data, status: 'onOffPass_off'})
+    if (res && res.code === 1) {
       getTableData()
     }
   }).onCancel(() => {
@@ -206,5 +208,11 @@ const prompt = (row) => {
   }).onDismiss(() => {
     console.log('I am triggered on both OK and Cancel')
   })
+}
+const pass = async (row) => {
+  const res = await postAction(url.update, {id: row.id, reason: '', status: 'onOffPass_pass'})
+  if (res && res.code === 1) {
+    getTableData()
+  }
 }
 </script>

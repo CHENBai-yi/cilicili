@@ -61,7 +61,9 @@
           <template v-slot:body-cell-path="props">
             <q-td :props="props" class="q-gutter-y-sm">
               <n-tag :bordered="false" type="success">
-                {{ props.row.link_path }}
+               <n-ellipsis style="max-width: 220px">
+                 {{ props.row.link_path }}
+               </n-ellipsis>
               </n-tag>
             </q-td>
           </template>
