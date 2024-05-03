@@ -443,13 +443,13 @@
     <select id="SelectClassify" resultType="string">
         select category_name
         from categories
-        limit 11;
+        limit 17;
     </select>
     
     <select id="SelectClassifyMore" resultType="string">
         select category_name
         from categories
-        LIMIT 11 OFFSET 11;
+        LIMIT 17,18446744073709551615;
     </select>
     <select id="SelectMoreCourses" resultMap="Courses">
         select *
