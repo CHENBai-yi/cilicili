@@ -8,12 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
+import site.cilicili.common.service.SseEmitterService;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.carousel.domain.dto.VideoCarouselDto;
 import site.cilicili.frontend.carousel.service.VideoCarouselService;
@@ -30,7 +29,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("carousel")
+@RequestMapping({"public", "carousel"})
 @Tag(name = "(VideoCarousel) 表控制层")
 public class VideoCarouselController {
     /**
@@ -67,23 +66,11 @@ public class VideoCarouselController {
     }
 
     /**
-     * 新增数据
+     * 刷新轮播图时间,按时间返回轮播图
      *
-     * @param videoCarousel 实体
-     * @return 新增结果
+     * @return R
      */
-    @Operation(
-            summary = "新增数据",
-            parameters = {@Parameter(description = "videoCarousel 实体")})
-    @PostMapping
-    public R add(final @RequestBody @Validated VideoCarouselDto videoCarousel, Errors exception) throws BindException {
-        if (
-                exception.hasFieldErrors()
-        ) {
-            throw new AppException(exception.getFieldErrors().stream().map(item -> Optional.ofNullable(item.getDefaultMessage()).orElse(Error.COMMON_EXCEPTION.getMessage())).collect(Collectors.joining(",")));
-        }
-        return this.videoCarouselService.insert(videoCarousel);
-    }
+    private final SseEmitterService carouselService;
 
     /**
      * 编辑数据
@@ -126,4 +113,51 @@ public class VideoCarouselController {
     public R changeStatus(final @RequestBody VideoCarouselDto status) {
         return this.videoCarouselService.update(status);
     }
+
+    /**
+     * 新增数据
+     *
+     * @param videoCarousel 实体
+     * @return 新增结果
+     */
+    @Operation(
+            summary = "新增数据",
+            parameters = {@Parameter(description = "videoCarousel 实体")})
+    @PostMapping
+    public R add(final @RequestBody @Validated VideoCarouselDto videoCarousel, Errors exception) throws BindException {
+        if (exception.hasFieldErrors()) {
+            throw new AppException(exception.getFieldErrors().stream()
+                    .map(item ->
+                            Optional.ofNullable(item.getDefaultMessage()).orElse(Error.COMMON_EXCEPTION.getMessage()))
+                    .collect(Collectors.joining(",")));
+        }
+        return this.videoCarouselService.insert(videoCarousel);
+    }
+
+    /**
+     * 按时间返回轮播图
+     *
+     * @return R
+     */
+    @Operation(
+            summary = "按时间返回轮播图")
+    @PostMapping("get-carousel-list")
+    public R videoCarouselListByTime() {
+        return this.videoCarouselService.getCarouselList();
+    }
+
+    @Operation(
+            summary = "刷新轮播图时间,按时间返回轮播图")
+    @PostMapping("flush-carousel-list")
+    public R flushCarouselList() {
+        return carouselService.flushCarouselList();
+    }
+
+    @Operation(
+            summary = "刷新轮播图时间,按时间返回轮播图")
+    @GetMapping("subscribe-carousel")
+    public SseEmitter subscribeCarousel() {
+        return carouselService.subscribeCarousel();
+    }
+
 }

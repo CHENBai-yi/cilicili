@@ -40,6 +40,7 @@ import java.util.Objects;
 public class VideoAdvertisingDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 283647449419855606L;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected LocalDateTime createdAt;
 
@@ -54,25 +55,33 @@ public class VideoAdvertisingDto implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected LocalDateTime deletedAt;
+
     List<Long> ids;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JacksonInject("isShow")
     private Boolean isShow;
+
     private Long id;
     private Long[] time;
     private Long sort;
     private String stable;
     private String status;
     private String memo;
+
     @JsonProperty("content_type")
     private String adverType;
+
     @JsonProperty("adver_page")
     private String adverUrl;
+
     @JsonProperty("content")
     private String adverContent;
+
     @Pattern(regexp = "^http://.*?", message = "不是正确的链接地址")
     @JsonProperty("adver_path")
     private String adverLink;
+
     private Date start;
     private Date end;
     /**
@@ -95,8 +104,10 @@ public class VideoAdvertisingDto implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String sortBy;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Boolean desc;
 

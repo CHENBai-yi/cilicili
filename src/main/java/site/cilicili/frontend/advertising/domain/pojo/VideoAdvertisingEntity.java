@@ -33,6 +33,7 @@ import java.util.Date;
 public class VideoAdvertisingEntity extends BaseEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = -75835453629995802L;
+
     private Long sort;
     private String stable;
     private String status;

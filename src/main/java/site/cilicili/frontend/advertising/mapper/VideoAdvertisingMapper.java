@@ -90,4 +90,6 @@ public interface VideoAdvertisingMapper extends BaseMapper<VideoAdvertisingEntit
     int deleteById(Long id);
 
     List<VideoAdvertisingEntity> queryAllByParam(VideoAdvertisingDto videoAdvertising);
+
+    List<VideoAdvertisingEntity> getAdverListByTime();
 }

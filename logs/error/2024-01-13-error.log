@@ -1,0 +1,6 @@
+2024-01-13 22:22:35.067 [http-nio-8889-exec-10] ERROR s.cilicili.common.util.DbUtils - Unknown database 'quasar-admin'
+2024-01-13 22:22:35.089 [http-nio-8889-exec-10] ERROR s.cilicili.common.util.DbUtils - Unknown database 'quasar-admin'
+2024-01-13 22:22:35.122 [http-nio-8889-exec-2] ERROR s.cilicili.common.util.DbUtils - Unknown database 'quasar-admin'
+2024-01-13 22:22:35.140 [http-nio-8889-exec-2] ERROR s.cilicili.common.util.DbUtils - Unknown database 'quasar-admin'
+2024-01-13 22:22:36.813 [http-nio-8889-exec-4] ERROR s.cilicili.common.util.DbUtils - Unknown database 'quasar-admin'
+2024-01-13 22:22:36.854 [http-nio-8889-exec-4] ERROR s.cilicili.common.util.DbUtils - Unknown database 'quasar-admin'

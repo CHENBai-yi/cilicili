@@ -62,6 +62,7 @@ public class VideoCarouselDto {
     private String type;
 
     private Integer sort;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JacksonInject("isShow")
     private Boolean isShow;
@@ -102,8 +103,10 @@ public class VideoCarouselDto {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String sortBy;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Boolean desc;
 

@@ -52,4 +52,6 @@ public interface VideoCarouselService extends IService<VideoCarouselEntity> {
      * @return 是否成功
      */
     R deleteById(final VideoCarouselDto id);
+
+    R getCarouselList();
 }

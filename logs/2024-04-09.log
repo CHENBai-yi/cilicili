@@ -1,0 +1,45 @@
+2024-04-09 22:36:38.449 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-04-09 22:36:38.612 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 9496 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-04-09 22:36:38.614 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-04-09 22:36:41.972 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-04-09 22:36:41.975 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-04-09 22:36:42.092 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107 ms. Found 0 MongoDB repository interfaces.
+2024-04-09 22:36:42.108 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-04-09 22:36:42.111 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-04-09 22:36:42.203 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 0 Redis repository interfaces.
+2024-04-09 22:36:45.024 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2024-04-09 22:36:45.057 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2024-04-09 22:36:45.059 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6302 ms
+2024-04-09 22:36:47.692 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-04-09 22:36:48.186 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-04-09 22:36:48.282 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-04-09 22:36:48.514 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-04-09 22:36:50.028 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-04-09 22:36:51.584 [redisson-netty-1-4] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-04-09 22:36:54.663 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-04-09 22:36:57.537 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@31d11998, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ee0ef34, org.springframework.security.web.context.SecurityContextHolderFilter@97842a0, org.springframework.security.web.header.HeaderWriterFilter@2330c5c5, org.springframework.web.filter.CorsFilter@ab5d5c8, org.springframework.security.web.authentication.logout.LogoutFilter@241861bc, site.cilicili.common.filter.JWTAuthFilter@37bac0f4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@41628b4f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71077d1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@41a18b54, org.springframework.security.web.access.ExceptionTranslationFilter@3e966e67, org.springframework.security.web.access.intercept.AuthorizationFilter@4104b6a6]
+2024-04-09 22:37:03.114 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-04-09 22:37:03.216 [main] INFO  io.undertow.websockets.jsr - UT026003: Adding annotated server endpoint class site.cilicili.common.websocket.WebSocketEndpoint for path /public/ws/{username}
+2024-04-09 22:37:03.282 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2024-04-09 22:37:03.296 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2024-04-09 22:37:03.311 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2024-04-09 22:37:03.357 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2024-04-09 22:37:03.444 [main] INFO  o.s.b.w.e.u.UndertowWebServer - Undertow started on port(s) 8889 (http)
+2024-04-09 22:37:03.465 [main] INFO  site.cilicili.App - Started App in 26.088 seconds (process running for 30.096)
+2024-04-09 22:37:03.568 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-04-09 22:37:03.653 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:68)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:56)
+
+----------------------------------------------------------------------------------------------------
+
+2024-04-09 22:37:03.688 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-04-09 22:37:15.089 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final

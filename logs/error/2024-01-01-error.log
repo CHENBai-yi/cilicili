@@ -1,0 +1,711 @@
+2024-01-01 00:22:07.729 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:22:10.146 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:22:10.364 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+2024-01-01 00:22:10.470 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  JWTAuthFilter defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]
+↑     ↓
+|  authenticationProvider defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]
+↑     ↓
+|  userDetailsServiceImpl defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]
+↑     ↓
+|  userRepository defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]
+↑     ↓
+|  sqlSessionTemplate defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  sqlSessionFactory defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  autoUpdateTableTime defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\config\dynamicDb\AutoUpdateTableTime.class]
+↑     ↓
+|  webSecurityConfiguration defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\WebSecurityConfiguration.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2024-01-01 00:22:52.336 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:22:54.663 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:22:54.890 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+2024-01-01 00:22:54.982 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  JWTAuthFilter defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]
+↑     ↓
+|  authenticationProvider defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]
+↑     ↓
+|  userDetailsServiceImpl defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]
+↑     ↓
+|  userRepository defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]
+↑     ↓
+|  sqlSessionTemplate defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  sqlSessionFactory defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  autoUpdateTableTime defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\config\dynamicDb\AutoUpdateTableTime.class]
+↑     ↓
+|  webSecurityConfiguration defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\WebSecurityConfiguration.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2024-01-01 00:25:03.016 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:25:05.360 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:25:05.587 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+2024-01-01 00:25:05.684 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  JWTAuthFilter defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]
+↑     ↓
+|  authenticationProvider defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]
+↑     ↓
+|  userDetailsServiceImpl defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]
+↑     ↓
+|  userRepository defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]
+↑     ↓
+|  sqlSessionTemplate defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  sqlSessionFactory defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  autoUpdateTableTime defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\config\dynamicDb\AutoUpdateTableTime.class]
+↑     ↓
+|  webSecurityConfiguration defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\WebSecurityConfiguration.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2024-01-01 00:25:22.533 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:25:24.844 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:25:25.075 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+2024-01-01 00:25:25.164 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   JWTAuthFilter defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]
+      ↓
+   authenticationProvider defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]
+      ↓
+   userDetailsServiceImpl defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]
+      ↓
+   userRepository defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]
+┌─────┐
+|  sqlSessionTemplate defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  sqlSessionFactory defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  autoUpdateTableTime defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\config\dynamicDb\AutoUpdateTableTime.class]
+↑     ↓
+|  sysConfigBackendService (field protected com.baomidou.mybatisplus.core.mapper.BaseMapper com.baomidou.mybatisplus.extension.service.impl.ServiceImpl.baseMapper)
+↑     ↓
+|  sysConfigBackendMapper defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\backend\config\mapper\SysConfigBackendMapper.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2024-01-01 00:26:27.618 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:26:30.205 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:26:30.426 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+2024-01-01 00:26:30.518 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  JWTAuthFilter defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]
+↑     ↓
+|  authenticationProvider defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]
+↑     ↓
+|  userDetailsServiceImpl defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]
+↑     ↓
+|  userRepository defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]
+↑     ↓
+|  sqlSessionTemplate defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  sqlSessionFactory defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]
+↑     ↓
+|  autoUpdateTableTime defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\config\dynamicDb\AutoUpdateTableTime.class]
+↑     ↓
+|  webSecurityConfiguration defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\WebSecurityConfiguration.class]
+└─────┘
+
+
+Action:
+
+Despite circular references being allowed, the dependency cycle between beans could not be broken. Update your application to remove the dependency cycle.
+
+2024-01-01 00:28:24.206 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:28:26.483 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:28:44.589 [http-nio-8889-exec-6] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:33:22.512 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:33:24.863 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:35:20.850 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:35:23.233 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:39:21.539 [http-nio-8889-exec-2] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class org.apache.ibatis.executor.loader.javassist.JavassistProxyFactory$EnhancedResultObjectProxyImpl]] with root cause
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class org.apache.ibatis.executor.loader.javassist.JavassistProxyFactory$EnhancedResultObjectProxyImpl and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: site.cilicili.common.util.R["data"]->site.cilicili.backend.dept.domain.dto.SysDeptDto["records"]->java.util.ArrayList[0]->site.cilicili.backend.dept.domain.dto.SysDeptDto$DeptListDto_$$_jvste3b_0["children"]->java.util.ArrayList[0]->site.cilicili.backend.dept.domain.dto.SysDeptDto$DeptListDto_$$_jvste3b_0["handler"])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)
+	at com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1308)
+	at com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:414)
+	at com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.failForEmpty(UnknownSerializer.java:53)
+	at com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.serialize(UnknownSerializer.java:30)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serializeContents(IndexedListSerializer.java:119)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:79)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:18)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serializeContents(IndexedListSerializer.java:119)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:79)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:18)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:479)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:318)
+	at com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1572)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1061)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:483)
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:103)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:297)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.handleReturnValue(RequestResponseBodyMethodProcessor.java:194)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-01-01 00:40:22.136 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:40:24.407 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:43:15.275 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:43:19.090 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:43:33.047 [http-nio-8889-exec-2] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:44:39.655 [http-nio-8889-exec-7] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:44:53.417 [http-nio-8889-exec-3] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:47:47.362 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:47:49.634 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:51:05.501 [http-nio-8889-exec-5] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 00:51:40.828 [http-nio-8889-exec-4] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:14:03.050 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:14:06.658 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:14:13.949 [http-nio-8889-exec-5] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:45:57.844 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:46:00.183 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:47:47.711 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:47:49.966 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:48:49.459 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:48:51.859 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:50:28.473 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:50:30.807 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:55:05.268 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:55:07.624 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:57:36.693 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 15:57:39.103 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:00:19.798 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:00:22.067 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:06:05.480 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:06:07.841 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:08:04.130 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:08:06.453 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:14:50.183 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:14:52.496 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:19:03.168 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:19:05.523 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:23:15.933 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:23:18.316 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:24:18.895 [Druid-ConnectionPool-Create-771192427] ERROR c.a.druid.pool.DruidDataSource - create connection SQLException, url: jdbc:mysql://127.0.0.1:3306/quasar-admin, errorCode 0, state 08S01
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:175)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1703)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1801)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2946)
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:62)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:150)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:166)
+	at com.mysql.cj.protocol.a.NativeProtocol.negotiateSSLConnection(NativeProtocol.java:379)
+	at com.mysql.cj.protocol.a.NativeAuthenticationProvider.connect(NativeAuthenticationProvider.java:206)
+	at com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1430)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:134)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:945)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815)
+	... 6 common frames omitted
+Caused by: java.net.SocketException: 你的主机中的软件中止了一个已建立的连接。
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:420)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:440)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:826)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1035)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.flush(SSLSocketOutputRecord.java:266)
+	at java.base/sun.security.ssl.HandshakeOutStream.flush(HandshakeOutStream.java:89)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.onProduceFinished(Finished.java:693)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.produce(Finished.java:672)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:440)
+	at java.base/sun.security.ssl.Finished$T13FinishedConsumer.onConsumeFinished(Finished.java:1030)
+	at java.base/sun.security.ssl.Finished$T13FinishedConsumer.consume(Finished.java:893)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:396)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:480)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:458)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:200)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1500)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1415)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:421)
+	at com.mysql.cj.protocol.ExportControlled.performTlsHandshake(ExportControlled.java:347)
+	at com.mysql.cj.protocol.StandardSocketFactory.performTlsHandshake(StandardSocketFactory.java:191)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.performTlsHandshake(NativeSocketConnection.java:101)
+	at com.mysql.cj.protocol.a.NativeProtocol.negotiateSSLConnection(NativeProtocol.java:370)
+	... 11 common frames omitted
+2024-01-01 16:25:10.113 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:25:12.453 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:26:11.776 [http-nio-8889-exec-5] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:27:15.930 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:27:18.209 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:40:47.199 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:40:49.463 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:56:38.942 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:56:41.351 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:57:05.444 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 16:57:07.760 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:01:45.451 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:01:47.721 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:13:59.948 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:14:02.322 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:36:57.581 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:36:59.883 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:39:10.005 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 17:39:12.336 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:23:01.128 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:23:03.515 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:25:59.849 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:26:02.329 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:27:59.902 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:28:02.232 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:28:55.232 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:28:57.499 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:37:51.947 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:37:54.286 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:43:53.254 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:43:55.580 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:43:56.149 [main] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+2024-01-01 18:43:56.253 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:164)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:610)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:56)
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:142)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:489)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:211)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:183)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:161)
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'JWTAuthFilter' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\filter\JWTAuthFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:210)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:173)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:168)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:153)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:86)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:261)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:235)
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4850)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:845)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:240)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:917)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:488)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123)
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authenticationProvider' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\security\jwt\AuthenticationProvider.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:910)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+	... 56 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userDetailsServiceImpl' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\service\impl\UserDetailsServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:910)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+	... 70 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\authentication\user\repository\UserRepository.class]: Cannot resolve reference to bean 'sqlSessionTemplate' while setting bean property 'sqlSessionTemplate'
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1682)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:910)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+	... 84 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sqlSessionTemplate' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Unsatisfied dependency expressed through method 'sqlSessionTemplate' parameter 0: Error creating bean with name 'sqlSessionFactory' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception with message: Failed to parse mapping resource: 'file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\resources\main\mapper\sysDeptUser\SysDeptUserMapping.xml]'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 98 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception with message: Failed to parse mapping resource: 'file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\resources\main\mapper\sysDeptUser\SysDeptUserMapping.xml]'
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:654)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:642)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:910)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
+	... 108 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception with message: Failed to parse mapping resource: 'file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\resources\main\mapper\sysDeptUser\SysDeptUserMapping.xml]'
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
+	... 122 common frames omitted
+Caused by: java.io.IOException: Failed to parse mapping resource: 'file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\resources\main\mapper\sysDeptUser\SysDeptUserMapping.xml]'
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.buildSqlSessionFactory(MybatisSqlSessionFactoryBean.java:575)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.afterPropertiesSet(MybatisSqlSessionFactoryBean.java:444)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.getObject(MybatisSqlSessionFactoryBean.java:608)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration.sqlSessionFactory(MybatisPlusAutoConfiguration.java:224)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	... 123 common frames omitted
+Caused by: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: @TableId can't more than one in Class: "site.cilicili.backend.dept.domain.pojo.SysDeptUserEntity".
+	at com.baomidou.mybatisplus.core.toolkit.ExceptionUtils.mpe(ExceptionUtils.java:49)
+	at com.baomidou.mybatisplus.core.metadata.TableInfoHelper.initTableFields(TableInfoHelper.java:308)
+	at com.baomidou.mybatisplus.core.metadata.TableInfoHelper.initTableInfo(TableInfoHelper.java:176)
+	at com.baomidou.mybatisplus.core.metadata.TableInfoHelper.initTableInfo(TableInfoHelper.java:153)
+	at com.baomidou.mybatisplus.core.injector.AbstractSqlInjector.inspectInject(AbstractSqlInjector.java:48)
+	at com.baomidou.mybatisplus.core.MybatisMapperAnnotationBuilder.parserInjector(MybatisMapperAnnotationBuilder.java:133)
+	at com.baomidou.mybatisplus.core.MybatisMapperAnnotationBuilder.parse(MybatisMapperAnnotationBuilder.java:123)
+	at com.baomidou.mybatisplus.core.MybatisMapperRegistry.addMapper(MybatisMapperRegistry.java:94)
+	at com.baomidou.mybatisplus.core.MybatisConfiguration.addMapper(MybatisConfiguration.java:129)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.bindMapperForNamespace(XMLMapperBuilder.java:432)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:97)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.buildSqlSessionFactory(MybatisSqlSessionFactoryBean.java:573)
+	... 131 common frames omitted
+2024-01-01 18:46:30.479 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:46:32.931 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:56:16.447 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 18:56:18.979 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:08:22.289 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:08:24.624 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:10:41.738 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:10:44.063 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:16:00.490 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:16:02.742 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:19:04.273 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:19:06.545 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:22:29.320 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:22:31.623 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:24:10.666 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:24:12.984 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:36:37.602 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:36:39.870 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:43:32.773 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:43:35.174 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:52:00.050 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:52:02.420 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:54:11.290 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:54:13.635 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:57:38.401 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:57:40.698 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:58:42.869 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 19:58:45.179 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:00:25.633 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:00:27.993 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:07:55.367 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:07:57.778 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:24:24.665 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:24:27.050 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:29:50.713 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:29:54.235 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:36:33.415 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:36:35.740 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:39:36.937 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:39:39.697 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:47:23.481 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:47:25.784 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:52:38.261 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 20:52:40.617 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:01:23.902 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:01:26.268 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:06:36.612 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:06:38.955 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:08:31.266 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:08:33.610 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:17:03.111 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:17:05.430 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:23:28.091 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:23:30.426 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:46:38.629 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:46:40.975 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:55:54.016 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:55:56.382 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:57:38.550 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 21:57:40.863 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 22:13:45.156 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 22:13:48.416 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 22:55:42.209 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 22:55:45.541 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 22:56:01.230 [http-nio-8889-exec-9] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:02:57.807 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:03:00.152 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:06:28.632 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:06:30.954 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:13:26.575 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:13:28.865 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:15:55.060 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:15:57.522 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:17:53.660 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:17:56.044 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:19:24.767 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:19:27.095 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:22:07.400 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:22:09.729 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:23:22.762 [http-nio-8889-exec-7] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:24:03.558 [http-nio-8889-exec-5] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:29:19.739 [http-nio-8889-exec-3] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:30:04.481 [http-nio-8889-exec-4] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:30:35.004 [http-nio-8889-exec-3] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:41:24.080 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:41:28.796 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:41:41.865 [http-nio-8889-exec-1] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:43:49.065 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:43:51.401 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:46:22.334 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:46:24.694 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:47:52.330 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:47:54.580 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:53:46.919 [main] ERROR s.c.c.u.YAMLPropertySourceFactory - java.io.FileNotFoundException: dbConfig.yaml (系统找不到指定的文件。)
+2024-01-01 23:53:49.411 [main] ERROR s.cilicili.common.util.DbUtils - dbConfig.yaml (系统找不到指定的文件。)

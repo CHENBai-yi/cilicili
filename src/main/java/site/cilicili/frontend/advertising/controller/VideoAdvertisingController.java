@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("advertising")
+@RequestMapping({"public", "advertising"})
 @Tag(name = "(VideoAdvertising) 表控制层")
 public class VideoAdvertisingController {
     /**
@@ -76,10 +76,11 @@ public class VideoAdvertisingController {
             parameters = {@Parameter(description = "videoAdvertising 实体")})
     @PostMapping
     public R add(final @RequestBody @Validated VideoAdvertisingDto videoAdvertising, Errors exception) {
-        if (
-                exception.hasFieldErrors()
-        ) {
-            throw new AppException(exception.getFieldErrors().stream().map(item -> Optional.ofNullable(item.getDefaultMessage()).orElse(Error.COMMON_EXCEPTION.getMessage())).collect(Collectors.joining(",")));
+        if (exception.hasFieldErrors()) {
+            throw new AppException(exception.getFieldErrors().stream()
+                    .map(item ->
+                            Optional.ofNullable(item.getDefaultMessage()).orElse(Error.COMMON_EXCEPTION.getMessage()))
+                    .collect(Collectors.joining(",")));
         }
         return this.videoAdvertisingService.insert(videoAdvertising);
     }
@@ -124,5 +125,17 @@ public class VideoAdvertisingController {
     @PostMapping("change-status")
     public R changeStatus(final @RequestBody VideoAdvertisingDto status) {
         return this.videoAdvertisingService.update(status);
+    }
+
+    /**
+     * 按时间返回广告图
+     *
+     * @return R
+     */
+    @Operation(
+            summary = "按时间返回广告图")
+    @PostMapping("get-adver-list")
+    public R videoCarouselListByTime() {
+        return this.videoAdvertisingService.getAdverList();
     }
 }

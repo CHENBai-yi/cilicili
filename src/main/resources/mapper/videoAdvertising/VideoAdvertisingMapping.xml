@@ -225,6 +225,12 @@
         </if>
         ;
     </select>
+    <select id="getAdverListByTime" resultMap="VideoAdvertisingMap">
+        SELECT adver_type, adver_content, adver_link
+        FROM video_advertising
+        WHERE is_show
+          and NOW() between `start` and `end`;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

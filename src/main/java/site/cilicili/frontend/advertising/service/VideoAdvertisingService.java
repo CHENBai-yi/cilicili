@@ -52,4 +52,6 @@ public interface VideoAdvertisingService extends IService<VideoAdvertisingEntity
      * @return 是否成功
      */
     R deleteById(final VideoAdvertisingDto id);
+
+    R getAdverList();
 }

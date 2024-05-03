@@ -1,0 +1,10 @@
+backend:
+  url: jdbc:mysql://127.0.0.1:3306
+  dbUser: root
+  dbPassword: 74521CBy
+  driver: com.mysql.cj.jdbc.Driver
+  scheme: cili-quasar-admin
+  dbSchema: cili-quasar-admin
+  dbPort: '3306'
+  dbHost: 127.0.0.1
+  dbType: Mysql

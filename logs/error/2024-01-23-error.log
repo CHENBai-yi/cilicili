@@ -1,0 +1,173 @@
+2024-01-23 16:07:02.707 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Unable to load cache item
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:75)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:130)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:531)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:308)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:779)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:597)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:63)
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/common/db/domain/pojo/DatabaseConnection
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.springframework.cglib.core.ReflectUtils.addAllMethods(ReflectUtils.java:396)
+	at org.springframework.cglib.proxy.Enhancer.getMethods(Enhancer.java:627)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:664)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:366)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:107)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.common.db.domain.pojo.DatabaseConnection
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 36 common frames omitted
+2024-01-23 17:21:52.828 [http-nio-8889-exec-9] ERROR s.c.c.e.AppExceptionHandler - Ambiguous handler methods mapped for '/upload/upload-banner-image': {public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadBannerImage(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[]), public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadUserAvatar(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[])}
+2024-01-23 17:23:08.191 [http-nio-8889-exec-8] ERROR s.c.c.e.AppExceptionHandler - Ambiguous handler methods mapped for '/upload/upload-banner-image': {public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadBannerImage(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[]), public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadUserAvatar(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[])}
+2024-01-23 17:23:15.453 [http-nio-8889-exec-10] ERROR s.c.c.e.AppExceptionHandler - Ambiguous handler methods mapped for '/upload/upload-banner-image': {public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadBannerImage(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[]), public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadUserAvatar(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[])}
+2024-01-23 17:23:20.509 [http-nio-8889-exec-5] ERROR s.c.c.e.AppExceptionHandler - Ambiguous handler methods mapped for '/upload/upload-banner-image': {public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadBannerImage(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[]), public site.cilicili.common.util.R site.cilicili.backend.upAndown.upload.controller.FileUploadController.uploadUserAvatar(site.cilicili.authentication.Details.AuthUserDetails,org.springframework.web.multipart.MultipartFile[])}
+2024-01-23 17:26:40.686 [http-nio-8889-exec-4] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 17:27:54.706 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Unable to load cache item
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:75)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:130)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:531)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:308)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:779)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:597)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:63)
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/common/db/domain/pojo/DatabaseConnection
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.springframework.cglib.core.ReflectUtils.addAllMethods(ReflectUtils.java:396)
+	at org.springframework.cglib.proxy.Enhancer.getMethods(Enhancer.java:627)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:664)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:366)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:107)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.common.db.domain.pojo.DatabaseConnection
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 36 common frames omitted
+2024-01-23 19:33:00.151 [http-nio-8889-exec-9] ERROR s.c.c.e.AppExceptionHandler - 不支持的文件后缀.
+2024-01-23 19:40:19.029 [http-nio-8889-exec-10] ERROR s.c.c.e.AppExceptionHandler - 不支持的文件后缀.
+2024-01-23 19:46:09.846 [http-nio-8889-exec-4] ERROR s.c.c.e.AppExceptionHandler - 不支持的文件后缀.
+2024-01-23 19:47:10.997 [http-nio-8889-exec-2] ERROR s.c.c.e.AppExceptionHandler - 不支持的文件后缀.
+2024-01-23 19:51:20.757 [http-nio-8889-exec-3] ERROR s.c.c.e.AppExceptionHandler - 不支持的文件后缀.
+2024-01-23 20:38:03.421 [http-nio-8889-exec-9] ERROR s.c.c.filter.JWTAuthFilter - Token eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsIlJlZnJlc2hBdCI6MTcwNTkzNzcxNjAwMiwiaWF0IjoxNzA1OTAxNzE5LCJleHAiOjE3MDU5Mzc3MTl9.2TpUBl5r_lBXFKoeX2_wcx6GPbdhuc_CQBNGyCgZyyw
+2024-01-23 20:39:05.631 [http-nio-8889-exec-5] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:39:54.169 [http-nio-8889-exec-6] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:40:43.053 [http-nio-8889-exec-7] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:41:32.426 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Unable to load cache item
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:75)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:130)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:531)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:308)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:779)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:597)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:63)
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/common/db/domain/pojo/DatabaseConnection
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.springframework.cglib.core.ReflectUtils.addAllMethods(ReflectUtils.java:396)
+	at org.springframework.cglib.proxy.Enhancer.getMethods(Enhancer.java:627)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:664)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:366)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:107)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.common.db.domain.pojo.DatabaseConnection
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 36 common frames omitted
+2024-01-23 20:42:57.633 [http-nio-8889-exec-5] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:43:34.769 [http-nio-8889-exec-3] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:44:13.795 [http-nio-8889-exec-4] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:46:19.555 [http-nio-8889-exec-7] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:48:19.082 [http-nio-8889-exec-3] ERROR s.c.c.e.AppExceptionHandler - 服务器有点呆。。。
+2024-01-23 20:50:07.353 [http-nio-8889-exec-2] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 20:54:38.687 [http-nio-8889-exec-4] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 20:54:57.870 [http-nio-8889-exec-5] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:06:20.603 [http-nio-8889-exec-2] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:06:24.878 [http-nio-8889-exec-4] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:06:26.742 [http-nio-8889-exec-5] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:06:28.784 [http-nio-8889-exec-6] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:06:30.499 [http-nio-8889-exec-7] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:06:32.201 [http-nio-8889-exec-8] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:09:06.999 [http-nio-8889-exec-4] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:09:10.085 [http-nio-8889-exec-3] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:09:11.934 [http-nio-8889-exec-2] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:09:14.554 [http-nio-8889-exec-6] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:09:18.859 [http-nio-8889-exec-7] ERROR s.c.c.e.AppExceptionHandler - 上传文件失败.
+2024-01-23 21:19:52.707 [http-nio-8889-exec-10] ERROR s.c.c.filter.JWTAuthFilter - URL [file:/D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)/file/admin/ee2a4b8c5d674342a398f9cea6ed0a2e_20240123211354996.jpg] cannot be resolved in the file system for checking its last-modified timestamp
+2024-01-23 21:19:57.362 [http-nio-8889-exec-7] ERROR s.c.c.filter.JWTAuthFilter - URL [file:/D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)/file/admin/ee2a4b8c5d674342a398f9cea6ed0a2e_20240123211354996.jpg] cannot be resolved in the file system for checking its last-modified timestamp

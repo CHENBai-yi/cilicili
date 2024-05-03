@@ -281,7 +281,9 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                         .list(new QueryWrapper<CatalogsEntity>().eq("course_id", catalogs.getCourseId()))
                         .stream()
                         .map(CatalogsEntity::getTotal)
-                        .reduce(0L, Long::sum);
+                        .reduce(0L, (aLong, aLong2) -> Optional.ofNullable(aLong2)
+                                .map(item -> item + aLong)
+                                .orElse(aLong));
         final CoursesEntity coursesEntity = new CoursesEntity();
         coursesEntity.setCourseId(catalogs.getCourseId());
         coursesEntity.setTotalTime(formatDateTime(catalogsTotalSecond));

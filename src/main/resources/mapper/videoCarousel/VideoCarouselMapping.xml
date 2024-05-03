@@ -243,6 +243,13 @@
         </if>
         ;
     </select>
+    <select id="getCarouselListByTime"
+            resultMap="VideoCarouselMap">
+        SELECT link, background_color, image_url
+        FROM video_carousel
+        WHERE is_show
+          and NOW() between `start` and `end`;
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

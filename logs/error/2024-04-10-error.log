@@ -1,0 +1,60 @@
+2024-04-10 22:16:45.188 [XNIO-1 task-3] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-10 22:18:48.301 [XNIO-1 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-04-10 22:20:23.998 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x2446be22, L:/172.20.10.3:32651 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-04-10 22:20:24.093 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xa41b9cb4, L:/172.20.10.3:32652 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-04-10 22:20:24.293 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x39c894ea, L:/172.20.10.3:32654 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-04-10 22:21:54.893 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xb5048862, L:/172.20.10.3:50651 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-04-10 22:23:02.093 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xc19f0037, L:/172.20.10.3:21010 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-04-10 22:24:31.601 [XNIO-1 task-2] ERROR s.c.f.c.pojo.SearchRedisHelper - class site.cilicili.frontend.common.pojo.SearchRedisHelper::异常
+2024-04-10 22:26:27.054 [XNIO-1 task-5] ERROR s.c.f.c.pojo.SearchRedisHelper - class site.cilicili.frontend.common.pojo.SearchRedisHelper::异常
+2024-04-10 22:26:27.058 [XNIO-1 task-5] ERROR s.c.c.e.AppExceptionHandler - java.lang.InterruptedException
+2024-04-10 22:26:27.058 [XNIO-1 task-4] ERROR s.c.c.e.AppExceptionHandler - java.lang.InterruptedException
+2024-04-10 22:26:27.058 [XNIO-1 task-3] ERROR s.c.c.e.AppExceptionHandler - java.lang.InterruptedException
+2024-04-10 22:26:27.101 [XNIO-1 task-3] ERROR s.c.c.filter.JWTAuthFilter - Request processing failed: org.springframework.dao.InvalidDataAccessApiUsageException: java.lang.InterruptedException
+2024-04-10 22:26:27.102 [XNIO-1 task-4] ERROR s.c.c.filter.JWTAuthFilter - Request processing failed: org.springframework.dao.InvalidDataAccessApiUsageException: java.lang.InterruptedException
+2024-04-10 22:26:27.103 [XNIO-1 task-5] ERROR s.c.c.filter.JWTAuthFilter - Request processing failed: org.springframework.dao.InvalidDataAccessApiUsageException: java.lang.InterruptedException

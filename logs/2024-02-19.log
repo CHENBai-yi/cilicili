@@ -1,0 +1,1377 @@
+2024-02-19 15:32:31.670 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-19 15:32:31.861 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 10068 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-02-19 15:32:31.863 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-02-19 15:32:36.136 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:32:36.141 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-02-19 15:32:36.345 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 188 ms. Found 0 MongoDB repository interfaces.
+2024-02-19 15:32:36.388 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:32:36.392 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-02-19 15:32:36.527 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 100 ms. Found 0 Redis repository interfaces.
+2024-02-19 15:32:36.884 [main] WARN  o.s.c.i.s.PathMatchingResourcePatternResolver - Failed to search in directory [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili] for files matching pattern [**/*.class]: java.io.UncheckedIOException: java.nio.file.NoSuchFileException: D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main\site\cilicili\common\mvcConfig
+2024-02-19 15:32:36.885 [main] WARN  o.m.s.m.ClassPathMapperScanner - No MyBatis mapper was found in '[site.cilicili]' package. Please check your configuration.
+2024-02-19 15:32:37.082 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.IllegalStateException: Unable to load cache item
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:75)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:130)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:317)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:531)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:308)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:779)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:597)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:63)
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/common/db/domain/pojo/DatabaseConnection
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.springframework.cglib.core.ReflectUtils.addAllMethods(ReflectUtils.java:396)
+	at org.springframework.cglib.proxy.Enhancer.getMethods(Enhancer.java:627)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:664)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:366)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:107)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:264)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.common.db.domain.pojo.DatabaseConnection
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 36 common frames omitted
+2024-02-19 15:33:20.800 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-19 15:33:20.944 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 4928 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-02-19 15:33:20.947 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-02-19 15:33:23.292 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:33:23.294 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-02-19 15:33:23.394 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 92 ms. Found 0 MongoDB repository interfaces.
+2024-02-19 15:33:23.406 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:33:23.407 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-02-19 15:33:23.466 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 0 Redis repository interfaces.
+2024-02-19 15:33:27.022 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8889 (http)
+2024-02-19 15:33:27.024 [main] INFO  o.a.c.c.AprLifecycleListener - An older version [2.0.1] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [2.0.5]
+2024-02-19 15:33:27.025 [main] INFO  o.a.c.c.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.1] using APR version [1.7.0].
+2024-02-19 15:33:27.054 [main] INFO  o.a.c.c.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.5 5 Jul 2022]
+2024-02-19 15:33:27.070 [main] INFO  o.a.c.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8889"]
+2024-02-19 15:33:27.074 [main] INFO  o.a.c.core.StandardService - Starting service [Tomcat]
+2024-02-19 15:33:27.075 [main] INFO  o.a.c.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-19 15:33:27.279 [main] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-02-19 15:33:27.280 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6218 ms
+2024-02-19 15:33:30.176 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:33:30.909 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:33:31.011 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:33:31.257 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:33:31.287 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserRoleEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:33:32.780 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-02-19 15:33:33.614 [redisson-netty-1-4] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 15:33:39.771 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 15:33:41.828 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3d056418, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@769d0ef2, org.springframework.security.web.context.SecurityContextHolderFilter@323b5264, org.springframework.security.web.header.HeaderWriterFilter@2f95ce11, org.springframework.web.filter.CorsFilter@6d58ed12, org.springframework.security.web.authentication.logout.LogoutFilter@25a81f28, site.cilicili.common.filter.JWTAuthFilter@325236f5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@386b4f7e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2453cbb7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@221ef0f0, org.springframework.security.web.access.ExceptionTranslationFilter@557abb68, org.springframework.security.web.access.intercept.AuthorizationFilter@a422390]
+2024-02-19 15:33:47.237 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-19 15:33:47.389 [main] INFO  o.a.c.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8889"]
+2024-02-19 15:33:47.408 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8889 (http) with context path ''
+2024-02-19 15:33:47.423 [main] INFO  site.cilicili.App - Started App in 27.484 seconds (process running for 29.843)
+2024-02-19 15:33:47.525 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-02-19 15:33:47.597 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:63)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:52)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 15:33:47.630 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-02-19 15:49:10.422 [http-nio-8889-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-19 15:49:10.426 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-02-19 15:49:10.465 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 39 ms
+2024-02-19 15:51:32.196 [SpringApplicationShutdownHook] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-02-19 15:51:32.212 [SpringApplicationShutdownHook] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-02-19 15:51:58.274 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-19 15:51:58.405 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 12532 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-02-19 15:51:58.407 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-02-19 15:52:00.692 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:52:00.695 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-02-19 15:52:00.793 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 90 ms. Found 0 MongoDB repository interfaces.
+2024-02-19 15:52:00.807 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:52:00.808 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-02-19 15:52:00.868 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 0 Redis repository interfaces.
+2024-02-19 15:52:02.824 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8889 (http)
+2024-02-19 15:52:02.826 [main] INFO  o.a.c.c.AprLifecycleListener - An older version [2.0.1] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [2.0.5]
+2024-02-19 15:52:02.827 [main] INFO  o.a.c.c.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.1] using APR version [1.7.0].
+2024-02-19 15:52:02.834 [main] INFO  o.a.c.c.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.5 5 Jul 2022]
+2024-02-19 15:52:02.850 [main] INFO  o.a.c.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8889"]
+2024-02-19 15:52:02.853 [main] INFO  o.a.c.core.StandardService - Starting service [Tomcat]
+2024-02-19 15:52:02.853 [main] INFO  o.a.c.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-19 15:52:03.035 [main] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-02-19 15:52:03.037 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4511 ms
+2024-02-19 15:52:05.021 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:52:05.542 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:52:05.662 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:52:05.886 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:52:05.909 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserRoleEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:52:07.086 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-02-19 15:52:08.171 [redisson-netty-1-4] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 15:52:13.103 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 15:52:15.122 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3e7c66b3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@502f6f6a, org.springframework.security.web.context.SecurityContextHolderFilter@79690a0a, org.springframework.security.web.header.HeaderWriterFilter@13617139, org.springframework.web.filter.CorsFilter@64a0ee65, org.springframework.security.web.authentication.logout.LogoutFilter@1d306d27, site.cilicili.common.filter.JWTAuthFilter@74ab8610, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@294aaa6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ee949d4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3ce60feb, org.springframework.security.web.access.ExceptionTranslationFilter@9d4d221, org.springframework.security.web.access.intercept.AuthorizationFilter@673a702a]
+2024-02-19 15:52:19.982 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-19 15:52:20.151 [main] INFO  o.a.c.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8889"]
+2024-02-19 15:52:20.169 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8889 (http) with context path ''
+2024-02-19 15:52:20.187 [main] INFO  site.cilicili.App - Started App in 22.968 seconds (process running for 26.293)
+2024-02-19 15:52:20.299 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-02-19 15:52:20.386 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:63)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:52)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 15:52:20.428 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-02-19 15:52:33.161 [http-nio-8889-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-19 15:52:33.161 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-02-19 15:52:33.163 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
+2024-02-19 15:53:27.871 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T15:53:27.818733800'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 1
+- Execution Time                          : 48 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 15:53:27.883 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-02-19 15:53:54.964 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-19 15:53:55.096 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 12148 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-02-19 15:53:55.098 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-02-19 15:53:57.840 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:53:57.844 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-02-19 15:53:57.961 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107 ms. Found 0 MongoDB repository interfaces.
+2024-02-19 15:53:57.978 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 15:53:57.980 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-02-19 15:53:58.046 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 51 ms. Found 0 Redis repository interfaces.
+2024-02-19 15:53:59.978 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8889 (http)
+2024-02-19 15:53:59.980 [main] INFO  o.a.c.c.AprLifecycleListener - An older version [2.0.1] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [2.0.5]
+2024-02-19 15:53:59.981 [main] INFO  o.a.c.c.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.1] using APR version [1.7.0].
+2024-02-19 15:53:59.987 [main] INFO  o.a.c.c.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.5 5 Jul 2022]
+2024-02-19 15:54:00.004 [main] INFO  o.a.c.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8889"]
+2024-02-19 15:54:00.009 [main] INFO  o.a.c.core.StandardService - Starting service [Tomcat]
+2024-02-19 15:54:00.009 [main] INFO  o.a.c.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-19 15:54:00.217 [main] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-02-19 15:54:00.218 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4945 ms
+2024-02-19 15:54:02.134 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:54:02.666 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:54:02.777 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:54:03.061 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:54:03.090 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserRoleEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 15:54:04.263 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-02-19 15:54:05.344 [redisson-netty-1-5] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 15:54:10.418 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 15:54:13.184 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6edd8d56, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@226f472, org.springframework.security.web.context.SecurityContextHolderFilter@647468a7, org.springframework.security.web.header.HeaderWriterFilter@7bd6c35e, org.springframework.web.filter.CorsFilter@2360ebe2, org.springframework.security.web.authentication.logout.LogoutFilter@466f7259, site.cilicili.common.filter.JWTAuthFilter@4ac0fdc7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@fcee97c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@48682f91, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77fa2dcc, org.springframework.security.web.access.ExceptionTranslationFilter@68e8bbab, org.springframework.security.web.access.intercept.AuthorizationFilter@352288bc]
+2024-02-19 15:54:18.732 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-19 15:54:18.871 [main] INFO  o.a.c.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8889"]
+2024-02-19 15:54:18.898 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8889 (http) with context path ''
+2024-02-19 15:54:18.916 [main] INFO  site.cilicili.App - Started App in 24.953 seconds (process running for 27.519)
+2024-02-19 15:54:19.020 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-02-19 15:54:19.090 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:63)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:52)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 15:54:19.123 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-02-19 16:00:23.711 [http-nio-8889-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-19 16:00:23.711 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-02-19 16:00:23.713 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2024-02-19 16:00:31.152 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T16:00:31.141200700'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'服务器有点呆。。。'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":0,"message":"服务器有点呆。。。"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 1
+- Execution Time                          : 6 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:00:31.160 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-02-19 16:00:33.277 [SpringApplicationShutdownHook] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-02-19 16:00:33.284 [SpringApplicationShutdownHook] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-02-19 16:18:45.935 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-19 16:18:46.028 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 9100 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-02-19 16:18:46.032 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-02-19 16:18:48.761 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 16:18:48.764 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-02-19 16:18:48.880 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107 ms. Found 0 MongoDB repository interfaces.
+2024-02-19 16:18:48.895 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 16:18:48.896 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-02-19 16:18:48.956 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 0 Redis repository interfaces.
+2024-02-19 16:18:51.105 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8889 (http)
+2024-02-19 16:18:51.107 [main] INFO  o.a.c.c.AprLifecycleListener - An older version [2.0.1] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [2.0.5]
+2024-02-19 16:18:51.107 [main] INFO  o.a.c.c.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.1] using APR version [1.7.0].
+2024-02-19 16:18:51.114 [main] INFO  o.a.c.c.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.5 5 Jul 2022]
+2024-02-19 16:18:51.130 [main] INFO  o.a.c.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8889"]
+2024-02-19 16:18:51.133 [main] INFO  o.a.c.core.StandardService - Starting service [Tomcat]
+2024-02-19 16:18:51.133 [main] INFO  o.a.c.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-19 16:18:51.341 [main] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-02-19 16:18:51.344 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5154 ms
+2024-02-19 16:18:53.392 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:18:53.909 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:18:54.007 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:18:54.297 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:18:54.323 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserRoleEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:18:55.421 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-02-19 16:18:56.559 [redisson-netty-1-4] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 16:19:02.046 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 16:19:03.973 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c541b00, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f26bd62, org.springframework.security.web.context.SecurityContextHolderFilter@2fedaa2e, org.springframework.security.web.header.HeaderWriterFilter@326320bb, org.springframework.web.filter.CorsFilter@61f18997, org.springframework.security.web.authentication.logout.LogoutFilter@c34fd2, site.cilicili.common.filter.JWTAuthFilter@4ac0fdc7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6add8aac, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@300b839c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@55448710, org.springframework.security.web.access.ExceptionTranslationFilter@25a81f28, org.springframework.security.web.access.intercept.AuthorizationFilter@119de68f]
+2024-02-19 16:19:08.602 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-19 16:19:08.744 [main] INFO  o.a.c.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8889"]
+2024-02-19 16:19:08.759 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8889 (http) with context path ''
+2024-02-19 16:19:08.775 [main] INFO  site.cilicili.App - Started App in 24.237 seconds (process running for 27.627)
+2024-02-19 16:19:08.874 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-02-19 16:19:08.943 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:63)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:52)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:19:08.976 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-02-19 16:19:29.451 [http-nio-8889-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-19 16:19:29.452 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-02-19 16:19:29.457 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 5 ms
+2024-02-19 16:20:19.750 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T16:20:19.739299800'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'服务器有点呆。。。'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":0,"message":"服务器有点呆。。。"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 1
+- Execution Time                          : 6 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:20:19.759 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-02-19 16:26:48.860 [SpringApplicationShutdownHook] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-02-19 16:26:48.867 [SpringApplicationShutdownHook] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-02-19 16:27:13.100 [background-preinit] INFO  o.h.v.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-19 16:27:13.159 [main] INFO  site.cilicili.App - Starting App using Java 17.0.1 with PID 2592 (D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\classes\java\main started by BaiYiChen in D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩))
+2024-02-19 16:27:13.162 [main] INFO  site.cilicili.App - The following 1 profile is active: "dev"
+2024-02-19 16:27:15.528 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 16:27:15.532 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-02-19 16:27:15.619 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 79 ms. Found 0 MongoDB repository interfaces.
+2024-02-19 16:27:15.630 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-02-19 16:27:15.632 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-02-19 16:27:15.689 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 0 Redis repository interfaces.
+2024-02-19 16:27:17.349 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8889 (http)
+2024-02-19 16:27:17.350 [main] INFO  o.a.c.c.AprLifecycleListener - An older version [2.0.1] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [2.0.5]
+2024-02-19 16:27:17.350 [main] INFO  o.a.c.c.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.1] using APR version [1.7.0].
+2024-02-19 16:27:17.355 [main] INFO  o.a.c.c.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.5 5 Jul 2022]
+2024-02-19 16:27:17.366 [main] INFO  o.a.c.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8889"]
+2024-02-19 16:27:17.368 [main] INFO  o.a.c.core.StandardService - Starting service [Tomcat]
+2024-02-19 16:27:17.368 [main] INFO  o.a.c.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-19 16:27:17.487 [main] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-02-19 16:27:17.488 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4205 ms
+2024-02-19 16:27:18.934 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.button.domain.pojo.SysButtonEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:27:19.266 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.notice.domain.pojo.SysNoticeToUserEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:27:19.337 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.api.domain.pojo.SysRoleApiEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:27:19.491 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserOnlineEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:27:19.518 [main] WARN  c.b.m.c.i.DefaultSqlInjector - class site.cilicili.backend.user.domain.pojo.SysUserRoleEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-02-19 16:27:20.387 [main] INFO  org.redisson.Version - Redisson 3.25.2
+2024-02-19 16:27:21.130 [redisson-netty-1-4] INFO  o.r.c.p.MasterPubSubConnectionPool - 1 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 16:27:26.148 [redisson-netty-1-19] INFO  o.r.c.p.MasterConnectionPool - 24 connections initialized for 8.217.182.161/8.217.182.161:6379
+2024-02-19 16:27:28.189 [main] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@323b5264, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@335ff774, org.springframework.security.web.context.SecurityContextHolderFilter@73864c16, org.springframework.security.web.header.HeaderWriterFilter@5ea50a98, org.springframework.web.filter.CorsFilter@386b4f7e, org.springframework.security.web.authentication.logout.LogoutFilter@34a48013, site.cilicili.common.filter.JWTAuthFilter@4964d801, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@e10809f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@62b3871, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4c131823, org.springframework.security.web.access.ExceptionTranslationFilter@25af2afe, org.springframework.security.web.access.intercept.AuthorizationFilter@2f349170]
+2024-02-19 16:27:32.851 [main] INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-02-19 16:27:32.989 [main] INFO  o.a.c.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8889"]
+2024-02-19 16:27:33.006 [main] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8889 (http) with context path ''
+2024-02-19 16:27:33.022 [main] INFO  site.cilicili.App - Started App in 21.18 seconds (process running for 24.402)
+2024-02-19 16:27:33.121 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-02-19 16:27:33.191 [main] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34mSELECT[0m  id,url,username,password,driver,scheme  [34mFROM[0m database_connection
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 0
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.App.main(App.java:63)
+	 2. site.cilicili.common.config.dynamicDb.dataSource.DbInitialization.run(DbInitialization.java:52)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:27:33.224 [main] INFO  c.a.druid.pool.DruidDataSource - {dataSource-2} inited
+2024-02-19 16:27:58.998 [http-nio-8889-exec-1] INFO  o.a.c.c.C.[.[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-19 16:27:58.998 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-02-19 16:27:59.001 [http-nio-8889-exec-1] INFO  o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
+2024-02-19 16:28:22.421 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T16:28:22.411327900'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 1
+- Execution Time                          : 6 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:28:22.428 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-02-19 16:30:53.894 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T16:30:53.889396200'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 2
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:30:53.897 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-02-19 16:45:43.814 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T16:45:43.810511700'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 3
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 16:45:43.818 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-02-19 19:32:49.192 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T19:32:49.180182'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 4
+- Execution Time                          : 5 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 19:32:49.198 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-02-19 19:37:09.375 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T19:37:09.362097500'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 5
+- Execution Time                          : 10 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 19:37:09.379 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-02-19 19:39:23.333 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T19:39:23.330324100'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 6
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 19:39:23.337 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-02-19 19:51:41.146 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T19:51:41.142121'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 7
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 19:51:41.150 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-02-19 19:54:15.060 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T19:54:15.055534200'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 8
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 19:54:15.065 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-02-19 19:55:09.678 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T19:55:09.674759600'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 9
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 19:55:09.682 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-02-19 20:26:52.710 [http-nio-8889-exec-1] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T20:26:52.706161900'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 10
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 20:26:52.716 [http-nio-8889-exec-1] INFO  p6spy - 
+2024-02-19 20:40:14.279 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T20:40:14.275401500'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 11
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 20:40:14.283 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-02-19 20:50:20.831 [http-nio-8889-exec-5] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T20:50:20.827147600'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 12
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 20:50:20.834 [http-nio-8889-exec-5] INFO  p6spy - 
+2024-02-19 20:50:59.005 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T20:50:59.001414200'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 13
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 20:50:59.010 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-02-19 21:10:45.465 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:10:45.461476100'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 14
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:10:45.472 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-02-19 21:13:14.641 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:13:14.635184500'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 15
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:13:14.647 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-02-19 21:18:11.147 [http-nio-8889-exec-9] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:18:11.136355300'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 16
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:18:11.153 [http-nio-8889-exec-9] INFO  p6spy - 
+2024-02-19 21:33:08.660 [http-nio-8889-exec-4] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:33:08.653660200'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 17
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:33:08.666 [http-nio-8889-exec-4] INFO  p6spy - 
+2024-02-19 21:35:09.994 [http-nio-8889-exec-5] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:35:09.989221600'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 18
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:35:09.998 [http-nio-8889-exec-5] INFO  p6spy - 
+2024-02-19 21:43:14.211 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:43:14.199289300'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 19
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:43:14.220 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-02-19 21:50:08.514 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:50:08.498587500'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 20
+- Execution Time                          : 7 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:50:08.520 [http-nio-8889-exec-10] INFO  p6spy - 
+2024-02-19 21:52:14.299 [http-nio-8889-exec-3] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:52:14.286037400'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 21
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:52:14.306 [http-nio-8889-exec-3] INFO  p6spy - 
+2024-02-19 21:52:39.314 [http-nio-8889-exec-5] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:52:39.304029300'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 22
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:52:39.322 [http-nio-8889-exec-5] INFO  p6spy - 
+2024-02-19 21:53:08.277 [http-nio-8889-exec-6] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:53:08.270247800'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 23
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:53:08.281 [http-nio-8889-exec-6] INFO  p6spy - 
+2024-02-19 21:55:30.277 [http-nio-8889-exec-10] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T21:55:30.262340500'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 24
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 21:55:30.283 [http-nio-8889-exec-10] INFO  p6spy - 
+2024-02-19 22:12:40.015 [http-nio-8889-exec-4] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T22:12:40.008972400'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 25
+- Execution Time                          : 1 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 22:12:40.024 [http-nio-8889-exec-4] INFO  p6spy - 
+2024-02-19 22:16:59.952 [http-nio-8889-exec-2] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T22:16:59.942502100'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 26
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 22:16:59.959 [http-nio-8889-exec-2] INFO  p6spy - 
+2024-02-19 22:17:57.684 [http-nio-8889-exec-7] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T22:17:57.675191300'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 27
+- Execution Time                          : 3 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 22:17:57.688 [http-nio-8889-exec-7] INFO  p6spy - 
+2024-02-19 22:18:24.023 [http-nio-8889-exec-8] INFO  p6spy - 
+----------------------------------------------------------------------------------------------------
+                                            QUERY LOG
+----------------------------------------------------------------------------------------------------
+	[34minsert[0m [34minto[0m sys_log_operation(created_at, created_by, updated_at, updated_by, deleted_at,
+                                      status,
+                                      memo, operation_username, operation_ip, operation_method, operation_api,
+                                      operation_status, operation_body)
+        [34mvalues[0m ([36m'2024-02-19T22:18:24.018749900'[0m, [36m'anonymousUser'[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m, [34mNULL[0m,
+                [36m'上传成功'[0m, [36m'anonymousUser'[0m, [36m'127.0.0.1'[0m, [36m'POST'[0m, [36m'/upload/upload-video'[0m, 200,
+                [36m'{"code":1,"message":"上传成功"}'[0m)
+----------------------------------------------------------------------------------------------------
+- Connection ID                           : 28
+- Execution Time                          : 2 ms
+- Call Stacks                             :
+	 1. site.cilicili.common.filter.JWTAuthFilter.doFilterInternal(JWTAuthFilter.java:51)
+	 2. site.cilicili.common.filter.AccessFilter.doFilter(AccessFilter.java:41)
+	 3. site.cilicili.common.mvcConfig.LogOperationAspect.logOperation(LogOperationAspect.java:58)
+	 4. site.cilicili.common.mvcConfig.LogOperationAspect.writeOperationLog(LogOperationAspect.java:86)
+	 5. site.cilicili.backend.log.service.impl.SysLogOperationServiceImpl.insert(SysLogOperationServiceImpl.java:63)
+
+----------------------------------------------------------------------------------------------------
+
+2024-02-19 22:18:24.033 [http-nio-8889-exec-8] INFO  p6spy - 
+2024-02-20 02:27:17.199 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x449b0ffd, L:/172.20.10.3:62592 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.378 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x9796adb3, L:/172.20.10.3:62593 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.379 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x2af7c75e, L:/172.20.10.3:62591 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.380 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x10b8474c, L:/172.20.10.3:62597 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.381 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x40d871a7, L:/172.20.10.3:62596 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.381 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x40359b31, L:/172.20.10.3:62601 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.383 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xf2795066, L:/172.20.10.3:62602 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.383 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xa90616b2, L:/172.20.10.3:62605 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.385 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x57577e58, L:/172.20.10.3:62604 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.386 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x39b31c4b, L:/172.20.10.3:62607 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.387 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xcc4e0686, L:/172.20.10.3:62606 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.388 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x82acaefe, L:/172.20.10.3:62609 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.389 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xb3f07ed7, L:/172.20.10.3:62608 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.390 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x0e32288a, L:/172.20.10.3:62611 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.390 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x7e29470c, L:/172.20.10.3:62610 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.392 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x60a250c4, L:/172.20.10.3:62612 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.393 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x4ee69960, L:/172.20.10.3:62613 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.393 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xb5f7277c, L:/172.20.10.3:62614 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.394 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x88b87923, L:/172.20.10.3:62615 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.395 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xbe8a2a21, L:/172.20.10.3:62616 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.396 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xebefe3b4, L:/172.20.10.3:62617 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.397 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xe1338cb4, L:/172.20.10.3:62619 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.397 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x15d62e8c, L:/172.20.10.3:62620 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.399 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x234cacf3, L:/172.20.10.3:62626 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-20 02:27:17.400 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x93bfa0a6, L:/172.20.10.3:62627 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.794 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x253fd48e, L:/172.20.10.3:1299 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.811 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xd0c870db, L:/172.20.10.3:1297 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.812 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x33902da7, L:/172.20.10.3:1307 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.813 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xfbabe848, L:/172.20.10.3:1306 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.815 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x723f14b3, L:/172.20.10.3:1324 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.817 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0x8031e616, L:/172.20.10.3:1327 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-02-21 10:55:17.818 [redisson-timer-4-1] ERROR o.r.c.h.PingConnectionHandler - Unable to send PING command over channel: [id: 0xb5e6d3d0, L:/172.20.10.3:1346 - R:8.217.182.161/8.217.182.161:6379]
+org.redisson.client.RedisTimeoutException: Command execution timeout for command: (PING), params: [], Redis client: [addr=redis://8.217.182.161:6379]
+	at org.redisson.client.RedisConnection.lambda$async$0(RedisConnection.java:256)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.run(HashedWheelTimer.java:715)
+	at io.netty.util.concurrent.ImmediateExecutor.execute(ImmediateExecutor.java:34)
+	at io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:703)
+	at io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:790)
+	at io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:503)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)

@@ -90,4 +90,6 @@ public interface VideoCarouselMapper extends BaseMapper<VideoCarouselEntity> {
     int deleteById(Long id);
 
     List<VideoCarouselEntity> queryAllByParam(VideoCarouselDto videoCarousel);
+
+    List<VideoCarouselEntity> getCarouselListByTime();
 }

@@ -10,6 +10,7 @@ import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.carousel.domain.dto.QueryCarouselResponse;
 import site.cilicili.frontend.carousel.domain.dto.VideoCarouselDto;
+import site.cilicili.frontend.carousel.domain.dto.VideoCarouselVo;
 import site.cilicili.frontend.carousel.domain.pojo.VideoCarouselEntity;
 import site.cilicili.frontend.carousel.mapper.VideoCarouselMapper;
 import site.cilicili.frontend.carousel.service.VideoCarouselService;
@@ -110,5 +111,13 @@ public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, V
                 .map(r -> R.yes("Success."))
                 .orElseThrow(() ->
                         AppException.builder().error(Error.COMMON_EXCEPTION).build());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getCarouselList() {
+        return Optional.ofNullable(baseMapper.getCarouselListByTime())
+                .map(videoCarouselEntities -> BeanUtil.copyToList(videoCarouselEntities, VideoCarouselVo.class))
+                .map(videoCarouselVos -> R.yes("Success.").setRecords(videoCarouselVos)).orElse(R.no("Fail."));
     }
 }

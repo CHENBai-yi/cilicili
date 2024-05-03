@@ -9,6 +9,7 @@ import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.advertising.domain.dto.VideoAdvertisingDto;
+import site.cilicili.frontend.advertising.domain.dto.VideoAdvertisingVo;
 import site.cilicili.frontend.advertising.domain.pojo.VideoAdvertisingEntity;
 import site.cilicili.frontend.advertising.mapper.VideoAdvertisingMapper;
 import site.cilicili.frontend.advertising.service.VideoAdvertisingService;
@@ -89,7 +90,8 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
     @Override
     public R update(VideoAdvertisingDto videoAdvertising) {
         return Optional.ofNullable(videoAdvertising.getId())
-                .map(idd -> baseMapper.updateById(BeanUtil.copyProperties(videoAdvertising, VideoAdvertisingEntity.class)))
+                .map(idd ->
+                        baseMapper.updateById(BeanUtil.copyProperties(videoAdvertising, VideoAdvertisingEntity.class)))
                 .filter(f -> f > 0)
                 .map(r -> R.yes("Success."))
                 .orElseThrow(() ->
@@ -110,5 +112,13 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
                 .map(r -> R.yes("Success."))
                 .orElseThrow(() ->
                         AppException.builder().error(Error.COMMON_EXCEPTION).build());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getAdverList() {
+        return Optional.ofNullable(baseMapper.getAdverListByTime())
+                .map(videoAdvertisingEntities -> BeanUtil.copyToList(videoAdvertisingEntities, VideoAdvertisingVo.class))
+                .map(videoCarouselVos -> R.yes("Success.").setRecords(videoCarouselVos)).orElse(R.no("Fail."));
     }
 }
