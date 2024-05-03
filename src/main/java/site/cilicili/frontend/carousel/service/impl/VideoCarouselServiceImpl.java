@@ -118,6 +118,7 @@ public class VideoCarouselServiceImpl extends ServiceImpl<VideoCarouselMapper, V
     public R getCarouselList() {
         return Optional.ofNullable(baseMapper.getCarouselListByTime())
                 .map(videoCarouselEntities -> BeanUtil.copyToList(videoCarouselEntities, VideoCarouselVo.class))
-                .map(videoCarouselVos -> R.yes("Success.").setRecords(videoCarouselVos)).orElse(R.no("Fail."));
+                .map(videoCarouselVos -> R.yes("Success.").setRecords(videoCarouselVos))
+                .orElse(R.no("Fail."));
     }
 }

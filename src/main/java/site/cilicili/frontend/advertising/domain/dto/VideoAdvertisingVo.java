@@ -30,8 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class VideoAdvertisingVo {
     @JsonProperty("type")
     private String adverType;
+
     @JsonProperty("content")
     private String adverContent;
+
     @Pattern(regexp = "^http://.*?", message = "不是正确的链接地址")
     @JsonProperty("link")
     private String adverLink;

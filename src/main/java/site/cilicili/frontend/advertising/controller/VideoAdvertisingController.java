@@ -132,8 +132,7 @@ public class VideoAdvertisingController {
      *
      * @return R
      */
-    @Operation(
-            summary = "按时间返回广告图")
+    @Operation(summary = "按时间返回广告图")
     @PostMapping("get-adver-list")
     public R videoCarouselListByTime() {
         return this.videoAdvertisingService.getAdverList();

@@ -118,7 +118,9 @@ public class VideoAdvertisingServiceImpl extends ServiceImpl<VideoAdvertisingMap
     @Override
     public R getAdverList() {
         return Optional.ofNullable(baseMapper.getAdverListByTime())
-                .map(videoAdvertisingEntities -> BeanUtil.copyToList(videoAdvertisingEntities, VideoAdvertisingVo.class))
-                .map(videoCarouselVos -> R.yes("Success.").setRecords(videoCarouselVos)).orElse(R.no("Fail."));
+                .map(videoAdvertisingEntities ->
+                        BeanUtil.copyToList(videoAdvertisingEntities, VideoAdvertisingVo.class))
+                .map(videoCarouselVos -> R.yes("Success.").setRecords(videoCarouselVos))
+                .orElse(R.no("Fail."));
     }
 }

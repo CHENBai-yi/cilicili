@@ -98,7 +98,7 @@ public class VideoCommentsUserInfoServiceImpl
     public R commentUserInfo(
             final AuthUserDetails authUserDetails, final QueryCommentListRequest queryCommentListRequest) {
         final Integer uid =
-                Optional.ofNullable(queryCommentListRequest.id()).orElse(Math.toIntExact(authUserDetails.getId()));
+                Optional.ofNullable(authUserDetails).map(authUserDetails1 -> Math.toIntExact(authUserDetails.getId())).orElse(queryCommentListRequest.id());
         return Optional.ofNullable(baseMapper.queryByUid(uid))
                 .map(data -> {
                     data.setId(data.getUid());

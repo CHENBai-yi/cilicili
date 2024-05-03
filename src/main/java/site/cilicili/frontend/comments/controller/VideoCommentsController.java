@@ -31,6 +31,7 @@ public class VideoCommentsController {
      * 服务对象
      */
     private final VideoCommentsService videoCommentsService;
+
     private final VideoCommentsUserInfoService videoCommentsUserInfoService;
 
     /**

@@ -139,25 +139,21 @@ public class VideoCarouselController {
      *
      * @return R
      */
-    @Operation(
-            summary = "按时间返回轮播图")
+    @Operation(summary = "按时间返回轮播图")
     @PostMapping("get-carousel-list")
     public R videoCarouselListByTime() {
         return this.videoCarouselService.getCarouselList();
     }
 
-    @Operation(
-            summary = "刷新轮播图时间,按时间返回轮播图")
+    @Operation(summary = "刷新轮播图时间,按时间返回轮播图")
     @PostMapping("flush-carousel-list")
     public R flushCarouselList() {
         return carouselService.flushCarouselList();
     }
 
-    @Operation(
-            summary = "刷新轮播图时间,按时间返回轮播图")
+    @Operation(summary = "刷新轮播图时间,按时间返回轮播图")
     @GetMapping("subscribe-carousel")
     public SseEmitter subscribeCarousel() {
         return carouselService.subscribeCarousel();
     }
-
 }

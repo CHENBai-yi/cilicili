@@ -26,5 +26,4 @@ public class SseEmitterListener {
         String message = "用户 " + "bbb" + " 上线了";
         this.sseEmitterUtil.pushAllUser(JSONUtil.toJsonStr(R.yes("Success.")));
     }
-
 }

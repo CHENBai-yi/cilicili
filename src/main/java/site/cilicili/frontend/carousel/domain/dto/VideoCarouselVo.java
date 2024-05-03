@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VideoCarouselVo {
     @JsonProperty("img")
     private String imageUrl;
+
     private String backgroundColor;
     private String link;
 }
