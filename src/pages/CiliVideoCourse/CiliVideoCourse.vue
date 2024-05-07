@@ -4,7 +4,7 @@
     <div class="row">
       <div class="nice-class col-10 ">
         <ul v-if="!showNoData&&!!courses.courses&&courses.courses.length>0"
-            class="nice-class-list  clearfix q-gutter-y-md flex wrap ">
+            class="nice-class-list  clearfix q-gutter-y-md flex wrap justify-start">
           <li v-for="(item,index) in courses.courses" :key="item.title" class="ali clearfix q-pb-md q-mr-md">
             <a :href="'#/video/'+item.title+'/'+item.id+'/info'">
               <img :src=item.pic>
@@ -1417,7 +1417,7 @@ section {
 }
 
 .nice-class li {
-  width: 218px;
+  width: 216px;
   text-align: left;
 }
 

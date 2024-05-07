@@ -74,6 +74,10 @@ export const useStorageStore = defineStore('storage', {
         LocalStorage.set('cili-carousel', this.CiliCarousel)
       }
     },
+    DelCiliCarousel() {
+      this.CiliCarousel = undefined
+      LocalStorage.removeItem('cili-carousel')
+    },
     async SetCiliAdvertising() {
       const res = await postAction('public/get-adver-list')
       if (res.code === 1) {

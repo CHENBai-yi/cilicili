@@ -38,17 +38,18 @@
                 :width="364"
                 bordered
                 collapse-mode="width"
-                content-style="padding-left:15px;overflow:hidden"
+                content-style="padding-left:15px;overflow: hidden;"
               >
-
-                <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders ':''">
-                  <div class="left q-mb-sm rounded-borders "></div>
-                </div>
-                <n-scrollbar>
-                  <div class="q-gutter-sm" style="display: flex;
+                <q-page-sticky :class="darkTheme" class="z-top absolute-top-left left full-width justify-start" expand>
+                  <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders ':''">
+                    <div class="left  rounded-borders q-ml-sm"></div>
+                  </div>
+                </q-page-sticky>
+                <n-scrollbar style="overflow: scroll;">
+                  <div class="q-gutter-sm q-pt-xl" style="display: flex; overflow: scroll;
     flex-direction: column;
     align-items: flex-start;
-    flex-wrap: nowrap;">
+    flex-wrap: nowrap; ">
                     <CiliLink v-for="(item ,index) in videoList" :key="index" :weight=600 color=""
                               @click="switchVideo(item.content)">
                       <div class="flex no-wrap items-center justify-evenly">
@@ -83,9 +84,9 @@
               <div class="q-pr-lg text-weight-medium">
                 <q-icon name="visibility"/>
                 <em class="q-pl-xs">{{ videoInfo.view }}</em></div>
-              <CiliLink class="q-pr-lg " color="">
-                <q-icon name="share"/>
-                <em class="q-pl-xs text-weight-medium">{{ $t('Share') }}</em></CiliLink>
+              <!--              <CiliLink class="q-pr-lg " color="">-->
+              <!--                <q-icon name="share"/>-->
+              <!--                <em class="q-pl-xs text-weight-medium">{{ $t('Share') }}</em></CiliLink>-->
             </div>
           </div>
         </div>
@@ -258,8 +259,8 @@ const switchVideo = (e) => {
 </script>
 <style lang="scss" scoped>
 .left {
-  width: 117px;
-  height: 28px;
+  width: 150px;
+  height: 36px;
   background-image: url('/static/images/catalogue-title.png');
   background-size: cover;
   background-position: center;

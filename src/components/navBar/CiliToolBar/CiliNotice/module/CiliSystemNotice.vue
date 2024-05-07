@@ -58,10 +58,10 @@ const bus = inject("bus")
 const getNoticeTypeSystem = async () => {
   const res = await postAction(getNoticeUrl.value, {
     notice_type: 'noticeType_system',
-    desc: true,
-    // notice_to_user: userStore.GetUsername(),
-    sort_by: 'created_at',
+    notice_to_user: userStore.GetUsername(),
     page: 1,
+    desc: true,
+    sort_by: 'created_at',
     page_size: 9999,
     read: true
   })

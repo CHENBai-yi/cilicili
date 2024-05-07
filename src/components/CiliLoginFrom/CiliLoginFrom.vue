@@ -11,8 +11,8 @@
               dense
               narrow-indicator
             >
-              <q-tab class="text-purple" icon="img:ic_student.svg" label="学生" name="student"/>
-              <q-tab class="text-orange" icon="img:teacher.svg" label="教师" name="teacher"/>
+              <q-tab class="text-purple" icon="img:static/images/ic_student.svg" label="学生" name="student"/>
+              <q-tab class="text-orange" icon="img:static/images/teacher.svg" label="教师" name="teacher"/>
             </q-tabs>
           </div>
           <q-btn v-close-popup class="absolute-top-right on-left q-ma-sm" dense flat icon="ion-ios-close-circle-outline"

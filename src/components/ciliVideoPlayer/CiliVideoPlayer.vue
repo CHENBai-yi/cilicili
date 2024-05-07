@@ -8,7 +8,7 @@
   >
     <div v-if="showMask" class="relative-position">
       <div class="row  full-width no-wrap mask">
-        <div class="col-11 flex justify-start q-gutter-sm ">
+        <div class="col-11 flex justify-start q-gutter-sm " style="width:50%">
           <div class="flex items-center">
             <q-icon name="fab fa-youtube"/>
             <div class="q-pl-xs"> {{ testData.view }}</div>
@@ -19,7 +19,7 @@
             <div class="q-pl-xs"> {{ testData.dm }}</div>
           </div>
         </div>
-        <div class="col">
+        <div class="row">
           {{ testData.time }}
         </div>
       </div>
@@ -219,7 +219,8 @@ onMounted(() => {
 
 const loadShowMast = (e) => {
   var timers = Math.ceil(state.instance.video.duration); //视频总时长
-  testData.time = timeToMinute(timers);
+  // testData.time = timeToMinute(timers);
+  testData.time = props.time;
   emit('isLoadCompleted', true)
 }
 

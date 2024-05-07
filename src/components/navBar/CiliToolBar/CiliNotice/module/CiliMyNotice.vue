@@ -57,7 +57,7 @@ const getNoticeUrl = ref('notice/get-notice-list')
 const bus = inject("bus")
 const getNoticeTypeSystem = async () => {
   const res = await postAction(getNoticeUrl.value, {
-    notice_type: 'noticeType_system',
+    notice_type: 'noticeType_message',
     notice_to_user: userStore.GetUsername(),
     page: 1,
     desc: true,

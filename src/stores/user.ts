@@ -77,7 +77,12 @@ export const useUserStore = defineStore('user', {
     HandleLogout() {
       // const permissionStore = usePermissionStore()
       // permissionStore.ClearMenu()
-      SessionStorage.remove('cili-token-frontend')
+      this.token = undefined
+      this.username = undefined
+      this.nickname = undefined
+      this.realName = undefined
+      this.avatar = undefined
+      SessionStorage.removeItem('cili-token-frontend')
       Cookies.remove('cili-token-frontend')
       Cookies.remove('cili-username-frontend')
       Cookies.remove('cili-nickname-frontend')
@@ -85,11 +90,7 @@ export const useUserStore = defineStore('user', {
       Cookies.remove('cili-avatar-frontend')
       // dont delete dict
       // LocalStorage.remove('cili-dict')
-      this.token = undefined
-      this.username = undefined
-      this.nickname = undefined
-      this.realName = undefined
-      this.avatar = undefined
+
 
     },
     GetToken() {

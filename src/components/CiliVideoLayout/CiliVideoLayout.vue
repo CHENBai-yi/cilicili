@@ -19,6 +19,7 @@
                     :highlight="item.detail.highlight"
                     :hotkey="false"
                     :preventClickToggle='true'
+                    :time="item.total_time"
                     :video="item.detail.video"
                     :view="item.view"
                     height="172px"
@@ -108,6 +109,7 @@
                     :highlight="item.detail.highlight"
                     :hotkey="false"
                     :preventClickToggle='true'
+                    :time="item.total_time"
                     :video="item.detail.video"
                     :view="item.view"
                     height="172px"
@@ -188,9 +190,9 @@
       </div>
     </div>
     <div v-for="(item, index) in items" :key="index"
-         :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md':'row q-gutter-x-md q-mx-sm q-mr-md q-mb-md '"
+         :class="$q.screen.lt.sm?'column q-ma-sm q-gutter-y-md justify-start':'row q-gutter-x-md q-mx-sm q-mr-md q-mb-md justify-start'"
     >
-      <div v-for="(i,index) in item" :key="i.title" class="col order-none">
+      <div v-for="(i,index) in item" :key="i.title" class="order-none">
         <q-card bordered flat style="height:260px;max-height:260px;">
           <div v-show="loaded" class="column">
             <div class="col">
@@ -200,6 +202,7 @@
                 :highlight="i.detail.highlight"
                 :hotkey="false"
                 :preventClickToggle='true'
+                :time="i.total_time"
                 :video="i.detail.video"
                 :view="i.view"
                 height="172px"
@@ -647,7 +650,7 @@ const item2 = ref([
 const urls = reactive({
   list: 'courses/get-course-list'
 })
-const size = 4
+const size = 5
 const pageSize = ref(6)
 const pagination = ref({
   sort_by: 'created_at',
@@ -786,5 +789,9 @@ const handlePause = (handlePause) => {
 
 .author {
 
+}
+
+.order-none {
+  width: 323.5px;
 }
 </style>

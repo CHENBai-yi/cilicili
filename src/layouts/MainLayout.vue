@@ -58,11 +58,13 @@ const initEventSource = () => {
         let data = event?.data
         try {
           data = JSON.parse(data)
-          if (data.code === 1) {
+          if (data.code === 301) {
+            storageStore.DelCiliCarousel();
+            storageStore.SetCiliCarousel();
+          } else if (data.code === 302) {
             console.log(data, "EventSource")
             storageStore.DelCiliAdvertisingText()
             storageStore.SetCiliAdvertising();
-            storageStore.SetCiliCarousel();
           }
         } catch (e) {
         }
