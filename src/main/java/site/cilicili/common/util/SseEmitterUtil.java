@@ -53,7 +53,7 @@ public class SseEmitterUtil {
         for (SseEmitter emitter : userSseEmitters.values()) {
             try {
                 emitter.send(content);
-                emitter.send(SseEmitter.event().name("全局消息").data(content));
+                // emitter.send(SseEmitter.event().name("全局消息").data(content));
             } catch (Exception e) {
                 log.error("推送消息异常：{}", e);
             }

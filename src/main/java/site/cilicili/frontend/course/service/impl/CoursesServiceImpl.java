@@ -302,6 +302,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                             getCourseListResponse.setTitle(item.getName());
                             getCourseListResponse.setAuthor(item.getTeacher());
                             getCourseListResponse.setTime(DateUtil.format(item.getCreatedAt(), "MM-dd"));
+                            getCourseListResponse.setTotalTime(item.getTotalTime());
                             Optional.ofNullable(item.getVis()).ifPresent(vis -> {
                                 if (NumberUtil.isGreater(BigDecimal.valueOf(vis), BigDecimal.valueOf(10000))) {
                                     getCourseListResponse.setView(NumberUtil.roundStr(vis / 10000.0, 1) + "万");

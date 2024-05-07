@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import site.cilicili.common.service.SseEmitterService;
@@ -26,8 +27,8 @@ public class SseEmitterServiceImpl implements SseEmitterService {
     private final SseEmitterUtil sseEmitterUtil;
 
     @Override
-    public R flushCarouselList() {
-        publisher.publishEvent(sseEmitterUtil);
+    public R flushCarouselList(HttpStatus httpStatus) {
+        publisher.publishEvent(httpStatus);
         return R.yes("Success.");
     }
 

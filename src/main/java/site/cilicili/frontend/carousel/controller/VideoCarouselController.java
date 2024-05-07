@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -36,6 +37,12 @@ public class VideoCarouselController {
      * 服务对象
      */
     private final VideoCarouselService videoCarouselService;
+    /**
+     * 刷新轮播图时间,按时间返回轮播图
+     *
+     * @return R
+     */
+    private final SseEmitterService carouselService;
 
     /**
      * 全查询
@@ -64,13 +71,6 @@ public class VideoCarouselController {
     public R queryById(final @RequestBody VideoCarouselDto videoCarousel) {
         return this.videoCarouselService.queryById(videoCarousel.getId());
     }
-
-    /**
-     * 刷新轮播图时间,按时间返回轮播图
-     *
-     * @return R
-     */
-    private final SseEmitterService carouselService;
 
     /**
      * 编辑数据
@@ -148,7 +148,13 @@ public class VideoCarouselController {
     @Operation(summary = "刷新轮播图时间,按时间返回轮播图")
     @PostMapping("flush-carousel-list")
     public R flushCarouselList() {
-        return carouselService.flushCarouselList();
+        return carouselService.flushCarouselList(HttpStatus.MOVED_PERMANENTLY);
+    }
+
+    @Operation(summary = "刷新轮播图时间,按时间返回轮播图")
+    @PostMapping("flush-adver-list")
+    public R flushAdverlList() {
+        return carouselService.flushCarouselList(HttpStatus.FOUND);
     }
 
     @Operation(summary = "刷新轮播图时间,按时间返回轮播图")

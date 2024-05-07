@@ -30,6 +30,7 @@ public class GetCourseListResponse implements Serializable {
     private String faver;
     private String author;
     private String time;
+    private String totalTime;
     private Detail detail;
 
     @Data

@@ -1,5 +1,6 @@
 package site.cilicili.common.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import site.cilicili.common.util.R;
 
@@ -12,7 +13,7 @@ import site.cilicili.common.util.R;
  * @author BaiYiChen
  */
 public interface SseEmitterService {
-    R flushCarouselList();
+    R flushCarouselList(HttpStatus httpStatus);
 
     SseEmitter subscribeCarousel();
 }
