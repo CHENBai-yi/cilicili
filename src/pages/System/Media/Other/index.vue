@@ -63,6 +63,13 @@
               </n-tag>
             </q-td>
           </template>
+          <template v-slot:body-cell-page="props">
+            <q-td :props="props" class="q-gutter-y-sm">
+              <n-ellipsis style="max-width: 220px">
+                {{ props.row.adver_page }}
+              </n-ellipsis>
+            </q-td>
+          </template>
           <template v-slot:body-cell-actions="props">
             <q-td :props="props" class="q-gutter-x-md">
               <q-btn v-has="'media-advertising:edit'" :label="$t('Edit')" color="primary" dense flat
@@ -92,7 +99,7 @@ const url = {
   delete: 'advertising/delete-advertising-by-id',
   send: 'notice/send-notice',
   change: 'advertising/change-status',
-  flush: 'carousel/flush-carousel-list'
+  flush: 'carousel/flush-adver-list'
 
 }
 const columns = computed(() => {
