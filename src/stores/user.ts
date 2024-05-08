@@ -3,6 +3,8 @@ import {Cookies, SessionStorage} from 'quasar';
 // import {usePermissionStore} from './permission';
 import {postAction} from "src/api/manage";
 import {getAvatar} from 'src/utils/common'
+import {usePermissionStore} from "stores/permission";
+
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -46,8 +48,6 @@ export const useUserStore = defineStore('user', {
         this.realName = realName
         // @ts-ignore
         Cookies.set('cili-realName-frontend', realName, this.option)
-
-
         return true
       } else {
         return
@@ -69,28 +69,27 @@ export const useUserStore = defineStore('user', {
       if (!!this.GetToken()) {
         const res = await postAction("public/logout", {username: this.username, token: this.GetToken()})
         if (res.code === 1) {
-          this.HandleLogout()
+          await this.HandleLogout()
         }
         return res.message;
       }
     },
-    HandleLogout() {
-      // const permissionStore = usePermissionStore()
-      // permissionStore.ClearMenu()
+    async HandleLogout() {
+      const permissionStore = usePermissionStore()
+      permissionStore.ClearMenu()
       this.token = undefined
+      SessionStorage.removeItem('cili-token-frontend')
+      Cookies.remove('cili-token-frontend')
       this.username = undefined
       this.nickname = undefined
       this.realName = undefined
       this.avatar = undefined
-      SessionStorage.removeItem('cili-token-frontend')
-      Cookies.remove('cili-token-frontend')
       Cookies.remove('cili-username-frontend')
       Cookies.remove('cili-nickname-frontend')
       Cookies.remove('cili-realName-frontend')
       Cookies.remove('cili-avatar-frontend')
       // dont delete dict
       // LocalStorage.remove('cili-dict')
-
 
     },
     GetToken() {

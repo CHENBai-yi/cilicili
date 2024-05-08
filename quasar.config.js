@@ -38,7 +38,8 @@ module.exports = configure(function (ctx) {
       'lang',
       'i18n',
       'addressBarColor',
-      'common'
+      'common',
+      'directive'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css

@@ -187,10 +187,10 @@
       <!--      <CiliPopover v-if="$q.screen.gt.sm" :label="$t('Records')" name="access_time">-->
       <!--        <div class="login-panel-popover"><p class="tips">{{ $t('LoginToViewHistory') }}</p>-->
       <!--          <div class="login-btn" @click="showLoginFrom"> {{ $t('SignInNow') }}</div>-->
-      <!--        </div>-->
+      <!--        </div> frontend:contribute -->
       <!--      </CiliPopover>-->
 
-      <CiliPopover :label="$t('Contribute')" name="cloud_upload" to="/create/upload">
+      <CiliPopover v-if="!!token&&contribute" :label="$t('Contribute')" name="cloud_upload" to="/create/upload">
         <div class="">
           <div class="">
             <div class="upload-panel-popover">
@@ -238,6 +238,7 @@
           </div>
         </div>
       </CiliPopover>
+
     </div>
     <q-space/>
   </q-toolbar>
@@ -245,22 +246,27 @@
 </template>
 
 <script setup>
-import {inject, onMounted, ref, watch, watchEffect, defineProps} from 'vue'
+import {computed, defineProps, inject, onMounted, ref, watch, watchEffect} from 'vue'
 import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
 import CiliLoginFrom from 'src/components/CiliLoginFrom/CiliLoginFrom.vue'
 import {useUserStore} from 'src/stores/user'
 import {getAvatar} from 'src/utils/common'
-import {useRouter} from 'vue-router'
+import {useI18n} from 'vue-i18n'
+import {getAction, postAction} from 'src/api/manage'
+import {usePermissionStore} from 'src/stores/permission'
 
 defineProps({
   isJump: Boolean
 })
-import {useI18n} from 'vue-i18n'
-import {getAction, postAction} from 'src/api/manage'
+const permissionStore = usePermissionStore()
+const contribute = computed(() => {
+  if (permissionStore.GetInitUserButton())
+    return permissionStore.GetInitUserButton()?.some(item => item === 'frontend:contribute')
+  return permissionStore.userButton.some(item => item === 'frontend:contribute')
+})
 
-const $router = useRouter()
 const showTip = ref(false)
 const queryRecentUrl = ref('courses/search')
 const recentQueryRecord = ref([])

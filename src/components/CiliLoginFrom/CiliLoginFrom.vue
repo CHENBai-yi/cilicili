@@ -239,7 +239,9 @@ import {computed, inject, onMounted, reactive, ref, watch} from "vue";
 import useTheme from "src/composables/useTheme"
 import {postAction} from 'src/api/manage'
 import {useUserStore} from "src/stores/user"
+import {usePermissionStore} from "stores/permission";
 
+const permissionStore = usePermissionStore()
 const urls = reactive({
   registry: 'public/frontend/reg',
   getEmailCode: 'public/get-email-code'
@@ -342,11 +344,8 @@ const onRegister = () => {
     })
 }
 const codeSign = ref(false)
-
-
 //登录
-const onLogin = (form) => {
-
+const onLogin = async (form) => {
   if (codeSign.value) {
     form.email = account.value
     form.code = emailCode.value
@@ -355,10 +354,10 @@ const onLogin = (form) => {
     form.email = emailAccount.value
     form.password = password.value
   }
-  const res = userStore.HandleLogin(form)
+  const res = await userStore.HandleLogin(form)
   console.log(res)
   if (res) {
-    console.log(res)
+    permissionStore.GetRoleButton()
     icon.value = false
   } else {
 
