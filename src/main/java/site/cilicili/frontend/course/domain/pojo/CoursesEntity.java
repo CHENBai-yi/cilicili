@@ -44,41 +44,56 @@ public class CoursesEntity implements Serializable {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     protected LocalDateTime createdAt;
+
     @TableField(fill = FieldFill.INSERT)
     protected String createdBy;
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     protected LocalDateTime updatedAt;
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updatedBy;
+
     @TableField(fill = FieldFill.UPDATE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     protected LocalDateTime deletedAt;
+
     @Schema(description = "课程名称")
     private String name;
+
     @Schema(description = "教师姓名")
     @JsonAlias("author")
     private String teacher;
+
     @Schema(description = "课程种类")
     private String kind;
+
     @Schema(description = "学科")
     private String subject;
+
     @Schema(description = "价格")
     private Double price;
+
     @Schema(description = "描述")
     private String description;
+
     @JsonAlias("img")
     @Schema(description = "海报URL")
     private String poster;
+
     @Schema(description = "标签")
     private String tag;
+
     @Schema(description = "审核理由")
     private String reason;
+
     @TableLogic(value = "1", delval = "0")
     @Schema(description = "逻辑删除")
     private Integer logicalDelete;
+
     @JsonIdentityReference(alwaysAsId = true)
     @TableId(type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.AUTO)

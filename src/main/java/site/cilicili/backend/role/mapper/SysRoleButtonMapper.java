@@ -80,4 +80,6 @@ public interface SysRoleButtonMapper extends BaseMapper<SysRoleButtonEntity> {
      * @return 影响行数
      */
     int deleteById(String sysRoleRoleCode);
+
+    List<String> findButtons(String roleCode);
 }

@@ -1,6 +1,7 @@
 package site.cilicili.backend.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.role.domain.dto.RoleButtonMenuRequest;
 import site.cilicili.backend.role.domain.pojo.SysRoleButtonEntity;
 import site.cilicili.common.util.R;
@@ -50,4 +51,6 @@ public interface SysRoleButtonService extends IService<SysRoleButtonEntity> {
     R getRoleButtonList(RoleButtonMenuRequest roleCode);
 
     boolean insertOrUpdateBatch(List<SysRoleButtonEntity> roleButton);
+
+    R getRoleButtonStrList(AuthUserDetails roleCode);
 }

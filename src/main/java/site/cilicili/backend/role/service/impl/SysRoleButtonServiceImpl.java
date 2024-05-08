@@ -5,10 +5,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.role.domain.dto.RoleButtonMenuRequest;
 import site.cilicili.backend.role.domain.pojo.SysRoleButtonEntity;
 import site.cilicili.backend.role.mapper.SysRoleButtonMapper;
 import site.cilicili.backend.role.service.SysRoleButtonService;
+import site.cilicili.common.exception.AppException;
+import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 
 import java.util.List;
@@ -86,4 +89,16 @@ public class SysRoleButtonServiceImpl extends ServiceImpl<SysRoleButtonMapper, S
     public boolean insertOrUpdateBatch(final List<SysRoleButtonEntity> roleButton) {
         return baseMapper.insertOrUpdateBatch(roleButton) > 0;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public R getRoleButtonStrList(final AuthUserDetails roleCode) {
+        return Optional.ofNullable(roleCode).map(authUserDetails ->
+                Optional.ofNullable(authUserDetails.getRoleCode())
+                        .map(r -> baseMapper.findButtons(r))
+                        .map(data -> R.yes("Success.").setRecords(data))
+                        .orElse(R.no("Fail."))
+        ).orElseThrow(() -> new AppException(Error.TOKEN_INVALIED));
+    }
+
 }

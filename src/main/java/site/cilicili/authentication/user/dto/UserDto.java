@@ -60,7 +60,6 @@ public class UserDto {
         @NotNull
         @Size(min = 8, max = 32)
         private String password;
-
         private String email;
         private String code;
     }
