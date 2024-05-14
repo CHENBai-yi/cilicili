@@ -37,7 +37,11 @@
             </div>
           </li>
         </ul>
-        <n-result v-if="showNoData" description="色即是空，空即是色" status="418" title="什么也没有"/>
+        <transition v-if="showNoData" appear
+                    enter-active-class="animated animate__fadeInDown"
+        >
+          <n-result description="色即是空，空即是色" status="418" title="什么也没有"/>
+        </transition>
       </div>
     </div>
     <!-- place QPageSticky at end of page -->

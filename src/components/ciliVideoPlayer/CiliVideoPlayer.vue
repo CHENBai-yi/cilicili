@@ -169,8 +169,12 @@ const handlePlay = () => {
   showMask.value = false
   const audioDom = state.instance.video
   audioDom.muted = "true"
-  audioDom && audioDom?.click() // 【主要代码 - 解决报错】先模拟与页面进行交互，防止报错
-  audioDom && audioDom?.play() // 播放音频
+  try {
+    audioDom && audioDom?.click() // 【主要代码 - 解决报错】先模拟与页面进行交互，防止报错
+    audioDom && audioDom?.play() // 播放音频
+  } catch (e) {
+
+  }
 }
 const handlePause = () => {
   const audioDom = state.instance.video

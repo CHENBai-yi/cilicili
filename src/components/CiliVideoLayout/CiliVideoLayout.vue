@@ -1,6 +1,6 @@
 <template>
   <NoticeBar/>
-  <q-infinite-scroll :offset="250" class="" @load="onLoad">
+  <q-infinite-scroll ref="infiniteScroll" :offset="250" class="" @load="onLoad">
     <div :class="$q.screen.lt.sm?'column ':'row'">
       <div v-if="$q.screen.gt.sm" class="col-4">
         <div :class="$q.screen.lt.sm?'column q-mt-sm q-mx-sm ':'row q-gutter-x-md q-mx-sm  q-mb-md '">
@@ -650,6 +650,7 @@ const item2 = ref([
 const urls = reactive({
   list: 'courses/get-course-list'
 })
+const infiniteScroll = ref(null)
 const size = 5
 const pageSize = ref(6)
 const pagination = ref({
@@ -672,11 +673,18 @@ const refresh = async () => {
     console.log(item1.value, item2.value)
   }
 }
+const selectKind = () => {
+  items.value = []
+  item1.value = []
+  item2.value = []
+  onLoad()
+  refresh()
+}
 const bus = inject('bus')
 onMounted(() => {
   bus.on('selectKind', (kind) => {
     pagination.value.kind = kind
-    refresh()
+    selectKind()
   })
   bus.on('handleSearch', (query) => {
     pagination.value.query = query

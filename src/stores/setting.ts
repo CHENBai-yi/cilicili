@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {Cookies, LocalStorage} from 'quasar';
+import {useUserStore} from "stores/user";
 
 export const useSettingStore = defineStore('setting', {
   state: () => ({
@@ -52,7 +53,9 @@ export const useSettingStore = defineStore('setting', {
     },
     ChangeLanguage(lang: any) {
       this.language = lang
-      Cookies.set('cili-language', lang)
+      const userStore = useUserStore()
+      // @ts-ignore
+      Cookies.set('cili-language', lang,userStore.option)
     },
     GetLanguage() {
       if (this.language) {

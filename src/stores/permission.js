@@ -3,7 +3,8 @@ import {defineStore} from 'pinia';
 import {ArrayToTree} from 'src/utils/arrayAndTree';
 import {postAction} from "src/api/manage";
 // import res from '/public/data/_public_GetUserMenu.json'
-import {SessionStorage} from 'quasar';
+import {Cookies} from 'quasar';
+import {useUserStore} from 'src/stores/user'
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
@@ -15,50 +16,50 @@ export const usePermissionStore = defineStore('permission', {
   }),
   getters: {},
   actions: {
-    async GetUserMenu() {
-      try {
-        const res = await postAction('user/get-user-menu')
-        if (res.code === 1) {
-          const data = res.data.records
-          // role default page
-          const dp = res.data.default_page_list
-          const redirect = data.filter(item => item.name === dp[0] && item.redirect !== '')
-          if (redirect.length) {
-            this.InitUserDefautlPage([data.filter(item => item.path === redirect[0].redirect)[0].name])
-          } else {
-            this.InitUserDefautlPage(dp)
-          }
-          // get user button permisstion
-          this.InitUserButton(res.data.buttons)
-          // Get the authentication route table (all the user's own menus) and handle it into routes
-          const userMenu = HandleRouter(data)
-          // add 404 page
-          userMenu.push({
-            path: '/:catchAll(.*)*',
-            name: 'notFound',
-            component: () => import('pages/Error404.vue')
-          })
-          // set all menus
-          this.InitUserMenu(userMenu)
-          // drop hidden menus
-          const noHiddenMenu = data.filter(value => value.hidden === "yesNo_no")
-          const searchMenu = noHiddenMenu.filter(value => value.parent_code !== "")
-          // set search menus
-          this.InitSearchMenu(searchMenu)
-          // Deep copy to avoid affecting other data
-          const deepTopMenu = JSON.parse(JSON.stringify(noHiddenMenu))
-          const topMenu = ArrayToTree(deepTopMenu, "name", "parent_code")
-          this.InitTopMenu(topMenu)
+    /* async GetUserMenu() {
+       try {
+         const res = await postAction('user/get-user-menu')
+         if (res.code === 1) {
+           const data = res.data.records
+           // role default page
+           const dp = res.data.default_page_list
+           const redirect = data.filter(item => item.name === dp[0] && item.redirect !== '')
+           if (redirect.length) {
+             this.InitUserDefautlPage([data.filter(item => item.path === redirect[0].redirect)[0].name])
+           } else {
+             this.InitUserDefautlPage(dp)
+           }
+           // get user button permisstion
+           this.InitUserButton(res.data.buttons)
+           // Get the authentication route table (all the user's own menus) and handle it into routes
+           const userMenu = HandleRouter(data)
+           // add 404 page
+           userMenu.push({
+             path: '/:catchAll(.*)*',
+             name: 'notFound',
+             component: () => import('pages/Error404.vue')
+           })
+           // set all menus
+           this.InitUserMenu(userMenu)
+           // drop hidden menus
+           const noHiddenMenu = data.filter(value => value.hidden === "yesNo_no")
+           const searchMenu = noHiddenMenu.filter(value => value.parent_code !== "")
+           // set search menus
+           this.InitSearchMenu(searchMenu)
+           // Deep copy to avoid affecting other data
+           const deepTopMenu = JSON.parse(JSON.stringify(noHiddenMenu))
+           const topMenu = ArrayToTree(deepTopMenu, "name", "parent_code")
+           this.InitTopMenu(topMenu)
 
-          // Return authentication routes
-          return userMenu
-        } else {
-          return []
-        }
-      } catch (error) {
-        return error
-      }
-    },
+           // Return authentication routes
+           return userMenu
+         } else {
+           return []
+         }
+       } catch (error) {
+         return error
+       }
+     },*/
     async GetRoleButton() {
       try {
         const res = await postAction('role/role-button-list')
@@ -100,14 +101,15 @@ export const usePermissionStore = defineStore('permission', {
       this.topMenu = []
       this.userButton = []
       this.defaultPage = []
-      SessionStorage.removeItem('cili-role-button')
+      Cookies.remove('cili-role-button')
     },
     InitUserButton(buttons) {
+      const userStore = useUserStore()
       this.userButton = buttons
-      SessionStorage.setItem('cili-role-button', buttons)
+      Cookies.set('cili-role-button', buttons, userStore.option)
     },
     GetInitUserButton() {
-      const btns = SessionStorage.getItem('cili-role-button')
+      const btns = Cookies.get('cili-role-button')
       if (btns) {
         return btns
       }
