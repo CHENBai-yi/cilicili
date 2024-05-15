@@ -40,7 +40,8 @@
         <transition v-if="showNoData" appear
                     enter-active-class="animated animate__fadeInDown"
         >
-          <n-result description="色即是空，空即是色" status="418" title="什么也没有"/>
+          <!--          <n-result description="色即是空，空即是色" status="418" title="什么也没有"/>-->
+          <n-result description="换个词试试" status="418" title="什么也没有"/>
         </transition>
       </div>
     </div>
@@ -77,7 +78,8 @@
                 {{ item }}
               </n-button>
               <n-collapse-transition :show="show" class="q-gutter-md" style="margin-left:0;margin-top:0">
-                <CiliLink v-for="(item,index) in courses.classify_more" :weight=500 color="" size="16px">
+                <CiliLink v-for="(item,index) in courses.classify_more" :weight=500 color="" size="16px"
+                          @click="queryParam.kind=item;refresh()">
                   {{ item }}
                 </CiliLink>
 
@@ -138,12 +140,12 @@ const refresh = async () => {
   const res = await postAction(urls.list, queryParam)
   if (res && res.code === 1) {
     const data = res.data
-    if (!!data.courses && data.courses.length > 0) {
-      courses.value = data
-      showNoData.value = false
-    } else {
-      showNoData.value = !showNoData.value
+    if (data.courses && data.courses.length <= 0) {
+      showNoData.value = true
+      return
     }
+    courses.value = data
+    showNoData.value = false
   }
 }
 

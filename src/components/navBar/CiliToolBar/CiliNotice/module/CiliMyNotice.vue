@@ -20,10 +20,11 @@
                     <span v-html="i.notice_content">
                     </span>
                     <!--                    错过拜年纪直播？没关系，拜年纪正片+单品已全部上线！小伙伴们快来看看吧-->
-                    <!--                    <CiliLink class="q-ml-sm" color="#2faee3" href="https://www.bilibili.com/video/BV1iU421d7aG"-->
-                    <!--                              target="_blank">-->
-                    <!--                    <q-icon name="ion-ios-link"/> 网页链接-->
-                    <!--                   </CiliLink>-->
+                    <CiliLink v-if="i.href" :href="i.href" class="q-ml-sm"
+                              color="#2faee3"
+                              target="_blank">
+                                        <q-icon name="ion-ios-link"/> 网页链接
+                    </CiliLink>
                   </span>
             </div>
           </el-card>
@@ -69,6 +70,17 @@ const getNoticeTypeSystem = async () => {
     bus.emit('handleNoticeCount')
     noticeList.value = res.data.records.map(item => {
       item.created_at = XEUtils.toDateString(item.created_at, 'yyyy年MM月dd日 HH:mm')
+      //正则表达式匹配URL
+      const urlRegex = /https?:\/\/[^\s]+$/; // 注意这里使用$确保URL在字符串末尾
+      const urlMatch = urlRegex.exec(item.notice_content);
+      if (urlMatch) {
+        const url = urlMatch[0];
+        const chinesePart = item.notice_content?.slice(0, urlMatch.index); // 获取URL之前的部分，即中文
+        item.notice_content = chinesePart
+        item.href = url
+      } else {
+
+      }
       return item
     })
 

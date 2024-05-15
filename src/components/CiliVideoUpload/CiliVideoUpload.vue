@@ -108,17 +108,17 @@
               </el-form-item>
             </div>
             <div class="col">
-              <el-form-item label="授课教师：" prop="teacher">
-                <n-select
-                  v-model:value="form.teacher"
-                  :loading="loading"
-                  :options="teachers"
+              <!--              <el-form-item label="授课教师：" prop="teacher">-->
+              <!--                <n-select-->
+              <!--                  v-model:value="form.teacher"-->
+              <!--                  :loading="loading"-->
+              <!--                  :options="teachers"-->
 
-                  filterable
-                  placeholder="搜索歌曲"
-                  @focus="handleSearch"
-                />
-              </el-form-item>
+              <!--                  filterable-->
+              <!--                  placeholder="搜索歌曲"-->
+              <!--                  @focus="handleSearch"-->
+              <!--                />-->
+              <!--              </el-form-item>-->
               <el-form-item label="课程分类：" prop="subject">
                 <el-col :span="11">
                   <n-select v-model:value="form.subject" :options="subjects" :render-option="renderOption"
@@ -270,8 +270,10 @@ import {useToast} from "primevue/usetoast";
 import {useQuasar} from "quasar";
 import {postAction} from 'src/api/manage'
 import {getVideoLength} from "../../utils/common";
+import {useUserStore} from "src/stores/user";
 import XEUtils from 'xe-utils'
 
+const userStore = useUserStore()
 const validatedFrom = ref(null)
 const urls = reactive({
   add: 'courses/add',
@@ -301,6 +303,8 @@ const onSubmit = async () => {
     html: true
   })
   // const res = await postAction(urls.add, form)
+  form.teacher = userStore.GetRealName();
+  console.log(form.teacher, "aaa")
   postAction(urls.add, form)
     .then(res => {
       if (res.code === 1) {

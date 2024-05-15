@@ -18,16 +18,16 @@ export default defineComponent({
   setup() {
     useMeta({
       // 设置页面 title
-      title: '嗤哩嗤哩(゜-゜)つロ 干杯~',
+      title: '菠萝微课',
       // 可选的；设置最终的 title 为“Index Page - My Website”,
       // optional; sets final title as "Index Page - My Website", useful for multiple level meta
-      titleTemplate: (title: any) => `${title} - CiliCili`,
+      titleTemplate: (title: any) => `${title}`,
 
       // meta tags
       meta: {
         description: {
           name: 'description',
-          content: '磁力网（cili）是IT技能学习平台。一家专注做视频课程的网站,提供及时更新的技术视频帮助更多自学者拿到心仪的offer.'
+          content: '菠萝微课是IT技能学习平台。一家专注做视频课程的网站,提供及时更新的技术视频帮助更多自学者拿到心仪的offer.'
         },
         keywords: {
           name: 'keywords',
@@ -55,13 +55,13 @@ export default defineComponent({
           innerHTML: `{
       "@context": "https://schema.org/",
       "@type": "Recipe",
-      "name": "CiliCili(゜-゜)つロ 干杯~",
+      "name": "菠萝微课",
       "author": {
         "@type": "Person",
         "name": "ChenBaiYi"
       },
       "datePublished": "2018-03-10",
-      "description": "磁力网（cili）是IT技能学习平台。一家专注做视频课程的网站,提供及时更新的技术视频帮助更多自学者拿到心仪的offer.",
+      "description": "菠萝微课是IT技能学习平台。一家专注做视频课程的网站,提供及时更新的技术视频帮助更多自学者拿到心仪的offer.",
       "prepTime": "PT20M"
     }`
         }

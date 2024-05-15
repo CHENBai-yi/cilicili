@@ -1,8 +1,8 @@
 export const CiliDefaultUsername = 'Cili'
 export const CiliDefaultAvatar = "icons/favicon-128x128.png"
 export const CiliFrontendDefault = {
-  mainTitle: "Cilicili后台管理系统",
-  subTitle: "Cilicili后台管理系统",
+  mainTitle: "菠萝微课",
+  subTitle: "菠萝微课",
   webDescribe: "Be the change you want to see in the world.",
   showGit: "yesNo_yes",
   imageList: {
