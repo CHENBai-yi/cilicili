@@ -15,7 +15,7 @@
                  :rules="[(val) => (val && val.length > 0) || $t('NeedInput')]" color="black" dense no-error-icon
                  outlined rounded/>
         <q-input v-model.trim="form.password" :disable="loading" :placeholder="$t('Password')"
-                 :rules="[(val) => (val && val.length > 0) || $t('NeedInput')]" :type="isPwd ? 'password' : 'text'"
+                 :rules="[(val) => (val && val.length >=8) || $t('NeedInput8')]" :type="isPwd ? 'password' : 'text'"
                  color="black" dense no-error-icon outlined
                  rounded>
           <template v-slot:append>

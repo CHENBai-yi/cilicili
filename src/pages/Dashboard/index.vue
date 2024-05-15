@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-gutter-y-md" padding style="overflow-x: hidden;">
-    <div class="row q-gutter-x-xs">
+    <div class="row q-gutter-x-xs" style="width: 240px">
       <QStatistic :label="timeWelcome()" boldLabel bordered class="col" style="border-radius: 15px;">
         <div class="row items-center text-italic" style="margin-top: 7px;">
           {{ randomWelcome() }}
@@ -13,7 +13,7 @@
           </q-inner-loading>
         </div>
       </QStatistic>
-      <QStatistic boldLabel bordered class="col" label="License"
+<!--      <QStatistic boldLabel bordered class="col" label="License"
                   style="backgroundImage: linear-gradient(to bottom right, #ec4786,#b955a4);border-radius: 15px;">
         <div class="row items-center">
           <q-icon dark name="fab fa-github" size="32px"/>
@@ -55,12 +55,12 @@
             placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
             src="https://img.shields.io/github/watchers/CBy74521/cilicili?style=social">
         </div>
-      </QStatistic>
+      </QStatistic>-->
     </div>
     <div class="row q-gutter-x-md">
-      <q-card class="col">
-        <StarHistory/>
-      </q-card>
+<!--      <q-card class="col">-->
+<!--        <StarHistory/>-->
+<!--      </q-card>-->
       <q-card class="col">
         <PieChart2 class="col"/>
       </q-card>
@@ -70,7 +70,7 @@
     </div>
     <div class="row q-gutter-x-md">
       <q-card class="col">
-        <TimeLine/>
+<!--        <TimeLine/>-->
       </q-card>
     </div>
   </q-page>
