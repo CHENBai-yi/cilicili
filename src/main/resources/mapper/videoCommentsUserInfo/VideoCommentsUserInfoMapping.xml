@@ -182,9 +182,10 @@
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into video_comments_user_info(address, content, like, attention, follower, username, avatar, level,
-                                             homeLink, created_at, created_by, updated_at, updated_by, deleted_at)
-        values (#{address}, #{content}, #{like}, #{attention}, #{follower}, #{username}, #{avatar}, #{level},
+        insert into video_comments_user_info(uid, address, content, `like`, attention, follower, username, avatar,
+                                             `level`, homeLink, created_at, created_by, updated_at, updated_by,
+                                             deleted_at)
+        values (#{uid}, #{address}, #{content}, #{like}, #{attention}, #{follower}, #{username}, #{avatar}, #{level},
                 #{homelink}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{deletedAt})
     </insert>
     
@@ -253,7 +254,7 @@
                 content = #{content},
             </if>
             <if test="like != null">
-                like = #{like},
+                `like` = #{like},
             </if>
             <if test="attention != null">
                 attention = #{attention},
@@ -268,7 +269,7 @@
                 avatar = #{avatar},
             </if>
             <if test="level != null">
-                level = #{level},
+                `level` = #{level},
             </if>
             <if test="homelink != null and homelink != ''">
                 homeLink = #{homelink},

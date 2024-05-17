@@ -8,6 +8,9 @@ import site.cilicili.authentication.user.entity.UserEntity;
 import site.cilicili.backend.user.domain.dto.KickOnlineUserRequest;
 import site.cilicili.common.util.R;
 
+/**
+ * @author BaiYiChen
+ */
 public interface UserService extends IService<UserEntity> {
     UserDto registration(final UserDto.Registration registration);
 
@@ -21,5 +24,5 @@ public interface UserService extends IService<UserEntity> {
 
     R frontendRegistration(UserDto.FrontendRegistration registration);
 
-    R getEmailCodeForReg(String email);
+    R getEmailCodeForReg(UserDto.GetEmailCode email);
 }

@@ -14,8 +14,8 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CetCoursesCountResponse {
-    private Integer total;
-    private Integer pass;
-    private Integer on;
-    private Integer off;
+    private Integer total = 0;
+    private Integer pass = 0;
+    private Integer on = 0;
+    private Integer off = 0;
 }

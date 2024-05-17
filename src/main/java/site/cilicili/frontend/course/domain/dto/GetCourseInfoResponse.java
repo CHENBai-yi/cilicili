@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  *
  * @author BaiYiChen
  */
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetCourseInfoResponse extends BaseQueryResponse {
     @Builder
     public GetCourseInfoResponse(

@@ -165,7 +165,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         return Optional.ofNullable(authUserDetails)
                 .map(authUserDetails1 -> {
                     courses.setCreatedBy(authUserDetails1.getusername());
-                    return R.yes("Success").setData(baseMapper.getCoursesCount(courses));
+                    return R.yes("Success").setData(Optional.ofNullable(baseMapper.getCoursesCount(courses)).orElse(new CetCoursesCountResponse()));
                 })
                 .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }

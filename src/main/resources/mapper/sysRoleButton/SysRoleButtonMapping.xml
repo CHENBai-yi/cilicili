@@ -43,6 +43,14 @@
             </if>
         </where>
     </select>
+    <select id="findButtons" resultType="string">
+        select button_code
+        from sys_button
+        where exists(select *
+                     from sys_role_button
+                     where sys_role_role_code = #{roleCode}
+                       and sys_button.button_code = sys_role_button.sys_button_button_code)
+    </select>
     
     <insert id="insertBatch" keyProperty="sysRoleRoleCode" useGeneratedKeys="true">
         insert into sys_role_button()

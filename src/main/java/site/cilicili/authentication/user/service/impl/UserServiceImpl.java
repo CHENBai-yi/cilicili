@@ -24,10 +24,14 @@ import site.cilicili.backend.user.domain.dto.KickOnlineUserRequest;
 import site.cilicili.backend.user.domain.pojo.SysUserRoleEntity;
 import site.cilicili.backend.user.service.SysUserOnlineService;
 import site.cilicili.backend.user.service.SysUserRoleService;
+import site.cilicili.common.config.dynamicDb.DbThreadLocalContextHolder;
+import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
+import site.cilicili.common.entity.Role;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.JwtUtils;
 import site.cilicili.common.util.R;
+import site.cilicili.frontend.comments.service.VideoCommentsUserInfoService;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -50,6 +54,9 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     private final StringRedisTemplate stringRedisTemplate;
     private final EmailService emailService;
     private final TemplateEngine templateEngine;
+    private final DbChangeConfig dbChangeConf;
+    private final Role role;
+    private final VideoCommentsUserInfoService videoCommentsUserInfoService;
 
     @Override
     public UserDto registration(final UserDto.Registration registration) {
@@ -71,6 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Transactional(rollbackFor = Throwable.class)
     @Override
     public R login(UserDto.Login login, final HttpHeaders headers) {
+        DbThreadLocalContextHolder.setDbUse(Optional.ofNullable(dbChangeConf.getBackend()).orElse(dbChangeConf.getBackendInner()));
         ipAddressHyperLogLog.add(Objects.requireNonNull(headers.getHost()).getHostString());
         if (Objects.nonNull(login.getCode()) && StrUtil.isNotEmpty(login.getCode())) {
             final String code = stringRedisTemplate.opsForValue().get(login.getEmail());
@@ -175,20 +183,21 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Transactional(rollbackFor = Throwable.class)
     @Override
     public R frontendRegistration(final UserDto.FrontendRegistration registration) {
+        DbThreadLocalContextHolder.setDbUse(Optional.ofNullable(dbChangeConf.getBackend()).orElse(dbChangeConf.getBackendInner()));
         return Optional.ofNullable(stringRedisTemplate.opsForValue().get(registration.getEmail()))
                 .map(code -> {
                     if (!code.equals(registration.getCode())) {
                         return R.no("验证码不正确！");
                     }
-                    return baseMapper
+                    return userRepository
                             .findByEmail(registration.getEmail())
                             .map(userEntity -> R.no("该账号已被注册"))
                             .orElseGet(() -> {
                                 registration.setUsername(String.format("%1$s%2$s", "用户", RandomUtil.randomNumbers(4)));
                                 registration.setPassword(passwordEncoder.encode(registration.getPassword()));
-                                if (saveOrUpdate(BeanUtil.toBean(registration, UserEntity.class))) {
-                                    final SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity(
-                                            registration.getRoleCode(), registration.getUsername());
+                                final UserEntity userEntity = BeanUtil.toBean(registration, UserEntity.class);
+                                if (saveOrUpdate(userEntity)) {
+                                    final SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity(Optional.ofNullable(registration.getRealName()).map(r -> role.getTeacher()).orElse(role.getStudent()), registration.getUsername());
                                     if (sysUserRoleService.saveOrUpdate(sysUserRoleEntity)) {
                                         return R.yes("注册成功！");
                                     }
@@ -200,8 +209,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     }
 
     @Override
-    public R getEmailCodeForReg(final String email) {
-        return getEmailCode(email, "注册");
+    public R getEmailCodeForReg(final UserDto.GetEmailCode email) {
+        return getEmailCode(email.getEmail(), Optional.ofNullable(email.getLogin()).filter(f -> f).map(f -> "登录").orElse("注册"));
     }
 
     public R getEmailCode(final String email, final String option) {
@@ -209,7 +218,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
         final int time = 60;
         try {
             emailService.sendHtmlMail(
-                    email, "cilicili注册验证码测试邮件：", resolveHtmlTemplate(option, randomNumbers, time, "秒"));
+                    email, "cilicili登录注册验证码测试邮件：", resolveHtmlTemplate(option, randomNumbers, time, "秒"));
             stringRedisTemplate.opsForValue().setIfAbsent(email, randomNumbers, Duration.of(time, ChronoUnit.SECONDS));
             return R.yes("验证码发送成功！");
         } catch (IllegalArgumentException e) {

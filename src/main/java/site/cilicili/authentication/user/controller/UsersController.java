@@ -67,7 +67,7 @@ public class UsersController {
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.joining()));
         }
-        return userService.getEmailCodeForReg(email.getEmail());
+        return userService.getEmailCodeForReg(email);
     }
 
     @PostMapping("frontend/reg")

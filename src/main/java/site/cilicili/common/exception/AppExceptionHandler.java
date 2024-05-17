@@ -2,7 +2,6 @@ package site.cilicili.common.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtException;
-import jakarta.annotation.PreDestroy;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -161,7 +160,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     /**
      * 服务器下线前对所有用户强制下线处理
      */
-    @PreDestroy
+    // @PreDestroy
     public void preDestroy() {
         Optional.ofNullable(DbUtils.checkDb(dbInitialization.getDbChangeConf().getBackendInner()))
                 .filter(r -> sysUserOnlineService.dropOnline(null))

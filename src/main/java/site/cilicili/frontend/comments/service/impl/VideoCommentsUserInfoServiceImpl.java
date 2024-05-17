@@ -2,13 +2,17 @@ package site.cilicili.frontend.comments.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
+import site.cilicili.common.util.AddressUtils;
+import site.cilicili.common.util.IpUtil;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.comments.domain.dto.QueryCommentListRequest;
 import site.cilicili.frontend.comments.domain.dto.QueryCommentListResponse;
@@ -18,6 +22,7 @@ import site.cilicili.frontend.comments.mapper.VideoCommentsUserInfoMapper;
 import site.cilicili.frontend.comments.service.VideoCommentsService;
 import site.cilicili.frontend.comments.service.VideoCommentsUserInfoService;
 
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -34,6 +39,7 @@ public class VideoCommentsUserInfoServiceImpl
         implements VideoCommentsUserInfoService {
 
     private final VideoCommentsService videoCommentsService;
+    private final HttpServletRequest httpServletRequest;
 
     /**
      * 通过ID查询单条数据
@@ -93,19 +99,60 @@ public class VideoCommentsUserInfoServiceImpl
         return R.ok().setData(del);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(rollbackFor = Throwable.class)
     @Override
     public R commentUserInfo(
             final AuthUserDetails authUserDetails, final QueryCommentListRequest queryCommentListRequest) {
-        final Integer uid = Optional.ofNullable(authUserDetails)
-                .map(authUserDetails1 -> Math.toIntExact(authUserDetails.getId()))
-                .orElse(queryCommentListRequest.id());
-        return Optional.ofNullable(baseMapper.queryByUid(uid))
-                .map(data -> {
-                    data.setId(data.getUid());
-                    return R.yes("Success.").setData(data);
-                })
-                .orElse(R.no("Fail."));
+        final String address = AddressUtils.getRealAddressByIP(IpUtil.getRemoteIp(httpServletRequest));
+        return Optional.ofNullable(queryCommentListRequest.id())
+                .filter(id -> id.intValue() != authUserDetails.getId())
+                .map(id -> Optional.ofNullable(baseMapper.queryByUid(id))
+                        .map(data -> {
+                            data.setId(data.getUid());
+                            return R.yes("Success.").setData(data);
+                        }).orElse(R.no("Fail."))
+                ).orElseGet(() -> Optional.ofNullable(authUserDetails)
+                        .map(AuthUserDetails::getId)
+                        .map(uid -> Optional.ofNullable(baseMapper.queryByUid(Math.toIntExact(uid))).orElseGet(() -> {
+                            final VideoCommentsUserInfoEntity userInfoEntity = new VideoCommentsUserInfoEntity();
+                            userInfoEntity.setUid(uid);
+                            userInfoEntity.setUsername(authUserDetails.getUsername());
+                            userInfoEntity.setAvatar(authUserDetails.getAvatar());
+                            userInfoEntity.setLevel(1);
+                            userInfoEntity.setFollower(0L);
+                            userInfoEntity.setLike(0L);
+                            userInfoEntity.setAttention(0L);
+                            userInfoEntity.setLikeIdsArr(Collections.emptyList());
+                            userInfoEntity.setAddress(address);
+                            if (save(userInfoEntity)) {
+                                return userInfoEntity;
+                            }
+                            return null;
+                        })).map(data -> {
+                            boolean f = false;
+                            data.setUsername(Optional.ofNullable(authUserDetails.getNickName()).orElse(authUserDetails.getRealName()));
+                            final String avatar = authUserDetails.getAvatar();
+                            final String username = Optional.ofNullable(authUserDetails.getNickName()).orElse(authUserDetails.getRealName());
+                            if (StrUtil.isNotEmpty(avatar) && !avatar.equals(data.getAvatar())) {
+                                data.setAvatar(avatar);
+                                f = true;
+                            }
+                            if (StrUtil.isNotEmpty(username) && !username.equals(data.getUsername())) {
+                                data.setUsername(username);
+                                f = true;
+                            }
+                            if (StrUtil.isNotEmpty(data.getAddress()) && !data.getAddress().equals(address)) {
+                                data.setAddress(address);
+                                f = true;
+                            }
+                            if (f) {
+                                update(data);
+                            }
+                            data.setId(data.getUid());
+                            return R.yes("Success.").setData(data);
+                        }).orElse(R.no("Fail.")));
+
+
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -133,6 +180,11 @@ public class VideoCommentsUserInfoServiceImpl
                     videoCommentsEntity.setContentImg(records.getContentImg());
                     videoCommentsEntity.setHomeLink("/" + videoCommentsEntity.getUid());
                     videoCommentsEntity.setLikes(records.getLikes());
+                    Optional.ofNullable(records.getUser())
+                            .ifPresent(user -> {
+                                videoCommentsEntity.setAvatar(user.getAvatar());
+                                videoCommentsEntity.setUsername(user.getUsername());
+                            });
                     return videoCommentsEntity;
                 })
                 .filter(videoCommentsService::save)

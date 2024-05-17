@@ -1,9 +1,7 @@
 package site.cilicili.authentication.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -60,6 +58,7 @@ public class UserDto {
         @NotNull
         @Size(min = 8, max = 32)
         private String password;
+
         private String email;
         private String code;
     }
@@ -99,7 +98,12 @@ public class UserDto {
         private String realName;
 
         @NotBlank
+        @JacksonInject("roleCode")
         private String roleCode;
+
+        @Schema(description = "头像")
+        @JacksonInject("avatar")
+        private String avatar;
     }
 
     @Getter
@@ -109,5 +113,6 @@ public class UserDto {
         @NotNull
         @Email
         private String email;
+        private Boolean login;
     }
 }

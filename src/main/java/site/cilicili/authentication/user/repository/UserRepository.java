@@ -21,7 +21,7 @@ public interface UserRepository extends BaseMapper<UserEntity> {
     Optional<UserEntity> findByEmail(@Param("email") String email);
 
     @Select(
-            "SELECT u.*,r.sys_role_role_code as roleCode FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = #{username} OR u.email = #{email}")
+            "SELECT u.*,r.sys_role_role_code as roleCode FROM  sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = #{username} OR u.email = #{email}")
     Optional<UserEntity> findByUsername(@Param("username") String username, @Param("email") String email);
 
     @Select(

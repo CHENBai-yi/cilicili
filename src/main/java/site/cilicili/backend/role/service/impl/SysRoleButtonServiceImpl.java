@@ -93,12 +93,11 @@ public class SysRoleButtonServiceImpl extends ServiceImpl<SysRoleButtonMapper, S
     @Transactional(readOnly = true)
     @Override
     public R getRoleButtonStrList(final AuthUserDetails roleCode) {
-        return Optional.ofNullable(roleCode).map(authUserDetails ->
-                Optional.ofNullable(authUserDetails.getRoleCode())
+        return Optional.ofNullable(roleCode)
+                .map(authUserDetails -> Optional.ofNullable(authUserDetails.getRoleCode())
                         .map(r -> baseMapper.findButtons(r))
                         .map(data -> R.yes("Success.").setRecords(data))
-                        .orElse(R.no("Fail."))
-        ).orElseThrow(() -> new AppException(Error.TOKEN_INVALIED));
+                        .orElse(R.no("Fail.")))
+                .orElseThrow(() -> new AppException(Error.TOKEN_INVALIED));
     }
-
 }

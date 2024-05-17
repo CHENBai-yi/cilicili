@@ -31,6 +31,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         .username(userEntity.getUsername())
                         .roleCode(userEntity.getRoleCode())
                         .realName(userEntity.getRealName())
+                        .avatar(userEntity.getAvatar())
+                        .nickName(userEntity.getNickname())
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException(Error.KICKED_USER.getMessage()));
     }

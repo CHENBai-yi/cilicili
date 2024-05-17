@@ -55,3 +55,6 @@ cilicili:
       valid-time: 360000
       #      valid-time: 15
       refresh-at: 3
+  role:
+    student: "student"
+    teacher: "teacher"

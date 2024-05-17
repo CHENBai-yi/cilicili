@@ -1,11 +1,10 @@
 package site.cilicili.authentication.Details;
 
-import java.util.Collection;
-
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Builder;
+import java.util.Collection;
 
 /**
  * @author BaiYiChen
@@ -16,12 +15,21 @@ public class AuthUserDetails implements UserDetails {
     private final String roleCode;
     private final String realName;
 
+    private final String nickName;
+    private final String avatar;
+
     @Builder
-    public AuthUserDetails(Long id, String username, String roleCode, final String realName) {
+    public AuthUserDetails(Long id, String username, String roleCode, final String realName, final String nickName, final String avatar) {
         this.id = id;
         this.username = username;
         this.roleCode = roleCode;
         this.realName = realName;
+        this.nickName = nickName;
+        this.avatar = avatar;
+    }
+
+    public String getNickName() {
+        return nickName;
     }
 
     public String getRealName() {
@@ -64,6 +72,10 @@ public class AuthUserDetails implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
         return true;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 
     @Override

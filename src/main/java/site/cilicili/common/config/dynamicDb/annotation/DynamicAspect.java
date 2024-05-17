@@ -4,10 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import site.cilicili.common.config.dynamicDb.DbThreadLocalContextHolder;
@@ -48,13 +45,12 @@ public class DynamicAspect {
     }
 
     @Around("pointCut()")
-    public Object aroundAdvice(final ProceedingJoinPoint pjp) {
+    public Object aroundAdvice(ProceedingJoinPoint pjp) {
         try {
             final Method method = ((MethodSignature) pjp.getSignature()).getMethod();
             if (method.isAnnotationPresent(DBUSE.class)) {
                 final String value = method.getDeclaredAnnotation(DBUSE.class).value();
                 DbThreadLocalContextHolder.setDbUse(value);
-                // log.info(method.getName() + "方法：切换到{}数据库", value);
             } else {
                 if (StrUtil.isNotBlank(dbChangeConf.getBackend())) {
                     DbThreadLocalContextHolder.setDbUse(dbChangeConf.getBackend());
@@ -80,6 +76,11 @@ public class DynamicAspect {
         }
     }
 
+    @After("pointCutBackend()||common()")
+    public void aroundAdviceBackendAfter() {
+        DbThreadLocalContextHolder.poll();
+    }
+
     // @Around("pointCutBackend()||common()")
     // public Object aroundAdviceFrontend(final ProceedingJoinPoint pjp) {
     //     try {
@@ -102,5 +103,10 @@ public class DynamicAspect {
         } else if (StrUtil.isNotBlank(dbChangeConf.getFrontendInner())) {
             DbThreadLocalContextHolder.setDbUse(dbChangeConf.getFrontendInner());
         }
+    }
+
+    @After("pointCutFrontend()")
+    public void afterFrontend() {
+        DbThreadLocalContextHolder.poll();
     }
 }

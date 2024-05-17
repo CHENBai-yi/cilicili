@@ -97,6 +97,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         std.addValue("todoStatus", "yesNo_no");
         std.addValue("videoStatus", "onOffPass_on");
         std.addValue("isShow", true);
+        std.addValue("roleCode", "student");
+        std.addValue("avatar", "cili-upload:avatar/cilicili/ec01f28762bf4ab983de6e484d8c8cfc_20240504000947738.png");
         objectMapper.setInjectableValues(std);
     }
 
@@ -295,6 +297,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         return requestedPath.toUri().toString();
                     }
                 });
+
+        // windows
+        registry.addResourceHandler("/admin/**")
+                .addResourceLocations("classpath:/admin/");
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 
