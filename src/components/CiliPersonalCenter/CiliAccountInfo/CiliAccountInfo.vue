@@ -5,14 +5,16 @@
     <div class="q-gutter-md q-pl-xl">
 
       <div class="row items-center"><span class="security-nav-name">&nbsp;&nbsp;昵&nbsp;&nbsp;&nbsp;称：</span>
-        <q-input v-model="form.nickname" :borderless="open[0]" :readonly="open[0]" class="security-nav-name"
+        <q-input v-model="form.user.nickname" :borderless="open[0]" :readonly="open[0]"
+                 :rules="[ (val, rules) => val.length<10|| $t('LengthLessThan')+10 ]"
+                 class="security-nav-name"
         />
         <span v-if="!open[0]" class="q-gutter-x-md">
           <n-button
             secondary
             strong
             type="tertiary"
-            @click="form.nickname=form.nickname_bak,open[0]=true"
+            @click="form.user.nickname=form.nickname_bak,open[0]=true"
           >
             取消
           </n-button>
@@ -20,18 +22,18 @@
             secondary
             strong
             type="success"
-            @click="open[0]=true,save({nickname:form.nickname})"
+            @click="open[0]=true,save({nickname:form.user.nickname})"
           >
             保存
           </n-button>
         </span>
-        <n-button v-if="open[0]" strong text type="info" @click="open[0]=false,form.nickname_bak=form.nickname">修改
+        <n-button v-if="open[0]" strong text type="info" @click="open[0]=false,form.nickname_bak=form.user.nickname">修改
         </n-button>
       </div>
       <div class="row items-center">
         <div class="security-nav-name">&nbsp;&nbsp;&nbsp;头&nbsp;&nbsp;像：</div>
         <q-avatar size="60px" square>
-          <img :src="form.avatar">
+          <img :src="form.user.avatar">
         </q-avatar>
 
         <div class="col no-wrap flex items-center q-gutter-x-sm q-ml-md">
@@ -48,7 +50,7 @@
             ref="upload"
             :action="uploadUrl"
             :default-upload="false"
-            :headers="{Authorization:form.token}"
+            :headers="{Authorization:form.user.token}"
             :max=1
             accept="image/*"
             class="flex items-center"
@@ -63,14 +65,14 @@
 
       </div>
       <div class="row items-center"><span class="security-nav-name">&nbsp;&nbsp;手机号：</span>
-        <q-input v-model="form.mobile" :borderless="open[3]" :readonly="open[3]" class="security-nav-name"/>
+        <q-input v-model="form.user.mobile" :borderless="open[3]" :readonly="open[3]" class="security-nav-name"/>
         <div class="q-gutter-x-md">
           <span v-if="!open[3]" class="q-gutter-x-md">
           <n-button
             secondary
             strong
             type="tertiary"
-            @click="form.mobile=form.mobile_bak,open[3]=true"
+            @click="form.user.mobile=form.mobile_bak,open[3]=true"
           >
             取消
           </n-button>
@@ -84,12 +86,12 @@
           </n-button>
         </span>
           <n-button v-if="open[3]" class="q-ml-lg" strong text type="info"
-                    @click="open[3]=false,form.mobile_bak=form.mobile">修改
+                    @click="open[3]=false,form.mobile_bak=form.user.mobile">修改
           </n-button>
         </div>
       </div>
       <div class="row items-center"><span class="security-nav-name">真实姓名：</span>
-        <q-input v-model="form.real_name" :borderless="open[1]" :readonly="open[1]" class="security-nav-name"
+        <q-input v-model="form.user.real_name" :borderless="open[1]" :readonly="open[1]" class="security-nav-name"
         />
         <div class="q-gutter-x-md">
           <span v-if="!open[1]" class="q-gutter-x-md">
@@ -97,7 +99,7 @@
             secondary
             strong
             type="tertiary"
-            @click="form.real_name=form.real_name_bak,open[1]=true"
+            @click="form.user.real_name=form.real_name_bak,open[1]=true"
           >
             取消
           </n-button>
@@ -105,13 +107,13 @@
             secondary
             strong
             type="success"
-            @click="open[1]=true,save({real_name:form.real_name})"
+            @click="open[1]=true,save({real_name:form.user.real_name})"
           >
             保存
           </n-button>
         </span>
           <n-button v-if="open[1]" class="q-ml-lg" strong text type="info"
-                    @click="open[1]=false,form.real_name_bak=form.real_name">修改
+                    @click="open[1]=false,form.real_name_bak=form.user.real_name">修改
           </n-button>
         </div>
 
@@ -119,7 +121,7 @@
       <div class="row items-center"><span class="security-nav-name">性别：</span>
         <div>
           <q-btn-toggle
-            v-model="form.gender"
+            v-model="form.user.gender"
             :disable="open[2]"
             :options="options"
             push
@@ -132,7 +134,7 @@
             secondary
             strong
             type="tertiary"
-            @click="form.gender=form.gender_bak,open[2]=true"
+            @click="form.user.gender=form.gender_bak,open[2]=true"
           >
             取消
           </n-button>
@@ -140,12 +142,12 @@
             secondary
             strong
             type="success"
-            @click="open[2]=true,save({gender:form.gender})"
+            @click="open[2]=true,save({gender:form.user.gender})"
           >
             保存
           </n-button>
         </span>
-          <n-button v-if="open[2]" strong text type="info" @click="open[2]=false,form.gender_bak=form.gender">修改
+          <n-button v-if="open[2]" strong text type="info" @click="open[2]=false,form.gender_bak=form.user.gender">修改
           </n-button>
         </div>
       </div>
@@ -161,53 +163,55 @@
 </template>
 
 <script setup>
-import {computed, nextTick, reactive, ref, watchEffect} from 'vue'
+import {computed, nextTick, reactive, ref, watchSyncEffect} from 'vue'
 import {useUserStore} from 'src/stores/user'
 import useTheme from "src/composables/useTheme"
 import ChangePasswordDialog from 'src/components/CiliPersonalCenter/ChangePasswordDialog/ChangePasswordDialog.vue'
 import {getAction, postAction} from "../../../api/manage";
+import XEUtils from "xe-utils";
+import {RealUrl} from 'src/utils/convert'
 
 const userStore = useUserStore()
 
 const {darkTheme} = useTheme()
-const form = reactive({
-  avatar: computed(() => userStore.GetAvatar()),
-  nickname: computed({
-    get: () => {
-      return userStore.GetNickname() || userStore.GetUsername()
-    },
-    set: (val) => {
-      userStore.nickname = val
-    }
-  }),
-  real_name: computed({
-    get: () => {
-      return userStore.GetRealName()
-    },
-    set: (val) => {
-      userStore.realName = val
-    }
-  }),
-  mobile: '',
-  gender: '',
-  token: computed(() => userStore.GetToken())
-})
 
+const form = reactive({
+  user: {
+    avatar: userStore.GetAvatar(),
+    nickname: userStore.GetNickname() || userStore.GetUsername(),
+    real_name: userStore.GetRealName(),
+    mobile: '',
+    gender: '',
+    token: computed(() => userStore.GetToken())
+  }
+})
+const cleanForm = () => {
+  form.user.avatar = ''
+  form.user.nickname = ''
+  form.user.real_name = ''
+  form.user.mobile = ''
+  form.user.gender = ''
+}
 const getUserInfoUrl = 'users'
 const HandleGetUserInfo = async () => {
   const res = await getAction(getUserInfoUrl)
   if (res) {
     const {UserDto} = res
-    userStore.FlushUserInfo(UserDto)
-    console.log(UserDto)
-    form.mobile = UserDto.mobile
-    form.gender = UserDto.gender
+    try {
+      UserDto.avatar = RealUrl(UserDto.avatar)
+      userStore.FlushUserInfo(XEUtils.omit(UserDto, 'token'))
+      form.user = {...form.user, ...UserDto}
+    } catch (e) {
+      console.debug(e)
+    }
   }
 }
 
-watchEffect(() => {
-  if (userStore.GetToken()) {
+watchSyncEffect(() => {
+  if (userStore.token) {
     HandleGetUserInfo()
+  } else {
+    cleanForm()
   }
 })
 nextTick(() => HandleGetUserInfo())

@@ -4,7 +4,7 @@
                 enter-active-class="animated animate__fadeInDown"
                 leave-active-class="animated animate__fadeOutUp">
       <q-header :class="darkTheme">
-        <cili-tool-bar :isJump="true" class="shadow-6 "/>
+        <cili-tool-bar :isJump="true" StyleClass="shadow-6 "/>
       </q-header>
     </transition>
     <q-page-container>

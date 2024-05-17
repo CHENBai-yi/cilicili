@@ -349,6 +349,7 @@ onMounted(() => {
   bus.on('handleNoticeCount', (query) => {
     handleNoticeCount()
   })
+  bus.on('showLoginFrom', showLoginFrom)
 })
 </script>
 

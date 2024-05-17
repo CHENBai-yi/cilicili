@@ -16,7 +16,10 @@ export async function getAction<T>(url: string, params?: any): Promise<ApiResult
   return api({
     url,
     params,
-    method: method.Get
+    method: method.Get,
+    headers: {
+      "Content-Type": 'application/json;charset=utf-8'
+    }
   })
 }
 
@@ -25,6 +28,9 @@ export async function postAction<T>(url: string, params?: any): Promise<ApiResul
     url: url,
     method: method.Post,
     data: params,
+    headers: {
+      "Content-Type": 'application/json;charset=utf-8'
+    }
   })
 }
 
@@ -33,7 +39,21 @@ export async function postBlobAction<T>(url: string, params?: any): Promise<ApiR
     url,
     params,
     method: method.Post,
-    responseType: 'blob'
+    responseType: 'blob',
+    headers: {
+      "Content-Type": 'application/json;charset=utf-8'
+    }
+  })
+}
+
+export async function postMultipartFileAction<T>(url: string, params?: any): Promise<ApiResult<T>> {
+  return api({
+    url,
+    data: params,
+    method: method.Post,
+    headers: {
+      "Content-Type": 'multipart/form-data'
+    }
   })
 }
 

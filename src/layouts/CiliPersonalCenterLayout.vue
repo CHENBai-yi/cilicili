@@ -2,7 +2,7 @@
   <q-layout :class="darkTheme" class="shadow-2 rounded-borders" style="overflow-x: hidden;"
             view="lHh lpr lFf"> <!-- Be sure to play with the Layout demo on docs -->
     <q-header :class="darkTheme">
-      <cili-tool-bar class="shadow-24"/>
+      <cili-tool-bar/>
     </q-header>
     <q-page-container>
       <router-view v-slot="{ Component }">

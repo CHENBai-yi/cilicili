@@ -1,12 +1,28 @@
 <template>
 
-  <div :class="$q.screen.lt.sm?'q-ma-sm':'q-ml-xl'">
+  <div :class="$q.screen.lt.sm?'q-px-md':'q-px-xl q-mx-lg'">
+    <transition appear
+                enter-active-class="animated animate__fadeInDown"
+    >
+      <div v-if="!showReplayForm" class="flex no-wrap items-center justify-center">
+        <n-alert :bordered="false" :class="$q.dark.isActive?darkTheme:''"
+                 :show-icon="false" class="flex no-padding  no-wrap justify-center items-center "
+                 style="height:51px;width:898px" type="warning">
+          <div :class="$q.dark.isActive?darkTheme:''" class="q-gutter-x-md login-tip-font "><span>请先</span>
+            <q-btn :ripple="{ color: 'yellow' }" color="primary" label="登录" no-caps size="12px"
+                   @click.once="toLogin"/>
+            <span>后发表评论 (・ω・)</span></div>
+        </n-alert>
+      </div>
+    </transition>
+
     <u-comment-scroll :disable="disable" @more="more">
-      <u-comment ref="commentRef" :config="config" relative-time upload @like="like"
-                 @operate="operate" @submit="submit" @show-info="showInfo" @reply-page="replyPage">
+      <u-comment ref="commentRef" :class="darkTheme" :config="config" class="no-padding no-margin" relative-time
+                 upload @like="like" @operate="operate" @submit="submit" @show-info="showInfo"
+                 @reply-page="replyPage">
         <!-- <div>导航栏卡槽</div> -->
-        <!-- <template #header>头部卡槽</template> -->
-        <!-- <template #info>用户信息卡槽</template> -->
+        <!--         <template #header>头部卡槽</template>-->
+        <!--         <template #info>用户信息卡槽</template>-->
         <template #card="scope">
           <div class="user-card">
             <div class="user-avatar">
@@ -59,7 +75,8 @@
 // 下载表情包资源emoji.zip https://gitee.com/undraw/undraw-ui/releases/tag/v0.0.0
 // static文件放在public下,引入emoji.ts文件可以移动assets下引入,也可以自定义到指定位置
 import emoji from './emoji'
-import {onMounted, reactive, ref} from 'vue'
+import useTheme from "src/composables/useTheme"
+import {computed, inject, onMounted, reactive, ref, watchEffect} from 'vue'
 import Operate from './CiliOperate/Operate.vue'
 import {RealUrl} from 'src/utils/convert'
 import {
@@ -76,18 +93,18 @@ import {
   usePage,
   UToast
 } from 'undraw-ui'
-import {getComment, postAction, urls} from './comment'
+import {getComment, postAction, postMultipartFileAction, urls} from './comment'
 import defaultImage from 'src/assets/quasar-logo-vertical.svg'
 import {useRoute} from 'vue-router'
 import {useI18n} from "vue-i18n";
 import {useUserStore} from "src/stores/user";
 
+const {darkTheme} = useTheme()
 const {t} = useI18n()
 const $router = useRoute()
 const commentRef = ref<CommentInstance>()
 const userStore = useUserStore()
 // 用户信息是否加载
-
 const loading = ref(false)
 // 请求获取用户详细信息
 const showInfo = (uid: string, finish: Function) => {
@@ -101,7 +118,7 @@ const showInfo = (uid: string, finish: Function) => {
       }
     }).finally(() => loading.value = false)
 }
-
+const showReplayForm = computed(() => userStore.token)
 const config = reactive<ConfigApi>({
   user: {
     id: 1,
@@ -112,6 +129,15 @@ const config = reactive<ConfigApi>({
   },
   emoji: emoji,
   comments: [],
+  showForm: !!showReplayForm.value,
+
+})
+watchEffect(() => {
+  console.log(showReplayForm.value)
+  config.showForm = !!showReplayForm.value
+  if (config.showForm) {
+    loadUserInfo()
+  }
 })
 // 当前页数
 let pageNum = 2
@@ -119,8 +145,8 @@ let pageNum = 2
 let pageSize = 1
 // 评论总数量
 let total = 1
-// 初始化评论列表
-onMounted(async () => {
+
+function loadUserInfo() {
   loading.value = true
   if (!!userStore.GetToken()) {
     postAction(urls.userInfo, {id: null})
@@ -133,6 +159,11 @@ onMounted(async () => {
         }
       }).finally(() => loading.value = false)
   }
+}
+
+// 初始化评论列表
+onMounted(async () => {
+  loadUserInfo();
   const res = await getComment(pageNum - 1, pageSize, $router.params.id)
   res.data = res.data?.map((item: any) => {
     let user = item.user
@@ -161,7 +192,9 @@ const more = async () => {
 }
 
 let temp_id = 100
+
 // 提交评论事件
+
 const submit = async ({content, parentId, files, finish}: SubmitParamApi) => {
   console.log('提交评论: ' + content, parentId, files)
 
@@ -169,6 +202,18 @@ const submit = async ({content, parentId, files, finish}: SubmitParamApi) => {
    * 上传文件后端返回图片访问地址，格式以'||'为分割; 如:  '/static/img/program.gif||/static/img/normal.webp'
    */
   let contentImg = files?.map(e => createObjectURL(e)).join('||')
+  let href: any = void 0
+  if (!!files && files.length > 0) {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    const res1 = await postMultipartFileAction<object>(urls.upload, formData)
+    if (res1.code === 1) {
+      //@ts-ignore
+      href = process.env.API + res1.data.records
+    } else {
+      href = contentImg
+    }
+  }
   temp_id += 1
   const comment: CommentApi = {
     id: String(temp_id),
@@ -178,7 +223,7 @@ const submit = async ({content, parentId, files, finish}: SubmitParamApi) => {
     content: content,
     likes: 0,
     createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    contentImg: contentImg,
+    contentImg: href,
     user: {
       username: config.user.username,
       avatar: config.user.avatar,
@@ -193,6 +238,7 @@ const submit = async ({content, parentId, files, finish}: SubmitParamApi) => {
     finish(<CommentApi>res.data)
     UToast({message: res.message, type: 'info'})
   }
+
 }
 // 点赞按钮事件 将评论id返回后端判断是否点赞，然后在处理点赞状态
 const like = async (id: string, finish: () => void) => {
@@ -283,7 +329,11 @@ const _throttle = throttle((type: string, comment: CommentApi, finish: Function)
 const operate = (type: string, comment: CommentApi, finish: Function) => {
   _throttle(type, comment, finish)
 }
-
+const bus = inject('bus')
+const toLogin = () => {
+  //@ts-ignore
+  bus.emit('showLoginFrom')
+}
 </script>
 <style lang="scss" scoped>
 .user-card {
@@ -328,5 +378,21 @@ const operate = (type: string, comment: CommentApi, finish: Function) => {
       }
     }
   }
+}
+
+:deep(.comment-list-wrapper) {
+  padding-top: 0 !important;
+}
+
+:deep(.content) {
+  margin-bottom: 20px !important;
+}
+
+.login-tip-font {
+  font-family: PingFang SC, HarmonyOS_Regular, Helvetica Neue, Microsoft YaHei, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 </style>

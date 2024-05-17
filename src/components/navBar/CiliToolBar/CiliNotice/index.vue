@@ -1,6 +1,6 @@
 <template>
   <q-page class="overflow-hidden ">
-    <cili-tool-bar class="shadow-24"/>
+    <cili-tool-bar/>
     <!--    <div class="row justify-center   q-mt-xs q-gutter-md ">-->
     <div class="row justify-center   q-mt-xs q-gutter-md container_d">
       <div class=" q-pa-md flex  column q-gutter-y-md items-center rounded-borders space-left  ">

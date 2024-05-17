@@ -30,7 +30,6 @@ export default boot(({app, router}) => {
   api.interceptors.request.use(request => {
     const token = userStore.GetToken()
     request.headers!.ciliLanguage = Cookies.get("cili-language-frontend") || "zh-CN"
-    request.headers.setContentType('application/json;charset=utf-8')
     // @ts-ignore
     request.headers.setAuthorization(token)
     if (DemoMode && ForbiddenUrl.some(item => item === request.url)) {

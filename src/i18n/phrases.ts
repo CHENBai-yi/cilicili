@@ -78,5 +78,10 @@ export default {
     "zh-CN": "晚上好, ",
     "en-US": "Good Evening, ",
     "ru": "Добрый вечер, "
-  }
+  },
+  LengthLessThan: {
+    "zh-CN": "长度不能大于",
+    "en-US": "Length must be less than ",
+    "ru": "Сортировка должна быть больше "
+  },
 }

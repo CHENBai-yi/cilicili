@@ -1,4 +1,4 @@
-import {postAction} from 'src/api/manage'
+import {postAction, postMultipartFileAction} from 'src/api/manage'
 
 const urls = {
   list: 'comments/list_comments',
@@ -6,11 +6,12 @@ const urls = {
   add: 'comments/user_comment_add/',
   like: 'comments/add_favorite/',
   delete: 'comments/del_comments/',
+  upload: 'upload/upload-file'
 }
 const comments = [{}]
 
 async function getComment(a: number, b: number, id: any) {
-  const res = await postAction(urls.list, {page: a, page_size: b, id: id, sort_by: 'created_at', desc: true})
+  const res = await postAction(urls.list, {page: a, page_size: b, id: id, sort_by: 'createTime', desc: true})
   if (res.code === 1) {
     // @ts-ignore
     return {data: res.data.records, total: res.data.total}
@@ -18,4 +19,4 @@ async function getComment(a: number, b: number, id: any) {
   return {data: comments, total: comments.length}
 }
 
-export {getComment, urls, postAction}
+export {getComment, urls, postAction, postMultipartFileAction}

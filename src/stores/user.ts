@@ -18,7 +18,10 @@ export const useUserStore = defineStore('user', {
   getters: {},
   actions: {
     FlushUserInfo(res: any) {
-      const token = res.token
+      if (!!res.token) {
+        const token = res.token
+        this.SetToken(token)
+      }
       // @ts-ignore
       const username = res.username
       // @ts-ignore
@@ -27,8 +30,6 @@ export const useUserStore = defineStore('user', {
       const realName = res.real_name
       // @ts-ignore
       const avatar = RealUrl(res.avatar)
-      this.SetToken(token)
-
       this.avatar = avatar
       // @ts-ignore
       Cookies.set('cili-avatar-frontend', avatar, this.option)
