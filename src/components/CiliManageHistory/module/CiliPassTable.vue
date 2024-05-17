@@ -70,8 +70,12 @@
             </q-btn>
             <q-btn v-if="props.row.logical_delete>0" color="red" flat label="下架" @click="deleteCourse(props.row.id)">
             </q-btn>
-            <q-btn v-else color="primary" flat label="上架" @click="uploadCourse(props.row.id)">
-            </q-btn>
+            <div v-else>
+              <q-btn color="primary" flat label="上架" @click="uploadCourse(props.row.id)">
+              </q-btn>
+              <q-btn color="primary" flat label="移入未通过" @click="uploadCourse2(props.row.id)">
+              </q-btn>
+            </div>
           </div>
         </q-td>
       </q-tr>
@@ -172,6 +176,19 @@ const deleteCourse = (id) => {
 const uploadCourse = async (id) => {
   queryParams.value.id = id
   queryParams.value.logical_delete = 1
+  const res = await postAction(url.update, queryParams.value)
+  if (res && res.code === 1) {
+    emits('refresh')
+    getTableData()
+    window.$message.success(res.message, {render: window.$render})
+  } else {
+    window.$message.error(res.message, {render: window.$render})
+  }
+}
+const uploadCourse2 = async (id) => {
+  queryParams.value.id = id
+  queryParams.value.status = 'onOffPass_off'
+  // queryParams.value.logical_delete = 1
   const res = await postAction(url.update, queryParams.value)
   if (res && res.code === 1) {
     emits('refresh')

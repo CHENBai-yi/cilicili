@@ -1,10 +1,9 @@
 import {defineStore} from 'pinia';
-import {Cookies, SessionStorage} from 'quasar';
+import {Cookies, LocalStorage, SessionStorage} from 'quasar';
 // import {usePermissionStore} from './permission';
 import {postAction} from "src/api/manage";
-import {getAvatar} from 'src/utils/common'
 import {usePermissionStore} from "stores/permission";
-
+import {RealUrl} from 'src/utils/convert'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -18,6 +17,31 @@ export const useUserStore = defineStore('user', {
   }),
   getters: {},
   actions: {
+    FlushUserInfo(res: any) {
+      const token = res.token
+      // @ts-ignore
+      const username = res.username
+      // @ts-ignore
+      const nickname = res.nickname
+      // @ts-ignore
+      const realName = res.real_name
+      // @ts-ignore
+      const avatar = RealUrl(res.avatar)
+      this.SetToken(token)
+
+      this.avatar = avatar
+      // @ts-ignore
+      Cookies.set('cili-avatar-frontend', avatar, this.option)
+      this.username = username
+      // @ts-ignore
+      Cookies.set('cili-username-frontend', username, this.option)
+      this.nickname = nickname
+      // @ts-ignore
+      Cookies.set('cili-nickname-frontend', nickname, this.option)
+      this.realName = realName
+      // @ts-ignore
+      Cookies.set('cili-realName-frontend', realName, this.option)
+    },
     async HandleLogin(loginForm: any) {
       if (!!this.GetToken()) return true;
       const res = await postAction('public/login', loginForm)
@@ -25,29 +49,7 @@ export const useUserStore = defineStore('user', {
         // @ts-ignore
         window.$message.success(res.message, {render: window.$render})
         // @ts-ignore
-        const token = res.data.token
-        // @ts-ignore
-        const username = res.data.username
-        // @ts-ignore
-        const nickname = res.data.nickname
-        // @ts-ignore
-        const realName = res.data.real_name
-        // @ts-ignore
-        const avatar = res.data.avatar
-        this.SetToken(token)
-
-        this.avatar = avatar
-        // @ts-ignore
-        Cookies.set('cili-avatar-frontend', avatar, this.option)
-        this.username = username
-        // @ts-ignore
-        Cookies.set('cili-username-frontend', username, this.option)
-        this.nickname = nickname
-        // @ts-ignore
-        Cookies.set('cili-nickname-frontend', nickname, this.option)
-        this.realName = realName
-        // @ts-ignore
-        Cookies.set('cili-realName-frontend', realName, this.option)
+        this.FlushUserInfo(res.data)
         return true
       } else {
         return
@@ -76,26 +78,27 @@ export const useUserStore = defineStore('user', {
     },
     async HandleLogout() {
       const permissionStore = usePermissionStore()
-      permissionStore.ClearMenu()
-      this.token = undefined
+      this.token = void 0
+      this.username = void 0
+      this.nickname = void 0
+      this.realName = void 0
+      this.avatar = void 0
       SessionStorage.removeItem('cili-token-frontend')
+      LocalStorage.removeItem('cili-token-frontend')
       Cookies.remove('cili-token-frontend')
-      this.username = undefined
-      this.nickname = undefined
-      this.realName = undefined
-      this.avatar = undefined
       Cookies.remove('cili-username-frontend')
       Cookies.remove('cili-nickname-frontend')
       Cookies.remove('cili-realName-frontend')
       Cookies.remove('cili-avatar-frontend')
+      permissionStore.ClearMenu()
       // dont delete dict
       // LocalStorage.remove('cili-dict')
 
     },
     GetToken() {
-      if (SessionStorage.getItem('cili-token-frontend')) {
+      if (SessionStorage.has('cili-token-frontend')) {
         return SessionStorage.getItem('cili-token-frontend')
-      } else if (Cookies.get('cili-token-frontend')) {
+      } else if (Cookies.has('cili-token-frontend')) {
         return Cookies.get('cili-token-frontend')
       } else {
         return this.token
@@ -104,7 +107,7 @@ export const useUserStore = defineStore('user', {
     GetUsername() {
       if (this.username) {
         return this.username
-      } else if (Cookies.get('cili-username-frontend')) {
+      } else if (Cookies.has('cili-username-frontend')) {
         return Cookies.get('cili-username-frontend')
       } else {
         return ""
@@ -130,12 +133,17 @@ export const useUserStore = defineStore('user', {
     },
     GetAvatar() {
       if (this.avatar) {
-        return getAvatar(this.avatar)
+        return this.avatar
       } else if (Cookies.get('cili-avatar-frontend')) {
-        return getAvatar(Cookies.get('cili-avatar-frontend'))
+        return Cookies.get('cili-avatar-frontend')
       } else {
         return 'static/images/logo.svg'
       }
     },
-  },
+    SetAvatar(avatar: any) {
+      let url = RealUrl(avatar);
+      this.avatar = url
+      Cookies.set('cili-avatar-frontend', url)
+    },
+  }
 });

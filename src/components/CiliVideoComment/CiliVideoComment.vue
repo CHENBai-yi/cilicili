@@ -61,6 +61,7 @@
 import emoji from './emoji'
 import {onMounted, reactive, ref} from 'vue'
 import Operate from './CiliOperate/Operate.vue'
+import {RealUrl} from 'src/utils/convert'
 import {
   CommentApi,
   CommentInstance,
@@ -90,12 +91,12 @@ const userStore = useUserStore()
 const loading = ref(false)
 // 请求获取用户详细信息
 const showInfo = (uid: string, finish: Function) => {
-  console.log(uid)
-  console.log(loading.value)
   loading.value = true
   postAction(urls.userInfo, {id: uid})
     .then(res => {
       if (res.code === 1) {
+        //@ts-ignore
+        res.data.avatar = RealUrl(res.data.avatar)
         finish(res.data)
       }
     }).finally(() => loading.value = false)
@@ -126,11 +127,19 @@ onMounted(async () => {
       .then(res => {
         if (res.code === 1) {
           //@ts-ignore
-          config.user = res.data
+          config.user = {...config.user, ...res.data}
+          //@ts-ignore
+          config.user.avatar = RealUrl(config.user.avatar)
         }
       }).finally(() => loading.value = false)
   }
   const res = await getComment(pageNum - 1, pageSize, $router.params.id)
+  res.data = res.data?.map((item: any) => {
+    let user = item.user
+    user.avatar = RealUrl(user.avatar)
+    item.user = user
+    return item;
+  })
   config.comments.push(...res.data)
   total = res.total
 })
@@ -142,6 +151,7 @@ const more = async () => {
   if (pageNum <= Math.ceil(total / pageSize)) {
     const res = await getComment(pageNum, pageSize, $router.params.id)
     setTimeout(() => {
+
       config.comments.push(...res.data)
       pageNum++
     }, 200)

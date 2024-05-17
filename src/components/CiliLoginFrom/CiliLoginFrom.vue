@@ -55,7 +55,7 @@
                      maxlength="6" standout="bg-teal text-white">
               <template v-slot:after>
                 <CiliLink :disabled="!CodeSpanReSend" :weight=600 color="#4eb7ed" size="14px"
-                          @click="handleEmailCode">
+                          @click="handleEmailCode(false)">
                     <span
                       v-show="CodeSpanReSend">获取验证码
                     </span>
@@ -186,7 +186,7 @@
                          maxlength="6" standout="bg-teal text-white">
                   <template v-slot:after>
                     <CiliLink :disabled="!CodeSpanReSend" :weight=600 color="#2faee3" size="14px"
-                              @click="handleEmailCode">
+                              @click="handleEmailCode(true)">
                     <span
                       v-show="CodeSpanReSend">获取验证码
                     </span>
@@ -262,9 +262,9 @@ const accept = ref('maybe')
 const rememberMe = ref(false)
 const isPwd = ref(true)
 const tab = ref('showPhoneSignin')
-const email = ref('2565408606')
+const email = ref('')
 const account = computed(() => email.value + suffix.value)
-const emailAccount = ref('2565408606@qq.com')
+const emailAccount = ref('')
 const password = ref('')
 const twoPassword = ref('')
 const code = ref('')
@@ -291,18 +291,27 @@ const testEmail = (email) => {
   const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return pattern.test(email);
 }
-const handleEmailCode = () => {
-  if (!emailAccount.value || !testEmail(emailAccount.value)) {
-    window.$message.error("请输入正确的邮箱.", {render: window.$render})
-    return
+const handleEmailCode = (b) => {
+  const params = {}
+  if (b) {
+    if (!email.value || !testEmail((email.value?.trim()) + suffix.value)) {
+      window.$message.error("请输入正确的邮箱.", {render: window.$render})
+      return
+    }
+    params.email = (email.value?.trim()) + suffix.value
+  } else {
+    if (!emailAccount.value || !testEmail(emailAccount.value?.trim())) {
+      window.$message.error("请输入正确的邮箱.", {render: window.$render})
+      return
+    }
+    params.email = emailAccount.value
   }
-  console.log(typeof accept.value !== "boolean")
-  console.log(typeof accept.value !== "boolean" && accept.value)
+  params.login = b
   if (registerRapidly.value && !(typeof accept.value === "boolean" && accept.value)) {
     window.$message.warning("请勾选注册协议.", {render: window.$render})
     return
   }
-  postAction(urls.getEmailCode, {email: emailAccount.value})
+  postAction(urls.getEmailCode, params)
     .then(res => {
       console.log(res)
       if (res.code === 1) {
@@ -337,6 +346,7 @@ const onRegister = () => {
     .then(res => {
       if (res.code === 1) {
         window.$message.success(res.message, {render: window.$render})
+        code.value = ''
         showLoginFrom()
       } else {
         window.$message.error(res.message, {render: window.$render})
@@ -354,19 +364,26 @@ const onLogin = async (form) => {
     form.email = emailAccount.value
     form.password = password.value
   }
-  const res = await userStore.HandleLogin(form)
-  console.log(res)
-  if (res) {
-    permissionStore.GetRoleButton()
-    icon.value = false
-  } else {
-
-  }
-
+  userStore.HandleLogin(form)
+    .then(res => {
+      if (res) {
+        permissionStore.GetRoleButton()
+        icon.value = false
+        flushFrom()
+      }
+    })
 }
+
 onMounted(() => {
   bus.on('showLoginFrom', showLoginFrom)
 })
+const flushFrom = () => {
+  emailAccount.value = ''
+  email.value = ''
+  code.value = ''
+  password.value = ''
+  twoPassword.value = ''
+}
 </script>
 
 <style lang="scss" scoped>

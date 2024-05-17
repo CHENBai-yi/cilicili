@@ -161,7 +161,7 @@
 </template>
 
 <script setup>
-import {computed, nextTick, reactive, ref, watch} from 'vue'
+import {computed, nextTick, reactive, ref, watchEffect} from 'vue'
 import {useUserStore} from 'src/stores/user'
 import useTheme from "src/composables/useTheme"
 import ChangePasswordDialog from 'src/components/CiliPersonalCenter/ChangePasswordDialog/ChangePasswordDialog.vue'
@@ -196,18 +196,19 @@ const form = reactive({
 const getUserInfoUrl = 'users'
 const HandleGetUserInfo = async () => {
   const res = await getAction(getUserInfoUrl)
-  console.log(res)
   if (res) {
     const {UserDto} = res
-    userStore.avatar = UserDto.avatar
-    userStore.nickname = UserDto.nickname
-    userStore.realName = UserDto.real_name
+    userStore.FlushUserInfo(UserDto)
+    console.log(UserDto)
     form.mobile = UserDto.mobile
     form.gender = UserDto.gender
   }
 }
-watch(() => userStore.token, (newVal, oldVal) => {
-  HandleGetUserInfo()
+
+watchEffect(() => {
+  if (userStore.GetToken()) {
+    HandleGetUserInfo()
+  }
 })
 nextTick(() => HandleGetUserInfo())
 const open = reactive([

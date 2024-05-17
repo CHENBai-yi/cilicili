@@ -137,8 +137,8 @@
             <CiliLink :weight="600" color="" href="#/account/setting" iconLeft="person"
                       iconRight="eva-arrow-circle-right-outline" target="_self">个人中心
             </CiliLink>
-            <CiliLink :weight="600" color="" href="#/create/manage" iconLeft="eva-cloud-upload-outline"
-                      iconRight="eva-arrow-circle-right-outline" target="_self">投稿管理
+            <CiliLink v-if="contribute" :weight="600" color="" href="#/create/manage"
+                      iconLeft="eva-cloud-upload-outline" iconRight="eva-arrow-circle-right-outline" target="_self">投稿管理
             </CiliLink>
             <div class="full-width q-py-sm">
               <el-divider class="no-margin"/>
@@ -246,13 +246,12 @@
 </template>
 
 <script setup>
-import {computed, defineProps, inject, onMounted, ref, watch, watchEffect} from 'vue'
+import {computed, defineProps, inject, onMounted, ref, watchEffect} from 'vue'
 import {ElMessageBox} from 'element-plus'
 import CiliPopover from "../CiliPopover/CiliPopover.vue"
 import useTheme from "src/composables/useTheme"
 import CiliLoginFrom from 'src/components/CiliLoginFrom/CiliLoginFrom.vue'
 import {useUserStore} from 'src/stores/user'
-import {getAvatar} from 'src/utils/common'
 import {useI18n} from 'vue-i18n'
 import {getAction, postAction} from 'src/api/manage'
 import {usePermissionStore} from 'src/stores/permission'
@@ -281,19 +280,9 @@ const queryRecent = async () => {
 }
 const {t} = useI18n()
 const userStore = useUserStore()
-const token = ref(userStore.GetToken())
-const avatar = ref(userStore.GetAvatar())
-watch(() => userStore.avatar, (newValue, oldValue) => {
-  if (getAvatar(newValue)) {
-    avatar.value = getAvatar(newValue)
-  }
-}, {
-  immediate: true,
-  deep: true
-})
-watch(() => userStore.token, (newValue, oldValue) => {
-  token.value = userStore.GetToken()
-})
+const token = computed(() => userStore.token)
+const avatar = computed(() => userStore.GetAvatar())
+
 const {darkTheme} = useTheme()
 const search = ref('')
 const LoginDialog = ref(null)
@@ -341,7 +330,7 @@ const handleNoticeCount = async () => {
 }
 watchEffect(() => {
   if (userStore.GetToken()) {
-    handleNoticeCount()
+    userStore.SetToken(userStore.GetToken())
   }
 })
 const bus = inject("bus")

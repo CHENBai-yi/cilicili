@@ -198,7 +198,6 @@
             <div class="col">
               <cili-video-player
                 :contextmenu="i.detail.contextmenu"
-                :dm="i.dm"
                 :highlight="i.detail.highlight"
                 :hotkey="false"
                 :preventClickToggle='true'

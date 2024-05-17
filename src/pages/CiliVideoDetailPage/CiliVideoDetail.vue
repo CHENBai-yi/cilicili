@@ -18,12 +18,12 @@
                                 embedded>
                 <cili-video-player
                   ref="dp"
-                  :danmaku="dplayerObj.danmaku"
                   :highlight="dplayerObj.highlight"
                   :loop="false"
                   :showShadow="false"
                   :video="dplayerObj.video"
                 />
+<!--                :danmaku="dplayerObj.danmaku"-->
                 <div v-if="dplayerObj.buy!==undefined&&!dplayerObj.buy" class="el-loading-mask cili_mask">
                   <img onclick="javascript:window.location='#/pay/pay.html'" src="/pay/pc-fhy.gif" style="width:100%">
                 </div>

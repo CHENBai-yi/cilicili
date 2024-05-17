@@ -28,9 +28,11 @@
                 </a>
               </div>
               <div> &nbsp; &nbsp; &nbsp; &nbsp;</div>
-              <div><a class="payment-method" href="#">
-                <!--                <div class="Alipay"><img src="pay/weixinPay.png"> <span>微信支付</span></div>-->
-              </a></div>
+              <div>
+                <a class="payment-method" href="#">
+                  <div class="Alipay"><img src="pay/weixinPay.png"> <span>微信支付</span></div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
