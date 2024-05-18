@@ -1,10 +1,11 @@
 <template>
-  <div :class="$q.screen.lt.sm?'q-ma-sm glossy':'q-ml-xl glossy'">
+  <div class="glossy">
     <div :class="$q.screen.lt.sm?'':'Cili_left'">
       <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
-        <div class="title-box learn no-margin no-padding"></div>
+        <div
+          class="title-box learn no-margin no-padding">
+        </div>
       </div>
-
       <div>
         <ul :class="$q.screen.lt.sm?'flex flex-start no-padding q-gutter-md ':'content-box'" class="text-black q-mt-xs">
           <li v-for="(item,index) in testData.learn_more" :class="$q.dark.isActive&&$q.screen.lt.sm?'text-white':''">
@@ -13,15 +14,14 @@
         </ul>
       </div>
     </div>
-    <div id="classDesc" class="course-desc-container ">
-      <div class="wrapper no-margin ">
-        <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
-          <div class="title-box detail"></div>
+    <div class="wrapper no-margin ">
+      <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders':''">
+        <div
+          class="title-box detail">
         </div>
-
-        <div :class="$q.screen.lt.sm?'desc-box-sm q-pl-xs':'desc-box'">
-          {{ testData.into }}
-        </div>
+      </div>
+      <div :class="$q.screen.lt.sm?'desc-box-sm q-pl-xs':'desc-box q-px-md'">
+        {{ testData.into }}
       </div>
     </div>
   </div>
@@ -77,7 +77,7 @@ onMounted(async () => {
   height: 28px;
   background-size: cover;
   background-position: center;
-  margin: 22px 0 30px 0;
+  margin: 6px 0 25px 0;
 
   &.learn {
     background-image: url("/static/images/studyed-title.png");
@@ -111,14 +111,11 @@ ul.content-box {
 }
 
 .desc-box {
-  width: 1120px;
-  margin: 0 auto;
+  //padding: 0 20px;
   font-size: 18px;
-  letter-spacing: 0;
-  line-height: 32px;
-  word-break: break-all; //实现超过宽度自动换行
-  display: flex;
-  align-items: flex-start;
+  letter-spacing: 1px;
+  line-height: 30px;
+  word-break: break-all;
 }
 
 .desc-box-sm {

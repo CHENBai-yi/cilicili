@@ -10,8 +10,8 @@
     <q-page-container>
       <q-page :class="$q.screen.lt.sm?'q-pa-xs':'q-pa-sm q-px-xl'" style="min-height: 263px;">
         <div>
-          <n-space size="large" style="justify-content: center;flex-flow:nowrap">
-            <n-layout :style="$q.screen.lt.sm?{height:'300px'}:{height:'550px',width:'1500px'}" embedded has-sider
+          <n-space size="large" style="justify-content: start;flex-flow:nowrap">
+            <n-layout :style="$q.screen.lt.sm?{height:'300px'}:{height:'400px',width:'1100px'}" embedded has-sider
                       sider-placement="right">
               <n-layout-content :class="darkTheme"
                                 :content-style="$q.screen.lt.sm?{paddingRight:'20px',overflow:'hidden'}:{overflow:'hidden'}"
@@ -23,7 +23,7 @@
                   :showShadow="false"
                   :video="dplayerObj.video"
                 />
-<!--                :danmaku="dplayerObj.danmaku"-->
+                <!--                :danmaku="dplayerObj.danmaku"-->
                 <div v-if="dplayerObj.buy!==undefined&&!dplayerObj.buy" class="el-loading-mask cili_mask">
                   <img onclick="javascript:window.location='#/pay/pay.html'" src="/pay/pc-fhy.gif" style="width:100%">
                 </div>
@@ -41,8 +41,9 @@
                 content-style="padding-left:15px;overflow: hidden;"
               >
                 <q-page-sticky :class="darkTheme" class="z-top absolute-top-left left full-width justify-start" expand>
-                  <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm rounded-borders ':''">
-                    <div class="left  rounded-borders q-ml-sm"></div>
+                  <div :class="$q.dark.isActive?'left_background bg-white q-mb-sm  rounded-borders ':''"
+                       class="q-ml-md">
+                    <div class="left  rounded-borders"></div>
                   </div>
                 </q-page-sticky>
                 <n-scrollbar style="overflow: scroll;">
@@ -88,35 +89,56 @@
               <!--                <q-icon name="share"/>-->
               <!--                <em class="q-pl-xs text-weight-medium">{{ $t('Share') }}</em></CiliLink>-->
             </div>
+            <div :class="$q.dark.isActive?'cili_dark':''" class="card q-mt-lg col-md-8 row">
+              <TabMenu :active-index="$route.meta.index" :model="items">
+                <template #item="{ item, props }">
+                  <n-badge v-if="item.badge" :align="item.badge.align" :offset="item.badge.offset"
+                           :value="item.badge.value"
+                           class="z-top">
+                    <router-link v-if="item.route" v-slot="{ href, navigate }"
+                                 :to="'/video/'+$route.params.name+'/'+$route.params.id+'/'+item.route" append>
+                      <a v-ripple :href="href" v-bind="props.action" @click="navigate">
+                        <span v-bind="props.icon"/>
+                        <span v-bind="props.label">{{ item.label }}</span>
+                      </a>
+                    </router-link>
+                    <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
+                      <span v-bind="props.icon"/>
+                      <span v-bind="props.label">{{ item.label }}</span>
+                    </a>
+                  </n-badge>
+                  <n-badge v-else>
+                    <router-link v-if="item.route" v-slot="{ href, navigate }"
+                                 :to="'/video/'+$route.params.name+'/'+$route.params.id+'/'+item.route" append>
+                      <a v-ripple :href="href" v-bind="props.action" @click="navigate">
+                        <span v-bind="props.icon"/>
+                        <span v-bind="props.label">{{ item.label }}</span>
+                      </a>
+                    </router-link>
+                    <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
+                      <span v-bind="props.icon"/>
+                      <n-badge value="新">
+                        <span v-bind="props.label">{{ item.label }}</span>
+                      </n-badge>
+                    </a>
+                  </n-badge>
+                </template>
+              </TabMenu>
+            </div>
           </div>
         </div>
-        <div :class="$q.dark.isActive?'cili_dark':''" class="card q-mt-lg">
-          <TabMenu :active-index="$route.meta.index" :model="items">
-            <template #item="{ item, props }">
-              <router-link v-if="item.route" v-slot="{ href, navigate }"
-                           :to="'/video/'+$route.params.name+'/'+$route.params.id+'/'+item.route" append>
-                <a v-ripple :href="href" v-bind="props.action" @click="navigate">
-                  <span v-bind="props.icon"/>
-                  <span v-bind="props.label">{{ item.label }}</span>
-                </a>
-              </router-link>
-              <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-                <span v-bind="props.icon"/>
-                <span v-bind="props.label">{{ item.label }}</span>
-              </a>
-            </template>
-          </TabMenu>
-        </div>
       </q-page>
-      <div ref="videoArea">
-        <router-view v-slot="{ Component }">
-          <transition :duration="50"
-                      appear enter-active-class="animated animate__fadeIn">
-            <keep-alive>
-              <component :is="Component"/>
-            </keep-alive>
-          </transition>
-        </router-view>
+      <div ref="videoArea" :class="$q.screen.lt.sm?'q-px-xs':'q-px-xl'">
+        <div :class="$q.screen.lt.sm?'row col ':'row col-9'">
+          <router-view v-slot="{ Component }">
+            <transition :duration="50"
+                        appear enter-active-class="animated animate__fadeIn">
+              <keep-alive>
+                <component :is="Component" :class="$q.screen.lt.sm?'row col':'row col-9'"/>
+              </keep-alive>
+            </transition>
+          </router-view>
+        </div>
       </div>
     </q-page-container>
   </q-layout>
@@ -152,16 +174,7 @@ function scrollToElement(el, pos) {
 }
 
 const {darkTheme} = useTheme()
-const items = ref([
-  {label: '课程信息', icon: 'pi pi-info-circle', route: 'info'},
-  {
-    label: '目录',
-    icon: 'pi pi-list',
-    route: 'catalogue'
-  },
-  // {label: '服务', icon: 'fab fa-servicestack', url: 'https://vuejs.org/'},
-  {label: '评价', icon: 'fas fa-comment-alt', route: 'comment'},
-]);
+
 
 const dplayerObj = reactive({
   buy: undefined,
@@ -222,8 +235,6 @@ const videoInfo = ref({})
 const urls = reactive({
   info: 'courses/get-course-video-info-by-id'
 })
-
-
 const bus = inject('bus')
 onMounted(async () => {
   if (!!$router.query.t) {
@@ -255,20 +266,39 @@ const switchVideo = (e) => {
   dp.value.dp.switchVideo(e.video, e.danmu);
   dp.value.dp.video.autoplay = true
 }
-
+const items = ref([
+  {label: '课程信息', icon: 'pi pi-info-circle', route: 'info'},
+  {
+    label: '目录',
+    icon: 'pi pi-list',
+    route: 'catalogue',
+    badge: {
+      value: '试看',
+      color: '',
+      size: "24",
+      align: "center",
+      offset: [-2, 10]
+    }
+  },
+  // {label: '服务', icon: 'fab fa-servicestack', url: 'https://vuejs.org/'},
+  {label: '评价', icon: 'fas fa-comment-alt', route: 'comment'},
+]);
 </script>
 <style lang="scss" scoped>
 .left {
   width: 150px;
   height: 36px;
+  line-height: 36px;
   background-image: url('/static/images/catalogue-title.png');
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
 }
 
 .left_background {
-  width: 120px;
-  height: 33px;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
 }
 
 .cili_dark {
@@ -291,4 +321,7 @@ const switchVideo = (e) => {
   z-index: 12
 }
 
+:deep(video) {
+  object-fit: cover;
+}
 </style>

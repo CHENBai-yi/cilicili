@@ -1,6 +1,6 @@
 <template>
 
-  <div :class="$q.screen.lt.sm?'q-px-md':'q-px-xl q-mx-lg'">
+  <div class="inline-block">
     <transition appear
                 enter-active-class="animated animate__fadeInDown"
     >
@@ -8,9 +8,10 @@
         <n-alert :bordered="false" :class="$q.dark.isActive?darkTheme:''"
                  :show-icon="false" class="flex no-padding  no-wrap justify-center items-center "
                  style="height:51px;width:898px" type="warning">
-          <div :class="$q.dark.isActive?darkTheme:''" class="q-gutter-x-md login-tip-font "><span>请先</span>
+          <div :class="$q.dark.isActive?darkTheme:''" class="q-gutter-x-md login-tip-font">
+            <span>请先</span>
             <q-btn :ripple="{ color: 'yellow' }" color="primary" label="登录" no-caps size="12px"
-                   @click.once="toLogin"/>
+                   @click.stop="toLogin"/>
             <span>后发表评论 (・ω・)</span></div>
         </n-alert>
       </div>
@@ -163,16 +164,20 @@ function loadUserInfo() {
 
 // 初始化评论列表
 onMounted(async () => {
-  loadUserInfo();
-  const res = await getComment(pageNum - 1, pageSize, $router.params.id)
-  res.data = res.data?.map((item: any) => {
-    let user = item.user
-    user.avatar = RealUrl(user.avatar)
-    item.user = user
-    return item;
-  })
-  config.comments.push(...res.data)
-  total = res.total
+  try {
+    loadUserInfo();
+    const res = await getComment(pageNum - 1, pageSize, $router.params.id)
+    res.data = res.data?.map((item: any) => {
+      let user = item.user
+      user.avatar = RealUrl(user.avatar)
+      item.user = user
+      return item;
+    })
+    config.comments.push(...res.data)
+    total = res.total
+  } catch (e) {
+    console.debug(e)
+  }
 })
 // 是否禁用滚动加载评论
 const disable = ref(false)

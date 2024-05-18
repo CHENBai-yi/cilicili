@@ -61,6 +61,7 @@ import {
   NA,
   NAlert,
   NAvatar,
+  NBadge,
   NButton,
   NCard,
   NCarousel,
@@ -86,6 +87,7 @@ import {
   NResult,
   NScrollbar,
   NSelect,
+  NSkeleton,
   NSpace,
   NSwitch,
   NTable,
@@ -158,8 +160,8 @@ export default boot(({app}) => {
   //native ui
   const naive = create({
     components: [
-      NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NGradientText, NCard, NAlert, NAvatar,
-      NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NA,
+      NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NGradientText, NCard, NAlert, NAvatar, NBadge,
+      NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NA, NSkeleton,
       NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition,
       NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload, NResult
     ]

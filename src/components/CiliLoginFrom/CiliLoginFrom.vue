@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="icon">
+  <q-dialog v-model="icon" class="z-max">
     <div style="width:340px">
       <q-card v-if="registerRapidly">
         <q-card-section class="row items-center">
