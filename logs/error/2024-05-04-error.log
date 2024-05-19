@@ -1,0 +1,337 @@
+2024-05-04 00:02:39.064 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:39.064 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:39.064 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:39.067 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:39.069 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:40.710 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:41.925 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:41.935 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:41.935 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:41.936 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:41.937 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:02:43.835 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:36.516 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:36.521 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:36.566 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:36.579 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:36.675 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:38.278 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:39.565 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:39.565 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:39.565 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:39.565 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:39.565 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:41.497 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:43.968 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:43.969 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:43.975 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:43.977 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:43.979 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:03:45.895 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:05.990 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:05.995 [XNIO-2 task-6] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:05.995 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:05.997 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:05.998 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:07.918 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:12.178 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:15.858 [XNIO-2 task-3] ERROR s.c.c.filter.JWTAuthFilter - null
+2024-05-04 00:04:52.073 [XNIO-2 task-2] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-05-04 00:04:59.506 [XNIO-2 task-2] ERROR s.c.c.e.AppExceptionHandler - null
+2024-05-04 00:05:59.900 [XNIO-2 task-7] ERROR s.c.c.e.AppExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+### The error may exist in site/cilicili/authentication/user/repository/UserRepository.java (best guess)
+### The error may involve site.cilicili.authentication.user.repository.UserRepository.findByUsername-Inline
+### The error occurred while setting parameters
+### SQL: SELECT u.*,r.sys_role_role_code as roleCode FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = ? OR u.email = ?
+### Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+; bad SQL grammar []
+2024-05-04 00:06:34.752 [XNIO-2 task-2] ERROR s.c.c.e.AppExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+### The error may exist in site/cilicili/authentication/user/repository/UserRepository.java (best guess)
+### The error may involve site.cilicili.authentication.user.repository.UserRepository.findByUsername-Inline
+### The error occurred while setting parameters
+### SQL: SELECT u.*,r.sys_role_role_code as roleCode FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = ? OR u.email = ?
+### Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+; bad SQL grammar []
+2024-05-04 00:07:12.848 [XNIO-2 task-2] ERROR s.c.c.e.AppExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+### The error may exist in site/cilicili/authentication/user/repository/UserRepository.java (best guess)
+### The error may involve site.cilicili.authentication.user.repository.UserRepository.findByUsername-Inline
+### The error occurred while setting parameters
+### SQL: SELECT u.*,r.sys_role_role_code as roleCode FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = ? OR u.email = ?
+### Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+; bad SQL grammar []
+2024-05-04 00:10:08.870 [XNIO-2 task-7] ERROR s.c.c.e.AppExceptionHandler - null
+2024-05-04 00:10:16.038 [XNIO-2 task-7] ERROR s.c.c.e.AppExceptionHandler - null
+2024-05-04 00:10:29.876 [XNIO-2 task-7] ERROR s.c.c.e.AppExceptionHandler - null
+2024-05-04 00:11:11.873 [XNIO-2 task-7] ERROR s.c.c.e.AppExceptionHandler - null
+2024-05-04 00:11:29.145 [XNIO-2 task-7] ERROR s.c.c.e.AppExceptionHandler - null
+2024-05-04 00:11:35.348 [XNIO-2 I/O-34] ERROR org.xnio.listener - XNIO001007: A channel event listener threw an exception
+java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
+	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:620)
+	at io.undertow.websockets.jsr.UndertowSession.close0(UndertowSession.java:362)
+	at io.undertow.websockets.jsr.UndertowSession.closeInternal(UndertowSession.java:242)
+	at io.undertow.websockets.jsr.UndertowSession$3$1.run(UndertowSession.java:402)
+	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:411)
+	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:389)
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92)
+	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1085)
+	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1004)
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92)
+	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70)
+	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:204)
+	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:193)
+	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:198)
+	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387)
+	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186)
+	at org.xnio.IoUtils.safeClose(IoUtils.java:152)
+	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57)
+	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:108)
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:507)
+2024-05-04 00:12:08.867 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'meterRegistryPostProcessor' defined in class path resource [org/springframework/boot/actuate/autoconfigure/metrics/MetricsAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:273)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:796)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:600)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:63)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:412)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:91)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:111)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:92)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 14 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.config.ProxyJCacheConfiguration': BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:412)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:91)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:111)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:92)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 35 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration': BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:412)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:91)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:111)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:92)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 56 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/backend/log/domain/pojo/SysLogLoginEntity
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.aspectj.internal.lang.reflect.AjTypeImpl.getDeclarePrecedence(AjTypeImpl.java:1005)
+	at org.springframework.aop.aspectj.annotation.AspectMetadata.<init>(AspectMetadata.java:97)
+	at org.springframework.aop.aspectj.annotation.BeanFactoryAspectJAdvisorsBuilder.buildAspectJAdvisors(BeanFactoryAspectJAdvisorsBuilder.java:106)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:95)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 77 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.backend.log.domain.pojo.SysLogLoginEntity
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 89 common frames omitted
+2024-05-04 00:16:16.725 [XNIO-2 task-2] ERROR s.c.c.e.AppExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+### The error may exist in site/cilicili/authentication/user/repository/UserRepository.java (best guess)
+### The error may involve site.cilicili.authentication.user.repository.UserRepository.findByUsername-Inline
+### The error occurred while setting parameters
+### SQL: SELECT u.*,r.sys_role_role_code as roleCode FROM sys_user u JOIN sys_user_role r on u.username=r.sys_user_username WHERE u.username = ? OR u.email = ?
+### Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_user' doesn't exist
+; bad SQL grammar []
+2024-05-04 00:19:27.903 [XNIO-2 task-5] ERROR s.c.c.e.AppExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_config_backend' doesn't exist
+### The error may exist in file [D:\Documents\JavaCode\Code\cilicili(嗤哩嗤哩)\build\resources\main\mapper\sysConfigBackend\SysConfigBackendMapping.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: select *         from sys_config_backend;
+### Cause: java.sql.SQLSyntaxErrorException: Table 'cili-quasar-user.sys_config_backend' doesn't exist
+; bad SQL grammar []
+2024-05-04 00:21:47.195 [XNIO-2 task-4] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-05-04 00:34:26.649 [SpringApplicationShutdownHook] ERROR s.c.c.e.AppExceptionHandler - 服务器停机，强制下线所有用户
+2024-05-04 07:16:26.134 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:26.134 [XNIO-2 task-9] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:26.134 [XNIO-2 task-11] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:26.134 [XNIO-2 task-8] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:26.134 [XNIO-2 task-10] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:29.616 [XNIO-2 task-10] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:29.616 [XNIO-2 task-11] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:29.616 [XNIO-2 task-7] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:29.620 [XNIO-2 task-8] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:16:29.628 [XNIO-2 task-9] ERROR s.c.c.filter.JWTAuthFilter - 您已被强制下线！
+2024-05-04 07:17:34.279 [XNIO-2 task-10] ERROR s.c.c.filter.JWTAuthFilter - 你的主机中的软件中止了一个已建立的连接。
+2024-05-04 07:18:18.388 [XNIO-2 task-10] ERROR s.c.c.filter.JWTAuthFilter - Connection reset by peer
+2024-05-04 13:26:21.165 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'meterRegistryPostProcessor' defined in class path resource [org/springframework/boot/actuate/autoconfigure/metrics/MetricsAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:273)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:796)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:600)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at site.cilicili.App.main(App.java:63)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:412)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:91)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:111)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:92)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 14 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.config.ProxyJCacheConfiguration': BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:412)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:91)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:111)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:92)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 35 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration': BeanPostProcessor before instantiation of bean failed
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:412)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper.findAdvisorBeans(BeanFactoryAdvisorRetrievalHelper.java:91)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.findCandidateAdvisors(AbstractAdvisorAutoProxyCreator.java:111)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:92)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 56 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: site/cilicili/authentication/Details/AuthUserDetails
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
+	at org.aspectj.internal.lang.reflect.AjTypeImpl.getDeclarePrecedence(AjTypeImpl.java:1005)
+	at org.springframework.aop.aspectj.annotation.AspectMetadata.<init>(AspectMetadata.java:97)
+	at org.springframework.aop.aspectj.annotation.BeanFactoryAspectJAdvisorsBuilder.buildAspectJAdvisors(BeanFactoryAspectJAdvisorsBuilder.java:106)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.findCandidateAdvisors(AnnotationAwareAspectJAutoProxyCreator.java:95)
+	at org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip(AspectJAwareAdvisorAutoProxyCreator.java:101)
+	at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessBeforeInstantiation(AbstractAutoProxyCreator.java:280)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1127)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.resolveBeforeInstantiation(AbstractAutowireCapableBeanFactory.java:1102)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:509)
+	... 77 common frames omitted
+Caused by: java.lang.ClassNotFoundException: site.cilicili.authentication.Details.AuthUserDetails
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 89 common frames omitted

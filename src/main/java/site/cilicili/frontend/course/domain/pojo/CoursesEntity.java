@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -38,6 +39,7 @@ import java.time.LocalDateTime;
 @TableName("courses")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CoursesEntity implements Serializable {
+    @Serial
     private static final long serialVersionUID = 158204106956964287L;
 
     @TableField(fill = FieldFill.INSERT)
@@ -56,10 +58,10 @@ public class CoursesEntity implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String updatedBy;
 
-    @TableField(fill = FieldFill.UPDATE)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    protected LocalDateTime deletedAt;
+    // @TableField(fill = FieldFill.UPDATE)
+    // @JsonSerialize(using = LocalDateTimeSerializer.class)
+    // @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    // protected LocalDateTime deletedAt;
 
     @Schema(description = "课程名称")
     private String name;
@@ -114,6 +116,8 @@ public class CoursesEntity implements Serializable {
 
     @Schema(description = "访问量")
     private Long vis;
+    @Schema(description = "支持试看")
+    private Boolean tryWatch;
 
     @JsonSetter("desc")
     public void setJsondescription(String s) {

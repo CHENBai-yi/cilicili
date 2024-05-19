@@ -1,10 +1,9 @@
 package site.cilicili.frontend.course.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.*;
 import cn.hutool.json.JSONUtil;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
@@ -373,6 +372,37 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                         video.setBuy(false);
                         return "please buy this course/";
                     }
+                    Optional.ofNullable(courseVideoInfoById.getCatalog())
+                            .filter(f -> video.getTryWatch())
+                            .map(catalogs -> catalogs.stream().map(GetCourseVideoInfoByIdResponse.Catalog::getDetailList).map(CollUtil::getFirst).collect(Collectors.toList()))
+                            .ifPresent(tryWatchList -> {
+                                final List<GetCourseVideoInfoByIdResponse.Catalog.Detail> details1 = Optional.ofNullable(courseVideoInfoById.getVideoList())
+                                        .map(videoLists -> {
+                                            final List<GetCourseVideoInfoByIdResponse.Catalog.Detail> details = new ArrayList<>();
+                                            for (final GetCourseVideoInfoByIdResponse.Catalog.Detail detail : tryWatchList) {
+                                                for (final GetCourseVideoInfoByIdResponse.VideoList videoList : videoLists) {
+                                                    final String title = detail.getTitle();
+                                                    final String title1 = videoList.getTitle();
+                                                    if (StrUtil.isNotEmpty(title) && StrUtil.isNotEmpty(title1) && title.equals(title1)) {
+                                                        Optional.ofNullable(videoList.getContent())
+                                                                .map(GetCourseVideoInfoByIdResponse.Content::getVideo)
+                                                                .ifPresent(video1 -> {
+                                                                    final GetCourseVideoInfoByIdResponse.Catalog.Detail detail1 = ObjUtil.clone(detail);
+                                                                    final String href = String.format("%1$s%2$s", ss, video1.getUrl());
+                                                                    detail1.setTitle(String.format("%1$s %2$s", detail.getTag(), detail.getTitle()));
+                                                                    detail.setHref(href);
+                                                                    detail1.setHref(href);
+                                                                    detail1.setTime(null);
+                                                                    detail1.setTag(null);
+                                                                    details.add(detail1);
+                                                                });
+                                                    }
+                                                }
+                                            }
+                                            return details;
+                                        }).orElse(Collections.emptyList());
+                                video.setTryWatchList(details1);
+                            });
                     return ss;
                 })
                 .orElse("please buy this course/");
@@ -472,7 +502,7 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                                     return R.no("支付表单生成失败！");
                                 }
                             })
-                            .orElse(R.no("您已经是尊贵得会员了！").setData(false));
+                            .orElse(R.no("您已经是尊贵的会员了！").setData(false));
                 })
                 .orElse(R.no("请登录后操作.").setData(true));
     }

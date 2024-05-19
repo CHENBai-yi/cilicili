@@ -321,6 +321,7 @@
         <result property="title" column="name" jdbcType="VARCHAR"/>
         <result property="price" column="price" jdbcType="DOUBLE"/>
         <result property="view" column="course_id" jdbcType="BIGINT"/>
+        <result property="tryWatch" column="try_watch" jdbcType="TINYINT"/>
     </resultMap>
     
     <resultMap type="site.cilicili.frontend.course.domain.dto.GetCourseVideoInfoByIdResponse$Content"
@@ -564,6 +565,9 @@
             </if>
             <if test="totalTime != null and totalTime != ''">
                 total_time = #{totalTime},
+            </if>
+            <if test="tryWatch != null">
+                try_watch = #{tryWatch}
             </if>
         </set>
         where course_id = #{courseId}

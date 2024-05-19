@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import site.cilicili.common.util.BarUtils;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +34,8 @@ public class GetCourseVideoInfoByIdResponse {
         private String title;
         private String author;
         private Boolean buy = true;
+        private Boolean tryWatch;
+        private List<Catalog.Detail> tryWatchList;
 
         @JsonIgnore
         private Double price;
@@ -79,10 +83,13 @@ public class GetCourseVideoInfoByIdResponse {
 
         @Data
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
-        public static class Detail {
+        public static class Detail implements Serializable {
+            @Serial
+            private static final long serialVersionUID = 42L;
             private String tag;
             private String title;
             private String time;
+            private String href;
         }
     }
 }
