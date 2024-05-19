@@ -93,7 +93,8 @@ import {
   NTable,
   NTag,
   NThing,
-  NUpload
+  NUpload,
+  NWatermark
 } from 'naive-ui'
 //评论组件
 import UndrawUi from "undraw-ui"
@@ -162,7 +163,7 @@ export default boot(({app}) => {
     components: [
       NDivider, NButton, NH6, NH2, NH1, NCarousel, NList, NGradientText, NCard, NAlert, NAvatar, NBadge,
       NListItem, NThing, NSpace, NTag, NEllipsis, NScrollbar, NA, NSkeleton,
-      NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition,
+      NLayout, NLayoutSider, NLayoutContent, NSwitch, NCollapseTransition, NWatermark,
       NSelect, NDynamicTags, NTable, NDynamicInput, NCheckbox, NInputNumber, NInput, NCascader, NImage, NUpload, NResult
     ]
   })

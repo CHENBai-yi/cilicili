@@ -11,6 +11,10 @@ export const useCommonStore = defineStore('common', {
     originPos: 0,
     videoInfo: {},
     videoCatalog: {},
+    tryWatchList: {
+      try_watch: false as boolean,
+      list: [] as Array<object>
+    },
     currentAddress: ''
   }),
   getters: {},
@@ -38,6 +42,7 @@ export const useCommonStore = defineStore('common', {
         const {records}: any = res.data
         video = records.video
         videoList = records.video_list
+        this.tryWatchList = {try_watch: video.try_watch as boolean, list: video.try_watch_list as Array<object>}
         this.videoCatalog = records.catalog
       }
 

@@ -1,5 +1,5 @@
 <template>
-  <div ref="videoRef" :style="{height:height,width:'100%'}" class='rounded-borders'
+  <div ref="videoRef" :style="{height:height,width:width}" class='rounded-borders'
        @mouseenter="showMask?$emit('handlePlay',handlePlay):''"
        @mouseleave="!showMask?$emit('handlePause',handlePause):''"></div>
   <transition appear
@@ -31,12 +31,15 @@
 import DPlayer from 'dplayer'
 import Hls from 'hls.js';
 import {inject, onBeforeUnmount, onMounted, reactive, ref} from 'vue'
-import v from 'src/css/variables.scss'
 
 const props = defineProps({
   showShadow: {
     type: Boolean,
     default: true
+  },
+  showShadow2: {
+    type: Boolean,
+    default: false
   },
   view: {
     type: String,
@@ -54,6 +57,10 @@ const props = defineProps({
     type: String,
     default: '100%'
   },
+  width: {
+    type: String,
+    default: '100%'
+  },
   // 是否自动播放
   autoplay: {
     type: Boolean,
@@ -62,7 +69,7 @@ const props = defineProps({
   // 主题色
   theme: {
     type: String,
-    default: v.DpTheme
+    default: '#FADFA3'
   },
   // 视频是否循环播放
   loop: {
@@ -131,7 +138,7 @@ const props = defineProps({
       type: 'webvtt',
       fontSize: '25px',
       bottom: '10%',
-      color: v.DpSubtitle,
+      color: '#b7daff',
     }
   },
   // 显示弹幕

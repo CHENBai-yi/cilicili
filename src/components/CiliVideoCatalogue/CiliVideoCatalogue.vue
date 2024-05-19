@@ -35,8 +35,9 @@
             <q-icon name="fas fa-video"/>
             <div class="type-text">{{ $t('Video') }}:</div>
             <span class="title_info">{{ list.tag }} {{ list.title }}  ({{ list.time }})</span>
-            <n-button v-if="index===0" :bordered="false"
-                      round secondary size="tiny" strong text-color="#f50101" type="error" @click.stop="tryWatch">
+            <n-button v-if="tryWatchList.try_watch&&index===0" :bordered="false"
+                      round secondary size="tiny" strong text-color="#f50101" type="error"
+                      @click.stop="list.index=index;tryWatch(list)">
               <span class="text-weight-bolder">试看</span>
             </n-button>
           </li>
@@ -45,7 +46,7 @@
       <n-divider/>
     </div>
   </div>
-  <CiliTryWatch ref="tryWatchComponent"/>
+  <CiliTryWatch v-if="tryWatchList.try_watch" ref="tryWatchComponent" :list="tryWatchList.list"/>
 </template>
 
 <script setup>
@@ -63,9 +64,10 @@ const {darkTheme} = useTheme()
 
 const commonStore = useCommonStore()
 const videoCatalog = computed(() => commonStore.videoCatalog)
+const tryWatchList = computed(() => commonStore.tryWatchList)
 const tryWatchComponent = ref(void 0)
-const tryWatch = () => {
-  tryWatchComponent.value.tryWatch()
+const tryWatch = (list) => {
+  tryWatchComponent.value.tryWatch(list)
 }
 </script>
 

@@ -51,16 +51,22 @@
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: nowrap; ">
-                    <CiliLink v-for="(item ,index) in videoList" :key="index" :weight=600 color=""
-                              @click="switchVideo(item.content)">
-                      <div class="flex no-wrap items-center justify-evenly">
-                        <q-icon class="q-pr-sm" name="play_circle_filled" size="20px"/>
-                        {{ String(index + 1).padStart(2, '0') }}.
-                        <n-ellipsis style="max-width: 300px">
-                          {{ item.section }}-{{ item.title }}
-                        </n-ellipsis>
-                      </div>
-                    </CiliLink>
+
+
+                    <n-button-group v-for="(item ,index) in videoList" :key="index"
+                                    vertical>
+                      <n-button :bordered="false" text
+                                @click="switchVideo(item.content)"
+                      >
+                        <div class="flex no-wrap items-center justify-evenly">
+                          <q-icon class="q-pr-sm" name="play_circle_filled" size="20px"/>
+                          {{ String(index + 1).padStart(2, '0') }}.
+                          <n-ellipsis style="max-width: 300px">
+                            {{ item.section }}-{{ item.title }}
+                          </n-ellipsis>
+                        </div>
+                      </n-button>
+                    </n-button-group>
                     <p v-if="!videoList||videoList.length===0" class="text-weight-bolder text-blue-grey">
                       没有更多小节信息</p>
                   </div>
@@ -92,7 +98,7 @@
             <div :class="$q.dark.isActive?'cili_dark':''" class="card q-mt-lg col-md-8 row">
               <TabMenu :active-index="$route.meta.index" :model="items">
                 <template #item="{ item, props }">
-                  <n-badge v-if="item.badge" :align="item.badge.align" :offset="item.badge.offset"
+                  <n-badge v-if="item.badge&&videoInfo.try_watch" :align="item.badge.align" :offset="item.badge.offset"
                            :value="item.badge.value"
                            class="z-top">
                     <router-link v-if="item.route" v-slot="{ href, navigate }"
@@ -323,5 +329,21 @@ const items = ref([
 
 :deep(video) {
   object-fit: cover;
+}
+
+.n-button {
+  font-size: 15px !important;
+  line-height: 15px !important;
+  font-weight: bold !important;
+}
+
+/*按钮悬浮*/
+.n-button:hover {
+  color: $brand_blue !important;
+}
+
+/*按钮点击*/
+.n-button:focus {
+  color: $brand_blue !important;
 }
 </style>

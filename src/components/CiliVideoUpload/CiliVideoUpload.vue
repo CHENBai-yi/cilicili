@@ -100,7 +100,7 @@
                 </n-table>
 
               </el-form-item>
-              <el-form-item label="课程介绍：">
+              <el-form-item class="items-center" label="课程介绍：">
                 <el-input v-model="form.description" placeholder="请填写课程内容描述" type="textarea"/>
               </el-form-item>
               <el-form-item label="课程封面：" prop="poster">
@@ -144,6 +144,14 @@
                   <el-input-number v-model="price" :precision="2" :step="0.1"
                   />
                 </div>
+              </el-form-item>
+              <el-form-item class="items-center" label="支持试看：" prop="try_watch">
+                <q-toggle
+                    v-model="form.try_watch"
+                    checked-icon="check"
+                    label="试看每章第一集"
+                    unchecked-icon="clear"
+                />
               </el-form-item>
 
             </div>
@@ -257,7 +265,7 @@
         </q-stepper-navigation>
       </q-step>
     </q-stepper>
-    <n-result v-if="uploadSuccess" class="q-mt-xl" description="正待审核" status="success" title="成功"/>
+    <n-result v-if="step>3&&uploadSuccess" class="q-mt-xl" description="正待审核" status="success" title="成功"/>
   </div>
 </template>
 
@@ -292,7 +300,8 @@ const form = reactive({
   price: 0,
   description: '',
   tags: ['掌握Flutter必备的Dart基础', '快速上手企业级实战项目开发', '快速上手企业级实战项目开发'],
-  poster: ''
+  poster: '',
+  try_watch: ''
 })
 const $q = useQuasar()
 const price = ref(null)
@@ -591,6 +600,9 @@ const rules = reactive({
   ],
   poster: [
     {required: true, message: '请完成上传课程封面', trigger: 'blur'},
+  ],
+  try_watch: [
+    {required: true, message: '请选择是否支持试看', trigger: 'blur'},
   ]
 })
 const next3 = () => {
