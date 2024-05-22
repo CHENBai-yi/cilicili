@@ -1,6 +1,6 @@
 <template>
   <q-card>
-    <div ref="piechart" style="height: 400px;"></div>
+    <div ref="piechart" style="height: 298px;"></div>
     <q-resize-observer @resize="onResize"/>
   </q-card>
 </template>
@@ -31,6 +31,7 @@ const init = async () => {
   chart.value = markRaw(echarts.init(ct, darkThemeChart.value));
   const res = await getAction(url.command)
   let options = {}
+
   if (res.code === 1) {
     let dataSet = [
       {
@@ -75,6 +76,9 @@ const dataSet = ref([
 ])
 const getOption = (data) => {
   return {
+    backgroundColor: '#0b182b',
+    borderColor: '#535b69',
+    borderRadius: 8,
     series: [
       {
         type: 'gauge',
@@ -149,13 +153,14 @@ const getOption = (data) => {
           }
         ],
         title: {
-          fontSize: 18
+          fontSize: 16,
+          color: 'white'
         },
         detail: {
-          width: 50,
-          height: 10,
+          height: 4,
+          backgroundColor: '',
           fontSize: 14,
-          color: 'inherit',
+          color: 'white',
           borderColor: 'inherit',
           borderRadius: 20,
           borderWidth: 1,

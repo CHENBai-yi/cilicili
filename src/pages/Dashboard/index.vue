@@ -1,82 +1,87 @@
 <template>
-  <q-page class="q-gutter-y-md" padding style="overflow-x: hidden;">
-    <div class="row q-gutter-x-xs" style="width: 240px">
-      <QStatistic :label="timeWelcome()" boldLabel bordered class="col" style="border-radius: 15px;">
-        <div class="row items-center text-italic" style="margin-top: 7px;">
-          {{ randomWelcome() }}
-          <q-space/>
-          <span class="text-bold">
-                        <CiliShowName showMyName/>
-                    </span>
-          <q-inner-loading :showing="loading">
-            <q-spinner-gears color="primary" size="50px"/>
-          </q-inner-loading>
-        </div>
-      </QStatistic>
-<!--      <QStatistic boldLabel bordered class="col" label="License"
-                  style="backgroundImage: linear-gradient(to bottom right, #ec4786,#b955a4);border-radius: 15px;">
-        <div class="row items-center">
-          <q-icon dark name="fab fa-github" size="32px"/>
-          <q-space/>
-          <span>
-                        {{ license }}
-                    </span>
-          <q-inner-loading :showing="loading">
-            <q-spinner-gears color="primary" size="50px"/>
-          </q-inner-loading>
-        </div>
-      </QStatistic>
-      <QStatistic boldLabel bordered class="col" label="Stars"
-                  style="backgroundImage: linear-gradient(to bottom right, #865ec0,#5144b4);border-radius: 15px;">
-        <div class="row items-center">
-          <q-icon dark name="star_border" size="32px"/>
-          <q-space></q-space>
-          <img
-            placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
-            src="https://img.shields.io/github/stars/CBy74521/cilicili?style=social">
-        </div>
-      </QStatistic>
-      <QStatistic boldLabel bordered class="col" label="Forks"
-                  style="backgroundImage: linear-gradient(to bottom right, #56cdf3,#719de3);border-radius: 15px;">
-        <div class="row items-center">
-          <q-icon dark name="fork_right" size="32px"/>
-          <q-space></q-space>
-          <img
-            placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
-            src="https://img.shields.io/github/forks/CBy74521/cilicili?style=social">
-        </div>
-      </QStatistic>
-      <QStatistic boldLabel bordered class="col" label="Watchers"
-                  style="backgroundImage: linear-gradient(to bottom right, #fcbc25,#f68057);border-radius: 15px;">
-        <div class="row items-center">
-          <q-icon dark name="visibility" size="32px"/>
-          <q-space></q-space>
-          <img
-            placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
-            src="https://img.shields.io/github/watchers/CBy74521/cilicili?style=social">
-        </div>
-      </QStatistic>-->
-    </div>
-    <div class="row q-gutter-x-md">
-<!--      <q-card class="col">-->
-<!--        <StarHistory/>-->
-<!--      </q-card>-->
-      <q-card class="col">
-        <PieChart2 class="col"/>
-      </q-card>
-      <q-card class="col">
-        <PieChart class="col"/>
-      </q-card>
-    </div>
-    <div class="row q-gutter-x-md">
-      <q-card class="col">
-<!--        <TimeLine/>-->
-      </q-card>
-    </div>
+  <!--  <q-page class="q-gutter-y-md" padding style="overflow-x: hidden;">
+      <div class="row q-gutter-x-xs" style="width: 240px">
+        <QStatistic :label="timeWelcome()" boldLabel bordered class="col" style="border-radius: 15px;">
+          <div class="row items-center text-italic" style="margin-top: 7px;">
+            {{ randomWelcome() }}
+            <q-space/>
+            <span class="text-bold">
+                          <CiliShowName showMyName/>
+                      </span>
+            <q-inner-loading :showing="loading">
+              <q-spinner-gears color="primary" size="50px"/>
+            </q-inner-loading>
+          </div>
+        </QStatistic>
+  &lt;!&ndash;      <QStatistic boldLabel bordered class="col" label="License"
+                    style="backgroundImage: linear-gradient(to bottom right, #ec4786,#b955a4);border-radius: 15px;">
+          <div class="row items-center">
+            <q-icon dark name="fab fa-github" size="32px"/>
+            <q-space/>
+            <span>
+                          {{ license }}
+                      </span>
+            <q-inner-loading :showing="loading">
+              <q-spinner-gears color="primary" size="50px"/>
+            </q-inner-loading>
+          </div>
+        </QStatistic>
+        <QStatistic boldLabel bordered class="col" label="Stars"
+                    style="backgroundImage: linear-gradient(to bottom right, #865ec0,#5144b4);border-radius: 15px;">
+          <div class="row items-center">
+            <q-icon dark name="star_border" size="32px"/>
+            <q-space></q-space>
+            <img
+              placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
+              src="https://img.shields.io/github/stars/CBy74521/cilicili?style=social">
+          </div>
+        </QStatistic>
+        <QStatistic boldLabel bordered class="col" label="Forks"
+                    style="backgroundImage: linear-gradient(to bottom right, #56cdf3,#719de3);border-radius: 15px;">
+          <div class="row items-center">
+            <q-icon dark name="fork_right" size="32px"/>
+            <q-space></q-space>
+            <img
+              placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
+              src="https://img.shields.io/github/forks/CBy74521/cilicili?style=social">
+          </div>
+        </QStatistic>
+        <QStatistic boldLabel bordered class="col" label="Watchers"
+                    style="backgroundImage: linear-gradient(to bottom right, #fcbc25,#f68057);border-radius: 15px;">
+          <div class="row items-center">
+            <q-icon dark name="visibility" size="32px"/>
+            <q-space></q-space>
+            <img
+              placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
+              src="https://img.shields.io/github/watchers/CBy74521/cilicili?style=social">
+          </div>
+        </QStatistic>&ndash;&gt;
+      </div>
+      <div class="row q-gutter-x-md">
+  &lt;!&ndash;      <q-card class="col">&ndash;&gt;
+  &lt;!&ndash;        <StarHistory/>&ndash;&gt;
+  &lt;!&ndash;      </q-card>&ndash;&gt;
+        <q-card class="col">
+          <PieChart2 class="col"/>
+        </q-card>
+        <q-card class="col">
+          <PieChart class="col"/>
+        </q-card>
+      </div>
+      <div class="row q-gutter-x-md">
+        <q-card class="col">
+  &lt;!&ndash;        <TimeLine/>&ndash;&gt;
+        </q-card>
+      </div>
+
+    </q-page>-->
+  <q-page class="q-pt-lg q-mt-sm" style="overflow: hidden;">
+    <CiliDataBoard/>
   </q-page>
 </template>
 
 <script setup>
+import CiliDataBoard from 'src/pages/Dashboard/charts/CiliDataBoard.vue'
 import CiliShowName from 'src/components/CiliShowName/index.vue'
 import PieChart from "./charts/PieChart.vue";
 import PieChart2 from "./charts/PieChart2.vue";
@@ -102,4 +107,5 @@ onMounted(() => {
     loading.value = false
   })
 })
+
 </script>
