@@ -3,6 +3,9 @@ package site.cilicili.frontend.catalogs.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
+import site.cilicili.frontend.chart.domain.CiliDataBoardResponse;
+
+import java.util.List;
 
 /**
  * (Catalogs)表服务接口
@@ -51,4 +54,6 @@ public interface CatalogsService extends IService<CatalogsEntity> {
      * @return 是否成功
      */
     R deleteById(final Integer catalogId);
+
+    List<CiliDataBoardResponse.Main6.Value> getCatalogTableData();
 }

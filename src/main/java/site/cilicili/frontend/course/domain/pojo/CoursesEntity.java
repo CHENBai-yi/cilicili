@@ -116,6 +116,7 @@ public class CoursesEntity implements Serializable {
 
     @Schema(description = "访问量")
     private Long vis;
+
     @Schema(description = "支持试看")
     private Boolean tryWatch;
 

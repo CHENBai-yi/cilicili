@@ -70,6 +70,18 @@
             </if>
         </where>
     </select>
+    <select id="getCatalogTableData"
+            resultType="site.cilicili.frontend.chart.domain.CiliDataBoardResponse$Main6$Value">
+        
+        SELECT a.category_name as areaName, COUNT(*) as count
+        FROM categories a
+                 LEFT JOIN courses b on a.category_name = b.kind
+                 LEFT JOIN catalogs c on c.course_id = b.course_id
+                 LEFT JOIN bars d on d.catalog_id = d.catalog_id
+        GROUP BY a.category_name
+        order by 2 desc
+        limit 10
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="catalogId" useGeneratedKeys="true">

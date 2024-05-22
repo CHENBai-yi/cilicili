@@ -57,6 +57,12 @@ public class VideoCommentsUserInfoEntity extends BaseEntity implements Serializa
     private List<Integer> likeIdsArr;
 
     public List<Integer> getLikeIdsArr() {
-        return Optional.ofNullable(likeIds).filter(StrUtil::isNotEmpty).map(likeIds -> StrUtil.stripIgnoreCase(likeIds, ",")).filter(StrUtil::isNotEmpty).map(likeIds -> Arrays.stream(likeIds.split(",")).map(Integer::valueOf).toList()).orElse(Collections.emptyList());
+        return Optional.ofNullable(likeIds)
+                .filter(StrUtil::isNotEmpty)
+                .map(likeIds -> StrUtil.stripIgnoreCase(likeIds, ","))
+                .filter(StrUtil::isNotEmpty)
+                .map(likeIds ->
+                        Arrays.stream(likeIds.split(",")).map(Integer::valueOf).toList())
+                .orElse(Collections.emptyList());
     }
 }

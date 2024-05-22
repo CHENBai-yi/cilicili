@@ -2,6 +2,7 @@ package site.cilicili.frontend.course.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.*;
 import cn.hutool.json.JSONUtil;
@@ -25,6 +26,7 @@ import site.cilicili.frontend.bars.service.BarsService;
 import site.cilicili.frontend.catalogs.domain.mapper.CatalogMapper;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
 import site.cilicili.frontend.catalogs.service.CatalogsService;
+import site.cilicili.frontend.chart.domain.CiliDataBoardResponse;
 import site.cilicili.frontend.common.pojo.SearchRedisHelper;
 import site.cilicili.frontend.course.domain.dto.*;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
@@ -164,7 +166,9 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
         return Optional.ofNullable(authUserDetails)
                 .map(authUserDetails1 -> {
                     courses.setCreatedBy(authUserDetails1.getusername());
-                    return R.yes("Success").setData(Optional.ofNullable(baseMapper.getCoursesCount(courses)).orElse(new CetCoursesCountResponse()));
+                    return R.yes("Success")
+                            .setData(Optional.ofNullable(baseMapper.getCoursesCount(courses))
+                                    .orElse(new CetCoursesCountResponse()));
                 })
                 .orElseThrow(() -> new AppException(Error.LOGIN_INFO_INVALID));
     }
@@ -374,33 +378,51 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                     }
                     Optional.ofNullable(courseVideoInfoById.getCatalog())
                             .filter(f -> video.getTryWatch())
-                            .map(catalogs -> catalogs.stream().map(GetCourseVideoInfoByIdResponse.Catalog::getDetailList).map(CollUtil::getFirst).collect(Collectors.toList()))
+                            .map(catalogs -> catalogs.stream()
+                                    .map(GetCourseVideoInfoByIdResponse.Catalog::getDetailList)
+                                    .map(CollUtil::getFirst)
+                                    .collect(Collectors.toList()))
                             .ifPresent(tryWatchList -> {
-                                final List<GetCourseVideoInfoByIdResponse.Catalog.Detail> details1 = Optional.ofNullable(courseVideoInfoById.getVideoList())
-                                        .map(videoLists -> {
-                                            final List<GetCourseVideoInfoByIdResponse.Catalog.Detail> details = new ArrayList<>();
-                                            for (final GetCourseVideoInfoByIdResponse.Catalog.Detail detail : tryWatchList) {
-                                                for (final GetCourseVideoInfoByIdResponse.VideoList videoList : videoLists) {
-                                                    final String title = detail.getTitle();
-                                                    final String title1 = videoList.getTitle();
-                                                    if (StrUtil.isNotEmpty(title) && StrUtil.isNotEmpty(title1) && title.equals(title1)) {
-                                                        Optional.ofNullable(videoList.getContent())
-                                                                .map(GetCourseVideoInfoByIdResponse.Content::getVideo)
-                                                                .ifPresent(video1 -> {
-                                                                    final GetCourseVideoInfoByIdResponse.Catalog.Detail detail1 = ObjUtil.clone(detail);
-                                                                    final String href = String.format("%1$s%2$s", ss, video1.getUrl());
-                                                                    detail1.setTitle(String.format("%1$s %2$s", detail.getTag(), detail.getTitle()));
-                                                                    detail.setHref(href);
-                                                                    detail1.setHref(href);
-                                                                    detail1.setTime(null);
-                                                                    detail1.setTag(null);
-                                                                    details.add(detail1);
-                                                                });
+                                final List<GetCourseVideoInfoByIdResponse.Catalog.Detail> details1 =
+                                        Optional.ofNullable(courseVideoInfoById.getVideoList())
+                                                .map(videoLists -> {
+                                                    final List<GetCourseVideoInfoByIdResponse.Catalog.Detail> details =
+                                                            new ArrayList<>();
+                                                    for (final GetCourseVideoInfoByIdResponse.Catalog.Detail detail :
+                                                            tryWatchList) {
+                                                        for (final GetCourseVideoInfoByIdResponse.VideoList videoList :
+                                                                videoLists) {
+                                                            final String title = detail.getTitle();
+                                                            final String title1 = videoList.getTitle();
+                                                            if (StrUtil.isNotEmpty(title)
+                                                                    && StrUtil.isNotEmpty(title1)
+                                                                    && title.equals(title1)) {
+                                                                Optional.ofNullable(videoList.getContent())
+                                                                        .map(
+                                                                                GetCourseVideoInfoByIdResponse.Content
+                                                                                        ::getVideo)
+                                                                        .ifPresent(video1 -> {
+                                                                            final GetCourseVideoInfoByIdResponse.Catalog
+                                                                                    .Detail
+                                                                                    detail1 = ObjUtil.clone(detail);
+                                                                            final String href = String.format(
+                                                                                    "%1$s%2$s", ss, video1.getUrl());
+                                                                            detail1.setTitle(String.format(
+                                                                                    "%1$s %2$s",
+                                                                                    detail.getTag(),
+                                                                                    detail.getTitle()));
+                                                                            detail.setHref(href);
+                                                                            detail1.setHref(href);
+                                                                            detail1.setTime(null);
+                                                                            detail1.setTag(null);
+                                                                            details.add(detail1);
+                                                                        });
+                                                            }
+                                                        }
                                                     }
-                                                }
-                                            }
-                                            return details;
-                                        }).orElse(Collections.emptyList());
+                                                    return details;
+                                                })
+                                                .orElse(Collections.emptyList());
                                 video.setTryWatchList(details1);
                             });
                     return ss;
@@ -505,5 +527,26 @@ public class CoursesServiceImpl extends ServiceImpl<CoursesMapper, CoursesEntity
                             .orElse(R.no("您已经是尊贵的会员了！").setData(false));
                 })
                 .orElse(R.no("请登录后操作.").setData(true));
+    }
+
+    @Override
+    public List<CiliDataBoardResponse.Main1> getCoursesCountBySubject() {
+        return baseMapper.getCoursesCountBySubject();
+    }
+
+    public List<Map<String, Object>> getCourseTotalByWeek(final DateTime start, final Date end) {
+        return baseMapper.getCourseTotalByWeek(start, end);
+    }
+
+    public List<Map<String, Object>> getOnTotalByWeek(final DateTime start, final Date end) {
+        return baseMapper.getOnTotalByWeek(start, end);
+    }
+
+    public List<Map<String, Object>> getPassByWeek(final DateTime start, final Date end) {
+        return baseMapper.getPassByWeek(start, end);
+    }
+
+    public List<Map<String, Object>> getMoreVis() {
+        return baseMapper.getMoreVis();
     }
 }

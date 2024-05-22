@@ -86,6 +86,7 @@ public class GetCourseVideoInfoByIdResponse {
         public static class Detail implements Serializable {
             @Serial
             private static final long serialVersionUID = 42L;
+
             private String tag;
             private String title;
             private String time;

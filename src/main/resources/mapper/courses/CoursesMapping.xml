@@ -492,6 +492,41 @@
             order by ${sortBy} desc
         </if>
     </select>
+    <select id="getCoursesCountBySubject"
+            resultType="site.cilicili.frontend.chart.domain.CiliDataBoardResponse$Main1">
+        SELECT `subject` as name, COUNT(*) as value
+        FROM courses
+        GROUP BY `subject`
+        order by 2 DESC
+    </select>
+    <select id="getCourseTotalByWeek" resultType="java.util.Map">
+        select date_format(created_at, '%c/%d') as date, count(*) as count
+        from courses
+        where created_at between #{start} and #{end}
+        group by 1
+    </select>
+    <select id="getOnTotalByWeek" resultType="java.util.Map">
+        select date_format(created_at, '%c/%d') as date, count(*) as count
+        from courses
+        where `status` = 'onOffPass_on'
+          and created_at between #{start} and #{end}
+        group by 1
+    </select>
+    <select id="getPassByWeek" resultType="java.util.Map">
+        select date_format(created_at, '%c/%d') as date, count(*) as count
+        from courses
+        where `status` = 'onOffPass_pass'
+          and created_at between #{start} and #{end}
+        group by 1
+    </select>
+    <select id="getMoreVis" resultType="java.util.Map">
+        SELECT `name`, vis
+        from courses
+        GROUP BY 1, 2
+        ORDER BY 2 desc
+        limit 10
+    </select>
+    
     
     <!--新增所有列-->
     <!--    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">-->

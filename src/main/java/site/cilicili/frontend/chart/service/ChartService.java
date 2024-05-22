@@ -1,4 +1,4 @@
-package site.cilicili.backend.chart.service;
+package site.cilicili.frontend.chart.service;
 
 import site.cilicili.common.util.R;
 
@@ -11,5 +11,6 @@ import site.cilicili.common.util.R;
  * @author BaiYiChen
  */
 public interface ChartService {
-    R getInfo();
+
+    R getCiliDataBoard();
 }

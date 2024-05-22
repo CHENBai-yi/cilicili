@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.common.util.R;
 import site.cilicili.frontend.bars.domain.pojo.BarsEntity;
+import site.cilicili.frontend.chart.domain.CiliDataBoardResponse;
 import site.cilicili.frontend.course.domain.dto.AddCourseRequest;
 import site.cilicili.frontend.course.domain.dto.GetChildrenBarResponse;
 import site.cilicili.frontend.course.domain.dto.GetSubjectCategoriesRequest;
@@ -100,4 +101,7 @@ public interface CoursesService extends IService<CoursesEntity> {
     R recentAndHotSearch(AuthUserDetails authUserDetails);
 
     R becomeMemberShip(final AuthUserDetails authUserDetails);
+
+    List<CiliDataBoardResponse.Main1> getCoursesCountBySubject();
+
 }

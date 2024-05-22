@@ -1,5 +1,6 @@
 package site.cilicili.backend.log.mapper;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -7,7 +8,9 @@ import site.cilicili.backend.log.domain.dto.QueryLogRequest;
 import site.cilicili.backend.log.domain.dto.QueryLogResponse;
 import site.cilicili.backend.log.domain.pojo.SysLogOperationEntity;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -94,4 +97,6 @@ public interface SysLogOperationMapper extends BaseMapper<SysLogOperationEntity>
     List<QueryLogResponse.LogOperation> queryLogOperationList(QueryLogRequest queryLogRequest);
 
     Integer countByParam(QueryLogRequest queryLogRequest);
+
+    List<Map<String, Object>> getPvData(@Param("start") DateTime start, @Param("end") Date end);
 }

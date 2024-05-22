@@ -27,6 +27,7 @@ import site.cilicili.backend.log.service.SysLogLoginService;
 import site.cilicili.backend.user.domain.dto.KickOnlineUserRequest;
 import site.cilicili.backend.user.domain.pojo.SysUserEntity;
 import site.cilicili.backend.user.service.SysUserService;
+import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.util.IpUtil;
 import site.cilicili.common.util.R;
@@ -60,12 +61,14 @@ public class LogLoginAspect {
     private final SysUserService sysUserService;
     private final HttpServletRequest request;
     private final DbInitialization dbInitialization;
+    private final DbChangeConfig dbChangeConf;
 
     @Value("${cilicili.auth.token.valid-time}")
     private Long validTime;
 
     @Pointcut("execution(* site.cilicili.authentication.user.controller.UsersController.login(..)) throws AppException")
     public void logLoginPointCut() {
+
     }
 
     @Pointcut(

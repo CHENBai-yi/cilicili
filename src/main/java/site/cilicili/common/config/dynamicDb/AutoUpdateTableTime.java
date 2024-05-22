@@ -32,7 +32,9 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
     public void insertFill(final MetaObject metaObject) {
         if (metaObject.getOriginalObject() instanceof VideoCommentsEntity) {
             this.setFieldValByName(
-                    "address", String.format("来自%1$s", AddressUtils.getRealAddressByIP(IpUtil.getRemoteIp(httpServletRequest))), metaObject);
+                    "address",
+                    String.format("来自%1$s", AddressUtils.getRealAddressByIP(IpUtil.getRemoteIp(httpServletRequest))),
+                    metaObject);
         }
         Optional.of(Objects.isNull(this.getFieldValByName("createdAt", metaObject)))
                 .filter(f -> f)
@@ -47,7 +49,9 @@ public class AutoUpdateTableTime implements MetaObjectHandler {
     public void updateFill(final MetaObject metaObject) {
         if (metaObject.getOriginalObject() instanceof VideoCommentsEntity) {
             this.setFieldValByName(
-                    "address", String.format("来自%1$s", AddressUtils.getRealAddressByIP(IpUtil.getRemoteIp(httpServletRequest))), metaObject);
+                    "address",
+                    String.format("来自%1$s", AddressUtils.getRealAddressByIP(IpUtil.getRemoteIp(httpServletRequest))),
+                    metaObject);
         }
         this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
         Optional.ofNullable(getAuthUserDetails())

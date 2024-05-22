@@ -78,7 +78,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Transactional(rollbackFor = Throwable.class)
     @Override
     public R login(UserDto.Login login, final HttpHeaders headers) {
-        DbThreadLocalContextHolder.setDbUse(Optional.ofNullable(dbChangeConf.getBackend()).orElse(dbChangeConf.getBackendInner()));
+        DbThreadLocalContextHolder.setDbUse(
+                Optional.ofNullable(dbChangeConf.getBackend()).orElse(dbChangeConf.getBackendInner()));
         ipAddressHyperLogLog.add(Objects.requireNonNull(headers.getHost()).getHostString());
         if (Objects.nonNull(login.getCode()) && StrUtil.isNotEmpty(login.getCode())) {
             final String code = stringRedisTemplate.opsForValue().get(login.getEmail());
@@ -183,7 +184,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Transactional(rollbackFor = Throwable.class)
     @Override
     public R frontendRegistration(final UserDto.FrontendRegistration registration) {
-        DbThreadLocalContextHolder.setDbUse(Optional.ofNullable(dbChangeConf.getBackend()).orElse(dbChangeConf.getBackendInner()));
+        DbThreadLocalContextHolder.setDbUse(
+                Optional.ofNullable(dbChangeConf.getBackend()).orElse(dbChangeConf.getBackendInner()));
         return Optional.ofNullable(stringRedisTemplate.opsForValue().get(registration.getEmail()))
                 .map(code -> {
                     if (!code.equals(registration.getCode())) {
@@ -197,7 +199,11 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                                 registration.setPassword(passwordEncoder.encode(registration.getPassword()));
                                 final UserEntity userEntity = BeanUtil.toBean(registration, UserEntity.class);
                                 if (saveOrUpdate(userEntity)) {
-                                    final SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity(Optional.ofNullable(registration.getRealName()).map(r -> role.getTeacher()).orElse(role.getStudent()), registration.getUsername());
+                                    final SysUserRoleEntity sysUserRoleEntity = new SysUserRoleEntity(
+                                            Optional.ofNullable(registration.getRealName())
+                                                    .map(r -> role.getTeacher())
+                                                    .orElse(role.getStudent()),
+                                            registration.getUsername());
                                     if (sysUserRoleService.saveOrUpdate(sysUserRoleEntity)) {
                                         return R.yes("注册成功！");
                                     }
@@ -210,7 +216,12 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
     @Override
     public R getEmailCodeForReg(final UserDto.GetEmailCode email) {
-        return getEmailCode(email.getEmail(), Optional.ofNullable(email.getLogin()).filter(f -> f).map(f -> "登录").orElse("注册"));
+        return getEmailCode(
+                email.getEmail(),
+                Optional.ofNullable(email.getLogin())
+                        .filter(f -> f)
+                        .map(f -> "登录")
+                        .orElse("注册"));
     }
 
     public R getEmailCode(final String email, final String option) {

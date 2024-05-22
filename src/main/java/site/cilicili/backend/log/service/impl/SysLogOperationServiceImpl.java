@@ -1,5 +1,6 @@
 package site.cilicili.backend.log.service.impl;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -98,5 +102,10 @@ public class SysLogOperationServiceImpl extends ServiceImpl<SysLogOperationMappe
                                 .records(userList)
                                 .build()))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    }
+
+    @Override
+    public List<Map<String, Object>> getPvData(final DateTime start, final Date end) {
+        return baseMapper.getPvData(start, end);
     }
 }

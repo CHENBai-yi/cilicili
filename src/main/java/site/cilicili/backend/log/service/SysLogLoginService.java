@@ -1,11 +1,16 @@
 package site.cilicili.backend.log.service;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.authentication.Details.AuthUserDetails;
 import site.cilicili.backend.log.domain.dto.DeleteLogRequest;
 import site.cilicili.backend.log.domain.dto.QueryLogRequest;
 import site.cilicili.backend.log.domain.pojo.SysLogLoginEntity;
 import site.cilicili.common.util.R;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * (SysLogLogin)表服务接口
@@ -58,4 +63,8 @@ public interface SysLogLoginService extends IService<SysLogLoginEntity> {
     R getLogLoginList(QueryLogRequest queryLogRequest);
 
     R deleteLogLoginById(final AuthUserDetails authUserDetails, DeleteLogRequest deleteLogRequest);
+
+    List<Map<String, Object>> getIpData(DateTime start, Date end);
+
+    List<Map<String, Object>> getUvData(DateTime start, Date end);
 }

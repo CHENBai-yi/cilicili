@@ -1,12 +1,16 @@
 package site.cilicili.frontend.course.mapper;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import site.cilicili.frontend.chart.domain.CiliDataBoardResponse;
 import site.cilicili.frontend.course.domain.dto.*;
 import site.cilicili.frontend.course.domain.pojo.CoursesEntity;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * PACkAGE: D:/Documents/JavaCode/Code/cilicili(嗤哩嗤哩)
@@ -100,4 +104,14 @@ public interface CoursesMapper extends BaseMapper<CoursesEntity> {
     Integer updateBatch(@Param("coursesEntities") List<CoursesEntity> coursesEntities);
 
     Integer countByParam(QueryCourseInfoRequest courses);
+
+    List<CiliDataBoardResponse.Main1> getCoursesCountBySubject();
+
+    List<Map<String, Object>> getCourseTotalByWeek(@Param("start") DateTime start, @Param("end") Date end);
+
+    List<Map<String, Object>> getOnTotalByWeek(@Param("start") DateTime start, @Param("end") Date end);
+
+    List<Map<String, Object>> getPassByWeek(@Param("start") DateTime start, @Param("end") Date end);
+
+    List<Map<String, Object>> getMoreVis();
 }

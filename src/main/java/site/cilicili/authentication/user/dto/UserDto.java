@@ -113,6 +113,7 @@ public class UserDto {
         @NotNull
         @Email
         private String email;
+
         private Boolean login;
     }
 }

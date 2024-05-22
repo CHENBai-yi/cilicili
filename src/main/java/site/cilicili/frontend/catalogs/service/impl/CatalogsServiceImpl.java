@@ -8,6 +8,9 @@ import site.cilicili.common.util.R;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
 import site.cilicili.frontend.catalogs.mapper.CatalogsMapper;
 import site.cilicili.frontend.catalogs.service.CatalogsService;
+import site.cilicili.frontend.chart.domain.CiliDataBoardResponse;
+
+import java.util.List;
 
 /**
  * (Catalogs) 表服务实现类
@@ -76,5 +79,10 @@ public class CatalogsServiceImpl extends ServiceImpl<CatalogsMapper, CatalogsEnt
     public R deleteById(Integer catalogId) {
         boolean del = baseMapper.deleteById(catalogId) > 0;
         return R.ok().setData(del);
+    }
+
+    @Override
+    public List<CiliDataBoardResponse.Main6.Value> getCatalogTableData() {
+        return baseMapper.getCatalogTableData();
     }
 }

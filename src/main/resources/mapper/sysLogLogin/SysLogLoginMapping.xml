@@ -222,6 +222,23 @@
             </trim>
         </where>
     </select>
+    <select id="getIpData" resultType="java.util.Map">
+        select date_format(created_at, '%c/%d') as date, count(distinct login_ip) as count
+        from sys_log_login
+        where created_at between #{start} and #{end}
+        group by 1
+/*        select date_format(created_at, '%Y-%m-%d') as date, count(login_ip) as count
+        from sys_log_login
+        group by 1
+        ORDER BY 1 DESC
+        LIMIT 7*/
+    </select>
+    <select id="getUvData" resultType="java.util.Map">
+        select date_format(created_at, '%c/%d') as date, count(login_ip) as count
+        from sys_log_login
+        where created_at between #{start} and #{end}
+        group by 1
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

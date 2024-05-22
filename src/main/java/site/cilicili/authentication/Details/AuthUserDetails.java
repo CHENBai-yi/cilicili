@@ -19,7 +19,13 @@ public class AuthUserDetails implements UserDetails {
     private final String avatar;
 
     @Builder
-    public AuthUserDetails(Long id, String username, String roleCode, final String realName, final String nickName, final String avatar) {
+    public AuthUserDetails(
+            Long id,
+            String username,
+            String roleCode,
+            final String realName,
+            final String nickName,
+            final String avatar) {
         this.id = id;
         this.username = username;
         this.roleCode = roleCode;

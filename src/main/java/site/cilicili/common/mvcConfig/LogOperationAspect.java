@@ -17,6 +17,7 @@ import site.cilicili.backend.log.domain.dto.SysLogOperationDto;
 import site.cilicili.backend.log.domain.pojo.SysLogOperationEntity;
 import site.cilicili.backend.log.service.SysLogOperationService;
 import site.cilicili.common.config.dynamicDb.AutoUpdateTableTime;
+import site.cilicili.common.config.dynamicDb.annotation.DbChangeConfig;
 import site.cilicili.common.config.dynamicDb.dataSource.DbInitialization;
 import site.cilicili.common.util.IpUtil;
 import site.cilicili.common.util.R;
@@ -42,6 +43,7 @@ public class LogOperationAspect {
     private final AutoUpdateTableTime autoUpdateTableTime;
     private final ObjectMapper objectMapper;
     private final DbInitialization dbInitialization;
+    private final DbChangeConfig dbChangeConf;
 
     @Pointcut("execution(* site.cilicili..controller.*.*(..))")
     public void logOperationPointCut() {

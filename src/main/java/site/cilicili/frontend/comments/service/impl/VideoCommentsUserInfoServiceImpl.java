@@ -110,29 +110,35 @@ public class VideoCommentsUserInfoServiceImpl
                         .map(data -> {
                             data.setId(data.getUid());
                             return R.yes("Success.").setData(data);
-                        }).orElse(R.no("Fail."))
-                ).orElseGet(() -> Optional.ofNullable(authUserDetails)
+                        })
+                        .orElse(R.no("Fail.")))
+                .orElseGet(() -> Optional.ofNullable(authUserDetails)
                         .map(AuthUserDetails::getId)
-                        .map(uid -> Optional.ofNullable(baseMapper.queryByUid(Math.toIntExact(uid))).orElseGet(() -> {
-                            final VideoCommentsUserInfoEntity userInfoEntity = new VideoCommentsUserInfoEntity();
-                            userInfoEntity.setUid(uid);
-                            userInfoEntity.setUsername(authUserDetails.getUsername());
-                            userInfoEntity.setAvatar(authUserDetails.getAvatar());
-                            userInfoEntity.setLevel(1);
-                            userInfoEntity.setFollower(0L);
-                            userInfoEntity.setLike(0L);
-                            userInfoEntity.setAttention(0L);
-                            userInfoEntity.setLikeIdsArr(Collections.emptyList());
-                            userInfoEntity.setAddress(address);
-                            if (save(userInfoEntity)) {
-                                return userInfoEntity;
-                            }
-                            return null;
-                        })).map(data -> {
+                        .map(uid -> Optional.ofNullable(baseMapper.queryByUid(Math.toIntExact(uid)))
+                                .orElseGet(() -> {
+                                    final VideoCommentsUserInfoEntity userInfoEntity =
+                                            new VideoCommentsUserInfoEntity();
+                                    userInfoEntity.setUid(uid);
+                                    userInfoEntity.setUsername(authUserDetails.getUsername());
+                                    userInfoEntity.setAvatar(authUserDetails.getAvatar());
+                                    userInfoEntity.setLevel(1);
+                                    userInfoEntity.setFollower(0L);
+                                    userInfoEntity.setLike(0L);
+                                    userInfoEntity.setAttention(0L);
+                                    userInfoEntity.setLikeIdsArr(Collections.emptyList());
+                                    userInfoEntity.setAddress(address);
+                                    if (save(userInfoEntity)) {
+                                        return userInfoEntity;
+                                    }
+                                    return null;
+                                }))
+                        .map(data -> {
                             boolean f = false;
-                            data.setUsername(Optional.ofNullable(authUserDetails.getNickName()).orElse(authUserDetails.getRealName()));
+                            data.setUsername(Optional.ofNullable(authUserDetails.getNickName())
+                                    .orElse(authUserDetails.getRealName()));
                             final String avatar = authUserDetails.getAvatar();
-                            final String username = Optional.ofNullable(authUserDetails.getNickName()).orElse(authUserDetails.getRealName());
+                            final String username = Optional.ofNullable(authUserDetails.getNickName())
+                                    .orElse(authUserDetails.getRealName());
                             if (StrUtil.isNotEmpty(avatar) && !avatar.equals(data.getAvatar())) {
                                 data.setAvatar(avatar);
                                 f = true;
@@ -141,7 +147,8 @@ public class VideoCommentsUserInfoServiceImpl
                                 data.setUsername(username);
                                 f = true;
                             }
-                            if (StrUtil.isNotEmpty(data.getAddress()) && !data.getAddress().equals(address)) {
+                            if (StrUtil.isNotEmpty(data.getAddress())
+                                    && !data.getAddress().equals(address)) {
                                 data.setAddress(address);
                                 f = true;
                             }
@@ -150,9 +157,8 @@ public class VideoCommentsUserInfoServiceImpl
                             }
                             data.setId(data.getUid());
                             return R.yes("Success.").setData(data);
-                        }).orElse(R.no("Fail.")));
-
-
+                        })
+                        .orElse(R.no("Fail.")));
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -180,11 +186,10 @@ public class VideoCommentsUserInfoServiceImpl
                     videoCommentsEntity.setContentImg(records.getContentImg());
                     videoCommentsEntity.setHomeLink("/" + videoCommentsEntity.getUid());
                     videoCommentsEntity.setLikes(records.getLikes());
-                    Optional.ofNullable(records.getUser())
-                            .ifPresent(user -> {
-                                videoCommentsEntity.setAvatar(user.getAvatar());
-                                videoCommentsEntity.setUsername(user.getUsername());
-                            });
+                    Optional.ofNullable(records.getUser()).ifPresent(user -> {
+                        videoCommentsEntity.setAvatar(user.getAvatar());
+                        videoCommentsEntity.setUsername(user.getUsername());
+                    });
                     return videoCommentsEntity;
                 })
                 .filter(videoCommentsService::save)

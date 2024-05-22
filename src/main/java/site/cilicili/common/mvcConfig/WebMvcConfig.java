@@ -299,8 +299,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 });
 
         // windows
-        registry.addResourceHandler("/admin/**")
-                .addResourceLocations("classpath:/admin/");
+        registry.addResourceHandler("/admin/**").addResourceLocations("classpath:/admin/");
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 

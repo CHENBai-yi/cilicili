@@ -1,9 +1,14 @@
 package site.cilicili.backend.log.service;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.IService;
 import site.cilicili.backend.log.domain.dto.QueryLogRequest;
 import site.cilicili.backend.log.domain.pojo.SysLogOperationEntity;
 import site.cilicili.common.util.R;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * (SysLogOperation)表服务接口
@@ -54,4 +59,6 @@ public interface SysLogOperationService extends IService<SysLogOperationEntity> 
     R deleteById(final Long id);
 
     R getLogOperationList(QueryLogRequest queryLogRequest);
+
+    List<Map<String, Object>> getPvData(DateTime start, Date end);
 }

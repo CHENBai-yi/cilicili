@@ -218,6 +218,12 @@
         </if>
         ;
     </select>
+    <select id="getPvData" resultType="java.util.Map">
+        select date_format(created_at, '%c/%d') as date, count(*) as count
+        from sys_log_operation
+        where created_at between #{start} and #{end}
+        group by 1
+    </select>
     
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

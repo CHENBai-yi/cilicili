@@ -1,5 +1,6 @@
 package site.cilicili.backend.log.service.impl;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ import site.cilicili.common.exception.AppException;
 import site.cilicili.common.exception.Error;
 import site.cilicili.common.util.R;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -111,5 +115,15 @@ public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLo
                 .filter(this::removeById)
                 .map(sysDictEntity -> R.yes(String.format("%1$s删除成功.", authUserDetails.getusername())))
                 .orElseThrow(() -> new AppException(Error.COMMON_EXCEPTION));
+    }
+
+    @Override
+    public List<Map<String, Object>> getIpData(final DateTime start, final Date end) {
+        return baseMapper.getIpData(start, end);
+    }
+
+    @Override
+    public List<Map<String, Object>> getUvData(final DateTime start, final Date end) {
+        return baseMapper.getUvData(start, end);
     }
 }

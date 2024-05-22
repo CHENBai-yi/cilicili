@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  *
  * @author BaiYiChen
  */
-
 @ConfigurationProperties(prefix = "cilicili.role")
 @Component
 @Data

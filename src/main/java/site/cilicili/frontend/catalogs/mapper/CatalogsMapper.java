@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import site.cilicili.frontend.catalogs.domain.pojo.CatalogsEntity;
+import site.cilicili.frontend.chart.domain.CiliDataBoardResponse;
 
 import java.util.List;
 
@@ -87,4 +88,6 @@ public interface CatalogsMapper extends BaseMapper<CatalogsEntity> {
      * @return 影响行数
      */
     int deleteById(Integer catalogId);
+
+    List<CiliDataBoardResponse.Main6.Value> getCatalogTableData();
 }
