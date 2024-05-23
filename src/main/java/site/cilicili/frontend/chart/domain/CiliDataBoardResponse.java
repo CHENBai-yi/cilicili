@@ -43,6 +43,7 @@ public class CiliDataBoardResponse {
         private String tradeNo;
         private String method;
         private String username;
+
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime createdAt;
     }
@@ -53,8 +54,10 @@ public class CiliDataBoardResponse {
     public static class Main3 {
         @JsonProperty("xData")
         private List<String> xData;
+
         @JsonProperty("yData")
         private Object yData;
+
         private Object title;
 
         @Data
@@ -72,8 +75,10 @@ public class CiliDataBoardResponse {
         public static class YData {
             @JsonProperty("uploadData")
             private List<Value> uploadData;
+
             @JsonProperty("updateData")
             private List<Value> updateData;
+
             @JsonProperty("viewData")
             private List<Value> viewData;
 
@@ -93,6 +98,7 @@ public class CiliDataBoardResponse {
     public static class Main5 {
         @JsonProperty("xData")
         private Collection<Object> xData;
+
         @JsonProperty("yData")
         private Collection<Object> yData;
     }
@@ -110,8 +116,8 @@ public class CiliDataBoardResponse {
         public static class Value {
             @JsonProperty("areaName")
             private String areaName;
+
             private Long count;
         }
-
     }
 }

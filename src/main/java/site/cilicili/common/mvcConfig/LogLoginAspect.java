@@ -68,7 +68,6 @@ public class LogLoginAspect {
 
     @Pointcut("execution(* site.cilicili.authentication.user.controller.UsersController.login(..)) throws AppException")
     public void logLoginPointCut() {
-
     }
 
     @Pointcut(

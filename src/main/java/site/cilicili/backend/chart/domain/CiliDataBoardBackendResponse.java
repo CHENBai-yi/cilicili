@@ -29,8 +29,10 @@ public class CiliDataBoardBackendResponse {
     public static class Main2 {
         @JsonProperty("xData")
         private List<String> xData;
+
         @JsonProperty("yData")
         private Object yData;
+
         private Object title;
 
         @Data
@@ -48,8 +50,10 @@ public class CiliDataBoardBackendResponse {
         public static class YData {
             @JsonProperty("uploadData")
             private List<Value> uploadData;
+
             @JsonProperty("updateData")
             private List<Value> updateData;
+
             @JsonProperty("viewData")
             private List<Value> viewData;
 
@@ -61,7 +65,6 @@ public class CiliDataBoardBackendResponse {
                 private Long count;
             }
         }
-
     }
 
     @Data
@@ -78,7 +81,5 @@ public class CiliDataBoardBackendResponse {
             private String areaName;
             private Long count;
         }
-
     }
-
 }

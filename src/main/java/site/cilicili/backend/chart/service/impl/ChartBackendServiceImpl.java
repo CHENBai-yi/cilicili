@@ -76,65 +76,79 @@ public class ChartBackendServiceImpl implements ChartBackendService {
     public R getCiliDataBoard() {
         final Date end = DateUtil.date();
         final DateTime start = DateUtil.offsetDay(end, -6);
-        final List<String> dateTimes = DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR).stream().map(item -> DateUtil.format(item, "M/dd")).toList();
+        final List<String> dateTimes = DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR).stream()
+                .map(item -> DateUtil.format(item, "M/dd"))
+                .toList();
         final CiliDataBoardBackendResponse.Main2 main2 = getMain2(end, start, dateTimes);
         return R.yes("Success")
-                .setData(CiliDataBoardBackendResponse.builder()
-                        .main2(main2)
-                        .build());
+                .setData(CiliDataBoardBackendResponse.builder().main2(main2).build());
     }
 
-    private CiliDataBoardBackendResponse.Main2 getMain2(final Date end, final DateTime start, final List<String> dateTimes) {
+    private CiliDataBoardBackendResponse.Main2 getMain2(
+            final Date end, final DateTime start, final List<String> dateTimes) {
         List<Map<String, Object>> valueList = sysLogLoginService.getIpData(start, end);
         List<Map<String, Object>> valueList3 = sysLogLoginService.getUvData(start, end);
         List<Map<String, Object>> valueList2 = sysLogOperationService.getPvData(start, end);
 
-        final List<Long> ip = dateTimes.stream().map(item -> {
-            for (final Map<String, Object> map : valueList) {
-                if (item.equals(map.get("date"))) {
-                    return (Long) map.get("count");
-                }
-            }
-            return 0L;
-        }).toList();
-        final List<Long> pv = dateTimes.stream().map(item -> {
-            for (final Map<String, Object> map : valueList2) {
-                if (item.equals(map.get("date"))) {
-                    return (Long) map.get("count");
-                }
-            }
-            return 0L;
-        }).toList();
-        final List<Long> uv = dateTimes.stream().map(item -> {
-            for (final Map<String, Object> map : valueList3) {
-                if (item.equals(map.get("date"))) {
-                    return (Long) map.get("count");
-                }
-            }
-            return 0L;
-        }).toList();
+        final List<Long> ip = dateTimes.stream()
+                .map(item -> {
+                    for (final Map<String, Object> map : valueList) {
+                        if (item.equals(map.get("date"))) {
+                            return (Long) map.get("count");
+                        }
+                    }
+                    return 0L;
+                })
+                .toList();
+        final List<Long> pv = dateTimes.stream()
+                .map(item -> {
+                    for (final Map<String, Object> map : valueList2) {
+                        if (item.equals(map.get("date"))) {
+                            return (Long) map.get("count");
+                        }
+                    }
+                    return 0L;
+                })
+                .toList();
+        final List<Long> uv = dateTimes.stream()
+                .map(item -> {
+                    for (final Map<String, Object> map : valueList3) {
+                        if (item.equals(map.get("date"))) {
+                            return (Long) map.get("count");
+                        }
+                    }
+                    return 0L;
+                })
+                .toList();
 
         final List<CiliDataBoardBackendResponse.Main2.Title> titles = new ArrayList<>();
         titles.add(CiliDataBoardBackendResponse.Main2.Title.builder()
-                .name("IP").value(ip.stream().reduce(0L, Long::sum))
+                .name("IP")
+                .value(ip.stream().reduce(0L, Long::sum))
                 .build());
         titles.add(CiliDataBoardBackendResponse.Main2.Title.builder()
-                .name("PV").value(pv.stream().reduce(0L, Long::sum))
+                .name("PV")
+                .value(pv.stream().reduce(0L, Long::sum))
                 .build());
         titles.add(CiliDataBoardBackendResponse.Main2.Title.builder()
-                .name("UV").value(uv.stream().reduce(0L, Long::sum))
+                .name("UV")
+                .value(uv.stream().reduce(0L, Long::sum))
                 .build());
 
         return CiliDataBoardBackendResponse.Main2.builder()
                 .xData(dateTimes)
                 .yData(CiliDataBoardBackendResponse.Main2.YData.builder()
-                        .updateData(ip.stream().map(CiliDataBoardBackendResponse.Main2.YData.Value::new).toList())
-                        .viewData(pv.stream().map(CiliDataBoardBackendResponse.Main2.YData.Value::new).toList())
-                        .uploadData(uv.stream().map(CiliDataBoardBackendResponse.Main2.YData.Value::new).toList())
+                        .updateData(ip.stream()
+                                .map(CiliDataBoardBackendResponse.Main2.YData.Value::new)
+                                .toList())
+                        .viewData(pv.stream()
+                                .map(CiliDataBoardBackendResponse.Main2.YData.Value::new)
+                                .toList())
+                        .uploadData(uv.stream()
+                                .map(CiliDataBoardBackendResponse.Main2.YData.Value::new)
+                                .toList())
                         .build())
                 .title(titles)
                 .build();
     }
-
-
 }

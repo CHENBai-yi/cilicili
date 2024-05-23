@@ -11,8 +11,8 @@ server:
     buffer-size: 1024
 spring:
   profiles:
-    #    active: prod
-    active: dev
+    active: prod
+  #    active: dev
   #    active: @activeProfile@
   servlet:
     multipart:

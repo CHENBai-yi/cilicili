@@ -103,5 +103,4 @@ public interface CoursesService extends IService<CoursesEntity> {
     R becomeMemberShip(final AuthUserDetails authUserDetails);
 
     List<CiliDataBoardResponse.Main1> getCoursesCountBySubject();
-
 }

@@ -35,5 +35,4 @@ public class ChartBackendController {
     public R getRedisInfo() {
         return chartService.getInfo();
     }
-
 }
