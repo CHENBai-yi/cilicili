@@ -113,6 +113,7 @@ const handleRoleMenu = () => {
     })
   }
   const roleButton = []
+  console.log(buttonCheckMap.value)
   for (let bc in buttonCheckMap.value) {
     if (buttonCheckMap.value[bc]) {
       roleButton.push({
