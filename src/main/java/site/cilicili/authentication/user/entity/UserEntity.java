@@ -2,12 +2,15 @@ package site.cilicili.authentication.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import site.cilicili.common.entity.BaseEntity;
+
+import java.util.List;
 
 /**
  * @author BaiYiChen
@@ -38,6 +41,9 @@ public class UserEntity extends BaseEntity {
     @Schema(description = "角色编码")
     private String roleCode;
 
+    @TableField(exist = false)
+    @JsonIgnore
+    private List<String> userButton;
     @TableField(exist = false)
     @Schema(description = "登录token")
     private String token;

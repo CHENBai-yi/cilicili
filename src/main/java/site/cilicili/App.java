@@ -29,6 +29,7 @@ import site.cilicili.common.logger.ExplainInterceptor;
 import site.cilicili.common.util.DbUtils;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -60,6 +61,11 @@ public class App {
     private final DbChangeConfig dbChangeConf;
 
     public static void main(String... args) {
+        final var arrayList = new ArrayList<>() {{
+            add(1);
+            add(3);
+            add(16);
+        }};
         SpringApplication.run(App.class, args);
     }
 

@@ -1,5 +1,6 @@
 package site.cilicili.backend.role.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,6 @@ import site.cilicili.common.util.R;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 /**
@@ -45,7 +45,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
     private final SysRoleButtonService sysRoleButtonService;
     private final SysRoleMenuService sysRoleMenuService;
     private final SysRoleApiService sysRoleApiService;
-    private final ThreadPoolExecutor threadPoolTaskExecutor;
     private final SysUserService sysUserService;
 
     /**
@@ -172,7 +171,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Throwable.class)
     public R deleteRoleById(final EditRequest sysRole) {
         return Optional.ofNullable(baseMapper.selectById(sysRole.id()))
                 .map(sysRole1 -> {
@@ -222,15 +221,16 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity
         return Optional.ofNullable(baseMapper.selectOne(
                         new QueryWrapper<SysRoleEntity>().eq("role_code", editRoleMenuRequest.roleCode())))
                 .map(sysRole -> {
-                    if ((!editRoleMenuRequest.roleMenu().isEmpty()
-                            && (sysRoleMenuService.remove(new QueryWrapper<SysRoleMenuEntity>()
-                            .eq("sys_role_role_code", sysRole.getRoleCode()))
-                            | sysRoleMenuService.insertOrBatch(editRoleMenuRequest.roleMenu())))
-                            | (!editRoleMenuRequest.roleButton().isEmpty()
-                            && (sysRoleButtonService.remove(new QueryWrapper<SysRoleButtonEntity>()
-                            .eq("sys_role_role_code", sysRole.getRoleCode()))
-                            | sysRoleButtonService.insertOrUpdateBatch(
-                            editRoleMenuRequest.roleButton())))) {
+                    if (sysRoleMenuService.remove(new QueryWrapper<SysRoleMenuEntity>()
+                            .eq("sys_role_role_code", sysRole.getRoleCode())) | sysRoleButtonService.remove(new QueryWrapper<SysRoleButtonEntity>()
+                            .eq("sys_role_role_code", sysRole.getRoleCode()))) {
+                        if (CollUtil.isNotEmpty(editRoleMenuRequest.roleMenu()) && !sysRoleMenuService.insertOrBatch(editRoleMenuRequest.roleMenu())) {
+                            throw new AppException("角色菜单更新失败");
+                        }
+                        if (CollUtil.isNotEmpty(editRoleMenuRequest.roleButton()) && !sysRoleButtonService.insertOrUpdateBatch(
+                                editRoleMenuRequest.roleButton())) {
+                            throw new AppException("角色按钮更新失败");
+                        }
                         sysRole.setDefaultPage(editRoleMenuRequest.defaultPage());
                         baseMapper.update(sysRole);
                         return R.yes(String.format("%1$s编辑角色菜单成功.", editRoleMenuRequest.roleCode()));

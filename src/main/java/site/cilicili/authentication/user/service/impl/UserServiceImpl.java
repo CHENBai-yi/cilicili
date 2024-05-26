@@ -35,6 +35,8 @@ import site.cilicili.frontend.comments.service.VideoCommentsUserInfoService;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -103,12 +105,14 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                                 .map(user -> {
                                     login.setEmail(user.getEmail());
                                     login.setUsername(user.getUsername());
+                                    final List<String> roleButtonByRoleCode = userRepository.findRoleButtonByRoleCode(user.getRoleCode());
+                                    user.setUserButton(Optional.ofNullable(roleButtonByRoleCode).orElse(Collections.emptyList()));
                                     return convertEntityToDto(user);
                                 })
                                 .filter(userDto ->
                                         sysUserOnlineService.insertOrUpdate(userDto.getUsername(), userDto.getToken()))
                                 .map(userDto -> R.yes("登录成功.").setData(userDto))
-                                .orElse(R.no("登陆失败!"))))
+                                .orElse(R.no("密码不正确!"))))
                 .orElse(R.no(Error.LOGIN_INFO_INVALID.getMessage()));
     }
 
@@ -119,6 +123,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
                 .avatar(userEntity.getAvatar())
                 .realName(userEntity.getRealName())
                 .gender(userEntity.getGender())
+                .userButton(userEntity.getUserButton())
                 .mobile(userEntity.getMobile())
                 .token(jwtUtils.encode(userEntity.getUsername()))
                 .build();

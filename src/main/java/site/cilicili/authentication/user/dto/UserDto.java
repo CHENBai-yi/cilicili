@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.List;
+
 /**
  * @author BaiYiChen
  */
@@ -12,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
-@JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UserDto {
     private String email;
     private String token;
@@ -25,6 +27,8 @@ public class UserDto {
     private String avatar;
     private String gender;
     private String mobile;
+    @JsonProperty("userButton")
+    private List<String> userButton;
 
     @Getter
     @AllArgsConstructor
