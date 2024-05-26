@@ -2,9 +2,9 @@ import {defineStore} from 'pinia';
 import {Cookies, LocalStorage, SessionStorage} from 'quasar';
 // import {usePermissionStore} from './permission';
 import {postAction} from "src/api/manage";
-import {usePermissionStore} from "stores/permission";
 import {RealUrl} from 'src/utils/convert'
 
+// @ts-ignore
 export const useUserStore = defineStore('user', {
   state: () => ({
     token: undefined,
@@ -13,44 +13,49 @@ export const useUserStore = defineStore('user', {
     realName: undefined,
     avatar: undefined,
     rememberMe: true,
+    userButton: undefined,
     option: {expires: 7, sameSite: "Strict"}
   }),
   getters: {},
   actions: {
     FlushUserInfo(res: any) {
+      this.userButton = res.userButton
+      // @ts-ignore
+      Cookies.set('cili-role-button', this.userButton, this.option)
       if (!!res.token) {
-        const token = res.token
-        this.SetToken(token)
+        this.SetToken(res.token)
       }
+      this.username = res.username
+
+      this.nickname = res.nickname
+
+      this.realName = res.real_name
+
+      this.avatar = RealUrl(res.avatar)
+
       // @ts-ignore
-      const username = res.username
+      Cookies.set('cili-avatar-frontend', this.avatar, this.option)
+
       // @ts-ignore
-      const nickname = res.nickname
+      Cookies.set('cili-username-frontend', this.username, this.option)
+
       // @ts-ignore
-      const realName = res.real_name
+      Cookies.set('cili-nickname-frontend', this.nickname, this.option)
+
       // @ts-ignore
-      const avatar = RealUrl(res.avatar)
-      this.avatar = avatar
-      // @ts-ignore
-      Cookies.set('cili-avatar-frontend', avatar, this.option)
-      this.username = username
-      // @ts-ignore
-      Cookies.set('cili-username-frontend', username, this.option)
-      this.nickname = nickname
-      // @ts-ignore
-      Cookies.set('cili-nickname-frontend', nickname, this.option)
-      this.realName = realName
-      // @ts-ignore
-      Cookies.set('cili-realName-frontend', realName, this.option)
+      Cookies.set('cili-realName-frontend', this.realName, this.option)
+
     },
+
     async HandleLogin(loginForm: any) {
       if (!!this.GetToken()) return true;
       const res = await postAction('public/login', loginForm)
       if (res.code === 1) {
         // @ts-ignore
-        window.$message.success(res.message, {render: window.$render})
-        // @ts-ignore
         this.FlushUserInfo(res.data)
+        // @ts-ignore
+        window.$message.success(res.message, {render: window.$render})
+
         return true
       } else {
         return
@@ -78,7 +83,8 @@ export const useUserStore = defineStore('user', {
       }
     },
     async HandleLogout() {
-      const permissionStore = usePermissionStore()
+      this.userButton = void 0
+      Cookies.remove('cili-role-button')
       this.token = void 0
       this.username = void 0
       this.nickname = void 0
@@ -91,15 +97,13 @@ export const useUserStore = defineStore('user', {
       Cookies.remove('cili-nickname-frontend')
       Cookies.remove('cili-realName-frontend')
       Cookies.remove('cili-avatar-frontend')
-      permissionStore.ClearMenu()
       // dont delete dict
       // LocalStorage.remove('cili-dict')
-
     },
     GetToken() {
       if (SessionStorage.has('cili-token-frontend')) {
         return SessionStorage.getItem('cili-token-frontend')
-      } else if (Cookies.has('cili-token-frontend')) {
+      } else if (Cookies.get('cili-token-frontend') != 'undefined') {
         return Cookies.get('cili-token-frontend')
       } else {
         return this.token
@@ -108,7 +112,7 @@ export const useUserStore = defineStore('user', {
     GetUsername() {
       if (this.username) {
         return this.username
-      } else if (Cookies.has('cili-username-frontend')) {
+      } else if (Cookies.get('cili-username-frontend') != 'undefined') {
         return Cookies.get('cili-username-frontend')
       } else {
         return ""
@@ -117,7 +121,7 @@ export const useUserStore = defineStore('user', {
     GetNickname() {
       if (this.nickname) {
         return this.nickname
-      } else if (Cookies.get('cili-nickname-frontend')) {
+      } else if (Cookies.get('cili-nickname-frontend') != 'undefined') {
         return Cookies.get('cili-nickname-frontend')
       } else {
         return ""
@@ -126,7 +130,7 @@ export const useUserStore = defineStore('user', {
     GetRealName() {
       if (this.realName) {
         return this.realName
-      } else if (Cookies.get('cili-realName-frontend')) {
+      } else if (Cookies.get('cili-realName-frontend') != 'undefined') {
         return Cookies.get('cili-realName-frontend')
       } else {
         return ""
@@ -135,7 +139,7 @@ export const useUserStore = defineStore('user', {
     GetAvatar() {
       if (this.avatar) {
         return this.avatar
-      } else if (Cookies.get('cili-avatar-frontend')) {
+      } else if (Cookies.get('cili-avatar-frontend') != 'undefined') {
         return Cookies.get('cili-avatar-frontend')
       } else {
         return 'static/images/logo.svg'
@@ -145,6 +149,15 @@ export const useUserStore = defineStore('user', {
       let url = RealUrl(avatar);
       this.avatar = url
       Cookies.set('cili-avatar-frontend', url)
+    },
+    GetInitUserButton() {
+      if (this.userButton) {
+        return this.userButton
+      } else if (Cookies.get('cili-role-button')) {
+        return Cookies.get('cili-role-button')
+      } else {
+        return []
+      }
     },
   }
 });

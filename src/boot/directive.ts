@@ -1,15 +1,13 @@
 import {boot} from 'quasar/wrappers'
-import {usePermissionStore} from 'src/stores/permission.js'
+import {useUserStore} from 'src/stores/user.js'
 
 export default boot(({app}) => {
-  const permissionStore = usePermissionStore()
-  app.directive('has', {
-    mounted(el, binding, vnode) {
-      const hasPermission = permissionStore.userButton.some(item => item === binding.value)
-      if (!hasPermission) {
-        console.log(el)
-        el.parentNode.removeChild(el)
-      }
+  const permissionStore = useUserStore()
+  app.directive('has', (el, binding, vnode, prevVnode) => {
+    //@ts-ignore
+    const hasPermission = permissionStore.GetInitUserButton().some((item: string) => item === binding.value)
+    if (!hasPermission && el.parentNode) {
+      el.parentNode.removeChild(el)
     }
   })
 })

@@ -59,7 +59,7 @@
             <img :src="avatar">
           </q-avatar>
           <div class="text-weight-bold">{{ nickname }}</div>
-          <div>@{{ realName }}</div>
+          <div v-if="realName">@ {{ realName }}</div>
         </div>
       </q-img>
     </q-drawer>

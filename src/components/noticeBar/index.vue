@@ -37,7 +37,7 @@ const noticeList = computed(() => {
   if (!!storageStore.CiliAdvertisingText) {
     setTimeout(() => {
       storageStore.DelCiliAdvertisingText()
-    }, 30000)
+    }, 8000)
   }
   return storageStore.CiliAdvertisingText
 })

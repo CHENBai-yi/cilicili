@@ -365,9 +365,8 @@ const onLogin = async (form) => {
     form.password = password.value
   }
   userStore.HandleLogin(form)
-    .then(res => {
+    .then(async res => {
       if (res) {
-        permissionStore.GetRoleButton()
         icon.value = false
         flushFrom()
       }

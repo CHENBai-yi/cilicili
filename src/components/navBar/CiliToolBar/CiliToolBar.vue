@@ -19,9 +19,9 @@
       <q-input
         v-model="search"
         :placeholder="$t('KeyWord')" clearable debounce="500" dense standout="bg-grey-7 text-white"
-        @blur="showTip=false" @click="queryRecent">
+        @blur="showTip=false" @clear="clear" @click="queryRecent">
         <template v-slot:prepend>
-          <q-btn flat icon="search" padding="none" rounded size="md" unelevated @click="handleSearch()"/>
+          <q-btn flat icon="search" padding="none" rounded size="md" unelevated @click="handleSearch"/>
           <transition appear
                       enter-active-class="animated animate__fadeIn"
                       leave-active-class="animated animate__fadeOut">
@@ -137,9 +137,12 @@
             <CiliLink :weight="600" color="" href="#/account/setting" iconLeft="person"
                       iconRight="eva-arrow-circle-right-outline" target="_self">个人中心
             </CiliLink>
-            <CiliLink v-if="contribute" :weight="600" color="" href="#/create/manage"
-                      iconLeft="eva-cloud-upload-outline" iconRight="eva-arrow-circle-right-outline" target="_self">投稿管理
-            </CiliLink>
+            <div v-has="'frontend:contribute'">
+              <CiliLink :weight="600" color="" href="#/create/manage"
+                        iconLeft="eva-cloud-upload-outline" iconRight="eva-arrow-circle-right-outline" target="_self">
+                投稿管理
+              </CiliLink>
+            </div>
             <div class="full-width q-py-sm">
               <el-divider class="no-margin"/>
             </div>
@@ -189,55 +192,56 @@
       <!--          <div class="login-btn" @click="showLoginFrom"> {{ $t('SignInNow') }}</div>-->
       <!--        </div> frontend:contribute -->
       <!--      </CiliPopover>-->
-
-      <CiliPopover v-if="!!token&&contribute" :label="$t('Contribute')" name="cloud_upload" to="/create/upload">
-        <div class="">
+      <div v-if="token" v-has="'frontend:contribute'">
+        <CiliPopover :label="$t('Contribute')" name="cloud_upload" to="/create/upload">
           <div class="">
-            <div class="upload-panel-popover">
-              <CiliLink color="" href="#/create/upload">
-                <div class="upload-item">
+            <div class="">
+              <div class="upload-panel-popover">
+                <CiliLink color="" href="#/create/upload">
+                  <div class="upload-item">
 
-                  <svg class="item-icon" fill="none" height="26" viewBox="0 0 26 26" width="26"
-                       xmlns="http://www.w3.org/2000/svg">
-                    <rect fill="#C4C4C4" height="24" opacity="0.01" width="24" x="1.55603"></rect>
-                    <path clip-rule="evenodd"
-                          d="M21.556 10.1866C21.0037 10.1866 20.556 10.6343 20.556 11.1866V12.5712C20.556 13.1234 21.0037 13.5712 21.556 13.5712C22.1083 13.5712 22.556 13.1234 22.556 12.5712V11.1866C22.556 10.6343 22.1083 10.1866 21.556 10.1866ZM14.556 20.5C14.0037 20.5 13.556 20.9477 13.556 21.5C13.556 22.0523 14.0037 22.5 14.556 22.5H15.556C16.1083 22.5 16.556 22.0523 16.556 21.5C16.556 20.9477 16.1083 20.5 15.556 20.5H14.556Z"
-                          fill="var(--text2)"
-                          fill-rule="evenodd"></path>
-                    <path clip-rule="evenodd"
-                          d="M22.6093 15.348C22.0235 14.7622 21.0738 14.7622 20.488 15.348L18.0131 17.8229C17.6226 18.2134 17.6226 18.8465 18.0131 19.2371C18.4037 19.6276 19.0368 19.6276 19.4274 19.2371L21.5487 17.1158L23.67 19.2371C24.0605 19.6276 24.6937 19.6276 25.0842 19.2371C25.4747 18.8465 25.4747 18.2134 25.0842 17.8229L22.6093 15.348Z"
-                          fill="var(--text2)"
-                          fill-rule="evenodd"></path>
-                    <path clip-rule="evenodd"
-                          d="M21.5487 14.9759C22.101 14.9759 22.5487 15.4236 22.5487 15.9759L22.5487 22.5C22.5487 23.0523 22.101 23.5 21.5487 23.5C20.9964 23.5 20.5487 23.0523 20.5487 22.5L20.5487 15.9759C20.5487 15.4236 20.9964 14.9759 21.5487 14.9759Z"
-                          fill="var(--text2)"
-                          fill-rule="evenodd"></path>
-                    <path clip-rule="evenodd"
-                          d="M3.20868 5.5H19.556C20.1083 5.5 20.556 5.94771 20.556 6.5V11.8911H22.556V6.5C22.556 4.84315 21.2129 3.5 19.556 3.5H3.20868C1.55183 3.5 0.208679 4.84315 0.208679 6.5V19.5C0.208679 21.1569 1.55182 22.5 3.20868 22.5H15.453V20.5H3.20868C2.65639 20.5 2.20868 20.0523 2.20868 19.5V6.5C2.20868 5.94772 2.6564 5.5 3.20868 5.5Z"
-                          fill="var(--text2)"
-                          fill-rule="evenodd"></path>
-                    <path
-                      d="M13.3617 12.134C14.0284 12.5189 14.0284 13.4811 13.3617 13.866L10.3617 15.5981C9.69503 15.983 8.86169 15.5019 8.86169 14.7321V11.2679C8.86169 10.4981 9.69503 10.017 10.3617 10.4019L13.3617 12.134Z"
-                      fill="var(--text2)"></path>
-                  </svg>
-                  <div class="item-title">{{ $t('VideoSubmission') }}</div>
-                </div>
-              </CiliLink>
-              <!--              <div class="upload-item">-->
-              <!--                <svg class="item-icon" fill="none" height="26" viewBox="0 0 26 26" width="26"-->
-              <!--                     xmlns="http://www.w3.org/2000/svg">-->
-              <!--                  <rect fill="#C4C4C4" height="24" opacity="0.01" width="24" x="1.5" y="1"></rect>-->
-              <!--                  <path clip-rule="evenodd"-->
-              <!--                        d="M16 3.5H6C5.72386 3.5 5.5 3.72386 5.5 4V21C5.5 21.2761 5.72386 21.5 6 21.5H10.5H11.5C12.0523 21.5 12.5 21.9477 12.5 22.5C12.5 23.0523 12.0523 23.5 11.5 23.5H10.5H6C4.61929 23.5 3.5 22.3807 3.5 21V4C3.5 2.61929 4.61929 1.5 6 1.5H16C19.5899 1.5 22.5 4.41015 22.5 8V11.2806V11.818V12.2806C22.5 12.8329 22.0523 13.2806 21.5 13.2806C20.9477 13.2806 20.5 12.8329 20.5 12.2806V11.818V11.2806V8C20.5 5.51472 18.4853 3.5 16 3.5ZM15 10.634C15.6667 11.0189 15.6667 11.9811 15 12.366L12 14.0981C11.3333 14.483 10.5 14.0019 10.5 13.2321V9.76795C10.5 8.99815 11.3333 8.51702 12 8.90192L15 10.634ZM23.9227 20.238C24.2799 19.6192 24.2799 18.8568 23.9227 18.238L22.3274 15.4748C21.9701 14.856 21.3098 14.4748 20.5953 14.4748H17.4047C16.6902 14.4748 16.0299 14.856 15.6727 15.4748L14.0774 18.238C13.7201 18.8568 13.7201 19.6192 14.0774 20.238L15.6727 23.0011C16.0299 23.6199 16.6902 24.0011 17.4047 24.0011H20.5953C21.3098 24.0011 21.9701 23.6199 22.3274 23.0011L23.9227 20.238ZM17.2604 16.7248C17.3497 16.5701 17.5148 16.4748 17.6934 16.4748H20.3066C20.4853 16.4748 20.6503 16.5701 20.7397 16.7248L22.0463 18.988C22.1356 19.1427 22.1356 19.3333 22.0463 19.488L20.7397 21.7511C20.6503 21.9058 20.4853 22.0011 20.3066 22.0011H17.6934C17.5148 22.0011 17.3497 21.9058 17.2604 21.7511L15.9538 19.488C15.8644 19.3333 15.8644 19.1427 15.9538 18.988L17.2604 16.7248ZM19 17.9879C18.3096 17.9879 17.75 18.5476 17.75 19.2379C17.75 19.9283 18.3096 20.4879 19 20.4879C19.6904 20.4879 20.25 19.9283 20.25 19.2379C20.25 18.5476 19.6904 17.9879 19 17.9879Z"-->
-              <!--                        fill="var(&#45;&#45;text2)"-->
-              <!--                        fill-rule="evenodd"></path>-->
-              <!--                </svg>-->
-              <!--                <div class="item-title"> {{ $t('SubmissionManagement') }}</div>-->
-              <!--              </div>-->
+                    <svg class="item-icon" fill="none" height="26" viewBox="0 0 26 26" width="26"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <rect fill="#C4C4C4" height="24" opacity="0.01" width="24" x="1.55603"></rect>
+                      <path clip-rule="evenodd"
+                            d="M21.556 10.1866C21.0037 10.1866 20.556 10.6343 20.556 11.1866V12.5712C20.556 13.1234 21.0037 13.5712 21.556 13.5712C22.1083 13.5712 22.556 13.1234 22.556 12.5712V11.1866C22.556 10.6343 22.1083 10.1866 21.556 10.1866ZM14.556 20.5C14.0037 20.5 13.556 20.9477 13.556 21.5C13.556 22.0523 14.0037 22.5 14.556 22.5H15.556C16.1083 22.5 16.556 22.0523 16.556 21.5C16.556 20.9477 16.1083 20.5 15.556 20.5H14.556Z"
+                            fill="var(--text2)"
+                            fill-rule="evenodd"></path>
+                      <path clip-rule="evenodd"
+                            d="M22.6093 15.348C22.0235 14.7622 21.0738 14.7622 20.488 15.348L18.0131 17.8229C17.6226 18.2134 17.6226 18.8465 18.0131 19.2371C18.4037 19.6276 19.0368 19.6276 19.4274 19.2371L21.5487 17.1158L23.67 19.2371C24.0605 19.6276 24.6937 19.6276 25.0842 19.2371C25.4747 18.8465 25.4747 18.2134 25.0842 17.8229L22.6093 15.348Z"
+                            fill="var(--text2)"
+                            fill-rule="evenodd"></path>
+                      <path clip-rule="evenodd"
+                            d="M21.5487 14.9759C22.101 14.9759 22.5487 15.4236 22.5487 15.9759L22.5487 22.5C22.5487 23.0523 22.101 23.5 21.5487 23.5C20.9964 23.5 20.5487 23.0523 20.5487 22.5L20.5487 15.9759C20.5487 15.4236 20.9964 14.9759 21.5487 14.9759Z"
+                            fill="var(--text2)"
+                            fill-rule="evenodd"></path>
+                      <path clip-rule="evenodd"
+                            d="M3.20868 5.5H19.556C20.1083 5.5 20.556 5.94771 20.556 6.5V11.8911H22.556V6.5C22.556 4.84315 21.2129 3.5 19.556 3.5H3.20868C1.55183 3.5 0.208679 4.84315 0.208679 6.5V19.5C0.208679 21.1569 1.55182 22.5 3.20868 22.5H15.453V20.5H3.20868C2.65639 20.5 2.20868 20.0523 2.20868 19.5V6.5C2.20868 5.94772 2.6564 5.5 3.20868 5.5Z"
+                            fill="var(--text2)"
+                            fill-rule="evenodd"></path>
+                      <path
+                        d="M13.3617 12.134C14.0284 12.5189 14.0284 13.4811 13.3617 13.866L10.3617 15.5981C9.69503 15.983 8.86169 15.5019 8.86169 14.7321V11.2679C8.86169 10.4981 9.69503 10.017 10.3617 10.4019L13.3617 12.134Z"
+                        fill="var(--text2)"></path>
+                    </svg>
+                    <div class="item-title">{{ $t('VideoSubmission') }}</div>
+                  </div>
+                </CiliLink>
+                <!--              <div class="upload-item">-->
+                <!--                <svg class="item-icon" fill="none" height="26" viewBox="0 0 26 26" width="26"-->
+                <!--                     xmlns="http://www.w3.org/2000/svg">-->
+                <!--                  <rect fill="#C4C4C4" height="24" opacity="0.01" width="24" x="1.5" y="1"></rect>-->
+                <!--                  <path clip-rule="evenodd"-->
+                <!--                        d="M16 3.5H6C5.72386 3.5 5.5 3.72386 5.5 4V21C5.5 21.2761 5.72386 21.5 6 21.5H10.5H11.5C12.0523 21.5 12.5 21.9477 12.5 22.5C12.5 23.0523 12.0523 23.5 11.5 23.5H10.5H6C4.61929 23.5 3.5 22.3807 3.5 21V4C3.5 2.61929 4.61929 1.5 6 1.5H16C19.5899 1.5 22.5 4.41015 22.5 8V11.2806V11.818V12.2806C22.5 12.8329 22.0523 13.2806 21.5 13.2806C20.9477 13.2806 20.5 12.8329 20.5 12.2806V11.818V11.2806V8C20.5 5.51472 18.4853 3.5 16 3.5ZM15 10.634C15.6667 11.0189 15.6667 11.9811 15 12.366L12 14.0981C11.3333 14.483 10.5 14.0019 10.5 13.2321V9.76795C10.5 8.99815 11.3333 8.51702 12 8.90192L15 10.634ZM23.9227 20.238C24.2799 19.6192 24.2799 18.8568 23.9227 18.238L22.3274 15.4748C21.9701 14.856 21.3098 14.4748 20.5953 14.4748H17.4047C16.6902 14.4748 16.0299 14.856 15.6727 15.4748L14.0774 18.238C13.7201 18.8568 13.7201 19.6192 14.0774 20.238L15.6727 23.0011C16.0299 23.6199 16.6902 24.0011 17.4047 24.0011H20.5953C21.3098 24.0011 21.9701 23.6199 22.3274 23.0011L23.9227 20.238ZM17.2604 16.7248C17.3497 16.5701 17.5148 16.4748 17.6934 16.4748H20.3066C20.4853 16.4748 20.6503 16.5701 20.7397 16.7248L22.0463 18.988C22.1356 19.1427 22.1356 19.3333 22.0463 19.488L20.7397 21.7511C20.6503 21.9058 20.4853 22.0011 20.3066 22.0011H17.6934C17.5148 22.0011 17.3497 21.9058 17.2604 21.7511L15.9538 19.488C15.8644 19.3333 15.8644 19.1427 15.9538 18.988L17.2604 16.7248ZM19 17.9879C18.3096 17.9879 17.75 18.5476 17.75 19.2379C17.75 19.9283 18.3096 20.4879 19 20.4879C19.6904 20.4879 20.25 19.9283 20.25 19.2379C20.25 18.5476 19.6904 17.9879 19 17.9879Z"-->
+                <!--                        fill="var(&#45;&#45;text2)"-->
+                <!--                        fill-rule="evenodd"></path>-->
+                <!--                </svg>-->
+                <!--                <div class="item-title"> {{ $t('SubmissionManagement') }}</div>-->
+                <!--              </div>-->
+              </div>
             </div>
           </div>
-        </div>
-      </CiliPopover>
+        </CiliPopover>
+      </div>
 
     </div>
     <q-space/>
@@ -254,18 +258,10 @@ import CiliLoginFrom from 'src/components/CiliLoginFrom/CiliLoginFrom.vue'
 import {useUserStore} from 'src/stores/user'
 import {useI18n} from 'vue-i18n'
 import {getAction, postAction} from 'src/api/manage'
-import {usePermissionStore} from 'src/stores/permission'
 
 defineProps({
   isJump: Boolean
 })
-const permissionStore = usePermissionStore()
-const contribute = computed(() => {
-  if (permissionStore.GetInitUserButton())
-    return permissionStore.GetInitUserButton()?.some(item => item === 'frontend:contribute')
-  return permissionStore.userButton.some(item => item === 'frontend:contribute')
-})
-
 const showTip = ref(false)
 const queryRecentUrl = ref('courses/search')
 const recentQueryRecord = ref([])
@@ -337,6 +333,11 @@ const bus = inject("bus")
 const handleSearch = () => {
   bus.emit('handleSearch', search.value)
   showTip.value = false
+}
+const clear = () => {
+  search.value = undefined
+  bus.emit('clearHandleSearch')
+
 }
 const recentSearch = (w) => {
   search.value = w

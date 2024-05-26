@@ -147,10 +147,11 @@
               </el-form-item>
               <el-form-item class="items-center" label="支持试看：" prop="try_watch">
                 <q-toggle
-                    v-model="form.try_watch"
-                    checked-icon="check"
-                    label="试看每章第一集"
-                    unchecked-icon="clear"
+                  v-model="form.try_watch"
+                  :disable="disableTryWatch"
+                  checked-icon="check"
+                  label="试看每章第一集"
+                  unchecked-icon="clear"
                 />
               </el-form-item>
 
@@ -270,7 +271,7 @@
 </template>
 
 <script setup>
-import {h, onMounted, reactive, ref} from 'vue'
+import {computed, h, onMounted, reactive, ref} from 'vue'
 import {NTag, NTooltip} from 'naive-ui'
 import CiliImageUpload from 'src/components/CiliUploadComponent/CiliImageUpload/CiliImageUpload.vue'
 import {toChineseNumber} from 'src/utils/ToChineseNumber'
@@ -301,11 +302,17 @@ const form = reactive({
   description: '',
   tags: ['掌握Flutter必备的Dart基础', '快速上手企业级实战项目开发', '快速上手企业级实战项目开发'],
   poster: '',
-  try_watch: ''
+  try_watch: false
 })
+
 const $q = useQuasar()
 const price = ref(null)
-
+const disableTryWatch = computed(() => {
+  if (form.price <= 0) {
+    form.try_watch = false
+  }
+  return form.price <= 0
+})
 const onSubmit = async () => {
   $q.loading.show({
     message: 'Some important <b>process</b> is in progress.<br/><span class="text-amber text-italic">Please wait...</span>',
@@ -597,6 +604,15 @@ const rules = reactive({
   ],
   price: [
     {required: true, message: '请完成课程金额定义', trigger: 'blur'},
+    {
+      validator: function (rule, value, call) {
+        if (value < 0) {
+          call(new Error("金额必须大于0"));
+          return
+        }
+        call();
+      }, trigger: 'blur'
+    },
   ],
   poster: [
     {required: true, message: '请完成上传课程封面', trigger: 'blur'},

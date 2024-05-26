@@ -1,6 +1,5 @@
 import {defineStore} from 'pinia';
 // import {HandleRouter} from 'src/utils/router';
-import {ArrayToTree} from 'src/utils/arrayAndTree';
 import {postAction} from "src/api/manage";
 // import res from '/public/data/_public_GetUserMenu.json'
 import {Cookies} from 'quasar';
@@ -64,11 +63,9 @@ export const usePermissionStore = defineStore('permission', {
       try {
         const res = await postAction('role/role-button-list')
         if (res.code === 1) {
-          const data = res.data.records
-          console.log(data)
-          this.InitUserButton(data)
+          this.InitUserButton(res.data.records)
         } else {
-          return []
+          this.InitUserButton([])
         }
       } catch (error) {
         return error
@@ -109,11 +106,13 @@ export const usePermissionStore = defineStore('permission', {
       Cookies.set('cili-role-button', buttons, userStore.option)
     },
     GetInitUserButton() {
-      const btns = Cookies.get('cili-role-button')
-      if (btns) {
-        return btns
+      if (this.buttons) {
+        return this.buttons
+      } else if (Cookies.get('cili-role-button')) {
+        return Cookies.get('cili-role-button')
+      } else {
+        return []
       }
-      return this.userButton
     },
     InitUserDefautlPage(defaultPageList) {
       this.defaultPage = defaultPageList

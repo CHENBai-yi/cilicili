@@ -689,6 +689,9 @@ onMounted(() => {
     pagination.value.query = query
     refresh()
   })
+  bus.on('clearHandleSearch', () => {
+    pagination.value.query = undefined
+  })
   refresh()
 })
 const onLoadFlag = ref(true)
